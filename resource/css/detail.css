@@ -1,0 +1,74 @@
+.num {
+	display: flex;
+	border-top: 1px solid #E5E5E5;
+	padding-top: .5rem;
+}
+
+.num div {
+	flex-grow: 1;
+	text-align: center;
+	padding-left: .8rem;
+}
+
+.hideed {
+	background: url(/resource/icon/icon_index.png) no-repeat 25px -143px;
+}
+
+.spot {
+	background: url(/resource/icon/icon_index.png) no-repeat 25px -213px;
+}
+
+.Read {
+	background: url(/resource/icon/icon_index.png) no-repeat 25px -249px;
+}
+
+.num .two:nth-child(1) {
+	background: url(/resource/icon/icon_index.png) no-repeat -150px -143px;
+	color: #d71618;
+}
+
+.num .two:nth-child(2) {
+	background: url(/resource/icon/icon_index.png) no-repeat -150px -213px;
+	color: #d71618;
+}
+
+.num .two:nth-child(3) {
+	background: url(/resource/icon/icon_index.png) no-repeat -155px -249px;
+	color: #d71618;
+}
+
+.txt p .red {
+	color: #F52A2A;
+	float: right;
+}
+
+.ccc {
+	font-size: 0.35rem;
+	color: rgba(102, 102, 102, 1);
+	line-height: 0.85rem !important;
+}
+
+#price {
+	color: #F52A2A;
+}
+
+#price span {
+	color: #333;
+}
+
+.txt {
+	padding: 0px 10px;
+}
+.txt .num {
+	width: 100%;
+	padding-top: 0px  !important;
+}
+.txt .num div:nth-child(1) {
+	border-right: 1px solid #E5E5E5;
+}
+.txt .num div:nth-child(2) {
+	border-right: 1px solid #E5E5E5;
+}
+.ul-list5-hlg a {
+	padding-bottom: 0px;
+}

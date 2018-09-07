@@ -1,0 +1,88 @@
+img {
+	display: block;
+} 
+.head {
+	font-size: 0.35rem;
+	color:rgba(102,102,102,1);
+	line-height: 0.7rem;
+	padding: 0.625rem .5rem;
+	background: #FFFFFF;
+}
+.head_title {
+	font-weight: 700;
+	margin-bottom: .3rem;
+}
+.items {
+	margin-top: .5rem;
+	background: #FFFFFF;
+	padding-bottom: .5rem;
+}
+.mian {
+	background: #E7E9EA;
+}
+.items_title {
+	font-size:0.4rem;
+	color:rgba(51,51,51,1);
+	line-height:1.275rem;
+	padding-left: .5rem;
+}
+.item-ul {
+	font-size:.35rem;
+	color:rgba(102,102,102,1);
+	line-height:1.25rem;
+	padding: .5rem;
+}
+.item-ul li h4 {
+	color:rgba(215,22,24,1);
+}
+.item-ul li div {
+}
+.flight i {
+	width: 0.82rem;
+	height: 0.8rem;
+	display: block;
+	float: left;
+	margin-top: .1rem;
+	margin-right: .2rem;
+	background: url(/resource/icon/icon.png) no-repeat;
+	background-position: -127px -59px
+}
+.diet i {
+  	width: 0.82rem;
+	height: 0.8rem;
+	display: block;
+	float: left;
+	margin-top: .1rem;
+	margin-right: .2rem;
+    background: url(/resource/icon/icon.png) no-repeat;
+    background-position: -127px -96px;
+}
+.sleep i {
+    width: 0.82rem;
+	height: 0.8rem;
+	display: block;
+	float: left;
+	margin-top: .1rem;
+	margin-right: .2rem;
+    background: url(/resource/icon/icon.png) no-repeat;
+    background-position: -124px -126px;
+}
+.Trip i {
+    width: 0.82rem;
+	height: 0.8rem;
+	display: block;
+	float: left;
+	margin-top: .1rem;
+	margin-right: .2rem;
+    background: url(/resource/icon/icon.png) no-repeat;
+    background-position: -125px -165px;
+}
+.end {
+	font-size:0.35rem;
+	color:rgba(136,136,136,1);
+	line-height:1.2rem;
+	text-align: center;
+}
+.num {
+	background: #FFFFFF;
+}

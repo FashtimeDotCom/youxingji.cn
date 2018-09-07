@@ -1,0 +1,174 @@
+@font-face {
+	font-family:'博洋行书';
+	src: url('/resource/fonts/7000.TTF');
+}
+.banner .txt h2 {
+    font-size: 24px;
+    line-height: 26px;
+    font-family: '博洋行书';
+    font-weight: normal;
+}
+.index_title {
+    margin: 8px auto;
+    font-size: .9rem;
+    font-family: 'MicrosoftYaHei';
+    color: rgba(51,51,51,1);
+    line-height: 1.1rem;
+}
+.index_title span {
+    font-size: 0.325rem;
+    margin-left: .3rem;
+}
+.index_text {
+    margin: 8px auto .8rem;
+    font-size: .9rem;
+    font-family: '博洋行书';
+    color: rgba(245,110,110,1);
+    line-height: 1.1rem;
+}
+.index_text span {
+    float: right;
+    padding-right: .5rem;
+    font-size: 0.35rem;
+    font-family: 'MicrosoftYaHei';
+    color: rgba(102,102,102,1);
+    line-height: 1.1rem;
+}
+.tab_box {
+	position: relative;
+}
+.num {
+	background: #FFFFFF;
+}
+
+.tab_text {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	color: #ffffff;
+}
+img {
+	display: block;
+}
+.tab_list {
+	display: flex;
+	margin-bottom: 0.75rem;
+}
+.tab_list li {
+	font-size: 0.75rem;
+	color:rgba(177,177,177,1);
+	text-align: center;
+	flex-grow: 1;
+	line-height: 18px;
+}
+.onn {
+	background:rgba(218,69,69,1);
+	border-radius:.125rem;
+	color: #FFFFFF !important;
+}
+.hide {
+	display: none;
+}
+.other {
+	display: flex;
+	border-top:1px solid #F8F8F8;
+	
+}
+.other div {
+	border-right: 1px solid #F8F8F8;
+	text-align: center;
+	flex-grow: 1;
+}
+.hideed {
+	background: url(/resource/icon/icon_index.png) no-repeat 8px -138px;
+}
+.theory {
+    background: url(/resource/icon/icon_index.png) no-repeat 8px -172px;
+}
+.spot{
+	background: url(/resource/icon/icon_index.png)  no-repeat 8px  -206px;
+}
+
+.Read {
+	background: url(/resource/icon/icon_index.png)  no-repeat 8px  -242px;
+	border-right: 0px !important;
+}
+.num .hideed {
+	background: url(/resource/icon/icon_index.png) no-repeat 8px -147px;
+}
+
+.num .spot{
+	background: url(/resource/icon/icon_index.png)  no-repeat 8px  -215px;
+}
+
+.num .Read {
+	background: url(/resource/icon/icon_index.png)  no-repeat 8px  -251px;
+	border-right: 0px !important;
+}
+.other .one:nth-child(1)  {
+	background: url(/resource/icon/icon_index.png)  no-repeat -168px -138px ;
+	color:#d71618;
+}
+.other .one:nth-child(2)  {
+	background: url(/resource/icon/icon_index.png)  no-repeat -168px -172px;
+	color:#d71618;
+}
+.other .one:nth-child(3)  {
+	background: url(/resource/icon/icon_index.png)  no-repeat -168px -206px;
+	color:#d71618;
+}
+.other .one:nth-child(4)  {
+	background: url(/resource/icon/icon_index.png)  no-repeat -168px -242px;
+	color:#d71618 ;
+	border-right: 0px !important;
+}
+.num .two:nth-child(1)  {
+	background: url(/resource/icon/icon_index.png)  no-repeat -168px -147px  ;
+	color:#d71618;
+}
+
+.num .two:nth-child(2)  {
+	background: url(/resource/icon/icon_index.png)  no-repeat -168px -215px;
+	color:#d71618;
+}
+.num .two:nth-child(3)  {
+	background: url(/resource/icon/icon_index.png)  no-repeat -168px -251px ;
+	color:#d71618;
+}
+.red {
+	color: red;
+}
+.red span {
+	color: #333;
+}
+.num {
+	height: 1.1rem;
+	border-top:1px solid #F8F8F8;
+	display: flex;
+}
+.num div {
+	border-right: 1px solid #F8F8F8;
+	text-align: center;
+	flex-grow: 1;
+}
+.m-item-text h3 {
+	font-size:.6rem;
+	color:rgba(51,51,51,1);
+	line-height:.95rem;
+}
+.m-item-text p {
+	font-size:0.35rem;
+	color:rgba(51,51,51,1);
+	line-height:.95rem;
+}
+.m-item-text {
+	padding: .215rem .5rem;
+}
+.row-a6 {
+	margin-bottom: 1.7rem;
+}
+.m-imgtxt2 {
+	margin-bottom: 0.55rem !important;
+}

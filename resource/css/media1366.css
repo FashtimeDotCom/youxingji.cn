@@ -1,0 +1,108 @@
+.hideed {
+	background: url(/resource/icon/icon_index.png) no-repeat 15px -145px;
+}
+.theory {
+    background: url(/resource/icon/icon_index.png) no-repeat 15px -180px;
+}
+.spot{
+	background: url(/resource/icon/icon_index.png)  no-repeat 15px  -213px;
+}
+.Read {
+	background: url(/resource/icon/icon_index.png)  no-repeat 15px  -249px;
+}
+.num .one:nth-child(1)  {
+	background: url(/resource/icon/icon_index.png)  no-repeat -160px -145px ;
+	color:#d71618;
+}
+.num .one:nth-child(2)  {
+	background: url(/resource/icon/icon_index.png)  no-repeat -160px -180px;
+	color:#d71618;
+}
+.num .one:nth-child(3)  {
+	background: url(/resource/icon/icon_index.png)  no-repeat -160px -213px;
+	color:#d71618;
+}
+.num .one:nth-child(4)  {
+	background: url(/resource/icon/icon_index.png)  no-repeat -160px -249px ;
+	color:#d71618;
+}
+.num .two:nth-child(1)  {
+	background: url(/resource/icon/icon_index.png)  no-repeat -160px -145px  ;
+	color:#d71618;
+}
+
+.num .two:nth-child(2)  {
+	background: url(/resource/icon/icon_index.png)  no-repeat -160px -213px;
+	color:#d71618;
+}
+.num .two:nth-child(3)  {
+	background: url(/resource/icon/icon_index.png)  no-repeat -160px -249px ;
+	color:#d71618;
+}
+.title a span {
+    display: block;
+    width: 2rem;
+    float: right;
+    font-size: 0.4rem;
+    font-family: MicrosoftYaHei;
+    color: rgba(102,102,102,1);
+    line-height: 1.1rem;
+    text-align: right;
+    padding-right: .8rem;
+    background: url(/resource/icon/icon.png);
+    background-position: 1.3rem -4.05rem;
+}
+.index_text span {
+    float: right;
+    padding-right: .5rem;
+    font-size: 0.35rem;
+    font-family: 'MicrosoftYaHei';
+    color: rgba(102,102,102,1);
+    line-height: 1.1rem;
+    background: url(/resource/icon/icon_index.png) no-repeat;
+    background-position:28px -278.5px;
+}
+.live {
+	background-position: 4rem 0.1rem;
+}
+.flight i{
+	position: absolute;
+    top: .1rem;
+    left: -1.6rem;
+    display: block;
+    width: .6rem;
+    height: .6rem;
+    background: url(/resource/icon/icon.png) no-repeat;
+    background-position: -127px -59px;
+	
+}
+.diet i {
+	position: absolute;
+    top: .1rem;
+    left: -1.6rem;
+    display: block;
+    width: .6rem;
+    height: .6rem;
+    background: url(/resource/icon/icon.png) no-repeat;
+    background-position: -127px -96px;
+}
+.sleep i {
+	position: absolute;
+    top: .1rem;
+    left: -1.6rem;
+    display: block;
+    width: .6rem;
+    height: .6rem;
+    background: url(/resource/icon/icon.png) no-repeat;
+    background-position: -124px -126px;
+}
+.Trip i {
+	position: absolute;
+    top: .1rem;
+    left: -1.6rem;
+    display: block;
+    width: .8rem;
+    height: .6rem;
+    background: url(/resource/icon/icon.png) no-repeat;
+    background-position: -125px -165px;
+}  

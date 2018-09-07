@@ -1,0 +1,113 @@
+.m-title {
+    color: #333;
+    font-weight: normal;
+    text-align: left;
+    padding-left: .5rem;
+    margin-bottom: 18px;
+    position: relative;
+    font-size:1rem;
+	color:rgba(51,51,51,1);
+	line-height:1.2rem;
+}
+.m-title  span {
+	float: right;
+	font-size:.45rem;
+	color:rgba(51,51,51,1);
+	line-height:1.2rem;
+	padding-right: .5rem;
+}
+.g-tit-yz {
+	padding-left: 0px  !important;
+}
+.ul-imgtxt5 .picbox {
+	margin:10px  0px 0px  !important;
+	padding: 0rem .5rem;
+}
+.swiper-button-prev, .swiper-button-next {
+    position: absolute;
+    top: 0% !important;
+    width: 20px !important;
+    height: 100% !important;
+    margin-top: 0px !important;
+    z-index: 10;
+    cursor: pointer;
+    background-size: 27px 44px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.swiper-button-prev {
+    
+    background-position: 1px -20px !important;
+}
+.swiper-button-next {
+    background-position: 1px -73px  !important;
+}
+.m-item-text h3 {
+	font-size:.6rem;
+	color:rgba(51,51,51,1);
+	line-height:.95rem;
+}
+.m-item-text p {
+	font-size:0.35rem;
+	color:rgba(51,51,51,1);
+	line-height:.95rem;
+}
+.m-item-text {
+	padding: .215rem .5rem;
+}
+img {
+	display: block;
+} 
+
+
+
+/*
+ 2018-09-05  14:3159
+ HQS
+ * */
+
+.Iclass{font-style: normal;}
+
+.fix{*zoom:1;}
+.fix:after{display:block; content:"clear"; height:0; clear:both; overflow:hidden; visibility:hidden;}
+
+
+.dis_none{display: none!important;}
+
+
+/*弹窗  弹出层*/
+.bg,.bg_overlay {position: fixed;top: 0; right: 0; bottom: 0; left: 0;}
+.bg {-webkit-transition: visibility .25s;transition: visibility .25s;
+     z-index: 3;visibility: hidden;overflow: hidden;}
+
+.bg .bg_overlay {background-color: black;opacity: 0;-webkit-transition: opacity .25s;transition: opacity .25s;}
+.scrollable {overflow: auto;-webkit-overflow-scrolling: touch;}
+
+.active {-webkit-transition: none;transition: none;visibility: visible;}
+.active > .bg_overlay {opacity: .6;}
+.active > .bg_content {-webkit-transform: translate(0%, 0%);transform: translate(0%, 0%);}
+.active .waitBg .wait {-webkit-transform: translate(0%, 0%);transform: translate(0%, 0%);}
+
+.bg .ShutDown{position: absolute;top:-0.8rem;right: -0.8rem;font-weight: 700;
+			  width: 3rem;height: 3rem;color: #fff;background: #000;z-index: 54;
+			  text-align: center;line-height: 3rem;font-size: 1.5rem;border-radius: 1.5rem;}
+
+/*<span class="ShutDown" id="">X</span>*/
+
+/*弹窗  弹出层*/
+.union{width: 80%;margin-top: 40%;border-radius: 0.3rem;background: #fff; position: absolute;left: 10%;overflow: hidden;}
+.style{color: #3d3d3d;font-size: 1.5rem;text-align: center;font-weight: 800;}
+.marginHeight{margin-bottom: 5rem!important;}
+
+.leaveTeam{height: auto; margin-top: 40%;}
+.leaveTeam .title{line-height: 7rem;margin-bottom: 2rem;}
+
+.buttonDiv{width: 100%;height: 3rem;line-height: 3rem;position: absolute;left: 0;bottom: 0;}
+.buttonDiv button{width: 50%;height: inherit;text-align: center;color: #fff;font-size: 1rem;float: left;border: none;}
+.leftButton{background: #e60111;}
+.rightButton{background: #558efc;}
+
+.moduleBGcolor1{background: #fff;}
+
+/*超出文本  自动省略号*/
+.apostrophe{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}

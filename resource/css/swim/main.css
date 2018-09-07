@@ -1,0 +1,216 @@
+\n.main {
+	width: 48rem;
+}
+.item {
+	height: 27.75rem;
+	position: relative;
+	padding-top: 2.05rem;
+}
+
+.nav_item {
+	height:3.825rem;
+	position: absolute;
+	bottom: 0;
+	width: 48rem;
+	background:rgba(50,49,49,0.43);
+	padding: 0 11.25rem;
+	display: flex;
+}
+.nav_item li{
+	flex-grow: 1; 
+	padding-bottom: 0.425rem;
+}
+.nav_item li:first-child .img  img{
+	border: 0.05rem #e93e3e solid;
+}
+.nav_item li h1 {
+	height: 0.825rem;
+	font-size: 0.35rem;
+	line-height: 0.825rem;
+	text-align: center;
+	color: #FFFFFF;
+}
+.nav_item li .img {
+	width: 2.575rem;
+	height: 2.575rem;
+	margin: auto;
+	border-radius: 1.2875rem;
+}
+.nav_item li .img img {
+	width: 2.575rem;
+	height: 2.575rem;
+	border-radius: 1.2875rem;
+}
+.box {
+	width:30rem;
+	height: 18.75rem;
+	margin: 0 auto;
+	display: flex;
+	
+}
+.box-text {
+	color: rgba(0,0,0,1);
+	background-color:rgba(255,255,255,.6) ;
+    width: 14.35rem;
+    height: 16.5rem;
+    padding: 1rem .5rem ;
+    position: relative;
+    border-radius: .3rem;
+}
+.box-title {
+	font-size:1.15rem;
+	font-family:MicrosoftYaHei;
+	
+	line-height:1.125rem;
+}
+.txt {
+	padding: 1rem  2.4rem 0 0.25rem;
+	text-align: left;
+	font-size: 0.45rem;
+	line-height:1rem ;
+	
+}
+.box-user {
+	flex-grow: 1;
+	width: 15.65rem;
+	position: relative;
+	flex-basis: <length> | auto;
+}
+.box .box-user .user-bg {
+	z-index: 1;
+	position: absolute;
+	top: 1rem;
+	left: 2rem;
+	width: 12.375rem;
+	height: 14.525rem;
+	background: #FFFFFF;
+	transform:rotate(10deg);
+	-ms-transform:rotate(10deg); /* Internet Explorer */
+	-moz-transform:rotate(10deg); /* Firefox */
+	-webkit-transform:rotate(10deg); /* Safari 和 Chrome */
+	-o-transform:rotate(10deg); /* Opera */
+	-moz-box-shadow: 3px 3px 1px rgba(0,0,0,.3); /* 老的 Firefox */
+	box-shadow: 3px 3px 1px rgba(0,0,0,.3);
+}
+.box .box-user .user-info {
+	width: 12.375rem;
+	z-index: 2;
+	height: 14.525rem;
+	background: #FFFFFF ;
+	padding: 0.45rem .55rem;
+	position: absolute;
+	top: 1rem;
+	left: 2rem;
+	-moz-box-shadow: 3px 3px 1px rgba(0,0,0,.3); /* 老的 Firefox */
+	box-shadow: 3px 3px 1px rgba(0,0,0,.3);
+}
+.user-head {
+	height: 2.5rem;
+	width: 100%;
+	display: flex;
+}
+.user-head div {
+	flex-grow: 1;
+}
+.Head_portrait img{
+	width: 3.1rem;
+	height: 2.275rem;
+}
+.user-head h1 {
+	margin: 0;
+	padding: 0;
+	font-size:0.4rem;
+	font-family:MicrosoftYaHei-Bold;
+	color:rgba(51,51,51,1);
+	line-height:1.1rem;
+	text-align: right;
+}
+.user-text {
+	width:11.25rem;
+	font-size:0.35rem;
+	font-family:MicrosoftYaHei;
+	color:rgba(51,51,51,1);
+	line-height:0.65rem;
+}
+.row{
+    width: 100%;
+	float: right;
+}
+.row li{
+	float: left; 
+    width: 33.3%; 
+    height: 2.9rem;
+    padding: 0.1875rem;
+   
+}
+.row li a{
+	
+    display: block;
+    border-radius: 5px;
+    height: 0;
+    padding-top: 63.15%;
+    position: relative;
+    overflow: hidden;
+    transition: .3s;
+    -ms-transition: .3s;
+    -moz-transition: .3s;
+    -webkit-transition: .3s;
+    -o-transition: .3s;
+}
+.row li a img {
+	position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    min-height: 100%;
+} 
+.text-center{
+    text-align:center;
+}
+.text-left {
+	text-align: left;
+	
+}
+.text-right {
+	text-align: right;
+}
+.live {
+	position: absolute;
+	bottom: 0;
+	left: 5rem;
+	width:5.85rem;
+	height:1.65rem;
+	border-radius:0.2rem;
+	box-shadow:0.2rem 0px 0.35rem rgba(0,0,0,0.6);
+	font-family:MicrosoftYaHei;
+	font-size: 0.75rem;
+	color:rgba(254,254,254,1);
+	line-height:0.7rem;
+	background: rgba(237,188,0,.8) no-repeat;
+	background-position:4rem 0.35rem;
+	padding-right:1rem;
+}
+
+.btn input{
+	width: 5.85rem;
+    height: 1.65rem;
+    color: #ffffff;
+    background: rgba(255,255,255,0);
+    border-radius: 0.2rem;
+    margin: 0rem 0.5rem;
+    font-size: .75rem;
+    position: absolute;
+    background: rgba(237,188,0,.8) no-repeat;
+    bottom: -2.3rem;
+}
+.signup {
+	left: 7rem;
+}
+#expect {
+	width:3.225rem;
+	color: #ffffff;
+	height:1rem;
+	background:rgba(169,169,169,1);
+	border-radius:0.15rem;
+	margin: 1.625rem  0.5rem ;
+}

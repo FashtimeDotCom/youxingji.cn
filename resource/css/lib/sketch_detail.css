@@ -1,0 +1,788 @@
+/*头部以及吸顶条*/
+
+body {
+	background-color: #ececec;
+}
+
+.instr {
+	width: 30rem;
+	margin: 0 auto;
+	position: relative;
+}
+
+.instr_cont {
+	width: 22rem;
+	margin-right: 0.425rem;
+	position: relative;
+}
+
+
+/*侧边栏*/
+
+.instr_sider {
+	width: 7.5rem;
+}
+
+.iCont_title {
+	padding: 0.6rem 1rem  .425rem 0.825rem;
+	background-color: #ffffff;
+}
+
+.iCont_title h4 {
+	font: 28px/1 "Microsoft Yahei", "微软雅黑";
+	margin-bottom: 18px;
+}
+
+.iCont_title p {
+	font: 14px/21px "Microsoft Yahei", '微软雅黑';
+	color: #333333;
+	padding-bottom: 17px;
+}
+
+.column {
+	height: 1rem;
+	padding-top: .5rem;
+	background-color: #ffffff;
+	z-index: 20;
+}
+
+.column ul {
+	display: flex;
+}
+
+.column li {
+	flex-grow: 1;
+	height: 0.75rem;
+}
+
+
+input,
+select,
+textarea {
+	outline: none;
+	border: none;
+	background-color: transparent;
+}
+
+.column_select {
+	border-bottom: 1px solid #D71618;
+}
+
+.column_select span {
+	color: #D71618;
+}
+
+.column li span {
+	width: 100%;
+	display: block;
+	height: .5rem;
+	text-align: center;
+	border-right: 1px solid #EBEBEB;
+	font-size: .35rem;
+	font-weight: bold;
+	color: #333333;
+	cursor: pointer;
+}
+
+
+/*hide 隐藏层*/
+
+.column_hide {
+	width: 22rem;
+	height: 1rem;
+	padding-top: 1rem;
+	background-color: #ffffff;
+	z-index: 20;
+	display: none;
+	position: fixed;
+	top: 0;
+}
+
+.column_hide ul {
+	display: flex;
+}
+
+.column_hide li {
+	height: 0.75rem;
+	flex-grow: 1;
+	background: #fff;
+}
+
+.column_select_hide {
+	border-bottom: 1px solid #D71618;
+}
+
+.column_select_hide span {
+	color: #D71618 !important;
+}
+
+.column_hide li span {
+	width: 100%;
+	display: block;
+	height: .5rem;
+	text-align: center;
+	border-right: 1px solid #EBEBEB;
+	font-size: .43rem;
+	font-weight: bold;
+	color: #333333;
+	cursor: pointer;
+}
+
+.column_hide li:last-child span {
+	border-right: 0px solid #EBEBEB;
+}
+
+.tour_day {
+	width: 3.75rem;
+	height: 1.5rem;
+	line-height: 1.5rem;
+	position: fixed;
+	top: 1.5rem;
+	display: none;
+	z-index: 10;
+}
+
+.tour_day li {
+	float: left;
+	margin: 0 0.375rem 0px 0;
+}
+
+.tour_day span {
+	width: 2.325rem;
+	height: 0.9rem;
+	display: inline-block;
+	background-color: #f8f8f8;
+	border: 1px solid #EDEDED;
+	text-align: center;
+	font: .375rem/.9rem "Microsoft Yahei", '微软雅黑';
+	color: #EE4848;
+	border-radius:0.125rem;
+	vertical-align: middle;
+	margin-left: -.5rem;
+}
+
+.tour_day .tour_day_active span {
+	background-color: #F36363;
+	color: #ffffff;
+	border: 1px solid #FFFFFF;
+}
+
+.tour_day i {
+	vertical-align: middle;
+	font: 0.35rem/1rem "Microsoft Yahei", "微软雅黑";
+	display: none;
+}
+
+.tour_day .tour_day_active i {
+	display: inline-block;
+	max-width: 6.25rem;
+	overflow: hidden;
+	white-space: nowrap;
+	word-spacing: normal;
+	text-overflow: ellipsis;
+}
+
+
+/*旅游日期详情*/
+
+.solumn_tour {
+	margin-top: .5rem;
+}
+
+.tour_cont {
+	padding: 0.7rem 0 .5rem 2.5rem;
+	background-color: #ffffff;
+}
+
+.tour_list {
+	position: relative;
+}
+
+.tour_list .tour_end {
+	margin-bottom: 1rem;
+}
+
+.day_num {
+	margin-bottom: 0.75rem;
+}
+
+img {
+	display: block;
+}
+
+.day_num i {
+	width: 0.9rem;
+	height: .9rem;
+	display: inline-block;
+	background-color: #ee7c7c;
+	text-align: center;
+	font: .375rem/.9rem "Microsoft Yahei", '微软雅黑';
+	color: #ffffff;
+	border-radius: 0.45rem;
+	vertical-align: middle;
+	margin-right: .5rem;
+	margin-left: -.5rem;
+}
+
+.day_num span {
+	font: 0.45rem/1rem "Microsoft Yahei", '微软雅黑';
+	vertical-align: middle;
+}
+
+
+
+.day_cont {
+	margin-left: 1.625rem;
+	width: 17.5rem;
+	padding-bottom: 1.3rem;
+}
+
+.day_cont p {
+	font: .35rem/0.625rem "Microsoft Yahei", '微软雅黑';
+	color: #7d7d7d;
+	margin-bottom: 0.4rem;
+	word-wrap: break-word;
+}
+
+.day_cont .day_item_img {
+	width: 8.25rem;
+	height: 2.8rem;
+	margin-right: 0.25rem;
+	display: inline-block;
+}
+
+img {
+	max-width:100% ;
+
+}
+
+.day_num .day_end {
+	width: 1.125rem;
+	height: 1.125rem;
+	border-radius: 0.625rem;
+	background-color: #ffffff;
+	border: 1px solid #cfcfcf;
+	text-align: center;
+	font: bold 0.3rem/1.125rem "Microsoft Yahei", "微软雅黑";
+	margin-left: -0.575rem;
+	color: #000000;
+}
+
+.day_num a {
+	display: inline-block;
+	width: 4rem;
+	height: 1rem;
+	border-radius: 0.375rem;
+	color: #ffffff;
+	text-align: center;
+	font: 0.45rem/1rem "Microsoft Yahei", "微软雅黑";
+}
+
+.day_num .rel_tour {
+	background-color: #ED7B7B;
+	margin: 0 0.75rem 0 0.65rem;
+}
+
+.day_num .order_tour {
+	background-color: #64c6eb;
+}
+
+
+/*选择团期*/
+
+.group {
+	margin-top: 0.6rem;
+	padding: 0 1rem 0 1rem;
+	background-color: #ffffff;
+}
+
+.group h4 {
+	height: 1.4rem;
+	font: 0.45rem/1.4rem "Microsoft Yahei", '微软雅黑';
+}
+.title_show_active {
+	border-bottom: 1px solid #ececec;
+}
+
+.pb30 {
+	padding-bottom: 0.75rem;
+}
+
+
+/*签证说明*/
+
+.group_visa {
+	height: 2.05rem;
+	margin-bottom:.5rem ;
+	line-height: 2rem;
+}
+
+.group_visa .visa_select {
+	font-size: 0.425rem;
+	font-weight: bold;
+	vertical-align: middle;
+	display: inline-block;
+	margin-right: 11.3rem;
+}
+
+.group_visa input {
+	display: none;
+}
+
+.group_visa label {
+	margin-right: 1.75rem;
+}
+
+.group_visa label span {
+	width:.5rem;
+	height: 0.4rem;
+	padding-left: 0.375rem;
+	line-height: .3rem;
+	display: inline-block;
+	vertical-align: middle;
+	background: url("../images/icon_false.png") left top no-repeat;
+}
+
+.group_visa i {
+	font-size: .375rem;
+	padding-left: .25rem;
+}
+
+.group_visa input:checked+span {
+	background: url(../images/icon_true.png) left top no-repeat;
+}
+
+.group_visa input:checked+span i {
+	color: #f26567;
+}
+
+
+/*费用说明*/
+
+.cost {
+	padding: 1.375rem 0 1px 0.75rem;
+}
+
+.cost_list {
+	margin-bottom: 1rem;
+}
+
+.cost_list span {
+	font: bold 0.325rem/0.575rem 'Microsoft Yahei', '微软雅黑';
+}
+
+.cost_list dt {
+	color: #f26567;
+	font-size: 0.4rem;
+	font-weight: bold;
+	margin-bottom: .5rem;
+}
+
+.cost_list dd {
+	padding-left: 0.375rem;
+	font: 0.325rem/0.575rem 'Microsoft Yahei', '微软雅黑';
+}
+
+
+/*结尾说明和了解更多*/
+
+.visa_infor {
+	padding: 0.7rem 0 1.325rem 0.825rem;
+	display: none;
+}
+
+.visa_infor li {
+	font: 0.325rem/0.575rem 'Microsoft Yahei', '微软雅黑';
+}
+
+.explain {
+	text-align: center;
+	margin-top: 0.75rem;
+}
+
+.explain a {
+	display: inline-block;
+	width: 4rem;
+	height: 1rem;
+	background-color: #e5b0b0;
+	color: #ffffff;
+	font: 0.45rem/1rem "Microsoft Yahei", '微软雅黑';
+	text-align: center;
+	border-radius: .5rem;
+	margin-right: 0.925rem;
+}
+
+.recommend {
+	margin: 1rem 0 3.25rem 0;
+}
+
+.recommend_top {
+	text-align: center;
+	margin-bottom: 0.725rem;
+}
+
+.recommend_top h4 {
+	font: 0.45rem/1 "Microsoft Yahei", "微软雅黑";
+}
+
+.recommend_top p {
+	font: .2125rem/1 "Microsoft Yahei", "微软雅黑";
+	color: #7e7d7d;
+	margin-top: 5px;
+}
+
+.recommend_bot {
+	margin-right: -1.2rem;
+}
+
+.recommend_bot li {
+	position: relative;
+	float: left;
+	width: 10.5rem;
+	height: 3.5rem;
+	margin-right: 1.1rem;
+}
+
+.recom_mask {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.3);
+	text-align: center;
+	color: #ffffff;
+}
+
+.recom_mask h5 {
+	margin-top: 0.65rem;
+	font-weight: normal;
+	font-size: 0.375rem;
+}
+
+.recom_mask p {
+	margin-top: .3rem;
+	font: .3rem/1 "Microsoft Yahei", '微软雅黑';
+	color: #ffffff;
+}
+
+.recom_mask a {
+	margin-top: 0.6rem;
+	display: inline-block;
+	width: 2.5rem;
+	height: 0.75rem;
+	border: 1px solid #ffffff;
+	text-align: center;
+	font: 0.375rem/0.75rem "Microsoft Yahei", '微软雅黑';
+	border-radius: 0.375rem;
+	color: #ffffff;
+}
+
+
+/*亮点呈现*/
+
+.bright img {
+	width: 100%;
+}
+
+.bright {
+	background-color: #fff;
+	text-align: center;
+	padding: 1rem 0 1rem 0;
+}
+
+.bright li {
+	padding: 0 3.625rem 0 3.625rem;
+}
+
+.bright li:last-child {
+	height: auto;
+}
+
+
+/*新增*/
+
+.trips_list {
+	margin-right: -0.625rem;
+	margin-top: 0.25rem;
+}
+
+.trips_list li {
+	width: 1.875rem;
+	text-align: center;
+	float: left;
+	margin-bottom: .5rem;
+	margin-right: 1.5rem;
+}
+
+.trips_list h6 {
+	font: 0.325rem/.75rem "Microsoft Yahei", '微软雅黑';
+}
+
+.trips_list i {
+	margin: 0 .25rem;
+}
+
+.trips_list input {
+	width: 0.625rem;
+	text-align: center;
+	font-size: .3rem;
+	margin: 0 3px;
+}
+
+.trips_list span {
+	width: 0.275rem;
+	height: 0.5rem;
+	text-align: center;
+	line-height: .5rem;
+	cursor: pointer;
+}
+
+.trips_cue {
+	position: absolute;
+	left:0.125rem;
+	top: 42%;
+	font-size: .3rem;
+	color: #f46464;
+	display: none;
+}
+
+
+/*置顶*/
+
+
+/*顶部加层*/
+
+.top_line {
+	width: 100%;
+	position: fixed;
+	top: 0;
+	display: none;
+	height: .5rem;
+	background-color: #ececec;
+	z-index: 25;
+}
+.play_num {
+	position: relative;
+}
+
+.life_line {
+	height: .5rem;
+	background-color: #ececec;
+}
+
+.player_star {
+	background-color: #FFFFFF;
+	text-align: center;
+	padding-top: 0.5rem;
+}
+.player_star p img {
+	width: 100%;
+}
+.player_star .player_video {
+	height: 9.75rem;
+	margin-bottom: 1rem;
+}
+
+
+
+.star_img_item {
+	width: 7.15rem;
+	height: 3.575rem;
+}
+
+.star_img_item img {
+	width: 100%;
+	height: 100%;
+}
+
+.player_cont {
+	padding: 0 3.625rem 1.5rem 3.625rem;
+}
+
+.player_star_img {
+	padding: 0.625rem 0 1rem 0;
+}
+
+
+
+.time {
+	display: flex;
+	padding-bottom: .65rem;
+	border-bottom: 1px solid #E5E5E5;
+	padding-top: .65rem;
+}
+
+.number {
+	display: flex;
+	margin: .5rem 0 0;
+	padding-bottom: .65rem;
+	border-bottom: 1px solid #E5E5E5;
+}
+
+.number-r span {
+	display: block;
+	float: left;
+	width: 30%;
+	font-size: .5rem;
+}
+
+.number div {
+	flex-grow: 1;
+}
+
+.row-title {
+	font-weight: bold;
+	padding-top: 1rem;
+}
+
+.number-l {
+	font-size: 0.4rem;
+	font-family: 'MicrosoftYaHei';
+	color: rgba(215, 22, 24, 1);
+	line-height: .8rem;
+}
+
+.time-l {
+	font-size: 0.4rem;
+	font-family: 'MicrosoftYaHei';
+	color: rgba(51, 51, 51, 1);
+}
+
+.time-r {
+	font-size: 0.35rem;
+	font-family: 'MicrosoftYaHei';
+	color: rgba(102, 102, 102, 1);
+	padding-left: 1rem;
+	background: url(/resource/icon/icon.png) no-repeat;
+	background-position: -115px 2px;
+}
+
+.time div {
+	flex-grow: 1;
+}
+
+.listGroup li.selectedTab {
+	background: #EE4848;
+	color: #fff;
+	font-weight: bold;
+}
+
+.textContent {
+	padding: .25rem .5rem;
+	background-color: #fff;
+	color: #777;
+	min-height: 9.6rem;
+}
+
+.instr_sider {
+	width: 7.5rem;
+	background: #fff;
+	padding: 0.75rem 0.75rem 1rem;
+}
+
+.City {
+	font-size: .3rem;
+	padding: .2rem 0 .5rem;
+	border-bottom: 1px solid #E5E5E5;
+}
+
+.City input {
+	vertical-align: middle;
+	margin-top: -2px;
+	margin-bottom: 1px;
+}
+
+.Price {
+	padding: 0.825rem 0 0.425rem;
+	text-align: center;
+	font-size: 0.35rem;
+	font-weight: bold;
+}
+
+.Price span {
+	font-size: 0.7rem;
+	color: #D92627;
+}
+
+.btn {
+	width: 100%;
+	height: .9rem;
+	background: rgba(242, 64, 65, 1);
+	border-radius: 0.45rem;
+	border: none;
+	color: #FFFFFF;
+}
+
+#City {
+	width: 3rem;
+	height: .65rem;
+	background: rgba(242, 242, 245, 0);
+	border-radius: 0.275rem;
+	border: 0.05rem solid #ccc;
+	text-align: center;
+	margin-top: 0.4rem;
+}
+.flight i {
+		display: inline-block;
+    width: .6rem;
+    float: left;
+    height: .6rem;
+    margin: .2rem .5rem .5rem -.3rem;
+    background: url(/resource/icon/icon.png) no-repeat;
+    background-position: -127px -59px;
+    
+}
+.introduce li span {
+	color:rgba(59,59,59,.8);
+	line-height:1rem;
+}
+.introduce li {
+	width: 100%;
+	clear: both;
+}
+.sleep i {
+    display: inline-block;
+    width: .6rem;
+    float: left;
+    height: .6rem;
+    margin: .2rem .5rem .5rem -.3rem;
+    background: url(/resource/icon/icon.png) no-repeat;
+    background-position: -124px -126px;
+}
+.diet i {
+    display: inline-block;
+    width: .6rem;
+    float: left;
+    height: .6rem;
+    margin: .2rem .5rem .5rem -.3rem;
+    background: url(/resource/icon/icon.png) no-repeat;
+    background-position: -126px -96px;
+}
+.Trip i {
+    display: inline-block;
+    width: .69rem;
+    float: left;
+    height: .6rem;
+    margin: .2rem -.5rem .5rem -.3rem;
+    background: url(/resource/icon/icon.png) no-repeat;
+    background-position: -125px -165px;
+}
+#travel i{
+		display: inline-block;
+    width: .6rem;
+    float: right;
+    height: .6rem;
+    margin: .5rem -.5rem .5rem .5rem;
+    background: url(/resource/icon/icon.png) no-repeat;
+    -moz-transform:rotate(90deg); 
+	 	-webkit-transform:rotate(90deg);
+		transform:rotate(90deg);
+    background-position: 10px -120px;
+}
+.group .title_show_active i {
+		-moz-transform:rotate(270deg) !important; 
+	 	-webkit-transform:rotate(270deg) !important;
+		transform:rotate(270deg) !important;
+}
+

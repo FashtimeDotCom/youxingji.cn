@@ -1,0 +1,129 @@
+.main  {
+	margin-top: 1.8rem;
+}
+.main .d-nav {
+	display: flex;
+	background: rgba(255, 255, 255, 1);
+	height: 3.7rem;
+	box-shadow: .1rem 0px 0.15rem rgba(0, 0, 0, 0.33);
+	border-bottom: 0.025rem solid #F2F2F5;
+}
+img {
+	display: block;
+}
+.banner .img_name {
+	position: absolute;
+	left: 0px;
+	bottom: 10px;
+	color: #fff;
+	font-size:.95rem;
+	font-family:'MicrosoftYaHei-Bold';
+	color:rgba(255,255,255,1);
+	line-height:1.25rem;
+}
+.main .d-nav div {
+	text-align: center;
+	flex-grow: 1;
+	font-size: 0.4rem;
+	font-family: MicrosoftYaHei;
+	color: rgba(53, 53, 53, 1);
+	line-height: .8rem;
+}
+.main .d-nav div:first-child {
+	border-right: 1px solid #F2F2F5;
+}
+.main .d-nav div:last-child {
+	border-left: 1px solid #F2F2F5;
+}
+.nav-img-box {
+	margin: 0.65rem auto 0.275rem;
+	width: 1.75rem;
+	height: 1.75rem;
+	border-right: none !important;
+}
+.title-nav {
+	padding: 0.55rem 0;
+	background: rgba(255, 255, 255, 1);
+	box-shadow: .1rem 0px 0.15rem rgba(0, 0, 0, 0.33);
+	border-bottom: 0.025rem solid #F2F2F5;
+}
+ .title {
+	height: 0.675rem;
+	width: 98%;
+	margin-left: 2%;
+	font-size: 0.675rem;
+	font-family: MicrosoftYaHei;
+	color: rgba(51, 51, 51, 1);
+	line-height: 0.675rem;
+	padding-left: 0.825rem;
+	background: linear-gradient(to right, #D71618, #D71618 6px, transparent 6px, transparent);
+	background-size: 100% 2px;
+}
+.title-nav ul {
+	display: flex;
+	margin-top: 0.575rem;
+}
+.title-nav ul li {
+	position: relative;
+	flex-grow: 1;
+}
+.title-nav .list-img-box {
+	width: 2.5rem;
+	height: 2.5rem;
+	margin: 0 auto;
+	border-radius: 1.25rem;
+}
+.list-img-box-bg {
+	background-color: rgba(0,0,0,.6) !important;
+}
+.list-img-box-bg img{
+	background-color: rgba(0,0,0,.6) !important;
+}
+.title-nav .list-img-box  img{
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 1.25rem;
+}
+
+.txt-next {
+    width: 2.5rem;
+    height:2.5rem;
+    line-height: .6rem;
+    position: absolute;
+    border-radius: 1.25rem;
+    padding: .65rem .25rem 0rem;
+    top: 0rem;
+    left: 0rem; 
+    display: inline-block;
+    text-align: center;
+    font-size: 0.4rem;
+    font-family: 'MicrosoftYaHei';
+    color: rgba(255,255,255,1);
+}
+
+.Country {
+	width: 100%;
+	height:.6rem;
+	line-height: .6rem;
+	position: absolute;
+	top: 60%;
+	text-align: center;
+	font-size:0.4rem;
+	font-family:MicrosoftYaHei;
+	color:rgba(255,255,255,1);
+}
+.item {
+	background:rgba(255,255,255,1);
+}
+.expect {
+	background:rgba(255,255,255,1);
+	height: 3.5rem;
+	box-shadow:4px 0px 6px rgba(0,0,0,0.33);
+	border-radius: 0 0 10px 10px;
+	font-size:1.2rem;
+	font-family:FZZYJW--GB1-0;
+	color:rgba(201,197,197,1);
+	line-height:3.5rem;
+	text-align: center;
+	font-weight: bold;
+}

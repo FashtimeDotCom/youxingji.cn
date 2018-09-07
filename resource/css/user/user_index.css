@@ -1,0 +1,45 @@
+.ul_list {
+	display: flex;
+	background: rgba(255, 255, 255, 1);
+}
+
+.ul_list li {
+	flex-grow: 1;
+	border-right: 1px solid #E2E2E2;
+	margin: .5rem;
+}
+
+.ul_list li .txt {
+	color: rgba(153, 153, 153, 1);
+	font-size: 0.4rem;
+	text-align: center;
+	margin-top: .3rem;
+}
+
+.ul_list li:last-child {
+	border-right: 0px solid #E2E2E2;
+}
+.ul_list li i {
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+}
+.addtravel i {
+	background: url(/resource/icon/user_icon.jpg) no-repeat 0px 0px;
+}
+.addtv i {
+	background: url(/resource/icon/user_icon.jpg) no-repeat 0px -45px;
+}
+
+.travel_note i {
+	background: url(/resource/icon/user_icon.jpg) no-repeat 0px -95px;
+}
+
+.follow i {
+	background: url(/resource/icon/user_icon.jpg) no-repeat 0px -148px;
+}
+
+.fans i {
+	background: url(/resource/icon/user_icon.jpg) no-repeat 0px -200px;
+}
