@@ -56,6 +56,27 @@ class Controller_Wap_User extends Core_Controller_WapAction
         $this->display('wap/user/index.tpl');
 	}
 
+	//新版我的游记
+    public function new_travelAction()
+    {
+        $perpage = 10;
+        $uid = $this->userInfo['uid'];
+        $Num = C::M('travel')->where("uid = $uid")->getCount();
+        $curpage = $this->getParam ('page') ? intval ($this->getParam ('page')) : 1;
+        $mpurl = "index.php?m=wap&c=user&v=index";
+        $multipage = $this->multipages ($Num, $perpage, $curpage, $mpurl);
+        $list = C::M('travel')->where("uid = $uid")->order('addtime desc')->limit($perpage * ($curpage - 1), $perpage)->select();
+        foreach ($list as $key => $value) {
+            $list[$key]['content'] = json_decode($value['content']);
+            $list[$key]['picnum'] = count(json_decode($value['content']));
+            $list[$key]['addtime'] = date('Y-m-d H:i:s', $value['addtime']);
+        }
+        $this->assign('list', $list);
+        $this->assign('num', $Num);
+        $this->assign ('multipage', $multipage);
+        $this->display('wap/user/new_travel.tpl');
+    }
+
 	//新版移动端个人中心-我的
     public function indexAction(){
         $uid = $this->userInfo['uid'];
@@ -163,6 +184,7 @@ class Controller_Wap_User extends Core_Controller_WapAction
         //user info
         $user_info=C::M('user_member')->field('uid,headpic as avatar,username,autograph,city,cover')->where("uid={$uid}")->find();
         if(empty($user_info['avatar'])) $user_info['avatar']="/resource/images/img-lb2.png";
+        if (empty($user_info['cover'])) $user_info['cover']="/resource/m/images/ban3.jpg";
         $this->assign("user",$user_info);
 
         $this->display('wap/user/new_tv.tpl');

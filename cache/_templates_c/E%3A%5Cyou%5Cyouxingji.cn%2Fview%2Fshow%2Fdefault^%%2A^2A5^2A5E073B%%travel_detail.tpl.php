@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-05 16:15:22
+<?php /* vpcvcms compiled created on 2018-09-10 10:13:01
          compiled from wap/travel_detail.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -158,7 +158,7 @@ unset($_smarty_tpl_vars);
     <div class="h50"></div>
     <div class="fl-bot" id="nexts">
         <div class="wp">
-            <span>￥<?php echo $this->_tpl_vars['journey']['extend']['price']; ?>
+            <span>￥<?php echo $this->_tpl_vars['detail']['price']; ?>
 </span>
             <a class="btn-enroll" id="btnBook" href="javascript:;">立刻报名</a>
         </div>

@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-07 13:51:47
+<?php /* vpcvcms compiled created on 2018-09-10 09:10:00
          compiled from wap/user/addtravel.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -8,7 +8,7 @@
 	<meta name="renderer" content="webkit" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
 	<meta name="format-detection" content="telephone=no" />
-	<title>个人中心-发布</title>
+	<title>个人中心-发布游记</title>
 	<meta name="keywords" content="<?php echo $this->_reg_objects['TO'][0]->cfg(array('key' => ' index_keywords ','group' => 'site ','default' => "首页 "), $this);?>
 " />
 	<meta name="description" content="<?php echo $this->_reg_objects['TO'][0]->cfg(array('key' => ' index_description ','group' => 'site ','default' => "首页 "), $this);?>
@@ -49,7 +49,7 @@
 			<ul class="ul-tab-yz1">
 				<li class="on">
 					<a href="/index.php?m=wap&c=user&v=addtravel">
-						<h4>发表游记</h4>
+						<h4>发表日志</h4>
 						<p>记录您的每一个动人深刻</p>
 					</a>
 				</li>
@@ -467,10 +467,14 @@ unset($_smarty_tpl_vars);
 												'longitude': lng,
 												'code': code,
 											}, function(data) {
-												console.log(data);
+												//console.log(data);
+												$("#address").val("");
+												$("#Paddress").text("");
 												if (data.code==1) {
-													$("#address").val(data.tpis);
-													$("#Paddress").text(data.tpis);
+													setInterval(function(){
+														$("#address").val(data.tpis);
+														$("#Paddress").text(data.tpis);
+													},200);
 												} else{
 													layer.msg(data.tips);
 												}

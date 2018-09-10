@@ -83,7 +83,7 @@
                                         <p>{{$vo.describes}}</p>
                                     </div>
                                 </div>
-                                <dl class="list-img">
+                                <dl class="list-img list_img">
                                     {{foreach from=$vo.content item=v}}
                                     <dd><a href="{{$v}}" class="lightbox" rel="list{{$vo.id}}"><img src="{{$v}}" alt=""></a></dd>
                                     {{/foreach}}

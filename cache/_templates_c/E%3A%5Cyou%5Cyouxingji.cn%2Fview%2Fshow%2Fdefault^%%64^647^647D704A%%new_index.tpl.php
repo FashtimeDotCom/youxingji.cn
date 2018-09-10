@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-04 15:30:08
+<?php /* vpcvcms compiled created on 2018-09-10 09:09:52
          compiled from wap/user/new_index.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/user/new_index.tpl', 46, false),)), $this); ?>
@@ -103,7 +103,7 @@ unset($_smarty_tpl_vars);
                 </li>
                 <li><a href="/index.php?m=wap&c=user&v=addtv">
     					<i style="background-image: url(/resource/m/images/s-i2.png);"></i>
-    					<div class="txt">发布视屏</div>
+    					<div class="txt">发布视频</div>
     				</a>
                 </li>
                 <li><a href="javascript:void(0)">

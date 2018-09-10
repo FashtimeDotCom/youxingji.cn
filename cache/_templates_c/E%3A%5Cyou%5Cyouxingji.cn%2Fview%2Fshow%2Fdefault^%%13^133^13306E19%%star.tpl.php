@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-05 14:18:47
+<?php /* vpcvcms compiled created on 2018-09-10 15:58:14
          compiled from wap/star.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/star.tpl', 60, false),)), $this); ?>
@@ -110,7 +110,7 @@ unset($_smarty_tpl_vars);
 </p>
                                     </div>
                                 </div>
-                                <dl class="list-img">
+                                <dl class="list-img list_img">
                                     <?php $_from = $this->_tpl_vars['vo']['content']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
     foreach ($_from as $this->_tpl_vars['v']):
 ?>

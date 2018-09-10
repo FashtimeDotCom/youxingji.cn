@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-05 17:46:33
+<?php /* vpcvcms compiled created on 2018-09-10 10:30:54
          compiled from wap/user/index.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -49,8 +49,8 @@ unset($_smarty_tpl_vars);
                 <i style="background: url(<?php echo $this->_tpl_vars['user']['avatar']; ?>
 ) no-repeat center center; background-size: cover; border-radius: 50%;"></i>
                 <dl>
-                    <dd><a href="/index.php?m=wap&c=user&v=addtravel">发布游记</a></dd>
-                    <dd><a href="/index.php?m=wap&c=user&v=addtv">发布TV</a></dd>
+                    <dd><a href="/index.php?m=wap&c=user&v=addtravel">发布日志</a></dd>
+                    <dd><a href="/index.php?m=wap&c=user&v=addtv">发布视频</a></dd>
                     <dd><a href="/index.php?m=wap&c=user&v=follow">我的关注</a></dd>
                     <dd><a href="/index.php?m=wap&c=user&v=msg">我的私信</a></dd>
                     <dd><a href="/index.php?m=wap&c=user&v=fans">我的粉丝</a></dd>
@@ -63,9 +63,9 @@ unset($_smarty_tpl_vars);
             <div class="m-nv-yz">
                 <div class="wp"> 
                     <ul>
-                        <li class="on"><a href="/index.php?m=wap&c=user&v=travel">我的游记</a></li>
+                        <li class="on"><a href="/index.php?m=wap&c=user&v=travel">我的日志</a></li>
                         <li><a href="/index.php?m=wap&c=user&v=album">我的相册</a></li>
-                        <li><a href="/index.php?m=wap&c=user&v=tv">我的旅拍TV</a></li>
+                        <li><a href="/index.php?m=wap&c=user&v=tv">我的视频</a></li>
                         <li><a href="/index.php?m=wap&c=user&v=draft">草稿箱</a></li>
                     </ul>
                 </div>
@@ -74,13 +74,13 @@ unset($_smarty_tpl_vars);
                 <li>
                     <a href="/index.php?m=wap&c=user&v=addtravel">
     					<i style="background-image: url(/resource/m/images/s-i1.png);"></i>
-    					<div class="txt">发布游记</div>
+    					<div class="txt">发布日志</div>
     				</a>
                 </li>
                 <li>
                     <a href="/index.php?m=wap&c=user&v=addtv">
     					<i style="background-image: url(/resource/m/images/s-i2.png);"></i>
-    					<div class="txt">发布旅拍TV</div>
+    					<div class="txt">发表视频</div>
     				</a>
                 </li>
                 <li>
@@ -167,23 +167,23 @@ unset($_smarty_tpl_vars);
             <div class="m-myday-yz">
                 <div class="wp">
                     <div class="top">
-                        <a href="/index.php?m=wap&c=user&v=addtravel" class="write"><i></i>写游记</a>
-                        <h3>我的游记</h3>
+                        <a href="/index.php?m=wap&c=user&v=addtravel" class="write"><i></i>写日志</a>
+                        <h3>我的日志</h3>
                     </div>
                     <div class="bg">
-                        <div class="txt">此处还差一篇游记哦~</div>
+                        <div class="txt">此处还差一篇日志哦~</div>
                     </div>
                 </div>
             </div>
             <div class="m-myday-yz m-myday-yz2">
                 <div class="wp">
                     <div class="top">
-                        <a href="/index.php?m=wap&c=user&v=addtv" class="write"><i></i>发布旅拍TV</a>
-                        <h3>我的旅拍TV</h3>
+                        <a href="/index.php?m=wap&c=user&v=addtv" class="write"><i></i>发布视频</a>
+                        <h3>我的视频</h3>
                     </div>
                     <div class="bg2">
                         <div class="text">
-                            留下你最原创旅拍 <br>这里有最原创的旅游推荐<br> 也有最温馨的旅行小贴士<br>
+                            留下你最原创视频 <br>这里有最原创的旅游推荐<br> 也有最温馨的旅行小贴士<br>
                         </div>
                     </div>
                 </div>

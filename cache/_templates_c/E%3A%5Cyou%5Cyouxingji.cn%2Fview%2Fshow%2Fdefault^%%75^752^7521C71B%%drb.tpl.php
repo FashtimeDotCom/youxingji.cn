@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-08-15 16:01:38
+<?php /* vpcvcms compiled created on 2018-09-10 10:10:31
          compiled from swim/mobile/drb.tpl */ ?>
 <!DOCTYPE html>
 <html>
@@ -7,7 +7,7 @@
 		<meta name="renderer" content="webkit" />
 	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
 	    <meta name="format-detection" content="telephone=no" />
-		<title>游主张</title>
+		<title>免费游</title>
 
 		<link rel="stylesheet" type="text/css" href="/resource/m/css/style.css"/>
 		<link rel="stylesheet" type="text/css" href="/resource/css/swim/m.css"/>
@@ -20,7 +20,7 @@ $this->_smarty_include(array('smarty_include_tpl_file' => 'wap/header.tpl', 'sma
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
-        	<h3>游主张</h3>
+        	<h3>免费游</h3>
 	        <div class="g-top">
 	            <div class="logo"><a href="/"><img src="/resource/m/images/logo.png" alt="" /></a></div>
 	            <div class="so">

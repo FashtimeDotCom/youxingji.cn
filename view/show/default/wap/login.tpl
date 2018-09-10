@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
@@ -14,20 +13,17 @@
     <script src="/resource/m/js/jquery.js"></script>
     <script src="/resource/m/js/lib.js"></script>
 </head>
-
-<body class="">
+<body class="" onkeydown="on_return();">
     <div class="mian">
         <div class="m-login" style="background-image: url(/resource/m/images/bg-login.jpg);">
             <div class="box"> 
                 <div class="con">
-                    <div class="logo">
-                        <img src="/resource/m/images/logo.png" alt="" />
-                    </div>
+                    <div class="logo"><img src="/resource/m/images/logo.png" alt="" /></div>
                     <h3 class="tit">登录</h3>
-                    <input type="number" placeholder="您的手机号" id="phone" class="inp" />
+                    <input type="number" placeholder="您的手机号" id="phone" class="inp" onkeydown=""/>
                     <input type="password" placeholder="您的密码" id="password" class="inp" />
                     <div class="forget">忘记密码？<a href="/index.php?m=wap&c=index&v=forget">点击找回</a></div>
-                    <input type="submit" value="登录" id="btnLogin" class="btn btn1" />
+                    <input type="submit" value="登录" id="btnLogin" class="btn btn1" onClick='check()' />
                     <a href="/index.php?m=wap&c=index&v=reg"><input type="submit" value="快速注册" class="btn btn2" /></a>
                     <div class="choose">
                         <p class="p1">你还可以选择第三方直接登录</p>
@@ -70,7 +66,38 @@
                 return false;
             };
         }
+        
+        //以下两个方法为  键盘 敲回车确认登录 事件
+        function check() {
+			var phone = $('#phone').val();
+            var password = $('#password').val();
+            if(!checkMobile(phone)){
+                layer.msg('请输入正确的手机号');
+                return false;
+            }
+            if(!password){
+                layer.msg('请输入账户密码');
+                return false;
+            }
+            $('.y-set').text('').hide();
+            $.post("/index.php?m=api&c=index&v=login", {
+                'phone':phone,
+                'password':password
+            }, function(data){
+                layer.msg(data.tips);
+                if(data.status == 1){
+                    window.location.href = "/index.php?m=wap&c=user&v=index";
+                }
+            },"JSON");
+		}
+		//回车时，默认是登陆
+		function on_return() {
+			if(window.event.keyCode == 13) {
+				if(document.all('btnLogin') != null) {
+					document.all('btnLogin').click();
+				}
+			}
+		}
     </script>
 </body>
-
 </html>

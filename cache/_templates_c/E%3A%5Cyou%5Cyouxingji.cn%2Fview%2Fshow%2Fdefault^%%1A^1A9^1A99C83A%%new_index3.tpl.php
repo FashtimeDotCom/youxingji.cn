@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-03 10:19:56
+<?php /* vpcvcms compiled created on 2018-09-10 15:45:33
          compiled from wap/new_index3.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -186,7 +186,7 @@
 				<?php echo $this->_tpl_vars['item']['describes']; ?>
 
 			</div>
-			<dl class="list-img">
+			<dl class="list-img list_img">
 				<?php $_from = $this->_tpl_vars['item']['content']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
     foreach ($_from as $this->_tpl_vars['v']):
 ?>
@@ -194,7 +194,7 @@
 					<a href="<?php echo $this->_tpl_vars['v']; ?>
 " class="lightbox" rel="list<?php echo $this->_tpl_vars['item']['id']; ?>
 ">
-						<img src="<?php echo $this->_tpl_vars['v']; ?>
+						<img src="http://www.youxingji.cn/<?php echo $this->_tpl_vars['v']; ?>
 " alt="">
 					</a>
 				</dd>

@@ -167,7 +167,7 @@
 			<div class="txt">
 				{{$item.describes}}
 			</div>
-			<dl class="list-img">
+			<dl class="list-img list_img">
 				{{foreach from=$item.content item=v}}
 				<dd>
 					<a href="{{$v}}" class="lightbox" rel="list{{$item.id}}">

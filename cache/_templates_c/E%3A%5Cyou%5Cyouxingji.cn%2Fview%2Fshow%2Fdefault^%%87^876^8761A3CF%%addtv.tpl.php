@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-07 11:16:37
+<?php /* vpcvcms compiled created on 2018-09-10 09:09:55
          compiled from wap/user/addtv.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -9,7 +9,7 @@
     <meta name="renderer" content="webkit" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" /> 
     <meta name="format-detection" content="telephone=no" />
-    <title>个人中心-发布</title>
+    <title>个人中心-发布视频</title>
     <meta name="keywords" content="<?php echo $this->_reg_objects['TO'][0]->cfg(array('key' => 'index_keywords','group' => 'site','default' => "首页"), $this);?>
 " />
     <meta name="description" content="<?php echo $this->_reg_objects['TO'][0]->cfg(array('key' => 'index_description','group' => 'site','default' => "首页"), $this);?>
@@ -89,7 +89,7 @@
         <div class="row-issue">
             <ul class="ul-tab-yz1">
                 <li><a href="/index.php?m=wap&c=user&v=addtravel">
-                        <h4>发表游记</h4>
+                        <h4>发表日志</h4>
                         <p>记录您的每一个动人深刻</p>
                     </a>
                 </li>
@@ -166,7 +166,7 @@ unset($_smarty_tpl_vars);
     <script type="text/javascript">
         $(document).ready(function(){
         	//解密base64编码
-			function Base64() {
+			function Base64(){
 			    // private property  
 			    _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";  
 			   
@@ -346,10 +346,14 @@ unset($_smarty_tpl_vars);
 												'longitude': lng,
 												'code': code,
 											}, function(data) {
-												console.log(data);
+												//console.log(data);
+												$("#address").val("");
+												$("#Paddress").text("");
 												if (data.code==1) {
-													$("#address").val(data.tpis);
-													$("#Paddress").text(data.tpis);
+													setInterval(function(){
+														$("#address").val(data.tpis);
+														$("#Paddress").text(data.tpis);
+													},200);
 												} else{
 													layer.msg(data.tips);
 												}
@@ -422,12 +426,14 @@ unset($_smarty_tpl_vars);
                 $('#piclist').html('<div class="upic" onclick="deletepic(this)"><img src="'+ data.url +'" class="layui-upload-img"><i class="iz layui-icon">&#xe640;</i></div>');
             }
         });
+        //发布
         $('#btnAdd').click(function(){
             var title = $('#title').val();
             var describe = $('#describe').val();
             var url = $('#url').val();
             var did = $('#did').val();
             var pic = $('.layui-upload-img').attr('src');
+            var address = $('#address').val();
             if(!describe){
                 layer.msg('请输入描述');
                 return false;
@@ -449,7 +455,8 @@ unset($_smarty_tpl_vars);
                 'url':url,
                 'pic':pic,
                 'did':did,
-                'describe':describe
+                'describe':describe,
+                'address':address
             }, function(data){
                 layer.msg(data.tips);
                 if (data.status == 1) {
@@ -457,8 +464,7 @@ unset($_smarty_tpl_vars);
                 }
             },"JSON");
         })
-      	function deletepic(obj)
-        {
+      	function deletepic(obj){
             $(obj).remove();
         }
         //保存草稿
@@ -468,11 +474,13 @@ unset($_smarty_tpl_vars);
             var describe = $('#describe').val();
             var pic = $('.layui-upload-img').attr('src');
             var list = pic + '||' + url;
+            var address = $('#address').val();
             $.post("/index.php?m=api&c=index&v=adddraft", {
                 'title':title,
                 'list':list,
                 'type':1,
-                'describe':describe
+                'describe':describe,
+                'address':address
             }, function(data){
                 layer.msg(data.tips);
             },"JSON");
