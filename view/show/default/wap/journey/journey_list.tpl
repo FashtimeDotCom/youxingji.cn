@@ -18,7 +18,7 @@
 <body class="">
     <div class="header">
         {{include file='wap/header.tpl'}}
-        <h3>个人中心</h3>
+        <h3>独家旅行</h3>
     </div>
     <div class="mian">
         <div class="g-top">
@@ -36,145 +36,95 @@
        
        	<!--度假项目-->
        	<div class="ban1 fix">
-            <a class="advertising dis_block fix" href="javascript:;"><img class="headPortrait" src="/resource/m/images/ban2_1.jpg" alt=""></a>
+            <a class="advertising dis_block fix" href="javascript:;">
+                <img class="headPortrait" src="{{$ad_list.0.imgurl}}" alt=""></a>
         </div>
         
         <!--达人带你去旅行-->
         <div class="Public tour fix">
-        	<p class="moduleTitle">达人带你去旅行<a href="javascript:;">更多>></a></p>
-        	<div class="box fix">
-        		<a class="dis_block fix" href="javascript:;">
-	        		<img class="poster" src="/resource/m/images/q-pic23.jpg"/>
-	        		<p class="describe">在热情奔放的斯里兰卡，玩出欧洲最佳性价比</p>
-	        		<p class="bottom">
-	        			<span class="NATIONNAME">西班牙、葡萄牙</span>·
-	        			<span class="time">10天</span>
-	        			<span class="cost">1480元/人起</span>
-	        		</p>
-	        	</a>
-        	</div>
-        	<div class="box fix">
-        		<a class="dis_block fix" href="javascript:;">
-	        		<img class="poster" src="/resource/m/images/q-pic23.jpg"/>
-	        		<p class="describe">在热情奔放的斯里兰卡，玩出欧洲最佳性价比</p>
-	        		<p class="bottom">
-	        			<span class="NATIONNAME">西班牙、葡萄牙</span>·
-	        			<span class="time">10天</span>
-	        			<span class="cost">1480元/人起</span>
-	        		</p>
-        		</a>
-        	</div>
+        	<p class="moduleTitle">达人带你去旅行
+				<a href="javascript:;">更多>></a>
+			</p>
+
+			{{if $star_travel}}
+			{{foreach from=$star_travel item=item key=key}}
+
+			<div class="box fix">
+				<a class="dis_block fix" href="index.php?m=wap&c=index&v=travel_detail&id={{$item.id}}">
+					<img class="poster" src="{{$item.thumbfile}}"/>
+					<p class="describe">{{$item.title}}</p>
+					<p class="bottom">
+						<span class="NATIONNAME">旅行天数</span>·
+						<span class="time">{{$item.days}}天</span>
+						<span class="cost">{{$item.price}}元/人起</span>
+					</p>
+				</a>
+			</div>
+
+			{{/foreach}}
+			{{/if}}
+
+
         </div>
         
         <!--名家带你去写生-->
         <div class="Public sketching fix">
         	<p class="moduleTitle">名师带你去写生<a href="javascript:;">更多>></a></p>
-        	<div class="box fix">
-        		<a class="dis_block fix" href="javascript:;">
-	        		<img class="poster" src="/resource/m/images/q-pic23.jpg"/>
-	        		<p class="describe">在热情奔放的斯里兰卡，玩出欧洲最佳性价比</p>
-	        		<p class="bottom">
-	        			<span class="NATIONNAME">西班牙、葡萄牙</span>·
-	        			<span class="time">10天</span>
-	        			<span class="cost">1480元/人起</span>
-	        		</p>
-	        	</a>
-        	</div>
-        	<div class="box fix">
-        		<a class="dis_block fix" href="javascript:;">
-	        		<img class="poster" src="/resource/m/images/q-pic23.jpg"/>
-	        		<p class="describe">在热情奔放的斯里兰卡，玩出欧洲最佳性价比</p>
-	        		<p class="bottom">
-	        			<span class="NATIONNAME">西班牙、葡萄牙</span>·
-	        			<span class="time">10天</span>
-	        			<span class="cost">1480元/人起</span>
-	        		</p>
-        		</a>
-        	</div>
+
+			{{if $sketch_list}}
+			{{foreach from=$sketch_list item=item key=key}}
+
+			<div class="box fix">
+				<a class="dis_block fix" href="index.php?m=wap&c=index&v=sketch_detail&id={{$item.id}}">
+					<img class="poster" src="{{$item.thumbfile}}"/>
+					<p class="describe">{{$item.title}}</p>
+					<p class="bottom">
+						<span class="NATIONNAME">旅行天数</span>·
+						<span class="time">{{$item.days}}天</span>
+						<span class="cost">{{$item.price}}元/人起</span>
+					</p>
+				</a>
+			</div>
+
+			{{/foreach}}
+			{{/if}}
+
+
         </div>
        
        	<!--独家资源-->
        	<div class="ban1 exclusive fix">
-            <a class="advertising dis_block fix" href="javascript:;"><img class="headPortrait" src="/resource/m/images/ban2_1.jpg" alt=""></a>
+            <a class="advertising dis_block fix" href="javascript:;">
+                <img class="headPortrait" src="{{$ad_list.1.imgurl}}" alt=""></a>
         </div>
 
         <!--国家分类-->
         <div class="Public classify fix">
-        	<div class="chunk fix">
-        		<p class="moduleTitle">俄罗斯<a href="javascript:;">更多>></a></p>
-        		<div class="box fix">
-	        		<a class="dis_block fix" href="javascript:;">
-		        		<img class="poster" src="/resource/m/images/q-pic23.jpg"/>
-		        		<p class="describe">在热情奔放的斯里兰卡，玩出欧洲最佳性价比</p>
-		        		<p class="bottom">
-		        			<span class="NATIONNAME">西班牙、葡萄牙</span>·
-		        			<span class="time">10天</span>
-		        			<span class="cost">1480元/人起</span>
-		        		</p>
-		        	</a>
-	        	</div>
-	        	<div class="box fix">
-	        		<a class="dis_block fix" href="javascript:;">
-		        		<img class="poster" src="/resource/m/images/q-pic23.jpg"/>
-		        		<p class="describe">在热情奔放的斯里兰卡，玩出欧洲最佳性价比</p>
-		        		<p class="bottom">
-		        			<span class="NATIONNAME">西班牙、葡萄牙</span>·
-		        			<span class="time">10天</span>
-		        			<span class="cost">1480元/人起</span>
-		        		</p>
-	        		</a>
-	        	</div>
-	        	<div class="box fix">
-	        		<a class="dis_block fix" href="javascript:;">
-		        		<img class="poster" src="/resource/m/images/q-pic23.jpg"/>
-		        		<p class="describe">在热情奔放的斯里兰卡，玩出欧洲最佳性价比</p>
-		        		<p class="bottom">
-		        			<span class="NATIONNAME">西班牙、葡萄牙</span>·
-		        			<span class="time">10天</span>
-		        			<span class="cost">1480元/人起</span>
-		        		</p>
-	        		</a>
-	        	</div>
-	        </div>
-	        
-	        <!--西班牙-->
-	        <div class="chunk fix">
-        		<p class="moduleTitle">西班牙<a href="javascript:;">更多>></a></p>
-        		<div class="box fix">
-	        		<a class="dis_block fix" href="javascript:;">
-		        		<img class="poster" src="/resource/m/images/q-pic23.jpg"/>
-		        		<p class="describe">在热情奔放的斯里兰卡，玩出欧洲最佳性价比</p>
-		        		<p class="bottom">
-		        			<span class="NATIONNAME">西班牙、葡萄牙</span>·
-		        			<span class="time">10天</span>
-		        			<span class="cost">1480元/人起</span>
-		        		</p>
-		        	</a>
-	        	</div>
-	        	<div class="box fix">
-	        		<a class="dis_block fix" href="javascript:;">
-		        		<img class="poster" src="/resource/m/images/q-pic23.jpg"/>
-		        		<p class="describe">在热情奔放的斯里兰卡，玩出欧洲最佳性价比</p>
-		        		<p class="bottom">
-		        			<span class="NATIONNAME">西班牙、葡萄牙</span>·
-		        			<span class="time">10天</span>
-		        			<span class="cost">1480元/人起</span>
-		        		</p>
-	        		</a>
-	        	</div>
-	        	<div class="box fix">
-	        		<a class="dis_block fix" href="javascript:;">
-		        		<img class="poster" src="/resource/m/images/q-pic23.jpg"/>
-		        		<p class="describe">在热情奔放的斯里兰卡，玩出欧洲最佳性价比</p>
-		        		<p class="bottom">
-		        			<span class="NATIONNAME">西班牙、葡萄牙</span>·
-		        			<span class="time">10天</span>
-		        			<span class="cost">1480元/人起</span>
-		        		</p>
-	        		</a>
-	        	</div>
-	        </div>
-	        
+			{{foreach from=$label_list item=item key=key}}
+
+			<div class="chunk fix">
+				<p class="moduleTitle">{{$item.name}}<a href="javascript:;">更多>></a></p>
+
+				{{if $item.info}}
+				{{foreach from=$item.info key=k item=vo}}
+				<div class="box fix">
+					<a class="dis_block fix" href="index.php?m=wap&c=index&v=journeydetail&id={{$vo.id}}">
+						<img class="poster" src="{{$vo.articlethumb}}"/>
+						<p class="describe">{{$vo.title}}</p>
+						<p class="bottom">
+							<span class="NATIONNAME">旅行天数</span>·
+							<span class="time">{{$vo.lxts}}天</span>
+							<span class="cost">{{$vo.price}}元/人起</span>
+						</p>
+					</a>
+				</div>
+				{{/foreach}}
+				{{/if}}
+
+			</div>
+
+			{{/foreach}}
+
         </div>
     </div>
     <script type="text/javascript">

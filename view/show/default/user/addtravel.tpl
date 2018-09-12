@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
@@ -17,8 +16,7 @@
     <script src="/resource/js/jquery.min.js"></script>
     <script src="/resource/js/lib.js"></script>
     <style type="text/css">
-			.subbtn {
-				    display: inline-block;
+		.subbtn{display: inline-block;
 			    width: 112px;
 			    height: 38px;
 			    line-height: 38px;
@@ -28,15 +26,13 @@
 			    border-radius: 5px;
 			    margin-right: 9px;
 				background:rgba(248,89,89,1);
-				color:rgba(254,254,254,1);
-			}
-			.sub {
-				background:rgba(249,249,249,1)  !important ;
-				color:rgba(102,102,102,1) !important;
-			}
-		</style>
+				color:rgba(254,254,254,1);}
+		.sub{
+			background:rgba(249,249,249,1)  !important ;
+			color:rgba(102,102,102,1) !important;
+		}
+	</style>
 </head>
- 
 <body>
     {{include file='public/header.tpl'}}
     <div class="main">
@@ -51,7 +47,7 @@
 					</li>
 					<li>
 						<a href="/index.php?m=index&c=user&v=addtv">
-							<h4>发表旅拍TV</h4>
+							<h4>发表视频</h4>
 							<p>最原创的旅拍，最独特的旅行视角</p>
 						</a>
 					</li>
@@ -244,13 +240,11 @@
                 jcnum();
             }
         });
-        function deletepic(obj)
-        {
+        function deletepic(obj){
             $(obj).remove();
             jcnum();
         }
-        function jcnum()
-        {
+        function jcnum(){
             var num = $('#piclist').children('.upic').length;
             if(num >= 9){
                 $('.layui-upload-button').hide();
@@ -318,5 +312,4 @@
         })
     </script>
 </body>
-
 </html>

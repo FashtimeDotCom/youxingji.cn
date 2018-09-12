@@ -41,20 +41,17 @@
 		    	<p class="signature" title="个性签名">{{$user.autograph}}</p>
 		    </div>
 		    <ul class="ul-txtlist-yz ClassUL">
-                <li>
-                    <a href="/index.php?m=wap&c=user&v=follow">
+                <li><a href="/index.php?m=wap&c=user&v=follow">
     					<i>{{$user.uid|helper:'follownum'}}</i>
     					<div class="txt">关注</div>
     				</a>
                 </li>
-                <li>
-                    <a href="/index.php?m=wap&c=user&v=fans">
+                <li><a href="/index.php?m=wap&c=user&v=fans">
     					<i>{{$user.uid|helper:'fansnum'}}</i>
     					<div class="txt">粉丝</div>
     				</a>
                 </li>
-                <li>
-                    <a href="/index.php?m=wap&c=user&v=visitor">
+                <li><a href="/index.php?m=wap&c=user&v=visitor">
     					<i>{{$user.uid|helper:'visitor'}}</i>
     					<div class="txt">访客</div>
     				</a>
@@ -70,7 +67,6 @@
                         {{if $msg_total}}
                             <span class="amount">{{$msg_total}}</span>
                         {{/if}}
-                        <!--/index.php?m=wap&c=user&v=msg-->
 	                </p>
 	            </a>
             </div>
@@ -114,7 +110,7 @@
                 	</a>
                 </div>
                 <div class="level">
-                	<a class="dis_block fix" href="javascript:void(0)">
+                	<a class="dis_block fix" href="/index.php?m=wap&c=user&v=new_note">
 	                	<img class="" src="/resource/m/images/user/3.png"/>
 	                	<p class="">我的游记<img class="RightArrows" src="/resource/m/images/user/8.png" /></p>
                 	</a>

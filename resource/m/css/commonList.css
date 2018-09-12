@@ -1,6 +1,8 @@
 /*2018-09-06
  HQS
- 旅行际  个人中心-旅行视频列表
+ 
+ 移动端  个人中心-我的日志页、我的视频列表页、我的游记页、我的问答页公共 样式
+
  * */
 
 .write {position: absolute;bottom: 0px;right: 10px;z-index: 9999;}
@@ -29,15 +31,20 @@
 .ban .head .bottom p{display: inline-block;font-size: 0.7rem;}
 
 .m-nv-yz{border-bottom: none;}
-.m-nv-yz .on a, .m-nv-yz a:hover{color: #d71618;}
+.m-nv-yz .on a, .m-nv-yz a:hover{color: #fe5657;font-weight: 600;}
 .m-nv-yz .on:before{background: none;}
 .m-nv-yz li a{font-size: 13px;}
+
+.ul-imgtxt2-yz li{padding: 0px;}
+.ul-imgtxt2-yz dl{margin-top: 0;margin-bottom: -5px;}
+.ul-imgtxt2-yz .pic img{height: auto;}
+
 
 .m-myday-yz{border: none;padding-bottom: 0px;}
 .m-myday-yz .top{margin-bottom: 0px;}
 .m-mytv-yz{border: none;padding: 0px;background: none;}
 .m-mytv-yz .item{background: #fff;border-bottom:none;margin-bottom: 0.8rem;position: relative;padding-bottom: 2px;}
-.m-mytv-yz .item .videoTitle{color: #d71618;font-size: 0.8rem;font-weight: 800;width:90%;display: -webkit-box;
+.m-mytv-yz .item .videoTitle{color: #ef1517;font-size: 1.1em;font-weight: 800;width:90%;display: -webkit-box;
 								-webkit-line-clamp: 2;/*两列*/
 								-webkit-box-orient: vertical;
 								 overflow: hidden;}
@@ -45,8 +52,8 @@
 .m-mytv-yz .item .videoDetails{font-size: 0.7rem;color: #333;text-align: justify;margin-bottom: 0.7rem;}
 .m-mytv-yz .item .preview{height: 10rem;overflow: hidden;position: relative;}
 .m-mytv-yz .item .preview a{display: block;width: 100%;}
-.m-mytv-yz .item .preview a img{width: 100%;}
-.m-mytv-yz .item .preview a .bo{position: absolute;
+.m-mytv-yz .item .preview img{width: 100%;}
+.m-mytv-yz .item .preview .bo{position: absolute;
 								top: 50%;
 								left: 50%;
 								width: 36px;

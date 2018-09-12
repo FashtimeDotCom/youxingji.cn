@@ -59,21 +59,22 @@ class Controller_Wap_User extends Core_Controller_WapAction
 	//新版我的游记
     public function new_travelAction()
     {
-        $perpage = 10;
+        $perpage = 4;
         $uid = $this->userInfo['uid'];
-        $Num = C::M('travel')->where("uid = $uid")->getCount();
         $curpage = $this->getParam ('page') ? intval ($this->getParam ('page')) : 1;
-        $mpurl = "index.php?m=wap&c=user&v=index";
-        $multipage = $this->multipages ($Num, $perpage, $curpage, $mpurl);
         $list = C::M('travel')->where("uid = $uid")->order('addtime desc')->limit($perpage * ($curpage - 1), $perpage)->select();
         foreach ($list as $key => $value) {
             $list[$key]['content'] = json_decode($value['content']);
             $list[$key]['picnum'] = count(json_decode($value['content']));
             $list[$key]['addtime'] = date('Y-m-d H:i:s', $value['addtime']);
+            C::M('travel')->where('id', $value['id'])->setInc('shownum', 1);
         }
         $this->assign('list', $list);
-        $this->assign('num', $Num);
-        $this->assign ('multipage', $multipage);
+
+        //total
+        $total=$this->totalAction($uid);
+        $this->assign("total",$total);
+
         $this->display('wap/user/new_travel.tpl');
     }
 
@@ -553,6 +554,13 @@ class Controller_Wap_User extends Core_Controller_WapAction
 
         return $data;
 
+    }
+
+
+    //*************************
+    public function new_noteAction(){
+
+        $this->display("wap/user/new_note.tpl");
     }
 
 

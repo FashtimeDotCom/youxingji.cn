@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-05 17:37:38
+<?php /* vpcvcms compiled created on 2018-09-11 14:50:24
          compiled from wap/user/tv.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -53,8 +53,8 @@ unset($_smarty_tpl_vars);
                 <i style="background: url(<?php echo $this->_tpl_vars['user']['avatar']; ?>
 ) no-repeat center center; background-size: cover; border-radius: 50%;"></i>
                 <dl>
-                    <dd><a href="/index.php?m=wap&c=user&v=addtravel">发布游记</a></dd>
-                    <dd><a href="/index.php?m=wap&c=user&v=addtv">发布TV</a></dd>
+                    <dd><a href="/index.php?m=wap&c=user&v=addtravel">发布日志</a></dd>
+                    <dd><a href="/index.php?m=wap&c=user&v=addtv">发布视频</a></dd>
                     <dd><a href="/index.php?m=wap&c=user&v=follow">我的关注</a></dd>
                     <dd><a href="/index.php?m=wap&c=user&v=msg">我的私信</a></dd>
                     <dd><a href="/index.php?m=wap&c=user&v=fans">我的粉丝</a></dd>
@@ -67,9 +67,9 @@ unset($_smarty_tpl_vars);
             <div class="m-nv-yz">
                 <div class="wp">
                     <ul>
-                        <li><a href="/index.php?m=wap&c=user&v=travel">我的游记</a></li>
+                        <li><a href="/index.php?m=wap&c=user&v=travel">我的日志</a></li>
                         <li><a href="/index.php?m=wap&c=user&v=album">我的相册</a></li>
-                        <li class="on"><a href="/index.php?m=wap&c=user&v=tv">我的旅拍TV</a></li>
+                        <li class="on"><a href="/index.php?m=wap&c=user&v=tv">我的视频</a></li>
                         <li><a href="/index.php?m=wap&c=user&v=draft">草稿箱</a></li>
                     </ul>
                 </div>
@@ -78,13 +78,13 @@ unset($_smarty_tpl_vars);
                 <li>
                     <a href="/index.php?m=wap&c=user&v=addtravel">
                         <i style="background-image: url(/resource/m/images/s-i1.png);"></i>
-                        <div class="txt">发布游记</div>
+                        <div class="txt">发布日志</div>
                     </a>
                 </li>
                 <li>
                     <a href="/index.php?m=wap&c=user&v=addtv">
                         <i style="background-image: url(/resource/m/images/s-i2.png);"></i>
-                        <div class="txt">发布旅拍TV</div>
+                        <div class="txt">发布视频</div>
                     </a>
                 </li>
                 <li>

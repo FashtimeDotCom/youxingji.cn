@@ -1,7 +1,7 @@
-<?php /* vpcvcms compiled created on 2018-09-10 09:09:52
+<?php /* vpcvcms compiled created on 2018-09-11 15:44:40
          compiled from wap/user/new_index.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/user/new_index.tpl', 46, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/user/new_index.tpl', 45, false),)), $this); ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -56,22 +56,19 @@ unset($_smarty_tpl_vars);
 </p>
 		    </div>
 		    <ul class="ul-txtlist-yz ClassUL">
-                <li>
-                    <a href="/index.php?m=wap&c=user&v=follow">
+                <li><a href="/index.php?m=wap&c=user&v=follow">
     					<i><?php echo ((is_array($_tmp=$this->_tpl_vars['user']['uid'])) ? $this->_run_mod_handler('helper', true, $_tmp, 'follownum') : smarty_modifier_helper($_tmp, 'follownum')); ?>
 </i>
     					<div class="txt">关注</div>
     				</a>
                 </li>
-                <li>
-                    <a href="/index.php?m=wap&c=user&v=fans">
+                <li><a href="/index.php?m=wap&c=user&v=fans">
     					<i><?php echo ((is_array($_tmp=$this->_tpl_vars['user']['uid'])) ? $this->_run_mod_handler('helper', true, $_tmp, 'fansnum') : smarty_modifier_helper($_tmp, 'fansnum')); ?>
 </i>
     					<div class="txt">粉丝</div>
     				</a>
                 </li>
-                <li>
-                    <a href="/index.php?m=wap&c=user&v=visitor">
+                <li><a href="/index.php?m=wap&c=user&v=visitor">
     					<i><?php echo ((is_array($_tmp=$this->_tpl_vars['user']['uid'])) ? $this->_run_mod_handler('helper', true, $_tmp, 'visitor') : smarty_modifier_helper($_tmp, 'visitor')); ?>
 </i>
     					<div class="txt">访客</div>
@@ -89,7 +86,6 @@ unset($_smarty_tpl_vars);
                             <span class="amount"><?php echo $this->_tpl_vars['msg_total']; ?>
 </span>
                         <?php endif; ?>
-                        <!--/index.php?m=wap&c=user&v=msg-->
 	                </p>
 	            </a>
             </div>
@@ -133,7 +129,7 @@ unset($_smarty_tpl_vars);
                 	</a>
                 </div>
                 <div class="level">
-                	<a class="dis_block fix" href="javascript:void(0)">
+                	<a class="dis_block fix" href="/index.php?m=wap&c=user&v=new_note">
 	                	<img class="" src="/resource/m/images/user/3.png"/>
 	                	<p class="">我的游记<img class="RightArrows" src="/resource/m/images/user/8.png" /></p>
                 	</a>

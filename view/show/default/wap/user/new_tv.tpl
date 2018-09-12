@@ -13,7 +13,7 @@
     <script src="/resource/m/js/jquery.js"></script>
     <script src="/resource/m/js/lib.js"></script>
     <link rel="stylesheet" href="/resource/m/css/common.css" />
-    <link rel="stylesheet" href="/resource/m/css/tv.css" />
+    <link rel="stylesheet" href="/resource/m/css/commonList.css" />
 </head>
 <body class="">
 	<div class="header">
@@ -37,10 +37,10 @@
 	        <a class="backdrop fix" href=""><img src="{{$user.cover}}" title="背景图" alt=""></a>
 	        <div class="head fix">
 	        	<div class="profilePhoto"><img class="" src="{{$user.avatar}}" alt=""></div>
-	        	<p class="wx_name">{{$user.username}}&nbsp;<a href="javascript:;"><img class="icon_new1" src="/resource/m/images/user/tv/icon_new1.png" /></a></p>
+	        	<p class="wx_name">{{$user.username}}&nbsp;<a href="javascript:;"><img class="icon_new1" src="/resource/m/images/common/icon_new1.png" /></a></p>
 	        	<p class="signature fix" title="个性签名">
 	        		<span class="icon_location1"></span>
-	        		<img class="icon_location2" src="/resource/m/images/user/tv/icon_location1.png" />
+	        		<img class="icon_location2" src="/resource/m/images/common/icon_location1.png" />
 	        		<span class="autograph">{{$user.city}}&nbsp;{{$user.autograph}}</span>
 	        	</p>
 	        	<div class="bottom fix">
@@ -63,7 +63,7 @@
 	        <div class="m-mytv-yz" id="pageCount" data-page="" data-nowPage="1">
 	        	<div class="content fix">
 	        		{{foreach from=$list item=item key=key}}
-					<div class="item">
+					<div class="item item_{{$item.id}}">
 						<div class="wp">
 							<p class="videoTitle">{{$item.title}}</p>
 							<div class="date">{{$item.addtime}}</div>
@@ -75,25 +75,25 @@
 								</a>
 							</div>
 							<div class="videoBottom">
-								<span class="left"><img class="" src="/resource/m/images/user/tv/icon_location2.png" />{{$item.address}}</span>
+								<span class="left"><img class="" src="/resource/m/images/common/icon_location2.png" />{{$item.address}}</span>
 								<p class="right">
 									<span class="check">
-										<img class="" src="/resource/m/images/user/tv/icon_check.png" data-id="{{$item.id}}" data-num="{{$item.shownum}}" />{{$item.shownum}}
+										<img class="" src="/resource/m/images/common/icon_check.png" data-id="{{$item.id}}" data-num="{{$item.shownum}}" />{{$item.shownum}}
 									</span>&nbsp;&nbsp;
 									<a class="zan" data-id="{{$item.id}}" data-num="{{$item.topnum}}" href="javascript:;">
 										<span class="like">
-											<img class="" src="/resource/m/images/user/tv/icon_like.png" /><i class="Iclass">{{$item.topnum}}</i>
+											<img class="" src="/resource/m/images/common/icon_like.png" /><i class="Iclass">{{$item.topnum}}</i>
 										</span>
 									</a>&nbsp;&nbsp;
-									<a class="Areview" href="javascript:;"><span class="review"><img class="" src="/resource/m/images/user/tv/icon_review.png" />0</span></a>
+									<a class="Areview" href="javascript:;"><span class="review"><img class="" src="/resource/m/images/common/icon_review.png" />0</span></a>
 								</p>
 							</div>
 							<div class="pullDownMenu fix">
-								<img class="icon_pullDown" src="/resource/m/images/user/tv/icon_pullDown.png" />
+								<img class="icon_pullDown" src="/resource/m/images/common/icon_pullDown.png" />
 								<div class="pullDownNav fix dis_none">
 									<!--<a class="collect" href="javascript:;"><span>收藏</span></a>
 	                                <a class="cancel" href="javascript:;"><span>取消</span></a>-->
-	
+
 									<a class="collect" href="/index.php?m=wap&c=user&v=edittv&id={{$item.id}}"><span>编辑</span></a>
 									<a class="cancel" href="javascript:;" onclick="deleteTv({{$item.id}})"><span>删除</span></a>
 								</div>
@@ -108,7 +108,7 @@
 	        <div class="m-mytv-yz">
 	            <div class="m-myday-yz">
 	                <div class="wp">
-	                	<img class="default_bg" src="/resource/m/images/user/tv/default_bg.png"/>
+	                	<img class="default_bg" src="/resource/m/images/user/defaul_tv_bg.png"/>
 	                    <div class="bg3">
 	                        <div class="text">最原创的旅拍视频，最暖心的旅行推荐，由你打造</div>
 	                    </div>
@@ -168,14 +168,14 @@
 		                dataType:'json',
 		                beforeSend:function(){
 		                	$(".tips").text("");
-							$(".tips").html('<img class="loading" src="/resource/m/images/user/tv/loading.gif"/>');
+							$(".tips").html('<img class="loading" src="/resource/m/images/common/loading.gif"/>');
 		                    flag = false;
 		                },
 		                success:function( data ){
 		                    if(data.status == 1){
 			                	var html="";
 			                	$.each(data.tips,function(i,item){
-			            			html += '<div class="item">'+
+			            			html += '<div class="item item_'+ data.tips[i].id+'">'+
 												'<div class="wp">'+
 													'<p class="videoTitle">'+data.tips[i].title+'</p>'+
 													'<div class="date">'+data.tips[i].addtime+'</div>'+
@@ -187,23 +187,23 @@
 														'</a>'+
 													'</div>'+
 													'<div class="videoBottom">'+
-														'<span class="left"><img class="" src="/resource/m/images/user/tv/icon_location2.png" />'+data.tips[i].address+'</span>'+
+														'<span class="left"><img class="" src="/resource/m/images/common/icon_location2.png" />'+data.tips[i].address+'</span>'+
 														'<p class="right">'+
 															'<a class="" href="javascript:;">'+
 																'<span class="check">'+
-																	'<img class="" src="/resource/m/images/user/tv/icon_check.png" data-id="'+data.tips[i].id+'" data-num="'+data.tips[i].shownum+'" />'+data.tips[i].shownum+''+
+																	'<img class="" src="/resource/m/images/common/icon_check.png" data-id="'+data.tips[i].id+'" data-num="'+data.tips[i].shownum+'" />'+data.tips[i].shownum+''+
 																'</span>'+
 															'</a>&nbsp;&nbsp;'+
 															'<a class="zan" data-id="'+data.tips[i].id+'" data-num="'+data.tips[i].topnum+'" href="javascript:;">'+
 																'<span class="like">'+
-																	'<img class="" src="/resource/m/images/user/tv/icon_like.png" /><i class="Iclass">'+data.tips[i].topnum+'</i>'+
+																	'<img class="" src="/resource/m/images/common/icon_like.png" /><i class="Iclass">'+data.tips[i].topnum+'</i>'+
 																'</span>'+
 															'</a>&nbsp;&nbsp;'+
-															'<a class="Areview" href="javascript:;"><span class="review"><img class="" src="/resource/m/images/user/tv/icon_review.png" />0</span></a>'+
+															'<a class="Areview" href="javascript:;"><span class="review"><img class="" src="/resource/m/images/common/icon_review.png" />0</span></a>'+
 														'</p>'+
 													'</div>'+
 													'<div class="pullDownMenu fix">'+
-														'<img class="icon_pullDown" src="/resource/m/images/user/tv/icon_pullDown.png" />'+
+														'<img class="icon_pullDown" src="/resource/m/images/common/icon_pullDown.png" />'+
 														'<div class="pullDownNav fix dis_none">'+
 															'<a class="collect" href="/index.php?m=wap&c=user&v=edittv&id='+data.tips[i].id+'"><span>编辑</span></a>'+
 															'<a class="cancel" href="javascript:;" onclick="deleteTv('+data.tips[i].id+')"><span>删除</span></a>'+
@@ -262,7 +262,7 @@
 	                'id':id
 	            }, function(data){
 	                if(data.status == 1){
-	                	$(obj).find("img").attr("src","/resource/m/images/user/tv/icon_like2.png");
+	                	$(obj).find("img").attr("src","/resource/m/images/common/icon_like2.png");
 	                    $(obj).find("i").text(num+1);
 	                }else{
 	                    layer.msg(data.tips);
@@ -276,8 +276,7 @@
 	        });
 		}
 		commonality();
-			
-	    
+
 	    $('.js-video').click(function(event) {
 	        var _id = $(this).attr("href");
 	        var _src = $(this).attr("data-src");
@@ -291,6 +290,7 @@
 	        event.stopPropagation();
 	    });
 	    function deleteTv(id){
+	    	$(".maskLayer,.pullDownNav").addClass("dis_none");
 	        layer.msg('您确定要删除吗？', {
 	            btn: ['确认', '取消'],
 	            yes: function (index) {
@@ -298,7 +298,9 @@
 	                    'id':id
 	                }, function(data){
 	                    if(data.status == 1){
-	                        $('.tv_t'+id).remove();
+	                    	var tv_num = parseInt($("#tv_num").text());
+	                    	$("#tv_num").text(tv_num-1);
+	                        $('.item_'+id).remove();
 	                    }
 	                },"JSON");
 	                layer.close(index);

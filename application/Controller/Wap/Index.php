@@ -1169,5 +1169,4 @@ class Controller_Wap_Index extends Core_Controller_WapAction
         $this->display("wap/travel_detail.tpl");
     }
 
-
 }

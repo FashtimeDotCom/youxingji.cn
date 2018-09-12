@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-10 10:30:54
+<?php /* vpcvcms compiled created on 2018-09-11 11:31:18
          compiled from wap/user/index.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -8,7 +8,7 @@
     <meta name="renderer" content="webkit" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
     <meta name="format-detection" content="telephone=no" />
-    <title>个人中心-我的游记</title> 
+    <title>个人中心-我的日志</title> 
     <meta name="keywords" content="<?php echo $this->_reg_objects['TO'][0]->cfg(array('key' => 'index_keywords','group' => 'site','default' => "首页"), $this);?>
 " />
     <meta name="description" content="<?php echo $this->_reg_objects['TO'][0]->cfg(array('key' => 'index_description','group' => 'site','default' => "首页"), $this);?>
@@ -25,7 +25,7 @@ $this->_smarty_include(array('smarty_include_tpl_file' => 'wap/header.tpl', 'sma
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
-        <h3>我的游记</h3>
+        <h3>我的日志</h3>
     </div>
     <div class="mian">
         <div class="g-top">

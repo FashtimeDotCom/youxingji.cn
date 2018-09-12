@@ -102,7 +102,7 @@
 			</a>
 		</li>
 		<li>
-			<a href="/index.php?m=wap&c=index&v=journey">
+			<a href="/index.php?m=wap&c=journey&v=index">
 				<i style="background-image: url(/resource/m/images/q-icon14.png);"></i>
 				<span>独家旅行</span>
 			</a>

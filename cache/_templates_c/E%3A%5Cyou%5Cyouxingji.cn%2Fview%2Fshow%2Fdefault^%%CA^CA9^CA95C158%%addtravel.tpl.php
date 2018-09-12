@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-10 09:10:00
+<?php /* vpcvcms compiled created on 2018-09-11 16:11:20
          compiled from wap/user/addtravel.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -8,7 +8,7 @@
 	<meta name="renderer" content="webkit" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
 	<meta name="format-detection" content="telephone=no" />
-	<title>个人中心-发布游记</title>
+	<title>个人中心-发布日志</title>
 	<meta name="keywords" content="<?php echo $this->_reg_objects['TO'][0]->cfg(array('key' => ' index_keywords ','group' => 'site ','default' => "首页 "), $this);?>
 " />
 	<meta name="description" content="<?php echo $this->_reg_objects['TO'][0]->cfg(array('key' => ' index_description ','group' => 'site ','default' => "首页 "), $this);?>
@@ -53,8 +53,7 @@
 						<p>记录您的每一个动人深刻</p>
 					</a>
 				</li>
-				<li>
-					<a href="/index.php?m=wap&c=user&v=addtv">
+				<li><a href="/index.php?m=wap&c=user&v=addtv">
 						<h4>发表视频</h4>
 						<p>最温馨旅行小提示</p>
 					</a>

@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-10 15:45:33
+<?php /* vpcvcms compiled created on 2018-09-12 09:27:00
          compiled from wap/new_index3.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -111,7 +111,7 @@
 			</a>
 		</li>
 		<li>
-			<a href="/index.php?m=wap&c=index&v=journey">
+			<a href="/index.php?m=wap&c=journey&v=index">
 				<i style="background-image: url(/resource/m/images/q-icon14.png);"></i>
 				<span>独家旅行</span>
 			</a>
@@ -194,7 +194,7 @@
 					<a href="<?php echo $this->_tpl_vars['v']; ?>
 " class="lightbox" rel="list<?php echo $this->_tpl_vars['item']['id']; ?>
 ">
-						<img src="http://www.youxingji.cn/<?php echo $this->_tpl_vars['v']; ?>
+						<img src="<?php echo $this->_tpl_vars['v']; ?>
 " alt="">
 					</a>
 				</dd>

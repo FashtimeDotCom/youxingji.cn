@@ -1,8 +1,7 @@
-<?php /* vpcvcms compiled created on 2018-09-05 11:43:54
+<?php /* vpcvcms compiled created on 2018-09-11 17:46:07
          compiled from user/addtravel.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
@@ -21,8 +20,7 @@
     <script src="/resource/js/jquery.min.js"></script>
     <script src="/resource/js/lib.js"></script>
     <style type="text/css">
-			.subbtn {
-				    display: inline-block;
+		.subbtn{display: inline-block;
 			    width: 112px;
 			    height: 38px;
 			    line-height: 38px;
@@ -32,15 +30,13 @@
 			    border-radius: 5px;
 			    margin-right: 9px;
 				background:rgba(248,89,89,1);
-				color:rgba(254,254,254,1);
-			}
-			.sub {
-				background:rgba(249,249,249,1)  !important ;
-				color:rgba(102,102,102,1) !important;
-			}
-		</style>
+				color:rgba(254,254,254,1);}
+		.sub{
+			background:rgba(249,249,249,1)  !important ;
+			color:rgba(102,102,102,1) !important;
+		}
+	</style>
 </head>
- 
 <body>
     <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => 'public/header.tpl', 'smarty_include_vars' => array()));
@@ -267,13 +263,11 @@ unset($_smarty_tpl_vars);
                 jcnum();
             }
         });
-        function deletepic(obj)
-        {
+        function deletepic(obj){
             $(obj).remove();
             jcnum();
         }
-        function jcnum()
-        {
+        function jcnum(){
             var num = $('#piclist').children('.upic').length;
             if(num >= 9){
                 $('.layui-upload-button').hide();
@@ -341,5 +335,4 @@ unset($_smarty_tpl_vars);
         })
     </script>
 </body>
-
 </html>

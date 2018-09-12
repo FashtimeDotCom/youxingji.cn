@@ -8,7 +8,7 @@
 
 .Public{width: 92%;margin: auto;}
 .Public .moduleTitle{color: #3c3c3c;font-size: 1.2rem;line-height: 2.8rem;}
-.Public .moduleTitle a{color: #666; font-size: 0.6rem;float: right;margin-top: 0.3rem;font-weight: 600;}
+.Public .moduleTitle a{color: #959595; font-size: 0.6rem;float: right;margin-top: 0.3rem;font-weight: 600;}
 .Public .box{width: 100%;margin-bottom: 1rem;background: #fff;border-radius: 0.1rem;overflow: hidden;
 			-webkit-box-shadow: 0 0 3px 1px #cecece;
 			-moz-box-shadow: 0 0 3px 1px #cecece;
@@ -16,10 +16,10 @@
 .Public .box:last-child{margin-bottom: 0.3rem;}
 
 .Public .box .poster{width: 100%;display: block;margin: 0 auto;}
-.Public .box .describe{width: 56%;text-align: justify;font-weight: 600;font-size: 0.8rem;clear: both;
-						line-height: 1.3rem;color: #3c3c3c;padding-left: 1rem;margin-top: 0.2rem;}
+.Public .box .describe{width: 94%;text-align: justify;font-weight: 600;font-size: 0.7rem;clear: both;
+						line-height: 1rem;color: #717171;padding-left: 1rem;margin-top: 0.2rem;}
 .Public .box .bottom{font-size: 0.6rem;line-height: 1.2rem;color: #918682;padding-left: 1rem;    margin-bottom: 0.5rem;}
-.Public .box .bottom .cost{color: #dd4c4d;float: right;font-weight: 600;margin-right: 0.5rem;}
+.Public .box .bottom .cost{color: #ff0002;float: right;font-weight: 600;margin-right: 0.5rem;}
 
 
 /*度假项目*/

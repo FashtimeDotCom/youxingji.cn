@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-10 18:02:31
+<?php /* vpcvcms compiled created on 2018-09-11 15:25:27
          compiled from wap/user/new_travel.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/user/new_travel.tpl', 47, false),)), $this); ?>
@@ -19,7 +19,7 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'w
     <script src="/resource/m/js/jquery.js"></script>
     <script src="/resource/m/js/lib.js"></script>
     <link rel="stylesheet" href="/resource/m/css/common.css" />
-    <link rel="stylesheet" href="/resource/m/css/tv.css" />
+    <link rel="stylesheet" href="/resource/m/css/commonList.css" />
 </head>
 <body class="">
 	<div class="header">
@@ -50,10 +50,10 @@ unset($_smarty_tpl_vars);
 	        	<div class="profilePhoto"><img class="" src="<?php echo $this->_tpl_vars['user']['avatar']; ?>
 " alt=""></div>
 	        	<p class="wx_name"><?php echo $this->_tpl_vars['user']['username']; ?>
-&nbsp;<a href="javascript:;"><img class="icon_new1" src="/resource/m/images/user/tv/icon_new1.png" /></a></p>
+&nbsp;<a href="javascript:;"><img class="icon_new1" src="/resource/m/images/common/icon_new1.png" /></a></p>
 	        	<p class="signature fix" title="个性签名">
 	        		<span class="icon_location1"></span>
-	        		<img class="icon_location2" src="/resource/m/images/user/tv/icon_location1.png" />
+	        		<img class="icon_location2" src="/resource/m/images/common/icon_location1.png" />
 	        		<span class="autograph"><?php echo $this->_tpl_vars['user']['city']; ?>
 &nbsp;<?php echo $this->_tpl_vars['user']['autograph']; ?>
 </span>
@@ -69,9 +69,9 @@ unset($_smarty_tpl_vars);
 	        <div class="m-nv-yz">
 	            <div class="wp fix">
 	                <ul class="fix">
-	                	<li><a href="/index.php?m=wap&c=user&v=travel">日志&nbsp;<i class="Iclass" id="travel_num"><?php echo $this->_tpl_vars['total']['travel_num']; ?>
+	                	<li class="on"><a href="/index.php?m=wap&c=user&v=travel">日志&nbsp;<i class="Iclass" id="travel_num"><?php echo $this->_tpl_vars['total']['travel_num']; ?>
 </i></a></li>
-	                    <li class="on"><a href="/index.php?m=wap&c=user&v=new_tv">视频&nbsp;<i class="Iclass" id="tv_num"><?php echo $this->_tpl_vars['total']['tv_num']; ?>
+	                    <li><a href="/index.php?m=wap&c=user&v=new_tv">视频&nbsp;<i class="Iclass" id="tv_num"><?php echo $this->_tpl_vars['total']['tv_num']; ?>
 </i></a></li>
 	                    <li><a href="javascript:;">游记&nbsp;<i class="Iclass" id="note_num"><?php echo $this->_tpl_vars['total']['note_num']; ?>
 </i></a></li>
@@ -86,7 +86,8 @@ unset($_smarty_tpl_vars);
 	        		<?php $_from = $this->_tpl_vars['list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
     foreach ($_from as $this->_tpl_vars['key'] => $this->_tpl_vars['item']):
 ?>
-					<div class="item">
+					<div class="item item_<?php echo $this->_tpl_vars['item']['id']; ?>
+">
 						<div class="wp">
 							<p class="videoTitle"><?php echo $this->_tpl_vars['item']['title']; ?>
 </p>
@@ -94,20 +95,27 @@ unset($_smarty_tpl_vars);
 </div>
 							<p class="videoDetails"><?php echo $this->_tpl_vars['item']['describes']; ?>
 </p>
-							<div class="preview fix">
-								<a href="#m-pop1-yz" class="pic js-video fix" data-src="<?php echo $this->_tpl_vars['item']['url']; ?>
-">
-									<img src="<?php echo $this->_tpl_vars['item']['pics']; ?>
-" alt="">
-									<span class="bo"></span>
-								</a>
-							</div>
+							<ul class="ul-imgtxt2-yz">
+								<li><dl>
+		                                <?php $_from = $this->_tpl_vars['item']['content']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+    foreach ($_from as $this->_tpl_vars['v']):
+?>
+		                                <dd><a href="<?php echo $this->_tpl_vars['v']; ?>
+" class="fancybox-effects-a">
+		                                        <div class="pic"><img src="<?php echo $this->_tpl_vars['v']; ?>
+" alt=""></div>
+		                                    </a>
+		                                </dd>
+		                                <?php endforeach; endif; unset($_from); ?>
+		                           	</dl>
+								</li>
+							</ul>
 							<div class="videoBottom">
-								<span class="left"><img class="" src="/resource/m/images/user/tv/icon_location2.png" /><?php echo $this->_tpl_vars['item']['address']; ?>
+								<span class="left"><img class="" src="/resource/m/images/common/icon_location2.png" /><?php echo $this->_tpl_vars['item']['address']; ?>
 </span>
 								<p class="right">
 									<span class="check">
-										<img class="" src="/resource/m/images/user/tv/icon_check.png" data-id="<?php echo $this->_tpl_vars['item']['id']; ?>
+										<img class="" src="/resource/m/images/common/icon_check.png" data-id="<?php echo $this->_tpl_vars['item']['id']; ?>
 " data-num="<?php echo $this->_tpl_vars['item']['shownum']; ?>
 " /><?php echo $this->_tpl_vars['item']['shownum']; ?>
 
@@ -116,22 +124,20 @@ unset($_smarty_tpl_vars);
 " data-num="<?php echo $this->_tpl_vars['item']['topnum']; ?>
 " href="javascript:;">
 										<span class="like">
-											<img class="" src="/resource/m/images/user/tv/icon_like.png" /><i class="Iclass"><?php echo $this->_tpl_vars['item']['topnum']; ?>
+											<img class="" src="/resource/m/images/common/icon_like.png" /><i class="Iclass"><?php echo $this->_tpl_vars['item']['topnum']; ?>
 </i>
 										</span>
 									</a>&nbsp;&nbsp;
-									<a class="Areview" href="javascript:;"><span class="review"><img class="" src="/resource/m/images/user/tv/icon_review.png" />0</span></a>
+									<a class="Areview" href="javascript:;"><span class="review"><img class="" src="/resource/m/images/common/icon_review.png" />0</span></a>
 								</p>
 							</div>
+							
 							<div class="pullDownMenu fix">
-								<img class="icon_pullDown" src="/resource/m/images/user/tv/icon_pullDown.png" />
+								<img class="icon_pullDown" src="/resource/m/images/common/icon_pullDown.png" />
 								<div class="pullDownNav fix dis_none">
-									<!--<a class="collect" href="javascript:;"><span>收藏</span></a>
-	                                <a class="cancel" href="javascript:;"><span>取消</span></a>-->
-	
-									<a class="collect" href="/index.php?m=wap&c=user&v=edittv&id=<?php echo $this->_tpl_vars['item']['id']; ?>
+									<a class="collect" href="/index.php?m=wap&c=user&v=edittravel&id=<?php echo $this->_tpl_vars['item']['id']; ?>
 "><span>编辑</span></a>
-									<a class="cancel" href="javascript:;" onclick="deleteTv(<?php echo $this->_tpl_vars['item']['id']; ?>
+									<a class="cancel" href="javascript:;" onclick="deleteTravel(<?php echo $this->_tpl_vars['item']['id']; ?>
 )"><span>删除</span></a>
 								</div>
 							</div>
@@ -140,17 +146,17 @@ unset($_smarty_tpl_vars);
 					<?php endforeach; endif; unset($_from); ?>
 	        	</div>
 				<p class="tips"></p>
-	        </div>
+	       	</div>
 	        <?php else: ?>
 	        <div class="m-mytv-yz">
 	            <div class="m-myday-yz">
 	                <div class="wp">
-	                	<img class="default_bg" src="/resource/m/images/user/tv/default_bg.png"/>
+	                	<img class="default_bg" src="/resource/m/images/user/defaul_travel_bg.png"/>
 	                    <div class="bg3">
-	                        <div class="text">最原创的旅拍视频，最暖心的旅行推荐，由你打造</div>
+	                        <div class="text">用九宫格丈量这个世界用简短的255个字<br />分享旅途中的美好感受行走中的点滴</div>
 	                    </div>
 	                    <div class="top">
-	                        <a href="/index.php?m=wap&c=user&v=addtv" class="shoot">发布视频</a>
+	                        <a href="/index.php?m=wap&c=user&v=addtravel" class="shoot">发布旅行日志</a>
 	                    </div>
 	                </div>
 	            </div>
@@ -158,28 +164,25 @@ unset($_smarty_tpl_vars);
 	        <?php endif; ?>
 	    </div>
 	    <div class="maskLayer dis_none" title="遮罩层，作用：下拉菜单失焦时，下拉菜单自动消失"></div>
-	    <!-- 视频弹窗 -->
-	    <div class="m-pop1-yz" id="m-pop1-yz">
-	        <div class="con">
-	            <iframe src='' frameborder=0 'allowfullscreen'></iframe>
-	            <div class="close js-close"><span></span></div>
-	        </div>
-	    </div>
-	    <!-- end -->
 	</div>
 	<?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => 'wap/footer.tpl', 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
+	
+	<!-- 弹窗 -->
+    <link rel="stylesheet" type="text/css" href="/resource/m/css/jquery.fancybox.css" media="screen" />
+    <script type="text/javascript" src="/resource/m/js/jquery.fancybox.js"></script>
+    
 	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
 	<script type="text/javascript">
 		window.onload=function(){
     		//判断列表的总数量是否大于等于5
-    		var tv_num = parseInt($("#tv_num").text());
-    		var maxPages = parseInt(Math.ceil(tv_num/4));//最大页数
+    		var travel_num = parseInt($("#travel_num").text());
+    		var maxPages = parseInt(Math.ceil(travel_num/4));//最大页数
     		$("#pageCount").attr("data-page",maxPages);
-    		if (tv_num>=5) {
+    		if (travel_num>=5) {
     			$(".tips").text("往下拖动查看更多！");
     		} else{
     			$(".tips").text("我也是有底线的哦~");
@@ -195,59 +198,63 @@ unset($_smarty_tpl_vars);
 	        scrollHeight = $(document).height(); 
 	        windowHeight = $(this).height();
 	        var e;
-		    var tv_num = parseInt($("#tv_num").text());//总数量
+		    var travel_num = parseInt($("#travel_num").text());//总数量
 		    
-			var maxPages = parseInt(Math.ceil(tv_num/4));//最大页数
+			var maxPages = parseInt(Math.ceil(travel_num/4));//最大页数
 			var NowPage = parseInt($("#pageCount").attr("data-nowPage"));//当前页数
 			var page=NowPage+1;
+			
 	        if(scrollTop + windowHeight >= scrollHeight-200 && flag == true ){
 	        	if (NowPage+1<=maxPages) {
 		            $.ajax({
-		                url:'index.php?m=api&c=tv&v=self_tv',
+		                url:'index.php?m=api&c=tv&v=self_travel',
 		                data:{page:page},
 		                method:'post',
 		                dataType:'json',
 		                beforeSend:function(){
 		                	$(".tips").text("");
-							$(".tips").html('<img class="loading" src="/resource/m/images/user/tv/loading.gif"/>');
+							$(".tips").html('<img class="loading" src="/resource/m/images/common/loading.gif"/>');
 		                    flag = false;
 		                },
 		                success:function( data ){
 		                    if(data.status == 1){
 			                	var html="";
 			                	$.each(data.tips,function(i,item){
-			            			html += '<div class="item">'+
+			            			html += '<div class="item item_'+ data.tips[i].id+'">'+
 												'<div class="wp">'+
 													'<p class="videoTitle">'+data.tips[i].title+'</p>'+
 													'<div class="date">'+data.tips[i].addtime+'</div>'+
 													'<p class="videoDetails">'+data.tips[i].describes+'</p>'+
-													'<div class="preview fix">'+
-														'<a href="#m-pop1-yz" class="pic js-video fix" data-src="'+data.tips[i].url+'">'+
-															'<img src="'+data.tips[i].pics+'" alt="">'+
-															'<span class="bo"></span>'+
-														'</a>'+
-													'</div>'+
+													'<ul class="ul-imgtxt2-yz">'+
+														'<li><dl>'+
+								                               	'<dd><a href="'+data.tips[i].pics+'" class="fancybox-effects-a">'+
+								                                        '<div class="pic"><img src="'+data.tips[i].pics+'" alt=""></div>'+
+								                                    '</a>'+
+								                                '</dd>'+
+								                           	'</dl>'+
+														'</li>'+
+													'</ul>'+
 													'<div class="videoBottom">'+
-														'<span class="left"><img class="" src="/resource/m/images/user/tv/icon_location2.png" />'+data.tips[i].address+'</span>'+
+														'<span class="left"><img class="" src="/resource/m/images/common/icon_location2.png" />'+data.tips[i].address+'</span>'+
 														'<p class="right">'+
 															'<a class="" href="javascript:;">'+
 																'<span class="check">'+
-																	'<img class="" src="/resource/m/images/user/tv/icon_check.png" data-id="'+data.tips[i].id+'" data-num="'+data.tips[i].shownum+'" />'+data.tips[i].shownum+''+
+																	'<img class="" src="/resource/m/images/common/icon_check.png" data-id="'+data.tips[i].id+'" data-num="'+data.tips[i].shownum+'" />'+data.tips[i].shownum+''+
 																'</span>'+
 															'</a>&nbsp;&nbsp;'+
 															'<a class="zan" data-id="'+data.tips[i].id+'" data-num="'+data.tips[i].topnum+'" href="javascript:;">'+
 																'<span class="like">'+
-																	'<img class="" src="/resource/m/images/user/tv/icon_like.png" /><i class="Iclass">'+data.tips[i].topnum+'</i>'+
+																	'<img class="" src="/resource/m/images/common/icon_like.png" /><i class="Iclass">'+data.tips[i].topnum+'</i>'+
 																'</span>'+
 															'</a>&nbsp;&nbsp;'+
-															'<a class="Areview" href="javascript:;"><span class="review"><img class="" src="/resource/m/images/user/tv/icon_review.png" />0</span></a>'+
+															'<a class="Areview" href="javascript:;"><span class="review"><img class="" src="/resource/m/images/common/icon_review.png" />0</span></a>'+
 														'</p>'+
 													'</div>'+
 													'<div class="pullDownMenu fix">'+
-														'<img class="icon_pullDown" src="/resource/m/images/user/tv/icon_pullDown.png" />'+
+														'<img class="icon_pullDown" src="/resource/m/images/common/icon_pullDown.png" />'+
 														'<div class="pullDownNav fix dis_none">'+
-															'<a class="collect" href="/index.php?m=wap&c=user&v=edittv&id='+data.tips[i].id+'"><span>编辑</span></a>'+
-															'<a class="cancel" href="javascript:;" onclick="deleteTv('+data.tips[i].id+')"><span>删除</span></a>'+
+															'<a class="collect" href="/index.php?m=wap&c=user&v=edittravel&id='+data.tips[i].id+'"><span>编辑</span></a>'+
+															'<a class="cancel" href="javascript:;" onclick="deleteTravel('+data.tips[i].id+')"><span>删除</span></a>'+
 														'</div>'+
 													'</div>'+
 												'</div>'+
@@ -258,7 +265,7 @@ unset($_smarty_tpl_vars);
 			                    if (NowPage+1<maxPages) {
 			                		$(".tips").text("往下拖动查看更多！");
 			                	}else{
-			                		$(".tips").text("我也是有底线的~");
+			                		$(".tips").text("我也是有底线的哦~");
 			                	}
 			                }else{
 			                    layer.msg(data.tips);
@@ -269,13 +276,13 @@ unset($_smarty_tpl_vars);
 		                    if (NowPage+1<maxPages) {
 		                		$(".tips").text("往下拖动查看更多！");
 		                	}else{
-		                		$(".tips").text("我也是有底线的~");
+		                		$(".tips").text("我也是有底线的哦~");
 		                	}
 		                    flag = true;
 		                }
 		            });
 		        }else{
-            		$(".tips").text("我也是有底线的~");
+            		$(".tips").text("我也是有底线的哦~");
             	}
 	        }
 	    });
@@ -299,11 +306,11 @@ unset($_smarty_tpl_vars);
 	            var num = parseInt($(this).attr('data-num'));
 	            var textNum = parseInt($(this).find("i").text());
 	            var obj = $(this);
-	            $.post("/index.php?m=api&c=index&v=zantv", {
+	            $.post("/index.php?m=api&c=index&v=zan", {
 	                'id':id
 	            }, function(data){
 	                if(data.status == 1){
-	                	$(obj).find("img").attr("src","/resource/m/images/user/tv/icon_like2.png");
+	                	$(obj).find("img").attr("src","/resource/m/images/common/icon_like2.png");
 	                    $(obj).find("i").text(num+1);
 	                }else{
 	                    layer.msg(data.tips);
@@ -331,21 +338,37 @@ unset($_smarty_tpl_vars);
 	        $(this).parents('#m-pop1-yz').find("iframe").attr("src", "");
 	        event.stopPropagation();
 	    });
-	    function deleteTv(id){
-	        layer.msg('您确定要删除吗？', {
-	            btn: ['确认', '取消'],
-	            yes: function (index) {
-	                $.post("/index.php?m=api&c=index&v=deletetv", {
-	                    'id':id
-	                }, function(data){
-	                    if(data.status == 1){
-	                        $('.tv_t'+id).remove();
-	                    }
-	                },"JSON");
-	                layer.close(index);
-	            }
-	        });
-	    }
+	    $(document).ready(function() {
+            $(".fancybox-effects-a").fancybox({
+                helpers: {
+                    title: {
+                        type: 'outside'
+                    },
+                    overlay: {
+                        speedOut: 0
+                    }
+                }
+            });
+        });
+
+        function deleteTravel(id){
+        	$(".maskLayer,.pullDownNav").addClass("dis_none");
+            layer.msg('您确定要删除吗？', {
+                btn: ['确认', '取消'],
+                yes: function (index) {
+                    $.post("/index.php?m=api&c=index&v=deletetravel", {
+                        'id':id
+                    }, function(data){
+                        if(data.status == 1){
+                        	var tv_num = parseInt($("#travel_num").text());
+	                    	$("#travel_num").text(tv_num-1);
+                            $('.item_'+id).remove();
+                        }
+                    },"JSON");
+                    layer.close(index);
+                }
+            });
+        }
 	</script>
 </body>
 </html>
