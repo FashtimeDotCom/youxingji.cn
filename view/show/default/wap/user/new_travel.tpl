@@ -52,9 +52,9 @@
 	        <div class="m-nv-yz">
 	            <div class="wp fix">
 	                <ul class="fix">
-	                	<li class="on"><a href="/index.php?m=wap&c=user&v=travel">日志&nbsp;<i class="Iclass" id="travel_num">{{$total.travel_num}}</i></a></li>
+	                	<li class="on"><a href="/index.php?m=wap&c=user&v=new_travel">日志&nbsp;<i class="Iclass" id="travel_num">{{$total.travel_num}}</i></a></li>
 	                    <li><a href="/index.php?m=wap&c=user&v=new_tv">视频&nbsp;<i class="Iclass" id="tv_num">{{$total.tv_num}}</i></a></li>
-	                    <li><a href="javascript:;">游记&nbsp;<i class="Iclass" id="note_num">{{$total.note_num}}</i></a></li>
+	                    <li><a href="/index.php?m=wap&c=user&v=new_note">游记&nbsp;<i class="Iclass" id="note_num">{{$total.note_num}}</i></a></li>
 	                    <li><a href="javascript:;">问答&nbsp;<i class="Iclass" id="answer">{{$total.answer}}</i></a></li>
 	                </ul>
 	            </div>

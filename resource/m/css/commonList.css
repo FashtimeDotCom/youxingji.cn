@@ -50,7 +50,7 @@
 								 overflow: hidden;}
 .m-mytv-yz .item .date{font-size: 0.6rem;margin-bottom:0;}
 .m-mytv-yz .item .videoDetails{font-size: 0.7rem;color: #333;text-align: justify;margin-bottom: 0.7rem;}
-.m-mytv-yz .item .preview{height: 10rem;overflow: hidden;position: relative;}
+.m-mytv-yz .item .preview{max-height: 10rem;overflow: hidden;position: relative;}
 .m-mytv-yz .item .preview a{display: block;width: 100%;}
 .m-mytv-yz .item .preview img{width: 100%;}
 .m-mytv-yz .item .preview .bo{position: absolute;
@@ -68,7 +68,9 @@
 							    transform:  translate(-50%,-50%);}
 .m-mytv-yz .item .videoBottom{margin: 0.5rem auto;}
 .m-mytv-yz .item .videoBottom img{display: inline-block;margin-right: 0.2rem;width: 0.6rem;}
-.m-mytv-yz .item .videoBottom span{font-size: 0.6rem;}
+.m-mytv-yz .item .videoBottom span{font-size: 0.6rem;color: #666;}
+.m-mytv-yz .item .videoBottom .left{display: inline-block;float: left;height: 20px;line-height: 20px;}
+.m-mytv-yz .item .videoBottom .tag{padding: 0px 4px;border: 1px #545454 solid;border-radius: 3px;max-width: 80px;overflow: hidden;line-height: 18px;margin-left: 10px;}
 .m-mytv-yz .item .videoBottom .left img{vertical-align: text-top;}
 .m-mytv-yz .item .videoBottom p{float: right;}
 

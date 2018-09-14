@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-11 15:44:40
+<?php /* vpcvcms compiled created on 2018-09-13 11:50:15
          compiled from wap/user/new_index.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/user/new_index.tpl', 45, false),)), $this); ?>
@@ -102,7 +102,7 @@ unset($_smarty_tpl_vars);
     					<div class="txt">发布视频</div>
     				</a>
                 </li>
-                <li><a href="javascript:void(0)">
+                <li><a href="/index.php?m=wap&c=user&v=add_note">
     					<i style="background-image: url(/resource/m/images/s-i1.png);"></i>
     					<div class="txt">发布游记</div>
     				</a>

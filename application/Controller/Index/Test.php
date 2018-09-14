@@ -14,7 +14,7 @@ class Controller_Index_Test extends Core_Controller_TAction
 
     public function indexAction()
     {
-        $this->display("index/test.tpl");
+        echo phpinfo();
     }
 
 

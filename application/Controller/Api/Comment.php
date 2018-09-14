@@ -96,4 +96,65 @@ class Controller_Api_Comment extends Core_Controller_Action
 
 
 
+
+    //**************************************自己的评论系统的系统
+    public function commentAction()
+    {
+        //验证是否是post 提交申请
+        if( !$this->isPost() ){
+            $json = array('status' => 0, 'tips' => '非法操作!');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        //评论人的ID
+        $data=array();
+        $user_id = $_SESSION['userinfo']['uid'];
+        //查询是否登陆
+        if(!$user_id){
+            $json = array('status' => 0, 'tips' => '请登录后再评论');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+        $data['uid']=$user_id;//用户ID
+        $data['rid']=(int)$this->getParam('id');//文章ID
+
+        //内容
+        $content=addslashes(str_replace("\n", "<br />", $this->getParam("content")));//content
+        //文章ID以及处理评论内容
+        if (strlen(preg_replace('/\[  [^\)]+?  \]/x', '', $content)) < 10) {
+            echo json_encode(array("status" => 0, "tips" => "评论的内容不能少于10个字符。"));
+            exit;
+        }
+
+        $data['pid'] = (int)$this->getParam("pid")??0;//pid,顶层评论为0
+        $data['pid_sub'] = (int)$this->getParam("pid_sub")??0;//pid_sub父节点
+
+        $data['addtime'] = time();
+        $data['content'] = addslashes($content);
+        $data['status']=1;
+
+        $res = M("comment")->add($data);
+
+        if ($res > 0) {
+            $cur_date = strtotime(date('Y-m-d'));
+            $commentnum = C::M('comment')->where("uid = $user_id and addtime >= $cur_date")->getCount();
+            if($commentnum <= 1){
+                //赠送10经验
+                C::M('user_member')->where("uid = $user_id")->setInc('exp', 10);
+            }
+            $json=array('status'=>1,'tips'=>'评论成功!');
+        }else{
+            $json = array('status' => 0, 'tips' => '评论失败，请重试');
+        }
+
+        echo Core_Fun::outputjson($json);
+        exit;
+    }
+
+
+    function isPost() {
+        return ($_SERVER['REQUEST_METHOD'] == 'POST' && (empty($_SERVER['HTTP_REFERER']) || preg_replace("~https?:\/\/([^\:\/]+).*~i", "\\1", $_SERVER['HTTP_REFERER']) == preg_replace("~([^\:]+).*~", "\\1", $_SERVER['HTTP_HOST']))) ? 1 : 0;
+    }
+
 }

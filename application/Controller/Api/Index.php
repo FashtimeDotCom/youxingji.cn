@@ -894,6 +894,7 @@ class Controller_Api_Index extends Core_Controller_Action
         $type = intval($this->getParam('type'));
         $uid = $_SESSION['userinfo']['uid'];
         $address=$this->getParam("address");
+        $tag=$this->getParam("tag")??'';
         //查询是否登陆
         if(!$uid){
             $json = array('status' => 0, 'tips' => '请登录后再试');
@@ -910,7 +911,8 @@ class Controller_Api_Index extends Core_Controller_Action
                 'describe' => $describe,
                 'type' => $type,
                 'addtime' => time(),
-                'address'=>$address
+                'address'=>$address,
+                'tag'=>$tag
             )
         )){
             $json = array('status' => 1, 'tips' => '保存成功~');

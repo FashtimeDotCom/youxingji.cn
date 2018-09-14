@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-07-26 10:10:39
+<?php /* vpcvcms compiled created on 2018-09-12 14:06:55
          compiled from user/addtv.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -260,7 +260,7 @@ unset($_smarty_tpl_vars);
 				}, function(data) {
 					layer.msg(data.tips);
 					if(data.status == 1) {
-						window.location.href = window.location.href;
+						window.location.href ='/index.php?m=index&c=user&v=tv';
 					}
 				}, "JSON");
 			})
@@ -278,6 +278,9 @@ unset($_smarty_tpl_vars);
 					'describe': describe
 				}, function(data) {
 					layer.msg(data.tips);
+					if (data.status == 1) {
+	                    window.location.href = '/index.php?m=index&c=user&v=draft';
+	                }
 				}, "JSON");
 			})
 		</script>

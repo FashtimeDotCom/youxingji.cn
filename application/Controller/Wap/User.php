@@ -35,7 +35,7 @@ class Controller_Wap_User extends Core_Controller_WapAction
         $this->assign('myfollow', $myfollow);
 	}
 
-	//我的游记
+	//我的日志
 	public function travelAction()
 	{
 		$perpage = 10;
@@ -192,29 +192,33 @@ class Controller_Wap_User extends Core_Controller_WapAction
     }
 
 	//草稿
-	public function draftAction()
-	{
+	public function draftAction(){
 		$list = C::M('draft')->where("uid = " . $this->userInfo['uid'])->order('id desc')->select();
 		foreach ($list as $key => $value) {
           	if($value['type'] == 0){
             	$pic = json_decode($value['content']);
               	$list[$key]['pic'] = $pic['0']?$pic['0']:'/resource/images/s-pic1.jpg';
               	$list[$key]['url'] = '/index.php?m=wap&c=user&v=addtravel&type=' . $value['type'] . '&did=' . $value['id'];
+                $list[$key]['addtime'] = date('Y-m-d H:i:s', $value['addtime']);
             }elseif($value['type'] == 1){
               	$pic = explode('||', $value['content']);
               	$list[$key]['pic'] = $pic['0']?$pic['0']:'/resource/images/s-pic1.jpg';
 				$list[$key]['url'] = '/index.php?m=wap&c=user&v=addtv&type=' . $value['type'] . '&did=' . $value['id'];
+                $list[$key]['addtime'] = date('Y-m-d H:i:s', $value['addtime']);
+			}elseif($value['type'] == 2){
+              	$pic = explode('||', $value['content']);
+              	$list[$key]['pic'] = $pic['0']?$pic['0']:'/resource/images/s-pic1.jpg';
+                $list[$key]['content']=$pic['1']??'';
+				$list[$key]['url'] = '/index.php?m=wap&c=user&v=add_note&type=' . $value['type'] . '&did=' . $value['id'];
 			}
 			$list[$key]['title'] = $value['title']?$value['title']:'未命名草稿';
-			$list[$key]['addtime'] = date('Y-m-d H:i:s', $value['addtime']);
-			
 		}
 		$this->assign('list', $list);
 		$this->assign('num', count($list));
 		$this->display('wap/user/draft.tpl');
 	}
 
-	//发布
+	//发布日志
 	public function addtravelAction()
 	{
         //获取access_token
@@ -239,7 +243,7 @@ class Controller_Wap_User extends Core_Controller_WapAction
 
 
   
-  	//编辑
+  	//编辑日志
 	public function edittravelAction()
 	{
 	    //获取微信信息
@@ -260,7 +264,7 @@ class Controller_Wap_User extends Core_Controller_WapAction
 		$this->display('wap/user/edittravel.tpl');
 	}
 
-	//发布
+	//发布视频
 	public function addtvAction()
 	{
         //获取access_token
@@ -284,7 +288,7 @@ class Controller_Wap_User extends Core_Controller_WapAction
 		$this->display('wap/user/addtv.tpl');
 	}
   
-  	//编辑
+  	//编辑视频
 	public function edittvAction()
 	{
         //获取access_token
@@ -559,8 +563,72 @@ class Controller_Wap_User extends Core_Controller_WapAction
 
     //*************************
     public function new_noteAction(){
+        $perpage = 4;
+        $uid = $this->userInfo['uid'];
+        $curpage = $this->getParam ('page') ? intval ($this->getParam ('page')) : 1;
+        $limit = $perpage * ($curpage - 1) . "," . $perpage;
+        $list=C::M("travel_note")->where("uid={$uid}")->order("addtime DESC")->limit($limit)->select();
+        if( $list ){
+            foreach ($list as $key=>$value){
+                C::M('travel_note')->where('id', $value['id'])->setInc('show_num', 1);
+            }
+            $this->assign("list",$list);
+        }
+
+        //total
+        $total=$this->totalAction($uid);
+        $this->assign("total",$total);
+
+        //user info
+        $user_info=C::M('user_member')->field('uid,headpic as avatar,username,autograph,city,cover')->where("uid={$uid}")->find();
+        if(empty($user_info['avatar'])) $user_info['avatar']="/resource/images/img-lb2.png";
+        if (empty($user_info['cover'])) $user_info['cover']="/resource/m/images/ban3.jpg";
+        $this->assign("user",$user_info);
 
         $this->display("wap/user/new_note.tpl");
+    }
+	
+	//发布游记
+    public function add_noteAction(){
+		//获取access_token
+        $this->wx_infoAction();
+        
+		$did = intval($this->getParam('did'));
+		$type = intval($this->getParam('type'));
+		if($did){
+			$res = C::M('draft')->where("uid = " . $this->userInfo['uid'] . " and type = 2 and id = $did")->order('id desc')->find();
+			if( $res ){
+                $info = explode('||', $res['content']);
+                $res['pic']=$info[0]??'';
+                $res['content']=$info[1]??'';
+            }
+			$this->assign('res', $res);
+			$this->assign('did', $did);
+		}
+
+		//百度ak,浏览器
+        $key="l3rvDUNj68gCXNAjEnXtVI1RZSPYu1mv";
+        $code=base64_encode($key);
+        $this->assign("code",$code);
+        $this->display("wap/user/add_note.tpl");
+    }
+	
+	//编辑游记
+    public function edit_noteAction(){
+    	//获取微信信息
+        $this->wx_infoAction();
+
+		$id = intval($this->getParam('id'));
+		if($id){
+			$res = C::M('travel_note')->where("uid = " . $this->userInfo['uid'] . " and id = $id")->find();
+			$this->assign('res', $res);
+			$this->assign('id', $id);
+		}
+        //百度ak,浏览器
+        $key="l3rvDUNj68gCXNAjEnXtVI1RZSPYu1mv";
+        $code=base64_encode($key);
+        $this->assign("code",$code);
+        $this->display("wap/user/editnote.tpl");
     }
 
 

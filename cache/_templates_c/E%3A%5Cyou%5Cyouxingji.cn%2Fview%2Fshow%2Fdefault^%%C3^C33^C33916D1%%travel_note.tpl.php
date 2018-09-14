@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-07-26 14:47:11
+<?php /* vpcvcms compiled created on 2018-09-13 16:22:09
          compiled from user/travel_note.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -9,7 +9,7 @@
 		<meta name="renderer" content="webkit" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
 		<meta name="format-detection" content="telephone=no" />
-		<title>个人中心-发布</title>
+		<title>个人中心-发布游记</title>
 		<meta name="keywords" content="<?php echo $this->_reg_objects['TO'][0]->cfg(array('key' => ' index_keywords ','group' => 'site ','default' => "首页 "), $this);?>
 " />
 		<meta name="description" content="<?php echo $this->_reg_objects['TO'][0]->cfg(array('key' => ' index_description ','group' => 'site ','default' => "首页 "), $this);?>
@@ -61,7 +61,7 @@ unset($_smarty_tpl_vars);
 					</li>
 					<li>
 						<a href="/index.php?m=index&c=user&v=addtv">
-							<h4>发表旅拍TV</h4>
+							<h4>发表视频</h4>
 							<p>最原创的旅拍，最独特的旅行视角</p>
 						</a>
 					</li>
@@ -233,43 +233,43 @@ unset($_smarty_tpl_vars);
 				});
 			});
 			function add (con) {
-						var title = $('#title').val();
-						var desc = $('#describe').val();
-						var did = $('#did').val();
-						var imgUrl = $('.layui-upload-img').attr('src');
-						if(!title) {
-							layer.msg('请输入标题');
-							return false;
-						}
-						if(!con) {
-							layer.msg('请输入正文');
-							return false;
-						}
-						if(!desc) {
-							layer.msg('请输入描述');
-							return false;
-						}
-						
-						if(!imgUrl) {
-							layer.msg('请上传图片');
-							return false;
-						}
-						if(!$("input[type='checkbox']").is(':checked')) {
-							layer.msg('请选择服务协议');
-							return false;
-						}
-						$.post("index.php?m=api&c=TravelNote&v=save_travel_note", {
-							'title': title,
-							'content': con,
-							'did':did,
-							'imgUrl': imgUrl,
-							'desc': desc
-						}, function(data) {
-							layer.msg(data.tips);
-							if(data.status == 1) {
-								window.location.href = "index.php?m=index&c=user&v=travel";
-							}
-						}, "JSON");
+				var title = $('#title').val();
+				var desc = $('#describe').val();
+				var did = $('#did').val();
+				var imgUrl = $('.layui-upload-img').attr('src');
+				if(!title) {
+					layer.msg('请输入标题');
+					return false;
+				}
+				if(!con) {
+					layer.msg('请输入正文');
+					return false;
+				}
+				if(!desc) {
+					layer.msg('请输入描述');
+					return false;
+				}
+				
+				if(!imgUrl) {
+					layer.msg('请上传图片');
+					return false;
+				}
+				if(!$("input[type='checkbox']").is(':checked')) {
+					layer.msg('请选择服务协议');
+					return false;
+				}
+				$.post("index.php?m=api&c=TravelNote&v=save_travel_note", {
+					'title': title,
+					'content': con,
+					'did':did,
+					'imgUrl': imgUrl,
+					'desc': desc
+				}, function(data) {
+					layer.msg(data.tips);
+					if(data.status == 1) {
+						window.location.href = "index.php?m=index&c=user&v=travel";
+					}
+				}, "JSON");
 			}
 			
 			//保存草稿

@@ -54,7 +54,7 @@
 	                <ul class="fix">
 	                	<li><a href="/index.php?m=wap&c=user&v=new_travel">日志&nbsp;<i class="Iclass" id="travel_num">{{$total.travel_num}}</i></a></li>
 	                    <li><a href="/index.php?m=wap&c=user&v=new_tv">视频&nbsp;<i class="Iclass" id="tv_num">{{$total.tv_num}}</i></a></li>
-	                    <li class="on"><a href="javascript:;">游记&nbsp;<i class="Iclass" id="note_num">{{$total.note_num}}</i></a></li>
+	                    <li class="on"><a href="/index.php?m=wap&c=user&v=new_note">游记&nbsp;<i class="Iclass" id="note_num">{{$total.note_num}}</i></a></li>
 	                    <li><a href="javascript:;">问答&nbsp;<i class="Iclass" id="answer">{{$total.answer}}</i></a></li>
 	                </ul>
 	            </div>
@@ -67,19 +67,21 @@
 						<div class="wp">
 							<p class="videoTitle">{{$item.title}}</p>
 							<div class="date">{{$item.addtime}}</div>
-							<a href="{{$v}}" class="pic js-video fix">
-								<p class="videoDetails">{{$item.describes}}</p>
-								<div class="preview fix"><img src="{{$item.pics}}" alt=""></div>
+							<a href="" class="dis_block fix">
+								<p class="videoDetails">{{$item.desc}}</p>
+								<div class="preview fix"><img src="{{$item.thumbfile}}" alt=""></div>
 							</a>
-							<div class="videoBottom">
+
+							<div class="videoBottom fix">
 								<span class="left"><img class="" src="/resource/m/images/common/icon_location2.png" />{{$item.address}}</span>
+								<span class="left tag">{{$item.tag}}</span>
 								<p class="right">
 									<span class="check">
-										<img class="" src="/resource/m/images/common/icon_check.png" data-id="{{$item.id}}" data-num="{{$item.shownum}}" />{{$item.shownum}}
+										<img class="" src="/resource/m/images/common/icon_check.png" data-id="{{$item.id}}" data-num="{{$item.show_num}}" />{{$item.show_num}}
 									</span>&nbsp;&nbsp;
-									<a class="zan" data-id="{{$item.id}}" data-num="{{$item.topnum}}" href="javascript:;">
+									<a class="zan" data-id="{{$item.id}}" data-num="{{$item.top_num}}" href="javascript:;">
 										<span class="like">
-											<img class="" src="/resource/m/images/common/icon_like.png" /><i class="Iclass">{{$item.topnum}}</i>
+											<img class="" src="/resource/m/images/common/icon_like.png" /><i class="Iclass">{{$item.top_num}}</i>
 										</span>
 									</a>&nbsp;&nbsp;
 									<a class="Areview" href="javascript:;"><span class="review"><img class="" src="/resource/m/images/common/icon_review.png" />0</span></a>
@@ -89,8 +91,8 @@
 							<div class="pullDownMenu fix">
 								<img class="icon_pullDown" src="/resource/m/images/common/icon_pullDown.png" />
 								<div class="pullDownNav fix dis_none">
-									<a class="collect" href="/index.php?m=wap&c=user&v=edittravel&id={{$item.id}}"><span>编辑</span></a>
-									<a class="cancel" href="javascript:;" onclick="deleteTravel({{$item.id}})"><span>删除</span></a>
+									<a class="collect" href="/index.php?m=wap&c=user&v=edit_note&id={{$item.id}}"><span>编辑</span></a>
+									<a class="cancel" href="javascript:;" onclick="deleteNote({{$item.id}})"><span>删除</span></a>
 								</div>
 							</div>
 						</div>
@@ -108,7 +110,7 @@
 	                        <div class="text">用“长篇大论”记录你的美好旅程<br />让每一个景点在你的笔下变得鲜活</div>
 	                    </div>
 	                    <div class="top">
-	                        <a href="/index.php?m=wap&c=user&v=addtravelnote" class="shoot">发布游记</a>
+	                        <a href="/index.php?m=wap&c=user&v=add_note" class="shoot">发布游记</a>
 	                    </div>
 	                </div>
 	            </div>
@@ -128,12 +130,12 @@
 		window.onload=function(){
     		//判断列表的总数量是否大于等于5
     		var note_num = parseInt($("#note_num").text());
-    		var maxPages = parseInt(Math.ceil(travel_num/4));//最大页数
+    		var maxPages = parseInt(Math.ceil(note_num/4));//最大页数
     		$("#pageCount").attr("data-page",maxPages);
     		if (note_num>=5) {
     			$(".tips").text("往下拖动查看更多！");
     		} else{
-    			$(".tips").text("我也是有底线的哦~");
+    			$(".tips").text("我也是有底线的哦0~");
     		}
     	}
 
@@ -165,6 +167,7 @@
 		                    flag = false;
 		                },
 		                success:function( data ){
+		                	console.log(data);
 		                    if(data.status == 1){
 			                	var html="";
 			                	$.each(data.tips,function(i,item){
@@ -172,62 +175,64 @@
 												'<div class="wp">'+
 													'<p class="videoTitle">'+data.tips[i].title+'</p>'+
 													'<div class="date">'+data.tips[i].addtime+'</div>'+
-													'<p class="videoDetails">'+data.tips[i].describes+'</p>'+
-													'<div class="preview fix">'+
-														'<a href="" class="pic js-video fix" data-src="'+data.tips[i].url+'">'+
-															'<img src="'+data.tips[i].pics+'" alt="">'+
-															'<span class="bo"></span>'+
-														'</a>'+
-													'</div>'+
-													'<div class="videoBottom">'+
-														'<span class="left"><img class="" src="/resource/m/images/common/icon_location2.png" />'+data.tips[i].address+'</span>'+
+													'<a href="'+data.tips[i].url+'" class="dis_block fix">'+
+														'<p class="videoDetails">'+data.tips[i].describes+'</p>'+
+														'<div class="preview fix"><img src="'+data.tips[i].pics+'" alt=""></div>'+
+													'</a>'+
+													'<div class="videoBottom fix">'+
+														'<span class="left"><img src="/resource/m/images/common/icon_location2.png" />'+data.tips[i].address+'</span>'+
 														'<p class="right">'+
-															'<a class="" href="javascript:;">'+
-																'<span class="check">'+
-																	'<img class="" src="/resource/m/images/common/icon_check.png" data-id="'+data.tips[i].id+'" data-num="'+data.tips[i].shownum+'" />'+data.tips[i].shownum+''+
-																'</span>'+
+															'<span class="check">'+
+																'<img" src="/resource/m/images/common/icon_check.png" data-id="'+data.tips[i].id+'" data-num="'+data.tips[i].shownum+'" />'+data.tips[i].shownum+''+
+															'</span>'+
 															'</a>&nbsp;&nbsp;'+
 															'<a class="zan" data-id="'+data.tips[i].id+'" data-num="'+data.tips[i].topnum+'" href="javascript:;">'+
 																'<span class="like">'+
-																	'<img class="" src="/resource/m/images/common/icon_like.png" /><i class="Iclass">'+data.tips[i].topnum+'</i>'+
+																	'<img src="/resource/m/images/common/icon_like.png" /><i class="Iclass">'+data.tips[i].topnum+'</i>'+
 																'</span>'+
 															'</a>&nbsp;&nbsp;'+
-															'<a class="Areview" href="javascript:;"><span class="review"><img class="" src="/resource/m/images/common/icon_review.png" />0</span></a>'+
+															'<a class="Areview" href="javascript:;"><span class="review"><img src="/resource/m/images/common/icon_review.png" />0</span></a>'+
 														'</p>'+
 													'</div>'+
 													'<div class="pullDownMenu fix">'+
 														'<img class="icon_pullDown" src="/resource/m/images/common/icon_pullDown.png" />'+
 														'<div class="pullDownNav fix dis_none">'+
-															'<a class="collect" href="/index.php?m=wap&c=user&v=edittv&id='+data.tips[i].id+'"><span>编辑</span></a>'+
-															'<a class="cancel" href="javascript:;" onclick="deleteTv('+data.tips[i].id+')"><span>删除</span></a>'+
+															'<a class="collect" href="/index.php?m=wap&c=user&v=edit_note&id='+data.tips[i].id+'"><span>编辑</span></a>'+
+															'<a class="cancel" href="javascript:;" onclick="deletenote('+data.tips[i].id+')"><span>删除</span></a>'+
 														'</div>'+
 													'</div>'+
 												'</div>'+
 											'</div>';
-			                   });
+			                	});
 			                    $(".content").append(html);
 			                    $("#pageCount").attr("data-NowPage",NowPage+1);
 			                    if (NowPage+1<maxPages) {
 			                		$(".tips").text("往下拖动查看更多！");
+			                		flag = true;
 			                	}else{
-			                		$(".tips").text("我也是有底线的哦~");
+			                		$(".tips").text("我也是有底线的哦1~");
+			                		flag = false;
 			                	}
 			                }else{
 			                    layer.msg(data.tips);
 			                }
 			                commonality();
 		                },
-		                complete:function(){
+		                error:function(data){
+		                	console.log(data);
+		                	console.log(data.msg);
+		                },
+		                complete:function(data){
 		                    if (NowPage+1<maxPages) {
 		                		$(".tips").text("往下拖动查看更多！");
 		                	}else{
-		                		$(".tips").text("我也是有底线的哦~");
+		                		$(".tips").text("我也是有底线的哦2~");
 		                	}
-		                    flag = true;
+		                	flag = false;
 		                }
 		            });
 		        }else{
-            		$(".tips").text("我也是有底线的哦~");
+            		$(".tips").text("我也是有底线的哦3~");
             	}
 	        }
 	    });
@@ -251,7 +256,7 @@
 	            var num = parseInt($(this).attr('data-num'));
 	            var textNum = parseInt($(this).find("i").text());
 	            var obj = $(this);
-	            $.post("/index.php?m=api&c=index&v=zantv", {
+	            $.post("/index.php?m=api&c=index&v=zantravel", {
 	                'id':id
 	            }, function(data){
 	                if(data.status == 1){
@@ -270,37 +275,12 @@
 		}
 		commonality();
 
-//	    $('.js-video').click(function(event) {
-//	        var _id = $(this).attr("href");
-//	        var _src = $(this).attr("data-src");
-//	
-//	        $(_id).find("iframe").attr("src", _src);
-//	        $(_id).fadeIn();
-//	    });
-//	    $('.js-close').click(function(event) {
-//	        $(this).parents('.m-pop1-yz').fadeOut();
-//	        $(this).parents('#m-pop1-yz').find("iframe").attr("src", "");
-//	        event.stopPropagation();
-//	    });
-	    $(document).ready(function() {
-            $(".fancybox-effects-a").fancybox({
-                helpers: {
-                    title: {
-                        type: 'outside'
-                    },
-                    overlay: {
-                        speedOut: 0
-                    }
-                }
-            });
-        });
-
-        function deleteTravel(id){
+        function deleteNote(id){
         	$(".maskLayer,.pullDownNav").addClass("dis_none");
             layer.msg('您确定要删除吗？', {
                 btn: ['确认', '取消'],
                 yes: function (index) {
-                    $.post("/index.php?m=api&c=index&v=deletetravelnote", {
+                    $.post("/index.php?m=api&c=TravelNote&v=del_travel_note", {
                         'id':id
                     }, function(data){
                         if(data.status == 1){

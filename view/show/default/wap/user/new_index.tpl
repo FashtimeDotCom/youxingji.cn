@@ -83,7 +83,7 @@
     					<div class="txt">发布视频</div>
     				</a>
                 </li>
-                <li><a href="javascript:void(0)">
+                <li><a href="/index.php?m=wap&c=user&v=add_note">
     					<i style="background-image: url(/resource/m/images/s-i1.png);"></i>
     					<div class="txt">发布游记</div>
     				</a>

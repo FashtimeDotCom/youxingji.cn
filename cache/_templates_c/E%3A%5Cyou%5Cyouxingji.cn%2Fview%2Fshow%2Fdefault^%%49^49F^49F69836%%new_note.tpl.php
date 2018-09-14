@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-11 17:05:36
+<?php /* vpcvcms compiled created on 2018-09-14 10:04:05
          compiled from wap/user/new_note.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/user/new_note.tpl', 47, false),)), $this); ?>
@@ -93,32 +93,28 @@ unset($_smarty_tpl_vars);
 </p>
 							<div class="date"><?php echo $this->_tpl_vars['item']['addtime']; ?>
 </div>
-							<p class="videoDetails"><?php echo $this->_tpl_vars['item']['describes']; ?>
+							<a href="" class="pic js-video fix">
+								<p class="videoDetails"><?php echo $this->_tpl_vars['item']['desc']; ?>
 </p>
-							<div class="preview fix">
-								<a href="<?php echo $this->_tpl_vars['v']; ?>
-" class="pic js-video fix" data-src="<?php echo $this->_tpl_vars['item']['url']; ?>
-">
-									<img src="<?php echo $this->_tpl_vars['item']['pics']; ?>
-" alt="">
-									<!--<span class="bo"></span>-->
-								</a>
-							</div>
+								<div class="preview fix"><img src="<?php echo $this->_tpl_vars['item']['thumbfile']; ?>
+" alt=""></div>
+							</a>
+
 							<div class="videoBottom">
 								<span class="left"><img class="" src="/resource/m/images/common/icon_location2.png" /><?php echo $this->_tpl_vars['item']['address']; ?>
 </span>
 								<p class="right">
 									<span class="check">
 										<img class="" src="/resource/m/images/common/icon_check.png" data-id="<?php echo $this->_tpl_vars['item']['id']; ?>
-" data-num="<?php echo $this->_tpl_vars['item']['shownum']; ?>
-" /><?php echo $this->_tpl_vars['item']['shownum']; ?>
+" data-num="<?php echo $this->_tpl_vars['item']['show_num']; ?>
+" /><?php echo $this->_tpl_vars['item']['show_num']; ?>
 
 									</span>&nbsp;&nbsp;
 									<a class="zan" data-id="<?php echo $this->_tpl_vars['item']['id']; ?>
-" data-num="<?php echo $this->_tpl_vars['item']['topnum']; ?>
+" data-num="<?php echo $this->_tpl_vars['item']['top_num']; ?>
 " href="javascript:;">
 										<span class="like">
-											<img class="" src="/resource/m/images/common/icon_like.png" /><i class="Iclass"><?php echo $this->_tpl_vars['item']['topnum']; ?>
+											<img class="" src="/resource/m/images/common/icon_like.png" /><i class="Iclass"><?php echo $this->_tpl_vars['item']['top_num']; ?>
 </i>
 										</span>
 									</a>&nbsp;&nbsp;
@@ -150,7 +146,7 @@ unset($_smarty_tpl_vars);
 	                        <div class="text">用“长篇大论”记录你的美好旅程<br />让每一个景点在你的笔下变得鲜活</div>
 	                    </div>
 	                    <div class="top">
-	                        <a href="/index.php?m=wap&c=user&v=addtravelnote" class="shoot">发布游记</a>
+	                        <a href="/index.php?m=wap&c=user&v=add_note" class="shoot">发布游记</a>
 	                    </div>
 	                </div>
 	            </div>
@@ -244,8 +240,8 @@ unset($_smarty_tpl_vars);
 													'<div class="pullDownMenu fix">'+
 														'<img class="icon_pullDown" src="/resource/m/images/common/icon_pullDown.png" />'+
 														'<div class="pullDownNav fix dis_none">'+
-															'<a class="collect" href="/index.php?m=wap&c=user&v=edittv&id='+data.tips[i].id+'"><span>编辑</span></a>'+
-															'<a class="cancel" href="javascript:;" onclick="deleteTv('+data.tips[i].id+')"><span>删除</span></a>'+
+															'<a class="collect" href="/index.php?m=wap&c=user&v=editnote&id='+data.tips[i].id+'"><span>编辑</span></a>'+
+															'<a class="cancel" href="javascript:;" onclick="deletenote('+data.tips[i].id+')"><span>删除</span></a>'+
 														'</div>'+
 													'</div>'+
 												'</div>'+
@@ -297,7 +293,7 @@ unset($_smarty_tpl_vars);
 	            var num = parseInt($(this).attr('data-num'));
 	            var textNum = parseInt($(this).find("i").text());
 	            var obj = $(this);
-	            $.post("/index.php?m=api&c=index&v=zantv", {
+	            $.post("/index.php?m=api&c=index&v=zantravel", {
 	                'id':id
 	            }, function(data){
 	                if(data.status == 1){
@@ -346,7 +342,7 @@ unset($_smarty_tpl_vars);
             layer.msg('您确定要删除吗？', {
                 btn: ['确认', '取消'],
                 yes: function (index) {
-                    $.post("/index.php?m=api&c=index&v=deletetravelnote", {
+                    $.post("/index.php?m=api&c=TravelNote&v=del_travel_note", {
                         'id':id
                     }, function(data){
                         if(data.status == 1){

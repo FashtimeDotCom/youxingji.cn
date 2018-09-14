@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/resource/css/module.css" />
     <link rel="stylesheet" href="/resource/css/module-less.css" />
     <link rel="stylesheet" href="/resource/css/style.css" />
-    <link rel="stylesheet" href="/resource/js/layui/css/layui.css" />
+    <link rel="stylesheet" href="/resource/layui/css/layui.css" />
     <script src="/resource/js/jquery.min.js"></script>
     <script src="/resource/js/lib.js"></script>
 </head>
@@ -95,6 +95,9 @@
                           	<p class="r num_text">可输入<a class="num_f" id="contentwordage">255</a>个字</p>
                         </div>
                         <div class="layui-upload">
+                        	<button type="button" class="layui-btn" id="layui_upload_icon">
+							  	<i class="layui-icon">&#xe67c;</i>上传图片
+							</button>
                             <label>
                                 <input type="file" name="file" class="layui-upload-file" id="myfile" style="display:none">
                             </label>
@@ -139,7 +142,7 @@
     {{include file='public/footer.tpl'}}
   	<link rel="stylesheet" href="/resource/css/slick.css">
     <script src="/resource/js/slick.min.js"></script>
-    <script src="/resource/js/layui/lay/dest/layui.all.js"></script>
+    <script src="/resource/layui/layui.all.js"></script>
   	<script>
         $(document).ready(function() {
             $('.m-pic2-qm .slider').slick({
@@ -189,31 +192,67 @@
 		    }  
 		    return s;  
 		}
-        layui.upload({
-            url: "/index.php?m=api&c=index&v=uploadpic",
-            type: 'image',
-            ext: 'jpg|png|jpeg|bmp',
-            before: function(obj){
-                $('#picslist').before('<span style="color: #d71618;" class="tips">上传中...</span>');
-            },
-            success: function (data) {
-                $('.tips').remove();
-                if($('#piclist').children('.upic').length >= 9){
-                    layer.msg('最多可上传9张图片');
-                    return false;
-                }
-                $("#picslist").show();
-                $('#piclist').append('<div class="upic" onclick="deletepic(this)"><img src="'+ data.url +'" class="layui-upload-img"><i class="iz layui-icon">&#xe640;</i></div>');
-                jcnum();
-            }
-        });
-        function deletepic(obj)
-        {
+		
+		layui.use('upload', function(){
+			var upload = layui.upload;
+			
+			//执行实例
+			var uploadInst = upload.render({
+			    elem: '#layui_upload_icon' //绑定元素
+			    ,url: '/index.php?m=api&c=index&v=uploadpic' //上传接口
+			    ,type: 'image'
+            	,ext: 'jpg|png|jpeg|bmp'
+			    ,multiple: true //开启多文件上传
+			    ,number:9
+			    ,allDone: function(obj){ //当文件全部被提交后，才触发
+				    //console.log(obj.total); //得到总文件数
+				    //console.log(obj.successful); //请求成功的文件数
+				    //console.log(obj.aborted); //请求失败的文件数
+				}
+			    ,before: function(obj){
+			    	layer.load(); //上传loading
+	        	}
+			    ,done: function(res){
+			    	if($('#piclist').children('.upic').length >= 9){
+	                    layer.closeAll('loading'); //关闭loading
+	                    layer.msg('最多可上传9张图片');
+	                    return false;
+	                }
+	                $("#picslist").show();
+	                $('#piclist').append('<div class="upic" onclick="deletepic(this)"><img src="'+ res.url +'" class="layui-upload-img"><i class="iz layui-icon">&#xe640;</i></div>');
+	                jcnum();
+			    	//上传完毕回调
+			    	layer.closeAll('loading'); //关闭loading
+			    }
+			    ,error: function(){
+			    	//请求异常回调
+			    	layer.closeAll('loading'); //关闭loading
+			    }
+			});
+		});
+//      layui.upload({
+//          url: "/index.php?m=api&c=index&v=uploadpic",
+//          type: 'image',
+//          ext: 'jpg|png|jpeg|bmp',
+//          before: function(obj){
+//              $('#picslist').before('<span style="color: #d71618;" class="tips">上传中...</span>');
+//          },
+//          success: function (data) {
+//              $('.tips').remove();
+//              if($('#piclist').children('.upic').length >= 9){
+//                  layer.msg('最多可上传9张图片');
+//                  return false;
+//              }
+//              $("#picslist").show();
+//              $('#piclist').append('<div class="upic" onclick="deletepic(this)"><img src="'+ data.url +'" class="layui-upload-img"><i class="iz layui-icon">&#xe640;</i></div>');
+//              jcnum();
+//          }
+//      });
+        function deletepic(obj){
             $(obj).remove();
             jcnum();
         }
-        function jcnum()
-        {
+        function jcnum(){
             var num = $('#piclist').children('.upic').length;
             if(num >= 9){
                 $('.layui-upload-button').hide();

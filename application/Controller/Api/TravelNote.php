@@ -47,6 +47,8 @@ class Controller_Api_TravelNote extends Core_Controller_Action
         $desc=htmlspecialchars($this->getParam("desc"));
         $content=$this->getParam("content");
         $imgUrl=$this->getParam("imgUrl");
+        $address=$this->getParam("address")??'';
+        $tag=$this->getParam("tag")??'';
         if( empty($title) || empty($desc) || empty($content) || empty($imgUrl) ){
             $json = array('status' => 0, 'tips' => '请完整填写信息!');
             echo Core_Fun::outputjson($json);
@@ -63,7 +65,9 @@ class Controller_Api_TravelNote extends Core_Controller_Action
             'content'=>$content,
             'status'=>0,
             'addtime'=>date("Y-m-d H:i:s",time()),
-            'thumbfile'=>$imgUrl
+            'thumbfile'=>$imgUrl,
+            'address'=>$address,
+            'tag'=>$tag
         );
 
         //新增操作还是update操作
