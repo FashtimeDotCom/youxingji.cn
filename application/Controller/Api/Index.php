@@ -983,39 +983,41 @@ class Controller_Api_Index extends Core_Controller_Action
     public function zanrytAction()
     {
         $id = intval($this->getParam('id'));
-        $uid = $_SESSION['userinfo']['uid'];
+//        $uid = $_SESSION['userinfo']['uid'];
         if(!$id){
             $json = array('status' => 0, 'tips' => '缺少参数');
             echo Core_Fun::outputjson($json);
             exit;
         }
         //查询是否登陆
-        if(!$uid){
-            $json = array('status' => 0, 'tips' => '请登录后再试');
-            echo Core_Fun::outputjson($json);
-            exit;
-        }
+//        if(!$uid){
+//            $json = array('status' => 0, 'tips' => '请登录后再试');
+//            echo Core_Fun::outputjson($json);
+//            exit;
+//        }
         //查询今日是否是第一次点赞游记
-        $cur_date = strtotime(date('Y-m-d'));
-        $zannum = C::M('top')->where("uid = $uid and type = 'ryt' and addtime >= $cur_date")->getCount();
-        if($zannum <= 0){
-            //赠送5经验
-            C::M('user_member')->where("uid = $uid")->setInc('exp', 5);
-        }
-        $zan = C::M('top')->where("uid = $uid and type = 'ryt' and tid = $id")->find();
-        if($zan){
-            $json = array('status' => 0, 'tips' => '你已经点赞过了');
-        }else{
-            //添加点赞记录
-            C::M('top')->add(array(
-                'uid' => $uid,
-                'type' => 'ryt',
-                'tid' => $id,
-                'addtime' => time()
-            ));
-            C::M('ryt')->where('id', $id)->setInc('zannum', 1);
-            $json = array('status' => 1, 'tips' => '点赞成功');
-        }
+//        $cur_date = strtotime(date('Y-m-d'));
+//        $zannum = C::M('top')->where("uid = $uid and type = 'ryt' and addtime >= $cur_date")->getCount();
+//        if($zannum <= 0){
+//            //赠送5经验
+//            C::M('user_member')->where("uid = $uid")->setInc('exp', 5);
+//        }
+//        $zan = C::M('top')->where("uid = $uid and type = 'ryt' and tid = $id")->find();
+//        if($zan){
+//            $json = array('status' => 0, 'tips' => '你已经点赞过了');
+//        }else{
+//            //添加点赞记录
+//            C::M('top')->add(array(
+//                'uid' => $uid,
+//                'type' => 'ryt',
+//                'tid' => $id,
+//                'addtime' => time()
+//            ));
+//            C::M('ryt')->where('id', $id)->setInc('zannum', 1);
+//            $json = array('status' => 1, 'tips' => '点赞成功');
+//        }
+        C::M('ryt')->where('id', $id)->setInc('zannum', 1);
+        $json = array('status' => 1, 'tips' => '点赞成功');
         echo Core_Fun::outputjson($json);
     }
 
@@ -1023,39 +1025,41 @@ class Controller_Api_Index extends Core_Controller_Action
     public function zanAction()
     {
         $id = intval($this->getParam('id'));
-        $uid = $_SESSION['userinfo']['uid'];
+//        $uid = $_SESSION['userinfo']['uid'];
         if(!$id){
             $json = array('status' => 0, 'tips' => '缺少参数');
             echo Core_Fun::outputjson($json);
             exit;
         }
         //查询是否登陆
-        if(!$uid){
-            $json = array('status' => 0, 'tips' => '请登录后再试');
-            echo Core_Fun::outputjson($json);
-            exit;
-        }
+//        if(!$uid){
+//            $json = array('status' => 0, 'tips' => '请登录后再试');
+//            echo Core_Fun::outputjson($json);
+//            exit;
+//        }
         //查询今日是否是第一次点赞游记
-        $cur_date = strtotime(date('Y-m-d'));
-        $zannum = C::M('top')->where("uid = $uid and type = 'travel' and addtime >= $cur_date")->getCount();
-        if($zannum <= 0){
-            //赠送5经验
-            C::M('user_member')->where("uid = $uid")->setInc('exp', 5);
-        }
-        $zan = C::M('top')->where("uid = $uid and type = 'travel' and tid = $id")->find();
-        if($zan){
-            $json = array('status' => 2, 'tips' => '你已经点赞过了');
-        }else{
-            //添加点赞记录
-            C::M('top')->add(array(
-                'uid' => $uid,
-                'type' => 'travel',
-                'tid' => $id,
-                'addtime' => time()
-            ));
-            C::M('travel')->where('id', $id)->setInc('topnum', 1);
-            $json = array('status' => 1, 'tips' => '点赞成功');
-        }
+//        $cur_date = strtotime(date('Y-m-d'));
+//        $zannum = C::M('top')->where("uid = $uid and type = 'travel' and addtime >= $cur_date")->getCount();
+//        if($zannum <= 0){
+//            //赠送5经验
+//            C::M('user_member')->where("uid = $uid")->setInc('exp', 5);
+//        }
+//        $zan = C::M('top')->where("uid = $uid and type = 'travel' and tid = $id")->find();
+//        if($zan){
+//            $json = array('status' => 2, 'tips' => '你已经点赞过了');
+//        }else{
+//            //添加点赞记录
+//            C::M('top')->add(array(
+//                'uid' => $uid,
+//                'type' => 'travel',
+//                'tid' => $id,
+//                'addtime' => time()
+//            ));
+//            C::M('travel')->where('id', $id)->setInc('topnum', 1);
+//            $json = array('status' => 1, 'tips' => '点赞成功');
+//        }
+        C::M('travel')->where('id', $id)->setInc('topnum', 1);
+        $json = array('status' => 1, 'tips' => '点赞成功');
         echo Core_Fun::outputjson($json);
     }
 
@@ -1063,39 +1067,41 @@ class Controller_Api_Index extends Core_Controller_Action
     public function zantvAction()
     {
         $id = intval($this->getParam('id'));
-        $uid = $_SESSION['userinfo']['uid'];
+//        $uid = $_SESSION['userinfo']['uid'];
         if(!$id){
             $json = array('status' => 0, 'tips' => '缺少参数');
             echo Core_Fun::outputjson($json);
             exit;
         }
         //查询是否登陆
-        if(!$uid){
-            $json = array('status' => 0, 'tips' => '请登录后再试');
-            echo Core_Fun::outputjson($json);
-            exit;
-        }
+//        if(!$uid){
+//            $json = array('status' => 0, 'tips' => '请登录后再试');
+//            echo Core_Fun::outputjson($json);
+//            exit;
+//        }
         //查询今日是否是第一次点赞游记
-        $cur_date = strtotime(date('Y-m-d'));
-        $zannum = C::M('top')->where("uid = $uid and type = 'tv' and addtime >= $cur_date")->getCount();
-        if($zannum <= 0){
-            //赠送5经验
-            C::M('user_member')->where("uid = $uid")->setInc('exp', 5);
-        }
-        $zan = C::M('top')->where("uid = $uid and type = 'tv' and tid = $id")->find();
-        if($zan){
-            $json = array('status' => 0, 'tips' => '你已经点赞过了');
-        }else{
-            //添加点赞记录
-            C::M('top')->add(array(
-                'uid' => $uid,
-                'type' => 'tv',
-                'tid' => $id,
-                'addtime' => time()
-            ));
-            C::M('tv')->where('id', $id)->setInc('topnum', 1);
-            $json = array('status' => 1, 'tips' => '点赞成功');
-        }
+//        $cur_date = strtotime(date('Y-m-d'));
+//        $zannum = C::M('top')->where("uid = $uid and type = 'tv' and addtime >= $cur_date")->getCount();
+//        if($zannum <= 0){
+//            //赠送5经验
+//            C::M('user_member')->where("uid = $uid")->setInc('exp', 5);
+//        }
+//        $zan = C::M('top')->where("uid = $uid and type = 'tv' and tid = $id")->find();
+//        if($zan){
+//            $json = array('status' => 0, 'tips' => '你已经点赞过了');
+//        }else{
+//            //添加点赞记录
+//            C::M('top')->add(array(
+//                'uid' => $uid,
+//                'type' => 'tv',
+//                'tid' => $id,
+//                'addtime' => time()
+//            ));
+//            C::M('tv')->where('id', $id)->setInc('topnum', 1);
+//            $json = array('status' => 1, 'tips' => '点赞成功');
+//        }
+        C::M('tv')->where('id', $id)->setInc('topnum', 1);
+        $json = array('status' => 1, 'tips' => '点赞成功');
         echo Core_Fun::outputjson($json);
     }
 
@@ -1104,39 +1110,41 @@ class Controller_Api_Index extends Core_Controller_Action
     public function zan_sceneryAction()
     {
         $id = intval($this->getParam('id'));
-        $uid = $_SESSION['userinfo']['uid'];
+//        $uid = $_SESSION['userinfo']['uid'];
         if(!$id){
             $json = array('status' => 0, 'tips' => '缺少参数');
             echo Core_Fun::outputjson($json);
             exit;
         }
         //查询是否登陆
-        if(!$uid){
-            $json = array('status' => 0, 'tips' => '请登录后再试');
-            echo Core_Fun::outputjson($json);
-            exit;
-        }
+//        if(!$uid){
+//            $json = array('status' => 0, 'tips' => '请登录后再试');
+//            echo Core_Fun::outputjson($json);
+//            exit;
+//        }
         //查询今日是否是第一次点赞油画
-        $cur_date = strtotime(date('Y-m-d'));
-        $zannum = C::M('top')->where("uid = $uid and type = 'scenery' and addtime >= $cur_date")->getCount();
-        if($zannum <= 0){
-            //赠送5经验
-            C::M('user_member')->where("uid = $uid")->setInc('exp', 5);
-        }
-        $zan = C::M('top')->where("uid = $uid and type = 'scenery' and tid = $id")->find();
-        if($zan){
-            $json = array('status' => 2, 'tips' => '你已经点赞过了');
-        }else{
-            //添加点赞记录
-            C::M('top')->add(array(
-                'uid' => $uid,
-                'type' => 'scenery',
-                'tid' => $id,
-                'addtime' => time()
-            ));
-            C::M('scenery')->where('id', $id)->setInc('top_num', 1);
-            $json = array('status' => 1, 'tips' => '点赞成功');
-        }
+//        $cur_date = strtotime(date('Y-m-d'));
+//        $zannum = C::M('top')->where("uid = $uid and type = 'scenery' and addtime >= $cur_date")->getCount();
+//        if($zannum <= 0){
+//            //赠送5经验
+//            C::M('user_member')->where("uid = $uid")->setInc('exp', 5);
+//        }
+//        $zan = C::M('top')->where("uid = $uid and type = 'scenery' and tid = $id")->find();
+//        if($zan){
+//            $json = array('status' => 2, 'tips' => '你已经点赞过了');
+//        }else{
+//            //添加点赞记录
+//            C::M('top')->add(array(
+//                'uid' => $uid,
+//                'type' => 'scenery',
+//                'tid' => $id,
+//                'addtime' => time()
+//            ));
+//            C::M('scenery')->where('id', $id)->setInc('top_num', 1);
+//            $json = array('status' => 1, 'tips' => '点赞成功');
+//        }
+        C::M('scenery')->where('id', $id)->setInc('top_num', 1);
+        $json = array('status' => 1, 'tips' => '点赞成功');
         echo Core_Fun::outputjson($json);
     }
 
@@ -1144,39 +1152,41 @@ class Controller_Api_Index extends Core_Controller_Action
     public function zantravelAction()
     {
         $id = intval($this->getParam('id'));
-        $uid = $_SESSION['userinfo']['uid'];
+//        $uid = $_SESSION['userinfo']['uid'];
         if(!$id){
             $json = array('status' => 0, 'tips' => '缺少参数');
             echo Core_Fun::outputjson($json);
             exit;
         }
         //查询是否登陆
-        if(!$uid){
-            $json = array('status' => 0, 'tips' => '请登录后再试');
-            echo Core_Fun::outputjson($json);
-            exit;
-        }
+//        if(!$uid){
+//            $json = array('status' => 0, 'tips' => '请登录后再试');
+//            echo Core_Fun::outputjson($json);
+//            exit;
+//        }
         //查询今日是否是第一次点赞游记
-        $cur_date = strtotime(date('Y-m-d'));
-        $zannum = C::M('top')->where("uid = $uid and type = 'travel_note' and addtime >= $cur_date")->getCount();
-        if($zannum <= 0){
-            //赠送5经验
-            C::M('user_member')->where("uid = $uid")->setInc('exp', 5);
-        }
-        $zan = C::M('top')->where("uid = $uid and type = 'travel_note' and tid = $id")->find();
-        if($zan){
-            $json = array('status' => 0, 'tips' => '你已经点赞过了');
-        }else{
-            //添加点赞记录
-            C::M('top')->add(array(
-                'uid' => $uid,
-                'type' => 'travel_note',
-                'tid' => $id,
-                'addtime' => time()
-            ));
-            C::M('travel_note')->where('id', $id)->setInc('top_num', 1);
-            $json = array('status' => 1, 'tips' => '点赞成功');
-        }
+//        $cur_date = strtotime(date('Y-m-d'));
+//        $zannum = C::M('top')->where("uid = $uid and type = 'travel_note' and addtime >= $cur_date")->getCount();
+//        if($zannum <= 0){
+//            //赠送5经验
+//            C::M('user_member')->where("uid = $uid")->setInc('exp', 5);
+//        }
+//        $zan = C::M('top')->where("uid = $uid and type = 'travel_note' and tid = $id")->find();
+//        if($zan){
+//            $json = array('status' => 0, 'tips' => '你已经点赞过了');
+//        }else{
+//            //添加点赞记录
+//            C::M('top')->add(array(
+//                'uid' => $uid,
+//                'type' => 'travel_note',
+//                'tid' => $id,
+//                'addtime' => time()
+//            ));
+//            C::M('travel_note')->where('id', $id)->setInc('top_num', 1);
+//            $json = array('status' => 1, 'tips' => '点赞成功');
+//        }
+        C::M('travel_note')->where('id', $id)->setInc('top_num', 1);
+        $json = array('status' => 1, 'tips' => '点赞成功');
         echo Core_Fun::outputjson($json);
     }
 
@@ -1533,6 +1543,46 @@ class Controller_Api_Index extends Core_Controller_Action
             echo Core_Fun::outputjson($json);
             exit;
         }
+
+    }
+
+    //达人列表页-加载更多
+    public function master_moreAction(){
+        //验证是否是post 提交申请
+        if( !$this->isPost() ){
+            $json = array('status' => 0, 'tips' => '非法操作!');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        $page=$this->getParam("page");
+        $type=$this->getParam("type");//分类,1-旅游达人，2-达人练习生
+        if( !$page || $page <=0 || !$type ){
+            $json = array('status' => 0, 'tips' => '参数错误');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        $perpage=4;
+        $limit = $perpage * ($page - 1) . "," . $perpage;
+        $where="";
+        if( $type==1 ){//旅行达人
+            $where="startop = 1";
+        }else{
+            $where="trainee = 1";
+        }
+
+        $list=C::M('user_member')->field('uid,username,realname,headpic,city,autograph')->where("$where")->order("uid desc")->limit($limit)->select();
+        if($list){
+            $json = array('status' => 1, 'tips' =>$list,"page"=>$page+1);
+            echo Core_Fun::outputjson($json);
+            exit;
+        }else{
+            $json = array('status' => 0, 'tips' =>"没有数据啦:)");
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
 
     }
 

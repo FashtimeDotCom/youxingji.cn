@@ -37,7 +37,7 @@
 	        <a class="backdrop fix" href=""><img src="{{$user.cover}}" title="背景图" alt=""></a>
 	        <div class="head fix">
 	        	<div class="profilePhoto"><img class="" src="{{$user.avatar}}" alt=""></div>
-	        	<p class="wx_name">{{$user.username}}&nbsp;<a href="javascript:;"><img class="icon_new1" src="/resource/m/images/common/icon_new1.png" /></a></p>
+	        	<p class="wx_name">{{$user.username}}</p>
 	        	<p class="signature fix" title="个性签名">
 	        		<span class="icon_location1"></span>
 	        		<img class="icon_location2" src="/resource/m/images/common/icon_location1.png" />
@@ -52,9 +52,9 @@
 	        <div class="m-nv-yz">
 	            <div class="wp fix">
 	                <ul class="fix">
-	                	<li><a href="/index.php?m=wap&c=user&v=new_travel">日志&nbsp;<i class="Iclass" id="travel_num">{{$total.travel_num}}</i></a></li>
-	                    <li class="on"><a href="/index.php?m=wap&c=user&v=new_tv">视频&nbsp;<i class="Iclass" id="tv_num">{{$total.tv_num}}</i></a></li>
-	                    <li><a href="/index.php?m=wap&c=user&v=new_note">游记&nbsp;<i class="Iclass" id="note_num">{{$total.note_num}}</i></a></li>
+	                	<li><a href="/index.php?m=wap&c=user&v=travel">日志&nbsp;<i class="Iclass" id="travel_num">{{$total.travel_num}}</i></a></li>
+	                    <li class="on"><a href="/index.php?m=wap&c=user&v=tv">视频&nbsp;<i class="Iclass" id="tv_num">{{$total.tv_num}}</i></a></li>
+	                    <li><a href="/index.php?m=wap&c=user&v=travel_note">游记&nbsp;<i class="Iclass" id="note_num">{{$total.note_num}}</i></a></li>
 	                    <li><a href="javascript:;">问答&nbsp;<i class="Iclass" id="answer">{{$total.answer}}</i></a></li>
 	                </ul>
 	            </div>
@@ -64,7 +64,7 @@
 	        	<div class="content fix">
 	        		{{foreach from=$list item=item key=key}}
 					<div class="item item_{{$item.id}}">
-						<div class="wp">
+						<div class="wp fix">
 							<p class="videoTitle">{{$item.title}}</p>
 							<div class="date">{{$item.addtime}}</div>
 							<p class="videoDetails">{{$item.describes}}</p>
@@ -91,9 +91,6 @@
 							<div class="pullDownMenu fix">
 								<img class="icon_pullDown" src="/resource/m/images/common/icon_pullDown.png" />
 								<div class="pullDownNav fix dis_none">
-									<!--<a class="collect" href="javascript:;"><span>收藏</span></a>
-	                                <a class="cancel" href="javascript:;"><span>取消</span></a>-->
-
 									<a class="collect" href="/index.php?m=wap&c=user&v=edittv&id={{$item.id}}"><span>编辑</span></a>
 									<a class="cancel" href="javascript:;" onclick="deleteTv({{$item.id}})"><span>删除</span></a>
 								</div>
@@ -107,7 +104,7 @@
 	        {{else}}
 	        <div class="m-mytv-yz">
 	            <div class="m-myday-yz">
-	                <div class="wp">
+	                <div class="wp fix">
 	                	<img class="default_bg" src="/resource/m/images/user/defaul_tv_bg.png"/>
 	                    <div class="bg3">
 	                        <div class="text">最原创的旅拍视频，最暖心的旅行推荐，由你打造</div>
@@ -123,8 +120,8 @@
 	    <div class="maskLayer dis_none" title="遮罩层，作用：下拉菜单失焦时，下拉菜单自动消失"></div>
 	    <!-- 视频弹窗 -->
 	    <div class="m-pop1-yz" id="m-pop1-yz">
-	        <div class="con">
-	            <iframe src='' frameborder=0 'allowfullscreen'></iframe>
+	        <div class="con conAmend">
+	            <iframe src='' name="myiframe" frameborder=0 'allowfullscreen' id="myiframe"></iframe>
 	            <div class="close js-close"><span></span></div>
 	        </div>
 	    </div>
@@ -176,7 +173,7 @@
 			                	var html="";
 			                	$.each(data.tips,function(i,item){
 			            			html += '<div class="item item_'+ data.tips[i].id+'">'+
-												'<div class="wp">'+
+												'<div class="wp fix">'+
 													'<p class="videoTitle">'+data.tips[i].title+'</p>'+
 													'<div class="date">'+data.tips[i].addtime+'</div>'+
 													'<p class="videoDetails">'+data.tips[i].describes+'</p>'+
@@ -227,10 +224,11 @@
 		                complete:function(){
 		                    if (NowPage+1<maxPages) {
 		                		$(".tips").text("往下拖动查看更多！");
+		                		flag = true;
 		                	}else{
 		                		$(".tips").text("我也是有底线的~");
+		                		flag = false;
 		                	}
-		                    flag = true;
 		                }
 		            });
 		        }else{
@@ -240,8 +238,9 @@
 	    });
 		function commonality(){
 			//点击下拉
-		    $('.icon_pullDown').on("click",function() {
-		    	if ($(".pullDownNav").attr("class")=="pullDownNav fix dis_none") {
+		    $('.icon_pullDown').on("click",function(){
+		    	if ( $(this).next(".pullDownNav").attr("class")=="pullDownNav fix dis_none") {
+		    		$(".pullDownNav").addClass("dis_none");
 		    		$(this).next(".pullDownNav").removeClass("dis_none");
 		    		$(".maskLayer").removeClass("dis_none");
 		    	}
@@ -274,21 +273,26 @@
 	        $(".Areview").on("click",function(){
 	        	layer.msg('此功能暂未开放，敬请期待！');
 	        });
+
+		    $('.js-video').click(function(event) {
+		        var _id = $(this).attr("href");
+		        var _src = $(this).attr("data-src");
+
+		        $(_id).find("iframe").attr("src", _src);
+		        $(_id).fadeIn();
+		    });
+		    
+		    //关闭视频
+		    $('.js-close').click(function(event){
+		        $(this).parents('.m-pop1-yz').fadeOut();
+		        var myiframe1 = $(this).parents('#m-pop1-yz').find("iframe").attr("src");
+		        $(this).parents('#m-pop1-yz').find("iframe").attr("src", myiframe1);
+		        
+		        event.stopPropagation();
+		    });
 		}
 		commonality();
-
-	    $('.js-video').click(function(event) {
-	        var _id = $(this).attr("href");
-	        var _src = $(this).attr("data-src");
-	
-	        $(_id).find("iframe").attr("src", _src);
-	        $(_id).fadeIn();
-	    });
-	    $('.js-close').click(function(event) {
-	        $(this).parents('.m-pop1-yz').fadeOut();
-	        $(this).parents('#m-pop1-yz').find("iframe").attr("src", "");
-	        event.stopPropagation();
-	    });
+		
 	    function deleteTv(id){
 	    	$(".maskLayer,.pullDownNav").addClass("dis_none");
 	        layer.msg('您确定要删除吗？', {

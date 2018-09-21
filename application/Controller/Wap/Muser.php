@@ -56,7 +56,7 @@ class Controller_Wap_Muser extends Core_Controller_WapAction
         $this->assign('myfollow', $myfollow);
     }
 
-    public function indexAction()
+    public function old_indexAction()
     {
     	$perpage = 10;
 		$uid = $this->user['uid'];
@@ -110,7 +110,7 @@ class Controller_Wap_Muser extends Core_Controller_WapAction
 	}
 
 	//tv
-	public function tvAction()
+	public function old_tvAction()
 	{
 		$perpage = 10;
 		$uid = $this->user['uid'];
@@ -212,5 +212,103 @@ class Controller_Wap_Muser extends Core_Controller_WapAction
 		$this->assign ('multipage', $multipage);
 		$this->display('wap/muser/visitor.tpl');
 	}
+
+	//******新版-别人日志
+    public function indexAction(){
+        $uid=$this->getParam('id');
+
+        $perpage = 4;
+        $curpage = $this->getParam ('page') ? intval ($this->getParam ('page')) : 1;
+        $list = C::M('travel')->where("uid = $uid and status=1")->order('addtime desc')->limit($perpage * ($curpage - 1), $perpage)->select();
+        if( $list ){
+            foreach ($list as $key => $value) {
+                $list[$key]['content'] = json_decode($value['content']);
+                $list[$key]['picnum'] = count(json_decode($value['content']));
+                $list[$key]['addtime'] = date('Y-m-d H:i:s', $value['addtime']);
+                C::M('travel')->where('id', $value['id'])->setInc('shownum', 1);
+            }
+            $this->assign('list', $list);
+        }
+        //total
+        $total=$this->totalAction($uid);
+        $this->assign("total",$total);
+
+        $this->display('wap/muser/new_travel.tpl');
+    }
+
+    //新版，别人视频
+    public function tvAction(){
+        $uid=$this->getParam('id');
+
+        $perpage = 4;
+        $curpage = $this->getParam ('page') ? intval ($this->getParam ('page')) : 1;
+        $list = C::M('tv')->where("uid = $uid and status=1")->order('addtime desc')->limit($perpage * ($curpage - 1), $perpage)->select();
+        if( $list ){
+            foreach ($list as $key=>$value){
+                $list[$key]['addtime']=date("Y-m-d H:i:s",$value['addtime']);
+                C::M('tv')->where('id', $value['id'])->setInc('shownum', 1);
+            }
+            $this->assign("list",$list);
+        }
+        //total
+        $total=$this->totalAction($uid);
+        $this->assign("total",$total);
+
+        $this->display('wap/muser/new_tv.tpl');
+    }
+
+    public function travel_noteAction(){
+        $uid=$this->getParam('id');
+
+        $perpage = 4;
+        $curpage = $this->getParam ('page') ? intval ($this->getParam ('page')) : 1;
+        $list = C::M('travel_note')->where("uid = $uid and status=1")->order('addtime desc')->limit($perpage * ($curpage - 1), $perpage)->select();
+        if( $list ){
+            foreach ($list as $key=>$value){
+                C::M('travel_note')->where('id', $value['id'])->setInc('show_num', 1);
+                if( trim($value['tag']) ){
+                    $list[$key]['tag']=explode("/",$value['tag']);
+                }
+
+            }
+            $this->assign("list",$list);
+        }
+        //total
+        $total=$this->totalAction($uid);
+        $this->assign("total",$total);
+
+        $this->display("wap/muser/new_note.tpl");
+    }
+
+
+    /*
+    * 统计日志，视频，游记，问题总数
+    * */
+    protected function totalAction($uid)
+    {
+        $data=array();
+        //日志
+        $travel_num=0;
+        $travel_num=C::M('travel')->where("uid={$uid} and status=1")->getCount();
+        $data['travel_num']=$travel_num;
+
+        //视频
+        $tv_num=0;
+        $tv_num=C::M('tv')->where("uid={$uid} and status=1")->getCount();
+        $data['tv_num']=$tv_num;
+
+        //游记
+        $note_num=0;
+        $note_num=C::M('travel_note')->where("uid={$uid} and status=1")->getCount();
+        $data['note_num']=$note_num;
+
+        //问答，暂时没有，0
+        $answer=0;
+        $data['answer']=$answer;
+
+        return $data;
+
+    }
+
 
 }

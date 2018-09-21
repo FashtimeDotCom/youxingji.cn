@@ -15,6 +15,11 @@
 	<script src="/resource/js/move_rem.js"></script>
 	<script src="/resource/m/js/jquery.js"></script>
 	<script src="/resource/m/js/lib.js"></script>
+	
+	<script src="/resource/eleditor/jquery.min.js" title="引入jQuery"></script>
+    <script src="/resource/eleditor/eleditor.min.js" title="插件核心"></script>
+    <script src="/resource/eleditor/webuploader.min.js" title="如果需要图片上传"></script>
+	
 	<style>
 		.myfile{width: 100%;position: relative;overflow: hidden;}
 		.myfile .note_bg{display: block;width: 100%;height: 100%; position: relative;z-index: 1;}
@@ -81,6 +86,8 @@
 					      transform: scale(0.9);
 						  -webkit-transform: scale(0.9);
 					      -o-transform: scale(0.9);    /*针对能识别-webkit的opera browser设置*/}
+		
+		#article_body{border: 1px #ccc solid;padding: 2px 5px; margin: 12px auto;}
 	</style>
 </head>
 <body>
@@ -160,10 +167,32 @@
 							<input type="text" class="inp" value="{{$res.tag}}" id="tag" placeholder="请输入标签(可选)，每个标签最多四个字，如：旅游知识/美食，用正斜杠分开">
 							<p class="tagTips dis_none">标签目前最多为四个哦！</p>
 						</div>
-						<div class="tit">
+						<!--<div class="tit">
 							<textarea class="layui-textarea" id="LAY_demo1" placeholder="请发表你的游记">{{$res.content}}</textarea>
-						</div>
+						</div>-->
+
+						<!-- 内容编辑区域 -->
+						<div id="article_body"></div>
 						
+						<script>
+						/*实例化一个编辑器*/
+						var artEditor = new Eleditor({
+											el: '#article_body',
+											upload:{
+												server: '/upload.php',
+												fileSizeLimit: 2
+											}
+										});
+						</script>
+						<script type="text/javascript">
+							var artEditor12 = new Eleditor({
+							    el: {Object}, /*编辑区域dom对象，也可以是jquery对象*/
+							    upload: {Object}, /*上传配置参数，详情见《进阶-文件上传部分》*/
+							    uploader: {Function}, /*用于替换编辑器自带上传逻辑，upload和uploader参数不能共存！*/
+							    toolbars: {Array}, /*自定义按钮，详情见《进阶-扩展编辑器部分》*/
+							    placeHolder: {String}, /*编辑器默认为空时文字*/
+							});
+						</script>
 						<div class="pic-video">
 							<input type="hidden" name="code" value="{{$code}}" id="code">
 							<div class="file f-pic" id="openLocation" style="margin-bottom: 7px;">
@@ -174,6 +203,7 @@
 							<input type="hidden" name="address" value="{{$res.address}}" id="address" title="后台返回来的定位地址">
 							<p id="Paddress" class="address">{{$res.address}}</p>
 						</div>
+
                       	<input type="checkbox" checked="">我已阅读并同意<a href="/article/hyzn">《服务协议》</a>
                       	<input type="hidden" name="did" value="{{$did}}" id="did">
 					</form>
@@ -217,7 +247,7 @@
 					$(".tagTips").removeClass("dis_none");
 				}else{
 					for(var i=0;i<result.length;i++){
-						//console.log(result[i]);
+						
 					}
 					$(".tagTips").addClass("dis_none");
 				}	
@@ -246,39 +276,39 @@
 			});
 			
 			//构建一个默认的编辑器
-			layui.use('layedit', function() {
-				var layedit = layui.layedit,
-					$ = layui.jquery;
-				layedit.set({
-					uploadImage: {
-						url: '/index.php?m=api&c=index&v=lay_uploadpic', //接口url
-						type: 'post' //默认post
-					}
-				});
-				//构建一个默认的编辑器
-				var index = layedit.build('LAY_demo1');
+//			layui.use('layedit', function() {
+//				var layedit = layui.layedit,
+//					$ = layui.jquery;
+//				layedit.set({
+//					uploadImage: {
+//						url: '/index.php?m=api&c=index&v=lay_uploadpic', //接口url
+//						type: 'post' //默认post
+//					}
+//				});
+//				//构建一个默认的编辑器
+//				var index = layedit.build('LAY_demo1');
+//
+//				//编辑器外部操作
+//				var active = {
+//					content: function() {
+//						var content = layedit.getContent(index);
+//						add(content);
+//					},
+//					text: function() {
+//						var content = layedit.getContent(index);
+//						draft(content); //获取编辑器纯文本内容
+//					},
+//					selection: function() {
+//						alert(layedit.getSelection(index));
+//					}
+//				};
+//
+//				$('.site-demo-layedit').on('click', function() {
+//					var type = $(this).data('type');
+//					active[type] ? active[type].call(this) : '';
+//				});
+//			});
 
-				//编辑器外部操作
-				var active = {
-					content: function() {
-						var content = layedit.getContent(index);
-						add(content);
-					},
-					text: function() {
-						var content = layedit.getContent(index);
-						draft(content); //获取编辑器纯文本内容
-					},
-					selection: function() {
-						alert(layedit.getSelection(index));
-					}
-				};
-
-				$('.site-demo-layedit').on('click', function() {
-					var type = $(this).data('type');
-					active[type] ? active[type].call(this) : '';
-				});
-			});
-			
 			function add (con) {
 				var title = $('#title').val();
 				var describe = $('#describe').val();
@@ -330,7 +360,7 @@
 				}, function(data) {
 					layer.msg(data.tips);
 					if(data.status == 1) {
-						window.location.href = "/index.php?m=wap&c=user&v=new_note";
+						window.location.href = "/index.php?m=wap&c=user&v=travel_note";
 					}
 				}, "JSON");
 			}
@@ -344,7 +374,6 @@
 				var list = imgUrl + '||' + con;
 				var tag = $('#tag').val();//标签
 				address = $('#address').val();//定位
-				console.log(imgUrl);
 				if(!title && !describe && oldImgUrl == 0 && !con) {
 					layer.msg('不能全为空');
 					return false;
@@ -530,7 +559,7 @@
 				                    var y = res.latitude;
 				                    //alert(code);
 				                    
-				                    console.log("location is lng=" + x + "  lat=" + y);
+				                    //console.log("location is lng=" + x + "  lat=" + y);
 				                   	//changCoordinate(x, y);
 				                    //alert("location1 is lng=" + lng + "  lat=" + lat);
 				                    
@@ -540,14 +569,13 @@
 				                        if(data.status === 0) {
 				                            window.lng = data.result[0].x;
 				                            window.lat = data.result[0].y;
-				                            console.log("location is lng=" + lng + "  lat=" + lat);
+				                            //console.log("location is lng=" + lng + "  lat=" + lat);
 
 						                    $.post("/index.php?m=api&c=Location&v=get_location_info", {
 												'latitude': lat,
 												'longitude': lng,
 												'code': code,
 											}, function(data) {
-												//console.log(data);
 												$("#address").val("");
 												$("#Paddress").text("");
 												if (data.code==1) {
@@ -579,5 +607,7 @@
 			index.init();
 		});
 	</script>
+	
+	
 </body>
 </html>

@@ -324,7 +324,7 @@
 				}, function(data){
 					layer.msg(data.tips);
 					if(data.status == 1) {
-						window.location.href = "/index.php?m=wap&c=user&v=new_note";
+						window.location.href = "/index.php?m=wap&c=user&v=travel_note";
 					}
 				}, "JSON");
 			}

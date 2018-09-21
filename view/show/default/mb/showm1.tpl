@@ -45,7 +45,7 @@
 			<div class="m-talent">
 				<div class="row-t2">
 					<div class="wp">
-						<h3 class="g-tit-yz2" style="background-image: url(/resource/m/images/line-yz2.jpg)">中国大型实景演出文化体验使者招募令第1期</h3>
+						<h3 class="g-tit-yz2" style="background-image: url(/resource/m/images/line-yz2.jpg)">中国大型实景演出文化体验使者招募令第2期</h3>
 						<div class="swiper-yz1">
 							<div class="swiper-container">
 								<div class="swiper-wrapper">
@@ -79,10 +79,12 @@
 
 							</p>
 							<div class="time-p">
-								<p><span>阶段一：</span>文化体验使者报名 （2018年8月3日~8月26日）</p>
-								<p><span>阶段二：</span>文化体验使者选拔 （2018年8月27日~9月2日）</p>
-								<p><span>阶段三：</span>公布名单 （2018年9月5日）</p>
-								<p><span>阶段四：</span>文化体验使者直播 （2018年9月8日~9月9日）</p>
+								<p><span>阶段一：</span>文化体验使者报名 （2018年9月14日~9月23日）</p>
+								<p><span>阶段二：</span>文化体验使者选拔 （2018年9月24日~9月26日）</p>
+								<p><span>阶段三：</span>网络投票 （2018年9月27日~2018年9月30日）</p>
+								<p><span>阶段四：</span>文化体验使者签约 （2018年10月9日）</p>
+								<p><span>阶段五：</span>名单公布 （2018年10月10日）</p>
+								<p><span>阶段六：</span>启程时间 （2018年10月13日~2018年10月14日）</p>
 							</div>
 							<div class="jp-p">
 								<p>获选中国大型实景演出文化体验使者（共5名）将赢得</p>

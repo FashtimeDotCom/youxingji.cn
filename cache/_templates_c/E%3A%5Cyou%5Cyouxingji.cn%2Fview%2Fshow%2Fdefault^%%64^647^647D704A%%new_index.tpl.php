@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-13 11:50:15
+<?php /* vpcvcms compiled created on 2018-09-18 16:10:35
          compiled from wap/user/new_index.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/user/new_index.tpl', 45, false),)), $this); ?>
@@ -129,7 +129,7 @@ unset($_smarty_tpl_vars);
                 	</a>
                 </div>
                 <div class="level">
-                	<a class="dis_block fix" href="/index.php?m=wap&c=user&v=new_note">
+                	<a class="dis_block fix" href="/index.php?m=wap&c=user&v=travel_note">
 	                	<img class="" src="/resource/m/images/user/3.png"/>
 	                	<p class="">我的游记<img class="RightArrows" src="/resource/m/images/user/8.png" /></p>
                 	</a>
@@ -141,7 +141,7 @@ unset($_smarty_tpl_vars);
                 	</a>
                 </div>
                 <div class="level">
-                	<a class="dis_block fix" href="javascript:;">
+                	<a class="dis_block fix" href="/index.php?m=wap&c=collection&v=collection_travel">
 	                	<img class="" src="/resource/m/images/user/5.png"/>
 	                	<p class="">我的收藏<img class="RightArrows" src="/resource/m/images/user/8.png" /></p>
                 	</a>

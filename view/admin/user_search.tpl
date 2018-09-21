@@ -50,8 +50,8 @@
             <th>用户组</th>
             <th>Email</th>
             <th>注册 IP</th>
-            <th>最后访问 IP</th>
             <th>注册时间</th>
+            <th>练习生</th>
           	<th>本周推荐</th>
             <th>达人推荐</th>
             <th>tv推荐</th>
@@ -70,8 +70,10 @@
                 <td>{{$usergroups[$user.gid].title}}</td>
                 <td>{{$user.email}}</td>
                 <td>{{$user.regip}}</td>
-                <td>{{$user.lastip}}</td>
                 <td>{{$user.regtime|idate:"Y-m-d"}}</td>
+                <td class="tdl">
+                    <input type="checkbox" name="trainee[{{$user.uid}}]" value="1"{{if $user.trainee}} checked{{/if}} />
+                </td>
               	<td class="tdl">
                     <input type="checkbox" name="weektop[{{$user.uid}}]" value="1"{{if $user.weektop}} checked{{/if}} />
                 </td>

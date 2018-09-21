@@ -309,7 +309,7 @@
 				                    var y = res.latitude;
 				                    //alert(code);
 				                    
-				                    console.log("location is lng=" + x + "  lat=" + y);
+				                    //console.log("location is lng=" + x + "  lat=" + y);
 				                   	//changCoordinate(x, y);
 				                    //alert("location1 is lng=" + lng + "  lat=" + lat);
 				                    
@@ -319,14 +319,13 @@
 				                        if(data.status === 0) {
 				                            window.lng = data.result[0].x;
 				                            window.lat = data.result[0].y;
-				                            console.log("location is lng=" + lng + "  lat=" + lat);
+				                            //console.log("location is lng=" + lng + "  lat=" + lat);
 
 						                    $.post("/index.php?m=api&c=Location&v=get_location_info", {
 												'latitude': lat,
 												'longitude': lng,
 												'code': code,
 											}, function(data) {
-												//console.log(data);
 												$("#address").val("");
 												$("#Paddress").text("");
 												if (data.code==1) {
@@ -440,7 +439,7 @@
             }, function(data){
                 layer.msg(data.tips);
                 if (data.status == 1) {
-                    window.location.href = window.location.href;
+                    window.location.href = "/index.php?m=wap&c=user&v=tv";
                 }
             },"JSON");
         })
@@ -463,6 +462,9 @@
                 'address':address
             }, function(data){
                 layer.msg(data.tips);
+                if (data.status == 1) {
+                    window.location.href = "/index.php?m=wap&c=user&v=draft";
+                }
             },"JSON");
         })
     </script>

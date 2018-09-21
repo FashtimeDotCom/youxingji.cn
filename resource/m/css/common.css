@@ -74,6 +74,12 @@ img {
 
 .dis_none{display: none!important;}
 
+/*字体超出多少行 以省略号代替  
+ * 此处 在特定的位置  加一句行数
+ * -webkit-line-clamp: 3;三列
+ * */
+.omit{display: -webkit-box;-webkit-box-orient: vertical;overflow: hidden;}
+
 
 /*弹窗  弹出层*/
 .bg,.bg_overlay {position: fixed;top: 0; right: 0; bottom: 0; left: 0;}

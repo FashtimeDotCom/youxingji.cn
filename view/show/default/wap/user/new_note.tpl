@@ -37,7 +37,7 @@
 	        <a class="backdrop fix" href=""><img src="{{$user.cover}}" title="背景图" alt=""></a>
 	        <div class="head fix">
 	        	<div class="profilePhoto"><img class="" src="{{$user.avatar}}" alt=""></div>
-	        	<p class="wx_name">{{$user.username}}&nbsp;<a href="javascript:;"><img class="icon_new1" src="/resource/m/images/common/icon_new1.png" /></a></p>
+	        	<p class="wx_name">{{$user.username}}</p>
 	        	<p class="signature fix" title="个性签名">
 	        		<span class="icon_location1"></span>
 	        		<img class="icon_location2" src="/resource/m/images/common/icon_location1.png" />
@@ -52,9 +52,9 @@
 	        <div class="m-nv-yz">
 	            <div class="wp fix">
 	                <ul class="fix">
-	                	<li><a href="/index.php?m=wap&c=user&v=new_travel">日志&nbsp;<i class="Iclass" id="travel_num">{{$total.travel_num}}</i></a></li>
-	                    <li><a href="/index.php?m=wap&c=user&v=new_tv">视频&nbsp;<i class="Iclass" id="tv_num">{{$total.tv_num}}</i></a></li>
-	                    <li class="on"><a href="/index.php?m=wap&c=user&v=new_note">游记&nbsp;<i class="Iclass" id="note_num">{{$total.note_num}}</i></a></li>
+	                	<li><a href="/index.php?m=wap&c=user&v=travel">日志&nbsp;<i class="Iclass" id="travel_num">{{$total.travel_num}}</i></a></li>
+	                    <li><a href="/index.php?m=wap&c=user&v=tv">视频&nbsp;<i class="Iclass" id="tv_num">{{$total.tv_num}}</i></a></li>
+	                    <li class="on"><a href="/index.php?m=wap&c=user&v=travel_note">游记&nbsp;<i class="Iclass" id="note_num">{{$total.note_num}}</i></a></li>
 	                    <li><a href="javascript:;">问答&nbsp;<i class="Iclass" id="answer">{{$total.answer}}</i></a></li>
 	                </ul>
 	            </div>
@@ -74,7 +74,13 @@
 
 							<div class="videoBottom fix">
 								<span class="left"><img class="" src="/resource/m/images/common/icon_location2.png" />{{$item.address}}</span>
-								<span class="left tag">{{$item.tag}}</span>
+								{{if $item.tag}}
+									{{foreach from=$item.tag key=k item=vo }}
+										{{if $k <2}}
+											<span class="left tag">{{$vo}}</span>
+										{{/if}}
+									{{/foreach}}
+								{{/if}}
 								<p class="right">
 									<span class="check">
 										<img class="" src="/resource/m/images/common/icon_check.png" data-id="{{$item.id}}" data-num="{{$item.show_num}}" />{{$item.show_num}}
@@ -135,7 +141,7 @@
     		if (note_num>=5) {
     			$(".tips").text("往下拖动查看更多！");
     		} else{
-    			$(".tips").text("我也是有底线的哦0~");
+    			$(".tips").text("我也是有底线的哦~");
     		}
     	}
 
@@ -167,28 +173,27 @@
 		                    flag = false;
 		                },
 		                success:function( data ){
-		                	console.log(data);
 		                    if(data.status == 1){
 			                	var html="";
 			                	$.each(data.tips,function(i,item){
 			            			html += '<div class="item item_'+ data.tips[i].id+'">'+
-												'<div class="wp">'+
+												'<div class="wp fix">'+
 													'<p class="videoTitle">'+data.tips[i].title+'</p>'+
 													'<div class="date">'+data.tips[i].addtime+'</div>'+
 													'<a href="'+data.tips[i].url+'" class="dis_block fix">'+
-														'<p class="videoDetails">'+data.tips[i].describes+'</p>'+
+														'<p class="videoDetails">'+data.tips[i].desc+'</p>'+
 														'<div class="preview fix"><img src="'+data.tips[i].pics+'" alt=""></div>'+
 													'</a>'+
 													'<div class="videoBottom fix">'+
 														'<span class="left"><img src="/resource/m/images/common/icon_location2.png" />'+data.tips[i].address+'</span>'+
 														'<p class="right">'+
 															'<span class="check">'+
-																'<img" src="/resource/m/images/common/icon_check.png" data-id="'+data.tips[i].id+'" data-num="'+data.tips[i].shownum+'" />'+data.tips[i].shownum+''+
+																'<img" src="/resource/m/images/common/icon_check.png" data-id="'+data.tips[i].id+'" data-num="'+data.tips[i].show_num+'" />'+data.tips[i].show_num+''+
 															'</span>'+
 															'</a>&nbsp;&nbsp;'+
-															'<a class="zan" data-id="'+data.tips[i].id+'" data-num="'+data.tips[i].topnum+'" href="javascript:;">'+
+															'<a class="zan" data-id="'+data.tips[i].id+'" data-num="'+data.tips[i].top_num+'" href="javascript:;">'+
 																'<span class="like">'+
-																	'<img src="/resource/m/images/common/icon_like.png" /><i class="Iclass">'+data.tips[i].topnum+'</i>'+
+																	'<img src="/resource/m/images/common/icon_like.png" /><i class="Iclass">'+data.tips[i].top_num+'</i>'+
 																'</span>'+
 															'</a>&nbsp;&nbsp;'+
 															'<a class="Areview" href="javascript:;"><span class="review"><img src="/resource/m/images/common/icon_review.png" />0</span></a>'+
@@ -198,7 +203,7 @@
 														'<img class="icon_pullDown" src="/resource/m/images/common/icon_pullDown.png" />'+
 														'<div class="pullDownNav fix dis_none">'+
 															'<a class="collect" href="/index.php?m=wap&c=user&v=edit_note&id='+data.tips[i].id+'"><span>编辑</span></a>'+
-															'<a class="cancel" href="javascript:;" onclick="deletenote('+data.tips[i].id+')"><span>删除</span></a>'+
+															'<a class="cancel" href="javascript:;" onclick="deleteNote('+data.tips[i].id+')"><span>删除</span></a>'+
 														'</div>'+
 													'</div>'+
 												'</div>'+
@@ -210,7 +215,7 @@
 			                		$(".tips").text("往下拖动查看更多！");
 			                		flag = true;
 			                	}else{
-			                		$(".tips").text("我也是有底线的哦1~");
+			                		$(".tips").text("我也是有底线的哦~");
 			                		flag = false;
 			                	}
 			                }else{
@@ -218,28 +223,27 @@
 			                }
 			                commonality();
 		                },
-		                error:function(data){
-		                	console.log(data);
-		                	console.log(data.msg);
-		                },
 		                complete:function(data){
 		                    if (NowPage+1<maxPages) {
 		                		$(".tips").text("往下拖动查看更多！");
+		                		flag = true;
 		                	}else{
-		                		$(".tips").text("我也是有底线的哦2~");
+		                		$(".tips").text("我也是有底线的哦~");
+		                		flag = false;
 		                	}
-		                	flag = false;
 		                }
 		            });
 		        }else{
-            		$(".tips").text("我也是有底线的哦3~");
+            		$(".tips").text("我也是有底线的哦~");
             	}
 	        }
 	    });
+		
 		function commonality(){
 			//点击下拉
-		    $('.icon_pullDown').on("click",function() {
-		    	if ($(".pullDownNav").attr("class")=="pullDownNav fix dis_none") {
+		    $('.icon_pullDown').on("click",function(){
+		    	if ( $(this).next(".pullDownNav").attr("class")=="pullDownNav fix dis_none") {
+		    		$(".pullDownNav").addClass("dis_none");
 		    		$(this).next(".pullDownNav").removeClass("dis_none");
 		    		$(".maskLayer").removeClass("dis_none");
 		    	}

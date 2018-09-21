@@ -4595,8 +4595,8 @@ body{
 .dia_list .title .name{color:#d71618;display:inline-block;margin-right:5px}
 .dia_list .title .time{float:right}
 .dia_list .con p{line-height:24px;color:#999}
-.dia_list .item .tool_right{float:right;width:60px;text-align:right}
-.dia_list .tool_right .delete{width:9px;height:9px;background:url(/resource/images/delete.png);display:block;margin-left:45px;padding: 5px;background-size: 100%;}
+.dia_list .item .tool_right{float:right;width:20px;text-align:right}
+.dia_list .tool_right .delete{width:9px;height:9px;background:url(/resource/images/delete.png);display:block;margin-left:5.5px;padding: 5px;background-size: 100%;}
 .dia_list .tool_right .weidu{width: 20px;color: #fff;background: #d71618;display: inline-block;height: 15px;font-size: 12px;text-align: center;border-radius: 3px;margin-top: 18px;}
 
 ._j_chat_lists{padding:0 20px;margin-bottom: 80px;}

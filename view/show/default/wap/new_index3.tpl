@@ -102,12 +102,6 @@
 			</a>
 		</li>
 		<li>
-			<a href="/index.php?m=wap&c=journey&v=index">
-				<i style="background-image: url(/resource/m/images/q-icon14.png);"></i>
-				<span>独家旅行</span>
-			</a>
-		</li>
-		<li>
 			<a href="">
 				<i style="background-image: url(/resource/m/images/q-icon53.jpg);"></i>
 				<span>成为达人</span>
@@ -117,6 +111,12 @@
 			<a href="/index.php?m=wap&c=user&v=index">
 				<i style="background-image: url(/resource/m/images/q-icon20.png);"></i>
 				<span>个人中心</span>
+			</a>
+		</li>
+		<li>
+			<a href="/index.php?m=wap&c=journey&v=index">
+				<i style="background-image: url(/resource/m/images/q-icon14.png);"></i>
+				<span>独家旅行</span>
 			</a>
 		</li>
 		<!--<li>
@@ -134,7 +134,7 @@
 
 	</ul>
 	<article class="article">
-		<h3 class="title">达人邦 <a href="/index.php?m=wap&c=index&v=star"><span>更多<i></i></span></a></h3>
+		<h3 class="title">达人邦 <a href="/index.php?m=wap&c=index&v=master_list"><span>更多<i></i></span></a></h3>
 		<div class="m_item_a1 swiper-container">
 			<div class="swiper-wrapper" id="drb">
 				{{if $tjstar}}

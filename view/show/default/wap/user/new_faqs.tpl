@@ -219,10 +219,11 @@
 		                complete:function(){
 		                    if (NowPage+1<maxPages) {
 		                		$(".tips").text("往下拖动查看更多！");
+		                		flag = true;
 		                	}else{
 		                		$(".tips").text("我也是有底线的~");
+		                		flag = false;
 		                	}
-		                    flag = true;
 		                }
 		            });
 		        }else{

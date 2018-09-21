@@ -110,7 +110,7 @@
                 	</a>
                 </div>
                 <div class="level">
-                	<a class="dis_block fix" href="/index.php?m=wap&c=user&v=new_note">
+                	<a class="dis_block fix" href="/index.php?m=wap&c=user&v=travel_note">
 	                	<img class="" src="/resource/m/images/user/3.png"/>
 	                	<p class="">我的游记<img class="RightArrows" src="/resource/m/images/user/8.png" /></p>
                 	</a>
@@ -122,7 +122,7 @@
                 	</a>
                 </div>
                 <div class="level">
-                	<a class="dis_block fix" href="javascript:;">
+                	<a class="dis_block fix" href="/index.php?m=wap&c=collection&v=collection_travel">
 	                	<img class="" src="/resource/m/images/user/5.png"/>
 	                	<p class="">我的收藏<img class="RightArrows" src="/resource/m/images/user/8.png" /></p>
                 	</a>

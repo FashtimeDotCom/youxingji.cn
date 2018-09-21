@@ -430,11 +430,9 @@
                 'describe':describe,
                 'address':address
             }, function(data){
-            	console.log(data);
-            	alert(data);
                 layer.msg(data.tips);
                 if (data.status == 1) {
-                    window.location.href = window.location.href;
+                    window.location.href = "/index.php?m=wap&c=user&v=tv";
                 }
             },"JSON");
         })

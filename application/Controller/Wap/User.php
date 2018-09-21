@@ -36,7 +36,7 @@ class Controller_Wap_User extends Core_Controller_WapAction
 	}
 
 	//我的日志
-	public function travelAction()
+	public function old_travelAction()
 	{
 		$perpage = 10;
 		$uid = $this->userInfo['uid'];
@@ -56,8 +56,8 @@ class Controller_Wap_User extends Core_Controller_WapAction
         $this->display('wap/user/index.tpl');
 	}
 
-	//新版我的游记
-    public function new_travelAction()
+	//新版我的日志
+    public function travelAction()
     {
         $perpage = 4;
         $uid = $this->userInfo['uid'];
@@ -139,7 +139,7 @@ class Controller_Wap_User extends Core_Controller_WapAction
 	}
 
 	//tv
-	public function tvAction()
+	public function old_tvAction()
 	{
 		$perpage = 10;
 		$uid = $this->userInfo['uid'];
@@ -164,7 +164,7 @@ class Controller_Wap_User extends Core_Controller_WapAction
 		$this->display('wap/user/tv.tpl');
 	}
 
-	public function new_tvAction(){
+	public function tvAction(){
         $perpage = 4;
         $uid = $this->userInfo['uid'];
         $curpage = $this->getParam ('page') ? intval ($this->getParam ('page')) : 1;
@@ -562,7 +562,7 @@ class Controller_Wap_User extends Core_Controller_WapAction
 
 
     //*************************
-    public function new_noteAction(){
+    public function travel_noteAction(){
         $perpage = 4;
         $uid = $this->userInfo['uid'];
         $curpage = $this->getParam ('page') ? intval ($this->getParam ('page')) : 1;
@@ -571,6 +571,10 @@ class Controller_Wap_User extends Core_Controller_WapAction
         if( $list ){
             foreach ($list as $key=>$value){
                 C::M('travel_note')->where('id', $value['id'])->setInc('show_num', 1);
+                if( trim($value['tag']) ){
+                    $list[$key]['tag']=explode("/",$value['tag']);
+                }
+
             }
             $this->assign("list",$list);
         }
@@ -629,6 +633,21 @@ class Controller_Wap_User extends Core_Controller_WapAction
         $code=base64_encode($key);
         $this->assign("code",$code);
         $this->display("wap/user/editnote.tpl");
+    }
+
+    public function note_detailAction(){
+        $id = intval($this->getParam('id'));
+        $type_model=new Model_TravelNote();
+        $article=$type_model->get_one($id);
+
+        if(!$article){
+            $this->showmsg('', '/', 0);
+            exit;
+        }
+        C::M('travel_note')->where('id', $id)->setInc('show_num', 1);
+        $this->assign('article', $article);
+
+        $this->display('wap/user/note_detail.tpl');
     }
 
 

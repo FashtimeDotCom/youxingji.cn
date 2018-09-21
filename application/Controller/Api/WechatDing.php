@@ -85,8 +85,41 @@ class Controller_Api_WechatDing extends Core_Controller_Action
     }
 
     /*
-     * 订阅事件
+     * 订阅事件-图文
      * */
+    public function text_subscribeAction($postObj){
+        $toUser=$postObj->FromUserName;//用户
+        $fromUser=$postObj->ToUserName;//开发者
+        $token=$this->tokenAction();
+
+        //获取用户的基本信息
+        $user_info=$this->get_userinfoAction($token,$toUser);
+        if( $user_info ){
+            $res=C::M('ding_user')->add($user_info);
+            if( $res ){//发送一条推送消息,默认的消息
+                $time=time();
+                $msgType='text';
+                $content="感谢您关注游行迹！
+
+我们是个“三新二意”的旅行互动平台，每天为你呈现最新鲜的旅游资讯，如果你爱旅游，我们会带你开启公益＋社会实践的旅行新模式；如果你很文艺，我们会让你和画家开启不一样的旅行；如果你是旅游达人，我们会为你提供一个最好的展示平台，旅程漫漫，希望与你同行！
+
+ 回复【1】带你开启特别的旅行
+ 回复【2】带你体验我负责出钱，你负责出发的新主张
+ 回复【3】带你和画家一起开启绘画之旅
+ 回复【4】加入达人邦，成为旅游达人
+ 回复【5】可以联系我们
+ 投票:免费游 -> 人气投票
+ ";
+                //回复消息模版
+                $info=$this->text_template($toUser,$fromUser,$time,$msgType,$content);
+                return $info;
+            }
+        }
+    }
+
+    /*
+ * 订阅事件
+ * */
     public function subscribeAction($postObj){
         $toUser=$postObj->FromUserName;//用户
         $fromUser=$postObj->ToUserName;//开发者
@@ -99,7 +132,16 @@ class Controller_Api_WechatDing extends Core_Controller_Action
             if( $res ){//发送一条推送消息,默认的消息
                 $time=time();
                 $msgType='text';
-                $content='感谢您关注游行迹！
+
+                $list=C::M('activity_vote')->field('id,title,thumbfile,wechat_desc')->where("status=1 and NOW() <=end_time")->order('id desc')->limit(0,5)->select();
+                if( $list ){
+                    foreach( $list as $key=>$value ){
+                        $list[$key]['url']="http://".$_SERVER['HTTP_HOST']."/index.php?m=wap&c=vote&v=index&vote_id=".$value['id'];
+                        $list[$key]['thumbfile']="http://".$_SERVER['HTTP_HOST'].$value['thumbfile'];
+                    }
+                    $info=$this->batch_templateAction($toUser,$fromUser,$time,'news',$list);
+                }else{
+                    $content="感谢您关注游行迹！
 
 我们是个“三新二意”的旅行互动平台，每天为你呈现最新鲜的旅游资讯，如果你爱旅游，我们会带你开启公益＋社会实践的旅行新模式；如果你很文艺，我们会让你和画家开启不一样的旅行；如果你是旅游达人，我们会为你提供一个最好的展示平台，旅程漫漫，希望与你同行！
 
@@ -107,9 +149,9 @@ class Controller_Api_WechatDing extends Core_Controller_Action
  回复【2】带你体验我负责出钱，你负责出发的新主张
  回复【3】带你和画家一起开启绘画之旅
  回复【4】加入达人邦，成为旅游达人
- 回复【5】可以联系我们';
-                //回复消息模版
-                $info=$this->text_template($toUser,$fromUser,$time,$msgType,$content);
+ 回复【5】可以联系我们";
+                    $info=$this->text_template($toUser,$fromUser,$time,$msgType,$content);
+                }
                 return $info;
             }
         }
@@ -223,7 +265,7 @@ class Controller_Api_WechatDing extends Core_Controller_Action
                 $content='#墙裂推荐#游行迹达人种子招募了解一下：是大学生，爱旅游，就可报名，魅力出国游，等你来！ 点击链接http://u6714665.viewer.maka.im/pcviewer/BYCX3CDL';
                 break;
             case '文化体验':
-                $content='点击链接即可报名 http://cn.mikecrm.com/GZTfvnh';
+                $content='点击链接即可报名 http://cn.mikecrm.com/GZTfvnh?from=singlemessage&isappinstalled=0';
                 break;
             default:
                 $content="游行迹官网http://www.youxingji.cn/index.php?m=wap&c=index&v=index";

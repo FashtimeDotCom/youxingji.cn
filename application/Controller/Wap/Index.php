@@ -1169,4 +1169,39 @@ class Controller_Wap_Index extends Core_Controller_WapAction
         $this->display("wap/travel_detail.tpl");
     }
 
+
+    //达人列表页
+    public function master_listAction()
+    {
+        //顶部广告图
+        $ad=C::M('base_ad')->field('imgurl,linkurl')->where("tagname='wap_master_list'")->find();
+        $this->assign('ad',$ad);
+
+        //tab-旅行达人
+        $star = C::M('user_member')->field('uid,username,realname,headpic,city,autograph')->where("startop = 1")->order("uid desc")->limit('0,4')->select();
+        foreach ($star as $key => $value) {
+            $star[$key]['avatar'] = $value['headpic']?$value['headpic']:'/resource/images/img-lb2.png';
+        }
+
+        //tab-种子达人
+        $seed=C::M('user_member')->field('uid,username,realname,headpic,city,autograph')->where("trainee=1")->order("uid desc")->limit('0,4')->select();
+        foreach ($seed as $key => $value) {
+            $seed[$key]['avatar'] = $value['headpic']?$value['headpic']:'/resource/images/img-lb2.png';
+        }
+
+        //总数
+        $star_total=C::M('user_member')->field('COUNT(uid) as star')->where('startop = 1')->find();
+        $seed_total=C::M('user_member')->field('count(UID) as seed')->WHERE('trainee=1')->find();
+        $total['star']=$star_total['star'];
+        $total['seed']=$seed_total['seed'];
+        $this->assign('total',$total);
+
+        $this->assign("star",$star);
+        $this->assign('seed',$seed);
+        $this->display('wap/master_list.tpl');
+    }
+
+
+
+
 }

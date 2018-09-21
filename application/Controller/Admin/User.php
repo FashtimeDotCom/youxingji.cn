@@ -345,12 +345,14 @@ class Controller_Admin_User extends Core_Controller_Action
 			$_startops = $this->getParam ('startop');
 			$_tvtops = $this->getParam ('tvtop');
           	$_weektops = $this->getParam ('weektop');
+            $_trainee=$this->getParam('trainee');
 			foreach($_ids AS $i => $_id)
 			{
 				$_data = array (
 					'startop' => intval($_startops[$_id]),
 					'tvtop' => intval($_tvtops[$_id]),
                   	'weektop' => intval($_weektops[$_id]),
+                    'trainee'=>intval($_trainee[$_id])
                 );
 
 				C::M('user_member')->where("uid = $_id")->update ($_data);

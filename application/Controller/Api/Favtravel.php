@@ -22,7 +22,7 @@ class Controller_Api_Favtravel extends Core_Controller_Action
      * travel_id:说说ID
      *
      * */
-    public function fav_travelAction()
+    public function collectionAction()
     {
         //验证是否是post 提交申请
         if( !$this->isPost() ){
@@ -31,8 +31,8 @@ class Controller_Api_Favtravel extends Core_Controller_Action
             exit;
         }
 
-        $type=(int)$this->getParam("type");//0取消，1收藏
-        if( !in_array($type,array(1,2)) ){
+        $action=(int)$this->getParam("action");//0取消，1收藏
+        if( !in_array($action,array(0,1)) ){
             $json = array('status' => 0, 'tips' => '缺少参数');
             echo Core_Fun::outputjson($json);
             exit;
@@ -46,16 +46,17 @@ class Controller_Api_Favtravel extends Core_Controller_Action
             exit;
         }
 
-        $travel_id=$this->getParam("travel_id");
-        if( $travel_id <=0 ){
+        $t_id=$this->getParam("t_id");//目标ID
+        $type=$this->getParam("type");//分类 1日志，2tv,3游记
+        if( $t_id <=0 || !$type ){
             $json = array('status' => 0, 'tips' => '参数错误');
             echo Core_Fun::outputjson($json);
             exit;
         }
 
-        if( $type==1 ){//取消,删除记录
-            $where=" travel_id = {$travel_id} && user_id = {$user_id} ";
-            $res=C::M("fav_travel")->where($where)->delete();
+        if( $action==0 ){//取消,删除记录
+            $where=" t_id = {$t_id} && uid = {$user_id} &&type={$type} ";
+            $res=C::M("collection")->where($where)->delete();
             if($res){
                 $json = array('status' => 1, 'tips' => '取消成功!');
                 echo Core_Fun::outputjson($json);
@@ -67,12 +68,21 @@ class Controller_Api_Favtravel extends Core_Controller_Action
             }
         }else{//收藏
             $data=array(
-                'travel_id'=>$travel_id,
-                "user_id"=>$user_id,
-                "add_time"=>time()
+                't_id'=>$t_id,
+                "uid"=>$user_id,
+                "add_time"=>time(),
+                'type'=>$type
             );
 
-            $res=C::M("fav_travel")->add($data);
+            //判断是否是重复收藏
+            $is_collection=C::M('collection')->field('id')->where("t_id={$t_id} and uid={$user_id} and type={$type}")->find();
+            if( $is_collection ){
+                $json = array('status' => 0, 'tips' => '您已收藏过啦!');
+                echo Core_Fun::outputjson($json);
+                exit;
+            }
+
+            $res=C::M("collection")->add($data);
             if($res){
                 $json = array('status' => 1, 'tips' => '收藏成功，请在个人中心查看!');
                 echo Core_Fun::outputjson($json);
@@ -85,11 +95,101 @@ class Controller_Api_Favtravel extends Core_Controller_Action
         }
     }
 
+
+    //加载更多
+    public function collection_moreAction(){
+        //验证是否是post 提交申请
+        if( !$this->isPost() ){
+            $json = array('status' => 0, 'tips' => '非法操作!');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        $user_id = $_SESSION['userinfo']['uid']??229;
+        //查询是否登陆
+        if(!$user_id){
+            $json = array('status' => 0, 'tips' => '请登录后再试');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        $page=$this->getParam("page");
+        $type=$this->getParam("type");//分类,1-日志，2-tv,3-游记
+        if( !$page || $page <=0 || !$type ){
+            $json = array('status' => 0, 'tips' => '参数错误');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        $perpage=4;
+        $limit = $perpage * ($page - 1) . "," . $perpage;
+        //返回数据
+        $list=C::M("collection")->where("uid={$user_id} and type={$type}")->order("add_time DESC")->limit($limit)->select();
+        if( $list ){
+            $id_list=array_column($list,'t_id');
+            $id_str=implode(",",$id_list);
+            switch ($type){
+                case 1:
+                    $data=$this->parseTravelAction($id_str);
+                    break;
+                case 2:
+                    $data=$this->parseTvAction($id_str);
+                    break;
+                case 3:
+                    $data=$this->parseNoteAction($id_str);
+                    break;
+                default:
+                    $data=$this->parseTravelAction($id_str);
+                    break;
+            }
+
+            $json = array('status' => 1, 'tips' =>$data,"page"=>$page+1);
+            echo Core_Fun::outputjson($json);
+            exit;
+        }else{
+            $json = array('status' => 0, 'tips' =>"没有数据啦:)");
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+    }
+
     function isPost() {
         return ($_SERVER['REQUEST_METHOD'] == 'POST' && (empty($_SERVER['HTTP_REFERER']) || preg_replace("~https?:\/\/([^\:\/]+).*~i", "\\1", $_SERVER['HTTP_REFERER']) == preg_replace("~([^\:]+).*~", "\\1", $_SERVER['HTTP_HOST']))) ? 1 : 0;
     }
 
+    public function parseTravelAction($id_str){
+        $sql="SELECT * FROM ##__travel WHERE id In ({$id_str});";
+        $data=Core_Db::fetchAll($sql);
+        if( $data ){
+            foreach ($data as $key=>$value){
+                $data[$key]['addtime']=date("Y-m-d H:i:s",$value['addtime']);
+                $data[$key]['content']=json_decode($value['content']);
+            }
+            return $data;
+        }
+        return false;
+    }
 
+    public function parseTvAction($id_str){
+        $sql="SELECT * FROM ##__tv WHERE id In ({$id_str});";
+        $data=Core_Db::fetchAll($sql);
+        if( $data ){
+            foreach ($data as $key=>$value){
+                $data[$key]['addtime']=date("Y-m-d H:i:s",$value['addtime']);
+            }
+            return $data;
+        }
+        return false;
+    }
+
+    public function parseNoteAction($id_str){
+        $sql="SELECT * FROM ##__travel_note WHERE id In ({$id_str});";
+        $data=Core_Db::fetchAll($sql);
+        if( $data ){
+            return $data;
+        }
+        return false;
+    }
 
 
 

@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-14 10:04:05
+<?php /* vpcvcms compiled created on 2018-09-19 17:09:37
          compiled from wap/user/new_note.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/user/new_note.tpl', 47, false),)), $this); ?>
@@ -50,7 +50,7 @@ unset($_smarty_tpl_vars);
 	        	<div class="profilePhoto"><img class="" src="<?php echo $this->_tpl_vars['user']['avatar']; ?>
 " alt=""></div>
 	        	<p class="wx_name"><?php echo $this->_tpl_vars['user']['username']; ?>
-&nbsp;<a href="javascript:;"><img class="icon_new1" src="/resource/m/images/common/icon_new1.png" /></a></p>
+</p>
 	        	<p class="signature fix" title="个性签名">
 	        		<span class="icon_location1"></span>
 	        		<img class="icon_location2" src="/resource/m/images/common/icon_location1.png" />
@@ -69,11 +69,11 @@ unset($_smarty_tpl_vars);
 	        <div class="m-nv-yz">
 	            <div class="wp fix">
 	                <ul class="fix">
-	                	<li><a href="/index.php?m=wap&c=user&v=new_travel">日志&nbsp;<i class="Iclass" id="travel_num"><?php echo $this->_tpl_vars['total']['travel_num']; ?>
+	                	<li><a href="/index.php?m=wap&c=user&v=travel">日志&nbsp;<i class="Iclass" id="travel_num"><?php echo $this->_tpl_vars['total']['travel_num']; ?>
 </i></a></li>
-	                    <li><a href="/index.php?m=wap&c=user&v=new_tv">视频&nbsp;<i class="Iclass" id="tv_num"><?php echo $this->_tpl_vars['total']['tv_num']; ?>
+	                    <li><a href="/index.php?m=wap&c=user&v=tv">视频&nbsp;<i class="Iclass" id="tv_num"><?php echo $this->_tpl_vars['total']['tv_num']; ?>
 </i></a></li>
-	                    <li class="on"><a href="javascript:;">游记&nbsp;<i class="Iclass" id="note_num"><?php echo $this->_tpl_vars['total']['note_num']; ?>
+	                    <li class="on"><a href="/index.php?m=wap&c=user&v=travel_note">游记&nbsp;<i class="Iclass" id="note_num"><?php echo $this->_tpl_vars['total']['note_num']; ?>
 </i></a></li>
 	                    <li><a href="javascript:;">问答&nbsp;<i class="Iclass" id="answer"><?php echo $this->_tpl_vars['total']['answer']; ?>
 </i></a></li>
@@ -93,16 +93,26 @@ unset($_smarty_tpl_vars);
 </p>
 							<div class="date"><?php echo $this->_tpl_vars['item']['addtime']; ?>
 </div>
-							<a href="" class="pic js-video fix">
+							<a href="" class="dis_block fix">
 								<p class="videoDetails"><?php echo $this->_tpl_vars['item']['desc']; ?>
 </p>
 								<div class="preview fix"><img src="<?php echo $this->_tpl_vars['item']['thumbfile']; ?>
 " alt=""></div>
 							</a>
 
-							<div class="videoBottom">
+							<div class="videoBottom fix">
 								<span class="left"><img class="" src="/resource/m/images/common/icon_location2.png" /><?php echo $this->_tpl_vars['item']['address']; ?>
 </span>
+								<?php if ($this->_tpl_vars['item']['tag']): ?>
+									<?php $_from = $this->_tpl_vars['item']['tag']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+    foreach ($_from as $this->_tpl_vars['k'] => $this->_tpl_vars['vo']):
+?>
+										<?php if ($this->_tpl_vars['k'] < 2): ?>
+											<span class="left tag"><?php echo $this->_tpl_vars['vo']; ?>
+</span>
+										<?php endif; ?>
+									<?php endforeach; endif; unset($_from); ?>
+								<?php endif; ?>
 								<p class="right">
 									<span class="check">
 										<img class="" src="/resource/m/images/common/icon_check.png" data-id="<?php echo $this->_tpl_vars['item']['id']; ?>
@@ -125,9 +135,9 @@ unset($_smarty_tpl_vars);
 							<div class="pullDownMenu fix">
 								<img class="icon_pullDown" src="/resource/m/images/common/icon_pullDown.png" />
 								<div class="pullDownNav fix dis_none">
-									<a class="collect" href="/index.php?m=wap&c=user&v=edittravel&id=<?php echo $this->_tpl_vars['item']['id']; ?>
+									<a class="collect" href="/index.php?m=wap&c=user&v=edit_note&id=<?php echo $this->_tpl_vars['item']['id']; ?>
 "><span>编辑</span></a>
-									<a class="cancel" href="javascript:;" onclick="deleteTravel(<?php echo $this->_tpl_vars['item']['id']; ?>
+									<a class="cancel" href="javascript:;" onclick="deleteNote(<?php echo $this->_tpl_vars['item']['id']; ?>
 )"><span>删除</span></a>
 								</div>
 							</div>
@@ -170,7 +180,7 @@ unset($_smarty_tpl_vars);
 		window.onload=function(){
     		//判断列表的总数量是否大于等于5
     		var note_num = parseInt($("#note_num").text());
-    		var maxPages = parseInt(Math.ceil(travel_num/4));//最大页数
+    		var maxPages = parseInt(Math.ceil(note_num/4));//最大页数
     		$("#pageCount").attr("data-page",maxPages);
     		if (note_num>=5) {
     			$(".tips").text("往下拖动查看更多！");
@@ -211,61 +221,60 @@ unset($_smarty_tpl_vars);
 			                	var html="";
 			                	$.each(data.tips,function(i,item){
 			            			html += '<div class="item item_'+ data.tips[i].id+'">'+
-												'<div class="wp">'+
+												'<div class="wp fix">'+
 													'<p class="videoTitle">'+data.tips[i].title+'</p>'+
 													'<div class="date">'+data.tips[i].addtime+'</div>'+
-													'<p class="videoDetails">'+data.tips[i].describes+'</p>'+
-													'<div class="preview fix">'+
-														'<a href="" class="pic js-video fix" data-src="'+data.tips[i].url+'">'+
-															'<img src="'+data.tips[i].pics+'" alt="">'+
-															'<span class="bo"></span>'+
-														'</a>'+
-													'</div>'+
-													'<div class="videoBottom">'+
-														'<span class="left"><img class="" src="/resource/m/images/common/icon_location2.png" />'+data.tips[i].address+'</span>'+
+													'<a href="'+data.tips[i].url+'" class="dis_block fix">'+
+														'<p class="videoDetails">'+data.tips[i].desc+'</p>'+
+														'<div class="preview fix"><img src="'+data.tips[i].pics+'" alt=""></div>'+
+													'</a>'+
+													'<div class="videoBottom fix">'+
+														'<span class="left"><img src="/resource/m/images/common/icon_location2.png" />'+data.tips[i].address+'</span>'+
 														'<p class="right">'+
-															'<a class="" href="javascript:;">'+
-																'<span class="check">'+
-																	'<img class="" src="/resource/m/images/common/icon_check.png" data-id="'+data.tips[i].id+'" data-num="'+data.tips[i].shownum+'" />'+data.tips[i].shownum+''+
-																'</span>'+
+															'<span class="check">'+
+																'<img" src="/resource/m/images/common/icon_check.png" data-id="'+data.tips[i].id+'" data-num="'+data.tips[i].show_num+'" />'+data.tips[i].show_num+''+
+															'</span>'+
 															'</a>&nbsp;&nbsp;'+
-															'<a class="zan" data-id="'+data.tips[i].id+'" data-num="'+data.tips[i].topnum+'" href="javascript:;">'+
+															'<a class="zan" data-id="'+data.tips[i].id+'" data-num="'+data.tips[i].top_num+'" href="javascript:;">'+
 																'<span class="like">'+
-																	'<img class="" src="/resource/m/images/common/icon_like.png" /><i class="Iclass">'+data.tips[i].topnum+'</i>'+
+																	'<img src="/resource/m/images/common/icon_like.png" /><i class="Iclass">'+data.tips[i].top_num+'</i>'+
 																'</span>'+
 															'</a>&nbsp;&nbsp;'+
-															'<a class="Areview" href="javascript:;"><span class="review"><img class="" src="/resource/m/images/common/icon_review.png" />0</span></a>'+
+															'<a class="Areview" href="javascript:;"><span class="review"><img src="/resource/m/images/common/icon_review.png" />0</span></a>'+
 														'</p>'+
 													'</div>'+
 													'<div class="pullDownMenu fix">'+
 														'<img class="icon_pullDown" src="/resource/m/images/common/icon_pullDown.png" />'+
 														'<div class="pullDownNav fix dis_none">'+
-															'<a class="collect" href="/index.php?m=wap&c=user&v=editnote&id='+data.tips[i].id+'"><span>编辑</span></a>'+
-															'<a class="cancel" href="javascript:;" onclick="deletenote('+data.tips[i].id+')"><span>删除</span></a>'+
+															'<a class="collect" href="/index.php?m=wap&c=user&v=edit_note&id='+data.tips[i].id+'"><span>编辑</span></a>'+
+															'<a class="cancel" href="javascript:;" onclick="deleteNote('+data.tips[i].id+')"><span>删除</span></a>'+
 														'</div>'+
 													'</div>'+
 												'</div>'+
 											'</div>';
-			                   });
+			                	});
 			                    $(".content").append(html);
 			                    $("#pageCount").attr("data-NowPage",NowPage+1);
 			                    if (NowPage+1<maxPages) {
 			                		$(".tips").text("往下拖动查看更多！");
+			                		flag = true;
 			                	}else{
 			                		$(".tips").text("我也是有底线的哦~");
+			                		flag = false;
 			                	}
 			                }else{
 			                    layer.msg(data.tips);
 			                }
 			                commonality();
 		                },
-		                complete:function(){
+		                complete:function(data){
 		                    if (NowPage+1<maxPages) {
 		                		$(".tips").text("往下拖动查看更多！");
+		                		flag = true;
 		                	}else{
 		                		$(".tips").text("我也是有底线的哦~");
+		                		flag = false;
 		                	}
-		                    flag = true;
 		                }
 		            });
 		        }else{
@@ -273,10 +282,12 @@ unset($_smarty_tpl_vars);
             	}
 	        }
 	    });
+		
 		function commonality(){
 			//点击下拉
-		    $('.icon_pullDown').on("click",function() {
-		    	if ($(".pullDownNav").attr("class")=="pullDownNav fix dis_none") {
+		    $('.icon_pullDown').on("click",function(){
+		    	if ( $(this).next(".pullDownNav").attr("class")=="pullDownNav fix dis_none") {
+		    		$(".pullDownNav").addClass("dis_none");
 		    		$(this).next(".pullDownNav").removeClass("dis_none");
 		    		$(".maskLayer").removeClass("dis_none");
 		    	}
@@ -312,32 +323,7 @@ unset($_smarty_tpl_vars);
 		}
 		commonality();
 
-//	    $('.js-video').click(function(event) {
-//	        var _id = $(this).attr("href");
-//	        var _src = $(this).attr("data-src");
-//	
-//	        $(_id).find("iframe").attr("src", _src);
-//	        $(_id).fadeIn();
-//	    });
-//	    $('.js-close').click(function(event) {
-//	        $(this).parents('.m-pop1-yz').fadeOut();
-//	        $(this).parents('#m-pop1-yz').find("iframe").attr("src", "");
-//	        event.stopPropagation();
-//	    });
-	    $(document).ready(function() {
-            $(".fancybox-effects-a").fancybox({
-                helpers: {
-                    title: {
-                        type: 'outside'
-                    },
-                    overlay: {
-                        speedOut: 0
-                    }
-                }
-            });
-        });
-
-        function deleteTravel(id){
+        function deleteNote(id){
         	$(".maskLayer,.pullDownNav").addClass("dis_none");
             layer.msg('您确定要删除吗？', {
                 btn: ['确认', '取消'],

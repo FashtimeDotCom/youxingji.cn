@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-11 15:25:27
+<?php /* vpcvcms compiled created on 2018-09-20 10:02:39
          compiled from wap/user/new_travel.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/user/new_travel.tpl', 47, false),)), $this); ?>
@@ -10,7 +10,7 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'w
     <meta name="renderer" content="webkit" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
     <meta name="format-detection" content="telephone=no" />
-    <title>个人中心-我的日记</title>
+    <title>个人中心-我的日志</title>
     <meta name="keywords" content="<?php echo $this->_reg_objects['TO'][0]->cfg(array('key' => 'index_keywords','group' => 'site','default' => "首页"), $this);?>
 " />
     <meta name="description" content="<?php echo $this->_reg_objects['TO'][0]->cfg(array('key' => 'index_description','group' => 'site','default' => "首页"), $this);?>
@@ -28,7 +28,7 @@ $this->_smarty_include(array('smarty_include_tpl_file' => 'wap/header.tpl', 'sma
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
-	    <h3>我的日记</h3>
+	    <h3>我的日志</h3>
 	</div>
 	<div class="mian">
 	    <div class="g-top">
@@ -44,13 +44,13 @@ unset($_smarty_tpl_vars);
 	        </div>
 	    </div>
 	    <div class="ban">
-	        <a class="backdrop fix" href=""><img src="<?php echo $this->_tpl_vars['user']['cover']; ?>
-" title="背景图" alt=""></a>
+	        <div class="backdrop fix"><img src="<?php echo $this->_tpl_vars['user']['cover']; ?>
+" title="背景图" alt=""></div>
 	        <div class="head fix">
 	        	<div class="profilePhoto"><img class="" src="<?php echo $this->_tpl_vars['user']['avatar']; ?>
 " alt=""></div>
 	        	<p class="wx_name"><?php echo $this->_tpl_vars['user']['username']; ?>
-&nbsp;<a href="javascript:;"><img class="icon_new1" src="/resource/m/images/common/icon_new1.png" /></a></p>
+</p>
 	        	<p class="signature fix" title="个性签名">
 	        		<span class="icon_location1"></span>
 	        		<img class="icon_location2" src="/resource/m/images/common/icon_location1.png" />
@@ -69,11 +69,11 @@ unset($_smarty_tpl_vars);
 	        <div class="m-nv-yz">
 	            <div class="wp fix">
 	                <ul class="fix">
-	                	<li class="on"><a href="/index.php?m=wap&c=user&v=travel">日志&nbsp;<i class="Iclass" id="travel_num"><?php echo $this->_tpl_vars['total']['travel_num']; ?>
+	                	<li class="on"><a href="/index.php?m=wap&c=user&v=new_travel">日志&nbsp;<i class="Iclass" id="travel_num"><?php echo $this->_tpl_vars['total']['travel_num']; ?>
 </i></a></li>
-	                    <li><a href="/index.php?m=wap&c=user&v=new_tv">视频&nbsp;<i class="Iclass" id="tv_num"><?php echo $this->_tpl_vars['total']['tv_num']; ?>
+	                    <li><a href="/index.php?m=wap&c=user&v=tv">视频&nbsp;<i class="Iclass" id="tv_num"><?php echo $this->_tpl_vars['total']['tv_num']; ?>
 </i></a></li>
-	                    <li><a href="javascript:;">游记&nbsp;<i class="Iclass" id="note_num"><?php echo $this->_tpl_vars['total']['note_num']; ?>
+	                    <li><a href="/index.php?m=wap&c=user&v=travel_note">游记&nbsp;<i class="Iclass" id="note_num"><?php echo $this->_tpl_vars['total']['note_num']; ?>
 </i></a></li>
 	                    <li><a href="javascript:;">问答&nbsp;<i class="Iclass" id="answer"><?php echo $this->_tpl_vars['total']['answer']; ?>
 </i></a></li>
@@ -88,7 +88,7 @@ unset($_smarty_tpl_vars);
 ?>
 					<div class="item item_<?php echo $this->_tpl_vars['item']['id']; ?>
 ">
-						<div class="wp">
+						<div class="wp fix">
 							<p class="videoTitle"><?php echo $this->_tpl_vars['item']['title']; ?>
 </p>
 							<div class="date"><?php echo $this->_tpl_vars['item']['addtime']; ?>
@@ -102,14 +102,15 @@ unset($_smarty_tpl_vars);
 ?>
 		                                <dd><a href="<?php echo $this->_tpl_vars['v']; ?>
 " class="fancybox-effects-a">
-		                                        <div class="pic"><img src="<?php echo $this->_tpl_vars['v']; ?>
-" alt=""></div>
+		                                        <div class="pic"><img class="measurement" src="<?php echo $this->_tpl_vars['v']; ?>
+"></div>
 		                                    </a>
 		                                </dd>
 		                                <?php endforeach; endif; unset($_from); ?>
 		                           	</dl>
 								</li>
 							</ul>
+							
 							<div class="videoBottom">
 								<span class="left"><img class="" src="/resource/m/images/common/icon_location2.png" /><?php echo $this->_tpl_vars['item']['address']; ?>
 </span>
@@ -150,7 +151,7 @@ unset($_smarty_tpl_vars);
 	        <?php else: ?>
 	        <div class="m-mytv-yz">
 	            <div class="m-myday-yz">
-	                <div class="wp">
+	                <div class="wp fix">
 	                	<img class="default_bg" src="/resource/m/images/user/defaul_travel_bg.png"/>
 	                    <div class="bg3">
 	                        <div class="text">用九宫格丈量这个世界用简短的255个字<br />分享旅途中的美好感受行走中的点滴</div>
@@ -174,6 +175,20 @@ unset($_smarty_tpl_vars);
 	<!-- 弹窗 -->
     <link rel="stylesheet" type="text/css" href="/resource/m/css/jquery.fancybox.css" media="screen" />
     <script type="text/javascript" src="/resource/m/js/jquery.fancybox.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function(){
+            $(".fancybox-effects-a").fancybox({
+                helpers: {
+                    title: {
+                        type: 'outside'
+                    },
+                    overlay: {
+                        speedOut: 0
+                    }
+                }
+            });
+        });
+    </script>
     
 	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
 	<script type="text/javascript">
@@ -221,17 +236,20 @@ unset($_smarty_tpl_vars);
 			                	var html="";
 			                	$.each(data.tips,function(i,item){
 			            			html += '<div class="item item_'+ data.tips[i].id+'">'+
-												'<div class="wp">'+
+												'<div class="wp fix">'+
 													'<p class="videoTitle">'+data.tips[i].title+'</p>'+
 													'<div class="date">'+data.tips[i].addtime+'</div>'+
 													'<p class="videoDetails">'+data.tips[i].describes+'</p>'+
 													'<ul class="ul-imgtxt2-yz">'+
-														'<li><dl>'+
-								                               	'<dd><a href="'+data.tips[i].pics+'" class="fancybox-effects-a">'+
-								                                        '<div class="pic"><img src="'+data.tips[i].pics+'" alt=""></div>'+
-								                                    '</a>'+
-								                                '</dd>'+
-								                           	'</dl>'+
+														'<li><dl>';
+													for ( var k=0;k<data.tips[i].content.length;k++ ){
+														html+= '<dd><a href="'+data.tips[i].content[k]+'" class="fancybox-effects-a">'+
+																	'<div class="pic"><img class="measurement" src="'+data.tips[i].content[k]+'"></div>'+
+																	'</a>'+
+																'</dd>';
+													}
+				
+													html+='</dl>'+
 														'</li>'+
 													'</ul>'+
 													'<div class="videoBottom">'+
@@ -275,10 +293,11 @@ unset($_smarty_tpl_vars);
 		                complete:function(){
 		                    if (NowPage+1<maxPages) {
 		                		$(".tips").text("往下拖动查看更多！");
+		                		flag = true;
 		                	}else{
 		                		$(".tips").text("我也是有底线的哦~");
+		                		flag = false;
 		                	}
-		                    flag = true;
 		                }
 		            });
 		        }else{
@@ -286,9 +305,10 @@ unset($_smarty_tpl_vars);
             	}
 	        }
 	    });
+	    
 		function commonality(){
 			//点击下拉
-		    $('.icon_pullDown').on("click",function() {
+		    $('.icon_pullDown').on("click",function(){
 		    	if ($(".pullDownNav").attr("class")=="pullDownNav fix dis_none") {
 		    		$(this).next(".pullDownNav").removeClass("dis_none");
 		    		$(".maskLayer").removeClass("dis_none");
@@ -312,6 +332,7 @@ unset($_smarty_tpl_vars);
 	                if(data.status == 1){
 	                	$(obj).find("img").attr("src","/resource/m/images/common/icon_like2.png");
 	                    $(obj).find("i").text(num+1);
+						layer.msg(data.tips);
 	                }else{
 	                    layer.msg(data.tips);
 	                }
@@ -324,8 +345,7 @@ unset($_smarty_tpl_vars);
 	        });
 		}
 		commonality();
-			
-	    
+
 	    $('.js-video').click(function(event) {
 	        var _id = $(this).attr("href");
 	        var _src = $(this).attr("data-src");
@@ -338,18 +358,6 @@ unset($_smarty_tpl_vars);
 	        $(this).parents('#m-pop1-yz').find("iframe").attr("src", "");
 	        event.stopPropagation();
 	    });
-	    $(document).ready(function() {
-            $(".fancybox-effects-a").fancybox({
-                helpers: {
-                    title: {
-                        type: 'outside'
-                    },
-                    overlay: {
-                        speedOut: 0
-                    }
-                }
-            });
-        });
 
         function deleteTravel(id){
         	$(".maskLayer,.pullDownNav").addClass("dis_none");

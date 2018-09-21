@@ -224,18 +224,6 @@
             istime: true,
             istoday: true,
             choose: function(datas){
-                $.ajax({
-                    type: "GET",
-                    url: "/admin/ryt/editgettime",
-                    data: {time:datas,id:{{$detail.id}}},
-                    dataType: "json",
-                    success: function(data){
-                        if(data){
-                            alert(datas + '已经发布过日阅潭');
-                            $('#test1').val('')
-                        }
-                    }
-                });
             }
         };
 

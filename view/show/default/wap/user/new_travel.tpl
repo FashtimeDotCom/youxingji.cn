@@ -6,7 +6,7 @@
     <meta name="renderer" content="webkit" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
     <meta name="format-detection" content="telephone=no" />
-    <title>个人中心-我的日记</title>
+    <title>个人中心-我的日志</title>
     <meta name="keywords" content="{{TO->cfg key="index_keywords" group="site" default="首页"}}" />
     <meta name="description" content="{{TO->cfg key="index_description" group="site" default="首页"}}" />
     <link rel="stylesheet" href="/resource/m/css/style.css" />
@@ -18,7 +18,7 @@
 <body class="">
 	<div class="header">
 	    {{include file='wap/header.tpl'}}
-	    <h3>我的日记</h3>
+	    <h3>我的日志</h3>
 	</div>
 	<div class="mian">
 	    <div class="g-top">
@@ -34,10 +34,10 @@
 	        </div>
 	    </div>
 	    <div class="ban">
-	        <a class="backdrop fix" href=""><img src="{{$user.cover}}" title="背景图" alt=""></a>
+	        <div class="backdrop fix"><img src="{{$user.cover}}" title="背景图" alt=""></div>
 	        <div class="head fix">
 	        	<div class="profilePhoto"><img class="" src="{{$user.avatar}}" alt=""></div>
-	        	<p class="wx_name">{{$user.username}}&nbsp;<a href="javascript:;"><img class="icon_new1" src="/resource/m/images/common/icon_new1.png" /></a></p>
+	        	<p class="wx_name">{{$user.username}}</p>
 	        	<p class="signature fix" title="个性签名">
 	        		<span class="icon_location1"></span>
 	        		<img class="icon_location2" src="/resource/m/images/common/icon_location1.png" />
@@ -53,8 +53,8 @@
 	            <div class="wp fix">
 	                <ul class="fix">
 	                	<li class="on"><a href="/index.php?m=wap&c=user&v=new_travel">日志&nbsp;<i class="Iclass" id="travel_num">{{$total.travel_num}}</i></a></li>
-	                    <li><a href="/index.php?m=wap&c=user&v=new_tv">视频&nbsp;<i class="Iclass" id="tv_num">{{$total.tv_num}}</i></a></li>
-	                    <li><a href="/index.php?m=wap&c=user&v=new_note">游记&nbsp;<i class="Iclass" id="note_num">{{$total.note_num}}</i></a></li>
+	                    <li><a href="/index.php?m=wap&c=user&v=tv">视频&nbsp;<i class="Iclass" id="tv_num">{{$total.tv_num}}</i></a></li>
+	                    <li><a href="/index.php?m=wap&c=user&v=travel_note">游记&nbsp;<i class="Iclass" id="note_num">{{$total.note_num}}</i></a></li>
 	                    <li><a href="javascript:;">问答&nbsp;<i class="Iclass" id="answer">{{$total.answer}}</i></a></li>
 	                </ul>
 	            </div>
@@ -64,21 +64,22 @@
 	        	<div class="content fix">
 	        		{{foreach from=$list item=item key=key}}
 					<div class="item item_{{$item.id}}">
-						<div class="wp">
+						<div class="wp fix">
 							<p class="videoTitle">{{$item.title}}</p>
 							<div class="date">{{$item.addtime}}</div>
 							<p class="videoDetails">{{$item.describes}}</p>
 							<ul class="ul-imgtxt2-yz">
 								<li><dl>
 		                                {{foreach from=$item.content item=v}}
-		                                <dd><a href="{{$v}}" class="fancybox-effects-a">
-		                                        <div class="pic"><img src="{{$v}}" alt=""></div>
+		                                <dd><a href="{{$v}}" class="figure fancybox-effects-a" style="background-image: url({{$v}});">
+		                                        <div class="pic"></div>
 		                                    </a>
 		                                </dd>
 		                                {{/foreach}}
 		                           	</dl>
 								</li>
 							</ul>
+							
 							<div class="videoBottom">
 								<span class="left"><img class="" src="/resource/m/images/common/icon_location2.png" />{{$item.address}}</span>
 								<p class="right">
@@ -110,7 +111,7 @@
 	        {{else}}
 	        <div class="m-mytv-yz">
 	            <div class="m-myday-yz">
-	                <div class="wp">
+	                <div class="wp fix">
 	                	<img class="default_bg" src="/resource/m/images/user/defaul_travel_bg.png"/>
 	                    <div class="bg3">
 	                        <div class="text">用九宫格丈量这个世界用简短的255个字<br />分享旅途中的美好感受行走中的点滴</div>
@@ -130,6 +131,20 @@
 	<!-- 弹窗 -->
     <link rel="stylesheet" type="text/css" href="/resource/m/css/jquery.fancybox.css" media="screen" />
     <script type="text/javascript" src="/resource/m/js/jquery.fancybox.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function(){
+            $(".fancybox-effects-a").fancybox({
+                helpers: {
+                    title: {
+                        type: 'outside'
+                    },
+                    overlay: {
+                        speedOut: 0
+                    }
+                }
+            });
+        });
+    </script>
     
 	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
 	<script type="text/javascript">
@@ -177,17 +192,20 @@
 			                	var html="";
 			                	$.each(data.tips,function(i,item){
 			            			html += '<div class="item item_'+ data.tips[i].id+'">'+
-												'<div class="wp">'+
+												'<div class="wp fix">'+
 													'<p class="videoTitle">'+data.tips[i].title+'</p>'+
 													'<div class="date">'+data.tips[i].addtime+'</div>'+
 													'<p class="videoDetails">'+data.tips[i].describes+'</p>'+
 													'<ul class="ul-imgtxt2-yz">'+
-														'<li><dl>'+
-								                               	'<dd><a href="'+data.tips[i].pics+'" class="fancybox-effects-a">'+
-								                                        '<div class="pic"><img src="'+data.tips[i].pics+'" alt=""></div>'+
-								                                    '</a>'+
-								                                '</dd>'+
-								                           	'</dl>'+
+														'<li><dl>';
+													for ( var k=0;k<data.tips[i].content.length;k++ ){
+														html+= '<dd><a href="'+data.tips[i].content[k]+'" class="figure fancybox-effects-a" style="background-image: url('+data.tips[i].content[k]+');">'+
+																		'<div class="pic"></div>'+
+																	'</a>'+
+																'</dd>';
+													}
+				
+													html+='</dl>'+
 														'</li>'+
 													'</ul>'+
 													'<div class="videoBottom">'+
@@ -231,10 +249,11 @@
 		                complete:function(){
 		                    if (NowPage+1<maxPages) {
 		                		$(".tips").text("往下拖动查看更多！");
+		                		flag = true;
 		                	}else{
 		                		$(".tips").text("我也是有底线的哦~");
+		                		flag = false;
 		                	}
-		                    flag = true;
 		                }
 		            });
 		        }else{
@@ -242,9 +261,10 @@
             	}
 	        }
 	    });
+	    
 		function commonality(){
 			//点击下拉
-		    $('.icon_pullDown').on("click",function() {
+		    $('.icon_pullDown').on("click",function(){
 		    	if ($(".pullDownNav").attr("class")=="pullDownNav fix dis_none") {
 		    		$(this).next(".pullDownNav").removeClass("dis_none");
 		    		$(".maskLayer").removeClass("dis_none");
@@ -268,6 +288,7 @@
 	                if(data.status == 1){
 	                	$(obj).find("img").attr("src","/resource/m/images/common/icon_like2.png");
 	                    $(obj).find("i").text(num+1);
+						layer.msg(data.tips);
 	                }else{
 	                    layer.msg(data.tips);
 	                }
@@ -280,8 +301,7 @@
 	        });
 		}
 		commonality();
-			
-	    
+
 	    $('.js-video').click(function(event) {
 	        var _id = $(this).attr("href");
 	        var _src = $(this).attr("data-src");
@@ -294,18 +314,6 @@
 	        $(this).parents('#m-pop1-yz').find("iframe").attr("src", "");
 	        event.stopPropagation();
 	    });
-	    $(document).ready(function() {
-            $(".fancybox-effects-a").fancybox({
-                helpers: {
-                    title: {
-                        type: 'outside'
-                    },
-                    overlay: {
-                        speedOut: 0
-                    }
-                }
-            });
-        });
 
         function deleteTravel(id){
         	$(".maskLayer,.pullDownNav").addClass("dis_none");

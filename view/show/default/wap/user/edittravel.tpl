@@ -349,10 +349,10 @@
 							return false;
 						}
 						
-						$.post("/index.php?m=api&c=index&v=addtravel", {
+						$.post("/index.php?m=api&c=index&v=edittravel", {
 							'title': title,
 							'list': JSON.stringify(me.datas.imgsrc),
-							'did': did,
+							'id': {{$res.id}},
 							'describe': describe,
 							'address':address
 						}, function(data) {
