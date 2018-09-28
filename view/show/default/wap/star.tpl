@@ -59,7 +59,7 @@
             {{if $tjstar.0.username}}
             <div class="row-peo">
                 <div class="wp">
-                    <h4 class="g-tit-yz" style="background-image: url(/resource/m/images/line-yz1.jpg)">本周推荐达人 <a href="/index.php?m=wap&c=index&v=master_list" style="float: right;">更多>></a></h4>
+                    <h4 class="g-tit-yz" style="background-image: url(/resource/m/images/line-yz1.jpg)">本周推荐达人 <a href="/index.php?m=wap&c=index&v=master_list" style="float: right;">更多达人>></a></h4>
                     <div class="tx">
                         <a href="{{$tjstar.0.uid|helper:'mhref'}}" class="pic"><img src="{{$tjstar.0.avatar}}" alt=""></a>
                         <h5><a href="{{$tjstar.0.uid|helper:'mhref'}}">{{$tjstar.0.username}}</a></h5>

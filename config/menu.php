@@ -87,4 +87,7 @@ return array(
         array('url'=>'/admin/activity/index','name'=>"活动列表",'auth'=>'activity'),
         array('url'=>'/admin/ActivityVote/index','name'=>"名单公布",'auth'=>'activity_vote'),
     ),
+    Core_Fun::Lang('menu::menu_faq') => array(
+        array('url'=>'/admin/faq/index','name'=>"问答列表",'auth'=>'faq_list'),
+    ),
 );

@@ -56,7 +56,11 @@
 				</div>
 				<div class="title-nav">
 					<div class="title">
+						{{if $item.id==2}}
+						更多精彩直播
+						{{else}}
 						更多精彩活动
+						{{/if}}
 					</div>
 					
 					<div class="swiper-container">

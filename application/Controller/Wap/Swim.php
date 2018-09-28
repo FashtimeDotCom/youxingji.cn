@@ -50,7 +50,7 @@ class Controller_Wap_Swim extends Core_Controller_WapAction
         $info=Core_Db::fetchOne($sql);
         if( $info ){
             $vote_id=$info['id'];
-            $sql2="SELECT a.*,b.username,b.headpic FROM ##__activity_vote_result as a LEFT JOIN ##__user_member as b on a.uid=b.uid WHERE a.vote_id={$vote_id} and a.is_top=1 ORDER BY a.sort ASC";
+            $sql2="SELECT a.*,b.username,b.headpic FROM ##__activity_vote_result as a LEFT JOIN ##__user_member as b on a.uid=b.uid WHERE a.vote_id={$vote_id} and a.is_top=1 ORDER BY a.vote_num DESC";
             $name_list=Core_Db::fetchAll($sql2);
             if( $name_list ){
                 foreach($name_list as $key=>$value){

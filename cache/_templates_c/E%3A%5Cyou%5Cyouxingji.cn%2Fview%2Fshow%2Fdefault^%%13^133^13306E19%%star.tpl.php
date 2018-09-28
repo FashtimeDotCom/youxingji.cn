@@ -1,10 +1,9 @@
-<?php /* vpcvcms compiled created on 2018-09-21 18:17:11
+<?php /* vpcvcms compiled created on 2018-09-27 11:03:05
          compiled from wap/star.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/star.tpl', 61, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/star.tpl', 64, false),)), $this); ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
@@ -18,7 +17,6 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'w
     <meta name="keywords" content="<?php echo $this->_reg_objects['TO'][0]->cfg(array('key' => 'index_description','group' => 'site','default' => "首页"), $this);?>
 " />
     <link rel="stylesheet" href="/resource/m/css/style.css" />
-    <link rel="stylesheet" href="/resource/m/css/commonList.css" />
   	<script src="/resource/lightbox/jquery.min.js"></script>
     <script src="/resource/m/js/lib.js"></script>
   	<!--lightbox开始-->
@@ -32,8 +30,13 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'w
       		$('.lightbox').lightbox();
     	});
   	</script>
+  	<style type="text/css">
+  		.figure{padding-bottom: 70%; /* 关键就在这里 */
+			  	background-position: center;
+			  	background-repeat: no-repeat;
+			  	background-size: cover;border-radius: 5px;}
+  	</style>
 </head>
-
 <body>
     <div class="header">
         <?php $_smarty_tpl_vars = $this->_tpl_vars;
@@ -70,7 +73,7 @@ unset($_smarty_tpl_vars);
             <?php if ($this->_tpl_vars['tjstar']['0']['username']): ?>
             <div class="row-peo">
                 <div class="wp">
-                    <h4 class="g-tit-yz" style="background-image: url(/resource/m/images/line-yz1.jpg)">本周推荐达人 <a href="/index.php?m=wap&c=index&v=master_list" style="float: right;">更多>></a></h4>
+                    <h4 class="g-tit-yz" style="background-image: url(/resource/m/images/line-yz1.jpg)">本周推荐达人 <a href="/index.php?m=wap&c=index&v=master_list" style="float: right;">更多达人>></a></h4>
                     <div class="tx">
                         <a href="<?php echo ((is_array($_tmp=$this->_tpl_vars['tjstar']['0']['uid'])) ? $this->_run_mod_handler('helper', true, $_tmp, 'mhref') : smarty_modifier_helper($_tmp, 'mhref')); ?>
 " class="pic"><img src="<?php echo $this->_tpl_vars['tjstar']['0']['avatar']; ?>
@@ -195,5 +198,4 @@ unset($_smarty_tpl_vars);
     </script>
     <!-- 弹窗 end-->
 </body>
-
 </html>

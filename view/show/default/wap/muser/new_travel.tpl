@@ -36,7 +36,7 @@
 	    <div class="ban">
 	        <div class="backdrop fix" href=""><img src="{{$muser.cover}}" title="背景图" alt=""></div>
 	        <div class="head fix">
-	        	<div class="profilePhoto"><img class="" src="{{$muser.avatar}}" alt=""></div>
+	        	<div class="profilePhoto"><div class="gaine"><a class="box figure" style="background-image: url({{$muser.avatar}});"></a></div></div>
 	        	<p class="wx_name">{{$muser.username}}&nbsp;<a href="javascript:;" onclick="smg({{$muser.uid}})"><img class="icon_new1" src="/resource/m/images/common/icon_new1.png" /></a></p>
 	        	<p class="signature fix" title="个性签名">
 	        		<span class="icon_location1"></span>
@@ -74,8 +74,7 @@
 							<div class="date">{{$item.addtime}}</div>
 							<p class="videoDetails">{{$item.describes}}</p>
 							<ul class="ul-imgtxt2-yz">
-								<li><dl>
-		                                {{foreach from=$item.content item=v}}
+								<li><dl>{{foreach from=$item.content item=v}}
 		                                <dd><a href="{{$v}}" class="figure fancybox-effects-a" style="background-image: url({{$v}});">
 		                                        <div class="pic"></div>
 		                                    </a>

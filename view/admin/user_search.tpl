@@ -55,6 +55,7 @@
           	<th>本周推荐</th>
             <th>达人推荐</th>
             <th>tv推荐</th>
+            <th>问答达人</th>
             <th>操作</th>
         </tr>
         {{foreach from=$users item=user}}
@@ -82,6 +83,9 @@
                 </td>
                 <td class="tdl">
                     <input type="checkbox" name="tvtop[{{$user.uid}}]" value="1"{{if $user.tvtop}} checked{{/if}} />
+                </td>
+                <td class="tdl">
+                    <input type="checkbox" name="is_faq_star[{{$user.uid}}]" value="1"{{if $user.is_faq_star}} checked{{/if}} />
                 </td>
                 <td>
                     {{if $sgid==1}}

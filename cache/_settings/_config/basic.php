@@ -1,6 +1,6 @@
 <?php
  /**
- Cachefile auto created by vpcvcms , created on GMT+8 2018-09-21 14:28:59 , do not modify it!
+ Cachefile auto created by vpcvcms , created on GMT+8 2018-09-27 09:17:57 , do not modify it!
 */ 
 return array (
   'thumb_width' => '240',

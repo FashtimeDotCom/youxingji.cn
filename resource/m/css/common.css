@@ -78,8 +78,11 @@ img {
  * 此处 在特定的位置  加一句行数
  * -webkit-line-clamp: 3;三列
  * */
-.omit{display: -webkit-box;-webkit-box-orient: vertical;overflow: hidden;}
+.omit{display: -webkit-box!important;-webkit-box-orient: vertical;overflow: hidden;}
+.lineNumber2{-webkit-line-clamp: 2;}
 
+/*超出文本  自动省略号*/
+.apostrophe{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
 
 /*弹窗  弹出层*/
 .bg,.bg_overlay {position: fixed;top: 0; right: 0; bottom: 0; left: 0;}
@@ -115,5 +118,3 @@ img {
 
 .moduleBGcolor1{background: #fff;}
 
-/*超出文本  自动省略号*/
-.apostrophe{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}

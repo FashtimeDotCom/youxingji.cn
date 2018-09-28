@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/resource/m/css/common.css" />
     <link rel="stylesheet" href="/resource/m/css/commonList.css" />
 </head>
-<body class="">
+<body>
 	<div class="header">
 	    {{include file='wap/header.tpl'}}
 	    <h3>我的日志</h3>
@@ -36,7 +36,7 @@
 	    <div class="ban">
 	        <div class="backdrop fix"><img src="{{$user.cover}}" title="背景图" alt=""></div>
 	        <div class="head fix">
-	        	<div class="profilePhoto"><img class="" src="{{$user.avatar}}" alt=""></div>
+	        	<div class="profilePhoto"><div class="gaine"><a class="box figure" style="background-image: url({{$user.avatar}});"></a></div></div>
 	        	<p class="wx_name">{{$user.username}}</p>
 	        	<p class="signature fix" title="个性签名">
 	        		<span class="icon_location1"></span>
@@ -69,8 +69,7 @@
 							<div class="date">{{$item.addtime}}</div>
 							<p class="videoDetails">{{$item.describes}}</p>
 							<ul class="ul-imgtxt2-yz">
-								<li><dl>
-		                                {{foreach from=$item.content item=v}}
+								<li><dl>{{foreach from=$item.content item=v}}
 		                                <dd><a href="{{$v}}" class="figure fancybox-effects-a" style="background-image: url({{$v}});">
 		                                        <div class="pic"></div>
 		                                    </a>

@@ -137,6 +137,64 @@ class Controller_Api_Upload extends Core_Controller_Action
         }
     }
 
+
+
+
+
+
+    //***********base64上传图片
+    public function base64_uploadAction()
+    {
+        //验证是否是post 提交申请
+        if (!$this->isPost()) {
+            $json = array('status' => 0, 'tips' => '非法操作!');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        $code = $this->getParam("base64");
+        if (!$code) {
+            $json = array('status' => 0, 'tips' => '上传失败!');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        $path = '/uploadfile/image/' . date('Ymd', time()) . "/";
+        $ress = $this->createFolderAction(HTDOCS_ROOT.$path);//生成文件
+        if (!$ress) {
+            $json = array('status' => 0, 'tips' => '目录不存在');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        if (strstr($code,",")){
+            $image_arr = explode(',',$code);
+            $image_content = $image_arr[1];
+            $image_type=$image_arr[0];
+            $type=".jpg";
+            if( preg_match('/^data:image\/(\w+);64/', $image_type, $result) ){
+                $type=".".$result[1];
+            }
+        }
+
+        $filename=time().rand(1,1000).rand(1,1000).$type;
+        $full_path=HTDOCS_ROOT.$path.$filename;
+
+        $result=file_put_contents($full_path,base64_decode($image_content));
+        if( $result ){
+            $json = array('status' => 1, 'url' => $path.$filename);
+            echo Core_Fun::outputjson($json);
+            exit;
+        }else{
+            $json = array('status' => 0, 'tips' => '生成图片失败！');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+        
+    }
+
+
+
     function isPost() {
         return ($_SERVER['REQUEST_METHOD'] == 'POST' && (empty($_SERVER['HTTP_REFERER']) || preg_replace("~https?:\/\/([^\:\/]+).*~i", "\\1", $_SERVER['HTTP_REFERER']) == preg_replace("~([^\:]+).*~", "\\1", $_SERVER['HTTP_HOST']))) ? 1 : 0;
     }

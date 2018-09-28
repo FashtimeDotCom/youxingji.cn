@@ -143,7 +143,7 @@ class Controller_Wap_Index extends Core_Controller_WapAction
     public function indexAction()
     {
         //推荐达人
-        $tjstar = C::M('user_member')->field('uid,username,realname,headpic,city,autograph')->where("startop = 1")->order("uid desc")->limit('0,4')->select();
+        $tjstar = C::M('user_member')->field('uid,username,realname,headpic,city,autograph')->where("startop = 1")->order("uid desc")->select();
         foreach ($tjstar as $key => $value) {
             $tjstar[$key]['city'] =empty($value['city'])?'中国':$value['city'];
 //            $tjstar[$key]['autograph'] =Core_fun::cn_substr(strip_tags($value['autograph']),120,'...');
@@ -163,16 +163,6 @@ class Controller_Wap_Index extends Core_Controller_WapAction
 
         //tv
         $tv = C::M('tv')->where("istop = 1 and status = 1")->limit("0,4")->order("id desc")->select();
-
-//        //达人原创造
-//        $travel_note=C::M("travel_note")->where('is_top = 1 and status = 1')->order("addtime desc")->find();
-//        if( $travel_note ){
-//            $travel_user=C::M("user_member")->where("uid={$travel_note['uid']}")->field('uid,username,headpic')->find();
-//            if( $travel_user ){
-//                $travel_note['username']=$travel_user['username'];
-//                $travel_note['headpic']=$travel_user['headpic']?$travel_user['headpic']:'/resource/images/img-lb2.png';
-//            }
-//        }
 
         //达人带你去旅行
         $star_travel=C::M("star_travel")->field('id,title,thumbfile,price,user_id')->where('status=1')->order('id desc')->limit(0,2)->select();

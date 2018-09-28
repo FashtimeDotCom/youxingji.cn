@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-08-17 16:00:11
+<?php /* vpcvcms compiled created on 2018-09-26 11:47:30
          compiled from wap/tv.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/tv.tpl', 50, false),)), $this); ?>
@@ -11,7 +11,7 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'w
     <meta name="renderer" content="webkit" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
     <meta name="format-detection" content="telephone=no" />
-    <title>旅拍TV_<?php echo $this->_reg_objects['TO'][0]->cfg(array('key' => 'site_name','group' => 'site','default' => "致茂网络"), $this);?>
+    <title>达人视频_<?php echo $this->_reg_objects['TO'][0]->cfg(array('key' => 'site_name','group' => 'site','default' => "致茂网络"), $this);?>
 </title>
     <meta name="description" content="<?php echo $this->_reg_objects['TO'][0]->cfg(array('key' => 'index_keywords','group' => 'site','default' => "首页"), $this);?>
 " />
@@ -29,7 +29,7 @@ $this->_smarty_include(array('smarty_include_tpl_file' => 'wap/header.tpl', 'sma
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
-        <h3>旅拍tv</h3>
+        <h3>达人视频</h3>
     </div>
     <div class="mian" style="padding-bottom: 29px;margin-bottom: 12px;">
         <div class="g-top">
@@ -178,7 +178,7 @@ unset($_smarty_tpl_vars);
             slidesPerView: 1,
             loop: true,
             autoplay: {
-                delay: 2000,
+                delay: 5000,
                 stopOnLastSlide: false,
                 disableOnInteraction: true,
             }

@@ -14,24 +14,7 @@ class Controller_Wap_Test extends Core_Controller_WapAction
 
     public function indexAction()
     {
-        //获取access_token
-        if( !isset($_SESSION['access_token']) ){
-            Core_Fun::wx_get_token();
-        }
-
-        $timestamp=time();
-        $wxnonceStr="hezhihuishidatiancai".time();
-        $url=$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-        //微信接口部分
-        $wxticket = Core_Fun::wx_get_jsapi_ticket();
-        $wxOri = sprintf("jsapi_ticket=%s&noncestr=%s&timestamp=%s&url=%s",
-            $wxticket, $wxnonceStr, $timestamp, $url);
-
-        $wxSha1 = sha1($wxOri);
-        $this->assign('timestamp', $timestamp);
-        $this->assign('nonceStr', $wxnonceStr);
-        $this->assign('signature', $wxSha1);
-        //微信接口部分结束
+        $this->assign('homecontent', Core_Fun::getEditor('homecontent', '', 300, 700, 'bbs'));
 
         $this->display('wap/test.tpl');
     }

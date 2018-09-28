@@ -1,7 +1,7 @@
-<?php /* vpcvcms compiled created on 2018-09-19 16:03:07
+<?php /* vpcvcms compiled created on 2018-09-28 19:07:38
          compiled from wap/user/new_tv.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/user/new_tv.tpl', 53, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/user/new_tv.tpl', 47, false),)), $this); ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -20,14 +20,8 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'w
     <script src="/resource/m/js/lib.js"></script>
     <link rel="stylesheet" href="/resource/m/css/common.css" />
     <link rel="stylesheet" href="/resource/m/css/commonList.css" />
-    <style type="text/css">
-    	.m-pop1-yz .con{overflow: inherit;}
-    	.m-pop1-yz .con iframe{overflow: hidden;}
-    	.m-pop1-yz .con .close{top: -44px;}
-    	.m-pop1-yz .con .close span{background: #221414 url(/resource/m/images/icon-close2.png) no-repeat center center / 68%;}
-    </style>
 </head>
-<body class="">
+<body >
 	<div class="header">
 	    <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => 'wap/header.tpl', 'smarty_include_vars' => array()));
@@ -53,8 +47,8 @@ unset($_smarty_tpl_vars);
 	        <a class="backdrop fix" href=""><img src="<?php echo $this->_tpl_vars['user']['cover']; ?>
 " title="背景图" alt=""></a>
 	        <div class="head fix">
-	        	<div class="profilePhoto"><img class="" src="<?php echo $this->_tpl_vars['user']['avatar']; ?>
-" alt=""></div>
+	        	<div class="profilePhoto"><div class="gaine"><a class="box figure" style="background-image: url(<?php echo $this->_tpl_vars['user']['avatar']; ?>
+);"></a></div></div>
 	        	<p class="wx_name"><?php echo $this->_tpl_vars['user']['username']; ?>
 </p>
 	        	<p class="signature fix" title="个性签名">
@@ -164,7 +158,7 @@ unset($_smarty_tpl_vars);
 	    <div class="maskLayer dis_none" title="遮罩层，作用：下拉菜单失焦时，下拉菜单自动消失"></div>
 	    <!-- 视频弹窗 -->
 	    <div class="m-pop1-yz" id="m-pop1-yz">
-	        <div class="con">
+	        <div class="con conAmend">
 	            <iframe src='' name="myiframe" frameborder=0 'allowfullscreen' id="myiframe"></iframe>
 	            <div class="close js-close"><span></span></div>
 	        </div>

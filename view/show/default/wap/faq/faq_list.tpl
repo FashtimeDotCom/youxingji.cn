@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>达人问答</title>
+    <meta name="keywords" content="{{TO->cfg key="index_keywords" group="site" default="首页"}}" />
+    <meta name="description" content="{{TO->cfg key="index_description" group="site" default="首页"}}" />
+    <link rel="stylesheet" href="/resource/m/css/style.css" />
+    <script src="/resource/m/js/jquery.js"></script>
+    <link rel="stylesheet" href="/resource/m/css/common.css" />
+    <link rel="stylesheet" href="/resource/m/css/faq_list.css" />
+    <link rel="stylesheet" type="text/css" href="/resource/m/css/swiper.css" />
+</head>
+<body>
+	<div class="header">
+	    {{include file='wap/header.tpl'}}
+	    <h3>达人问答</h3>
+	</div>
+	<div class="mian">
+	    <div class="g-top">
+	        <div class="logo"><a href="/"><img src="/resource/m/images/logo.png" alt="" /></a></div>
+	        <div class="so">
+	            <form action="/index.php">
+	                <input type="hidden" name="m" value="wap"/>
+	                <input type="hidden" name="c" value="index"/>
+	                <input type="hidden" name="v" value="search"/>
+	                <input type="text" name="keyword" placeholder="请输入关键字" class="inp" />
+	                <input type="submit" value="" class="sub" />
+	            </form>
+	        </div>
+	    </div>
+	    <div class="ban marginBotom">
+	        <div class="backdrop fix">
+				<img src="{{$ad.imgurl}}" title="海报">
+			</div>
+	    </div>
+	    
+	    <div class="navMeun marginBotom fix">
+	    	<div class="navLi on" onclick="choice(0)">热门问答</div>
+	    	<div class="navLi" onclick="choice(1)">最新问答</div>
+	    	<div class="navLi" onclick="choice(2)">待回答问题</div>
+	    </div>
+	    
+	    <div class="container fix" data-index="1">
+	    	<!--热门问答  列表-->
+	    	<input type="hidden" name="" id="modulesNum1" title="旅游达人的总数" value="{{$total}}" />
+
+	    	<div class="modules fix" id="modules1" data-page="" data-nowPage="1">
+	    		<div class="matter fix">
+					{{if $list[0]}}
+					{{foreach from=$list[0] key=key item=item}}
+
+					<div class="hunk marginBotom fix">
+						<a class="vessel fix" href="javascript:;">
+							<p class="title fix"><span class="name omit lineNumber2 maxWidth">{{$item.title}}</span><span class="botton" title="标签">{{$item.label[0]}}</span></p>
+							<div class="headPortrait fix">
+								{{if $item.thumbfile}}
+								<div class="thumbnail"><img src="{{$item.thumbfile}}" title="问的对应的图片"/></div>
+								{{/if}}
+								<p class="description omit">{{$item.desc}}</p>
+							</div>
+
+							<div class="bottom fix">
+								<div class="left fix">
+									<span class="boxes">答&nbsp;<img class="profilePhoto" src="{{$item.avatar}}"/></span>&nbsp;
+									<span class="name">{{$item.username}}</span>&nbsp;<span class="time">2018-01-28</span>
+								</div>
+								<div class="right fix">
+									<span class="browseNum">{{$item.show_num}}浏览</span>&nbsp;·&nbsp;<span class="assistNum">{{$item.top_num}}赞</span>
+								</div>
+							</div>
+						</a>
+					</div>
+					{{/foreach}}
+					{{/if}}
+	    		</div>
+	    		
+	    		<!--问达人-->
+	    		<div class="asking fix">
+	    			<p class="title">问达人</p>
+	    			<div class="swiper-container" id="bannerSwiper1">
+						<div class="swiper-wrapper">
+
+							{{if $star_list}}
+							{{foreach from=$star_list item=item key=key}}
+
+							<div class="swiper-slide">
+								<div class="pic fix"><img class="profilePhoto" src="{{$item.headpic}}" alt="" title="头像"></div>
+								<p class="name apostrophe">{{$item.username}}</p>
+								<p class="creative"></p>
+								<a class="check" href="javascript:;">查看问答</a>
+							</div>
+
+							{{/foreach}}
+							{{/if}}
+
+						</div>
+					</div>
+	    		</div>
+	    		
+	    		<div class="matter2 fix">
+
+					{{if $list[1]}}
+					{{foreach from=$list[1] key=key item=item}}
+
+					<div class="hunk marginBotom fix">
+						<a class="vessel fix" href="javascript:;">
+							<p class="title fix"><span class="name omit lineNumber2 maxWidth">{{$item.title}}</span><span class="botton" title="标签">{{$item.label[0]}}</span></p>
+							<div class="headPortrait fix">
+								{{if $item.thumbfile}}
+								<div class="thumbnail"><img src="{{$item.thumbfile}}" title="头像"/></div>
+								{{/if}}
+								<p class="description omit">{{$item.desc}}</p>
+							</div>
+
+							<div class="bottom fix">
+								<div class="left fix">
+									<img class="icon" src="/resource/m/images/user/icon_fap.png"/>&nbsp;
+									<span class="name">{{$item.username}}</span>&nbsp;<span class="time">2018-01-28</span>
+								</div>
+								<div class="right fix">
+									<span class="browseNum">{{$item.show_num}}浏览</span>&nbsp;·&nbsp;<span class="assistNum">{{$item.top_num}}赞</span>
+								</div>
+							</div>
+						</a>
+					</div>
+
+					{{/foreach}}
+					{{/if}}
+
+	    		</div>
+	    	</div>
+	    	
+	    	<!--最新问答  列表-->
+	    	<input type="hidden" name="" id="modulesNum2" title="达人练习生的总数" value="{{$total.seed}}" />
+	    	<div class="modules fix dis_none" id="modules2" data-page="" data-nowPage="1">
+	    		<div class="matter fix">
+	    			<div class="hunk marginBotom fix">
+						<a class="vessel fix" href="javascript:;">
+							<p class="title fix"><span class="name omit lineNumber2">旅途中，那声怎样拍出帅气照片？</span></p>
+							<div class="headPortrait fix">
+								<div class="thumbnail"><img src="/resource/m/images/tx-yz2.jpg" title="头像"/></div>
+								<p class="description omit">嗯，关于男人自拍这件事情，我的说，我学摄影真的是为了给自己拍，从十几年前开始就是，只不过是世俗大多只能接受女人自拍，多不太能接受男人爱拍片，这是就让我觉得，我得拍出让大从都能接受的照片，不是做“娘”的事情。</p>
+							</div>
+							
+							<div class="bottom fix">
+								<div class="left fix marginLeft"><span class="name">阿亮</span>&nbsp;|&nbsp;<span class="time">11分钟前</span></div>
+								<div class="right fix">
+									<span class="browseNum">3465654浏览</span>&nbsp;·&nbsp;<span class="answerNum">0回答</span>&nbsp;·&nbsp;<span class="assistNum">104赞</span>
+								</div>
+							</div>
+						</a>
+					</div>
+	    			<div class="hunk marginBotom fix">
+						<a class="vessel fix" href="javascript:;">
+							<p class="title fix"><span class="name omit lineNumber2">旅途中，那声怎样拍出帅气照片？</span></p>
+							<div class="headPortrait fix">
+								<div class="thumbnail"><img src="/resource/m/images/tx-yz2.jpg" title="头像"/></div>
+								<p class="description omit">嗯，关于男人自拍这件事情，我的说，我学摄影真的是为了给自己拍，从十几年前开始就是，只不过是世俗大多只能接受女人自拍，多不太能接受男人爱拍片，这是就让我觉得，我得拍出让大从都能接受的照片，不是做“娘”的事情。</p>
+							</div>
+							
+							<div class="bottom fix">
+								<div class="left fix marginLeft"><span class="name">阿亮</span>&nbsp;|&nbsp;<span class="time">3分钟前</span></div>
+								<div class="right fix">
+									<span class="browseNum">3465654浏览</span>&nbsp;·&nbsp;<span class="answerNum">0回答</span>&nbsp;·&nbsp;<span class="assistNum">104赞</span>
+								</div>
+							</div>
+						</a>
+					</div>
+	    		</div>
+	    	</div>
+	    	
+	    	<!--待回答问题  列表-->
+	    	<input type="hidden" name="" id="modulesNum3" title="旅游达人的总数" value="{{$total.star}}" />
+	    	<div class="modules fix dis_none" id="modules3" data-page="" data-nowPage="1">
+	    		<div class="matter fix">
+	    			<div class="hunk marginBotom fix">
+						<a class="vessel fix" href="javascript:;">
+							<p class="title fix"><span class="name omit lineNumber2">旅途中，那声怎样拍出帅气照片？</span></p>
+							<div class="headPortrait fix">
+								<div class="thumbnail"><img src="/resource/m/images/tx-yz2.jpg" title="头像"/></div>
+								<p class="description omit">嗯，关于男人自拍这件事情，我的说，我学摄影真的是为了给自己拍，从十几年前开始就是，只不过是世俗大多只能接受女人自拍，多不太能接受男人爱拍片，这是就让我觉得，我得拍出让大从都能接受的照片，不是做“娘”的事情。</p>
+							</div>
+							
+							<div class="bottom fix">
+								<div class="left fix marginLeft"><span class="name">阿亮</span>&nbsp;问于<span class="time">2018-01-28</span></div>
+								<div class="right fix">
+									<span class="browseNum">3465654浏览</span>&nbsp;·&nbsp;<span class="answerNum">0回答</span>&nbsp;·&nbsp;<span class="assistNum">104赞</span>
+								</div>
+							</div>
+						</a>
+					</div>
+	    			<div class="hunk marginBotom fix">
+						<a class="vessel fix" href="javascript:;">
+							<p class="title fix"><span class="name omit lineNumber2">旅途中，那声怎样拍出帅气照片？</span></p>
+							<div class="headPortrait fix">
+								<div class="thumbnail"><img src="/resource/m/images/tx-yz2.jpg" title="头像"/></div>
+								<p class="description omit">嗯，关于男人自拍这件事情，我的说，我学摄影真的是为了给自己拍，从十几年前开始就是，只不过是世俗大多只能接受女人自拍，多不太能接受男人爱拍片，这是就让我觉得，我得拍出让大从都能接受的照片，不是做“娘”的事情。</p>
+							</div>
+							
+							<div class="bottom fix">
+								<div class="left fix marginLeft"><span class="name">阿亮</span>&nbsp;问于<span class="time">2018-01-28</span></div>
+								<div class="right fix">
+									<span class="browseNum">3465654浏览</span>&nbsp;·&nbsp;<span class="answerNum">0回答</span>&nbsp;·&nbsp;<span class="assistNum">104赞</span>
+								</div>
+							</div>
+						</a>
+					</div>
+	    		</div>
+	    		
+	    		<!--{{if $list}}
+	    		<div class="matter">
+					{{if $star}}
+					{{foreach from=$star item=item key=key}}
+					<div class="hunk marginBotom fix">
+						<p class="title fix"><span class="name">{{$item.username}}</span><span class="botton" onclick="follows({{$item.uid}},this)">{{$item.uid|helper:'isfollows'}}</span></p>
+						<a class="vessel fix" href="/index.php?m=wap&c=muser&v=index&id={{$item.uid}}">
+							<div class="headPortrait fix"><img src="{{$item.avatar}}" title="头像"/></div>
+							<p class="description omit">{{$item.autograph}}</p>
+							<button>更多他的动态</button>
+						</a>
+					</div>
+					{{/foreach}}
+					{{/if}}
+	    		</div>
+	    		<p class="tips tips3"></p>
+	    		{{else}}
+	    		<div class="matter">
+	    			<img class="default_bg" src="/resource/m/images/user/defaul_faqs_bg.png"/>
+	    			<p class="tips">待回答问题记录</p>
+	    		</div>
+	    		{{/if}}-->
+	    	</div>
+
+	    </div>
+	</div>
+	{{include file='wap/footer.tpl'}}
+	
+	<script type="text/javascript" src="/resource/m/js/swiper.js"></script>
+	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
+    <script type="text/javascript">
+		window.onload=function(){
+    		//判断列表的总数量是否大于等于5
+    		var intelligent_num = parseInt($("#modulesNum1").val());//旅游达人的总数
+    		var trainee_num = parseInt($("#modulesNum2").val());//达人练习生的总数
+    		var num3 = parseInt($("#modulesNum3").val());//达人练习生的总数
+    		
+    		var maxPages1 = parseInt(Math.ceil(intelligent_num/4));//旅游达人的最大页数
+    		var maxPages2 = parseInt(Math.ceil(trainee_num/4));//达人练习生的最大页数
+    		var maxPages3 = parseInt(Math.ceil(num3/4));//达人练习生的最大页数
+    		
+    		$("#modules1").attr("data-page",maxPages1);
+    		$("#modules2").attr("data-page",maxPages2);
+    		$("#modules3").attr("data-page",maxPages3);
+    		
+    		if (intelligent_num>=5) {
+    			$(".tips1").text("往下拖动查看更多！");
+    		} else{
+    			$(".tips1").text("我也是有底线的哦~");
+    		}
+    		if (trainee_num>=5) {
+    			$(".tips2").text("往下拖动查看更多！");
+    		} else{
+    			$(".tips2").text("我也是有底线的哦~");
+    		}
+    		if (num3>=5) {
+    			$(".tips3").text("往下拖动查看更多！");
+    		} else{
+    			$(".tips3").text("我也是有底线的哦~");
+    		}
+    	}
+        
+        var swiper = new Swiper('#bannerSwiper1', {
+				slidesPerView: 2.5,
+				spaceBetween : 10,//在slide之间设置距离（单位px）
+				observer:true, //当改变swiper的样式（例如隐藏/显示）或者修改swiper的子元素时，自动初始化swiper
+    			observeParents:true,//将observe应用于Swiper的父元素。当Swiper的父元素变化时，例如window.resize，Swiper更新
+				//loop: true,
+				autoplay: {
+					delay: 3000,
+					stopOnLastSlide: false,//设置为true，当切换到最后一个slide时停止自动切换。（loop模式下无效）。
+					disableOnInteraction: true,//用户操作swiper之后，是否禁止autoplay。默认为true：停止
+				}
+			});
+			
+		
+        var swiper = new Swiper('#bannerSwiper2', {
+				slidesPerView: 2.5,
+				spaceBetween : 10,//在slide之间设置距离（单位px）
+				observer:true, //当改变swiper的样式（例如隐藏/显示）或者修改swiper的子元素时，自动初始化swiper
+    			observeParents:true,//将observe应用于Swiper的父元素。当Swiper的父元素变化时，例如window.resize，Swiper更新
+				//loop: true,
+				autoplay: {
+					delay: 3000,
+					stopOnLastSlide: false,//设置为true，当切换到最后一个slide时停止自动切换。（loop模式下无效）。
+					disableOnInteraction: true,//用户操作swiper之后，是否禁止autoplay。默认为true：停止
+				}
+			});
+        
+        //切换菜单
+        function choice(tab){
+        	$(".navLi").eq(tab).addClass("on");
+        	$(".navLi").eq(tab).siblings().removeClass("on");
+        	
+        	$(".container .modules").eq(tab).removeClass("dis_none");
+        	$(".container .modules").eq(tab).siblings().addClass("dis_none");
+        	
+        	$(".container").attr("data-index",tab+1);
+        	upload();
+        }
+        
+        //关注
+        function follows(bid, obj){
+            $.post("/index.php?m=api&c=index&v=follow", {
+                'bid':bid
+            }, function(data){
+                if(data.status == 0){
+                    layer.msg(data.tips);
+                }else if(data.status == 1){
+                    layer.msg('关注成功！');
+                    $(obj).html('已关注');
+                }else if(data.status == 2){
+                	layer.msg('已取消关注！');
+                    $(obj).html('<b>+</b> 关注');
+                }
+            },"JSON");
+        }
+
+		function upload(){
+			var scrollTop;     //获取滚动条到顶部的距离
+		    var scrollHeight;  //获取文档区域高度 
+		    var windowHeight;  //获取滚动条的高度
+		    var flag = true;   //加载数据标志
+		    $(window).scroll(function(){
+		        scrollTop = $(this).scrollTop();     
+		        scrollHeight = $(document).height(); 
+		        windowHeight = $(this).height();
+		        var e;
+		        
+				var dataIndex = parseInt($(".container").attr("data-index"));
+		        
+		        //判断列表的总数量是否大于等于5
+	    		var intelligent_num = parseInt($("#modulesNum"+dataIndex).val());//总数
+	    		
+	    		maxPages = parseInt(Math.ceil(intelligent_num/4));//旅游达人的最大页数
+	    		
+				var NowPage = parseInt( $("#modules"+dataIndex).attr("data-nowPage") );//当前页数
+	    		
+				var page=NowPage+1;
+				
+				if(scrollTop + windowHeight >= scrollHeight-200 && flag == true ){
+		        	if (NowPage+1<=maxPages){
+			            $.ajax({
+			                url:'/index.php?m=api&c=index&v=master_more',
+			                data:{page:page,type:dataIndex},
+			                method:'post',
+			                dataType:'json',
+			                beforeSend:function(){
+			                	$(".tips").text("");
+								$(".tips").html('<img class="loading" src="/resource/m/images/common/loading.gif"/>');
+			                    flag = false;
+			                },
+			                success:function( data ){
+			                    if(data.status == 1){
+				                	var html="";
+				                	$.each(data.tips,function(i,item){
+				                		html += '<div class="hunk marginBotom fix">'+
+													'<p class="title fix"><span class="name">'+data.tips[i].username+'</span><span class="botton" onclick="follows('+data.tips[i].uid+',this)">{{'+data.tips[i].uid+'|helper:'isfollows'}}</span></p>'+
+													'<a class="vessel fix" href="/index.php?m=wap&c=muser&v=index&id='+data.tips[i].uid+'">'+
+														'<div class="headPortrait fix"><img src="'+data.tips[i].headpic+'" title="头像"/></div>'+
+														'<p class="description omit">'+data.tips[i].autograph+'</p>'+
+														'<button>更多他的动态</button>'+
+													'</a>'+
+												'</div>';
+				                   	});
+			                   		$("#modules"+dataIndex+" .matter").append(html);
+				                    
+				                    $("#modules"+dataIndex).attr("data-NowPage",NowPage+1);
+				                    if (NowPage+1<maxPages) {
+				                		$(".tips"+dataIndex).text("往下拖动查看更多！");
+				                	}else{
+				                		$(".tips"+dataIndex).text("我也是有底线的哦~");
+				                	}
+				                }else{
+				                    layer.msg(data.tips);
+				                }
+			                },
+			                complete:function(){
+			                    if (NowPage+1<maxPages) {
+			                		$(".tips"+dataIndex).text("往下拖动查看更多！");
+			                		flag = true;
+			                	}else{
+			                		$(".tips"+dataIndex).text("我也是有底线的哦~");
+			                		flag = false;
+			                	}
+			                }
+			            });
+			        }else{
+	            		$(".tips"+dataIndex).text("我也是有底线的哦~");
+	            	}
+		        }
+		    });
+		}
+		upload();
+	</script>
+</body>
+</html>

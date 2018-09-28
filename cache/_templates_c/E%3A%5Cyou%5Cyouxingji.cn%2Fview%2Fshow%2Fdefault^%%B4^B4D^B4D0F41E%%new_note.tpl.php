@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-19 16:55:39
+<?php /* vpcvcms compiled created on 2018-09-28 10:54:49
          compiled from wap/muser/new_note.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/muser/new_note.tpl', 47, false),)), $this); ?>
@@ -47,8 +47,8 @@ unset($_smarty_tpl_vars);
 	        <div class="backdrop fix"><img src="<?php echo $this->_tpl_vars['muser']['cover']; ?>
 " title="背景图" alt=""></div>
 	        <div class="head fix">
-	        	<div class="profilePhoto"><img class="" src="<?php echo $this->_tpl_vars['muser']['avatar']; ?>
-" alt=""></div>
+	        	<div class="profilePhoto"><div class="box fix" style="background: url(<?php echo $this->_tpl_vars['muser']['avatar']; ?>
+) no-repeat center center / auto 100%;"></div></div>
 	        	<p class="wx_name"><?php echo $this->_tpl_vars['muser']['username']; ?>
 &nbsp;<a href="javascript:;" onclick="smg(<?php echo $this->_tpl_vars['muser']['uid']; ?>
 )"><img class="icon_new1" src="/resource/m/images/common/icon_new1.png" /></a></p>
@@ -340,7 +340,6 @@ unset($_smarty_tpl_vars);
                 't_id':id,  //t_id:数值(日志的ID或者tv的ID或者游记的id )
                 'type':3  //type:数值(1-日志，2-tv,3-游记)
             }, function(data){
-            	console.log(data);
                 if(data.status == 1){
                 	layer.msg('收藏成功，请在个人中心查看！');
                 }else{

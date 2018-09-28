@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-19 17:09:37
+<?php /* vpcvcms compiled created on 2018-09-28 19:07:40
          compiled from wap/user/new_note.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/user/new_note.tpl', 47, false),)), $this); ?>
@@ -21,7 +21,7 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'w
     <link rel="stylesheet" href="/resource/m/css/common.css" />
     <link rel="stylesheet" href="/resource/m/css/commonList.css" />
 </head>
-<body class="">
+<body>
 	<div class="header">
 	    <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => 'wap/header.tpl', 'smarty_include_vars' => array()));
@@ -47,8 +47,8 @@ unset($_smarty_tpl_vars);
 	        <a class="backdrop fix" href=""><img src="<?php echo $this->_tpl_vars['user']['cover']; ?>
 " title="背景图" alt=""></a>
 	        <div class="head fix">
-	        	<div class="profilePhoto"><img class="" src="<?php echo $this->_tpl_vars['user']['avatar']; ?>
-" alt=""></div>
+	        	<div class="profilePhoto"><div class="gaine"><a class="box figure" style="background-image: url(<?php echo $this->_tpl_vars['user']['avatar']; ?>
+);"></a></div></div>
 	        	<p class="wx_name"><?php echo $this->_tpl_vars['user']['username']; ?>
 </p>
 	        	<p class="signature fix" title="个性签名">

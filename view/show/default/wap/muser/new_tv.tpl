@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/resource/m/css/common.css" />
     <link rel="stylesheet" href="/resource/m/css/commonList.css" />
 </head>
-<body class="">
+<body>
 	<div class="header">
 	    {{include file='wap/header.tpl'}}
 	    <h3>TA的视频</h3>
@@ -36,7 +36,7 @@
 	    <div class="ban">
 	        <div class="backdrop fix"><img src="{{$muser.cover}}" title="背景图" alt=""></div>
 	        <div class="head fix">
-	        	<div class="profilePhoto"><img class="" src="{{$muser.avatar}}" alt=""></div>
+	        	<div class="profilePhoto"><div class="gaine"><a class="box figure" style="background-image: url({{$muser.avatar}});"></a></div></div>
 	        	<p class="wx_name">{{$muser.username}}&nbsp;<a href="javascript:;" onclick="smg({{$muser.uid}})"><img class="icon_new1" src="/resource/m/images/common/icon_new1.png" /></a></p>
 	        	<p class="signature fix" title="个性签名">
 	        		<span class="icon_location1"></span>

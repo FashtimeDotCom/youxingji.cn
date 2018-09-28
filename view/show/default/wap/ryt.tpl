@@ -7,7 +7,7 @@
     <meta name="renderer" content="webkit" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
     <meta name="format-detection" content="telephone=no" />
-    <title>日阅潭_{{TO->cfg key="site_name" group="site" default="致茂网络"}}</title>
+    <title>达人游记_{{TO->cfg key="site_name" group="site" default="致茂网络"}}</title>
     <meta name="description" content="{{TO->cfg key="index_keywords" group="site" default="首页"}}" />
     <meta name="keywords" content="{{TO->cfg key="index_description" group="site" default="首页"}}" />
     <link rel="stylesheet" href="/resource/m/css/style.css" />
@@ -18,7 +18,7 @@
 <body class="">
     <div class="header">
         {{include file='wap/header.tpl'}}
-        <h3>日阅潭</h3>
+        <h3>达人游记</h3>
     </div>
     <div class="mian">
         <div class="g-top">

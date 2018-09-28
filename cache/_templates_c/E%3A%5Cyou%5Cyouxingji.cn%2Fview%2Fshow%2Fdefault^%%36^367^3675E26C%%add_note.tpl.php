@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-18 22:17:55
+<?php /* vpcvcms compiled created on 2018-09-27 16:12:12
          compiled from wap/user/add_note.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -19,7 +19,8 @@
 	<script src="/resource/js/move_rem.js"></script>
 	<script src="/resource/m/js/jquery.js"></script>
 	<script src="/resource/m/js/lib.js"></script>
-	<style>
+	
+	<style type="text/css">
 		.myfile{width: 100%;position: relative;overflow: hidden;}
 		.myfile .note_bg{display: block;width: 100%;height: 100%; position: relative;z-index: 1;}
 		.myfile .buttonTier{position: absolute;top: 0;left: 0;right: 0;bottom: 0;z-index: 2;}
@@ -85,8 +86,9 @@
 					      transform: scale(0.9);
 						  -webkit-transform: scale(0.9);
 					      -o-transform: scale(0.9);    /*针对能识别-webkit的opera browser设置*/}
+		
+		#article_body{border: 1px #ccc solid;padding: 2px 5px; margin: 12px auto;}
 	</style>
-
 </head>
 <body>
 	<div class="mian">
@@ -175,31 +177,21 @@
 </textarea>
 						</div>-->
 						
-					    <script src="/resource/eleditor/jquery.min.js" title="引入jQuery"></script>
-					    <script src="/resource/eleditor/eleditor.min.js" title="插件核心"></script>
-					    <script src="/resource/eleditor/webuploader.min.js" title="如果需要图片上传"></script>
+						<link rel="stylesheet" href="/resource/m/demo/css/index.css">
+						<style>
+						    #editorContainer{border: 1px solid #e5e5e5;margin-bottom: 10px;}
+						    .zxeditor-debug-switch{height: 0;opacity: 0;}
+						</style>
 						<!-- 内容编辑区域 -->
-						<div id="article-body"></div>
+						<article><div id="editorContainer"></div></article>
 						
-						<script>
-						/*实例化一个编辑器*/
-						var artEditor = new Eleditor({
-											el: '#article-body',
-											upload:{
-												server: '/upload.php',
-												fileSizeLimit: 2
-											}
-										});
-						</script>
-						<script type="text/javascript">
-							var artEditor12 = new Eleditor({
-							    el: {Object}, /*编辑区域dom对象，也可以是jquery对象*/
-							    upload: {Object}, /*上传配置参数，详情见《进阶-文件上传部分》*/
-							    uploader: {Function}, /*用于替换编辑器自带上传逻辑，upload和uploader参数不能共存！*/
-							    toolbars: {Array}, /*自定义按钮，详情见《进阶-扩展编辑器部分》*/
-							    placeHolder: {String}, /*编辑器默认为空时文字*/
-							})
-						</script>
+						
+						
+						
+						
+						<!--发布文章逻辑-->
+						<!--<script src="/resource/m/demo/js/index.js"></script>-->
+						
 						<div class="pic-video">
 							<input type="hidden" name="code" value="<?php echo $this->_tpl_vars['code']; ?>
 " id="code">
@@ -229,8 +221,22 @@ unset($_smarty_tpl_vars);
  ?>
 	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
 	<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+	
+	<script src="https://cdn.bootcss.com/js-polyfills/0.1.42/polyfill.min.js"></script>
+	<!--exif获取照片参数插件-->
+	<script src="/resource/m/demo/libs/exif.min.js"></script>
+	<!--debug-->
+	<script src="/resource/m/demo/libs/zx-debug.min.js"></script>
+	<!--编辑器-->
+	<script src="/resource/m/demo/js/zx-editor.min.js"></script>
+	
+	<script>
+	  	
+	</script>
+	
 	<script type="text/javascript">
 		$(document).ready(function(){
+			
 			//控制封面描述的字数
 			var limitNum = 255;
 			var num = $('.txta1').val().length;
@@ -241,18 +247,16 @@ unset($_smarty_tpl_vars);
 				return false;
 			}
 			$('#contentwordage').html(s);
-			$('.txta1').keyup(
-				function() {
-					var remain = $(this).val().length;
-					if(remain > 255) {
-						$('.txta1').val($('.txta1').val().substr(0, 255));
-						var result = 0;
-					} else {
-						var result = limitNum - remain;
-					}
-					$('#contentwordage').html(result);
+			$('.txta1').keyup(function(){
+				var remain = $(this).val().length;
+				if(remain > 255) {
+					$('.txta1').val($('.txta1').val().substr(0, 255));
+					var result = 0;
+				} else {
+					var result = limitNum - remain;
 				}
-			);
+				$('#contentwordage').html(result);
+			});
 			
 			//标签  字数控制
 			$('#tag').keyup(function() {
@@ -290,39 +294,194 @@ unset($_smarty_tpl_vars);
 				}
 			});
 			
-			//构建一个默认的编辑器
-//			layui.use('layedit', function() {
-//				var layedit = layui.layedit,
-//					$ = layui.jquery;
-//				layedit.set({
-//					uploadImage: {
-//						url: '/index.php?m=api&c=index&v=lay_uploadpic', //接口url
-//						type: 'post' //默认post
-//					}
-//				});
-//				//构建一个默认的编辑器
-//				var index = layedit.build('LAY_demo1');
-//
-//				//编辑器外部操作
-//				var active = {
-//					content: function() {
-//						var content = layedit.getContent(index);
-//						add(content);
-//					},
-//					text: function() {
-//						var content = layedit.getContent(index);
-//						draft(content); //获取编辑器纯文本内容
-//					},
-//					selection: function() {
-//						alert(layedit.getSelection(index));
-//					}
-//				};
-//
-//				$('.site-demo-layedit').on('click', function() {
-//					var type = $(this).data('type');
-//					active[type] ? active[type].call(this) : '';
-//				});
-//			});
+						
+			
+			// 实例化 ZxEditor
+		  	var zxEditor = new ZxEditor('#editorContainer', {
+			    // 编辑器固定
+			    fixed: false,
+			    // 20秒自动保存一次编辑内容
+			    autoSave: 20
+		  	});
+			var zxDebug = new ZxDebug({
+			  	position: 'top',
+			  	offset: 100
+			});
+			
+			// 监听编辑器处理通知
+			zxEditor.on('debug', function () {
+			  	zxDebug.log.apply(zxDebug, arguments)
+			});
+			
+			zxEditor.on('message', function () {
+			  	zxDebug.log.apply(zxDebug, arguments)
+			});
+			
+			zxEditor.on('error', function () {
+			  	zxDebug.error.apply(zxDebug, arguments)
+			});
+
+		  	// 实例化 ZxDebug
+		  	var debug = new ZxDebug({
+			    // 位置居top
+			    position: 'top',
+			    // 位置偏移100px
+			    offset: 30
+		  	});
+		
+		  	debug.log('实例化 ZxEditor', zxEditor);
+		
+			zxEditor.on('debug', function () {
+			    debug.log.apply(debug, arguments)
+		  	});
+		
+		  	zxEditor.on('error', function (err) {
+			    zxEditor.dialog.alert(err.msg)
+			    debug.error.apply(debug, arguments)
+		  	});
+		
+		  	zxEditor.on('message', function () {
+		    	debug.log.apply(debug, arguments)
+				//console.log.apply(null, arguments)
+		  	});
+			
+
+			//初始化容器高度 editor, preview body
+//			function initHeight () {
+//			  	// 窗口高度
+//			  	var winHeight = window.innerHeight;
+//			  	var headerHeight = 44;
+//			  	// 编辑器
+//			  	var $editorContent = zxEditor.$content;
+//			  	var contentTop = $editorContent.getBoundingClientRect().top;
+//			  	$editorContent.style.minHeight = winHeight - contentTop - zxEditor.toolbarHeight + 'px';
+//			  	// $previewWrapper
+//			}
+//			initHeight();
+			
+			// 初始化本地存储的数据
+			function initLoaclData () {
+			  	var data = zxEditor.storage.get('article')
+			  	if (data) {
+			    	if (data.cover) {
+			      		zxEditor.addClass('has-pic', $('.cover'));
+					}
+				    zxEditor.setContent(data.content);
+			  	}
+			}
+			initLoaclData();
+			
+			//获取文章数据
+			function getArticleData () {
+			  	var data = {
+			    	// 获取正文内容
+					content: zxEditor.getContent()
+				}
+				return (!data.cover && !data.summary && !data.title && (!data.content || data.content === '<p><br></p>'))
+			    	? null
+			    	: data;
+			}
+					
+			//数据处理，并提交数据处理
+			function uploadBase64Images (base64Images, callback) {
+			  	var len = base64Images.length;
+			  	var count = 0;
+			  	if (len === 0) {
+			    	callback();
+			    	return
+			  	}
+			  	for (var i = 0; i < len; i++) {
+			    	_uploadHandler(base64Images[i]);
+			  	}
+			
+			  	function _uploadHandler (data) {
+			    	upload(data.blob, function (url) {
+				    	// 替换正文中的base64图片
+					  	zxEditor.setImageSrc(data.id, url)
+					  	// 计算图片是否上传完成
+				      	_handleCount();
+				    });
+				}
+			
+			  	function _handleCount () {
+				    count++
+				    if (count === len) {
+				      	callback();
+				    }
+			  	}
+			}
+			// 模拟文件上传
+			function upload (blob, callback) {
+			  	setTimeout(function () {
+			    	callback('https://photo.tuchong.com/1000000/f/305463584.jpg');
+			  	}, 500);
+			}
+
+			//提交数据
+			function handleSubmitClick(){
+			  	// 获取文章数据
+			  	var data = getArticleData() || {};
+			  	// 显示loading
+			  	zxEditor.dialog.loading();
+			
+			  	// 上传图片数据
+			  	// 上传封面图省略...
+			
+			  	// 处理正文中的base64图片
+			  	// 获取正文中的base64数据数组
+			  	var base64Images = zxEditor.getBase64Images();
+			  	// 上传base64图片数据
+			  	uploadBase64Images(base64Images, function () {
+				    // 正文中有base64数据，上传替换成功后再重新获取正文内容
+				    if (base64Images.length) {
+				      	data.content = zxEditor.getContent();
+				    }
+				    // 需要提交的数据
+				    zxDebug.log('提交的数据', data);
+				    // 防止提交失败，再保存一次base64图片上传后的文章数据
+				    zxEditor.storage.set('article', data);
+				    // 发送至服务器
+				    $.post("/index.php?m=api&c=index&v=lay_uploadpic", {
+						'imgUrl': base64Images,
+					}, function(data) {
+						layer.msg(data.tips);
+						if(data.status == 1) {
+							console.log("1");
+							
+							// end
+						    zxEditor.dialog.removeLoading();
+						    zxEditor.dialog.alert('文章模拟发布成功!', function () {
+						      	// 文章发布成功
+						      	// 清除本地存储的文章数据
+						      	zxEditor.storage.remove('article');
+						      	// 其他操作
+						      	// ...
+						      	location.reload();
+						    });
+						}
+					}, "JSON");
+				    // ...
+				    
+				});
+			}
+			
+			//编辑器外部操作
+			var active = {
+				content: function() {
+					var content = getArticleData() || {};
+					add(content);
+				},
+				text: function() {
+					var content = getArticleData() || {};
+					draft(content); //获取编辑器纯文本内容
+				}
+			};
+			$('.site-demo-layedit').on('click', function() {
+				var type = $(this).data('type');
+				active[type] ? active[type].call(this) : '';
+				
+			});
+
 
 			function add (con) {
 				var title = $('#title').val();
@@ -355,6 +514,12 @@ unset($_smarty_tpl_vars);
 					return false;
 				}
 				
+				
+				if (!zxEditor.getContent() || zxEditor.getContent() === '<p><br></p>') {
+				    zxEditor.dialog.alert('请添加文章内容');
+				    return false;
+				}
+				
 				if(!con) {
 					layer.msg('请输入正文');
 					return false;
@@ -363,7 +528,8 @@ unset($_smarty_tpl_vars);
 				if(!$("input[type='checkbox']").is(':checked')) {
 					layer.msg('请选择服务协议');
 					return false;
-				}      
+				}
+				handleSubmitClick();
 				$.post("/index.php?m=api&c=TravelNote&v=save_travel_note", {
 					'did':did,
 					'title': title,
@@ -393,6 +559,7 @@ unset($_smarty_tpl_vars);
 					layer.msg('不能全为空');
 					return false;
 				}
+				handleSubmitClick();
 				$.post("/index.php?m=api&c=index&v=adddraft", {
 					'title': title,
 					'describe': describe,
@@ -626,7 +793,5 @@ unset($_smarty_tpl_vars);
 			index.init();
 		});
 	</script>
-	
-	
 </body>
 </html>

@@ -84,7 +84,8 @@ class Core_Language_Admin_Menu
           'menu_star' => '达人邦',
           'menu_tv' => '旅拍TV',
 
-           "menu_activity"=>"游主张"
+           "menu_activity"=>"游主张",
+           "menu_faq"=>"达人问答"
 		);
 	}
 }

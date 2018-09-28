@@ -7,7 +7,7 @@
     <meta name="renderer" content="webkit" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
     <meta name="format-detection" content="telephone=no" />
-    <title>旅拍TV_{{TO->cfg key="site_name" group="site" default="致茂网络"}}</title>
+    <title>达人视频_{{TO->cfg key="site_name" group="site" default="致茂网络"}}</title>
     <meta name="description" content="{{TO->cfg key="index_keywords" group="site" default="首页"}}" />
     <meta name="keywords" content="{{TO->cfg key="index_description" group="site" default="首页"}}" />
     <link rel="stylesheet" href="/resource/m/css/style.css" />
@@ -18,7 +18,7 @@
 <body class="">
     <div class="header">
         {{include file='wap/header.tpl'}}
-        <h3>旅拍tv</h3>
+        <h3>达人视频</h3>
     </div>
     <div class="mian" style="padding-bottom: 29px;margin-bottom: 12px;">
         <div class="g-top">
@@ -47,7 +47,7 @@
                     <div class="wp">
                         <h4 class="g-tit-yz" style="background-image: url(/resource/m/images/line-yz1.jpg)">本周推荐达人</h4>
                         <div class="tx">
-                            <a href="{{$v.uid|helper:'mhref'}}" class="pic"><img src="{{$v.avatar}}" alt=""></a>
+                            <a href="index.php?m=wap&c=muser&v=tv&id={{$v.uid}}" class="pic"><img src="{{$v.avatar}}" alt=""></a>
                             <h5><a href="{{$v.uid|helper:'mhref'}}">{{$v.username}}</a></h5>
                         </div>
                         <div class="txt">
@@ -129,7 +129,7 @@
             slidesPerView: 1,
             loop: true,
             autoplay: {
-                delay: 2000,
+                delay: 5000,
                 stopOnLastSlide: false,
                 disableOnInteraction: true,
             }
