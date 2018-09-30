@@ -19,6 +19,7 @@
 
 
 /*问*/
+.container{margin-bottom: 50px;}
 .container .hunk{background: #fff;padding: 3% 3% 0.5rem 3%;}
 .container .hunk .title{vertical-align: middle;display: block;}
 .container .hunk .title .view{display: inline-block;float: left;width: 7%;margin-right: 6px;}
@@ -33,25 +34,26 @@
 
 .container .hunk .bottom{margin: 0.1rem auto 0rem;}
 
-.transform{font-size: 12px;-webkit-transform: scale(0.9);height: 20.8px;line-height: 20.8px;
-		    transform: scale(0.9);-o-transform: scale(0.9);    /*针对能识别-webkit的opera browser设置*/}
+.transform{font-size: 12px!important;height: 20.8px;line-height: 20.8px;}
 .container .hunk .bottom .topButtom{margin-left: -16px;color: #474747;}
-.container .hunk .bottom .topButtom span{color: #474747;}
-.container .hunk .bottom .topButtom span i{font-style: normal;font-weight: 600;}
+.container .hunk .bottom .topButtom span{color: #898989;}
+.container .hunk .bottom .topButtom span i{font-style: normal;font-weight: 600;color: #666;}
 
 .container .hunk .bottom .left{float: left;color: #f24f62;font-weight: 600;}
 .container .hunk .bottom .left .icon{width: 14px;float: left;margin-top: 3px;}
 
+
 .container .hunk .bottom .right{float: right;text-align: right;}
 .container .hunk .bottom .right .browseNum,.answerNum{color: #999;}
 .container .hunk .bottom .right .assistNum{color: #d71618;}
+.container .hunk .bottom .right .name{max-width: 60%;overflow: hidden;}
 .question{-webkit-box-shadow: 0px 0px 8px 0px #b2b0b0;
 			-moz-box-shadow: 0px 0px 8px 0px #b2b0b0;
 			box-shadow: 0px 0px 8px 0px #b2b0b0;}
 
 
 /*答*/
-.answer{background: #fff;padding: 0 3%;margin-bottom: 50px;}
+.answer{background: #fff;padding: 0 3%;}
 .answer .bigTitle{vertical-align: middle;display: block;font-size: 12px;line-height: 28px;font-weight: 600;}
 .answer .bigTitle i{font-style: normal;}
 .answer .bigTitle .right{float: right;}
@@ -65,12 +67,13 @@
 .answer .hunk .depict{text-align: center;font-size: 12px;}
 .boxes{vertical-align: middle;background: #f24f62;color: #fff;float: left;height: 18px;line-height: 18px;
 					border-bottom-right-radius: 9px;border-top-right-radius: 9px;padding-left: 2px;}
-.boxes .profilePhoto{width: 18px;height: 18px;float: right;background: transparent;border-radius: 9px;}
-
+.boxes .profilePhoto{width: 18px;float: right;border-radius: 9px;padding-bottom: 18px;}
+.figure{padding-bottom: ; /* 关键就在这里 */
+	  	background-position: center;
+	  	background-repeat: no-repeat;
+	  	background-size: cover;}
 
 .container .hunk .substance{max-height: 130px;overflow: hidden;position: relative;}
-.container .hunk .substance .thumbnail{max-height: 82px;overflow: hidden;margin-top: 0.5rem;border-radius: 3px;}
-.container .hunk .substance .thumbnail img{width: 100%;}
 .container .hunk .substance .description{color: #666;font-size: 0.6rem;text-align: justify;line-height: 18px;margin: 0.5rem auto 0.2rem;}
 .container .hunk .bottom{margin: 0.3rem auto 0rem;}
 .readMore{display: block;width: 100%;position: absolute;bottom: 0;left: 0;text-align: center;height: 38px;}
@@ -82,35 +85,7 @@
 			position: fixed;left: 0;bottom: 0;border-top: 1px #eae8e8 solid;}
 .answerNav span{text-align: center;display: block;width: 49%;}
 .answerNav .left{float: left;border-right: 1px #eceaea solid;}
+.answerNav .left i{font-style: normal;}
 .answerNav .right{float: right;}
+.answerNav .right a{display: block;width: 100%;height: 100%;}
 .answerNav img{display: inline-block;width: 12px;vertical-align: middle;}
-
-
-
-
-
-
-/*5.5英寸   414*736尺寸的屏幕  如iPhone6 Plus、iPhone6s Plus、iPhone7 Plus、魅族MX5    1920x1080  /3★*/
-@media only screen and (max-width: 414px) {
-	
-}
-/*5.96英寸  412*732尺寸的屏幕  如谷歌Nexus 6   2K 2560x1440  /3.5★*/
-@media only screen and (max-width: 412px) {
-	
-}
-/*5.2英寸   411*731尺寸的屏幕  如 谷歌Nexus 5x   1920x1080  /2.625★*/
-@media only screen and (min-width: 376px) and (max-width: 411px) {
-	
-}
-/*4.7英寸   375*667尺寸的屏幕  如iPhone6、iPhone7、iPhone 6s   1334x750*/
-@media only screen and (min-width: 361px) and (max-width: 375px) {
-	
-}
-/*4.95英寸  360*640尺寸的屏幕  如 谷歌Nexus 5    1920x1080 /3★ */
-@media only screen and (min-width: 321px) and (max-width: 360px) {
-	
-}
-/*4.0英寸   320*568尺寸的屏幕  如iPhone5、iPhone SE   1136x640*/
-@media only screen and (max-width: 320px) {
-	
-}

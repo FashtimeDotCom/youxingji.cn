@@ -188,6 +188,11 @@ class Controller_Wap_Vote extends Core_Controller_WapAction
         $info=C::M('activity_vote')->field('id,wechat_desc,title,thumbfile,activity_rules,vote_total,end_time,sponsor')->where(" id={$vote_id} and status=1 ")->find();
         if( $info ){
             $info['end_time']=!empty($info['end_time'])?date('Y/m/d H:i:s',strtotime($info['end_time'])):0;
+            if( time() > strtotime($info['end_time']) ){//当前时间是否大于结束时间
+                $info['is_effective']=0;
+            }else{
+                $info['is_effective']=1;
+            }
         }
 
         //查找名单列表
@@ -225,9 +230,9 @@ class Controller_Wap_Vote extends Core_Controller_WapAction
             $this->showmsg('无效ID或投票已结束:)', 'index.php?m=wap&c=index&v=index', 3);
         }
 
-        if( !empty($info['end_time']) && ( time() > strtotime($info['end_time']) ) ){
-            $this->showmsg('投票已结束:)', 'index.php?m=wap&c=index&v=index', 3);
-        }
+//        if( !empty($info['end_time']) && ( time() > strtotime($info['end_time']) ) ){
+//            $this->showmsg('投票已结束:)', 'index.php?m=wap&c=index&v=index', 3);
+//        }
     }
 
     /*

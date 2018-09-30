@@ -75,6 +75,11 @@ class Core_Model
      */
     protected static $_data;
 
+    /*
+     * 链表查询
+     * */
+    protected $join_str="";
+
     public function __construct(){
         $this->_tableName = $this->_prefix . $this->_tableName;
     }
@@ -163,6 +168,27 @@ class Core_Model
     }
 
     /*
+     * 链表查询,单个
+     *
+     * */
+    public function join($join_table,$join_on,$direction="LEFT"){
+        $this->join_str=" {$direction} JOIN {$join_table} ON {$join_on} ";
+        return $this;
+    }
+
+    /*
+     * 链表查询，多个
+     * */
+    public function joins($arr){
+        if( $arr && is_array($arr) ){
+            foreach( $arr as $key=>$value ){
+                $this->join_str .=" {$value[0]} JOIN {$value[1]} ON {$value[2]} ";
+            }
+        }
+        return $this;
+    }
+
+    /*
      * 获取列表
      */
     public function select(){
@@ -174,9 +200,15 @@ class Core_Model
         }
 
         $sql = 'SELECT ' . $this->_fields . ' FROM ' . $this->_tableName;
+
+        if( $this->join_str ){
+            $sql .= $this->join_str;
+        }
+
         if($this->_where){
             $sql .= ' WHERE ' . $this->_where;
         }
+
         if($this->_order){
             $sql .= ' ORDER BY ' . $this->_order;
         }
@@ -396,7 +428,7 @@ class Core_Model
         if(!$this->_where){
             return false;
         }
-        $result = Core_Db::fetchOne ("Select {$this->_fields} From {$this->_tableName} where {$this->_where}");
+        $result = Core_Db::fetchOne ("Select {$this->_fields} From {$this->_tableName} {$this->join_str} where {$this->_where}");
         $this->_where = '';
         return $result;
     }

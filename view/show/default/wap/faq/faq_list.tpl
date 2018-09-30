@@ -47,30 +47,31 @@
 	    
 	    <div class="container fix" data-index="1">
 	    	<!--热门问答  列表-->
-	    	<input type="hidden" name="" id="modulesNum1" title="旅游达人的总数" value="{{$total}}" />
-
+	    	<input type="hidden" name="" id="modulesNum1" title="热门问答的总数" value="{{$total.hot}}" />
 	    	<div class="modules fix" id="modules1" data-page="" data-nowPage="1">
-	    		<div class="matter fix">
+	    		{{if $list}}
+	    		<div class="matter1 fix">
 					{{if $list[0]}}
 					{{foreach from=$list[0] key=key item=item}}
-
 					<div class="hunk marginBotom fix">
-						<a class="vessel fix" href="javascript:;">
+						<a class="vessel fix" href="/index.php?m=wap&c=faq&v=detail&id={{$item.id}}">
 							<p class="title fix"><span class="name omit lineNumber2 maxWidth">{{$item.title}}</span><span class="botton" title="标签">{{$item.label[0]}}</span></p>
 							<div class="headPortrait fix">
 								{{if $item.thumbfile}}
-								<div class="thumbnail"><img src="{{$item.thumbfile}}" title="问的对应的图片"/></div>
+								<div class="thumbnail"><img src="{{$item.thumbfile}}"/></div>
 								{{/if}}
 								<p class="description omit">{{$item.desc}}</p>
 							</div>
-
 							<div class="bottom fix">
-								<div class="left fix">
-									<span class="boxes">答&nbsp;<img class="profilePhoto" src="{{$item.avatar}}"/></span>&nbsp;
-									<span class="name">{{$item.username}}</span>&nbsp;<span class="time">2018-01-28</span>
-								</div>
-								<div class="right fix">
-									<span class="browseNum">{{$item.show_num}}浏览</span>&nbsp;·&nbsp;<span class="assistNum">{{$item.top_num}}赞</span>
+								<div class="left FontSize marginLeft fix">
+									<span class="boxes">答&nbsp;<span class="profilePhoto figure" style="background-image: url({{$item.headpic}});"></span></span>
+									<span class="name omit lineNumber2">{{$item.username}}</span>
+									<div class="right fix">
+										<div class="fix"><span class="time">{{$item.addtime}}</span></div>
+										<div class="fix">
+											<span class="browseNum">{{$item.show_num}}浏览</span>&nbsp;·&nbsp;<span class="assistNum">{{$item.top_num}}赞</span>
+										</div>
+									</div>
 								</div>
 							</div>
 						</a>
@@ -84,158 +85,103 @@
 	    			<p class="title">问达人</p>
 	    			<div class="swiper-container" id="bannerSwiper1">
 						<div class="swiper-wrapper">
-
 							{{if $star_list}}
 							{{foreach from=$star_list item=item key=key}}
-
 							<div class="swiper-slide">
-								<div class="pic fix"><img class="profilePhoto" src="{{$item.headpic}}" alt="" title="头像"></div>
+								<div class="pic fix"><span class="profilePhoto figure" style="background-image: url({{$item.avatar}});"></span></div>
 								<p class="name apostrophe">{{$item.username}}</p>
-								<p class="creative"></p>
+								<p class="creative FontSize"></p>
 								<a class="check" href="javascript:;">查看问答</a>
 							</div>
-
 							{{/foreach}}
 							{{/if}}
-
 						</div>
 					</div>
 	    		</div>
 	    		
 	    		<div class="matter2 fix">
-
 					{{if $list[1]}}
 					{{foreach from=$list[1] key=key item=item}}
-
 					<div class="hunk marginBotom fix">
-						<a class="vessel fix" href="javascript:;">
+						<a class="vessel fix" href="/index.php?m=wap&c=faq&v=detail&id={{$item.id}}">
 							<p class="title fix"><span class="name omit lineNumber2 maxWidth">{{$item.title}}</span><span class="botton" title="标签">{{$item.label[0]}}</span></p>
 							<div class="headPortrait fix">
 								{{if $item.thumbfile}}
-								<div class="thumbnail"><img src="{{$item.thumbfile}}" title="头像"/></div>
+								<div class="thumbnail"><img src="{{$item.thumbfile}}"/></div>
 								{{/if}}
 								<p class="description omit">{{$item.desc}}</p>
 							</div>
-
 							<div class="bottom fix">
-								<div class="left fix">
-									<img class="icon" src="/resource/m/images/user/icon_fap.png"/>&nbsp;
-									<span class="name">{{$item.username}}</span>&nbsp;<span class="time">2018-01-28</span>
-								</div>
-								<div class="right fix">
-									<span class="browseNum">{{$item.show_num}}浏览</span>&nbsp;·&nbsp;<span class="assistNum">{{$item.top_num}}赞</span>
+								<div class="left FontSize marginLeft fix">
+									<span class="boxes">答&nbsp;<span class="profilePhoto figure" style="background-image: url({{$item.headpic}});"></span></span>
+									<span class="name omit lineNumber2">{{$item.username}}</span>
+									
+									<div class="right fix">
+										<div class="fix"><span class="time">{{$item.addtime}}</span></div>
+										<div class="fix">
+											<span class="browseNum">{{$item.show_num}}浏览</span>&nbsp;·&nbsp;<span class="assistNum">{{$item.top_num}}赞</span>
+										</div>
+									</div>
 								</div>
 							</div>
 						</a>
 					</div>
-
 					{{/foreach}}
 					{{/if}}
-
 	    		</div>
-	    	</div>
-	    	
-	    	<!--最新问答  列表-->
-	    	<input type="hidden" name="" id="modulesNum2" title="达人练习生的总数" value="{{$total.seed}}" />
-	    	<div class="modules fix dis_none" id="modules2" data-page="" data-nowPage="1">
-	    		<div class="matter fix">
-	    			<div class="hunk marginBotom fix">
-						<a class="vessel fix" href="javascript:;">
-							<p class="title fix"><span class="name omit lineNumber2">旅途中，那声怎样拍出帅气照片？</span></p>
-							<div class="headPortrait fix">
-								<div class="thumbnail"><img src="/resource/m/images/tx-yz2.jpg" title="头像"/></div>
-								<p class="description omit">嗯，关于男人自拍这件事情，我的说，我学摄影真的是为了给自己拍，从十几年前开始就是，只不过是世俗大多只能接受女人自拍，多不太能接受男人爱拍片，这是就让我觉得，我得拍出让大从都能接受的照片，不是做“娘”的事情。</p>
+	    		<div class="matter fix"></div>
+	    		<p class="tips tips1"></p>
+	    		
+	    		{{else}}
+	    		<!--问达人-->
+	    		<div class="asking fix">
+	    			<p class="title">问达人</p>
+	    			<div class="swiper-container" id="bannerSwiper1">
+						<div class="swiper-wrapper">
+							{{if $star_list}}
+							{{foreach from=$star_list item=item key=key}}
+							<div class="swiper-slide">
+								<div class="pic fix"><span class="profilePhoto figure" style="background-image: url({{$item.avatar}});"></span></div>
+								<p class="name apostrophe">{{$item.username}}</p>
+								<p class="creative FontSize"></p>
+								<a class="check" href="javascript:;">查看问答</a>
 							</div>
-							
-							<div class="bottom fix">
-								<div class="left fix marginLeft"><span class="name">阿亮</span>&nbsp;|&nbsp;<span class="time">11分钟前</span></div>
-								<div class="right fix">
-									<span class="browseNum">3465654浏览</span>&nbsp;·&nbsp;<span class="answerNum">0回答</span>&nbsp;·&nbsp;<span class="assistNum">104赞</span>
-								</div>
-							</div>
-						</a>
-					</div>
-	    			<div class="hunk marginBotom fix">
-						<a class="vessel fix" href="javascript:;">
-							<p class="title fix"><span class="name omit lineNumber2">旅途中，那声怎样拍出帅气照片？</span></p>
-							<div class="headPortrait fix">
-								<div class="thumbnail"><img src="/resource/m/images/tx-yz2.jpg" title="头像"/></div>
-								<p class="description omit">嗯，关于男人自拍这件事情，我的说，我学摄影真的是为了给自己拍，从十几年前开始就是，只不过是世俗大多只能接受女人自拍，多不太能接受男人爱拍片，这是就让我觉得，我得拍出让大从都能接受的照片，不是做“娘”的事情。</p>
-							</div>
-							
-							<div class="bottom fix">
-								<div class="left fix marginLeft"><span class="name">阿亮</span>&nbsp;|&nbsp;<span class="time">3分钟前</span></div>
-								<div class="right fix">
-									<span class="browseNum">3465654浏览</span>&nbsp;·&nbsp;<span class="answerNum">0回答</span>&nbsp;·&nbsp;<span class="assistNum">104赞</span>
-								</div>
-							</div>
-						</a>
-					</div>
-	    		</div>
-	    	</div>
-	    	
-	    	<!--待回答问题  列表-->
-	    	<input type="hidden" name="" id="modulesNum3" title="旅游达人的总数" value="{{$total.star}}" />
-	    	<div class="modules fix dis_none" id="modules3" data-page="" data-nowPage="1">
-	    		<div class="matter fix">
-	    			<div class="hunk marginBotom fix">
-						<a class="vessel fix" href="javascript:;">
-							<p class="title fix"><span class="name omit lineNumber2">旅途中，那声怎样拍出帅气照片？</span></p>
-							<div class="headPortrait fix">
-								<div class="thumbnail"><img src="/resource/m/images/tx-yz2.jpg" title="头像"/></div>
-								<p class="description omit">嗯，关于男人自拍这件事情，我的说，我学摄影真的是为了给自己拍，从十几年前开始就是，只不过是世俗大多只能接受女人自拍，多不太能接受男人爱拍片，这是就让我觉得，我得拍出让大从都能接受的照片，不是做“娘”的事情。</p>
-							</div>
-							
-							<div class="bottom fix">
-								<div class="left fix marginLeft"><span class="name">阿亮</span>&nbsp;问于<span class="time">2018-01-28</span></div>
-								<div class="right fix">
-									<span class="browseNum">3465654浏览</span>&nbsp;·&nbsp;<span class="answerNum">0回答</span>&nbsp;·&nbsp;<span class="assistNum">104赞</span>
-								</div>
-							</div>
-						</a>
-					</div>
-	    			<div class="hunk marginBotom fix">
-						<a class="vessel fix" href="javascript:;">
-							<p class="title fix"><span class="name omit lineNumber2">旅途中，那声怎样拍出帅气照片？</span></p>
-							<div class="headPortrait fix">
-								<div class="thumbnail"><img src="/resource/m/images/tx-yz2.jpg" title="头像"/></div>
-								<p class="description omit">嗯，关于男人自拍这件事情，我的说，我学摄影真的是为了给自己拍，从十几年前开始就是，只不过是世俗大多只能接受女人自拍，多不太能接受男人爱拍片，这是就让我觉得，我得拍出让大从都能接受的照片，不是做“娘”的事情。</p>
-							</div>
-							
-							<div class="bottom fix">
-								<div class="left fix marginLeft"><span class="name">阿亮</span>&nbsp;问于<span class="time">2018-01-28</span></div>
-								<div class="right fix">
-									<span class="browseNum">3465654浏览</span>&nbsp;·&nbsp;<span class="answerNum">0回答</span>&nbsp;·&nbsp;<span class="assistNum">104赞</span>
-								</div>
-							</div>
-						</a>
+							{{/foreach}}
+							{{/if}}
+						</div>
 					</div>
 	    		</div>
 	    		
-	    		<!--{{if $list}}
-	    		<div class="matter">
-					{{if $star}}
-					{{foreach from=$star item=item key=key}}
-					<div class="hunk marginBotom fix">
-						<p class="title fix"><span class="name">{{$item.username}}</span><span class="botton" onclick="follows({{$item.uid}},this)">{{$item.uid|helper:'isfollows'}}</span></p>
-						<a class="vessel fix" href="/index.php?m=wap&c=muser&v=index&id={{$item.uid}}">
-							<div class="headPortrait fix"><img src="{{$item.avatar}}" title="头像"/></div>
-							<p class="description omit">{{$item.autograph}}</p>
-							<button>更多他的动态</button>
-						</a>
-					</div>
-					{{/foreach}}
-					{{/if}}
+	    		<div class="empty1 fix">
+	    			<img class="default_bg" src="/resource/m/images/user/defaul_faqs_bg.png"/>
+	    			<p class="tipsButtom">暂无信息</p>
+	    		</div>
+	    		{{/if}}
+	    	</div>
+	    	
+	    	<!--最新问答  列表-->
+	    	<input type="hidden" name="" id="modulesNum2" title="最新问答的总数" value="{{$total.new}}" />
+	    	<div class="modules fix faq_list dis_none" id="modules2" data-page="" data-nowPage="1">
+	    		<div class="matter2 fix"></div>
+	    		<div class="matter fix"></div>
+	    		<div class="empty2 fix dis_none">
+	    			<img class="default_bg" src="/resource/m/images/user/defaul_faqs_bg.png"/>
+	    			<p class="tipsButtom">暂无信息</p>
+	    		</div>
+	    		<p class="tips tips2"></p>
+	    	</div>
+	    	
+	    	<!--待回答问题  列表-->
+	    	<input type="hidden" name="" id="modulesNum3" title="待回答问题的总数" value="{{$total.waiting}}" />
+	    	<div class="modules fix faq_list dis_none" id="modules3" data-page="" data-nowPage="1">
+	    		<div class="matter3 fix"></div>
+	    		<div class="matter fix"></div>
+	    		<div class="empty3 fix dis_none">
+	    			<img class="default_bg" src="/resource/m/images/user/defaul_faqs_bg.png"/>
+	    			<p class="tipsButtom">暂无信息</p>
 	    		</div>
 	    		<p class="tips tips3"></p>
-	    		{{else}}
-	    		<div class="matter">
-	    			<img class="default_bg" src="/resource/m/images/user/defaul_faqs_bg.png"/>
-	    			<p class="tips">待回答问题记录</p>
-	    		</div>
-	    		{{/if}}-->
 	    	</div>
-
 	    </div>
 	</div>
 	{{include file='wap/footer.tpl'}}
@@ -245,24 +191,24 @@
     <script type="text/javascript">
 		window.onload=function(){
     		//判断列表的总数量是否大于等于5
-    		var intelligent_num = parseInt($("#modulesNum1").val());//旅游达人的总数
-    		var trainee_num = parseInt($("#modulesNum2").val());//达人练习生的总数
+    		var num1 = parseInt($("#modulesNum1").val());//旅游达人的总数
+    		var num2 = parseInt($("#modulesNum2").val());//达人练习生的总数
     		var num3 = parseInt($("#modulesNum3").val());//达人练习生的总数
     		
-    		var maxPages1 = parseInt(Math.ceil(intelligent_num/4));//旅游达人的最大页数
-    		var maxPages2 = parseInt(Math.ceil(trainee_num/4));//达人练习生的最大页数
+    		var maxPages1 = parseInt(Math.ceil(num1/4));//旅游达人的最大页数
+    		var maxPages2 = parseInt(Math.ceil(num2/4));//达人练习生的最大页数
     		var maxPages3 = parseInt(Math.ceil(num3/4));//达人练习生的最大页数
     		
     		$("#modules1").attr("data-page",maxPages1);
     		$("#modules2").attr("data-page",maxPages2);
     		$("#modules3").attr("data-page",maxPages3);
     		
-    		if (intelligent_num>=5) {
+    		if (num1>=5) {
     			$(".tips1").text("往下拖动查看更多！");
     		} else{
     			$(".tips1").text("我也是有底线的哦~");
     		}
-    		if (trainee_num>=5) {
+    		if (num2>=5) {
     			$(".tips2").text("往下拖动查看更多！");
     		} else{
     			$(".tips2").text("我也是有底线的哦~");
@@ -274,21 +220,7 @@
     		}
     	}
         
-        var swiper = new Swiper('#bannerSwiper1', {
-				slidesPerView: 2.5,
-				spaceBetween : 10,//在slide之间设置距离（单位px）
-				observer:true, //当改变swiper的样式（例如隐藏/显示）或者修改swiper的子元素时，自动初始化swiper
-    			observeParents:true,//将observe应用于Swiper的父元素。当Swiper的父元素变化时，例如window.resize，Swiper更新
-				//loop: true,
-				autoplay: {
-					delay: 3000,
-					stopOnLastSlide: false,//设置为true，当切换到最后一个slide时停止自动切换。（loop模式下无效）。
-					disableOnInteraction: true,//用户操作swiper之后，是否禁止autoplay。默认为true：停止
-				}
-			});
-			
-		
-        var swiper = new Swiper('#bannerSwiper2', {
+        var swiper1 = new Swiper('#bannerSwiper1', {
 				slidesPerView: 2.5,
 				spaceBetween : 10,//在slide之间设置距离（单位px）
 				observer:true, //当改变swiper的样式（例如隐藏/显示）或者修改swiper的子元素时，自动初始化swiper
@@ -301,6 +233,7 @@
 				}
 			});
         
+        var flag = true;   //加载数据标志
         //切换菜单
         function choice(tab){
         	$(".navLi").eq(tab).addClass("on");
@@ -310,102 +243,203 @@
         	$(".container .modules").eq(tab).siblings().addClass("dis_none");
         	
         	$(".container").attr("data-index",tab+1);
-        	upload();
-        }
-        
-        //关注
-        function follows(bid, obj){
-            $.post("/index.php?m=api&c=index&v=follow", {
-                'bid':bid
-            }, function(data){
-                if(data.status == 0){
-                    layer.msg(data.tips);
-                }else if(data.status == 1){
-                    layer.msg('关注成功！');
-                    $(obj).html('已关注');
-                }else if(data.status == 2){
-                	layer.msg('已取消关注！');
-                    $(obj).html('<b>+</b> 关注');
-                }
-            },"JSON");
-        }
+        	
+        	flag = true;   //加载数据标志
+        	
 
-		function upload(){
-			var scrollTop;     //获取滚动条到顶部的距离
-		    var scrollHeight;  //获取文档区域高度 
-		    var windowHeight;  //获取滚动条的高度
-		    var flag = true;   //加载数据标志
-		    $(window).scroll(function(){
-		        scrollTop = $(this).scrollTop();     
-		        scrollHeight = $(document).height(); 
-		        windowHeight = $(this).height();
-		        var e;
-		        
-				var dataIndex = parseInt($(".container").attr("data-index"));
-		        
-		        //判断列表的总数量是否大于等于5
-	    		var intelligent_num = parseInt($("#modulesNum"+dataIndex).val());//总数
-	    		
-	    		maxPages = parseInt(Math.ceil(intelligent_num/4));//旅游达人的最大页数
-	    		
-				var NowPage = parseInt( $("#modules"+dataIndex).attr("data-nowPage") );//当前页数
-	    		
-				var page=NowPage+1;
-				
-				if(scrollTop + windowHeight >= scrollHeight-200 && flag == true ){
-		        	if (NowPage+1<=maxPages){
-			            $.ajax({
-			                url:'/index.php?m=api&c=index&v=master_more',
-			                data:{page:page,type:dataIndex},
-			                method:'post',
-			                dataType:'json',
-			                beforeSend:function(){
-			                	$(".tips").text("");
-								$(".tips").html('<img class="loading" src="/resource/m/images/common/loading.gif"/>');
-			                    flag = false;
-			                },
-			                success:function( data ){
-			                    if(data.status == 1){
-				                	var html="";
-				                	$.each(data.tips,function(i,item){
+        	var num = parseInt($("#modulesNum"+(tab+1)).val());//总数
+    		var NowPage = parseInt( $("#modules"+(tab+1)).attr("data-nowPage") );//当前页数
+	    	maxPages = parseInt(Math.ceil(num/4));//旅游达人的最大页数
+	    	if( NowPage<=maxPages ){//判断是否已到达最大页数，防止点击切换重复请求
+	    		if( tab == 1 || tab == 2 ){
+	    			$("#modules"+(tab+1)+" .matter"+(tab+1)).html("");
+	        		tapTotoggle(tab+1);
+	        	}
+	    	}
+	        	
+        }
+		
+		function tapTotoggle(tab){
+	        //判断列表的总数量是否大于等于5
+    		var num = parseInt($("#modulesNum"+tab).val());//总数
+    		var NowPage = parseInt( $("#modules"+tab).attr("data-nowPage") );//当前页数
+	    	maxPages = parseInt(Math.ceil(num/4));//旅游达人的最大页数
+			
+			$.ajax({
+                url:'/index.php?m=api&c=faq&v=get_more',
+                data:{page:NowPage,type:tab},
+                method:'post',
+                dataType:'json',
+                beforeSend:function(){
+                	$(".tips").text("");
+					$(".tips").html('<img class="loading" src="/resource/m/images/common/loading.gif"/>');
+                    flag = false;
+                },
+                success:function( data ){
+                    if(data.status == 1){
+	                	var html="";
+						$.each(data.tips,function(i,item){
+			        		html += '<div class="hunk marginBotom fix">'+
+										'<a class="vessel fix" href="/index.php?m=wap&c=faq&v=detail&id='+data.tips[i].id+'">'+
+											'<p class="title fix"><span class="name omit lineNumber2">'+data.tips[i].title+'</span></p>'+
+											'<div class="headPortrait fix">'+
+												'<div class="thumbnail"><img src="'+data.tips[i].thumbfile+'"/></div>'+
+												'<p class="description omit">'+data.tips[i].desc+'</p>'+
+											'</div>'+
+											'<div class="bottom fix">'+
+												'<div class="left FontSize marginLeft fix">'+
+													'<span class="boxes">答&nbsp;<span class="profilePhoto figure" style="background-image: url('+data.tips[i].headpic+');"></span></span>'+
+													'<span class="name omit lineNumber2">'+data.tips[i].username+'</span>'+
+													'<div class="right fix">'+
+														'<div class="fix"><span class="time">'+data.tips[i].addtime+'</span></div>'+
+														'<div class="fix">'+
+															'<span class="browseNum">'+data.tips[i].show_num+'浏览</span>&nbsp;·&nbsp;<span class="assistNum">'+data.tips[i].top_num+'赞</span>'+
+														'</div>'+
+													'</div>'+
+												'</div>'+
+											'</div>'+
+										'</a>'+
+									'</div>';
+			           	});
+			           	$("#modules"+tab+" .matter"+tab).append(html);
+	                    if (NowPage+1<maxPages) {
+	                		$(".tips"+tab).text("往下拖动查看更多！");
+	                	}else{
+	                		$(".tips"+tab).text("我也是有底线的哦~");
+	                	}
+	                }else{
+	                    //layer.msg(data.tips);
+	                    $(".empty"+tab).removeClass("dis_none");
+	                    $(".tips"+tab).addClass("dis_none");
+	                }
+                },
+                complete:function(){
+                    if (NowPage+1<=maxPages) {
+                		$(".tips"+tab).text("往下拖动查看更多！");
+                		flag = true;
+                	}else{
+                		$(".tips"+tab).text("我也是有底线的哦~");
+                		flag = false;
+                	}
+                }
+            });
+		}
+
+		var scrollTop;     //获取滚动条到顶部的距离
+	    var scrollHeight;  //获取文档区域高度 
+	    var windowHeight;  //获取滚动条的高度
+	    
+	    $(window).scroll(function(){
+	        scrollTop = $(this).scrollTop();     
+	        scrollHeight = $(document).height(); 
+	        windowHeight = $(this).height();
+	        var e;
+	        
+			var dataIndex = parseInt($(".container").attr("data-index"));
+	        
+	        //判断列表的总数量是否大于等于5
+    		var num1 = parseInt($("#modulesNum"+dataIndex).val());//总数
+    		
+    		maxPages = parseInt(Math.ceil(num1/4));//旅游达人的最大页数
+    		
+			var NowPage = parseInt( $("#modules"+dataIndex).attr("data-nowPage") );//当前页数
+    		
+			var page=NowPage+1;
+			if(scrollTop + windowHeight >= scrollHeight-200 && flag == true ){
+	        	if (NowPage+1<=maxPages){
+		            $.ajax({
+		                url:'/index.php?m=api&c=faq&v=get_more',
+		                data:{page:page,type:dataIndex},
+		                method:'post',
+		                dataType:'json',
+		                beforeSend:function(){
+		                	$(".tips").text("");
+							$(".tips").html('<img class="loading" src="/resource/m/images/common/loading.gif"/>');
+		                    flag = false;
+		                },
+		                success:function( data ){
+		                    if(data.status == 1){
+			                	var html="";
+			                	if (dataIndex==1) {
+			                		$.each(data.tips,function(i,item){
+				                		var label = data.tips[i].label;
+				                		var str2=label.substring(0,label.indexOf("/"));
 				                		html += '<div class="hunk marginBotom fix">'+
-													'<p class="title fix"><span class="name">'+data.tips[i].username+'</span><span class="botton" onclick="follows('+data.tips[i].uid+',this)">{{'+data.tips[i].uid+'|helper:'isfollows'}}</span></p>'+
-													'<a class="vessel fix" href="/index.php?m=wap&c=muser&v=index&id='+data.tips[i].uid+'">'+
-														'<div class="headPortrait fix"><img src="'+data.tips[i].headpic+'" title="头像"/></div>'+
-														'<p class="description omit">'+data.tips[i].autograph+'</p>'+
-														'<button>更多他的动态</button>'+
+													'<a class="vessel fix" href="/index.php?m=wap&c=faq&v=detail&id='+data.tips[i].id+'">'+
+														'<p class="title fix"><span class="name omit lineNumber2 maxWidth">'+data.tips[i].title+'</span><span class="botton" title="标签">'+str2+'</span></p>'+
+														'<div class="headPortrait fix">'+
+															'<div class="thumbnail"><img src="'+data.tips[i].thumbfile+'"/></div>'+
+															'<p class="description omit">'+data.tips[i].desc+'</p>'+
+														'</div>'+
+														'<div class="bottom fix">'+
+															'<div class="left FontSize marginLeft fix">'+
+																'<span class="boxes">答&nbsp;<span class="profilePhoto figure" style="background-image: url('+data.tips[i].headpic+');"></span></span>'+
+																'<span class="name">'+data.tips[i].username+'</span>'+
+																
+																'<div class="right fix">'+
+																	'<div class="fix"><span class="time">'+data.tips[i].addtime+'</span></div>'+
+																	'<div class="fix">'+
+																		'<span class="browseNum">'+data.tips[i].show_num+'浏览</span>&nbsp;·&nbsp;<span class="assistNum">'+data.tips[i].top_num+'赞</span>'+
+																	'</div>'+
+																'</div>'+
+															'</div>'+
+														'</div>'+
 													'</a>'+
 												'</div>';
 				                   	});
-			                   		$("#modules"+dataIndex+" .matter").append(html);
-				                    
-				                    $("#modules"+dataIndex).attr("data-NowPage",NowPage+1);
-				                    if (NowPage+1<maxPages) {
-				                		$(".tips"+dataIndex).text("往下拖动查看更多！");
-				                	}else{
-				                		$(".tips"+dataIndex).text("我也是有底线的哦~");
-				                	}
-				                }else{
-				                    layer.msg(data.tips);
-				                }
-			                },
-			                complete:function(){
+				                   	
+			                	} else{
+			                		$.each(data.tips,function(i,item){
+						        		html += '<div class="hunk marginBotom fix">'+
+													'<a class="vessel fix" href="/index.php?m=wap&c=faq&v=detail&id='+data.tips[i].id+'">'+
+														'<p class="title fix"><span class="name omit lineNumber2">'+data.tips[i].title+'</span></p>'+
+														'<div class="headPortrait fix">'+
+															'<div class="thumbnail"><img src="'+data.tips[i].thumbfile+'"/></div>'+
+															'<p class="description omit">'+data.tips[i].desc+'</p>'+
+														'</div>'+
+														'<div class="bottom fix">'+
+															'<div class="left FontSize marginLeft fix">'+
+																'<span class="boxes">答&nbsp;<span class="profilePhoto figure" style="background-image: url('+data.tips[i].headpic+');"></span></span>'+
+																'<span class="name omit lineNumber2">'+data.tips[i].username+'</span>'+
+																'<div class="right fix">'+
+																	'<div class="fix"><span class="time">'+data.tips[i].addtime+'</span></div>'+
+																	'<div class="fix">'+
+																		'<span class="browseNum">'+data.tips[i].show_num+'浏览</span>&nbsp;·&nbsp;<span class="assistNum">'+data.tips[i].top_num+'赞</span>'+
+																	'</div>'+
+																'</div>'+
+															'</div>'+
+														'</div>'+
+													'</a>'+
+												'</div>';
+						           	});
+			                	}
+			                	$("#modules"+dataIndex+" .matter").append(html);
+				                $("#modules"+dataIndex).attr("data-NowPage",NowPage+1);
+		                   		
 			                    if (NowPage+1<maxPages) {
 			                		$(".tips"+dataIndex).text("往下拖动查看更多！");
-			                		flag = true;
 			                	}else{
 			                		$(".tips"+dataIndex).text("我也是有底线的哦~");
-			                		flag = false;
 			                	}
+			                }else{
+			                    //layer.msg(data.tips);
 			                }
-			            });
-			        }else{
-	            		$(".tips"+dataIndex).text("我也是有底线的哦~");
-	            	}
-		        }
-		    });
-		}
-		upload();
+		                },
+		                complete:function(){
+		                    if (NowPage+1<maxPages) {
+		                		$(".tips"+dataIndex).text("往下拖动查看更多！");
+		                		flag = true;
+		                	}else{
+		                		$(".tips"+dataIndex).text("我也是有底线的哦~");
+		                		flag = false;
+		                	}
+		                }
+		            });
+		        }else{
+            		$(".tips"+dataIndex).text("我也是有底线的哦~");
+            	}
+	        }
+	    });
 	</script>
 </body>
 </html>

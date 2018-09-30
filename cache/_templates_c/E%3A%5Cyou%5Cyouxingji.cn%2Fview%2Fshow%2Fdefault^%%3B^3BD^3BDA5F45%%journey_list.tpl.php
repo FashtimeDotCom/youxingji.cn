@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-10 15:06:33
+<?php /* vpcvcms compiled created on 2018-09-30 15:44:15
          compiled from wap/journey/journey_list.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -26,7 +26,7 @@ $this->_smarty_include(array('smarty_include_tpl_file' => 'wap/header.tpl', 'sma
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
-        <h3>个人中心</h3>
+        <h3>独家旅行</h3>
     </div>
     <div class="mian">
         <div class="g-top">
@@ -44,145 +44,121 @@ unset($_smarty_tpl_vars);
        
        	<!--度假项目-->
        	<div class="ban1 fix">
-            <a class="advertising dis_block fix" href="javascript:;"><img class="headPortrait" src="/resource/m/images/ban2_1.jpg" alt=""></a>
+            <a class="advertising dis_block fix" href="javascript:;">
+                <img class="headPortrait" src="<?php echo $this->_tpl_vars['ad_list']['0']['imgurl']; ?>
+" alt=""></a>
         </div>
         
         <!--达人带你去旅行-->
         <div class="Public tour fix">
-        	<p class="moduleTitle">达人带你去旅行<a href="javascript:;">更多>></a></p>
-        	<div class="box fix">
-        		<a class="dis_block fix" href="javascript:;">
-	        		<img class="poster" src="/resource/m/images/q-pic23.jpg"/>
-	        		<p class="describe">在热情奔放的斯里兰卡，玩出欧洲最佳性价比</p>
-	        		<p class="bottom">
-	        			<span class="NATIONNAME">西班牙、葡萄牙</span>·
-	        			<span class="time">10天</span>
-	        			<span class="cost">1480元/人起</span>
-	        		</p>
-	        	</a>
-        	</div>
-        	<div class="box fix">
-        		<a class="dis_block fix" href="javascript:;">
-	        		<img class="poster" src="/resource/m/images/q-pic23.jpg"/>
-	        		<p class="describe">在热情奔放的斯里兰卡，玩出欧洲最佳性价比</p>
-	        		<p class="bottom">
-	        			<span class="NATIONNAME">西班牙、葡萄牙</span>·
-	        			<span class="time">10天</span>
-	        			<span class="cost">1480元/人起</span>
-	        		</p>
-        		</a>
-        	</div>
+        	<p class="moduleTitle">达人带你去旅行
+				<a href="javascript:;">更多>></a>
+			</p>
+
+			<?php if ($this->_tpl_vars['star_travel']): ?>
+			<?php $_from = $this->_tpl_vars['star_travel']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+    foreach ($_from as $this->_tpl_vars['key'] => $this->_tpl_vars['item']):
+?>
+
+			<div class="box fix">
+				<a class="dis_block fix" href="index.php?m=wap&c=index&v=travel_detail&id=<?php echo $this->_tpl_vars['item']['id']; ?>
+">
+					<img class="poster" src="<?php echo $this->_tpl_vars['item']['thumbfile']; ?>
+"/>
+					<p class="describe"><?php echo $this->_tpl_vars['item']['title']; ?>
+</p>
+					<p class="bottom">
+						<span class="NATIONNAME">旅行天数</span>·
+						<span class="time"><?php echo $this->_tpl_vars['item']['days']; ?>
+天</span>
+						<span class="cost"><?php echo $this->_tpl_vars['item']['price']; ?>
+元/人起</span>
+					</p>
+				</a>
+			</div>
+
+			<?php endforeach; endif; unset($_from); ?>
+			<?php endif; ?>
+
+
         </div>
         
         <!--名家带你去写生-->
         <div class="Public sketching fix">
         	<p class="moduleTitle">名师带你去写生<a href="javascript:;">更多>></a></p>
-        	<div class="box fix">
-        		<a class="dis_block fix" href="javascript:;">
-	        		<img class="poster" src="/resource/m/images/q-pic23.jpg"/>
-	        		<p class="describe">在热情奔放的斯里兰卡，玩出欧洲最佳性价比</p>
-	        		<p class="bottom">
-	        			<span class="NATIONNAME">西班牙、葡萄牙</span>·
-	        			<span class="time">10天</span>
-	        			<span class="cost">1480元/人起</span>
-	        		</p>
-	        	</a>
-        	</div>
-        	<div class="box fix">
-        		<a class="dis_block fix" href="javascript:;">
-	        		<img class="poster" src="/resource/m/images/q-pic23.jpg"/>
-	        		<p class="describe">在热情奔放的斯里兰卡，玩出欧洲最佳性价比</p>
-	        		<p class="bottom">
-	        			<span class="NATIONNAME">西班牙、葡萄牙</span>·
-	        			<span class="time">10天</span>
-	        			<span class="cost">1480元/人起</span>
-	        		</p>
-        		</a>
-        	</div>
+
+			<?php if ($this->_tpl_vars['sketch_list']): ?>
+			<?php $_from = $this->_tpl_vars['sketch_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+    foreach ($_from as $this->_tpl_vars['key'] => $this->_tpl_vars['item']):
+?>
+
+			<div class="box fix">
+				<a class="dis_block fix" href="index.php?m=wap&c=index&v=sketch_detail&id=<?php echo $this->_tpl_vars['item']['id']; ?>
+">
+					<img class="poster" src="<?php echo $this->_tpl_vars['item']['thumbfile']; ?>
+"/>
+					<p class="describe"><?php echo $this->_tpl_vars['item']['title']; ?>
+</p>
+					<p class="bottom">
+						<span class="NATIONNAME">旅行天数</span>·
+						<span class="time"><?php echo $this->_tpl_vars['item']['days']; ?>
+天</span>
+						<span class="cost"><?php echo $this->_tpl_vars['item']['price']; ?>
+元/人起</span>
+					</p>
+				</a>
+			</div>
+
+			<?php endforeach; endif; unset($_from); ?>
+			<?php endif; ?>
+
+
         </div>
        
        	<!--独家资源-->
        	<div class="ban1 exclusive fix">
-            <a class="advertising dis_block fix" href="javascript:;"><img class="headPortrait" src="/resource/m/images/ban2_1.jpg" alt=""></a>
+            <a class="advertising dis_block fix" href="javascript:;">
+                <img class="headPortrait" src="<?php echo $this->_tpl_vars['ad_list']['1']['imgurl']; ?>
+" alt=""></a>
         </div>
 
         <!--国家分类-->
         <div class="Public classify fix">
-        	<div class="chunk fix">
-        		<p class="moduleTitle">俄罗斯<a href="javascript:;">更多>></a></p>
-        		<div class="box fix">
-	        		<a class="dis_block fix" href="javascript:;">
-		        		<img class="poster" src="/resource/m/images/q-pic23.jpg"/>
-		        		<p class="describe">在热情奔放的斯里兰卡，玩出欧洲最佳性价比</p>
-		        		<p class="bottom">
-		        			<span class="NATIONNAME">西班牙、葡萄牙</span>·
-		        			<span class="time">10天</span>
-		        			<span class="cost">1480元/人起</span>
-		        		</p>
-		        	</a>
-	        	</div>
-	        	<div class="box fix">
-	        		<a class="dis_block fix" href="javascript:;">
-		        		<img class="poster" src="/resource/m/images/q-pic23.jpg"/>
-		        		<p class="describe">在热情奔放的斯里兰卡，玩出欧洲最佳性价比</p>
-		        		<p class="bottom">
-		        			<span class="NATIONNAME">西班牙、葡萄牙</span>·
-		        			<span class="time">10天</span>
-		        			<span class="cost">1480元/人起</span>
-		        		</p>
-	        		</a>
-	        	</div>
-	        	<div class="box fix">
-	        		<a class="dis_block fix" href="javascript:;">
-		        		<img class="poster" src="/resource/m/images/q-pic23.jpg"/>
-		        		<p class="describe">在热情奔放的斯里兰卡，玩出欧洲最佳性价比</p>
-		        		<p class="bottom">
-		        			<span class="NATIONNAME">西班牙、葡萄牙</span>·
-		        			<span class="time">10天</span>
-		        			<span class="cost">1480元/人起</span>
-		        		</p>
-	        		</a>
-	        	</div>
-	        </div>
-	        
-	        <!--西班牙-->
-	        <div class="chunk fix">
-        		<p class="moduleTitle">西班牙<a href="javascript:;">更多>></a></p>
-        		<div class="box fix">
-	        		<a class="dis_block fix" href="javascript:;">
-		        		<img class="poster" src="/resource/m/images/q-pic23.jpg"/>
-		        		<p class="describe">在热情奔放的斯里兰卡，玩出欧洲最佳性价比</p>
-		        		<p class="bottom">
-		        			<span class="NATIONNAME">西班牙、葡萄牙</span>·
-		        			<span class="time">10天</span>
-		        			<span class="cost">1480元/人起</span>
-		        		</p>
-		        	</a>
-	        	</div>
-	        	<div class="box fix">
-	        		<a class="dis_block fix" href="javascript:;">
-		        		<img class="poster" src="/resource/m/images/q-pic23.jpg"/>
-		        		<p class="describe">在热情奔放的斯里兰卡，玩出欧洲最佳性价比</p>
-		        		<p class="bottom">
-		        			<span class="NATIONNAME">西班牙、葡萄牙</span>·
-		        			<span class="time">10天</span>
-		        			<span class="cost">1480元/人起</span>
-		        		</p>
-	        		</a>
-	        	</div>
-	        	<div class="box fix">
-	        		<a class="dis_block fix" href="javascript:;">
-		        		<img class="poster" src="/resource/m/images/q-pic23.jpg"/>
-		        		<p class="describe">在热情奔放的斯里兰卡，玩出欧洲最佳性价比</p>
-		        		<p class="bottom">
-		        			<span class="NATIONNAME">西班牙、葡萄牙</span>·
-		        			<span class="time">10天</span>
-		        			<span class="cost">1480元/人起</span>
-		        		</p>
-	        		</a>
-	        	</div>
-	        </div>
-	        
+			<?php $_from = $this->_tpl_vars['label_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+    foreach ($_from as $this->_tpl_vars['key'] => $this->_tpl_vars['item']):
+?>
+
+			<div class="chunk fix">
+				<p class="moduleTitle"><?php echo $this->_tpl_vars['item']['name']; ?>
+<a href="javascript:;">更多>></a></p>
+
+				<?php if ($this->_tpl_vars['item']['info']): ?>
+				<?php $_from = $this->_tpl_vars['item']['info']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+    foreach ($_from as $this->_tpl_vars['k'] => $this->_tpl_vars['vo']):
+?>
+				<div class="box fix">
+					<a class="dis_block fix" href="index.php?m=wap&c=index&v=journeydetail&id=<?php echo $this->_tpl_vars['vo']['id']; ?>
+">
+						<img class="poster" src="<?php echo $this->_tpl_vars['vo']['articlethumb']; ?>
+"/>
+						<p class="describe"><?php echo $this->_tpl_vars['vo']['title']; ?>
+</p>
+						<p class="bottom">
+							<span class="NATIONNAME">旅行天数</span>·
+							<span class="time"><?php echo $this->_tpl_vars['vo']['lxts']; ?>
+天</span>
+							<span class="cost"><?php echo $this->_tpl_vars['vo']['price']; ?>
+元/人起</span>
+						</p>
+					</a>
+				</div>
+				<?php endforeach; endif; unset($_from); ?>
+				<?php endif; ?>
+
+			</div>
+
+			<?php endforeach; endif; unset($_from); ?>
+
         </div>
     </div>
     <script type="text/javascript">

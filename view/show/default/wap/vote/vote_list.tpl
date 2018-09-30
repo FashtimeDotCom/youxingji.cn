@@ -278,7 +278,9 @@
 							<img src="{{$item.headpic}}" />
 							<i><img src="/resource/m/images/tp/icon.png"/></i>
 						</div>
-						<input type="button" class="tpbtn" value="投票" onclick="vote({{$item.vote_id}},{{$item.uid}})" />
+						{{if $info.is_effective && $info.is_effective==1 }}
+							<input type="button" class="tpbtn" value="投票" onclick="vote({{$item.vote_id}},{{$item.uid}})" />
+						{{/if}}
 						<p><span id="total_{{$item.uid}}">{{$item.vote_num}}</span>票</p>
 					</div>
 					<div class="box_right">

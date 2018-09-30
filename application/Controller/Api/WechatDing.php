@@ -216,7 +216,7 @@ class Controller_Api_WechatDing extends Core_Controller_Action
                 $res=$this->text_template($toUser,$fromUser,$time,'text',$content);
                 break;
             case 'vote':
-                $list=C::M('activity_vote')->field('id,title,thumbfile,wechat_desc')->where("status=1 and NOW() <=end_time")->order('id desc')->limit(0,5)->select();
+                $list=C::M('activity_vote')->field('id,title,thumbfile,wechat_desc')->where("status=1")->order('id desc')->limit(0,5)->select();
                 if( $list ){
                     foreach( $list as $key=>$value ){
                         $list[$key]['url']="http://".$_SERVER['HTTP_HOST']."/index.php?m=wap&c=vote&v=index&vote_id=".$value['id'];

@@ -1,0 +1,65 @@
+/*2018-09-29
+ * HQS 
+ * 
+ * 游记  相关移动端页面的  共用样式
+ * */
+
+.myfile{width: 100%;position: relative;overflow: hidden;}
+.myfile .note_bg{display: block;width: 100%;height: 100%; position: relative;z-index: 1;}
+.myfile .buttonTier{position: absolute;top: 0;left: 0;right: 0;bottom: 0;z-index: 2;}
+
+.paddingNum{padding-top: 19%;}
+
+.myfile .buttonTier .lump{width: 100%;}
+.myfile .buttonTier .lump .note_add{display: block;float: left;width: 40px;margin-right: 3px;}
+.myfile .buttonTier .lump span{color: #fff;text-align: left;display: block;width: 100%;}
+.myfile .buttonTier .lump .title{font-size: 14px;margin-bottom: 4px;}
+.myfile .buttonTier .lump .tips{width: 110%;}
+.lump .layui-upload-button{opacity: 0;height: 0;border: none;background: transparent;display: block;}
+
+input#tag::-webkit-input-placeholder{font-size:8px;}
+input#tag:-moz-placeholder{font-size:8px;}
+input#tag::-moz-placeholder{font-size:8px;}
+input#tag:-ms-input-placeholder{font-size:8px;}
+
+/*5.5英寸   414*736尺寸的屏幕  如iPhone6 Plus、iPhone6s Plus、iPhone7 Plus、魅族MX5    1920x1080  /3★*/
+@media only screen and (max-width: 414px) {
+	.myfile{height: 183.68px;}
+	.myfile .buttonTier .lump{padding-left: 20%;}
+	.myfile .buttonTier .lump .tips{text-indent: -13px;}
+}
+/*5.96英寸  412*732尺寸的屏幕  如谷歌Nexus 6   2K 2560x1440  /3.5★*/
+@media only screen and (max-width: 412px) {
+	.myfile{height: 182.55px;}
+	.myfile .buttonTier .lump{padding-left: 19%;}
+	.myfile .buttonTier .lump .tips{text-indent: -13px;}
+}
+/*5.2英寸   411*731尺寸的屏幕  如 谷歌Nexus 5x   1920x1080  /2.625★*/
+@media only screen and (min-width: 376px) and (max-width: 411px) {
+	.myfile{height: 182.18px;}
+	.myfile .buttonTier .lump{padding-left: 18%;}
+	.myfile .buttonTier .lump .tips{text-indent: -13px;}
+}
+/*4.7英寸   375*667尺寸的屏幕  如iPhone6、iPhone7、iPhone 6s   1334x750*/
+@media only screen and (min-width: 361px) and (max-width: 375px) {
+	.myfile{height: 165.38px;}
+	.myfile .buttonTier .lump{padding-left: 15%;}
+	.myfile .buttonTier .lump .tips{text-indent: -13px;}
+}
+/*4.95英寸  360*640尺寸的屏幕  如 谷歌Nexus 5    1920x1080 /3★ */
+@media only screen and (min-width: 321px) and (max-width: 360px) {
+	.myfile{height: 158.29px;}
+	.myfile .buttonTier .lump{padding-left: 14%;}
+	.myfile .buttonTier .lump .tips{text-indent: -11px;}
+}
+/*4.0英寸   320*568尺寸的屏幕  如iPhone5、iPhone SE   1136x640*/
+@media only screen and (max-width: 320px) {
+	.myfile{height: 139.63px;}
+	.myfile .buttonTier .lump{padding-left: 10%;}
+	.myfile .buttonTier .lump .tips{text-indent: -10px;}
+}
+
+.num_text {font-size: 12px;color: #868686;line-height: 20px;}
+.num_f {color: #d71618;}
+
+.zxeditor-container .zxeditor-toolbar-wrapper{position: inherit!important;}

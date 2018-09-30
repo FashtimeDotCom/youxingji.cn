@@ -118,3 +118,10 @@ img {
 
 .moduleBGcolor1{background: #fff;}
 
+.FontSize{font-size: 9px;
+	      transform: scale(0.9);
+		  -webkit-transform: scale(0.9);
+	      -o-transform: scale(0.9);    /*针对能识别-webkit的opera browser设置*/}
+
+.tagTips{color: red;}
+

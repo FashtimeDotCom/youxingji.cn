@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-27 16:12:12
+<?php /* vpcvcms compiled created on 2018-09-30 17:06:29
          compiled from wap/user/add_note.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -19,78 +19,9 @@
 	<script src="/resource/js/move_rem.js"></script>
 	<script src="/resource/m/js/jquery.js"></script>
 	<script src="/resource/m/js/lib.js"></script>
-	
-	<style type="text/css">
-		.myfile{width: 100%;position: relative;overflow: hidden;}
-		.myfile .note_bg{display: block;width: 100%;height: 100%; position: relative;z-index: 1;}
-		.myfile .buttonTier{position: absolute;top: 0;left: 0;right: 0;bottom: 0;z-index: 2;}
-		
-		.paddingNum{padding-top: 19%;}
-		
-		.myfile .buttonTier .lump{width: 100%;}
-		.myfile .buttonTier .lump .note_add{display: block;float: left;width: 40px;margin-right: 3px;}
-		.myfile .buttonTier .lump span{color: #fff;text-align: left;display: block;width: 100%;}
-		.myfile .buttonTier .lump .title{font-size: 14px;margin-bottom: 4px;}
-		.myfile .buttonTier .lump .tips{font-size: 9px;width: 110%;
-									      transform: scale(0.9);
-										  -webkit-transform: scale(0.9);
-									      -o-transform: scale(0.9);    /*针对能识别-webkit的opera browser设置*/}
-		.lump .layui-upload-button{opacity: 0;height: 0;border: none;background: transparent;display: block;}
-		
-		input#tag::-webkit-input-placeholder{font-size:8px;}
-		input#tag:-moz-placeholder{font-size:8px;}
-		input#tag::-moz-placeholder{font-size:8px;}
-		input#tag:-ms-input-placeholder{font-size:8px;}
-
-		/*5.5英寸   414*736尺寸的屏幕  如iPhone6 Plus、iPhone6s Plus、iPhone7 Plus、魅族MX5    1920x1080  /3★*/
-		@media only screen and (max-width: 414px) {
-			.myfile{height: 183.68px;}
-			.myfile .buttonTier .lump{padding-left: 20%;}
-			.myfile .buttonTier .lump .tips{text-indent: -13px;}
-		}
-		/*5.96英寸  412*732尺寸的屏幕  如谷歌Nexus 6   2K 2560x1440  /3.5★*/
-		@media only screen and (max-width: 412px) {
-			.myfile{height: 182.55px;}
-			.myfile .buttonTier .lump{padding-left: 19%;}
-			.myfile .buttonTier .lump .tips{text-indent: -13px;}
-		}
-		/*5.2英寸   411*731尺寸的屏幕  如 谷歌Nexus 5x   1920x1080  /2.625★*/
-		@media only screen and (min-width: 376px) and (max-width: 411px) {
-			.myfile{height: 182.18px;}
-			.myfile .buttonTier .lump{padding-left: 18%;}
-			.myfile .buttonTier .lump .tips{text-indent: -13px;}
-		}
-		/*4.7英寸   375*667尺寸的屏幕  如iPhone6、iPhone7、iPhone 6s   1334x750*/
-		@media only screen and (min-width: 361px) and (max-width: 375px) {
-			.myfile{height: 165.38px;}
-			.myfile .buttonTier .lump{padding-left: 15%;}
-			.myfile .buttonTier .lump .tips{text-indent: -13px;}
-		}
-		/*4.95英寸  360*640尺寸的屏幕  如 谷歌Nexus 5    1920x1080 /3★ */
-		@media only screen and (min-width: 321px) and (max-width: 360px) {
-			.myfile{height: 158.29px;}
-			.myfile .buttonTier .lump{padding-left: 14%;}
-			.myfile .buttonTier .lump .tips{text-indent: -11px;}
-		}
-		/*4.0英寸   320*568尺寸的屏幕  如iPhone5、iPhone SE   1136x640*/
-		@media only screen and (max-width: 320px) {
-			.myfile{height: 139.63px;}
-			.myfile .buttonTier .lump{padding-left: 10%;}
-			.myfile .buttonTier .lump .tips{text-indent: -10px;}
-		}
-		
-		.num_text {font-size: 12px;color: #868686;line-height: 20px;}
-		.num_f {color: #d71618;}
-		
-		.tagTips{color: red;font-size: 9px;
-					      transform: scale(0.9);
-						  -webkit-transform: scale(0.9);
-					      -o-transform: scale(0.9);    /*针对能识别-webkit的opera browser设置*/}
-		
-		#article_body{border: 1px #ccc solid;padding: 2px 5px; margin: 12px auto;}
-	</style>
+	<link rel="stylesheet" href="/resource/m/css/note.css" />
 </head>
-<body>
+<body id="row_issue">
 	<div class="mian">
 		<div class="save-issue">
 			<div class="wp">
@@ -136,7 +67,7 @@
 							<input type="text" class="inp" value="<?php echo $this->_tpl_vars['res']['title']; ?>
 " id="title" placeholder="请在这里输入游记的标题">
 						</div>
-						
+	
 						<div class="tit" style="margin-bottom: 20px;">
 							<textarea class="layui-textarea inp txta1" id="describe" placeholder="请在这里输入游记的摘要/封面描述" style="line-height: 22px;"><?php echo $this->_tpl_vars['res']['describe']; ?>
 </textarea>
@@ -156,58 +87,47 @@
 									<div class="layui-upload" style="width: 100%;height: 100%;">
 										<label class="paddingNum" style="display: block; width: 100%;height: 100%;">
 											<div class="lump fix">
-				                                <input type="file" name="file" class="layui-upload-file" id="myfile" style="display:none">
-				                                <img class="note_add" src="/resource/m/images/user/note_add.png"/>
+												<input type="file" name="file" class="layui-upload-file" id="myfile" style="display:none">
+												<img class="note_add" src="/resource/m/images/user/note_add.png"/>
 												<span class="title">设置游记头图</span>
-												<span class="tips">图片建议选择尺寸大于1680px的高清大图，如相机原图</span>
+												<span class="tips FontSize">图片建议选择尺寸大于1680px的高清大图，如相机原图</span>
 											</div>
-			                           </label>
+										</label>
 									</div>
 								</div>
 							</div>
 						</div>
-						
+	
 						<div class="tit">
 							<input type="text" class="inp" value="<?php echo $this->_tpl_vars['res']['tag']; ?>
 " id="tag" placeholder="请输入标签(可选)，每个标签最多四个字，如：旅游知识/美食，用正斜杠分开">
-							<p class="tagTips dis_none">标签目前最多为四个哦！</p>
+							<p class="tagTips FontSize dis_none">标签目前最多为四个哦！</p>
 						</div>
-						<!--<div class="tit">
-							<textarea class="layui-textarea" id="LAY_demo1" placeholder="请发表你的游记"><?php echo $this->_tpl_vars['res']['content']; ?>
-</textarea>
-						</div>-->
-						
+	
 						<link rel="stylesheet" href="/resource/m/demo/css/index.css">
 						<style>
-						    #editorContainer{border: 1px solid #e5e5e5;margin-bottom: 10px;}
-						    .zxeditor-debug-switch{height: 0;opacity: 0;}
+							#editorContainer{border: 1px solid #e5e5e5;margin-bottom: 10px;}
+							.zxeditor-debug-switch{height: 0;opacity: 0;}
 						</style>
 						<!-- 内容编辑区域 -->
 						<article><div id="editorContainer"></div></article>
-						
-						
-						
-						
-						
-						<!--发布文章逻辑-->
-						<!--<script src="/resource/m/demo/js/index.js"></script>-->
-						
+	
 						<div class="pic-video">
 							<input type="hidden" name="code" value="<?php echo $this->_tpl_vars['code']; ?>
 " id="code">
 							<div class="file f-pic" id="openLocation" style="margin-bottom: 7px;">
 								<label style="background-image: url(/resource/m/images/i_location.png)">
-	    							<em>添加定位</em>
-	    						</label>
+									<em>添加定位</em>
+								</label>
 							</div>
 							<input type="hidden" name="address" value="<?php echo $this->_tpl_vars['res']['address']; ?>
 " id="address" title="后台返回来的定位地址">
 							<p id="Paddress" class="address"><?php echo $this->_tpl_vars['res']['address']; ?>
 </p>
 						</div>
-
-                      	<input type="checkbox" checked="">我已阅读并同意<a href="/article/hyzn">《服务协议》</a>
-                      	<input type="hidden" name="did" value="<?php echo $this->_tpl_vars['did']; ?>
+	
+						<input type="checkbox" checked="">我已阅读并同意<a href="/article/hyzn">《服务协议》</a>
+						<input type="hidden" name="did" value="<?php echo $this->_tpl_vars['did']; ?>
 " id="did">
 					</form>
 				</div>
@@ -221,22 +141,8 @@ unset($_smarty_tpl_vars);
  ?>
 	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
 	<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
-	
-	<script src="https://cdn.bootcss.com/js-polyfills/0.1.42/polyfill.min.js"></script>
-	<!--exif获取照片参数插件-->
-	<script src="/resource/m/demo/libs/exif.min.js"></script>
-	<!--debug-->
-	<script src="/resource/m/demo/libs/zx-debug.min.js"></script>
-	<!--编辑器-->
-	<script src="/resource/m/demo/js/zx-editor.min.js"></script>
-	
-	<script>
-	  	
-	</script>
-	
 	<script type="text/javascript">
 		$(document).ready(function(){
-			
 			//控制封面描述的字数
 			var limitNum = 255;
 			var num = $('.txta1').val().length;
@@ -257,7 +163,7 @@ unset($_smarty_tpl_vars);
 				}
 				$('#contentwordage').html(result);
 			});
-			
+	
 			//标签  字数控制
 			$('#tag').keyup(function() {
 				var yourString = $('#tag').val();
@@ -266,13 +172,13 @@ unset($_smarty_tpl_vars);
 					$(".tagTips").removeClass("dis_none");
 				}else{
 					for(var i=0;i<result.length;i++){
-						
+	
 					}
 					$(".tagTips").addClass("dis_none");
-				}	
+				}
 			});
-			
-			
+	
+	
 			//上传游记 的封面图片
 			layui.upload({
 				url: "/index.php?m=api&c=index&v=uploadpic",
@@ -289,403 +195,120 @@ unset($_smarty_tpl_vars);
 					$(".note_bg").attr("src",data.url);
 					$(".note_bg").attr("data-default","1");// 判断是否 上传图片
 					//上传完毕回调
-			    	layer.closeAll('loading'); //关闭loading
+					layer.closeAll('loading'); //关闭loading
 					$(".lump").addClass("dis_none");
 				}
 			});
-			
-						
-			
-			// 实例化 ZxEditor
-		  	var zxEditor = new ZxEditor('#editorContainer', {
-			    // 编辑器固定
-			    fixed: false,
-			    // 20秒自动保存一次编辑内容
-			    autoSave: 20
-		  	});
-			var zxDebug = new ZxDebug({
-			  	position: 'top',
-			  	offset: 100
-			});
-			
-			// 监听编辑器处理通知
-			zxEditor.on('debug', function () {
-			  	zxDebug.log.apply(zxDebug, arguments)
-			});
-			
-			zxEditor.on('message', function () {
-			  	zxDebug.log.apply(zxDebug, arguments)
-			});
-			
-			zxEditor.on('error', function () {
-			  	zxDebug.error.apply(zxDebug, arguments)
-			});
-
-		  	// 实例化 ZxDebug
-		  	var debug = new ZxDebug({
-			    // 位置居top
-			    position: 'top',
-			    // 位置偏移100px
-			    offset: 30
-		  	});
-		
-		  	debug.log('实例化 ZxEditor', zxEditor);
-		
-			zxEditor.on('debug', function () {
-			    debug.log.apply(debug, arguments)
-		  	});
-		
-		  	zxEditor.on('error', function (err) {
-			    zxEditor.dialog.alert(err.msg)
-			    debug.error.apply(debug, arguments)
-		  	});
-		
-		  	zxEditor.on('message', function () {
-		    	debug.log.apply(debug, arguments)
-				//console.log.apply(null, arguments)
-		  	});
-			
-
-			//初始化容器高度 editor, preview body
-//			function initHeight () {
-//			  	// 窗口高度
-//			  	var winHeight = window.innerHeight;
-//			  	var headerHeight = 44;
-//			  	// 编辑器
-//			  	var $editorContent = zxEditor.$content;
-//			  	var contentTop = $editorContent.getBoundingClientRect().top;
-//			  	$editorContent.style.minHeight = winHeight - contentTop - zxEditor.toolbarHeight + 'px';
-//			  	// $previewWrapper
-//			}
-//			initHeight();
-			
-			// 初始化本地存储的数据
-			function initLoaclData () {
-			  	var data = zxEditor.storage.get('article')
-			  	if (data) {
-			    	if (data.cover) {
-			      		zxEditor.addClass('has-pic', $('.cover'));
-					}
-				    zxEditor.setContent(data.content);
-			  	}
-			}
-			initLoaclData();
-			
-			//获取文章数据
-			function getArticleData () {
-			  	var data = {
-			    	// 获取正文内容
-					content: zxEditor.getContent()
-				}
-				return (!data.cover && !data.summary && !data.title && (!data.content || data.content === '<p><br></p>'))
-			    	? null
-			    	: data;
-			}
-					
-			//数据处理，并提交数据处理
-			function uploadBase64Images (base64Images, callback) {
-			  	var len = base64Images.length;
-			  	var count = 0;
-			  	if (len === 0) {
-			    	callback();
-			    	return
-			  	}
-			  	for (var i = 0; i < len; i++) {
-			    	_uploadHandler(base64Images[i]);
-			  	}
-			
-			  	function _uploadHandler (data) {
-			    	upload(data.blob, function (url) {
-				    	// 替换正文中的base64图片
-					  	zxEditor.setImageSrc(data.id, url)
-					  	// 计算图片是否上传完成
-				      	_handleCount();
-				    });
-				}
-			
-			  	function _handleCount () {
-				    count++
-				    if (count === len) {
-				      	callback();
-				    }
-			  	}
-			}
-			// 模拟文件上传
-			function upload (blob, callback) {
-			  	setTimeout(function () {
-			    	callback('https://photo.tuchong.com/1000000/f/305463584.jpg');
-			  	}, 500);
-			}
-
-			//提交数据
-			function handleSubmitClick(){
-			  	// 获取文章数据
-			  	var data = getArticleData() || {};
-			  	// 显示loading
-			  	zxEditor.dialog.loading();
-			
-			  	// 上传图片数据
-			  	// 上传封面图省略...
-			
-			  	// 处理正文中的base64图片
-			  	// 获取正文中的base64数据数组
-			  	var base64Images = zxEditor.getBase64Images();
-			  	// 上传base64图片数据
-			  	uploadBase64Images(base64Images, function () {
-				    // 正文中有base64数据，上传替换成功后再重新获取正文内容
-				    if (base64Images.length) {
-				      	data.content = zxEditor.getContent();
-				    }
-				    // 需要提交的数据
-				    zxDebug.log('提交的数据', data);
-				    // 防止提交失败，再保存一次base64图片上传后的文章数据
-				    zxEditor.storage.set('article', data);
-				    // 发送至服务器
-				    $.post("/index.php?m=api&c=index&v=lay_uploadpic", {
-						'imgUrl': base64Images,
-					}, function(data) {
-						layer.msg(data.tips);
-						if(data.status == 1) {
-							console.log("1");
-							
-							// end
-						    zxEditor.dialog.removeLoading();
-						    zxEditor.dialog.alert('文章模拟发布成功!', function () {
-						      	// 文章发布成功
-						      	// 清除本地存储的文章数据
-						      	zxEditor.storage.remove('article');
-						      	// 其他操作
-						      	// ...
-						      	location.reload();
-						    });
-						}
-					}, "JSON");
-				    // ...
-				    
-				});
-			}
-			
-			//编辑器外部操作
-			var active = {
-				content: function() {
-					var content = getArticleData() || {};
-					add(content);
-				},
-				text: function() {
-					var content = getArticleData() || {};
-					draft(content); //获取编辑器纯文本内容
-				}
-			};
-			$('.site-demo-layedit').on('click', function() {
-				var type = $(this).data('type');
-				active[type] ? active[type].call(this) : '';
-				
-			});
-
-
-			function add (con) {
-				var title = $('#title').val();
-				var describe = $('#describe').val();
-				var did = $('#did').val();
-				var oldImgUrl = parseInt($(".note_bg").attr("data-default")); //判断封面是否有上传，1 为没有上传
-				var imgUrl = $('.note_bg').attr('src');
-				var tag = $('#tag').val();//标签
-				address = $('#address').val();//定位
-				
-				if(!title) {
-					layer.msg('请输入游记的标题');
-					return false;
-				}
-				if(!describe) {
-					layer.msg('请输入游记的摘要/封面描述');
-					return false;
-				}
-				
-				
-				if(oldImgUrl == 0 ) {
-					layer.msg('请上传封面图片');
-					return false;
-				}
-				
-				var yourString = $('#tag').val();
-				var result=yourString.split("/");
-				if(result.length>4){
-					$(".tagTips").removeClass("dis_none");
-					return false;
-				}
-				
-				
-				if (!zxEditor.getContent() || zxEditor.getContent() === '<p><br></p>') {
-				    zxEditor.dialog.alert('请添加文章内容');
-				    return false;
-				}
-				
-				if(!con) {
-					layer.msg('请输入正文');
-					return false;
-				}
-				
-				if(!$("input[type='checkbox']").is(':checked')) {
-					layer.msg('请选择服务协议');
-					return false;
-				}
-				handleSubmitClick();
-				$.post("/index.php?m=api&c=TravelNote&v=save_travel_note", {
-					'did':did,
-					'title': title,
-					'imgUrl': imgUrl,
-					'tag':tag,//标签
-					'content': con,
-					'desc': describe,
-					'address':address
-				}, function(data) {
-					layer.msg(data.tips);
-					if(data.status == 1) {
-						window.location.href = "/index.php?m=wap&c=user&v=travel_note";
-					}
-				}, "JSON");
-			}
-			
-			//保存草稿
-			function draft(con) {
-				var title = $('#title').val();
-				var describe = $('#describe').val();
-				var oldImgUrl = parseInt($(".note_bg").attr("data-default")); //判断封面是否有上传，1 为没有上传，
-				var imgUrl = $('.note_bg').attr('src');
-				var list = imgUrl + '||' + con;
-				var tag = $('#tag').val();//标签
-				address = $('#address').val();//定位
-				if(!title && !describe && oldImgUrl == 0 && !con) {
-					layer.msg('不能全为空');
-					return false;
-				}
-				handleSubmitClick();
-				$.post("/index.php?m=api&c=index&v=adddraft", {
-					'title': title,
-					'describe': describe,
-					'tag':tag,
-					'list': list,
-					'type': 2,
-					'address':address
-				}, function(data) {
-					layer.msg(data.tips);
-					if(data.status == 1) {
-						layer.msg('保存成功');
-						window.location.href = "/index.php?m=wap&c=user&v=draft";
-					}
-				}, "JSON");
-			}
-
-
+	
 			//解密base64编码
 			function Base64(){
-			    // private property  
-			    _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";  
-			   
-			    // public method for encoding  
-			    this.encode = function (input) {
-			        var output = "";  
-			        var chr1, chr2, chr3, enc1, enc2, enc3, enc4;  
-			        var i = 0;  
-			        input = _utf8_encode(input);  
-			        while (i < input.length) {  
-			            chr1 = input.charCodeAt(i++);  
-			            chr2 = input.charCodeAt(i++);  
-			            chr3 = input.charCodeAt(i++);  
-			            enc1 = chr1 >> 2;  
-			            enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);  
-			            enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);  
-			            enc4 = chr3 & 63;  
-			            if (isNaN(chr2)) {  
-			                enc3 = enc4 = 64;  
-			            } else if (isNaN(chr3)) {  
-			                enc4 = 64;  
-			            }  
-			            output = output +  
-			            _keyStr.charAt(enc1) + _keyStr.charAt(enc2) +  
-			            _keyStr.charAt(enc3) + _keyStr.charAt(enc4);  
-			        }  
-			        return output;  
-			    }  
-
-			    // public method for decoding  
-			    this.decode = function (input) {
-			        var output = "";  
-			        var chr1, chr2, chr3;  
-			        var enc1, enc2, enc3, enc4;  
-			        var i = 0;  
-			        input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");  
-			        while (i < input.length) {  
-			            enc1 = _keyStr.indexOf(input.charAt(i++));  
-			            enc2 = _keyStr.indexOf(input.charAt(i++));  
-			            enc3 = _keyStr.indexOf(input.charAt(i++));  
-			            enc4 = _keyStr.indexOf(input.charAt(i++));  
-			            chr1 = (enc1 << 2) | (enc2 >> 4);  
-			            chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);  
-			            chr3 = ((enc3 & 3) << 6) | enc4;  
-			            output = output + String.fromCharCode(chr1);  
-			            if (enc3 != 64) {  
-			                output = output + String.fromCharCode(chr2);  
-			            }  
-			            if (enc4 != 64) {  
-			                output = output + String.fromCharCode(chr3);  
-			            }  
-			        }  
-			        output = _utf8_decode(output);  
-			        return output;  
-			    }  
-
-			    // private method for UTF-8 encoding  
-			    _utf8_encode = function (string) {
-			        string = string.replace(/\r\n/g,"\n");  
-			        var utftext = "";  
-			        for (var n = 0; n < string.length; n++) {  
-			            var c = string.charCodeAt(n);  
-			            if (c < 128) {  
-			                utftext += String.fromCharCode(c);  
-			            } else if((c > 127) && (c < 2048)) {  
-			                utftext += String.fromCharCode((c >> 6) | 192);  
-			                utftext += String.fromCharCode((c & 63) | 128);  
-			            } else {  
-			                utftext += String.fromCharCode((c >> 12) | 224);  
-			                utftext += String.fromCharCode(((c >> 6) & 63) | 128);  
-			                utftext += String.fromCharCode((c & 63) | 128);  
-			            }  
-			   
-			        }  
-			        return utftext;  
-			    }  
-			   
-			    // private method for UTF-8 decoding  
-			    _utf8_decode = function (utftext) {
-			        var string = "";  
-			        var i = 0;  
-			        var c = c1 = c2 = 0;  
-			        while ( i < utftext.length ) {  
-			            c = utftext.charCodeAt(i);  
-			            if (c < 128) {  
-			                string += String.fromCharCode(c);  
-			                i++;  
-			            } else if((c > 191) && (c < 224)) {  
-			                c2 = utftext.charCodeAt(i+1);  
-			                string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));  
-			                i += 2;  
-			            } else {  
-			                c2 = utftext.charCodeAt(i+1);  
-			                c3 = utftext.charCodeAt(i+2);  
-			                string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));  
-			                i += 3;  
-			            }  
-			        }  
-			        return string;  
-			    }  
+				// private property
+				_keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+	
+				// public method for encoding
+				this.encode = function (input) {
+					var output = "";
+					var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+					var i = 0;
+					input = _utf8_encode(input);
+					while (i < input.length) {
+						chr1 = input.charCodeAt(i++);
+						chr2 = input.charCodeAt(i++);
+						chr3 = input.charCodeAt(i++);
+						enc1 = chr1 >> 2;
+						enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+						enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+						enc4 = chr3 & 63;
+						if (isNaN(chr2)) {
+							enc3 = enc4 = 64;
+						} else if (isNaN(chr3)) {
+							enc4 = 64;
+						}
+						output = output +
+								_keyStr.charAt(enc1) + _keyStr.charAt(enc2) +
+								_keyStr.charAt(enc3) + _keyStr.charAt(enc4);
+					}
+					return output;
+				}
+	
+				// public method for decoding
+				this.decode = function (input) {
+					var output = "";
+					var chr1, chr2, chr3;
+					var enc1, enc2, enc3, enc4;
+					var i = 0;
+					input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+					while (i < input.length) {
+						enc1 = _keyStr.indexOf(input.charAt(i++));
+						enc2 = _keyStr.indexOf(input.charAt(i++));
+						enc3 = _keyStr.indexOf(input.charAt(i++));
+						enc4 = _keyStr.indexOf(input.charAt(i++));
+						chr1 = (enc1 << 2) | (enc2 >> 4);
+						chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+						chr3 = ((enc3 & 3) << 6) | enc4;
+						output = output + String.fromCharCode(chr1);
+						if (enc3 != 64) {
+							output = output + String.fromCharCode(chr2);
+						}
+						if (enc4 != 64) {
+							output = output + String.fromCharCode(chr3);
+						}
+					}
+					output = _utf8_decode(output);
+					return output;
+				}
+	
+				// private method for UTF-8 encoding
+				_utf8_encode = function (string) {
+					string = string.replace(/\r\n/g,"\n");
+					var utftext = "";
+					for (var n = 0; n < string.length; n++) {
+						var c = string.charCodeAt(n);
+						if (c < 128) {
+							utftext += String.fromCharCode(c);
+						} else if((c > 127) && (c < 2048)) {
+							utftext += String.fromCharCode((c >> 6) | 192);
+							utftext += String.fromCharCode((c & 63) | 128);
+						} else {
+							utftext += String.fromCharCode((c >> 12) | 224);
+							utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+							utftext += String.fromCharCode((c & 63) | 128);
+						}
+	
+					}
+					return utftext;
+				}
+	
+				// private method for UTF-8 decoding
+				_utf8_decode = function (utftext) {
+					var string = "";
+					var i = 0;
+					var c = c1 = c2 = 0;
+					while ( i < utftext.length ) {
+						c = utftext.charCodeAt(i);
+						if (c < 128) {
+							string += String.fromCharCode(c);
+							i++;
+						} else if((c > 191) && (c < 224)) {
+							c2 = utftext.charCodeAt(i+1);
+							string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+							i += 2;
+						} else {
+							c2 = utftext.charCodeAt(i+1);
+							c3 = utftext.charCodeAt(i+2);
+							string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+							i += 3;
+						}
+					}
+					return string;
+				}
 			}
-			
+	
 			var code = $("#code").val();
-			
-			var base = new Base64();              
+	
+			var base = new Base64();
 			var result2 = base.decode(code);//调用以上方法解密
-			
+	
 			wx.config({
 				debug: false,
 				appId: "wx9953ad5ae1108b51",
@@ -699,11 +322,11 @@ unset($_smarty_tpl_vars);
 					'chooseImage',
 					'previewImage',
 					'uploadImage',
-					
+	
 					'getNetworkType',//网络状态接口
 					'checkJsApi',//使用微信内置地图查看地理位置接口
-        			'openLocation',
-        			'getLocation'
+					'openLocation',
+					'getLocation'
 				]
 			});
 			var list = "<?php echo $this->_tpl_vars['res']['str_content']; ?>
@@ -736,28 +359,28 @@ unset($_smarty_tpl_vars);
 						success: function(res) {
 							//alert("当前网络状态："+res.networkType);
 							wx.getLocation({
-				        		type: 'wgs84',
-							    success: function (res) {
+								type: 'wgs84',
+								success: function (res) {
 									var latitude = res.latitude;// 纬度，浮点数，范围为90 ~ -90
-			                     	//lat = res.latitude;
-				                    var longitude = res.longitude;// 经度，浮点数，范围为180 ~ -180。
-				                    var x = res.longitude;
-				                    var y = res.latitude;
-				                    //alert(code);
-				                    
-				                    //console.log("location is lng=" + x + "  lat=" + y);
-				                   	//changCoordinate(x, y);
-				                    //alert("location1 is lng=" + lng + "  lat=" + lat);
-				                    
-				                   
+									//lat = res.latitude;
+									var longitude = res.longitude;// 经度，浮点数，范围为180 ~ -180。
+									var x = res.longitude;
+									var y = res.latitude;
+									//alert(code);
+	
+									//console.log("location is lng=" + x + "  lat=" + y);
+									//changCoordinate(x, y);
+									//alert("location1 is lng=" + lng + "  lat=" + lat);
+	
+	
 									var url = "http://api.map.baidu.com/geoconv/v1/?coords=" + x + "," + y + "&from=1&to=5&ak="+ result;
-				                    $.get(url, function(data) {
-				                        if(data.status === 0) {
-				                            window.lng = data.result[0].x;
-				                            window.lat = data.result[0].y;
-				                            //console.log("location is lng=" + lng + "  lat=" + lat);
-
-						                    $.post("/index.php?m=api&c=Location&v=get_location_info", {
+									$.get(url, function(data) {
+										if(data.status === 0) {
+											window.lng = data.result[0].x;
+											window.lat = data.result[0].y;
+											//console.log("location is lng=" + lng + "  lat=" + lat);
+	
+											$.post("/index.php?m=api&c=Location&v=get_location_info", {
 												'latitude': lat,
 												'longitude': lng,
 												'code': code,
@@ -773,15 +396,15 @@ unset($_smarty_tpl_vars);
 													layer.msg(data.tips);
 												}
 											}, "JSON");
-				                        }
-				                    }, 'jsonp');
-				                    
-				                    var speed = res.speed; // 速度，以米/每秒计
-							        var accuracy = res.accuracy; // 位置精度
-							    },
-							    cancel: function (res) {
-							        alert('用户拒绝授权获取地理位置');
-							    }
+										}
+									}, 'jsonp');
+	
+									var speed = res.speed; // 速度，以米/每秒计
+									var accuracy = res.accuracy; // 位置精度
+								},
+								cancel: function (res) {
+									alert('用户拒绝授权获取地理位置');
+								}
 							});
 						},
 						fail: function(res) {
@@ -792,6 +415,242 @@ unset($_smarty_tpl_vars);
 			}
 			index.init();
 		});
+	</script>
+	
+	<script src="https://cdn.bootcss.com/js-polyfills/0.1.42/polyfill.min.js"></script>
+	<!--exif获取照片参数插件-->
+	<script src="/resource/m/demo/libs/exif.min.js"></script>
+	<!--debug-->
+	<script src="/resource/m/demo/libs/zx-debug.min.js"></script>
+	<!--编辑器-->
+	<script src="/resource/m/demo/js/zx-editor.min.js"></script>
+	<script type="text/javascript">
+		// 实例化 ZxEditor
+		var zxEditor = new ZxEditor('#editorContainer', {
+			// 编辑器固定
+			fixed: false,
+			// 120秒自动保存一次编辑内容
+			autoSave: 20,
+			imageMaxSize:5,
+			//top:44
+		});
+		
+		//防止上面的方法每次初始话富文本 自动跳转到页面的某个位置
+		window.onload=function(){
+			$("html, body").animate({ scrollTop: "-100px" }, {duration: 50,easing: "swing"});
+		}
+		
+		// 初始化本地存储的数据
+		function initLoaclData () {
+			var data = zxEditor.storage.get('article')
+			if (data) {
+				if (data.cover) {
+					zxEditor.addClass('has-pic', $('.cover'));
+				}
+				zxEditor.setContent(data.content);
+			}else{
+				zxEditor.setContent('<?php echo $this->_tpl_vars['res']['content']; ?>
+');
+			}
+		}
+		initLoaclData();
+	
+		//获取文章数据
+		function getArticleData () {
+			var data = {
+				// 获取正文内容
+				content: zxEditor.getContent()
+			}
+			return ((!data.content || data.content === '<p><br></p>'))
+					? null
+					: data;
+		}
+	
+		//数据处理，并提交数据处理
+		var url;
+		function uploadBase64Images (base64Images, callback) {
+			var len = base64Images.length;
+			var count = 0;
+			if (len === 0) {
+				callback();
+				return
+			}
+			for (var i = 0; i < len; i++) {
+				_uploadHandler(base64Images[i]);
+			}
+	
+			function _uploadHandler (data) {
+				url="";
+				$.ajax({
+					type:"post",
+					url:"/index.php?m=api&c=upload&v=base64_upload",
+					async:true,
+					data:{base64:data.base64},
+					dataType:"json",
+					success:function(res){
+						if(res.status == 1){
+							url=res.url;
+							zxEditor.setImageSrc(data.id, url)
+							// 计算图片是否上传完成
+							_handleCount();
+						}
+					},error:function(res){
+						console.log(res.tip);
+					}
+				});
+			}
+	
+			function _handleCount () {
+				count++
+				if (count === len) {
+					callback();
+				}
+			}
+		}
+		// 模拟文件上传--暂时没用处了
+		function upload (blob, callback) {
+			setTimeout(function () {
+				callback(url);
+			}, 500);
+		}
+	
+		//编辑器外部操作
+		var active = {
+			content: function() {
+				var content = getArticleData() || {};
+				add(content);
+			},
+			text: function() {
+				var content = getArticleData() || {};
+				draft(content); //获取编辑器纯文本内容
+			}
+		};
+		$('.site-demo-layedit').on('click', function() {
+			var type = $(this).data('type');
+			active[type] ? active[type].call(this) : '';
+		});
+	
+	
+		function add (con) {
+			var title = $('#title').val();
+			var describe = $('#describe').val();
+			var did = $('#did').val();
+			var oldImgUrl = parseInt($(".note_bg").attr("data-default")); //判断封面是否有上传，1 为没有上传
+			var imgUrl = $('.note_bg').attr('src');
+			var tag = $('#tag').val();//标签
+			address = $('#address').val();//定位
+	
+			if(!title) {
+				layer.msg('请输入游记的标题');
+				return false;
+			}
+			if(!describe) {
+				layer.msg('请输入游记的摘要/封面描述');
+				return false;
+			}
+	
+			if(oldImgUrl == 0 ) {
+				layer.msg('请上传封面图片');
+				return false;
+			}
+	
+			var yourString = $('#tag').val();
+			var result=yourString.split("/");
+			if(result.length>4){
+				$(".tagTips").removeClass("dis_none");
+				return false;
+			}
+	
+			if (!zxEditor.getContent() || zxEditor.getContent() === '<p><br></p>') {
+				zxEditor.dialog.alert('请添加文章内容');
+				return false;
+			}
+	
+			if(!$("input[type='checkbox']").is(':checked')) {
+				layer.msg('请选择服务协议');
+				return false;
+			}
+	
+			// 处理正文中的base64图片
+			// 获取正文中的base64数据数组
+			var base64Images = zxEditor.getBase64Images();
+			var data = getArticleData() || {};
+			// 上传base64图片数据
+			uploadBase64Images(base64Images, function () {
+				// 正文中有base64数据，上传替换成功后再重新获取正文内容
+				if (base64Images.length) {
+					data.content = zxEditor.getContent();
+				}
+	
+				$.post("/index.php?m=api&c=TravelNote&v=save_travel_note", {
+					'did':did,
+					'title': title,
+					'imgUrl': imgUrl,
+					'tag':tag,//标签
+					'content': data.content,
+					'desc': describe,
+					'address':address
+				}, function(data) {
+					layer.msg(data.tips);
+	
+					if(data.status == 1) {
+						layer.msg('发布成功！');
+						//清除缓存
+						//zxEditor.removeSave(data.content);
+						//localStorage.clear();
+						zxEditor.storage.remove('content', {content: data.content});
+						window.location.href = "/index.php?m=wap&c=user&v=travel_note";
+					}
+				}, "JSON");
+			});
+		}
+	
+		//保存草稿
+		function draft(con) {
+			var title = $('#title').val();
+			var describe = $('#describe').val();
+			var oldImgUrl = parseInt($(".note_bg").attr("data-default")); //判断封面是否有上传，1 为没有上传，
+			var imgUrl = $('.note_bg').attr('src');
+			var list = imgUrl + '||' + con;
+			var tag = $('#tag').val();//标签
+			address = $('#address').val();//定位
+			if(!title && !describe && oldImgUrl == 0 && !con) {
+				layer.msg('不能全为空');
+				return false;
+			}
+	
+			// 处理正文中的base64图片
+			// 获取正文中的base64数据数组
+			var base64Images = zxEditor.getBase64Images();
+			var data = getArticleData() || {};
+			// 上传base64图片数据
+			uploadBase64Images(base64Images, function () {
+				// 正文中有base64数据，上传替换成功后再重新获取正文内容
+				if (base64Images.length) {
+					data.content = zxEditor.getContent();
+				}
+	
+				list=imgUrl + '||' +data.content;
+				$.post("/index.php?m=api&c=index&v=adddraft", {
+					'title': title,
+					'describe': describe,
+					'tag':tag,
+					'list': list,
+					'type': 2,
+					'address':address
+				}, function(data) {
+					layer.msg(data.tips);
+					if(data.status == 1) {
+						layer.msg('保存成功！');
+						//清除缓存
+						//zxEditor.removeSave(data.content);
+						//localStorage.clear();
+						zxEditor.storage.remove('content', {content: data.content});
+						window.location.href = "/index.php?m=wap&c=user&v=draft";
+					}
+				}, "JSON");
+			});
+		}
 	</script>
 </body>
 </html>

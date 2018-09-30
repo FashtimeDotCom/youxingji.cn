@@ -87,6 +87,14 @@
             </li>
             {{/foreach}}
         </ul>
+
+        <!--新版评论-->
+
+
+
+
+  <!--************************************************-->
+
         <!-- 页码 -->
         {{if $multipage}}
         <div class="pages">
@@ -146,7 +154,7 @@
         var id = $(this).attr('data-id');
         var num = parseInt($(this).attr('data-num'));
         var obj = $(this);
-        $.post("/index.php?m=api&c=index&v=zanryt", {
+        $.post("/index.php?m=api&c=index&v=zantravel", {
             'id':id
         }, function(data){
             if(data.status == 1){

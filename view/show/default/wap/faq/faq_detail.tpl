@@ -33,91 +33,74 @@
 	        </div>
 	    </div>
 
-	    <div class="container fix" data-index="1">
+	    <div class="container fix">
 	    	<!--问题-->
-			<div class="hunk question marginBotom fix">
+			<div class="hunk question marginBotom fix" data-id="{{$faq_info.id}}">
 				<div class="title fix">
 					<span class="view fix"><img src="/resource/m/images/user/icon_faq_detail1.png"/></span>
-					<span class="name omit lineNumber2">旅途中，那声怎样拍出帅气照片？</span>
+					<span class="name omit lineNumber2">{{$faq_info.title}}</span>
 				</div>
-				<div class="headPortrait fix">
-					<div class="thumbnail"><img src="/resource/m/images/tx-yz2.jpg" title="头像"/></div>
-					<p class="description">嗯，关于男人自拍这件事情，我的说，我学摄影真的是为了给自己拍，从十几年前开始就是，只不过是世俗大多只能接受女人自拍，多不太能接受男人爱拍片，这是就让我觉得，我得拍出让大从都能接受的照片，不是做“娘”的事情。</p>
-				</div>
+				<div class="headPortrait fix"><p class="description">{{$faq_info.desc}}</p></div>
 				
 				<div class="bottom fix">
-					<div class="topButtom transform">
-						<span class="browseNum"><i>3465654</i>浏览</span>&nbsp;·&nbsp;<span class="answerNum"><i>0</i>回答</span>&nbsp;·&nbsp;<span class="assistNum"><i>104</i>赞</span>
+					<div class="topButtom transform FontSize">
+						<span class="browseNum"><i>{{$faq_info.show_num}}</i>浏览</span>&nbsp;·&nbsp;<span class="answerNum"><i>{{$total}}</i>回答</span>&nbsp;·&nbsp;<span class="assistNum"><i>{{$faq_info.collection_num}}</i>收藏</span>
 					</div>
-					<div class="left transform fix" style="margin-left: -5px;"><img class="icon" src="/resource/m/images/user/icon_faq_detail2.png"/>中国</div>
-					<div class="right transform fix"><span class="name">阿亮</span>&nbsp;问于&nbsp;<span class="time">2018-08-11</span></div>
+					<div class="left transform FontSize fix" style="margin-left: -5px;"><img class="icon" src="/resource/m/images/user/icon_faq_detail2.png"/>{{$faq_info.address}}</div>
+					<div class="right transform FontSize fix"><span class="name">{{$faq_info.username}}</span>&nbsp;问于&nbsp;<span class="time">{{$faq_info.addtime}}</span></div>
 				</div>
 			</div>
 	    	
 	    	<!--答-->
 	    	<input type="hidden" name="" id="answerNum" title="回答的总数" value="{{$total}}" />
-	    	<div class="modules answer question marginBotom fix" id="answer" data-page="" data-nowPage="1">
+	    	<div class="modules answer marginBotom fix" id="answer" data-index="1" data-page="" data-nowPage="1">
 	    		<div class="bigTitle">
-	    			<span class="left">全部问答（<i>0</i>）</span>
-	    			<p class="right"><span class="key" id="answerHeat">按热度</span>&nbsp;|&nbsp;<span class="key on" id="answerTime">按时间</span></p>
+	    			<span class="left">全部问答（<i>{{$total}}</i>）</span>
+	    			<p class="right"><span class="key on" id="answerHeat">按热度</span>&nbsp;|&nbsp;<span class="key" id="answerTime">按时间</span></p>
 	    		</div>
 	    		<div class="matter fix">
-	    			<!--无人回答-->
-	    			<div class="hunk dis_none">
-	    				<img class="tips" src="/resource/m/images/user/defaul_travel_bg.png"/>
-	    				<p class="depict">这个问题还没有人回答哦！<br />赶紧寻找达人回答吧！</p>
-	    			</div>
-	    			
-	    			<!--有人回答-->
-	    			<div class="hunk fix">
+					{{if $total >0 }}
+					<!--有人回答-->
+					{{foreach from=$list item=item key=key}}
+					<div class="hunk fix">
 						<div class="bottom fix">
-							<div class="left transform fix marginLeft">
-								<span class="boxes">答&nbsp;<img class="profilePhoto" src="/resource/m/images/q-pic6.jpg"/></span>&nbsp;
-								
-								<span class="name">阿亮</span>
+							<div class="left transform FontSize fix marginLeft">
+								<span class="boxes">答&nbsp;<span class="profilePhoto figure" style="background-image: url({{$item.headpic}});"></span></span>&nbsp;
+								<span class="name">{{$item.username}}</span>
 							</div>
-							<div class="right transform fix"><span class="time" style="margin-right: -10px;">2018-08-11</span></div>
+							<div class="right transform FontSize fix"><span class="time" style="margin-right: -10px;">{{$item.addtime}}</span></div>
 						</div>
 						<div class="substance fix">
-							<div class="solution description">
-								嗯，关于男人自拍这件事情，我的说，我学摄影真的是为了给自己拍，从十几年前开始就是，只不过是世俗大多只能接受女人自拍，多不太能接受男人爱拍片，这是就让我觉得，我得拍出让大从都能接受的照片，不是做“娘”的事情。
-								嗯，关于男人自拍这件事情，我的说，我学摄影真的是为了给自己拍，从十几年前开始就是，只不过是世俗大多只能接受女人自拍，多不太能接受男人爱拍片，这是就让我觉得，我得拍出让大从都能接受的照片，不是做“娘”的事情。
-								嗯，关于男人自拍这件事情，我的说，我学摄影真的是为了给自己拍，从十几年前开始就是，只不过是世俗大多只能接受女人自拍，多不太能接受男人爱拍片，这是就让我觉得，我得拍出让大从都能接受的照片，不是做“娘”的事情。
-								嗯，关于男人自拍这件事情，我的说，我学摄影真的是为了给自己拍，从十几年前开始就是，只不过是世俗大多只能接受女人自拍，多不太能接受男人爱拍片，这是就让我觉得，我得拍出让大从都能接受的照片，不是做“娘”的事情。
-								嗯，关于男人自拍这件事情，我的说，我学摄影真的是为了给自己拍，从十几年前开始就是，只不过是世俗大多只能接受女人自拍，多不太能接受男人爱拍片，这是就让我觉得，我得拍出让大从都能接受的照片，不是做“娘”的事情。
-							</div>
+							<div class="solution description">{{$item.content}}</div>
 							<a class="readMore fix" href="javascript:;">
 								<span class="coverage fix"></span>
 								<span class="typeface">查看更多</span>
 							</a>
 						</div>
-						
-						<div class="bottom fix"><div class="topButtom transform" style="text-align: center;"><span class="replyNum"><i>0</i>回复</span></div></div>
-					</div>
-	    			<div class="hunk fix">
+
 						<div class="bottom fix">
-							<div class="left transform fix marginLeft">
-								<span class="boxes">答&nbsp;<img class="profilePhoto" src="/resource/m/images/q-pic6.jpg"/></span>&nbsp;
-								
-								<span class="name">阿亮</span>
+							<div class="topButtom transform FontSize" style="text-align: center;">
+								<span class="replyNum"><i>{{$item.show_num}}</i>浏览</span>&nbsp;·&nbsp;<span class="replyNum"><i>{{$item.top_num}}</i>点赞</span>
 							</div>
-							<div class="right transform fix"><span class="time" style="margin-right: -10px;">2018-08-11</span></div>
 						</div>
-						<div class="headPortrait fix">
-							<p class="solution description">嗯，关于男人自拍这件事情，我的说，我学摄影真的是为了给自己拍，从十几年前开始就是，只不过是世俗大多只能接受女人自拍，多不太能接受男人爱拍片，这是就让我觉得，我得拍出让大从都能接受的照片，不是做“娘”的事情。</p>
-						</div>
-						
-						<div class="bottom fix"><div class="topButtom transform" style="text-align: center;"><span class="replyNum"><i>0</i>回复</span></div></div>
 					</div>
+					{{/foreach}}
+					
+					<!--无人回答-->
+					{{else}}
+					<div class="hunk">
+						<img class="tips" src="/resource/m/images/user/defaul_travel_bg.png"/>
+						<p class="depict">这个问题还没有人回答哦！<br />赶紧寻找达人回答吧！</p>
+					</div>
+					{{/if}}
 	    		</div>
 	    	</div>
-	    	
-    		
+	    	<p class="tips"></p>
 	    </div>
 	</div>
 	<div class="answerNav fix">
-		<span class="left"><img src="/resource/m/images/user/icon_faq_detail3.png"/>&nbsp;收藏问题（1234）</span>
-		<span class="right"><img src="/resource/m/images/user/icon_faq_detail4.png"/>&nbsp;添加答案</span>
+		<span class="left" onclick="collect({{$faq_info.id}})"><img src="/resource/m/images/user/icon_faq_detail3.png"/>&nbsp;收藏问题（<i class="collectNUM">{{$faq_info.collection_num}}</i>）</span>
+		<span class="right"><a href="/index.php?m=wap&c=faq&v=set_faq&id={{$faq_info.id}}"><img src="/resource/m/images/user/icon_faq_detail4.png"/>&nbsp;添加答案</a></span>
 	</div>
 	
 	<script type="text/javascript" src="/resource/m/js/swiper.js"></script>
@@ -125,112 +108,189 @@
     <script type="text/javascript">
 		window.onload=function(){
     		//判断列表的总数量是否大于等于5
-    		var intelligent_num = parseInt($("#modulesNum1").val());//旅游达人的总数
-    		var trainee_num = parseInt($("#modulesNum2").val());//达人练习生的总数
-    		var num3 = parseInt($("#modulesNum3").val());//达人练习生的总数
+    		var answerNum = parseInt($("#answerNum").val());//回答的总数
+    		var maxPages1 = parseInt(Math.ceil(answerNum/4));//回答的最大页数
     		
-    		var maxPages1 = parseInt(Math.ceil(intelligent_num/4));//旅游达人的最大页数
-    		var maxPages2 = parseInt(Math.ceil(trainee_num/4));//达人练习生的最大页数
-    		var maxPages3 = parseInt(Math.ceil(num3/4));//达人练习生的最大页数
+    		$("#answer").attr("data-page",maxPages1);
     		
-    		$("#modules1").attr("data-page",maxPages1);
-    		$("#modules2").attr("data-page",maxPages2);
-    		$("#modules3").attr("data-page",maxPages3);
-    		
-    		if (intelligent_num>=5) {
-    			$(".tips1").text("往下拖动查看更多！");
+    		if (answerNum>=5) {
+    			$(".tips").text("往下拖动查看更多！");
     		} else{
-    			$(".tips1").text("我也是有底线的哦~");
-    		}
-    		if (trainee_num>=5) {
-    			$(".tips2").text("往下拖动查看更多！");
-    		} else{
-    			$(".tips2").text("我也是有底线的哦~");
-    		}
-    		if (num3>=5) {
-    			$(".tips3").text("往下拖动查看更多！");
-    		} else{
-    			$(".tips3").text("我也是有底线的哦~");
+    			$(".tips").text("没有更多信息咯~");
     		}
     	}
         
-
-		function upload(){
-			var scrollTop;     //获取滚动条到顶部的距离
-		    var scrollHeight;  //获取文档区域高度 
-		    var windowHeight;  //获取滚动条的高度
-		    var flag = true;   //加载数据标志
-		    $(window).scroll(function(){
-		        scrollTop = $(this).scrollTop();     
-		        scrollHeight = $(document).height(); 
-		        windowHeight = $(this).height();
-		        var e;
-		        
-				var dataIndex = parseInt($(".container").attr("data-index"));
-		        
-		        //判断列表的总数量是否大于等于5
-	    		var intelligent_num = parseInt($("#modulesNum"+dataIndex).val());//总数
-	    		
-	    		maxPages = parseInt(Math.ceil(intelligent_num/4));//旅游达人的最大页数
-	    		
-				var NowPage = parseInt( $("#modules"+dataIndex).attr("data-nowPage") );//当前页数
-	    		
-				var page=NowPage+1;
-				
-				if(scrollTop + windowHeight >= scrollHeight-200 && flag == true ){
-		        	if (NowPage+1<=maxPages){
-			            $.ajax({
-			                url:'/index.php?m=api&c=index&v=master_more',
-			                data:{page:page,type:dataIndex},
-			                method:'post',
-			                dataType:'json',
-			                beforeSend:function(){
-			                	$(".tips").text("");
-								$(".tips").html('<img class="loading" src="/resource/m/images/common/loading.gif"/>');
-			                    flag = false;
-			                },
-			                success:function( data ){
-			                    if(data.status == 1){
-				                	var html="";
-				                	$.each(data.tips,function(i,item){
-				                		html += '<div class="hunk marginBotom fix">'+
-													'<p class="title fix"><span class="name">'+data.tips[i].username+'</span><span class="botton" onclick="follows('+data.tips[i].uid+',this)">{{'+data.tips[i].uid+'|helper:'isfollows'}}</span></p>'+
-													'<a class="vessel fix" href="/index.php?m=wap&c=muser&v=index&id='+data.tips[i].uid+'">'+
-														'<div class="headPortrait fix"><img src="'+data.tips[i].headpic+'" title="头像"/></div>'+
-														'<p class="description omit">'+data.tips[i].autograph+'</p>'+
-														'<button>更多他的动态</button>'+
-													'</a>'+
-												'</div>';
-				                   	});
-			                   		$("#modules"+dataIndex+" .matter").append(html);
-				                    
-				                    $("#modules"+dataIndex).attr("data-NowPage",NowPage+1);
-				                    if (NowPage+1<maxPages) {
-				                		$(".tips"+dataIndex).text("往下拖动查看更多！");
-				                	}else{
-				                		$(".tips"+dataIndex).text("我也是有底线的哦~");
-				                	}
-				                }else{
-				                    layer.msg(data.tips);
-				                }
-			                },
-			                complete:function(){
-			                    if (NowPage+1<maxPages) {
-			                		$(".tips"+dataIndex).text("往下拖动查看更多！");
-			                		flag = true;
-			                	}else{
-			                		$(".tips"+dataIndex).text("我也是有底线的哦~");
-			                		flag = false;
-			                	}
-			                }
-			            });
-			        }else{
-	            		$(".tips"+dataIndex).text("我也是有底线的哦~");
-	            	}
-		        }
-		    });
+        $(".key").on("click",function(){
+        	var index = $(this).index();
+        	$(this).addClass("on");
+        	$(this).siblings().removeClass("on");
+        	$("#answer").attr("data-index",index+1);
+        	$(".matter").html("");
+        	buttons(index+1);
+        });
+		
+		function buttons(tab){
+			//判断列表的总数量是否大于等于5
+    		var answerNum = parseInt($("#answerNum").val());//回答的总数
+    		$("#answer").attr("data-nowPage",1);//当前页数
+    		var maxPages = parseInt(Math.ceil(answerNum/4));//回答的最大页数
+    		
+    		$("#answer").attr("data-page",maxPages);
+    		var $faq_info = parseInt( $(".question").attr("data-id") );//对应这个问题的ID
+			$.ajax({
+                url:'/index.php?m=api&c=faq&v=response_more',
+                data:{page:1,type:tab,faq_id:$faq_info},
+                method:'post',
+                dataType:'json',
+                beforeSend:function(){
+                	$(".tips").text("");
+					$(".tips").html('<img class="loading" src="/resource/m/images/common/loading.gif"/>');
+					flag = false;
+                },
+                success:function( data ){
+                    if(data.status == 1){
+	                	var html="";
+	                	$.each(data.tips,function(i,item){
+	                		html+='<div class="hunk fix">'+
+										'<div class="bottom fix">'+
+											'<div class="left transform FontSize fix marginLeft">'+
+												'<span class="boxes">答&nbsp;<span class="profilePhoto figure" style="background-image: url('+data.tips[i].headpic+');"></span></span>&nbsp;'+
+												'<span class="name">'+data.tips[i].username+'</span>'+
+											'</div>'+
+											'<div class="right transform FontSize fix"><span class="time" style="margin-right: -10px;">'+data.tips[i].addtime+'</span></div>'+
+										'</div>'+
+										'<div class="substance fix">'+
+											'<div class="solution description">'+data.tips[i].content+'</div>'+
+											'<a class="readMore fix" href="javascript:;">'+
+												'<span class="coverage fix"></span>'+
+												'<span class="typeface">查看更多</span>'+
+											'</a>'+
+										'</div>'+
+										'<div class="bottom fix">'+
+											'<div class="topButtom transform FontSize" style="text-align: center;">'+
+												'<span class="replyNum"><i>'+data.tips[i].show_num+'</i>浏览</span>&nbsp;·&nbsp;<span class="replyNum"><i>'+data.tips[i].top_num+'</i>点赞</span>'+
+											'</div>'+
+										'</div>'+
+									'</div>';
+	                   	});
+                   		$(".matter").append(html);
+	                    
+	                    if (maxPages>1) {
+	                		$(".tips").text("往下拖动查看更多！");
+	                		flag = true;
+	                	}else{
+	                		$(".tips").text("我也是有底线的哦~");
+	                		flag = false;
+	                	}
+	                }else{
+	                    layer.msg(data.tips);
+	                }
+                }
+            });
 		}
-		upload();
+		
+		var scrollTop;     //获取滚动条到顶部的距离
+	    var scrollHeight;  //获取文档区域高度 
+	    var windowHeight;  //获取滚动条的高度
+	    var flag = true;   //加载数据标志
+	    $(window).scroll(function(){
+	        scrollTop = $(this).scrollTop();     
+	        scrollHeight = $(document).height(); 
+	        windowHeight = $(this).height();
+	        var e;
+	        
+			var dataIndex = parseInt($("#answer").attr("data-index"));
+	        
+	        //判断列表的总数量是否大于等于5
+    		var answerNum = parseInt($("#answerNum").val());//总数
+    		
+    		maxPages = parseInt(Math.ceil(answerNum/4));//旅游达人的最大页数
+    		
+			var NowPage = parseInt( $("#answer").attr("data-nowPage") );//当前页数
+    		var $faq_info = parseInt( $(".question").attr("data-id") );//对应这个问题的ID
+			var page=NowPage+1;
+			
+			if(scrollTop + windowHeight >= scrollHeight-200 && flag == true ){
+	        	if (NowPage+1<=maxPages){
+		            $.ajax({
+		                url:'/index.php?m=api&c=faq&v=response_more',
+		                data:{page:page,type:dataIndex,faq_id:$faq_info},
+		                method:'post',
+		                dataType:'json',
+		                beforeSend:function(){
+		                	$(".tips").text("");
+							$(".tips").html('<img class="loading" src="/resource/m/images/common/loading.gif"/>');
+		                    flag = false;
+		                },
+		                success:function( data ){
+		                    if(data.status == 1){
+			                	var html="";
+			                	$.each(data.tips,function(i,item){
+			                		html += '<div class="hunk fix">'+
+												'<div class="bottom fix">'+
+													'<div class="left transform FontSize fix marginLeft">'+
+														'<span class="boxes">答&nbsp;<span class="profilePhoto figure" style="background-image: url('+data.tips[i].headpic+');"></span></span>&nbsp;'+
+														'<span class="name">'+data.tips[i].username+'</span>'+
+													'</div>'+
+													'<div class="right transform FontSize fix"><span class="time" style="margin-right: -10px;">'+data.tips[i].addtime+'</span></div>'+
+												'</div>'+
+												'<div class="substance fix">'+
+													'<div class="solution description">'+data.tips[i].content+'</div>'+
+													'<a class="readMore fix" href="javascript:;">'+
+														'<span class="coverage fix"></span>'+
+														'<span class="typeface">查看更多</span>'+
+													'</a>'+
+												'</div>'+
+												'<div class="bottom fix">'+
+													'<div class="topButtom transform FontSize" style="text-align: center;">'+
+														'<span class="replyNum"><i>'+data.tips[i].show_num+'</i>浏览</span>&nbsp;·&nbsp;<span class="replyNum"><i>'+data.tips[i].top_num+'</i>点赞</span>'+
+													'</div>'+
+												'</div>'+
+											'</div>';
+			                   	});
+		                   		$(".matter").append(html);
+			                    
+			                    $(".matter").attr("data-NowPage",NowPage+1);
+			                    if(NowPage+1<maxPages){
+			                		$(".tips").text("往下拖动查看更多！");
+			                	}else{
+			                		$(".tips").text("我也是有底线的哦~");
+			                	}
+			                }else{
+			                    layer.msg(data.tips);
+			                }
+		                },
+		                complete:function(){
+		                    if (NowPage+1<maxPages) {
+		                		$(".tips").text("往下拖动查看更多！");
+		                		flag = true;
+		                	}else{
+		                		$(".tips").text("我也是有底线的哦~");
+		                		flag = false;
+		                	}
+		                }
+		            });
+		        }else{
+            		$(".tips").text("我也是有底线的哦~");
+            	}
+	        }
+	    });
+	    
+	     //收藏
+        function collect(id){
+            $.post("/index.php?m=api&c=favtravel&v=collection", {
+                'action':1,  //action:数值(0取消，1收藏)
+                't_id':id,  //t_id:数值(日志的ID或者tv的ID或者游记的id
+                'type':4  //type:数值(1-日志，2-tv,3-游记,4-问题
+            }, function(data){
+                if(data.status == 1){
+                	layer.msg('收藏成功，请在个人中心查看！');
+                	$(".collectNUM").text(parseInt($(".collectNUM").text())+1);
+                }else{
+                	layer.msg(data.tips);
+                }
+            },"JSON");
+        }
 	</script>
 </body>
 </html>

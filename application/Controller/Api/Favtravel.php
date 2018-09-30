@@ -47,7 +47,7 @@ class Controller_Api_Favtravel extends Core_Controller_Action
         }
 
         $t_id=$this->getParam("t_id");//目标ID
-        $type=$this->getParam("type");//分类 1日志，2tv,3游记
+        $type=$this->getParam("type");//分类 1日志，2tv,3游记,4达人问答
         if( $t_id <=0 || !$type ){
             $json = array('status' => 0, 'tips' => '参数错误');
             echo Core_Fun::outputjson($json);

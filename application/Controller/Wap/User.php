@@ -209,6 +209,7 @@ class Controller_Wap_User extends Core_Controller_WapAction
               	$pic = explode('||', $value['content']);
               	$list[$key]['pic'] = $pic['0']?$pic['0']:'/resource/images/s-pic1.jpg';
                 $list[$key]['content']=$pic['1']??'';
+                $list[$key]['addtime'] = date('Y-m-d H:i:s', $value['addtime']);
 				$list[$key]['url'] = '/index.php?m=wap&c=user&v=add_note&type=' . $value['type'] . '&did=' . $value['id'];
 			}
 			$list[$key]['title'] = $value['title']?$value['title']:'未命名草稿';
