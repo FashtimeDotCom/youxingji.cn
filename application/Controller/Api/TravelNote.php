@@ -62,7 +62,7 @@ class Controller_Api_TravelNote extends Core_Controller_Action
             'uid'=>$uid,
             'title'=>$title,
             'desc'=>$desc,
-            'content'=>$content,
+            'content'=>urlencode($content),
             'status'=>0,
             'addtime'=>date("Y-m-d H:i:s",time()),
             'thumbfile'=>$imgUrl,

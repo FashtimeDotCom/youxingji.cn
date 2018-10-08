@@ -78,6 +78,12 @@ class Controller_Wap_User extends Core_Controller_WapAction
         $this->display('wap/user/new_travel.tpl');
     }
 
+    public function my_faqAction()
+    {
+
+        $this->display('wap/user/my_faq.tpl');
+    }
+
 	//新版移动端个人中心-我的
     public function indexAction(){
         $uid = $this->userInfo['uid'];
@@ -605,7 +611,7 @@ class Controller_Wap_User extends Core_Controller_WapAction
 			if( $res ){
                 $info = explode('||', $res['content']);
                 $res['pic']=$info[0]??'';
-                $res['content']=$info[1]??'';
+                $res['content']=urldecode($info[1])??'';
             }
 			$this->assign('res', $res);
 			$this->assign('did', $did);
@@ -626,6 +632,7 @@ class Controller_Wap_User extends Core_Controller_WapAction
 		$id = intval($this->getParam('id'));
 		if($id){
 			$res = C::M('travel_note')->where("uid = " . $this->userInfo['uid'] . " and id = $id")->find();
+            $res['content']=urldecode($res['content']);
 			$this->assign('res', $res);
 			$this->assign('id', $id);
 		}

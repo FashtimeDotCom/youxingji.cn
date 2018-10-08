@@ -51,7 +51,7 @@
 .m-myday-yz .top{margin-bottom: 0px;}
 .m-mytv-yz{border: none;padding: 0px;background: none;}
 .m-mytv-yz .item{background: #fff;border-bottom:none;margin-bottom: 0.8rem;position: relative;padding-bottom: 2px;}
-.m-mytv-yz .item .videoTitle{color: #ef1517;font-size: 1.1em;font-weight: 800;width:90%;display: -webkit-box;
+.m-mytv-yz .item .videoTitle{color: #ef1517;font-size: 14px;font-weight: 600;width:90%;display: -webkit-box;
 								-webkit-line-clamp: 2;/*两列*/
 								-webkit-box-orient: vertical;
 								 overflow: hidden;}

@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-19 17:09:50
+<?php /* vpcvcms compiled created on 2018-10-08 10:18:54
          compiled from wap/user/collection_note.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -49,7 +49,7 @@ unset($_smarty_tpl_vars);
 	                	<li><a href="/index.php?m=wap&c=Collection&v=collection_travel">日志</a></li>
 	                    <li><a href="/index.php?m=wap&c=Collection&v=collection_tv">视频</a></li>
 	                    <li class="on"><a href="/index.php?m=wap&c=Collection&v=collection_note">游记</a></li>
-	                    <li><a href="javascript:;">问答</a></li>
+	                    <li><a href="/index.php?m=wap&c=Collection&v=collection_faq">问答</a></li>
 	                </ul>
 	            </div>
 	        </div>
@@ -304,7 +304,7 @@ unset($_smarty_tpl_vars);
                     $.post("/index.php?m=api&c=Favtravel&v=collection", {
                         'action':0,//action:数值(0取消，1收藏)
                         't_id':id, //t_id:数值(日志的ID或者tv的ID或者游记的id )
-                        'type':3   //type:数值(1-日志，2-tv,3-游记)
+                        'type':3   //type:数值(1-日志，2-tv,3-游记,4-问答)
                     }, function(data){
                         if(data.status == 1){
                         	layer.msg('已删除本条收藏！');

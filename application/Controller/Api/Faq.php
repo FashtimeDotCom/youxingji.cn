@@ -143,12 +143,111 @@ class Controller_Api_Faq extends Core_Controller_Action
 
     }
 
+    /*
+     * 我要回答--接口
+     *
+     * */
+    public function save_response_faqAction()
+    {
+        //验证是否是post 提交申请
+        if( !$this->isPost() ){
+            $json = array('status' => 0, 'tips' => '非法操作!');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        $user_id = $_SESSION['userinfo']['uid'];
+        //查询是否登陆
+        if(!$user_id){
+            $json = array('status' => 0, 'tips' => '请登录后再试');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        $faq_id=$this->getParam("faq_id");
+        $content=$this->getParam("content");
+        if( !$faq_id || !$content ){
+            $json = array('status' => 0, 'tips' => '参数错误');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        $content=urlencode($content);//转换一下
+        $data=array(
+            'faq_id'=>$faq_id,
+            'uid'=>$user_id,
+            'addtime'=>date("Y-m-d H:i:s",time()),
+            'content'=>$content
+        );
+        $res=C::M('faq_response')->add($data);
+        if( $res ){
+            C::M('faq')->where("id={$faq_id}")->update(array('is_response'=>1));//修改已经回答状态
+            $json = array('status' => 1, 'tips' => '回答成功');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }else{
+            $json = array('status' => 0, 'tips' => '回答失败');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+    }
+
+    /*
+     * 发布问题
+     *
+     * */
+    public function save_set_faqAction()
+    {
+        //验证是否是post 提交申请
+        if( !$this->isPost() ){
+            $json = array('status' => 0, 'tips' => '非法操作!');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        $user_id = $_SESSION['userinfo']['uid'];
+        //查询是否登陆
+        if(!$user_id){
+            $json = array('status' => 0, 'tips' => '请登录后再试');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        $title=$this->getParam("title");
+        $desc=$this->getParam("desc");
+        $address=$this->getParam("address");
+        $thumbfile=$this->getParam('thumbfile');
+        $label=$this->getParam("label");
+
+        $data=array(
+            'title'=>$title,
+            'uid'=>$user_id,
+            'desc'=>$desc,
+            'address'=>$address,
+            'thumbfile'=>$thumbfile,
+            'label'=>$label,
+            'addtime'=>date("Y-m-d H:i:s",time()),
+        );
+        $res=C::M('faq')->add($data);
+        if( $res ){
+            $json = array('status' => 1, 'tips' => '发布问题成功');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }else{
+            $json = array('status' => 0, 'tips' => '发布问题失败');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+    }
+
 
     /*
    * 过滤图片，读取文字
    * */
     public function filter_imagAction($content)
     {
+        $content=urldecode($content);
         $content=strip_tags($content);//去掉HTML标签
         $content=substr($content,0,255);//只截取一部分
         return $content;

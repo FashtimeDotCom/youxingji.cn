@@ -91,9 +91,11 @@
 							<input type="text" class="inp" value="{{$res.tag}}" id="tag" placeholder="请输入标签(可选)，每个标签最多四个字，如：旅游知识/美食，用正斜杠分开">
 							<p class="tagTips FontSize dis_none">标签目前最多为四个哦！</p>
 						</div>
-						<link rel="stylesheet" href="/resource/m/demo/css/index.css">
+
 						<style>
-							#editorContainer{border: 1px solid #e5e5e5;margin-bottom: 10px;}
+							article{min-height: 308px;}
+        					#editorContainer{min-height: 298px; border: 1px solid #e5e5e5;margin-bottom: 10px;}
+        					.zxeditor-container{min-height: 296px;}
 							.zxeditor-debug-switch{height: 0;opacity: 0;}
 						</style>
 						<!-- 内容编辑区域 -->
@@ -372,7 +374,9 @@
 													layer.msg(data.tips);
 												}
 											}, "JSON");
-				                        }
+				                        }else{
+											layer.msg(data.tips);
+										}
 				                    }, 'jsonp');
 				                    
 				                    var speed = res.speed; // 速度，以米/每秒计
@@ -468,6 +472,8 @@
 							zxEditor.setImageSrc(data.id, url)
 							// 计算图片是否上传完成
 							_handleCount();
+						}else{
+							layer.msg(data.tips);
 						}
 					},error:function(res){
 						console.log(res.tip);
@@ -567,8 +573,6 @@
 					'address':address,
 					'action':'edit'
 				}, function(data) {
-					layer.msg(data.tips);
-	
 					if(data.status == 1) {
 						layer.msg('发布成功！');
 						//清除缓存
@@ -576,6 +580,8 @@
 						//localStorage.clear();
 						zxEditor.storage.remove('content', {content: data.content});
 						window.location.href = "/index.php?m=wap&c=user&v=travel_note";
+					}else{
+						layer.msg(data.tips);
 					}
 				}, "JSON");
 			});

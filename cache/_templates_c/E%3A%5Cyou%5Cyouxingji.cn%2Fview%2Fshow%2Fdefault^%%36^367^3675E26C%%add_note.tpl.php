@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-30 17:06:29
+<?php /* vpcvcms compiled created on 2018-10-08 17:06:24
          compiled from wap/user/add_note.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -20,6 +20,10 @@
 	<script src="/resource/m/js/jquery.js"></script>
 	<script src="/resource/m/js/lib.js"></script>
 	<link rel="stylesheet" href="/resource/m/css/note.css" />
+    <style>
+    	
+
+    </style>
 </head>
 <body id="row_issue">
 	<div class="mian">
@@ -103,10 +107,11 @@
 " id="tag" placeholder="请输入标签(可选)，每个标签最多四个字，如：旅游知识/美食，用正斜杠分开">
 							<p class="tagTips FontSize dis_none">标签目前最多为四个哦！</p>
 						</div>
-	
-						<link rel="stylesheet" href="/resource/m/demo/css/index.css">
+
 						<style>
-							#editorContainer{border: 1px solid #e5e5e5;margin-bottom: 10px;}
+							article{min-height: 308px;}
+        					#editorContainer{min-height: 298px; border: 1px solid #e5e5e5;margin-bottom: 10px;}
+        					.zxeditor-container{min-height: 296px;}
 							.zxeditor-debug-switch{height: 0;opacity: 0;}
 						</style>
 						<!-- 内容编辑区域 -->
@@ -166,14 +171,11 @@ unset($_smarty_tpl_vars);
 	
 			//标签  字数控制
 			$('#tag').keyup(function() {
-				var yourString = $('#tag').val();
-				var result=yourString.split("/");
+				var tag = $('#tag').val();
+				var result=tag.split("/");
 				if(result.length>4){
 					$(".tagTips").removeClass("dis_none");
 				}else{
-					for(var i=0;i<result.length;i++){
-	
-					}
 					$(".tagTips").addClass("dis_none");
 				}
 			});
@@ -554,8 +556,7 @@ unset($_smarty_tpl_vars);
 				return false;
 			}
 	
-			var yourString = $('#tag').val();
-			var result=yourString.split("/");
+			var result=tag.split("/");
 			if(result.length>4){
 				$(".tagTips").removeClass("dis_none");
 				return false;
@@ -591,8 +592,6 @@ unset($_smarty_tpl_vars);
 					'desc': describe,
 					'address':address
 				}, function(data) {
-					layer.msg(data.tips);
-	
 					if(data.status == 1) {
 						layer.msg('发布成功！');
 						//清除缓存
@@ -630,7 +629,7 @@ unset($_smarty_tpl_vars);
 					data.content = zxEditor.getContent();
 				}
 	
-				list=imgUrl + '||' +data.content;
+				list=imgUrl + '||' +encodeURI(data.content);
 				$.post("/index.php?m=api&c=index&v=adddraft", {
 					'title': title,
 					'describe': describe,
@@ -639,7 +638,6 @@ unset($_smarty_tpl_vars);
 					'type': 2,
 					'address':address
 				}, function(data) {
-					layer.msg(data.tips);
 					if(data.status == 1) {
 						layer.msg('保存成功！');
 						//清除缓存

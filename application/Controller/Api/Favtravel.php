@@ -84,6 +84,9 @@ class Controller_Api_Favtravel extends Core_Controller_Action
 
             $res=C::M("collection")->add($data);
             if($res){
+                if( $type==4 ){//4-达人问答，collection_num字段+1
+                    C::M('faq')->where('id',$t_id)->setInc('collection_num', 1);
+                }
                 $json = array('status' => 1, 'tips' => '收藏成功，请在个人中心查看!');
                 echo Core_Fun::outputjson($json);
                 exit;

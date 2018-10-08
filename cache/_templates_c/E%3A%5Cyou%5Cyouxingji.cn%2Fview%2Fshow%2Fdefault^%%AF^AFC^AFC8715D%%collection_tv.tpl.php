@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-19 16:54:04
+<?php /* vpcvcms compiled created on 2018-10-08 10:15:27
          compiled from wap/user/collection_tv.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -49,7 +49,7 @@ unset($_smarty_tpl_vars);
 	                	<li><a href="/index.php?m=wap&c=Collection&v=collection_travel">日志</i></a></li>
 	                    <li class="on"><a href="/index.php?m=wap&c=Collection&v=collection_tv">视频</i></a></li>
 	                    <li><a href="/index.php?m=wap&c=Collection&v=collection_note">游记</a></li>
-	                    <li><a href="javascript:;">问答</a></li>
+	                    <li><a href="/index.php?m=wap&c=Collection&v=collection_faq">问答</a></li>
 	                </ul>
 	            </div>
 	        </div>

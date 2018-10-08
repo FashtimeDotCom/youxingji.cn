@@ -76,6 +76,31 @@ class Controller_Wap_Collection extends Core_Controller_WapAction
     }
 
     /*
+    * 收藏问题
+    *
+    * */
+    public function collection_faqAction()
+    {
+        $user_id = $_SESSION['userinfo']['uid'];
+
+//        $sql="SELECT a.t_id,b.* FROM ##__collection as a LEFT JOIN ##__travel_note as b ON a.t_id=b.id  WHERE a.type=3 and a.uid={$user_id} ORDER BY a.add_time DESC Limit 4";
+//        $info=Core_Db::fetchAll($sql);
+        $info=array();
+        if( $info ){
+            foreach ($info as $key=>$value){
+                if( trim($value['tag']) ){
+                    $info[$key]['tag']=explode("/",$value['tag']);
+                }
+            }
+            $this->assign("list",$info);
+        }
+        $total=$this->totalAction($user_id);
+        $this->assign('total',$total);
+
+        $this->display("wap/user/collection_faq.tpl");
+    }
+
+    /*
    * 统计日志，视频，游记，问题总数
    * */
     protected function totalAction($uid)
@@ -103,8 +128,6 @@ class Controller_Wap_Collection extends Core_Controller_WapAction
         return $data;
 
     }
-
-
 
 
 }

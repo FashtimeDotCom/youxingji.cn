@@ -96,6 +96,7 @@ class Controller_Wap_Faq extends Core_Controller_WapAction
      * */
     public function filter_imagAction($content)
     {
+        $content=urldecode($content);
         $content=strip_tags($content);//去掉HTML标签
         $content=substr($content,0,255);//只截取一部分
         return $content;
@@ -104,6 +105,11 @@ class Controller_Wap_Faq extends Core_Controller_WapAction
     //发布问题
     public function set_faqAction()
     {
+        //验证用户是否登录
+        if(!$_SESSION['userinfo']){
+            $this->showmsg('发布问题前，请您先进行登录!', 'index.php?m=wap&c=index&v=login', 2);
+            exit;
+        }
 
         $this->display('wap/faq/set_faq.tpl');
     }
@@ -111,6 +117,25 @@ class Controller_Wap_Faq extends Core_Controller_WapAction
     //我要回答
     public function response_faqAction()
     {
+        //验证用户是否登录
+        if(!$_SESSION['userinfo']){
+            $this->showmsg('回答前，请您先进行登录!', 'index.php?m=wap&c=index&v=login', 2);
+            exit;
+        }
+        $id=$this->getParam('id');
+        if( !$id ){
+            $this->showmsg('非法操作:)!', 'index.php?m=wap&c=index&v=index', 2);
+            exit;
+        }
+        $this->assign("faq_id",$id);
+
+        $info=C::M('faq')->field('title')->where("id={$id} and status=1")->find();
+        if( $info ){
+            $this->assign("info",$info);
+        }else{
+            $this->showmsg('问题不存在:)!', 'index.php?m=wap&c=index&v=index', 2);
+            exit;
+        }
 
         $this->display("wap/faq/response_faq.tpl");
     }

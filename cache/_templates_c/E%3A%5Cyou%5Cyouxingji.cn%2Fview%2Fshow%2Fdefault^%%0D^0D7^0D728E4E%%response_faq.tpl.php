@@ -1,258 +1,199 @@
-<?php /* vpcvcms compiled created on 2018-09-30 19:22:26
+<?php /* vpcvcms compiled created on 2018-10-08 16:14:55
          compiled from wap/faq/response_faq.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
     <meta name="renderer" content="webkit" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
     <meta name="format-detection" content="telephone=no" />
-    <title>个人中心-发布问题</title>
-    <meta name="keywords" content="<?php echo $this->_reg_objects['TO'][0]->cfg(array('key' => 'index_keywords','group' => 'site','default' => "首页"), $this);?>
+    <title>我要回答</title>
+    <meta name="keywords" content="<?php echo $this->_reg_objects['TO'][0]->cfg(array('key' => ' index_keywords ','group' => 'site ','default' => "首页 "), $this);?>
 " />
-    <meta name="description" content="<?php echo $this->_reg_objects['TO'][0]->cfg(array('key' => 'index_description','group' => 'site','default' => "首页"), $this);?>
+    <meta name="description" content="<?php echo $this->_reg_objects['TO'][0]->cfg(array('key' => ' index_description ','group' => 'site ','default' => "首页 "), $this);?>
 " />
     <link rel="stylesheet" href="/resource/m/css/style.css" />
+    <link rel="stylesheet" href="/resource/m/css/common.css" />
     <link rel="stylesheet" href="/resource/js/layui/css/layui.css" />
+    <script src="/resource/js/move_rem.js"></script>
     <script src="/resource/m/js/jquery.js"></script>
     <script src="/resource/m/js/lib.js"></script>
-	<link rel="stylesheet" href="/resource/m/css/common.css" />
-    <style type="text/css">
-        .upic{cursor:pointer;margin: 0 15px 15px 0;position: relative;}
-        .layui-upload-button{display: none;}
-      	.upic i{
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 48px;
-            height: 48px;
-            -webkit-border-radius: 50%;
-            -moz-border-radius: 50%;
-            border-radius: 50%;
-            background: rgba(0,0,0,.2);
-            color: #fff;
-            text-align: center;
-            font-size: 24px;
-            line-height: 48px;
-            opacity: 1;
-            -webkit-transition: all .3s;
-            -moz-transition: all .3s;
-            -o-transition: all .3s;
-            transition: all .3s;
-            -o-border-radius: 50%;
-            -ms-border-radius: 50%;
-            -ms-transition: all .3s;}
-        .num_text{font-size: 12px;color: #868686;line-height: 20px;}
-        .num_f{color: #d71618;}
-        
-        .row-issue{margin: 48px auto 0px;}
-        .m-edit-yz{margin-bottom: 0;padding-bottom: 1px;}
-        .wp{padding-top: 20px;}
-        .m-edit-yz .tit .inp,.m-edit-yz textarea{border:none;background: #f5f5f5;}
-        #title{width: 80%;}
-        .m-edit-yz textarea{height: 200px;}
-        
-        .m-edit-yz .file .addImg{ display: inline-block;border: 1px #f5f5f5 solid;
-								padding: 0 6px;line-height: 38px;
-								text-align: center;
-								font-size: 46px;
-								color: #f5f5f5;
-								border-radius: 1px;
-								background-color: #fff;
-								cursor: pointer;}
-        
-        .headline{margin-bottom: 6px;font-size: 12px;}
-        .m-edit-yz .tit .inp,.m-edit-yz textarea{font-size: 12px;}
-        
-        input#title::-webkit-input-placeholder, textarea::-webkit-input-placeholder {color: #949494;}
-		input#title:-moz-placeholder, textarea:-moz-placeholder{ color:#949494;}
-		input#title::-moz-placeholder, textarea::-moz-placeholder{ color:#949494;}
-		input#title:-ms-input-placeholder, textarea:-ms-input-placeholder{ color:#949494;}
-		
-		.publish{display: block;width: 100%;margin: 22px auto 14px;color: #fff;border: none;
-				 font-size: 14px;text-align: center;line-height: 30px;background: #f75b5d;
-				 border-radius: 2px;}
-		.nav{top: 45px;}
+    <style>
+    	article{min-height: 308px;}
+        #editorContainer{min-height: 298px; border: 1px solid #e5e5e5;margin-bottom: 10px;}
+        .zxeditor-container{min-height: 296px;}
+        .zxeditor-debug-switch{height: 0;opacity: 0;}
+        .zxeditor-container .zxeditor-toolbar-wrapper{position: inherit!important;}
+
+        .publish{display: block;width: 100%;margin: 22px auto 14px;color: #fff;border: none;
+				 font-size: 14px;text-align: center;line-height: 30px;background: #f75b5d;border-radius: 2px;}
+        .nav{top: 45px;}
+        .wp{padding-top: 22px;}
+        .row-issue{margin-top: 45px;}
+        .issueTile{background: #f5f5f5;height: auto;min-height: 45px;padding: 10px 0;}
+        .issueTile p{line-height: 20px;color: #666;width: 94%;margin: 0 auto;text-align: justify;}
     </style>
 </head>
 <body>
 	<div class="header">
-        <?php $_smarty_tpl_vars = $this->_tpl_vars;
+	    <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => 'wap/header.tpl', 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
-        <h3>发布问题</h3>
-    </div>
-    <div class="mian">
-        <div class="row-issue">
-            <div class="m-edit-yz">
-                <div class="wp">
-                    <form>
-                        <div class="tit" style="background: #f5f5f5;">
-                            <input type="text" class="inp" value="<?php echo $this->_tpl_vars['res']['title']; ?>
-" id="title" maxlength="80" onkeyup="judgeIsNonNull1(event)" placeholder="请输入你的问题，不少于10个字哦">
-                            <p class="r num_text"><a class="num_f" id="contentwordage1">0</a>/80</p>
-                        </div>
-                        
-                        <p class="headline">问题说明</p>
-                        <div class="content-txt" style="overflow: auto;margin-bottom: 0px;">
-                            <textarea placeholder="请输入你的问题说明，不少于10个字哦" class="txta1" id="describe" maxlength="1000" onkeyup="judgeIsNonNull2(event)"><?php echo $this->_tpl_vars['res']['describe']; ?>
-</textarea>
-                            <p class="r num_text"><a class="num_f" id="contentwordage2">0</a>/1000</p>
-                        </div>
-                        
-                        <div class="pic-video">
-                            <div class="file f-pic" style="margin-bottom: 7px;">
-                            	<div class="addImg">+</div>
-                            </div>
-                        </div>
-                        <div class="layui-upload">
-                            <label>
-                                <input type="file" name="file" class="layui-upload-file" id="myfile" style="display:none">
-                            </label>
-                            <div class="layui-upload-list" id="piclist">
-                                <?php if ($this->_tpl_vars['res']['pic'] != ''): ?>
-                                <div class="upic"><img src="<?php echo $this->_tpl_vars['res']['pic']; ?>
-" class="layui-upload-img" onclick="deletepic(this)"><i class="iz layui-icon">&#xe640;</i></div>
-                                <?php else: ?>
-                                <div class="upic"><img src="" class="layui-upload-img"></div>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                        
-                        <p class="headline">选择目的地</p>
-						<div class="tit">
-							<input type="text" class="inp" value="<?php echo $this->_tpl_vars['res']['nation']; ?>
-" id="nation" placeholder="国家">
-						</div>
-						<p class="headline">标签</p>
-						<div class="tit">
-							<input type="text" class="inp" value="<?php echo $this->_tpl_vars['res']['tag']; ?>
-" id="tag" placeholder="旅游知识/美食/自由行">
-							<p class="tagTips FontSize dis_none">标签目前最多为四个哦！</p>
-						</div>
-						<button class="publish" id="btnAdd">发布问题</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <?php $_smarty_tpl_vars = $this->_tpl_vars;
+	    <h3>达人问答-我要回答</h3>
+	</div>
+	<div class="mian">
+	    <div class="row-issue">
+	        <div class="m-edit-yz">
+	            <div class="issueTile">
+	                <p class="title"><?php echo $this->_tpl_vars['info']['title']; ?>
+</p>
+	            </div>
+	            <div class="wp">
+	                <!-- 内容编辑区域 -->
+	                <input type="hidden" name="" id="faq_id" value="<?php echo $this->_tpl_vars['faq_id']; ?>
+" />
+	                <article><div id="editorContainer"></div></article>
+	                <button class="publish" id="btnAdd">回答</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => 'wap/footer.tpl', 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
-    <script src="/resource/js/layui/lay/dest/layui.all.js"></script>
-	<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
-    <script type="text/javascript">
-        //控制 问题标题的长度
-        function judgeIsNonNull1(event){
-			var value=$("#title").val();
-			var x = event.which || event.keyCode;
-			if( value.length <= 80 ){
-	    		//console.log("符合80位数以内");
-	    	} else{
-	    		return $("#title").val(value.substr(0, 11));
-	    	}
-		    var remain = $("#title").val().length;
-            if(remain > 80){
-                $('#title').val(setString($('#title').val(),80));
-                $('#contentwordage1').html(remain);
-            }else{
-                $('#contentwordage1').html(remain);
-            }
-		}
-        
-        //控制 问题说明的长度
-        function judgeIsNonNull2(event){
-			var value=$("#describe").val();
-			var x = event.which || event.keyCode;
-			if( value.length <= 1000 ){
-	    		//console.log("符合1000位数以内");
-	    	} else{
-	    		return $("#describe").val(value.substr(0, 1000));
-	    	}
-		    var remain = $("#describe").val().length;
-            if(remain > 1000){
-                $('#title').val(setString($('#describe').val(),1000));
-                $('#contentwordage2').html(remain);
-            }else{
-                $('#contentwordage2').html(remain);
-            }
-		}
-        
-        //添加封面图
-        $('.f-pic').click(function(){
-            $('.layui-upload-button').trigger("click");
-        });
-        layui.upload({
-            url: "/index.php?m=api&c=index&v=uploadpic",
-            type: 'image',
-            ext: 'jpg|png|jpeg|bmp',
-            before: function(obj){
-                $('#picslist').before('<span style="color: #d71618;" class="tips">上传中...</span>');
-            },
-            success: function (data) {
-                $('#piclist').html('<div class="upic" onclick="deletepic(this)"><img src="'+ data.url +'" class="layui-upload-img"><i class="iz layui-icon">&#xe640;</i></div>');
-            }
-        });
-        
-        //发布
-        $('#btnAdd').click(function(){
-            var title = $('#title').val();
-            var describe = $('#describe').val();
-            var pic = $('.layui-upload-img').attr('src');
-            var address = $('#nation').val();
-            var tag = $('#tag').val();
-            if(!title){
-                layer.msg('请输入标题');
-                return false;
-            }
-            if(!describe){
-                layer.msg('请输入问题说明');
-                return false;
-            }
-            
-			var result=tag.split("/");
-			if(result.length>4){
-				$(".tagTips").removeClass("dis_none");
-				return false;
-			}
-            $.post("/index.php?m=api&c=index&v=", {
-                'title':title,
-                'describe':describe,
-                'pic':pic,
-                'address':address,
-                'tag':tag
-            }, function(data){
-                layer.msg(data.tips);
-                if (data.status == 1) {
-                    window.location.href = "/index.php?m=wap&c=user&v=";
-                }
-            },"JSON");
-        })
-      	function deletepic(obj){
-            $(obj).remove();
-       	}
-      	
-      	
-		//标签  字数控制
-		$('#tag').keyup(function() {
-			var tag = $('#tag').val();
-			var result=tag.split("/");
-			if(result.length>4){
-				$(".tagTips").removeClass("dis_none");
-			}else{
-				for(var i=0;i<result.length;i++){
-
-				}
-				$(".tagTips").addClass("dis_none");
-			}
-		});
-    </script>
+	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
+	<script src="https://cdn.bootcss.com/js-polyfills/0.1.42/polyfill.min.js"></script>
+	<!--exif获取照片参数插件-->
+	<script src="/resource/m/demo/libs/exif.min.js"></script>
+	<!--debug-->
+	<script src="/resource/m/demo/libs/zx-debug.min.js"></script>
+	<!--编辑器-->
+	<script src="/resource/m/demo/js/zx-editor.min.js"></script>
+	<script type="text/javascript">
+	    // 实例化 ZxEditor
+	    var zxEditor = new ZxEditor('#editorContainer', {
+	        // 编辑器固定
+	        fixed: false,
+	        // 120秒自动保存一次编辑内容
+	        autoSave: 20,
+	        imageMaxSize:5,
+	        //top:44
+	    });
+	
+	    // 初始化本地存储的数据
+	    function initLoaclData () {
+	        var data = zxEditor.storage.get('article')
+	        if (data) {
+	            if (data.cover) {
+	                zxEditor.addClass('has-pic', $('.cover'));
+	            }
+	            zxEditor.setContent(data.content);
+	        }else{
+	            zxEditor.setContent('<?php echo $this->_tpl_vars['res']['content']; ?>
+');
+	        }
+	    }
+	    initLoaclData();
+	
+	    //获取文章数据
+	    function getArticleData () {
+	        var data = {
+	            // 获取正文内容
+	            content: zxEditor.getContent()
+	        }
+	        return ((!data.content || data.content === '<p><br></p>'))
+	                ? null
+	                : data;
+	    }
+	
+	    //数据处理，并提交数据处理
+	    var url;
+	    function uploadBase64Images (base64Images, callback) {
+	        var len = base64Images.length;
+	        var count = 0;
+	        if (len === 0) {
+	            callback();
+	            return
+	        }
+	        for (var i = 0; i < len; i++) {
+	            _uploadHandler(base64Images[i]);
+	        }
+	
+	        function _uploadHandler (data) {
+	            url="";
+	            $.ajax({
+	                type:"post",
+	                url:"/index.php?m=api&c=upload&v=base64_upload",
+	                async:true,
+	                data:{base64:data.base64},
+	                dataType:"json",
+	                success:function(res){
+	                    if(res.status == 1){
+	                        url=res.url;
+	                        zxEditor.setImageSrc(data.id, url)
+	                        // 计算图片是否上传完成
+	                        _handleCount();
+	                    }
+	                },error:function(res){
+	                    console.log(res.tip);
+	                }
+	            });
+	        }
+	
+	        function _handleCount () {
+	            count++
+	            if (count === len) {
+	                callback();
+	            }
+	        }
+	    }
+	    // 模拟文件上传--暂时没用处了
+	    function upload (blob, callback) {
+	        setTimeout(function () {
+	            callback(url);
+	        }, 500);
+	    }
+	
+	    //提交回答的内容
+	    $('#btnAdd').on('click', function() {
+	        // 处理正文中的base64图片
+	        // 获取正文中的base64数据数组
+	        var base64Images = zxEditor.getBase64Images();
+	        var data = getArticleData() || {};
+	        var faq_id = $("#faq_id").val();
+	
+	        if( $(".zxeditor-content-wrapper p").text() == "" ){
+	            layer.msg('回答内容不能为空！');
+	            return false;
+	        } else{
+	            //上传base64图片数据
+	            uploadBase64Images(base64Images, function () {
+	                // 正文中有base64数据，上传替换成功后再重新获取正文内容
+	                if (base64Images.length) {
+	                    data.content = zxEditor.getContent();
+	                }
+	
+	                $.post("/index.php?m=api&c=faq&v=save_response_faq", {
+	                	'faq_id':faq_id,
+	                    'content': data.content,
+	                }, function(data) {
+	                    if(data.status == 1) {
+	                        layer.msg('发布成功！');
+	                        //清除缓存
+	                        //zxEditor.removeSave(data.content);
+	                        //localStorage.clear();
+	                        zxEditor.storage.remove('content', {content: data.content});
+	                        window.location.href = "/index.php?m=wap&c=faq&v=detail&id="+faq_id;
+	                    }
+	                }, "JSON");
+	            });
+	        }
+	    });
+	</script>
 </body>
 </html>

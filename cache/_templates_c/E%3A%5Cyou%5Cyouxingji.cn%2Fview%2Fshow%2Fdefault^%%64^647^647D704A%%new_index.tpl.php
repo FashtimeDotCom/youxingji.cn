@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-30 16:04:35
+<?php /* vpcvcms compiled created on 2018-10-08 15:37:10
          compiled from wap/user/new_index.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/user/new_index.tpl', 45, false),)), $this); ?>
@@ -107,7 +107,7 @@ unset($_smarty_tpl_vars);
     					<div class="txt">发布游记</div>
     				</a>
                 </li>
-                <li><a href="/index.php?m=wap&c=faq&v=response_faq">
+                <li><a href="/index.php?m=wap&c=faq&v=set_faq">
     					<i style="background-image: url(/resource/m/images/s-i4.png);"></i>
     					<div class="txt">发布提问</div>
     				</a>
@@ -135,7 +135,7 @@ unset($_smarty_tpl_vars);
                 	</a>
                 </div>
                 <div class="level">
-                	<a class="dis_block fix" href="javascript:;">
+                	<a class="dis_block fix" href="/index.php?m=wap&c=user&v=my_faq">
 	                	<img class="" src="/resource/m/images/user/4.png"/>
 	                	<p class="">我的问答<img class="RightArrows" src="/resource/m/images/user/8.png" /></p>
                 	</a>

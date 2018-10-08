@@ -40,6 +40,7 @@
             </a>
         </div>
         {{/vplist}}
+        <!--
         <div class="tjuser swiper-container">
             <div class="swiper-wrapper">
                 {{foreach from=$tjuser item=v key=k}}
@@ -58,6 +59,7 @@
                 {{/foreach}}
             </div>
         </div>
+        -->
         <div class="m-txt2">
             <div class="con swiper-container swiper-container-horizontal swiper-container-ios" style="    padding-right: 0px;">
                 <div class="swiper-wrapper" style="overflow-x: scroll;">

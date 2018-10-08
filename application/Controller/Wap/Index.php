@@ -523,11 +523,12 @@ class Controller_Wap_Index extends Core_Controller_WapAction
             $list[$key]['addtime'] = date('Y/m/d', $value['addtime']);
             $list[$key]['avatar'] = $user['headpic']?$user['headpic']:'/resource/images/img-lb2.png';
         }
-        $tjuser = C::M('user_member')->where("tvtop = 1")->order("rand()")->limit('0,6')->select();
-        foreach ($tjuser as $key => $value) {
-            $tjuser[$key]['avatar'] = $value['headpic']?$value['headpic']:'/resource/images/img-lb2.png';
-        }
-        $this->assign('tjuser', $tjuser);
+        //推荐达人注释，暂时不要
+//        $tjuser = C::M('user_member')->where("tvtop = 1")->order("rand()")->limit('0,6')->select();
+//        foreach ($tjuser as $key => $value) {
+//            $tjuser[$key]['avatar'] = $value['headpic']?$value['headpic']:'/resource/images/img-lb2.png';
+//        }
+//        $this->assign('tjuser', $tjuser);
         $this->assign('list', $list);
         $this->assign('type', $type);
         $this->assign('ns', 'tv');

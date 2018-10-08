@@ -100,7 +100,7 @@
 	</div>
 	<div class="answerNav fix">
 		<span class="left" onclick="collect({{$faq_info.id}})"><img src="/resource/m/images/user/icon_faq_detail3.png"/>&nbsp;收藏问题（<i class="collectNUM">{{$faq_info.collection_num}}</i>）</span>
-		<span class="right"><a href="/index.php?m=wap&c=faq&v=set_faq&id={{$faq_info.id}}"><img src="/resource/m/images/user/icon_faq_detail4.png"/>&nbsp;添加答案</a></span>
+		<span class="right"><a href="/index.php?m=wap&c=faq&v=response_faq&id={{$faq_info.id}}"><img src="/resource/m/images/user/icon_faq_detail4.png"/>&nbsp;添加答案</a></span>
 	</div>
 	
 	<script type="text/javascript" src="/resource/m/js/swiper.js"></script>

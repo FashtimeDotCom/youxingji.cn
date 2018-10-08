@@ -1,3 +1,7 @@
+<?php /* vpcvcms compiled created on 2018-10-08 15:38:32
+         compiled from wap/user/my_faq.tpl */ ?>
+<?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
+smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/user/my_faq.tpl', 53, false),)), $this); ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -7,17 +11,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
     <meta name="format-detection" content="telephone=no" />
     <title>个人中心-我的问答</title>
-    <meta name="keywords" content="{{TO->cfg key="index_keywords" group="site" default="首页"}}" />
-    <meta name="description" content="{{TO->cfg key="index_description" group="site" default="首页"}}" />
+    <meta name="keywords" content="<?php echo $this->_reg_objects['TO'][0]->cfg(array('key' => 'index_keywords','group' => 'site','default' => "首页"), $this);?>
+" />
+    <meta name="description" content="<?php echo $this->_reg_objects['TO'][0]->cfg(array('key' => 'index_description','group' => 'site','default' => "首页"), $this);?>
+" />
     <link rel="stylesheet" href="/resource/m/css/style.css" />
     <script src="/resource/m/js/jquery.js"></script>
     <script src="/resource/m/js/lib.js"></script>
     <link rel="stylesheet" href="/resource/m/css/common.css" />
     <link rel="stylesheet" href="/resource/m/css/commonList.css" />
+    <style type="text/css">
+    	.m-mytv-yz .item .videoTitle{color: #333;}
+    	.m-mytv-yz .item .videoDetails{color: #666;}
+    	.m-mytv-yz .item .videoTitle .view{display: inline-block;width: 7%;margin-right: 6px;vertical-align: -3px;}
+		.m-mytv-yz .item .videoTitle .view img{width: 100%;}
+    </style>
 </head>
-<body class="">
+<body>
 	<div class="header">
-	    {{include file='wap/header.tpl'}}
+	    <?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include(array('smarty_include_tpl_file' => 'wap/header.tpl', 'smarty_include_vars' => array()));
+$this->_tpl_vars = $_smarty_tpl_vars;
+unset($_smarty_tpl_vars);
+ ?>
 	    <h3>我的问答</h3>
 	</div>
 	<div class="mian">
@@ -34,17 +50,24 @@
 	        </div>
 	    </div>
 	    <div class="ban">
-	        <a class="backdrop fix" href=""><img src="{{$user.cover}}" title="背景图" alt=""></a>
+	        <a class="backdrop fix" href=""><img src="<?php echo $this->_tpl_vars['user']['cover']; ?>
+" title="背景图" alt=""></a>
 	        <div class="head fix">
-	        	<div class="profilePhoto"><img class="" src="{{$user.avatar}}" alt=""></div>
-	        	<p class="wx_name">{{$user.username}}&nbsp;<a href="javascript:;"><img class="icon_new1" src="/resource/m/images/common/icon_new1.png" /></a></p>
+	        	<div class="profilePhoto"><div class="gaine"><a class="box figure" style="background-image: url(<?php echo $this->_tpl_vars['user']['avatar']; ?>
+);"></a></div></div>
+	        	<p class="wx_name"><?php echo $this->_tpl_vars['user']['username']; ?>
+</p>
 	        	<p class="signature fix" title="个性签名">
 	        		<span class="icon_location1"></span>
 	        		<img class="icon_location2" src="/resource/m/images/common/icon_location1.png" />
-	        		<span class="autograph">{{$user.city}}&nbsp;{{$user.autograph}}</span>
+	        		<span class="autograph"><?php echo $this->_tpl_vars['user']['city']; ?>
+&nbsp;<?php echo $this->_tpl_vars['user']['autograph']; ?>
+</span>
 	        	</p>
 	        	<div class="bottom fix">
-	        		<p class="left"><span id="attention">{{$user.uid|helper:'follownum'}}</span>关注</p>&nbsp;&nbsp;&nbsp;<p class="right"><span id="fans">{{$user.uid|helper:'fansnum'}}</span>粉丝</p>
+	        		<p class="left"><span id="attention"><?php echo ((is_array($_tmp=$this->_tpl_vars['user']['uid'])) ? $this->_run_mod_handler('helper', true, $_tmp, 'follownum') : smarty_modifier_helper($_tmp, 'follownum')); ?>
+</span>关注</p>&nbsp;&nbsp;&nbsp;<p class="right"><span id="fans"><?php echo ((is_array($_tmp=$this->_tpl_vars['user']['uid'])) ? $this->_run_mod_handler('helper', true, $_tmp, 'fansnum') : smarty_modifier_helper($_tmp, 'fansnum')); ?>
+</span>粉丝</p>
 	        	</div>
 	        </div>
 	    </div>
@@ -52,37 +75,116 @@
 	        <div class="m-nv-yz">
 	            <div class="wp fix">
 	                <ul class="fix">
-	                	<li><a href="/index.php?m=wap&c=user&v=travel">日志&nbsp;<i class="Iclass" id="travel_num">{{$total.travel_num}}</i></a></li>
-	                    <li><a href="/index.php?m=wap&c=user&v=new_tv">视频&nbsp;<i class="Iclass" id="tv_num">{{$total.tv_num}}</i></a></li>
-	                    <li><a href="javascript:;">游记&nbsp;<i class="Iclass" id="note_num">{{$total.note_num}}</i></a></li>
-	                    <li class="on"><a href="javascript:;">问答&nbsp;<i class="Iclass" id="answer">{{$total.answer}}</i></a></li>
+	                	<li><a href="/index.php?m=wap&c=user&v=travel">日志&nbsp;<i class="Iclass" id="travel_num"><?php echo $this->_tpl_vars['total']['travel_num']; ?>
+</i></a></li>
+	                    <li><a href="/index.php?m=wap&c=user&v=tv">视频&nbsp;<i class="Iclass" id="tv_num"><?php echo $this->_tpl_vars['total']['tv_num']; ?>
+</i></a></li>
+	                    <li><a href="/index.php?m=wap&c=user&v=travel_note">游记&nbsp;<i class="Iclass" id="note_num"><?php echo $this->_tpl_vars['total']['note_num']; ?>
+</i></a></li>
+	                    <li class="on"><a href="/index.php?m=wap&c=user&v=my_faq">问答&nbsp;<i class="Iclass" id="answer"><?php echo $this->_tpl_vars['total']['answer']; ?>
+</i></a></li>
 	                </ul>
 	            </div>
 	        </div>
-	        {{if $list}}
+	        
 	        <div class="m-mytv-yz" id="pageCount" data-page="" data-nowPage="1">
 	        	<div class="content fix">
-	        		{{foreach from=$list item=item key=key}}
-					<div class="item">
-						<div class="wp">
-							<p class="videoTitle">{{$item.title}}</p>
-							<div class="date">{{$item.addtime}}</div>
-							<p class="videoDetails">{{$item.describes}}</p>
+					<div class="item item_<?php echo $this->_tpl_vars['item']['id']; ?>
+">
+						<div class="wp fix">
+							<p class="videoTitle"><span class="view fix"><img src="/resource/m/images/user/icon_faq_detail1.png"></span>发，呆。发岁，的弗兰。斯达克？</p>
+							<div class="date">2018-06</div>
+							<p class="videoDetails">老大爱的卡级的里卡多</p>
 							<div class="preview fix">
-								<a href="#m-pop1-yz" class="pic js-video fix" data-src="{{$item.url}}">
-									<img src="{{$item.pics}}" alt="">
+								<a href="#m-pop1-yz" class="pic js-video fix" data-src="<?php echo $this->_tpl_vars['item']['url']; ?>
+">
+									<img src="<?php echo $this->_tpl_vars['item']['pics']; ?>
+" alt="">
 									<span class="bo"></span>
 								</a>
 							</div>
-							<div class="videoBottom">
-								<span class="left"><img class="" src="/resource/m/images/common/icon_location2.png" />{{$item.address}}</span>
+							<div class="videoBottom fix">
+								<span class="left"><img class="" src="/resource/m/images/common/icon_location2.png" />北京</span><span class="left tag">没事</span>
 								<p class="right">
 									<span class="check">
-										<img class="" src="/resource/m/images/common/icon_check.png" data-id="{{$item.id}}" data-num="{{$item.shownum}}" />{{$item.shownum}}
+										<img class="" src="/resource/m/images/common/icon_check.png" data-id="<?php echo $this->_tpl_vars['item']['id']; ?>
+" data-num="<?php echo $this->_tpl_vars['item']['shownum']; ?>
+" />88888
 									</span>&nbsp;&nbsp;
-									<a class="zan" data-id="{{$item.id}}" data-num="{{$item.topnum}}" href="javascript:;">
+									<a class="zan" data-id="<?php echo $this->_tpl_vars['item']['id']; ?>
+" data-num="<?php echo $this->_tpl_vars['item']['topnum']; ?>
+" href="javascript:;">
 										<span class="like">
-											<img class="" src="/resource/m/images/common/icon_like.png" /><i class="Iclass">{{$item.topnum}}</i>
+											<img class="" src="/resource/m/images/common/icon_like.png" /><i class="Iclass">8888</i>
+										</span>
+									</a>&nbsp;&nbsp;
+									<span class="review"><img class="" src="/resource/m/images/common/icon_review.png" />0808</span>
+								</p>
+							</div>
+							<div class="pullDownMenu fix">
+								<img class="icon_pullDown" src="/resource/m/images/common/icon_pullDown.png" />
+								<div class="pullDownNav fix dis_none">
+									<a class="collect" href="/index.php?m=wap&c=user&v=edittv&id=<?php echo $this->_tpl_vars['item']['id']; ?>
+"><span>编辑</span></a>
+									<a class="cancel" href="javascript:;" onclick="deleteTv(<?php echo $this->_tpl_vars['item']['id']; ?>
+)"><span>删除</span></a>
+								</div>
+							</div>
+						</div>
+					</div>
+	        	</div>
+				<p class="tips"></p>
+	        </div>
+	        
+	        <?php if ($this->_tpl_vars['list']): ?>
+	        <div class="m-mytv-yz" id="pageCount" data-page="" data-nowPage="1">
+	        	<div class="content fix">
+	        		<?php $_from = $this->_tpl_vars['list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+    foreach ($_from as $this->_tpl_vars['key'] => $this->_tpl_vars['item']):
+?>
+					<div class="item item_<?php echo $this->_tpl_vars['item']['id']; ?>
+">
+						<div class="wp fix">
+							<p class="videoTitle"><span class="view fix"><img src="/resource/m/images/user/icon_faq_detail1.png"></span><?php echo $this->_tpl_vars['item']['title']; ?>
+</p>
+							<div class="date"><?php echo $this->_tpl_vars['item']['addtime']; ?>
+</div>
+							<p class="videoDetails"><?php echo $this->_tpl_vars['item']['describes']; ?>
+</p>
+							<div class="preview fix">
+								<a href="#m-pop1-yz" class="pic js-video fix" data-src="<?php echo $this->_tpl_vars['item']['url']; ?>
+">
+									<img src="<?php echo $this->_tpl_vars['item']['pics']; ?>
+" alt="">
+									<span class="bo"></span>
+								</a>
+							</div>
+							<div class="videoBottom fix">
+								<span class="left"><img class="" src="/resource/m/images/common/icon_location2.png" /><?php echo $this->_tpl_vars['item']['address']; ?>
+</span>
+								<?php if ($this->_tpl_vars['item']['tag']): ?>
+									<?php $_from = $this->_tpl_vars['item']['tag']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+    foreach ($_from as $this->_tpl_vars['k'] => $this->_tpl_vars['vo']):
+?>
+										<?php if ($this->_tpl_vars['k'] < 2): ?>
+											<span class="left tag"><?php echo $this->_tpl_vars['vo']; ?>
+</span>
+										<?php endif; ?>
+									<?php endforeach; endif; unset($_from); ?>
+								<?php endif; ?>
+								<p class="right">
+									<span class="check">
+										<img class="" src="/resource/m/images/common/icon_check.png" data-id="<?php echo $this->_tpl_vars['item']['id']; ?>
+" data-num="<?php echo $this->_tpl_vars['item']['shownum']; ?>
+" /><?php echo $this->_tpl_vars['item']['shownum']; ?>
+
+									</span>&nbsp;&nbsp;
+									<a class="zan" data-id="<?php echo $this->_tpl_vars['item']['id']; ?>
+" data-num="<?php echo $this->_tpl_vars['item']['topnum']; ?>
+" href="javascript:;">
+										<span class="like">
+											<img class="" src="/resource/m/images/common/icon_like.png" /><i class="Iclass"><?php echo $this->_tpl_vars['item']['topnum']; ?>
+</i>
 										</span>
 									</a>&nbsp;&nbsp;
 									<a class="Areview" href="javascript:;"><span class="review"><img class="" src="/resource/m/images/common/icon_review.png" />0</span></a>
@@ -91,20 +193,19 @@
 							<div class="pullDownMenu fix">
 								<img class="icon_pullDown" src="/resource/m/images/common/icon_pullDown.png" />
 								<div class="pullDownNav fix dis_none">
-									<!--<a class="collect" href="javascript:;"><span>收藏</span></a>
-	                                <a class="cancel" href="javascript:;"><span>取消</span></a>-->
-	
-									<a class="collect" href="/index.php?m=wap&c=user&v=edittv&id={{$item.id}}"><span>编辑</span></a>
-									<a class="cancel" href="javascript:;" onclick="deleteTv({{$item.id}})"><span>删除</span></a>
+									<a class="collect" href="/index.php?m=wap&c=user&v=edittv&id=<?php echo $this->_tpl_vars['item']['id']; ?>
+"><span>编辑</span></a>
+									<a class="cancel" href="javascript:;" onclick="deleteTv(<?php echo $this->_tpl_vars['item']['id']; ?>
+)"><span>删除</span></a>
 								</div>
 							</div>
 						</div>
 					</div>
-					{{/foreach}}
+					<?php endforeach; endif; unset($_from); ?>
 	        	</div>
 				<p class="tips"></p>
 	        </div>
-	        {{else}}
+	        <?php else: ?>
 	        <div class="m-mytv-yz">
 	            <div class="m-myday-yz">
 	                <div class="wp">
@@ -113,16 +214,20 @@
 	                        <div class="text">最原创的旅拍视频，最暖心的旅行推荐，由你打造</div>
 	                    </div>
 	                    <div class="top">
-	                        <a href="/index.php?m=wap&c=user&v=addfaqs" class="shoot">发布问答</a>
+	                        <a href="/index.php?m=wap&c=faq&v=set_faq" class="shoot">发布问答</a>
 	                    </div>
 	                </div>
 	            </div>
 	        </div>
-	        {{/if}}
+	        <?php endif; ?>
 	    </div>
 	    <div class="maskLayer dis_none" title="遮罩层，作用：下拉菜单失焦时，下拉菜单自动消失"></div>
 	</div>
-	{{include file='wap/footer.tpl'}}
+	<?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include(array('smarty_include_tpl_file' => 'wap/footer.tpl', 'smarty_include_vars' => array()));
+$this->_tpl_vars = $_smarty_tpl_vars;
+unset($_smarty_tpl_vars);
+ ?>
 	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
 	<script type="text/javascript">
 		window.onload=function(){
@@ -168,8 +273,8 @@
 			                	var html="";
 			                	$.each(data.tips,function(i,item){
 			            			html += '<div class="item">'+
-												'<div class="wp">'+
-													'<p class="videoTitle">'+data.tips[i].title+'</p>'+
+												'<div class="wp fix">'+
+													'<p class="videoTitle"><span class="view fix"><img src="/resource/m/images/user/icon_faq_detail1.png"></span>'+data.tips[i].title+'</p>'+
 													'<div class="date">'+data.tips[i].addtime+'</div>'+
 													'<p class="videoDetails">'+data.tips[i].describes+'</p>'+
 													'<div class="preview fix">'+
@@ -178,7 +283,7 @@
 															'<span class="bo"></span>'+
 														'</a>'+
 													'</div>'+
-													'<div class="videoBottom">'+
+													'<div class="videoBottom fix">'+
 														'<span class="left"><img class="" src="/resource/m/images/common/icon_location2.png" />'+data.tips[i].address+'</span>'+
 														'<p class="right">'+
 															'<a class="" href="javascript:;">'+
@@ -251,7 +356,7 @@
 	            var num = parseInt($(this).attr('data-num'));
 	            var textNum = parseInt($(this).find("i").text());
 	            var obj = $(this);
-	            $.post("/index.php?m=api&c=index&v=zantv", {
+	            $.post("/index.php?m=api&c=index&v=zanfaq", {
 	                'id':id
 	            }, function(data){
 	                if(data.status == 1){
@@ -288,13 +393,13 @@
 	        layer.msg('您确定要删除吗？', {
 	            btn: ['确认', '取消'],
 	            yes: function (index) {
-	                $.post("/index.php?m=api&c=index&v=deletetv", {
+	                $.post("/index.php?m=api&c=index&v=deletefaq", {
 	                    'id':id
 	                }, function(data){
 	                    if(data.status == 1){
 	                    	var answer = parseInt($("#answer").text());
 	                    	$("#answer").text(answer-1);
-	                        $('.tv_t'+id).remove();
+	                        $('.item_'+id).remove();
 	                    }
 	                },"JSON");
 	                layer.close(index);

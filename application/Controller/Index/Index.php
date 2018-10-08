@@ -350,10 +350,13 @@ class Controller_Index_Index extends Core_Controller_TAction
     { 
         $perpage = 10; 
       	$keyword = htmlspecialchars($this->getParam('keyword'),ENT_QUOTES);
-        $where = "status = 1";
+        $where="";
       	if($keyword){
-        	$where .= " and describes like '%$keyword%'";
+        	$where = " describes like '%$keyword%' or title like '%$keyword%' and status = 1 ";
+        }else{
+            $where=" status=1 ";
         }
+
         $Num = C::M('travel')->where($where)->getCount();
         $curpage = $this->getParam ('page') ? intval ($this->getParam ('page')) : 1;
         $mpurl = "index.php?m=index&c=index&v=star&keyword=$keyword";

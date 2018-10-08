@@ -6,7 +6,7 @@
     <meta name="renderer" content="webkit" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
     <meta name="format-detection" content="telephone=no" />
-    <title>达人问答</title>
+    <title>达人问答-问题列表</title>
     <meta name="keywords" content="{{TO->cfg key="index_keywords" group="site" default="首页"}}" />
     <meta name="description" content="{{TO->cfg key="index_description" group="site" default="首页"}}" />
     <link rel="stylesheet" href="/resource/m/css/style.css" />

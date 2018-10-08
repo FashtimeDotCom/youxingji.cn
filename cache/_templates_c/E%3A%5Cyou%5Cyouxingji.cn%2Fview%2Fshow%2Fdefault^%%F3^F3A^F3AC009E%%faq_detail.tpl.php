@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-30 20:07:29
+<?php /* vpcvcms compiled created on 2018-10-08 15:25:02
          compiled from wap/faq/faq_detail.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -129,7 +129,7 @@ unset($_smarty_tpl_vars);
 		<span class="left" onclick="collect(<?php echo $this->_tpl_vars['faq_info']['id']; ?>
 )"><img src="/resource/m/images/user/icon_faq_detail3.png"/>&nbsp;收藏问题（<i class="collectNUM"><?php echo $this->_tpl_vars['faq_info']['collection_num']; ?>
 </i>）</span>
-		<span class="right"><a href="/index.php?m=wap&c=faq&v=set_faq&id=<?php echo $this->_tpl_vars['faq_info']['id']; ?>
+		<span class="right"><a href="/index.php?m=wap&c=faq&v=response_faq&id=<?php echo $this->_tpl_vars['faq_info']['id']; ?>
 "><img src="/resource/m/images/user/icon_faq_detail4.png"/>&nbsp;添加答案</a></span>
 	</div>
 	

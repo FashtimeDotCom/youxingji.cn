@@ -88,7 +88,7 @@
     					<div class="txt">发布游记</div>
     				</a>
                 </li>
-                <li><a href="/index.php?m=wap&c=faq&v=response_faq">
+                <li><a href="/index.php?m=wap&c=faq&v=set_faq">
     					<i style="background-image: url(/resource/m/images/s-i4.png);"></i>
     					<div class="txt">发布提问</div>
     				</a>
@@ -116,7 +116,7 @@
                 	</a>
                 </div>
                 <div class="level">
-                	<a class="dis_block fix" href="javascript:;">
+                	<a class="dis_block fix" href="/index.php?m=wap&c=user&v=my_faq">
 	                	<img class="" src="/resource/m/images/user/4.png"/>
 	                	<p class="">我的问答<img class="RightArrows" src="/resource/m/images/user/8.png" /></p>
                 	</a>

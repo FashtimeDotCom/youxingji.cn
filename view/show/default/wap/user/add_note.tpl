@@ -16,6 +16,10 @@
 	<script src="/resource/m/js/jquery.js"></script>
 	<script src="/resource/m/js/lib.js"></script>
 	<link rel="stylesheet" href="/resource/m/css/note.css" />
+    <style>
+    	
+
+    </style>
 </head>
 <body id="row_issue">
 	<div class="mian">
@@ -94,10 +98,11 @@
 							<input type="text" class="inp" value="{{$res.tag}}" id="tag" placeholder="请输入标签(可选)，每个标签最多四个字，如：旅游知识/美食，用正斜杠分开">
 							<p class="tagTips FontSize dis_none">标签目前最多为四个哦！</p>
 						</div>
-	
-						<link rel="stylesheet" href="/resource/m/demo/css/index.css">
+
 						<style>
-							#editorContainer{border: 1px solid #e5e5e5;margin-bottom: 10px;}
+							article{min-height: 308px;}
+        					#editorContainer{min-height: 298px; border: 1px solid #e5e5e5;margin-bottom: 10px;}
+        					.zxeditor-container{min-height: 296px;}
 							.zxeditor-debug-switch{height: 0;opacity: 0;}
 						</style>
 						<!-- 内容编辑区域 -->
@@ -372,6 +377,8 @@
 													layer.msg(data.tips);
 												}
 											}, "JSON");
+										}else{
+											layer.msg(data.tips);
 										}
 									}, 'jsonp');
 	
@@ -468,6 +475,8 @@
 							zxEditor.setImageSrc(data.id, url)
 							// 计算图片是否上传完成
 							_handleCount();
+						}else{
+							layer.msg(data.tips);
 						}
 					},error:function(res){
 						console.log(res.tip);
@@ -529,7 +538,7 @@
 				return false;
 			}
 	
-			var result=yourString.split("/");
+			var result=tag.split("/");
 			if(result.length>4){
 				$(".tagTips").removeClass("dis_none");
 				return false;
@@ -565,8 +574,6 @@
 					'desc': describe,
 					'address':address
 				}, function(data) {
-					layer.msg(data.tips);
-	
 					if(data.status == 1) {
 						layer.msg('发布成功！');
 						//清除缓存
@@ -574,6 +581,8 @@
 						//localStorage.clear();
 						zxEditor.storage.remove('content', {content: data.content});
 						window.location.href = "/index.php?m=wap&c=user&v=travel_note";
+					}else{
+						layer.msg(data.tips);
 					}
 				}, "JSON");
 			});
@@ -604,7 +613,7 @@
 					data.content = zxEditor.getContent();
 				}
 	
-				list=imgUrl + '||' +data.content;
+				list=imgUrl + '||' +encodeURI(data.content);
 				$.post("/index.php?m=api&c=index&v=adddraft", {
 					'title': title,
 					'describe': describe,
@@ -613,7 +622,6 @@
 					'type': 2,
 					'address':address
 				}, function(data) {
-					layer.msg(data.tips);
 					if(data.status == 1) {
 						layer.msg('保存成功！');
 						//清除缓存
@@ -621,6 +629,8 @@
 						//localStorage.clear();
 						zxEditor.storage.remove('content', {content: data.content});
 						window.location.href = "/index.php?m=wap&c=user&v=draft";
+					}else{
+						layer.msg(data.tips);
 					}
 				}, "JSON");
 			});

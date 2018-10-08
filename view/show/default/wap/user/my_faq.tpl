@@ -6,7 +6,7 @@
     <meta name="renderer" content="webkit" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
     <meta name="format-detection" content="telephone=no" />
-    <title>个人中心-我的日志</title>
+    <title>个人中心-我的问答</title>
     <meta name="keywords" content="{{TO->cfg key="index_keywords" group="site" default="首页"}}" />
     <meta name="description" content="{{TO->cfg key="index_description" group="site" default="首页"}}" />
     <link rel="stylesheet" href="/resource/m/css/style.css" />
@@ -14,11 +14,17 @@
     <script src="/resource/m/js/lib.js"></script>
     <link rel="stylesheet" href="/resource/m/css/common.css" />
     <link rel="stylesheet" href="/resource/m/css/commonList.css" />
+    <style type="text/css">
+    	.m-mytv-yz .item .videoTitle{color: #333;}
+    	.m-mytv-yz .item .videoDetails{color: #666;}
+    	.m-mytv-yz .item .videoTitle .view{display: inline-block;width: 7%;margin-right: 6px;vertical-align: -3px;}
+		.m-mytv-yz .item .videoTitle .view img{width: 100%;}
+    </style>
 </head>
 <body>
 	<div class="header">
 	    {{include file='wap/header.tpl'}}
-	    <h3>我的日志</h3>
+	    <h3>我的问答</h3>
 	</div>
 	<div class="mian">
 	    <div class="g-top">
@@ -34,7 +40,7 @@
 	        </div>
 	    </div>
 	    <div class="ban">
-	        <div class="backdrop fix"><img src="{{$user.cover}}" title="背景图" alt=""></div>
+	        <a class="backdrop fix" href=""><img src="{{$user.cover}}" title="背景图" alt=""></a>
 	        <div class="head fix">
 	        	<div class="profilePhoto"><div class="gaine"><a class="box figure" style="background-image: url({{$user.avatar}});"></a></div></div>
 	        	<p class="wx_name">{{$user.username}}</p>
@@ -52,53 +58,55 @@
 	        <div class="m-nv-yz">
 	            <div class="wp fix">
 	                <ul class="fix">
-	                	<li class="on"><a href="/index.php?m=wap&c=user&v=new_travel">日志&nbsp;<i class="Iclass" id="travel_num">{{$total.travel_num}}</i></a></li>
+	                	<li><a href="/index.php?m=wap&c=user&v=travel">日志&nbsp;<i class="Iclass" id="travel_num">{{$total.travel_num}}</i></a></li>
 	                    <li><a href="/index.php?m=wap&c=user&v=tv">视频&nbsp;<i class="Iclass" id="tv_num">{{$total.tv_num}}</i></a></li>
 	                    <li><a href="/index.php?m=wap&c=user&v=travel_note">游记&nbsp;<i class="Iclass" id="note_num">{{$total.note_num}}</i></a></li>
-	                    <li><a href="/index.php?m=wap&c=user&v=my_faq">问答&nbsp;<i class="Iclass" id="answer">{{$total.answer}}</i></a></li>
+	                    <li class="on"><a href="/index.php?m=wap&c=user&v=my_faq">问答&nbsp;<i class="Iclass" id="answer">{{$total.answer}}</i></a></li>
 	                </ul>
 	            </div>
 	        </div>
+	        
 	        {{if $list}}
 	        <div class="m-mytv-yz" id="pageCount" data-page="" data-nowPage="1">
 	        	<div class="content fix">
 	        		{{foreach from=$list item=item key=key}}
 					<div class="item item_{{$item.id}}">
 						<div class="wp fix">
-							<p class="videoTitle">{{$item.title}}</p>
+							<p class="videoTitle"><span class="view fix"><img src="/resource/m/images/user/icon_faq_detail1.png"></span>{{$item.title}}</p>
 							<div class="date">{{$item.addtime}}</div>
 							<p class="videoDetails">{{$item.describes}}</p>
-							<ul class="ul-imgtxt2-yz">
-								<li><dl>{{foreach from=$item.content item=v}}
-		                                <dd><a href="{{$v}}" class="figure fancybox-effects-a" style="background-image: url({{$v}});">
-		                                        <div class="pic"></div>
-		                                    </a>
-		                                </dd>
-		                                {{/foreach}}
-		                           	</dl>
-								</li>
-							</ul>
-							
-							<div class="videoBottom">
-								<span class="left"><img class="" src="/resource/m/images/common/icon_location2.png" />{{$item.address}}</span>
+							<div class="preview fix">
+								<a href="#m-pop1-yz" class="pic js-video fix" data-src="{{$item.url}}">
+									<img src="{{$item.pics}}" alt="">
+									<span class="bo"></span>
+								</a>
+							</div>
+							<div class="videoBottom fix">
+								<span class="left"><img src="/resource/m/images/common/icon_location2.png" />{{$item.address}}</span>
+								{{if $item.tag}}
+									{{foreach from=$item.tag key=k item=vo }}
+										{{if $k <2}}
+											<span class="left tag">{{$vo}}</span>
+										{{/if}}
+									{{/foreach}}
+								{{/if}}
 								<p class="right">
 									<span class="check">
-										<img class="" src="/resource/m/images/common/icon_check.png" data-id="{{$item.id}}" data-num="{{$item.shownum}}" />{{$item.shownum}}
+										<img src="/resource/m/images/common/icon_check.png" data-id="{{$item.id}}" data-num="{{$item.shownum}}" />{{$item.shownum}}
 									</span>&nbsp;&nbsp;
 									<a class="zan" data-id="{{$item.id}}" data-num="{{$item.topnum}}" href="javascript:;">
 										<span class="like">
-											<img class="" src="/resource/m/images/common/icon_like.png" /><i class="Iclass">{{$item.topnum}}</i>
+											<img src="/resource/m/images/common/icon_like.png" /><i class="Iclass">{{$item.topnum}}</i>
 										</span>
 									</a>&nbsp;&nbsp;
-									<a class="Areview" href="javascript:;"><span class="review"><img class="" src="/resource/m/images/common/icon_review.png" />0</span></a>
+									<a class="Areview" href="javascript:;"><span class="review"><img src="/resource/m/images/common/icon_review.png" />0</span></a>
 								</p>
 							</div>
-							
 							<div class="pullDownMenu fix">
 								<img class="icon_pullDown" src="/resource/m/images/common/icon_pullDown.png" />
 								<div class="pullDownNav fix dis_none">
-									<a class="collect" href="/index.php?m=wap&c=user&v=edittravel&id={{$item.id}}"><span>编辑</span></a>
-									<a class="cancel" href="javascript:;" onclick="deleteTravel({{$item.id}})"><span>删除</span></a>
+									<a class="collect" href="/index.php?m=wap&c=user&v=edittv&id={{$item.id}}"><span>编辑</span></a>
+									<a class="cancel" href="javascript:;" onclick="deleteTv({{$item.id}})"><span>删除</span></a>
 								</div>
 							</div>
 						</div>
@@ -106,17 +114,17 @@
 					{{/foreach}}
 	        	</div>
 				<p class="tips"></p>
-	       	</div>
+	        </div>
 	        {{else}}
 	        <div class="m-mytv-yz">
 	            <div class="m-myday-yz">
-	                <div class="wp fix">
-	                	<img class="default_bg" src="/resource/m/images/user/defaul_travel_bg.png"/>
+	                <div class="wp">
+	                	<img class="default_bg" src="/resource/m/images/user/defaul_faqs_bg.png"/>
 	                    <div class="bg3">
-	                        <div class="text">用九宫格丈量这个世界用简短的255个字<br />分享旅途中的美好感受行走中的点滴</div>
+	                        <div class="text">最原创的旅拍视频，最暖心的旅行推荐，由你打造</div>
 	                    </div>
 	                    <div class="top">
-	                        <a href="/index.php?m=wap&c=user&v=addtravel" class="shoot">发布旅行日志</a>
+	                        <a href="/index.php?m=wap&c=faq&v=set_faq" class="shoot">发布问答</a>
 	                    </div>
 	                </div>
 	            </div>
@@ -126,33 +134,14 @@
 	    <div class="maskLayer dis_none" title="遮罩层，作用：下拉菜单失焦时，下拉菜单自动消失"></div>
 	</div>
 	{{include file='wap/footer.tpl'}}
-	
-	<!-- 弹窗 -->
-    <link rel="stylesheet" type="text/css" href="/resource/m/css/jquery.fancybox.css" media="screen" />
-    <script type="text/javascript" src="/resource/m/js/jquery.fancybox.js"></script>
-    <script type="text/javascript">
-    	$(document).ready(function(){
-            $(".fancybox-effects-a").fancybox({
-                helpers: {
-                    title: {
-                        type: 'outside'
-                    },
-                    overlay: {
-                        speedOut: 0
-                    }
-                }
-            });
-        });
-    </script>
-    
 	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
 	<script type="text/javascript">
 		window.onload=function(){
     		//判断列表的总数量是否大于等于5
-    		var travel_num = parseInt($("#travel_num").text());
-    		var maxPages = parseInt(Math.ceil(travel_num/4));//最大页数
+    		var answer = parseInt($("#answer").text());
+    		var maxPages = parseInt(Math.ceil(answer/4));//最大页数
     		$("#pageCount").attr("data-page",maxPages);
-    		if (travel_num>=5) {
+    		if (answer>=5) {
     			$(".tips").text("往下拖动查看更多！");
     		} else{
     			$(".tips").text("我也是有底线的哦~");
@@ -168,16 +157,15 @@
 	        scrollHeight = $(document).height(); 
 	        windowHeight = $(this).height();
 	        var e;
-		    var travel_num = parseInt($("#travel_num").text());//总数量
+		    var answer = parseInt($("#answer").text());//总数量
 		    
-			var maxPages = parseInt(Math.ceil(travel_num/4));//最大页数
+			var maxPages = parseInt(Math.ceil(answer/4));//最大页数
 			var NowPage = parseInt($("#pageCount").attr("data-nowPage"));//当前页数
 			var page=NowPage+1;
-			
 	        if(scrollTop + windowHeight >= scrollHeight-200 && flag == true ){
 	        	if (NowPage+1<=maxPages) {
 		            $.ajax({
-		                url:'index.php?m=api&c=tv&v=self_travel',
+		                url:'index.php?m=api&c=tv&v=self_tv',
 		                data:{page:page},
 		                method:'post',
 		                dataType:'json',
@@ -190,24 +178,18 @@
 		                    if(data.status == 1){
 			                	var html="";
 			                	$.each(data.tips,function(i,item){
-			            			html += '<div class="item item_'+ data.tips[i].id+'">'+
+			            			html += '<div class="item">'+
 												'<div class="wp fix">'+
-													'<p class="videoTitle">'+data.tips[i].title+'</p>'+
+													'<p class="videoTitle"><span class="view fix"><img src="/resource/m/images/user/icon_faq_detail1.png"></span>'+data.tips[i].title+'</p>'+
 													'<div class="date">'+data.tips[i].addtime+'</div>'+
 													'<p class="videoDetails">'+data.tips[i].describes+'</p>'+
-													'<ul class="ul-imgtxt2-yz">'+
-														'<li><dl>';
-													for ( var k=0;k<data.tips[i].content.length;k++ ){
-														html+= '<dd><a href="'+data.tips[i].content[k]+'" class="figure fancybox-effects-a" style="background-image: url('+data.tips[i].content[k]+');">'+
-																		'<div class="pic"></div>'+
-																	'</a>'+
-																'</dd>';
-													}
-				
-													html+='</dl>'+
-														'</li>'+
-													'</ul>'+
-													'<div class="videoBottom">'+
+													'<div class="preview fix">'+
+														'<a href="#m-pop1-yz" class="pic js-video fix" data-src="'+data.tips[i].url+'">'+
+															'<img src="'+data.tips[i].pics+'" alt="">'+
+															'<span class="bo"></span>'+
+														'</a>'+
+													'</div>'+
+													'<div class="videoBottom fix">'+
 														'<span class="left"><img class="" src="/resource/m/images/common/icon_location2.png" />'+data.tips[i].address+'</span>'+
 														'<p class="right">'+
 															'<a class="" href="javascript:;">'+
@@ -226,19 +208,19 @@
 													'<div class="pullDownMenu fix">'+
 														'<img class="icon_pullDown" src="/resource/m/images/common/icon_pullDown.png" />'+
 														'<div class="pullDownNav fix dis_none">'+
-															'<a class="collect" href="/index.php?m=wap&c=user&v=edittravel&id='+data.tips[i].id+'"><span>编辑</span></a>'+
-															'<a class="cancel" href="javascript:;" onclick="deleteTravel('+data.tips[i].id+')"><span>删除</span></a>'+
+															'<a class="collect" href="/index.php?m=wap&c=user&v=edittv&id='+data.tips[i].id+'"><span>编辑</span></a>'+
+															'<a class="cancel" href="javascript:;" onclick="deleteTv('+data.tips[i].id+')"><span>删除</span></a>'+
 														'</div>'+
 													'</div>'+
 												'</div>'+
 											'</div>';
-			                   });
+			                   	});
 			                    $(".content").append(html);
 			                    $("#pageCount").attr("data-NowPage",NowPage+1);
 			                    if (NowPage+1<maxPages) {
 			                		$(".tips").text("往下拖动查看更多！");
 			                	}else{
-			                		$(".tips").text("我也是有底线的哦~");
+			                		$(".tips").text("我也是有底线的~");
 			                	}
 			                }else{
 			                    layer.msg(data.tips);
@@ -250,20 +232,19 @@
 		                		$(".tips").text("往下拖动查看更多！");
 		                		flag = true;
 		                	}else{
-		                		$(".tips").text("我也是有底线的哦~");
+		                		$(".tips").text("我也是有底线的~");
 		                		flag = false;
 		                	}
 		                }
 		            });
 		        }else{
-            		$(".tips").text("我也是有底线的哦~");
+            		$(".tips").text("我也是有底线的~");
             	}
 	        }
 	    });
-	    
 		function commonality(){
 			//点击下拉
-		    $('.icon_pullDown').on("click",function(){
+		    $('.icon_pullDown').on("click",function() {
 		    	if ($(".pullDownNav").attr("class")=="pullDownNav fix dis_none") {
 		    		$(this).next(".pullDownNav").removeClass("dis_none");
 		    		$(".maskLayer").removeClass("dis_none");
@@ -281,13 +262,12 @@
 	            var num = parseInt($(this).attr('data-num'));
 	            var textNum = parseInt($(this).find("i").text());
 	            var obj = $(this);
-	            $.post("/index.php?m=api&c=index&v=zan", {
+	            $.post("/index.php?m=api&c=index&v=zanfaq", {
 	                'id':id
 	            }, function(data){
 	                if(data.status == 1){
 	                	$(obj).find("img").attr("src","/resource/m/images/common/icon_like2.png");
 	                    $(obj).find("i").text(num+1);
-						layer.msg(data.tips);
 	                }else{
 	                    layer.msg(data.tips);
 	                }
@@ -313,25 +293,24 @@
 	        $(this).parents('#m-pop1-yz').find("iframe").attr("src", "");
 	        event.stopPropagation();
 	    });
-
-        function deleteTravel(id){
-        	$(".maskLayer,.pullDownNav").addClass("dis_none");
-            layer.msg('您确定要删除吗？', {
-                btn: ['确认', '取消'],
-                yes: function (index) {
-                    $.post("/index.php?m=api&c=index&v=deletetravel", {
-                        'id':id
-                    }, function(data){
-                        if(data.status == 1){
-                        	var tv_num = parseInt($("#travel_num").text());
-	                    	$("#travel_num").text(tv_num-1);
-                            $('.item_'+id).remove();
-                        }
-                    },"JSON");
-                    layer.close(index);
-                }
-            });
-        }
+	    function deleteTv(id){
+	    	$(".maskLayer,.pullDownNav").addClass("dis_none");
+	        layer.msg('您确定要删除吗？', {
+	            btn: ['确认', '取消'],
+	            yes: function (index) {
+	                $.post("/index.php?m=api&c=index&v=deletefaq", {
+	                    'id':id
+	                }, function(data){
+	                    if(data.status == 1){
+	                    	var answer = parseInt($("#answer").text());
+	                    	$("#answer").text(answer-1);
+	                        $('.item_'+id).remove();
+	                    }
+	                },"JSON");
+	                layer.close(index);
+	            }
+	        });
+	    }
 	</script>
 </body>
 </html>
