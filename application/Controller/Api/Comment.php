@@ -118,6 +118,7 @@ class Controller_Api_Comment extends Core_Controller_Action
         }
         $data['uid']=$user_id;//用户ID
         $data['rid']=(int)$this->getParam('id');//文章ID
+        $data['type']=(int)$this->getParam("type");//分类，1-日志 2-视频 3-游记 4-问答
 
         //内容
         $content=addslashes(str_replace("\n", "<br />", $this->getParam("content")));//content
@@ -127,11 +128,11 @@ class Controller_Api_Comment extends Core_Controller_Action
             exit;
         }
 
-        $data['pid'] = (int)$this->getParam("pid")??0;//pid,顶层评论为0
+        $data['pid'] = (int)$this->getParam("pid")??0;//pid,一级评论为0,二级、三级评论为对应ID
         $data['pid_sub'] = (int)$this->getParam("pid_sub")??0;//pid_sub父节点
 
         $data['addtime'] = time();
-        $data['content'] = addslashes($content);
+        $data['content'] = $content;
         $data['status']=1;
 
         $res = M("comment")->add($data);

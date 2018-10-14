@@ -57,9 +57,9 @@ class Controller_Api_Faq extends Core_Controller_Action
         $limit = $perpage * ($page - 1) . "," . $perpage;
         //返回数据
         if( $type==3 ){
-            $list=C::M("faq as a")->field('a.*,b.username,b.headpic')->join('##__user_member as b',"a.uid=b.uid","left")->where("a.status=1 and a.is_response=0")->order($order)->limit($limit)->select();
+            $list=C::M("faq as a")->field('a.*,b.username,b.headpic')->join('##__user_member as b',"a.uid=b.uid","left")->where("a.status=1 and a.response_num=0")->order($order)->limit($limit)->select();
         }else{
-            $list=C::M("faq as a")->field('a.*,b.username,b.headpic')->join('##__user_member as b',"a.uid=b.uid","left")->where("a.status=1 and a.is_response=1")->order($order)->limit($limit)->select();
+            $list=C::M("faq as a")->field('a.*,b.username,b.headpic')->join('##__user_member as b',"a.uid=b.uid","left")->where("a.status=1 and a.response_num>0")->order($order)->limit($limit)->select();
         }
 
         if( $list ){
@@ -181,7 +181,7 @@ class Controller_Api_Faq extends Core_Controller_Action
         );
         $res=C::M('faq_response')->add($data);
         if( $res ){
-            C::M('faq')->where("id={$faq_id}")->update(array('is_response'=>1));//修改已经回答状态
+            C::M('faq')->where("id={$faq_id}")->setInc('response_num', 1);;//修改已经回答状态
             $json = array('status' => 1, 'tips' => '回答成功');
             echo Core_Fun::outputjson($json);
             exit;
@@ -228,6 +228,7 @@ class Controller_Api_Faq extends Core_Controller_Action
             'label'=>$label,
             'addtime'=>date("Y-m-d H:i:s",time()),
         );
+
         $res=C::M('faq')->add($data);
         if( $res ){
             $json = array('status' => 1, 'tips' => '发布问题成功');

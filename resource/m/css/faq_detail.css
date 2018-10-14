@@ -30,18 +30,18 @@
 .container .hunk .headPortrait{overflow: hidden;}
 .container .hunk .headPortrait .thumbnail{max-height: 82px;overflow: hidden;margin-top: 0.5rem;border-radius: 3px;}
 .container .hunk .headPortrait .thumbnail img{width: 100%;}
-.container .hunk .headPortrait .description{color: #666;font-size: 0.6rem;text-align: justify;line-height: 18px;margin: 0.5rem auto 0.2rem;}
+.container .hunk .headPortrait .description{color: #666;font-size: 0.8rem;text-align: justify;line-height: 18px;margin: 0.5rem auto 0.2rem;}
 
 .container .hunk .bottom{margin: 0.1rem auto 0rem;}
 
-.transform{font-size: 12px!important;height: 20.8px;line-height: 20.8px;}
+.transform{font-size: 14px!important;height: 20.8px;line-height: 20.8px;}
 .container .hunk .bottom .topButtom{margin-left: -16px;color: #474747;}
 .container .hunk .bottom .topButtom span{color: #898989;}
 .container .hunk .bottom .topButtom span i{font-style: normal;font-weight: 600;color: #666;}
 
 .container .hunk .bottom .left{float: left;color: #f24f62;font-weight: 600;}
 .container .hunk .bottom .left .icon{width: 14px;float: left;margin-top: 3px;}
-
+.container .hunk .bottom .left .seat{float: left;}
 
 .container .hunk .bottom .right{float: right;text-align: right;}
 .container .hunk .bottom .right .browseNum,.answerNum{color: #999;}
@@ -60,21 +60,24 @@
 .answer .bigTitle .right span{color: #666;}
 .answer .bigTitle .right .on{color: #d71618;}
 
-.answer .left .name{color: #474747;}
+.answer .left .name{color: #474747;display: inline-block; float: left;margin-left: 4px;}
 
 .answer .matter .hunk{border-top: 1px #f2eeee solid;}
+.answer .hunk{padding: 3% 0% 0.5rem;}
 .answer .hunk .tips{margin: 1rem auto;width: 80%;}
 .answer .hunk .depict{text-align: center;font-size: 12px;}
 .boxes{vertical-align: middle;background: #f24f62;color: #fff;float: left;height: 18px;line-height: 18px;
-					border-bottom-right-radius: 9px;border-top-right-radius: 9px;padding-left: 2px;}
+		border-bottom-right-radius: 9px;border-top-right-radius: 9px;padding-left: 2px;}
+.answerLeft{display: block; width: 54%;overflow: hidden;}
 .boxes .profilePhoto{width: 18px;float: right;border-radius: 9px;padding-bottom: 18px;}
+
 .figure{padding-bottom: ; /* 关键就在这里 */
 	  	background-position: center;
 	  	background-repeat: no-repeat;
 	  	background-size: cover;}
 
-.container .hunk .substance{max-height: 130px;overflow: hidden;position: relative;}
-.container .hunk .substance .description{color: #666;font-size: 0.6rem;text-align: justify;line-height: 18px;margin: 0.5rem auto 0.2rem;}
+.container .hunk .substance{min-height: 44px;max-height: 130px;overflow: hidden;position: relative;}
+.container .hunk .substance .description{color: #666;font-size: 0.8rem;text-align: justify;line-height: 18px;margin: 0.5rem auto 0.2rem;}
 .container .hunk .bottom{margin: 0.3rem auto 0rem;}
 .readMore{display: block;width: 100%;position: absolute;bottom: 0;left: 0;text-align: center;height: 38px;}
 .readMore .coverage{display: block;background: rgba(255,255,255,0.6);position: absolute;top: 0;left: 0;right: 0;bottom: 0;}
@@ -85,7 +88,6 @@
 			position: fixed;left: 0;bottom: 0;border-top: 1px #eae8e8 solid;}
 .answerNav span{text-align: center;display: block;width: 49%;}
 .answerNav .left{float: left;border-right: 1px #eceaea solid;}
-.answerNav .left i{font-style: normal;}
 .answerNav .right{float: right;}
 .answerNav .right a{display: block;width: 100%;height: 100%;}
 .answerNav img{display: inline-block;width: 12px;vertical-align: middle;}

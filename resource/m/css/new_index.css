@@ -1,0 +1,114 @@
+/*2801-10-12
+ *HQS 
+ * 
+ * 首页  部分样式
+ * */
+
+.fix{*zoom:1;}
+.fix:after{display:block; content:"clear"; height:0; clear:both; overflow:hidden; visibility:hidden;}
+
+.dis_none{display: none!important;}
+
+.figure{padding-bottom: ; /* 关键就在这里 */
+	  	background-position: center;
+	  	background-repeat: no-repeat;
+	  	background-size: cover;
+	  	border-radius: 5px;}
+
+
+
+
+.d_item{width: 93.7%!important;margin: 0 auto!important;}
+.d_item .logTime{color: #999;font-size: 12px;}
+
+.other{display: block;}
+.other .user{padding: 0rem 0 0.25rem;}
+.other .user span{width: 1.65rem;border-radius: 0.825rem;height: 1.65rem;}
+.other .user span img{width: 1.65rem;border-radius: 0.825rem;height: 1.65rem;}
+
+.other .interact{float: right;display: block;width: auto;}
+.other .interact span{display: inline-block;font-size: 12px;line-height: 1.5rem;}
+.other .interact span i{top: 0.3rem;}
+
+.m_item_a1 .pic{overflow: hidden;}
+
+
+/*独家旅行 独家路线*/
+.exclusive{display: block;}
+.exclusive li{display: block;float: left;width: 48%;}
+.exclusive li:nth-of-type(1){margin-right: 4%;margin-bottom: 10px;}
+.exclusive li:nth-of-type(2){margin-bottom: 10px;}
+.exclusive li:nth-of-type(3){margin-right: 4%;}
+
+/*独家旅行 私人订制*/
+.con_list_box{background: #f8f7f2;padding-bottom: 20px;margin-bottom: 10px;}
+.con_list_box .matter{padding-left: 5px;border-radius: 3px;border: 1px #bcbcbc solid;display: block;line-height: 24px;}
+.con_list_box .destination{width: 90%;margin: 0.5rem auto 0.5rem;}
+.con_list_box .name{width: 30%;float: left;margin: 0.2rem 3% 1rem 5%;}
+.con_list_box .PhoneNum{width: 57%;float: left;margin: 0.2rem 0 1rem;}
+
+.con_list_box .submitInfo{display: block;padding: 6px 26px;color: #fff;background: #545454;
+						  border: none;margin: 0 auto;border-radius: 15px;clear: both;}
+
+
+/*关于我们*/
+.asFor .flex-video{width: 100%;}
+.asFor .left{width: 50%;padding: 0rem 0.5rem 0.5rem;float: left;}
+.asFor .flex-video .diamonds{width: 100%;position: relative;}
+.asFor .left .diamonds{padding-bottom: 150%;}
+
+.asFor .right{width: 50%;padding: 0rem 0.5rem 0.5rem 0;float: left;}
+.asFor .right .diamonds{padding-bottom: 66%;}
+.asFor .right .diamonds:nth-of-type(1){margin-bottom: 8%;}
+
+.asFor .flex-video .diamonds .txt{position: absolute;bottom: 0;color: #fff;text-align: center;
+								  width: 100%;height: 20.8px;overflow: hidden;}
+
+
+/*5.5英寸   414*736尺寸的屏幕  如iPhone6 Plus、iPhone6s Plus、iPhone7 Plus、魅族MX5    1920x1080  /3★*/
+@media only screen and (max-width: 414px) {
+	.m_item_a1 .pic{height: 223.2px;}
+	.other .user span{padding-top:0;}
+	.interact .Read i,.other .interact span i,.interact .theory i{background-position-x: 2px;}
+}
+/*5.96英寸  412*732尺寸的屏幕  如谷歌Nexus 6   2K 2560x1440  /3.5★*/
+@media only screen and (max-width: 412px) {
+	.m_item_a1 .pic{height: 221.6px;}
+	.other .user span{padding-top:0;}
+	.interact .Read i,.other .interact span i,.interact .theory i{background-position-x: 2px;}
+}
+/*5.2英寸   411*731尺寸的屏幕  如 谷歌Nexus 5x   1920x1080  /2.625★*/
+@media only screen and (min-width: 376px) and (max-width: 411px) {
+	.m_item_a1 .pic{height: 220.8px;}
+	.other .user span{padding-top:0;}
+	.interact .Read i,.other .interact span i,.interact .theory i{background-position-x: 2px;}
+}
+/*4.7英寸   375*667尺寸的屏幕  如iPhone6、iPhone7、iPhone 6s   1334x750*/
+@media only screen and (min-width: 361px) and (max-width: 375px) {
+	.m_item_a1 .pic{height: 226.4px;}
+	.other .interact span{padding-left: 1rem;}
+	.interact .Read i,.other .interact span i,.interact .theory i{background-position-x: 0px;}
+	.interact .Read i{background-position-y: -29px;}
+	.interact .spot i{background-position-y: -62px;}
+	.interact .theory i{background-position-y: -98px;}
+}
+/*4.95英寸  360*640尺寸的屏幕  如 谷歌Nexus 5    1920x1080 /3★ */
+@media only screen and (min-width: 321px) and (max-width: 360px) {
+	.m_item_a1 .pic{height: 188.8px;}
+	.other .interact span{padding-left: 1rem;}
+	.interact .Read i,.other .interact span i,.interact .theory i{background-position-x: 0px;}
+	
+	.interact .Read i{background-position-y: -30px;}
+	.interact .spot i{background-position-y: -63px;}
+	.interact .theory i{background-position-y: -99px;}
+}
+/*4.0英寸   320*568尺寸的屏幕  如iPhone5、iPhone SE   1136x640*/
+@media only screen and (max-width: 320px) {
+	.m_item_a1 .pic{height: 160.8px;}
+	.other .interact span{padding-left: 1.2rem;}
+	.interact .Read i,.other .interact span i,.interact .theory i{background-position-x: 0px;}
+	.interact .Read i{background-position-y: -31px;}
+	.interact .spot i{background-position-y: -64px;}
+	.interact .theory i{background-position-y: -100px;}
+	.article .title span i{background-position-y: 17.5px;}
+}

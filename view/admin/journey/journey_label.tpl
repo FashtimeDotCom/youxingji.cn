@@ -1,8 +1,11 @@
 {{include file='admin/header.tpl'}}
 <div class="floattop">
     <ul>
-        <li class="btn btn-info" onclick="Controller.reload()"><span>标签列表</span></li>
+        <li class="btn btn-success" onclick="Controller.reload()"><span>标签列表</span></li>
         <li class="btn btn-info" onclick="Controller.main('{{$_pathroot}}admin/JourneyLabel/add')"><span>添加标签</span></li>
+        &nbsp;&nbsp;
+        <li class="btn btn-success" onclick="Controller.main('{{$_pathroot}}admin/JourneyType/index')"><span>分类列表</span></li>
+        <li class="btn btn-info" onclick="Controller.main('{{$_pathroot}}admin/JourneyType/add')"><span>添加分类</span></li>
     </ul>
 </div>
 <form method="post" action="/admin/JourneyLabel/morescenery" name="lpform" id="lpform">

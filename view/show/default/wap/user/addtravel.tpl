@@ -15,8 +15,11 @@
 	<script src="/resource/js/move_rem.js"></script>
 	<script src="/resource/m/js/jquery.js"></script>
 	<script src="/resource/m/js/lib.js"></script>
+	<style type="text/css">
+		.num_f{color: red;}
+	</style>
 </head>
-<body class="">
+<body>
 	<div class="mian">
 		<div class="save-issue">
 			<div class="wp">
@@ -61,9 +64,9 @@
 							<input type="text" class="inp" value="{{$res.title}}" id="title" placeholder="请在这里输入标题">
 						</div>
 						<div class="content-txt" style="overflow: auto;margin-bottom: 0px;">
-							<textarea placeholder="请在此处编辑正文内容" class="txta1" id="describe">{{$res.describe}}</textarea>
-							<p class="r num_text">可输入
-								<a class="num_f" id="contentwordage">255</a>个字</p>
+							<!--<input type="text" placeholder="请在此处编辑正文内容" class="txta1" id="describe" onkeyup="judgeIsNonNull1(event)" />-->
+							<textarea placeholder="请在此处编辑正文内容" class="txta1" id="describe" onkeyup="judgeIsNonNull1(event)">{{$res.describe}}</textarea>
+							<p class="r num_text">可输入<a class="num_f" id="contentwordage">255</a>个字</p>
 						</div>
 						<div class="pic-video">
 							<div class="file f-pic" id="chooseImage" style="margin-bottom: 7px;">
@@ -100,6 +103,29 @@
 	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
 	<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 	<script type="text/javascript">
+		//监控 正文内容输入框 ，包括粘贴板
+		function judgeIsNonNull1(event){
+			var value=$("#describe").val();
+			var x = event.which || event.keyCode;
+			if( value.length <= 255 ){
+				//console.log("符合255位数以内");
+			} else{
+				return $("#describe").val(value.substr(0, 255));
+			}
+			var remain = $("#describe").val().length;
+			if(remain > 255){
+				$('#describe').val(setString($('#describe').val(),255));
+				$('#contentwordage').html(255-remain);
+			}else{
+				$('#contentwordage').html(255-remain);
+			}
+		}
+		
+		//监控 正文内容输入框 ，包括粘贴板
+		$("#describe").bind('input propertychange', function(){
+			judgeIsNonNull1(event);
+		});
+
 		(function($) {
 			//解密base64编码
 			function Base64() {
@@ -351,10 +377,10 @@
 						layer.msg('请输入描述');
 						return false;
 					}
-					if(!me.datas.imgsrc[0]) {
-						layer.msg('请上传图片');
-						return false;
-					}
+//					if(!me.datas.imgsrc[0]) {
+//						layer.msg('请上传图片');
+//						return false;
+//					}
 					if(!$("input[type='checkbox']").is(':checked')) {
 						layer.msg('请选择服务协议');
 						return false;
@@ -368,7 +394,9 @@
 					}, function(data) {
 						layer.msg(data.tips);
 						if(data.status == 1) {
-							setInterval(ChangeTime, 2000);
+							setInterval(function(){
+								window.location.href = '/index.php?m=wap&c=user&v=travel';
+							}, 2000);
 						}
 					}, "JSON");
 				},
@@ -475,46 +503,7 @@
 			index.init();
 
 		})(jQuery);
-		$(document).ready(function() {
-			var limitNum = 255;
-			var num = $('.txta1').val().length;
-			var s = limitNum - num;
-			if(s < 0) {
-				$('.txta1').val(setString($('.txta1').val(), 255));
-				$('#contentwordage').html(0);
-				return false;
-			}
-			$('#contentwordage').html(s);
-			$('.txta1').keyup(
-				function() {
-					var remain = $(this).val().length;
-					if(remain > 255) {
-						$('.txta1').val(setString($('.txta1').val(), 255));
-						var result = 0;
-					} else {
-						var result = limitNum - remain;
-					}
-					$('#contentwordage').html(result);
-				}
-			);
-		});
-
-		function setString(str, len) {
-			var strlen = 0;
-			var s = "";
-			for(var i = 0; i < str.length; i++) {
-				strlen++;
-				s += str.charAt(i)
-				if(strlen >= len) {
-					return s;
-				}
-			}
-			return s;
-		}
-
-		function ChangeTime() {
-			window.location.href = '/index.php?m=wap&c=user&v=index';
-		}
 	</script>
+
 </body>
 </html>

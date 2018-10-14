@@ -16,7 +16,7 @@ class Controller_Wap_Faq extends Core_Controller_WapAction
     public function indexAction()
     {
         //最热回答
-        $sql="SELECT a.*,b.username,b.headpic FROM ##__faq as a LEFT JOIN ##__user_member as b on a.uid=b.uid WHERE a.status=1 and a.is_response=1 ORDER BY a.show_num DESC LIMIT 4";
+        $sql="SELECT a.*,b.username,b.headpic FROM ##__faq as a LEFT JOIN ##__user_member as b on a.uid=b.uid WHERE a.status=1 and a.response_num>0 ORDER BY a.show_num DESC LIMIT 4";
         $list=Core_Db::fetchAll($sql);
         if( $list ){
             foreach($list as $key=>$value){
@@ -50,9 +50,9 @@ class Controller_Wap_Faq extends Core_Controller_WapAction
 
         //问答总数.
         $total=array();
-        $total['hot']=C::M('faq')->where("status=1 and is_response=1")->getCount();
+        $total['hot']=C::M('faq')->where("status=1 and response_num>0")->getCount();
         $total['new']=$total['hot'];
-        $total['waiting']=C::M('faq')->where('status=1 and is_response=0')->getCount();
+        $total['waiting']=C::M('faq')->where('status=1 and response_num=0')->getCount();
         $this->assign("total",$total);
 
         $this->assign("list",$data);

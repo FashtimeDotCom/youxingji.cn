@@ -48,7 +48,21 @@
                     {{/if}}
                 </select>
             </td>
-            <td class="vtop tips2">请选择栏目<span info="catid"></span></td>
+            <td class="vtop tips2">请选择标签<span info="catid"></span></td>
+        </tr>
+
+        <tr class="noborder">
+            <td class="vtop rowform">
+                <select name="type_id" id="type_id">
+                    <option value="">----</option>
+                    {{if $type_list}}
+                    {{foreach from=$type_list item=item key=key}}
+                    <option value="{{$item.id}}" {{if $article.type_id==$item.id}}selected{{/if}}>{{$item.type_name}}</option>
+                    {{/foreach}}
+                    {{/if}}
+                </select>
+            </td>
+            <td class="vtop tips2">请选择分类<span info="catid"></span></td>
         </tr>
 
         <tr>

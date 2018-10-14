@@ -80,6 +80,9 @@ img {
  * */
 .omit{display: -webkit-box!important;-webkit-box-orient: vertical;overflow: hidden;}
 .lineNumber2{-webkit-line-clamp: 2;}
+.lineNumber3{-webkit-line-clamp: 3;}
+.lineNumber4{-webkit-line-clamp: 4;}
+.lineNumber5{-webkit-line-clamp: 5;}
 
 /*超出文本  自动省略号*/
 .apostrophe{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
@@ -118,7 +121,7 @@ img {
 
 .moduleBGcolor1{background: #fff;}
 
-.FontSize{font-size: 9px;
+.FontSize{font-size: 14px;
 	      transform: scale(0.9);
 		  -webkit-transform: scale(0.9);
 	      -o-transform: scale(0.9);    /*针对能识别-webkit的opera browser设置*/}

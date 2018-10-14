@@ -1192,6 +1192,48 @@ class Controller_Wap_Index extends Core_Controller_WapAction
         $this->display('wap/master_list.tpl');
     }
 
+    /*
+     * 长篇游记详情页
+     *
+     * */
+    public function note_detailAction(){
+        $id = intval($this->getParam('id'));//游记ID
+        $type=3;//1-日志 2-视频 3-游记 4-达人问答
+        $type_model=new Model_TravelNote();
+        $article=$type_model->get_one($id);
+
+        if(!$article){
+            $this->showmsg('', '/', 0);
+            exit;
+        }
+        C::M('travel_note')->where('id', $id)->setInc('show_num', 1);
+        $this->assign('article', $article);
+
+        $page=$this->getParam("page")??1;
+        $perpage=10;
+        $limit = $perpage * ($page - 1) . "," . $perpage;
+        //获取评论信息
+        $count=C::M('comment')->where("rid={$id} and type={$type} and pid=0")->getCount();//获取一级评论的总数
+        //获取一级评论信息
+        $comments=C::M("comment as a ")->field('a.*,b.headpic,b.username')->join("##__user_member as b","a.uid=b.uid","left")->where("rid={$id} and type={$type} and pid=0")->order("id DESC")->limit($limit)->select();
+        if( $comments ){
+            //查找对应一级节点的子评论，子子评论。一般只有三级结构,二级三级显示都是同一级显示
+            foreach( $comments as $key=>$value ){
+                $comments[$key]['headpic']=empty($value['headpic'])?'resource/images/img-lb2.png':$value['headpic'];
+                $comments[$key]['sub']=C::M('comment as a')->field("a.*,b.username")->join("##__user_member as b","a.uid=b.uid","left")->where("rid={$id} and type={$type} and pid={$value['id']}")->order('id ASC')->select();
+            }
+        }
+
+        $info=array(
+            'id'=>$id,
+            'comments_num'=>$count,
+        );
+
+        $this->assign('info',$info);
+        $this->assign("comments",$comments);
+        $this->display('wap/user/note_detail.tpl');
+    }
+
 
 
 

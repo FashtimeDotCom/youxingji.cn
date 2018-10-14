@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-06 09:43:30
+<?php /* vpcvcms compiled created on 2018-10-11 10:08:33
          compiled from wap/user/edittv.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -90,7 +90,7 @@
             <ul class="ul-tab-yz1">
                 <li class="on">
                     <a href="javascript:;">
-                        <h4>编辑旅拍TV</h4>
+                        <h4>编辑视频</h4>
                         <p>最温馨旅行小提示</p>
                     </a>
                 </li>
@@ -117,6 +117,18 @@
         							<em>添加图片</em>
         						</label>
                             </div>
+							
+							<input type="hidden" name="code" value="<?php echo $this->_tpl_vars['code']; ?>
+" id="code">
+							<div class="file" id="openLocation" style="margin-bottom: 7px;">
+								<label style="background-image: url(/resource/m/images/i_location.png)">
+	    							<em>添加定位</em>
+	    						</label>
+							</div>
+							<input type="hidden" name="address" value="<?php echo $this->_tpl_vars['res']['address']; ?>
+" id="address" title="后台返回来的定位地址">
+							<p id="Paddress" class="address"><?php echo $this->_tpl_vars['res']['address']; ?>
+</p>
                         </div>
                         <div class="layui-upload">
                             <label>
@@ -142,8 +154,221 @@ $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
     <script src="/resource/js/layui/lay/dest/layui.all.js"></script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
+        	//解密base64编码
+			function Base64(){
+			    // private property  
+			    _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";  
+			   
+			    // public method for encoding  
+			    this.encode = function (input) {  
+			        var output = "";  
+			        var chr1, chr2, chr3, enc1, enc2, enc3, enc4;  
+			        var i = 0;  
+			        input = _utf8_encode(input);  
+			        while (i < input.length) {  
+			            chr1 = input.charCodeAt(i++);  
+			            chr2 = input.charCodeAt(i++);  
+			            chr3 = input.charCodeAt(i++);  
+			            enc1 = chr1 >> 2;  
+			            enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);  
+			            enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);  
+			            enc4 = chr3 & 63;  
+			            if (isNaN(chr2)) {  
+			                enc3 = enc4 = 64;  
+			            } else if (isNaN(chr3)) {  
+			                enc4 = 64;  
+			            }  
+			            output = output +  
+			            _keyStr.charAt(enc1) + _keyStr.charAt(enc2) +  
+			            _keyStr.charAt(enc3) + _keyStr.charAt(enc4);  
+			        }  
+			        return output;  
+			    }  
+			   
+			    // public method for decoding  
+			    this.decode = function (input) {  
+			        var output = "";  
+			        var chr1, chr2, chr3;  
+			        var enc1, enc2, enc3, enc4;  
+			        var i = 0;  
+			        input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");  
+			        while (i < input.length) {  
+			            enc1 = _keyStr.indexOf(input.charAt(i++));  
+			            enc2 = _keyStr.indexOf(input.charAt(i++));  
+			            enc3 = _keyStr.indexOf(input.charAt(i++));  
+			            enc4 = _keyStr.indexOf(input.charAt(i++));  
+			            chr1 = (enc1 << 2) | (enc2 >> 4);  
+			            chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);  
+			            chr3 = ((enc3 & 3) << 6) | enc4;  
+			            output = output + String.fromCharCode(chr1);  
+			            if (enc3 != 64) {  
+			                output = output + String.fromCharCode(chr2);  
+			            }  
+			            if (enc4 != 64) {  
+			                output = output + String.fromCharCode(chr3);  
+			            }  
+			        }  
+			        output = _utf8_decode(output);  
+			        return output;  
+			    }  
+			   
+			    // private method for UTF-8 encoding  
+			    _utf8_encode = function (string) {  
+			        string = string.replace(/\r\n/g,"\n");  
+			        var utftext = "";  
+			        for (var n = 0; n < string.length; n++) {  
+			            var c = string.charCodeAt(n);  
+			            if (c < 128) {  
+			                utftext += String.fromCharCode(c);  
+			            } else if((c > 127) && (c < 2048)) {  
+			                utftext += String.fromCharCode((c >> 6) | 192);  
+			                utftext += String.fromCharCode((c & 63) | 128);  
+			            } else {  
+			                utftext += String.fromCharCode((c >> 12) | 224);  
+			                utftext += String.fromCharCode(((c >> 6) & 63) | 128);  
+			                utftext += String.fromCharCode((c & 63) | 128);  
+			            }  
+			   
+			        }  
+			        return utftext;  
+			    }  
+			   
+			    // private method for UTF-8 decoding  
+			    _utf8_decode = function (utftext) {  
+			        var string = "";  
+			        var i = 0;  
+			        var c = c1 = c2 = 0;  
+			        while ( i < utftext.length ) {  
+			            c = utftext.charCodeAt(i);  
+			            if (c < 128) {  
+			                string += String.fromCharCode(c);  
+			                i++;  
+			            } else if((c > 191) && (c < 224)) {  
+			                c2 = utftext.charCodeAt(i+1);  
+			                string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));  
+			                i += 2;  
+			            } else {  
+			                c2 = utftext.charCodeAt(i+1);  
+			                c3 = utftext.charCodeAt(i+2);  
+			                string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));  
+			                i += 3;  
+			            }  
+			        }  
+			        return string;  
+			    }  
+			}
+			
+			var code = $("#code").val();
+			
+			var base = new Base64();              
+			var result2 = base.decode(code);//调用以上方法解密
+			
+			wx.config({
+				debug: false,
+				appId: "wx9953ad5ae1108b51",
+				timestamp: '<?php echo $this->_tpl_vars['timestamp']; ?>
+',
+				nonceStr: '<?php echo $this->_tpl_vars['nonceStr']; ?>
+',
+				signature: '<?php echo $this->_tpl_vars['signature']; ?>
+',
+				jsApiList: [
+					'getNetworkType',//网络状态接口
+					'checkJsApi',//使用微信内置地图查看地理位置接口
+        			'openLocation',
+        			'getLocation'
+				]
+			});
+			var list = "<?php echo $this->_tpl_vars['res']['str_content']; ?>
+".split(',');
+			var index = {
+				init: function() {
+					var me = this;
+					me.render();
+					me.bind();
+				},
+				datas: {
+					localId: [],
+					serverId: [],
+					imgsrc: <?php if ($this->_tpl_vars['res']['str_content']): ?>list <?php else: ?>[]<?php endif; ?>,
+					host: window.location.host
+				},
+				render: function() {
+					var me = this;
+					me.openLocation = $('#openLocation');
+				},
+				bind: function() {
+					var me = this;
+					me.openLocation.on('click', $.proxy(me['_openLocation'], this));
+				},
+				_openLocation: function(e) {
+					var me = this;
+					var result = result2;
+					//先检查网络状态
+					wx.getNetworkType({
+						success: function(res) {
+							//alert("当前网络状态："+res.networkType);
+							wx.getLocation({
+				        		type: 'wgs84',
+							    success: function (res) {
+									var latitude = res.latitude;// 纬度，浮点数，范围为90 ~ -90
+			                     	//lat = res.latitude;
+				                    var longitude = res.longitude;// 经度，浮点数，范围为180 ~ -180。
+				                    var x = res.longitude;
+				                    var y = res.latitude;
+				                    //alert(code);
+				                    
+				                    console.log("location is lng=" + x + "  lat=" + y);
+				                   	//changCoordinate(x, y);
+				                    //alert("location1 is lng=" + lng + "  lat=" + lat);
+				                    
+				                   
+									var url = "http://api.map.baidu.com/geoconv/v1/?coords=" + x + "," + y + "&from=1&to=5&ak="+ result;
+				                    $.get(url, function(data) {
+				                        if(data.status === 0) {
+				                            window.lng = data.result[0].x;
+				                            window.lat = data.result[0].y;
+				                            console.log("location is lng=" + lng + "  lat=" + lat);
+
+						                    $.post("/index.php?m=api&c=Location&v=get_location_info", {
+												'latitude': lat,
+												'longitude': lng,
+												'code': code,
+											}, function(data) {
+												//console.log(data);
+												$("#address").val("");
+												$("#Paddress").text("");
+												if (data.code==1) {
+													setInterval(function(){
+														$("#address").val(data.tpis);
+														$("#Paddress").text(data.tpis);
+													},200);
+												} else{
+													layer.msg(data.tips);
+												}
+											}, "JSON");
+				                        }
+				                    }, 'jsonp');
+				                    
+				                    var speed = res.speed; // 速度，以米/每秒计
+							        var accuracy = res.accuracy; // 位置精度
+							    },
+							    cancel: function (res) {
+							        alert('用户拒绝授权获取地理位置');
+							    }
+							});
+						},
+						fail: function(res) {
+							alert(JSON.stringify(res));
+						}
+					});
+				}
+			}
+			index.init();
+        	
             var limitNum = 255;
             var num = $('.txta1').val().length;
             var s = limitNum - num;
@@ -196,6 +421,7 @@ unset($_smarty_tpl_vars);
         {
             $(obj).remove();
         }
+        //编辑
         $('#btnAdd').click(function(){
             var title = $('#title').val();
             var describe = $('#describe').val();
@@ -203,6 +429,7 @@ unset($_smarty_tpl_vars);
             var id = <?php echo $this->_tpl_vars['id']; ?>
 ;
             var pic = $('.layui-upload-img').attr('src');
+            var address = $('#address').val();
             if(!describe){
                 layer.msg('请输入描述');
                 return false;
@@ -220,11 +447,12 @@ unset($_smarty_tpl_vars);
                 'url':url,
                 'pic':pic,
                 'id':id,
-                'describe':describe
+                'describe':describe,
+                'address':address
             }, function(data){
                 layer.msg(data.tips);
                 if (data.status == 1) {
-                    window.location.href = window.location.href;
+                    window.location.href = "/index.php?m=wap&c=user&v=tv";
                 }
             },"JSON");
         })

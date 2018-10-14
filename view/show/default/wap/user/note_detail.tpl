@@ -11,8 +11,10 @@
     <meta name="description" content="{{$article.title}}" />
     <meta name="keywords" content="{{$article.title}}" />
     <link rel="stylesheet" href="/resource/m/css/style.css" />
+    <link rel="stylesheet" href="/resource/m/comment/css/style.css" />
     <script src="/resource/m/js/jquery.js"></script>
     <script src="/resource/m/js/lib.js"></script>
+    <script src="/resource/m/comment/js/common.js"></script>
     <style>
         .qqFace { margin-top: 4px; background: #fff; padding: 2px; border: 1px #dfe6f6 solid; }
         .qqFace table td { padding: 0px;line-height: 28px;}
@@ -89,10 +91,6 @@
         </ul>
 
         <!--新版评论-->
-
-
-
-
   <!--************************************************-->
 
         <!-- 页码 -->
@@ -108,21 +106,7 @@
         <!-- 页码 end-->
         <div class="m-publish">
             <div class="wp">
-                <div class="content" style="position: relative;">
-                    <div class="top" style="margin-top: 0px;">
-                        <a href="javascript:;" class="emotion" style="background-image: url(/resource/m/images/q-icon38.png);"></a>
-                    </div>
-                    <textarea id="saytext" placeholder="写下您的感受......."></textarea>
-                    {{if !$user}}
-                    <div class="nologin">
-                        <div class="nologinbtn">
-                            <a href="/index.php?m=wap&c=index&v=login" target="_blank">登陆</a>
-                            <a href="/index.php?m=wap&c=index&v=reg" target="_blank">注册</a>
-                        </div>
-                    </div>
-                    {{/if}}
-                </div>
-                <a href="javascript:;" class="btn btnComment">发表评论</a>
+               {{include file='wap/wap_comment.tpl'}}
             </div>
         </div>
     </div>
@@ -144,11 +128,7 @@
         },
         "share": {}
     };
-    $('.emotion').qqFace({
-        id : 'facebox',
-        assign:'saytext',
-        path:'/resource/arclist/' //表情存放的路径
-    });
+
     with(document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
     $('.zan').click(function(event) {
         var id = $(this).attr('data-id');
@@ -165,25 +145,7 @@
         },"JSON");
 
     });
-    $(".btnComment").click(function(){
-        var str = $("#saytext").val();
-        $.post("/index.php?m=api&c=index&v=comment", {
-            'str':str,
-            'rid':'{{$article.id}}'
-        }, function(data){
-            layer.msg(data.tips);
-            if(data.status == 1){
-                $("#saytext").val('');
-            }
-        },"JSON");
-    });
-    function replace_em(str){
-        str = str.replace(/\</g,'&lt;');
-        str = str.replace(/\>/g,'&gt;');
-        str = str.replace(/\n/g,'<br/>');
-        str = str.replace(/\[em_([0-9]*)\]/g,'<img src="/resource/arclist/$1.gif" border="0" />');
-        return str;
-    }
+
 </script>
 </body>
 

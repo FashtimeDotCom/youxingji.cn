@@ -1,6 +1,5 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
@@ -13,15 +12,9 @@
     <link rel="stylesheet" href="/resource/m/css/style.css" />
     <script src="/resource/m/js/jquery.js"></script>
     <script src="/resource/m/js/lib.js"></script>
-    <style>
-    .qqFace { margin-top: 4px; background: #fff; padding: 2px; border: 1px #dfe6f6 solid; }
-    .qqFace table td { padding: 0px;line-height: 28px;}
-    .qqFace table td img { cursor: pointer; border: 1px #fff solid; }
-    .qqFace table td img:hover { border: 1px #0066cc solid; }
-    </style>
+    <link rel="stylesheet" href="/resource/m/css/rytdetai.css" />
 </head>
-
-<body class="">
+<body>
     <div class="header">
         {{include file='wap/header.tpl'}}
         <h3>日阅潭</h3>
@@ -40,11 +33,7 @@
             </div>
         </div>
         {{vplist from='ad' item='adlist' tagname='waprytdetailslide'}}
-        <div class="ban">
-            <a href="javascript:;">
-                <img src="{{$adlist.imgurl}}" alt="" />
-            </a>
-        </div>
+        <div class="ban"><a href="javascript:;"><img src="{{$adlist.imgurl}}" alt="" /></a></div>
         {{/vplist}}
         <div class="m-text2">
             <div class="wp">
@@ -54,7 +43,9 @@
                     <span>{{$article.addtime}}</span>
                     <div class="right">
                         <span><i style="background-image: url(/resource/m/images/i-eye.png)"></i>{{$article.shownum}}</span>
-                        <span class="zan" data-id="{{$article.id}}" data-num="{{$article.zannum}}"><i style="background-image: url(/resource/m/images/i-zan.png)"></i>{{$article.zannum}}</span>
+                        <span class="zan" data-id="{{$article.id}}" data-num="{{$article.zannum}}">
+                        	<i style="background-image: url(/resource/m/images/i-zan.png)"></i>{{$article.zannum}}
+                        </span>
                     </div>
                 </div>
                 <div class="m-share">
@@ -72,17 +63,72 @@
         <div class="m-comment">
             <ul class="ul-imgtxt4">
             	{{foreach from=$comment item=vo key=k}}
-                <li>
-                    <div class="tit">
+                <li><div class="tit">
                         <a href="{{$vo.uid|helper:'mhref'}}">
 		                    <i style="background-image: url({{$vo.uid|helper:'avatar'}});"></i>
 		                    <span>{{$vo.lou}}F</span>
-		                    <h3>{{$vo.uid|helper:'username'}}<em>{{$vo.uid|helper:'lv'}}</em></h3>
+		                    <h3><b class="username_{{$vo.uid}}">{{$vo.uid|helper:'username'}}</b><em>{{$vo.uid|helper:'lv'}}</em></h3>
 		                </a>
                     </div>
-                    <div class="txt">
-                        <p>{{$vo.content}}</p>
-                        <span>{{$vo.addtime}}</span>
+                    <div class="substance" data-replyNum="0">
+                    	<div class="txtt">
+	                        <p>{{$vo.content}}</p>
+	                        <span>{{$vo.addtime}}</span>
+	                    </div>
+	                    
+	                    <p class="reply"><span class="replyReview" data-uid="{{$vo.uid}}" data-open="0" data-class="1">回复</span></p>
+	
+	                    <!--回复的弹出框-->
+	                    <div class="m-publish details_stair" data-uid="{{$vo.uid}}">
+			                <div class="wp">
+			                    <div class="content" style="position: relative;">
+			                        <div class="top" style="margin-top: 0px;">
+			                            <a href="javascript:;" class="emotion" style="background-image: url(/resource/m/images/q-icon38.png);"></a>
+			                        </div>
+			                        <textarea id="saytext{{$vo.uid}}" placeholder="写下您的感受......."></textarea>
+			                        {{if !$user}} 
+			                        <div class="nologin">
+			                            <div class="nologinbtn">
+			                                <a href="/index.php?m=wap&c=index&v=login" target="_blank">登陆</a>
+			                                <a href="/index.php?m=wap&c=index&v=reg" target="_blank">注册</a>
+			                            </div>
+			                        </div>
+			                        {{/if}}
+			                    </div>
+			                    <a href="javascript:;" class="btn btnComment_Review" data-uid="{{$vo.uid}}" data-class="1" data-name="">发表回复</a>
+			                </div>
+			            </div>
+			            
+			            <!--评论下面的回复-->
+			            <div class="blockquote_wrap" data-i="0">
+	                        <!--<blockquote class="comment_blockquote">
+	                        	<div class="comment_floor">1</div>
+	                        	<div class="comment_conWrap">
+	                        		<div class="comment_con"><span class="name">用户名</span><p class="matter"> 嗯嗯嗯，测试下</p></div>
+	                        	</div>
+	                        	<p class="reply"><span class="reply_" data-uid="{{$vo.uid}}" data-open="0" data-class="2">回复</span></p>
+	                        	<!--回复的弹出框-->
+			                    <!--<div class="m-publish details_" data-uid="{{$vo.uid}}">
+					                <div class="wp">
+					                    <div class="content" style="position: relative;">
+					                        <div class="top" style="margin-top: 0px;">
+					                            <a href="javascript:;" class="emotion" style="background-image: url(/resource/m/images/q-icon38.png);"></a>
+					                        </div>
+					                        <textarea id="saytext{{$vo.uid}}" placeholder="写下您的感受......."></textarea>
+					                        {{if !$user}} 
+					                        <div class="nologin">
+					                            <div class="nologinbtn">
+					                                <a href="/index.php?m=wap&c=index&v=login" target="_blank">登陆</a>
+					                                <a href="/index.php?m=wap&c=index&v=reg" target="_blank">注册</a>
+					                            </div>
+					                        </div>
+					                        {{/if}}
+					                    </div>
+					                    <a href="javascript:;" class="btn btnComment_" data-uid="{{$vo.uid}}">发表回复</a>
+					                </div>
+					            </div>
+	                        </blockquote>-->
+			            </div>
                     </div>
                 </li>
                 {{/foreach}}
@@ -98,6 +144,8 @@
 	        </div>
 	        {{/if}}
             <!-- 页码 end-->
+            
+            <!--评论-->
             <div class="m-publish">
                 <div class="wp">
                     <div class="content" style="position: relative;">
@@ -122,8 +170,9 @@
     {{include file='wap/footer.tpl'}} 
     <script src="/resource/js/layui/lay/dest/layui.all.js"></script>
     <script type="text/javascript" src="/resource/js/jquery.qqFace.js"></script>
+    <script type="text/javascript" src="/resource/m/js/rytdetai.js"></script>
     <!-- 分享 -->
-    <script>
+    <script type="text/javascript">
         window._bd_share_config = {
             "common": {
                 "bdSnsKey": {},
@@ -178,5 +227,4 @@
 	    }
     </script>
 </body>
-
 </html>

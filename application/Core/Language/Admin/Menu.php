@@ -77,7 +77,7 @@ class Core_Language_Admin_Menu
 		  'menu_check_hasorder' => '已发货订单',
 		  'menu_check_torder' => '平台返款订单',
 		  'menu_check_house' => '小黑屋',
-		  'menu_journey' => '甄选之旅',
+		  'menu_journey' => '独家线路',
 		  'menu_sms' => '短信记录',
           'menu_recruiting' => '招募令',
           'menu_youhua' => '油画',

@@ -49,6 +49,7 @@ class Controller_Admin_Article extends Core_Controller_Action
 		foreach($articles AS $idx => $article)
 		{
 			$articles[$idx]['catname'] = C::M('nav')->where('id', $article['catid'])->getField('name');
+            $articles[$idx]['type_name']=(C::M('journey_type')->field('type_name')->where("id","{$article['type_id']}")->find())['type_name'];
 		}
 		
         $this->assign ('multipage', $multipage);
@@ -508,7 +509,8 @@ class Controller_Admin_Article extends Core_Controller_Action
 				'comefrom' => Core_Config::get ('site_name', 'basic', 'vpcvcms'),
 				'addtime' => Core_Fun::time(),
                 "label_id"=>intval($this->getParam("label_id")),
-                "tjpic"=>$this->getParam("tjpic")
+                "tjpic"=>$this->getParam("tjpic"),
+                'type'=>$this->getParam("type")
 			);
 			if('' != $this->getParam('articlepic'))
 			{
@@ -591,6 +593,10 @@ class Controller_Admin_Article extends Core_Controller_Action
 				$article['useable'] = 1;
 				$article['moduleid'] = 'article';
 			}
+
+            //分类列表
+            $type_list=C::M('journey_type')->select();
+            $this->assign("type_list",$type_list);
 			
 			$this->assign('picdom', 'articlepic');
 			$this->assign('thumbdom', 'articlethumb');
@@ -648,7 +654,8 @@ class Controller_Admin_Article extends Core_Controller_Action
 				'sort' => intval($this->getParam('sort')),
 				'updatetime' => Core_Fun::time(),
                 "label_id"=>$this->getParam("label_id"),
-                "tjpic"=>$this->getParam("tjpic")
+                "tjpic"=>$this->getParam("tjpic"),
+                'type_id'=>$this->getParam("type_id")
 			);
 
 			if('' != $this->getParam('articlepic') && $this->getParam('articlepic') != $article['articlepic'])
@@ -762,6 +769,10 @@ class Controller_Admin_Article extends Core_Controller_Action
 
 				$this->assign('extends', $extends);
 			}
+
+			//分类列表
+            $type_list=C::M('journey_type')->select();
+            $this->assign("type_list",$type_list);
 
 			$this->assign('content', Core_Fun::getEditor('content', $article['content']));
 			$this->assign('picdom', 'articlepic');

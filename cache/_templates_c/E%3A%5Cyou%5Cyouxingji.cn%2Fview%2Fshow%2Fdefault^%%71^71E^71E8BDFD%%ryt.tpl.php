@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-08-17 16:52:52
+<?php /* vpcvcms compiled created on 2018-10-11 14:02:45
          compiled from wap/ryt.tpl */ ?>
  <!DOCTYPE html>
 <html lang="zh-CN">
@@ -9,7 +9,7 @@
     <meta name="renderer" content="webkit" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
     <meta name="format-detection" content="telephone=no" />
-    <title>日阅潭_<?php echo $this->_reg_objects['TO'][0]->cfg(array('key' => 'site_name','group' => 'site','default' => "致茂网络"), $this);?>
+    <title>达人游记_<?php echo $this->_reg_objects['TO'][0]->cfg(array('key' => 'site_name','group' => 'site','default' => "致茂网络"), $this);?>
 </title>
     <meta name="description" content="<?php echo $this->_reg_objects['TO'][0]->cfg(array('key' => 'index_keywords','group' => 'site','default' => "首页"), $this);?>
 " />
@@ -27,7 +27,7 @@ $this->_smarty_include(array('smarty_include_tpl_file' => 'wap/header.tpl', 'sma
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
-        <h3>日阅潭</h3>
+        <h3>达人游记</h3>
     </div>
     <div class="mian">
         <div class="g-top">

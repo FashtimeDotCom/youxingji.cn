@@ -32,7 +32,15 @@ class Model_Faq extends Core_Model
         return $this->joinAll($where,$orderBy,$limit_arr,$field,$join_str);
     }
 
+    public function add($data)
+    {
+        $rt = Core_Db::insert ("g_faq" , $data , array());
+        if (true === $rt && $data[$this->_idkey]) {
+            $rt = $data[$this->_idkey];
+        }
 
+        return $rt;
+    }
 
 
 }

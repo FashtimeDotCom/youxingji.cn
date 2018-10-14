@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-30 16:02:32
+<?php /* vpcvcms compiled created on 2018-10-12 17:52:14
          compiled from wap/faq/faq_list.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -8,13 +8,14 @@
     <meta name="renderer" content="webkit" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
     <meta name="format-detection" content="telephone=no" />
-    <title>达人问答</title>
+    <title>达人问答-问题列表</title>
     <meta name="keywords" content="<?php echo $this->_reg_objects['TO'][0]->cfg(array('key' => 'index_keywords','group' => 'site','default' => "首页"), $this);?>
 " />
     <meta name="description" content="<?php echo $this->_reg_objects['TO'][0]->cfg(array('key' => 'index_description','group' => 'site','default' => "首页"), $this);?>
 " />
     <link rel="stylesheet" href="/resource/m/css/style.css" />
     <script src="/resource/m/js/jquery.js"></script>
+    <script src="/resource/m/js/lib.js"></script>
     <link rel="stylesheet" href="/resource/m/css/common.css" />
     <link rel="stylesheet" href="/resource/m/css/faq_list.css" />
     <link rel="stylesheet" type="text/css" href="/resource/m/css/swiper.css" />
@@ -90,8 +91,8 @@ unset($_smarty_tpl_vars);
 </span></div>
 										<div class="fix">
 											<span class="browseNum"><?php echo $this->_tpl_vars['item']['show_num']; ?>
-浏览</span>&nbsp;·&nbsp;<span class="assistNum"><?php echo $this->_tpl_vars['item']['top_num']; ?>
-赞</span>
+浏览</span>&nbsp;·&nbsp;<span class="assistNum"><?php echo $this->_tpl_vars['item']['response_num']; ?>
+回答数</span>
 										</div>
 									</div>
 								</div>
@@ -112,12 +113,13 @@ unset($_smarty_tpl_vars);
     foreach ($_from as $this->_tpl_vars['key'] => $this->_tpl_vars['item']):
 ?>
 							<div class="swiper-slide">
-								<div class="pic fix"><span class="profilePhoto figure" style="background-image: url(<?php echo $this->_tpl_vars['item']['avatar']; ?>
+								<div class="pic fix"><span class="profilePhoto figure" style="background-image: url(<?php echo $this->_tpl_vars['item']['headpic']; ?>
 );"></span></div>
 								<p class="name apostrophe"><?php echo $this->_tpl_vars['item']['username']; ?>
 </p>
 								<p class="creative FontSize"></p>
-								<a class="check" href="javascript:;">查看问答</a>
+								<a class="check" href="/index.php?m=wap&c=muser&v=ta_faq&id=<?php echo $this->_tpl_vars['item']['uid']; ?>
+">查看问答</a>
 							</div>
 							<?php endforeach; endif; unset($_from); ?>
 							<?php endif; ?>
@@ -156,8 +158,8 @@ unset($_smarty_tpl_vars);
 </span></div>
 										<div class="fix">
 											<span class="browseNum"><?php echo $this->_tpl_vars['item']['show_num']; ?>
-浏览</span>&nbsp;·&nbsp;<span class="assistNum"><?php echo $this->_tpl_vars['item']['top_num']; ?>
-赞</span>
+浏览</span>&nbsp;·&nbsp;<span class="assistNum"><?php echo $this->_tpl_vars['item']['response_num']; ?>
+回答数</span>
 										</div>
 									</div>
 								</div>
@@ -181,12 +183,13 @@ unset($_smarty_tpl_vars);
     foreach ($_from as $this->_tpl_vars['key'] => $this->_tpl_vars['item']):
 ?>
 							<div class="swiper-slide">
-								<div class="pic fix"><span class="profilePhoto figure" style="background-image: url(<?php echo $this->_tpl_vars['item']['avatar']; ?>
+								<div class="pic fix"><span class="profilePhoto figure" style="background-image: url(<?php echo $this->_tpl_vars['item']['headpic']; ?>
 );"></span></div>
 								<p class="name apostrophe"><?php echo $this->_tpl_vars['item']['username']; ?>
 </p>
 								<p class="creative FontSize"></p>
-								<a class="check" href="javascript:;">查看问答</a>
+								<a class="check" href="/index.php?m=wap&c=muser&v=ta_faq&id=<?php echo $this->_tpl_vars['item']['uid']; ?>
+">查看问答</a>
 							</div>
 							<?php endforeach; endif; unset($_from); ?>
 							<?php endif; ?>
@@ -341,7 +344,7 @@ unset($_smarty_tpl_vars);
 													'<div class="right fix">'+
 														'<div class="fix"><span class="time">'+data.tips[i].addtime+'</span></div>'+
 														'<div class="fix">'+
-															'<span class="browseNum">'+data.tips[i].show_num+'浏览</span>&nbsp;·&nbsp;<span class="assistNum">'+data.tips[i].top_num+'赞</span>'+
+															'<span class="browseNum">'+data.tips[i].show_num+'浏览</span>&nbsp;·&nbsp;<span class="assistNum">'+data.tips[i].response_num+'回答数</span>'+
 														'</div>'+
 													'</div>'+
 												'</div>'+
@@ -427,7 +430,7 @@ unset($_smarty_tpl_vars);
 																'<div class="right fix">'+
 																	'<div class="fix"><span class="time">'+data.tips[i].addtime+'</span></div>'+
 																	'<div class="fix">'+
-																		'<span class="browseNum">'+data.tips[i].show_num+'浏览</span>&nbsp;·&nbsp;<span class="assistNum">'+data.tips[i].top_num+'赞</span>'+
+																		'<span class="browseNum">'+data.tips[i].show_num+'浏览</span>&nbsp;·&nbsp;<span class="assistNum">'+data.tips[i].response_num+'回答数</span>'+
 																	'</div>'+
 																'</div>'+
 															'</div>'+
@@ -452,7 +455,7 @@ unset($_smarty_tpl_vars);
 																'<div class="right fix">'+
 																	'<div class="fix"><span class="time">'+data.tips[i].addtime+'</span></div>'+
 																	'<div class="fix">'+
-																		'<span class="browseNum">'+data.tips[i].show_num+'浏览</span>&nbsp;·&nbsp;<span class="assistNum">'+data.tips[i].top_num+'赞</span>'+
+																		'<span class="browseNum">'+data.tips[i].show_num+'浏览</span>&nbsp;·&nbsp;<span class="assistNum">'+data.tips[i].response_num+'回答数</span>'+
 																	'</div>'+
 																'</div>'+
 															'</div>'+

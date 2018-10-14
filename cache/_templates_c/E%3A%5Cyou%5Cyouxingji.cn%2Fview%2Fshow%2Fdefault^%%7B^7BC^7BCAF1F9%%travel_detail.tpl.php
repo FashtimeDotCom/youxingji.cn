@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-07-30 16:06:14
+<?php /* vpcvcms compiled created on 2018-10-09 10:12:14
          compiled from index/travel_detail.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -100,7 +100,7 @@ unset($_smarty_tpl_vars);
 </div>
 							</div>
 						</div>
-						<div class="">
+						<div class="" style="width: 20rem;">
 							<!--评论div-->
 							<div class="m-comment-qm">
 								<!--PC版-->

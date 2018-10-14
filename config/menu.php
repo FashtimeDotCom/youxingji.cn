@@ -44,8 +44,8 @@ return array(
         array('url'=>"/admin/starTravelApply/index","name"=>"旅游报名","auth"=>"star_travel_apply","icon"=>"icon-file-alt"),
 	),
 	Core_Fun::Lang('menu::menu_journey') => array(
-        array('url' => '/admin/JourneyLabel/index', 'name' => '标签列表', 'auth' => 'journey_label', 'icon' => 'icon-file-alt'),
-		array('url' => '/admin/article/index', 'name' => '甄选列表', 'auth' => 'article_index', 'icon' => 'icon-file-alt'),
+        array('url' => '/admin/JourneyLabel/index', 'name' => '标签+分类', 'auth' => 'journey_label', 'icon' => 'icon-file-alt'),
+		array('url' => '/admin/article/index', 'name' => '独家线路', 'auth' => 'article_index', 'icon' => 'icon-file-alt'),
       	array('url' => '/admin/article/baojia', 'name' => '日历报价', 'auth' => 'article_baojia', 'icon' => 'icon-file-alt'),
 		array('url' => '/admin/article/features', 'name' => '特色体验', 'auth' => 'article_features', 'icon' => 'icon-file-alt'),
 		array('url' => '/admin/article/trip', 'name' => '详细行程', 'auth' => 'article_trip', 'icon' => 'icon-file-alt'),

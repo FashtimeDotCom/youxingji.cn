@@ -71,7 +71,7 @@
                 {{$article.title}}
             </td>
             <td class="td25">
-                {{$article.catname}}
+                {{$article.type_name}}
             </td>
             <td class="td25">
                 {{if $article.moduleid == 'shop'}}商品{{elseif $article.moduleid == 'case'}}案例{{else}}文章{{/if}}

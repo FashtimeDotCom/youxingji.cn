@@ -17,45 +17,42 @@
 	<style type="text/css">
 		.upic{cursor:pointer;margin: 0 15px 15px 0;position: relative;}
 		.layui-upload-button{display: none;}
-		.upic i{
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			width: 48px;
-			height: 48px;
-			-webkit-border-radius: 50%;
-			-moz-border-radius: 50%;
-			border-radius: 50%;
-			background: rgba(0,0,0,.2);
-			color: #fff;
-			text-align: center;
-			font-size: 24px;
-			line-height: 48px;
-			opacity: 1;
-			-webkit-transition: all .3s;
-			-moz-transition: all .3s;
-			-o-transition: all .3s;
-			transition: all .3s;
-			-o-border-radius: 50%;
-			-ms-border-radius: 50%;
-			-ms-transition: all .3s;}
-		.num_text{font-size: 12px;color: #868686;line-height: 20px;}
+		.upic i{position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				width: 48px;
+				height: 48px;
+				-webkit-border-radius: 50%;
+				-moz-border-radius: 50%;
+				border-radius: 50%;
+				background: rgba(0,0,0,.2);
+				color: #fff;
+				text-align: center;
+				font-size: 24px;
+				line-height: 48px;
+				opacity: 1;
+				-webkit-transition: all .3s;
+				-moz-transition: all .3s;
+				-o-transition: all .3s;
+				transition: all .3s;
+				-o-border-radius: 50%;
+				-ms-border-radius: 50%;
+				-ms-transition: all .3s;}
+		.num_text{font-size: 12px;color: #868686;line-height: 20px;padding-right: 6px;}
 		.num_f{color: #d71618;}
 
 		.row-issue{margin: 48px auto 0px;}
 		.m-edit-yz{margin-bottom: 0;padding-bottom: 1px;}
 		.wp{padding-top: 20px;}
 		.m-edit-yz .tit .inp,.m-edit-yz textarea{border:none;background: #f5f5f5;}
-		#title{width: 80%;}
-		.m-edit-yz textarea{height: 200px;}
+		#title{width: 90%;}
+		.m-edit-yz textarea{height: 200px;padding: 7px 10px 0px;}
 
-		.m-edit-yz .file .addImg{ display: inline-block;border: 1px #f5f5f5 solid;
-			padding: 0 6px;line-height: 38px;
-			text-align: center;font-size: 46px;color: #f5f5f5;
-			border-radius: 1px;background-color: #fff;cursor: pointer;}
+		.m-edit-yz .file .addImg{ display: inline-block;width:40px;height: 40px;
+			background: url(/resource/m/images/user/icon_addimg.png) no-repeat center center / 100%;}
 
-		.headline{margin-bottom: 6px;font-size: 12px;}
+		.headline{margin-bottom: 6px;font-size: 12px;clear: both;}
 		.m-edit-yz .tit .inp,.m-edit-yz textarea{font-size: 12px;}
 
 		input#title::-webkit-input-placeholder, textarea::-webkit-input-placeholder {color: #949494;}
@@ -67,6 +64,8 @@
 				 font-size: 14px;text-align: center;line-height: 30px;background: #f75b5d;
 				 border-radius: 2px;}
 		.nav{top: 45px;}
+		
+		.location1{position: absolute;top: 10px;right: 6px;}
 	</style>
 </head>
 <body>
@@ -78,20 +77,23 @@
 		<div class="row-issue">
 			<div class="m-edit-yz">
 				<div class="wp">
-					<div class="tit" style="background: #f5f5f5;">
+					<div class="tit" style="background: #f5f5f5;position: relative;">
 						<input type="text" class="inp" value="{{$res.title}}" id="title" maxlength="80" onkeyup="judgeIsNonNull1(event)" placeholder="请输入你的问题，不少于10个字哦">
-						<p class="r num_text"><a class="num_f" id="contentwordage1">0</a>/80</p>
+						<p class="r num_text location1"><a class="num_f" id="contentwordage1">0</a>/80</p>
 					</div>
 
 					<p class="headline">问题说明</p>
-					<div class="content-txt" style="overflow: auto;margin-bottom: 0px;">
-						<textarea placeholder="请输入你的问题说明，不少于10个字哦" class="txta1" id="describe" maxlength="1000" onkeyup="judgeIsNonNull2(event)">{{$res.describe}}</textarea>
-						<p class="r num_text"><a class="num_f" id="contentwordage2">0</a>/1000</p>
+					<div class="coverage fix" style="background: #f5f5f5;">
+						<div class="content-txt" style="overflow: auto;margin-bottom: 0px;">
+							<textarea placeholder="请输入你的问题说明，不少于10个字哦" class="txta1" id="describe" maxlength="1000" onkeyup="judgeIsNonNull2(event)">{{$res.describe}}</textarea>
+							<p class="r num_text"><a class="num_f" id="contentwordage2">0</a>/1000</p>
+						</div>
 					</div>
+						
 
-					<div class="pic-video">
-						<div class="file f-pic" style="margin-bottom: 7px;">
-							<div class="addImg">+</div>
+					<div class="pic-video" style="margin-top: 7px;">
+						<div class="file f-pic">
+							<div class="addImg"></div>
 						</div>
 					</div>
 					<div class="layui-upload">
@@ -142,7 +144,12 @@
 				$('#contentwordage1').html(remain);
 			}
 		}
-	
+		
+		//实时监听输入框值的改动
+		$("#title").bind('input propertychange', function(){
+			judgeIsNonNull1(event);
+		});
+		
 		//控制 问题说明的长度
 		function judgeIsNonNull2(event){
 			var value=$("#describe").val();
@@ -160,7 +167,12 @@
 				$('#contentwordage2').html(remain);
 			}
 		}
-	
+		
+		//实时监听输入框值的改动
+		$("#describe").bind('input propertychange', function(){
+			judgeIsNonNull2(event);
+		});
+		
 		//添加封面图
 		$('.f-pic').click(function(){
 			$('.layui-upload-button').trigger("click");
@@ -201,9 +213,15 @@
 			if(!title){
 				layer.msg('请输入标题');
 				return false;
+			}else if(title.length<10){
+				layer.msg('问题不能少于10个字哦！');
+				return false;
 			}
 			if(!describe){
 				layer.msg('请输入问题说明');
+				return false;
+			}else if(describe.length<10){
+				layer.msg('问题说明不能少于10个字哦！');
 				return false;
 			}
 	
@@ -220,12 +238,11 @@
 				'thumbfile':thumbfile,
 				'label':label
 			}, function(data){
-				console.log(data);
-				return false;
+				layer.msg(data.tips);
 				if (data.status == 1) {
-					window.location.href = "/index.php?m=wap&c=user&v=my_faq";
-				}else{
-					layer.msg(data.tips);
+					setInterval(function(){
+						window.location.href = "/index.php?m=wap&c=user&v=my_faq";
+					},500);
 				}
 			},"JSON");
 		});

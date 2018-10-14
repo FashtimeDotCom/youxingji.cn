@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-29 15:43:05
+<?php /* vpcvcms compiled created on 2018-10-11 10:57:02
          compiled from wap/user/editnote.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -101,9 +101,11 @@
 " id="tag" placeholder="请输入标签(可选)，每个标签最多四个字，如：旅游知识/美食，用正斜杠分开">
 							<p class="tagTips FontSize dis_none">标签目前最多为四个哦！</p>
 						</div>
-						<link rel="stylesheet" href="/resource/m/demo/css/index.css">
+
 						<style>
-							#editorContainer{border: 1px solid #e5e5e5;margin-bottom: 10px;}
+							article{min-height: 308px;}
+        					#editorContainer{min-height: 298px; border: 1px solid #e5e5e5;margin-bottom: 10px;}
+        					.zxeditor-container{min-height: 296px;}
 							.zxeditor-debug-switch{height: 0;opacity: 0;}
 						</style>
 						<!-- 内容编辑区域 -->
@@ -195,95 +197,6 @@ unset($_smarty_tpl_vars);
 					$(".lump").addClass("dis_none");
 				}
 			});
-			
-			//构建一个默认的编辑器
-			layui.use('layedit', function() {
-				var layedit = layui.layedit,
-					$ = layui.jquery;
-				layedit.set({
-					uploadImage: {
-						url: '/index.php?m=api&c=index&v=lay_uploadpic', //接口url
-						type: 'post' //默认post
-					}
-				});
-				//构建一个默认的编辑器
-				var index = layedit.build('LAY_demo1');
-
-				//编辑器外部操作
-				var active = {
-					content: function() {
-						
-						var content = layedit.getContent(index);
-						add(content);
-					},
-					selection: function() {
-						alert(layedit.getSelection(index));
-					}
-				};
-
-				$('#addnote').on('click', function(){
-					var type = $(this).data('type');
-					console.log(type);
-					active[type] ? active[type].call(this) : '';
-				});
-			});
-			
-			function add (con) {
-				var title = $('#title').val();
-				var describe = $('#describe').val();
-				var did = $('#did').val();
-				var oldImgUrl = parseInt($(".note_bg").attr("data-default")); //判断封面是否有上传，1 为没有上传
-				var imgUrl = $('.note_bg').attr('src');
-				var tag = $('#tag').val();//标签
-				address = $('#address').val();//定位
-				var id = $('#id').val();
-				
-				if(!title) {
-					layer.msg('请输入游记的标题');
-					return false;
-				}
-				if(!describe) {
-					layer.msg('请输入游记的摘要/封面描述');
-					return false;
-				}
-				
-				
-				if(oldImgUrl == 0 ) {
-					layer.msg('请上传封面图片');
-					return false;
-				}
-				var yourString = $('#tag').val();
-				var result=yourString.split("/");
-				if(result.length>4){
-					$(".tagTips").removeClass("dis_none");
-					return false;
-				}
-				if(!con) {
-					layer.msg('请输入正文');
-					return false;
-				}
-				console.log("3333");
-				if(!$("input[type='checkbox']").is(':checked')) {
-					layer.msg('请选择服务协议');
-					return false;
-				}
-				$.post("/index.php?m=api&c=TravelNote&v=save_travel_note", {
-					'did':did,
-					'title': title,
-					'imgUrl': imgUrl,
-					'tag':tag,//标签
-					'content': con,
-					'desc': describe,
-					'address':address,
-					'id': id,
-					'action':  'edit'
-				}, function(data){
-					layer.msg(data.tips);
-					if(data.status == 1) {
-						window.location.href = "/index.php?m=wap&c=user&v=travel_note";
-					}
-				}, "JSON");
-			}
 			
 			//解密base64编码
 			function Base64(){
@@ -482,7 +395,9 @@ unset($_smarty_tpl_vars);
 													layer.msg(data.tips);
 												}
 											}, "JSON");
-				                        }
+				                        }else{
+											layer.msg(data.tips);
+										}
 				                    }, 'jsonp');
 				                    
 				                    var speed = res.speed; // 速度，以米/每秒计
@@ -579,6 +494,8 @@ unset($_smarty_tpl_vars);
 							zxEditor.setImageSrc(data.id, url)
 							// 计算图片是否上传完成
 							_handleCount();
+						}else{
+							layer.msg(data.tips);
 						}
 					},error:function(res){
 						console.log(res.tip);
@@ -669,16 +586,16 @@ unset($_smarty_tpl_vars);
 				}
 	
 				$.post("/index.php?m=api&c=TravelNote&v=save_travel_note", {
-					'did':did,
+					'id':"<?php echo $this->_tpl_vars['res']['id']; ?>
+",
 					'title': title,
 					'imgUrl': imgUrl,
 					'tag':tag,//标签
 					'content': data.content,
 					'desc': describe,
-					'address':address
+					'address':address,
+					'action':'edit'
 				}, function(data) {
-					layer.msg(data.tips);
-	
 					if(data.status == 1) {
 						layer.msg('发布成功！');
 						//清除缓存
@@ -686,57 +603,13 @@ unset($_smarty_tpl_vars);
 						//localStorage.clear();
 						zxEditor.storage.remove('content', {content: data.content});
 						window.location.href = "/index.php?m=wap&c=user&v=travel_note";
+					}else{
+						layer.msg(data.tips);
 					}
 				}, "JSON");
 			});
 		}
-	
-		//保存草稿
-		function draft(con) {
-			var title = $('#title').val();
-			var describe = $('#describe').val();
-			var oldImgUrl = parseInt($(".note_bg").attr("data-default")); //判断封面是否有上传，1 为没有上传，
-			var imgUrl = $('.note_bg').attr('src');
-			var list = imgUrl + '||' + con;
-			var tag = $('#tag').val();//标签
-			address = $('#address').val();//定位
-			if(!title && !describe && oldImgUrl == 0 && !con) {
-				layer.msg('不能全为空');
-				return false;
-			}
-	
-			// 处理正文中的base64图片
-			// 获取正文中的base64数据数组
-			var base64Images = zxEditor.getBase64Images();
-			var data = getArticleData() || {};
-			// 上传base64图片数据
-			uploadBase64Images(base64Images, function () {
-				// 正文中有base64数据，上传替换成功后再重新获取正文内容
-				if (base64Images.length) {
-					data.content = zxEditor.getContent();
-				}
-	
-				list=imgUrl + '||' +data.content;
-				$.post("/index.php?m=api&c=index&v=adddraft", {
-					'title': title,
-					'describe': describe,
-					'tag':tag,
-					'list': list,
-					'type': 2,
-					'address':address
-				}, function(data) {
-					layer.msg(data.tips);
-					if(data.status == 1) {
-						layer.msg('保存成功！');
-						//清除缓存
-						//zxEditor.removeSave(data.content);
-						//localStorage.clear();
-						zxEditor.storage.remove('content', {content: data.content});
-						window.location.href = "/index.php?m=wap&c=user&v=draft";
-					}
-				}, "JSON");
-			});
-		}
+
 	</script>
 </body>
 </html>

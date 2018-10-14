@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-10-08 17:06:24
+<?php /* vpcvcms compiled created on 2018-10-14 18:43:27
          compiled from wap/user/add_note.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -20,10 +20,6 @@
 	<script src="/resource/m/js/jquery.js"></script>
 	<script src="/resource/m/js/lib.js"></script>
 	<link rel="stylesheet" href="/resource/m/css/note.css" />
-    <style>
-    	
-
-    </style>
 </head>
 <body id="row_issue">
 	<div class="mian">
@@ -73,7 +69,7 @@
 						</div>
 	
 						<div class="tit" style="margin-bottom: 20px;">
-							<textarea class="layui-textarea inp txta1" id="describe" placeholder="请在这里输入游记的摘要/封面描述" style="line-height: 22px;"><?php echo $this->_tpl_vars['res']['describe']; ?>
+							<textarea class="layui-textarea inp txta1" id="describe" onkeyup="judgeIsNonNull1(event)" placeholder="请在这里输入游记的摘要/封面描述" style="line-height: 22px;"><?php echo $this->_tpl_vars['res']['describe']; ?>
 </textarea>
 							<p class="r num_text">可输入<a class="num_f" id="contentwordage">255</a>个字</p>
 						</div>
@@ -147,28 +143,30 @@ unset($_smarty_tpl_vars);
 	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
 	<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function(){
-			//控制封面描述的字数
-			var limitNum = 255;
-			var num = $('.txta1').val().length;
-			var s = limitNum - num;
-			if(s < 0) {
-				$('.txta1').val(setString($('.txta1').val(), 255));
-				$('#contentwordage').html(0);
-				return false;
+		//监控 正文内容输入框 ，包括粘贴板
+		function judgeIsNonNull1(event){
+			var value=$("#describe").val();
+			var x = event.which || event.keyCode;
+			if( value.length <= 255 ){
+				//console.log("符合255位数以内");
+			} else{
+				return $("#describe").val(value.substr(0, 255));
 			}
-			$('#contentwordage').html(s);
-			$('.txta1').keyup(function(){
-				var remain = $(this).val().length;
-				if(remain > 255) {
-					$('.txta1').val($('.txta1').val().substr(0, 255));
-					var result = 0;
-				} else {
-					var result = limitNum - remain;
-				}
-				$('#contentwordage').html(result);
-			});
-	
+			var remain = $("#describe").val().length;
+			if(remain > 255){
+				$('#describe').val(setString($('#describe').val(),255));
+				$('#contentwordage').html(255-remain);
+			}else{
+				$('#contentwordage').html(255-remain);
+			}
+		}
+		
+		//监控 正文内容输入框 ，包括粘贴板
+		$("#describe").bind('input propertychange', function(){
+			judgeIsNonNull1(event);
+		});
+		
+		$(document).ready(function(){
 			//标签  字数控制
 			$('#tag').keyup(function() {
 				var tag = $('#tag').val();
@@ -398,6 +396,8 @@ unset($_smarty_tpl_vars);
 													layer.msg(data.tips);
 												}
 											}, "JSON");
+										}else{
+											layer.msg(data.tips);
 										}
 									}, 'jsonp');
 	
@@ -495,6 +495,8 @@ unset($_smarty_tpl_vars);
 							zxEditor.setImageSrc(data.id, url)
 							// 计算图片是否上传完成
 							_handleCount();
+						}else{
+							layer.msg(data.tips);
 						}
 					},error:function(res){
 						console.log(res.tip);
@@ -599,6 +601,8 @@ unset($_smarty_tpl_vars);
 						//localStorage.clear();
 						zxEditor.storage.remove('content', {content: data.content});
 						window.location.href = "/index.php?m=wap&c=user&v=travel_note";
+					}else{
+						layer.msg(data.tips);
 					}
 				}, "JSON");
 			});
@@ -645,6 +649,8 @@ unset($_smarty_tpl_vars);
 						//localStorage.clear();
 						zxEditor.storage.remove('content', {content: data.content});
 						window.location.href = "/index.php?m=wap&c=user&v=draft";
+					}else{
+						layer.msg(data.tips);
 					}
 				}, "JSON");
 			});

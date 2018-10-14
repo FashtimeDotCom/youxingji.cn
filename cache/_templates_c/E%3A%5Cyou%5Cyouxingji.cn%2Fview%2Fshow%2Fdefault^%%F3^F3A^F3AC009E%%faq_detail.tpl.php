@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-10-08 15:25:02
+<?php /* vpcvcms compiled created on 2018-10-14 18:53:23
          compiled from wap/faq/faq_detail.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -15,6 +15,7 @@
 " />
     <link rel="stylesheet" href="/resource/m/css/style.css" />
     <script src="/resource/m/js/jquery.js"></script>
+    <script src="/resource/m/js/lib.js"></script>
     <link rel="stylesheet" href="/resource/m/css/common.css" />
     <link rel="stylesheet" href="/resource/m/css/faq_detail.css" />
 </head>
@@ -56,12 +57,12 @@ unset($_smarty_tpl_vars);
 				<div class="bottom fix">
 					<div class="topButtom transform FontSize">
 						<span class="browseNum"><i><?php echo $this->_tpl_vars['faq_info']['show_num']; ?>
-</i>浏览</span>&nbsp;·&nbsp;<span class="answerNum"><i><?php echo $this->_tpl_vars['total']; ?>
-</i>回答</span>&nbsp;·&nbsp;<span class="assistNum"><i><?php echo $this->_tpl_vars['faq_info']['collection_num']; ?>
-</i>收藏</span>
+</i>浏览</span>&nbsp;·&nbsp;<span class="answerNum"><i><?php echo $this->_tpl_vars['faq_info']['collection_num']; ?>
+</i>收藏</span>&nbsp;·&nbsp;<span class="assistNum"><i><?php echo $this->_tpl_vars['faq_info']['response_num']; ?>
+</i>回答</span>
 					</div>
-					<div class="left transform FontSize fix" style="margin-left: -5px;"><img class="icon" src="/resource/m/images/user/icon_faq_detail2.png"/><?php echo $this->_tpl_vars['faq_info']['address']; ?>
-</div>
+					<div class="left transform FontSize fix" style="margin-left: -5px;"><img class="icon" src="/resource/m/images/user/icon_faq_detail2.png"/><span class="seat"><?php echo $this->_tpl_vars['faq_info']['address']; ?>
+</span></div>
 					<div class="right transform FontSize fix"><span class="name"><?php echo $this->_tpl_vars['faq_info']['username']; ?>
 </span>&nbsp;问于&nbsp;<span class="time"><?php echo $this->_tpl_vars['faq_info']['addtime']; ?>
 </span></div>
@@ -71,6 +72,8 @@ unset($_smarty_tpl_vars);
 	    	<!--答-->
 	    	<input type="hidden" name="" id="answerNum" title="回答的总数" value="<?php echo $this->_tpl_vars['total']; ?>
 " />
+	    	<?php if ($this->_tpl_vars['total'] > 0): ?>
+	    	<!--有人回答-->
 	    	<div class="modules answer marginBotom fix" id="answer" data-index="1" data-page="" data-nowPage="1">
 	    		<div class="bigTitle">
 	    			<span class="left">全部问答（<i><?php echo $this->_tpl_vars['total']; ?>
@@ -78,43 +81,53 @@ unset($_smarty_tpl_vars);
 	    			<p class="right"><span class="key on" id="answerHeat">按热度</span>&nbsp;|&nbsp;<span class="key" id="answerTime">按时间</span></p>
 	    		</div>
 	    		<div class="matter fix">
-					<?php if ($this->_tpl_vars['total'] > 0): ?>
-					<!--有人回答-->
-					<?php $_from = $this->_tpl_vars['list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+					<div class="con fix">
+						<?php $_from = $this->_tpl_vars['list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
     foreach ($_from as $this->_tpl_vars['key'] => $this->_tpl_vars['item']):
 ?>
-					<div class="hunk fix">
-						<div class="bottom fix">
-							<div class="left transform FontSize fix marginLeft">
-								<span class="boxes">答&nbsp;<span class="profilePhoto figure" style="background-image: url(<?php echo $this->_tpl_vars['item']['headpic']; ?>
+						<div class="hunk fix">
+							<div class="bottom fix">
+								<div class="left answerLeft transform FontSize fix marginLeft">
+									<span class="boxes">答&nbsp;<span class="profilePhoto figure" style="background-image: url(<?php echo $this->_tpl_vars['item']['headpic']; ?>
 );"></span></span>&nbsp;
-								<span class="name"><?php echo $this->_tpl_vars['item']['username']; ?>
+									<span class="name"><?php echo $this->_tpl_vars['item']['username']; ?>
 </span>
-							</div>
-							<div class="right transform FontSize fix"><span class="time" style="margin-right: -10px;"><?php echo $this->_tpl_vars['item']['addtime']; ?>
+								</div>
+								<div class="right transform FontSize fix"><span class="answerTime"><?php echo $this->_tpl_vars['item']['addtime']; ?>
 </span></div>
-						</div>
-						<div class="substance fix">
-							<div class="solution description"><?php echo $this->_tpl_vars['item']['content']; ?>
+							</div>
+							<div class="substance fix">
+								<div class="solution description"><?php echo $this->_tpl_vars['item']['content']; ?>
 </div>
-							<a class="readMore fix" href="javascript:;">
-								<span class="coverage fix"></span>
-								<span class="typeface">查看更多</span>
-							</a>
-						</div>
+								<a class="readMore fix" href="javascript:;">
+									<span class="coverage fix"></span>
+									<span class="typeface">查看更多</span>
+								</a>
+							</div>
 
-						<div class="bottom fix">
-							<div class="topButtom transform FontSize" style="text-align: center;">
-								<span class="replyNum"><i><?php echo $this->_tpl_vars['item']['show_num']; ?>
+							<div class="bottom fix">
+								<div class="topButtom transform FontSize" style="text-align: center;">
+									<span class="replyNum"><i><?php echo $this->_tpl_vars['item']['show_num']; ?>
 </i>浏览</span>&nbsp;·&nbsp;<span class="replyNum"><i><?php echo $this->_tpl_vars['item']['top_num']; ?>
 </i>点赞</span>
+								</div>
 							</div>
 						</div>
-					</div>
-					<?php endforeach; endif; unset($_from); ?>
-					
-					<!--无人回答-->
-					<?php else: ?>
+						<?php endforeach; endif; unset($_from); ?>
+					</div>	
+	    		</div>
+	    	</div>
+	    	<p class="tips"></p>
+	    	
+	    	<?php else: ?>
+	    	<!--无人回答-->
+	    	<div class="modules answer marginBotom fix" id="answer" data-index="1">
+	    		<div class="bigTitle">
+	    			<span class="left">全部问答（<i><?php echo $this->_tpl_vars['total']; ?>
+</i>）</span>
+	    			<p class="right"><span class="key on" id="answerHeat">按热度</span>&nbsp;|&nbsp;<span class="key" id="answerTime">按时间</span></p>
+	    		</div>
+	    		<div class="matter fix">
 					<div class="hunk">
 						<img class="tips" src="/resource/m/images/user/defaul_travel_bg.png"/>
 						<p class="depict">这个问题还没有人回答哦！<br />赶紧寻找达人回答吧！</p>
@@ -122,15 +135,13 @@ unset($_smarty_tpl_vars);
 					<?php endif; ?>
 	    		</div>
 	    	</div>
-	    	<p class="tips"></p>
 	    </div>
 	</div>
 	<div class="answerNav fix">
 		<span class="left" onclick="collect(<?php echo $this->_tpl_vars['faq_info']['id']; ?>
-)"><img src="/resource/m/images/user/icon_faq_detail3.png"/>&nbsp;收藏问题（<i class="collectNUM"><?php echo $this->_tpl_vars['faq_info']['collection_num']; ?>
-</i>）</span>
-		<span class="right"><a href="/index.php?m=wap&c=faq&v=response_faq&id=<?php echo $this->_tpl_vars['faq_info']['id']; ?>
-"><img src="/resource/m/images/user/icon_faq_detail4.png"/>&nbsp;添加答案</a></span>
+)"><img src="/resource/m/images/user/icon_faq_detail3.png"/>&nbsp;收藏问题</span>
+		<span class="right" id="skip" data-id="<?php echo $this->_tpl_vars['faq_info']['id']; ?>
+"><img src="/resource/m/images/user/icon_faq_detail4.png"/>&nbsp;添加答案</span>
 	</div>
 	
 	<script type="text/javascript" src="/resource/m/js/swiper.js"></script>
@@ -149,13 +160,13 @@ unset($_smarty_tpl_vars);
     			$(".tips").text("没有更多信息咯~");
     		}
     	}
-        
+
         $(".key").on("click",function(){
         	var index = $(this).index();
         	$(this).addClass("on");
         	$(this).siblings().removeClass("on");
         	$("#answer").attr("data-index",index+1);
-        	$(".matter").html("");
+        	$(".con").html("");
         	buttons(index+1);
         });
 		
@@ -178,8 +189,8 @@ unset($_smarty_tpl_vars);
 					flag = false;
                 },
                 success:function( data ){
+                	var html="";
                     if(data.status == 1){
-	                	var html="";
 	                	$.each(data.tips,function(i,item){
 	                		html+='<div class="hunk fix">'+
 										'<div class="bottom fix">'+
@@ -203,17 +214,22 @@ unset($_smarty_tpl_vars);
 										'</div>'+
 									'</div>';
 	                   	});
-                   		$(".matter").append(html);
+                   		$(".con").append(html);
 	                    
 	                    if (maxPages>1) {
 	                		$(".tips").text("往下拖动查看更多！");
 	                		flag = true;
 	                	}else{
-	                		$(".tips").text("我也是有底线的哦~");
+	                		$(".tips").text("没有更多信息咯~");
 	                		flag = false;
 	                	}
 	                }else{
 	                    layer.msg(data.tips);
+	                    html = '<div class="hunk">'+
+									'<img class="tips" src="/resource/m/images/user/defaul_travel_bg.png"/>'+
+									'<p class="depict">这个问题还没有人回答哦！<br />赶紧寻找达人回答吧！</p>'+
+								'</div>';
+	                    $(".matter").html(html);
 	                }
                 }
             });
@@ -278,9 +294,9 @@ unset($_smarty_tpl_vars);
 												'</div>'+
 											'</div>';
 			                   	});
-		                   		$(".matter").append(html);
+		                   		$(".con").append(html);
 			                    
-			                    $(".matter").attr("data-NowPage",NowPage+1);
+			                    $(".answer").attr("data-NowPage",NowPage+1);
 			                    if(NowPage+1<maxPages){
 			                		$(".tips").text("往下拖动查看更多！");
 			                	}else{
@@ -306,7 +322,7 @@ unset($_smarty_tpl_vars);
 	        }
 	    });
 	    
-	     //收藏
+	    //收藏
         function collect(id){
             $.post("/index.php?m=api&c=favtravel&v=collection", {
                 'action':1,  //action:数值(0取消，1收藏)
@@ -321,6 +337,20 @@ unset($_smarty_tpl_vars);
                 }
             },"JSON");
         }
+	    
+	    //添加答案
+        $("#skip").on("click",function(){
+        	var id = $(this).attr("data-id");
+            $.post("index.php?m=api&c=user&v=is_login", {
+            	
+            }, function(data){
+                if(data.status == 1){
+                	window.location="/index.php?m=wap&c=faq&v=response_faq&id="+id;
+                }else{
+                	layer.msg(data.tips);
+                }
+            },"JSON");
+        });
 	</script>
 </body>
 </html>

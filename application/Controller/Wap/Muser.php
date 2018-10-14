@@ -256,7 +256,8 @@ class Controller_Wap_Muser extends Core_Controller_WapAction
 
         $this->display('wap/muser/new_tv.tpl');
     }
-
+	
+	//新版，别人游记
     public function travel_noteAction(){
         $uid=$this->getParam('id');
 
@@ -280,6 +281,33 @@ class Controller_Wap_Muser extends Core_Controller_WapAction
         $this->display("wap/muser/new_note.tpl");
     }
 
+    /*
+     * 他的问答
+     *
+     * */
+    public function ta_faqAction()
+    {
+        $uid=$this->getParam('id');
+
+        $perpage = 4;
+        $curpage = $this->getParam ('page') ? intval ($this->getParam ('page')) : 1;
+        $list = C::M('faq')->where("uid = $uid and status=1")->order('addtime desc')->limit($perpage * ($curpage - 1), $perpage)->select();
+        if( $list ){
+        	foreach ($list as $key=>$value){
+                C::M('faq')->where('id', $value['id'])->setInc('show_num', 1);
+                if( trim($value['label']) ){
+                    $list[$key]['label']=explode("/",$value['label']);
+                }
+
+            }
+            $this->assign("list",$list);
+        }
+        //total
+        $total=$this->totalAction($uid);
+        $this->assign("total",$total);
+
+        $this->display('wap/muser/ta_faq.tpl');
+    }
 
     /*
     * 统计日志，视频，游记，问题总数
@@ -304,11 +332,10 @@ class Controller_Wap_Muser extends Core_Controller_WapAction
 
         //问答，暂时没有，0
         $answer=0;
-        $data['answer']=$answer;
+        $answer=C::M('faq')->where("uid={$uid} and status=1")->getCount();
+        $data['faq_num']=$answer;
 
         return $data;
 
     }
-
-
 }

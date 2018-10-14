@@ -1,7 +1,7 @@
-<?php /* vpcvcms compiled created on 2018-09-26 11:47:30
+<?php /* vpcvcms compiled created on 2018-10-09 14:42:26
          compiled from wap/tv.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/tv.tpl', 50, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/tv.tpl', 52, false),)), $this); ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 
@@ -54,6 +54,7 @@ unset($_smarty_tpl_vars);
             </a>
         </div>
         <?php endforeach; endif; unset($_from); ?>
+        <!--
         <div class="tjuser swiper-container">
             <div class="swiper-wrapper">
                 <?php $_from = $this->_tpl_vars['tjuser']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
@@ -63,7 +64,7 @@ unset($_smarty_tpl_vars);
                     <div class="wp">
                         <h4 class="g-tit-yz" style="background-image: url(/resource/m/images/line-yz1.jpg)">本周推荐达人</h4>
                         <div class="tx">
-                            <a href="<?php echo ((is_array($_tmp=$this->_tpl_vars['v']['uid'])) ? $this->_run_mod_handler('helper', true, $_tmp, 'mhref') : smarty_modifier_helper($_tmp, 'mhref')); ?>
+                            <a href="index.php?m=wap&c=muser&v=tv&id=<?php echo $this->_tpl_vars['v']['uid']; ?>
 " class="pic"><img src="<?php echo $this->_tpl_vars['v']['avatar']; ?>
 " alt=""></a>
                             <h5><a href="<?php echo ((is_array($_tmp=$this->_tpl_vars['v']['uid'])) ? $this->_run_mod_handler('helper', true, $_tmp, 'mhref') : smarty_modifier_helper($_tmp, 'mhref')); ?>
@@ -79,6 +80,7 @@ unset($_smarty_tpl_vars);
                 <?php endforeach; endif; unset($_from); ?>
             </div>
         </div>
+        -->
         <div class="m-txt2">
             <div class="con swiper-container swiper-container-horizontal swiper-container-ios" style="    padding-right: 0px;">
                 <div class="swiper-wrapper" style="overflow-x: scroll;">

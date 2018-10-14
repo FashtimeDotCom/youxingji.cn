@@ -1,7 +1,7 @@
-<?php /* vpcvcms compiled created on 2018-09-21 15:15:43
+<?php /* vpcvcms compiled created on 2018-10-09 18:32:43
          compiled from wap/master_list.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/master_list.tpl', 129, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/master_list.tpl', 123, false),)), $this); ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -47,7 +47,7 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'w
 		.container .modules .hunk .title .botton{float: right;border: 1px #999 solid;padding: 1px 4px;margin-top: 5px;font-size: 0.6rem;}
 		
 		.vessel{display: block;width: 100%;}
-		.container .modules .hunk a .headPortrait{overflow: hidden;}
+		.container .modules .hunk a .headPortrait{}
 		.container .modules .hunk a .headPortrait img{display: block;width: 100%;margin: 0 auto;}
 		
 		.container .modules .hunk a .description{color: #666;font-size: 0.6rem;line-height: 16px;margin: 0.8rem auto;-webkit-line-clamp: 5;/*三列*/}
@@ -59,32 +59,26 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'w
 		/*5.5英寸   414*736尺寸的屏幕  如iPhone6 Plus、iPhone6s Plus、iPhone7 Plus、魅族MX5    1920x1080  /3★*/
 		@media only screen and (max-width: 414px) {
 			.backdrop{max-height: 193.88px;}
-			.headPortrait{max-height: 228.41px;}
 		}
 		/*5.96英寸  412*732尺寸的屏幕  如谷歌Nexus 6   2K 2560x1440  /3.5★*/
 		@media only screen and (max-width: 412px) {
 			.backdrop{max-height: 192.75px;}
-			.headPortrait{max-height: 227.09px;}
 		}
 		/*5.2英寸   411*731尺寸的屏幕  如 谷歌Nexus 5x   1920x1080  /2.625★*/
 		@media only screen and (min-width: 376px) and (max-width: 411px) {
 			.backdrop{max-height: 192.38px;}
-			.headPortrait{max-height: 226.65px;}
 		}
 		/*4.7英寸   375*667尺寸的屏幕  如iPhone6、iPhone7、iPhone 6s   1334x750*/
 		@media only screen and (min-width: 361px) and (max-width: 375px) {
 			.backdrop{max-height: 175.5px;}
-			.headPortrait{max-height: 206.76px;}
 		}
 		/*4.95英寸  360*640尺寸的屏幕  如 谷歌Nexus 5    1920x1080 /3★ */
 		@media only screen and (min-width: 321px) and (max-width: 360px) {
 			.backdrop{max-height: 168.38px;}
-			.headPortrait{max-height: 198.36px;}
 		}
 		/*4.0英寸   320*568尺寸的屏幕  如iPhone5、iPhone SE   1136x640*/
 		@media only screen and (max-width: 320px) {
 			.backdrop{max-height: 149.63px;}
-			.headPortrait{max-height: 176.28px;}
 		}
     </style>
 </head>

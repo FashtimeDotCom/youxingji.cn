@@ -58,6 +58,9 @@ class Controller_Api_Favtravel extends Core_Controller_Action
             $where=" t_id = {$t_id} && uid = {$user_id} &&type={$type} ";
             $res=C::M("collection")->where($where)->delete();
             if($res){
+                if( $type==4 ){//4-达人问答，collection_num字段-1
+                    C::M('faq')->where('id',$t_id)->setInc('collection_num', -1);
+                }
                 $json = array('status' => 1, 'tips' => '取消成功!');
                 echo Core_Fun::outputjson($json);
                 exit;
@@ -141,6 +144,9 @@ class Controller_Api_Favtravel extends Core_Controller_Action
                 case 3:
                     $data=$this->parseNoteAction($id_str);
                     break;
+                case 4:
+                    $data=$this->parseFaqAction($id_str);
+                    break;
                 default:
                     $data=$this->parseTravelAction($id_str);
                     break;
@@ -160,6 +166,7 @@ class Controller_Api_Favtravel extends Core_Controller_Action
         return ($_SERVER['REQUEST_METHOD'] == 'POST' && (empty($_SERVER['HTTP_REFERER']) || preg_replace("~https?:\/\/([^\:\/]+).*~i", "\\1", $_SERVER['HTTP_REFERER']) == preg_replace("~([^\:]+).*~", "\\1", $_SERVER['HTTP_HOST']))) ? 1 : 0;
     }
 
+    //日志
     public function parseTravelAction($id_str){
         $sql="SELECT * FROM ##__travel WHERE id In ({$id_str});";
         $data=Core_Db::fetchAll($sql);
@@ -173,6 +180,7 @@ class Controller_Api_Favtravel extends Core_Controller_Action
         return false;
     }
 
+    //tv
     public function parseTvAction($id_str){
         $sql="SELECT * FROM ##__tv WHERE id In ({$id_str});";
         $data=Core_Db::fetchAll($sql);
@@ -185,6 +193,7 @@ class Controller_Api_Favtravel extends Core_Controller_Action
         return false;
     }
 
+    //游记
     public function parseNoteAction($id_str){
         $sql="SELECT * FROM ##__travel_note WHERE id In ({$id_str});";
         $data=Core_Db::fetchAll($sql);
@@ -194,6 +203,25 @@ class Controller_Api_Favtravel extends Core_Controller_Action
         return false;
     }
 
+    //达人问答
+    public function parseFaqAction($id_str){
+        $arr=explode(",",$id_str);
+        $data=array();
+        if( $arr ){
+            foreach( $arr as $key=>$value ){
+                $info=array();
+                $info=C::M('faq')->where("id=$value")->find();
+                if( !$info ){
+                    $data[$key]['id']=$value;
+                    $data[$key]['is_delete']=1;
+                }else{
+                    $data[]=$info;
+                }
+            }
+            return $data;
+        }
+        return false;
+    }
 
 
 

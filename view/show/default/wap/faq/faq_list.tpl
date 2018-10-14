@@ -11,6 +11,7 @@
     <meta name="description" content="{{TO->cfg key="index_description" group="site" default="首页"}}" />
     <link rel="stylesheet" href="/resource/m/css/style.css" />
     <script src="/resource/m/js/jquery.js"></script>
+    <script src="/resource/m/js/lib.js"></script>
     <link rel="stylesheet" href="/resource/m/css/common.css" />
     <link rel="stylesheet" href="/resource/m/css/faq_list.css" />
     <link rel="stylesheet" type="text/css" href="/resource/m/css/swiper.css" />
@@ -69,7 +70,7 @@
 									<div class="right fix">
 										<div class="fix"><span class="time">{{$item.addtime}}</span></div>
 										<div class="fix">
-											<span class="browseNum">{{$item.show_num}}浏览</span>&nbsp;·&nbsp;<span class="assistNum">{{$item.top_num}}赞</span>
+											<span class="browseNum">{{$item.show_num}}浏览</span>&nbsp;·&nbsp;<span class="assistNum">{{$item.response_num}}回答数</span>
 										</div>
 									</div>
 								</div>
@@ -88,10 +89,10 @@
 							{{if $star_list}}
 							{{foreach from=$star_list item=item key=key}}
 							<div class="swiper-slide">
-								<div class="pic fix"><span class="profilePhoto figure" style="background-image: url({{$item.avatar}});"></span></div>
+								<div class="pic fix"><span class="profilePhoto figure" style="background-image: url({{$item.headpic}});"></span></div>
 								<p class="name apostrophe">{{$item.username}}</p>
 								<p class="creative FontSize"></p>
-								<a class="check" href="javascript:;">查看问答</a>
+								<a class="check" href="/index.php?m=wap&c=muser&v=ta_faq&id={{$item.uid}}">查看问答</a>
 							</div>
 							{{/foreach}}
 							{{/if}}
@@ -119,7 +120,7 @@
 									<div class="right fix">
 										<div class="fix"><span class="time">{{$item.addtime}}</span></div>
 										<div class="fix">
-											<span class="browseNum">{{$item.show_num}}浏览</span>&nbsp;·&nbsp;<span class="assistNum">{{$item.top_num}}赞</span>
+											<span class="browseNum">{{$item.show_num}}浏览</span>&nbsp;·&nbsp;<span class="assistNum">{{$item.response_num}}回答数</span>
 										</div>
 									</div>
 								</div>
@@ -141,10 +142,10 @@
 							{{if $star_list}}
 							{{foreach from=$star_list item=item key=key}}
 							<div class="swiper-slide">
-								<div class="pic fix"><span class="profilePhoto figure" style="background-image: url({{$item.avatar}});"></span></div>
+								<div class="pic fix"><span class="profilePhoto figure" style="background-image: url({{$item.headpic}});"></span></div>
 								<p class="name apostrophe">{{$item.username}}</p>
 								<p class="creative FontSize"></p>
-								<a class="check" href="javascript:;">查看问答</a>
+								<a class="check" href="/index.php?m=wap&c=muser&v=ta_faq&id={{$item.uid}}">查看问答</a>
 							</div>
 							{{/foreach}}
 							{{/if}}
@@ -293,7 +294,7 @@
 													'<div class="right fix">'+
 														'<div class="fix"><span class="time">'+data.tips[i].addtime+'</span></div>'+
 														'<div class="fix">'+
-															'<span class="browseNum">'+data.tips[i].show_num+'浏览</span>&nbsp;·&nbsp;<span class="assistNum">'+data.tips[i].top_num+'赞</span>'+
+															'<span class="browseNum">'+data.tips[i].show_num+'浏览</span>&nbsp;·&nbsp;<span class="assistNum">'+data.tips[i].response_num+'回答数</span>'+
 														'</div>'+
 													'</div>'+
 												'</div>'+
@@ -379,7 +380,7 @@
 																'<div class="right fix">'+
 																	'<div class="fix"><span class="time">'+data.tips[i].addtime+'</span></div>'+
 																	'<div class="fix">'+
-																		'<span class="browseNum">'+data.tips[i].show_num+'浏览</span>&nbsp;·&nbsp;<span class="assistNum">'+data.tips[i].top_num+'赞</span>'+
+																		'<span class="browseNum">'+data.tips[i].show_num+'浏览</span>&nbsp;·&nbsp;<span class="assistNum">'+data.tips[i].response_num+'回答数</span>'+
 																	'</div>'+
 																'</div>'+
 															'</div>'+
@@ -404,7 +405,7 @@
 																'<div class="right fix">'+
 																	'<div class="fix"><span class="time">'+data.tips[i].addtime+'</span></div>'+
 																	'<div class="fix">'+
-																		'<span class="browseNum">'+data.tips[i].show_num+'浏览</span>&nbsp;·&nbsp;<span class="assistNum">'+data.tips[i].top_num+'赞</span>'+
+																		'<span class="browseNum">'+data.tips[i].show_num+'浏览</span>&nbsp;·&nbsp;<span class="assistNum">'+data.tips[i].response_num+'回答数</span>'+
 																	'</div>'+
 																'</div>'+
 															'</div>'+

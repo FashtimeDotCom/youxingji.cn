@@ -10,7 +10,6 @@
 	<meta name="keywords" content="{{TO->cfg key=" index_keywords " group="site " default="首页 "}}" />
 	<meta name="description" content="{{TO->cfg key=" index_description " group="site " default="首页 "}}" />
 	<link rel="stylesheet" href="/resource/m/css/style.css" />
-	<!--<link rel="stylesheet" href="/resource/m/css/index.css" />-->
 	<link rel="stylesheet" href="/resource/m/css/m.css" />
 	<script src="/resource/js/move_rem.js"></script>
 	<script src="/resource/lightbox/jquery.min.js"></script>
@@ -26,68 +25,8 @@
 			$('.lightbox').lightbox();
 		});
 	</script>
-	<style type="text/css">
-		.d_item{width: 93.7%!important;margin: 0 auto!important;}
-		.d_item .logTime{color: #999;font-size: 12px;}
-		
-		.other{display: block;}
-		.other .user{padding: 0rem 0 0.25rem;}
-		.other .user span{width: 1.65rem;border-radius: 0.825rem;height: 1.65rem;}
-		.other .user span img{width: 1.65rem;border-radius: 0.825rem;height: 1.65rem;}
-		
-		.other .interact{float: right;display: block;width: auto;}
-		.other .interact span{display: inline-block;font-size: 12px;line-height: 1.5rem;}
-		.other .interact span i{top: 0.3rem;}
-		
-		.m_item_a1 .pic{overflow: hidden;}
-		/*5.5英寸   414*736尺寸的屏幕  如iPhone6 Plus、iPhone6s Plus、iPhone7 Plus、魅族MX5    1920x1080  /3★*/
-		@media only screen and (max-width: 414px) {
-			.m_item_a1 .pic{height: 223.2px;}
-			.other .user span{padding-top:0;}
-			.interact .Read i,.other .interact span i,.interact .theory i{background-position-x: 2px;}
-		}
-		/*5.96英寸  412*732尺寸的屏幕  如谷歌Nexus 6   2K 2560x1440  /3.5★*/
-		@media only screen and (max-width: 412px) {
-			.m_item_a1 .pic{height: 221.6px;}
-			.other .user span{padding-top:0;}
-			.interact .Read i,.other .interact span i,.interact .theory i{background-position-x: 2px;}
-		}
-		/*5.2英寸   411*731尺寸的屏幕  如 谷歌Nexus 5x   1920x1080  /2.625★*/
-		@media only screen and (min-width: 376px) and (max-width: 411px) {
-			.m_item_a1 .pic{height: 220.8px;}
-			.other .user span{padding-top:0;}
-			.interact .Read i,.other .interact span i,.interact .theory i{background-position-x: 2px;}
-		}
-		/*4.7英寸   375*667尺寸的屏幕  如iPhone6、iPhone7、iPhone 6s   1334x750*/
-		@media only screen and (min-width: 361px) and (max-width: 375px) {
-			.m_item_a1 .pic{height: 226.4px;}
-			.other .interact span{padding-left: 1rem;}
-			.interact .Read i,.other .interact span i,.interact .theory i{background-position-x: 0px;}
-			.interact .Read i{background-position-y: -29px;}
-			.interact .spot i{background-position-y: -62px;}
-			.interact .theory i{background-position-y: -98px;}
-		}
-		/*4.95英寸  360*640尺寸的屏幕  如 谷歌Nexus 5    1920x1080 /3★ */
-		@media only screen and (min-width: 321px) and (max-width: 360px) {
-			.m_item_a1 .pic{height: 188.8px;}
-			.other .interact span{padding-left: 1rem;}
-			.interact .Read i,.other .interact span i,.interact .theory i{background-position-x: 0px;}
-			
-			.interact .Read i{background-position-y: -30px;}
-			.interact .spot i{background-position-y: -63px;}
-			.interact .theory i{background-position-y: -99px;}
-		}
-		/*4.0英寸   320*568尺寸的屏幕  如iPhone5、iPhone SE   1136x640*/
-		@media only screen and (max-width: 320px) {
-			.m_item_a1 .pic{height: 160.8px;}
-			.other .interact span{padding-left: 1.2rem;}
-			.interact .Read i,.other .interact span i,.interact .theory i{background-position-x: 0px;}
-			.interact .Read i{background-position-y: -31px;}
-			.interact .spot i{background-position-y: -64px;}
-			.interact .theory i{background-position-y: -100px;}
-			.article .title span i{background-position-y: 17.5px;}
-		}
-	</style>
+	
+	<link rel="stylesheet" href="/resource/m/css/new_index.css" />
 </head>
 <body class="index">
 	<div class="header">
@@ -156,12 +95,12 @@
 					<span>达人游记</span>
 				</a>
 			</li>
-			<li><a href="">
+			<li><a href="/index.php?m=wap&c=faq&v=index">
 					<i style="background-image: url(/resource/m/images/q-icon54.jpg);"></i>
 					<span>达人问答</span>
 				</a>
 			</li>
-			<li><a href="">
+			<li><a href="javascript:;">
 					<i style="background-image: url(/resource/m/images/q-icon53.jpg);"></i>
 					<span>成为达人</span>
 				</a>
@@ -289,9 +228,6 @@
 		<!--达人游记-->
 		<article class="article fix">
 			<h3 class="title">达人游记 <a href="index.php?m=wap&c=index&v=ryt"><span>更多<i></i></span></a></h3>
-				<!--<div class="time">
-					{{$info.time.day}}<span>{{$info.time.month}}<br />{{$info.time.year}}</span>
-				</div>-->
 			<section class="y_item">
 				<a href="index.php?m=wap&c=index&v=rytdetai&id={{$info.id}}">
 					<div class="">
@@ -300,7 +236,6 @@
 					<h4>{{$info.title}}</h4>
 					<p><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; font-size: 16px;">{{$info.desc}}</span></p>
 				</a>
-	
 			</section>
 			<section class="other" style="padding: 0 0.5rem;">
 				<article class="user" style="float: left;">
@@ -322,15 +257,17 @@
 		<article class="article">
 			<h3 class="title">独家旅行
 				<ul class="tab_list">
-					<li class="onn">独家项目</li>
-					<li>独家资源</li>
+					<li class="onn">独家路线</li>
+					<li>私人订制</li>
 				</ul>
 			</h3>
 			<div class="tab_con">
 				<div class="tab_box">
-					<ul class="box_list">
+					<ul class="exclusive box_list fix">
 						<li class="on">达人带你去旅行</li>
 						<li>名师带你去写生</li>
+						<li>佛系旅行</li>
+						<li>其他路线</li>
 					</ul>
 					<div class="con_list">
 						<div class="con_list_box ">
@@ -354,46 +291,73 @@
 									<img src="{{$item.thumbfile}}">
 									<p>{{$item.title}}<span>￥{{$item.price}}</span></p>
 								</a>
-	
 							</div>
 							{{/foreach}}
 							{{/if}}
 						</div>
 	
+						<div class="con_list_box " style="display: none;">
+							{{if $sketch}}
+							{{foreach from=$sketch key=key item=item}}
+							<div class="">
+								<a href="index.php?m=wap&c=index&v=sketch_detail&id={{$item.id}}">
+									<img src="{{$item.thumbfile}}">
+									<p>333{{$item.title}}<span>￥{{$item.price}}</span></p>
+								</a>
+							</div>
+							{{/foreach}}
+							{{/if}}
+						</div>
+	
+						<div class="con_list_box " style="display: none;">
+							{{if $sketch}}
+							{{foreach from=$sketch key=key item=item}}
+							<div class="">
+								<a href="index.php?m=wap&c=index&v=sketch_detail&id={{$item.id}}">
+									<img src="{{$item.thumbfile}}">
+									<p>444{{$item.title}}<span>￥{{$item.price}}</span></p>
+								</a>
+							</div>
+							{{/foreach}}
+							{{/if}}
+						</div>
 					</div>
 				</div>
 	
-				<div class="tab_box " style="display: none;">
-					<ul class="box_list">
-						{{if $label_list}}
-						{{foreach from=$label_list key=key item=item}}
-						<li class="{{if $key==0}}on{{/if}}">{{$item.name}}</li>
-						{{/foreach}}
-						{{/if}}
-					</ul>
+				<div class="tab_box" style="padding-bottom: 10px;display: none;">
 					<div class="con_list">
-						{{if $label_info}}
-						{{foreach from=$label_info key=key item=item}}
-						<div class="con_list_box " {{if $key !=0}}style="display: none;"{{/if}}>
-							{{foreach from=$item key=k item=vo}}
-							<div class="">
-								<a href="index.php?m=wap&c=index&v=journeydetail&id={{$vo.id}}">
-									<img src="{{$vo.articlethumb}}">
-									<p>{{$vo.title}} <span>￥{{$vo.price}}</span></p>
-								</a>
-	
-							</div>
-							{{/foreach}}
-	
-	
+						<div class="con_list_box">
+							<img src="/resource/m/images/homepage_private.png">
+							<input class="matter destination" type="text" name="" id="destination" maxlength="300" value="" placeholder="目的地" />
+							<input class="matter name" type="text" name="" id="name" maxlength="20" value="" placeholder="姓名" />
+							<input class="matter PhoneNum" type="number" name="" id="PhoneNum" value="" placeholder="电话号码" onkeyup="judgeIsNonNull1(event)" />
+							<button class="submitInfo">提交信息</button>
 						</div>
-						{{/foreach}}
-						{{/if}}
-	
 					</div>
 				</div>
 			</div>
 		</article>
+		
+		<!--关于我们-->
+		<article class="article asFor">
+			<h3 class="title">关于我们 <a href="javascript:;"><span>更多<i></i></span></a></h3>
+			<div class="flex-video" style="width: 100%;">
+				<div class="left">
+					<a class="dis_block diamonds figure"  href="javascript:;" style="background-image: url(/resource/m/images/bg-register.jpg);">
+						<div class="txt">啦啦啦啦</div>
+					</a>
+				</div>
+				<div class="right">
+					<a class="dis_block diamonds figure" href="javascript:;" style="background-image: url(/resource/m/images/pic-yz5.jpg);">
+						<div class="txt">啦啦啦啦</div>
+					</a>
+					<a class="dis_block diamonds figure" href="javascript:;" style="background-image: url(/resource/m/images/q-pic13.jpg);">
+						<div class="txt">啦啦啦啦</div>
+					</a>
+				</div>
+			</div>
+		</article>
+		
 		<div class="m-pop1-yz" id="m-pop1-yz">
 			<div class="con">
 				<iframe src='' frameborder=0 'allowfullscreen'></iframe>
@@ -412,12 +376,7 @@
 				pagination: {
 					el: '#pagination1',
 					clickable: true
-				},
-//				autoplay: {
-//					delay: 3000,
-//					stopOnLastSlide: false,
-//					disableOnInteraction: true,
-//				}
+				}
 			});
 
 		var swiper2 = new Swiper('#bannerSwiper2', {
@@ -439,7 +398,61 @@
 	<link rel="stylesheet" type="text/css" href="/resource/m/css/jquery.fancybox.css" media="screen" />
 	<script type="text/javascript" src="/resource/m/js/jquery.fancybox.js"></script>
 	<script type="text/javascript">
+		//控制  私人订制 电话号码的长度
+		function judgeIsNonNull1(event){
+			var value=$("#PhoneNum").val();
+			var x = event.which || event.keyCode;
+			if( value.length <= 50 ){
+				//console.log("符合80位数以内");
+			} else{
+				return $("#PhoneNum").val(value.substr(0, 50));
+			}
+		}
+		
+		//实时监听输入框值的改动
+		$("#PhoneNum").bind('input propertychange', function(){
+			judgeIsNonNull1(event);
+		});
+		
 		$(document).ready(function() {
+			//提交 私人订制
+			$(".submitInfo").on("click",function(){
+				var destination = $("#destination").val();
+				var name = $("#name").val();
+				var PhoneNum = $("#PhoneNum").val();
+				if( destination == "" ){
+					layer.msg('请输入目的地！');
+					return false;
+				}else if(destination.replace(/(^\s*)|(\s*$)/g, "")==""){
+					layer.msg('目的地不能只输入空格！');
+					return false;
+				}
+				
+				if( name == "" ){
+					layer.msg('请输入姓名！');
+					return false;
+				}else if(name.replace(/(^\s*)|(\s*$)/g, "")==""){
+					layer.msg('目的地不能只输入空格！');
+					return false;
+				}
+				if( PhoneNum == "" ){
+					layer.msg('请输入电话号码！');
+					return false;
+				}else if(PhoneNum.replace(/(^\s*)|(\s*$)/g, "")==""){
+					layer.msg('目的地不能只输入空格！');
+					return false;
+				}
+				
+				$.post("", {
+					'destination':destination,
+					'name':name,
+					'PhoneNum':PhoneNum,
+				}, function(data){
+					layer.msg(data.tips);
+					layer.msg("测试提交成功！");
+				},"JSON");
+			});
+			
 			$(".fancybox-effects-a").fancybox({
 				showCloseButton: false,
 				helpers: {
@@ -467,8 +480,9 @@
 	
 			$(".other .theory,.other .hideed,.num .hideed").click(function() {
 				layer.msg('功能正在开发，敬请期待');
-	
-			})
+			});
+			
+			//点赞  日志和游记
 			$('.zan').click(function(event) {
 				var id = $(this).attr('data-id');
 				var num = parseInt($(this).attr('data-num'));
@@ -476,19 +490,18 @@
 				$.post("/index.php?m=api&c=index&v=zan", {
 					'id': id
 				}, function(data) {
+					layer.msg(data.tips);
 					if(data.status == 1) {
 						$('#zan' + id).html((num + 1));
 						$('#zan' + id).addClass("one");
-						layer.msg(data.tips);
 					} else if(data.status == 2) {
 						$('#zan' + id).addClass("one");
-						layer.msg(data.tips);
-					} else {
-						layer.msg(data.tips);
 					}
 				}, "JSON");
 	
 			});
+			
+			//点赞 油画   这个目前PHP 已被注释一部分了
 			$('.dian').click(function(event) {
 				var id = $(this).attr('data-id');
 				var num = parseInt($(this).attr('data-num'));
@@ -507,22 +520,24 @@
 						layer.msg(data.tips);
 					}
 				}, "JSON");
-	
 			});
-			var $asd = $(".tab_list li");
-			$asd.click(function() {
+			
+			//独家旅行
+			var cut1 = $(".tab_list li");
+			cut1.click(function() {
 				$(this).addClass("onn").siblings().removeClass("onn");
 				var $index = $(this).index();
 				var $content = $(".tab_con .tab_box");
 				$content.eq($index).show().siblings().hide();
 			});
-			var $asd = $(".box_list li");
-			$asd.click(function(e) {
+			var cut2 = $(".box_list li");
+			cut2.click(function(e) {
 				$(this).addClass("on").siblings().removeClass("on");
 				var $index = $(this).index();
 				var $content=$(this).parent().next().find('.con_list_box');
 				$content.eq($index).show().siblings().hide();
 			});
+			
 			$('.js-video').click(function(event) {
 				var _id = $(this).attr("href");
 				var tid = $(this).attr("data-id");
@@ -544,8 +559,7 @@
 			bind_td();
 			var host = window.location.host;
 			//var src = "//" + host + '/' + 'index.php?m=api&c=index&v=getyzz';
-	
-	
+			
 		});
 	</script>
 	<!-- 弹窗 end-->
@@ -607,6 +621,5 @@
 			});
 		}
 	</script>
-	<!--<script type="text/javascript" src="/resource/js/date.js"></script>-->
 </body>
 </html>

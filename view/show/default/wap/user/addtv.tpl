@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
@@ -59,7 +58,7 @@
         }
     </style>
 </head>
-<body class="">
+<body>
     <div class="mian">
         <div class="save-issue">
             <div class="wp">
@@ -102,7 +101,7 @@
                             <input type="text" class="inp" value="{{$res.title}}" id="title" placeholder="请在这里输入标题">
                         </div>
                         <div class="content-txt" style="overflow: auto;margin-bottom: 0px;">
-                            <textarea placeholder="请在此处编辑正文内容" class="txta1" id="describe">{{$res.describe}}</textarea>
+                            <textarea placeholder="请在此处编辑正文内容" class="txta1" id="describe" onkeyup="judgeIsNonNull1(event)">{{$res.describe}}</textarea>
                             <p class="r num_text">可输入<a class="num_f" id="contentwordage">255</a>个字</p>
                         </div>
                         <div class="tit">
@@ -148,6 +147,30 @@
     <script src="/resource/js/layui/lay/dest/layui.all.js"></script>
 	<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script type="text/javascript">
+    	//监控 正文内容输入框 ，包括粘贴板
+		function judgeIsNonNull1(event){
+			var value=$("#describe").val();
+			var x = event.which || event.keyCode;
+			if( value.length <= 255 ){
+				//console.log("符合255位数以内");
+			} else{
+				return $("#describe").val(value.substr(0, 255));
+			}
+			var remain = $("#describe").val().length;
+			if(remain > 255){
+				$('#describe').val(setString($('#describe').val(),255));
+				$('#contentwordage').html(255-remain);
+			}else{
+				$('#contentwordage').html(255-remain);
+			}
+		}
+		
+		//监控 正文内容输入框 ，包括粘贴板
+		$("#describe").bind('input propertychange', function(){
+			judgeIsNonNull1(event);
+		});
+		
+    	
         $(document).ready(function(){
         	//解密base64编码
 			function Base64(){
@@ -356,41 +379,9 @@
 			}
 			index.init();
         	
-            var limitNum = 255;
-            var num = $('.txta1').val().length;
-            var s = limitNum - num;
-            if(s < 0){
-                $('.txta1').val(setString($('.txta1').val(),255));
-                $('#contentwordage').html(0);
-                return false;
-            }
-            $('#contentwordage').html(s);
-            $('.txta1').keyup(
-                function(){
-                    var remain = $(this).val().length;
-                    if(remain > 255){
-                        $('.txta1').val(setString($('.txta1').val(),255));
-                        var result = 0;
-                    }else{
-                        var result = limitNum - remain;
-                    }
-                    $('#contentwordage').html(result);
-                }
-            );
+            
         });
         
-        function setString(str, len) {  
-            var strlen = 0;  
-            var s = "";  
-            for (var i = 0; i < str.length; i++) {   
-                strlen++;   
-                s += str.charAt(i);  
-                if (strlen >= len) {  
-                    return s;  
-                }  
-            }  
-            return s;  
-        }
         $('.f-pic').click(function(){
             $('.layui-upload-button').trigger("click");
         })

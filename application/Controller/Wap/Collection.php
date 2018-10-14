@@ -83,13 +83,12 @@ class Controller_Wap_Collection extends Core_Controller_WapAction
     {
         $user_id = $_SESSION['userinfo']['uid'];
 
-//        $sql="SELECT a.t_id,b.* FROM ##__collection as a LEFT JOIN ##__travel_note as b ON a.t_id=b.id  WHERE a.type=3 and a.uid={$user_id} ORDER BY a.add_time DESC Limit 4";
-//        $info=Core_Db::fetchAll($sql);
-        $info=array();
+        $sql="SELECT a.t_id,b.* FROM ##__collection as a LEFT JOIN ##__faq as b ON a.t_id=b.id  WHERE a.type=4 and a.uid={$user_id} ORDER BY a.add_time DESC Limit 4";
+        $info=Core_Db::fetchAll($sql);
         if( $info ){
-            foreach ($info as $key=>$value){
-                if( trim($value['tag']) ){
-                    $info[$key]['tag']=explode("/",$value['tag']);
+            foreach($info as $key=>$value){
+                if( $value['title']==NULL && $value['desc']==NULL ){
+                    $info[$key]['is_delete']=1;
                 }
             }
             $this->assign("list",$info);
@@ -123,7 +122,8 @@ class Controller_Wap_Collection extends Core_Controller_WapAction
 
         //问答，暂时没有，0
         $answer=0;
-        $data['answer']=$answer;
+        $answer=C::M('collection')->where("uid={$uid} and type=4")->getCount();
+        $data['faq_num']=$answer;
 
         return $data;
 

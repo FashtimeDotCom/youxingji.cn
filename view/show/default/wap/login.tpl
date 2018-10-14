@@ -23,7 +23,7 @@
                     <input type="number" placeholder="您的手机号" id="phone" class="inp" onkeydown=""/>
                     <input type="password" placeholder="您的密码" id="password" class="inp" />
                     <div class="forget">忘记密码？<a href="/index.php?m=wap&c=index&v=forget">点击找回</a></div>
-                    <input type="submit" value="登录" id="btnLogin" class="btn btn1" onClick='check()' />
+                    <input type="submit" value="登录" id="btnLogin" class="btn" onClick='check()' />
                     <a href="/index.php?m=wap&c=index&v=reg"><input type="submit" value="快速注册" class="btn btn2" /></a>
                     <div class="choose">
                         <p class="p1">你还可以选择第三方直接登录</p>
@@ -36,28 +36,6 @@
     </div>
     <script src="/resource/js/layui/lay/dest/layui.all.js"></script>
     <script type="text/javascript">
-        $('#btnLogin').click(function(){
-            var phone = $('#phone').val();
-            var password = $('#password').val();
-            if(!checkMobile(phone)){
-                layer.msg('请输入正确的手机号');
-                return false;
-            }
-            if(!password){
-                layer.msg('请输入账户密码');
-                return false;
-            }
-            $('.y-set').text('').hide();
-            $.post("/index.php?m=api&c=index&v=login", {
-                'phone':phone,
-                'password':password
-            }, function(data){
-                layer.msg(data.tips);
-                if(data.status == 1){
-                    window.location.href = "/index.php?m=wap&c=user&v=index";
-                }
-            },"JSON");
-        });
         function checkMobile(tel) {
             var reg = /(^1[3|4|5|7|8][0-9]{9}$)/;
             if (reg.test(tel)) {
@@ -66,8 +44,8 @@
                 return false;
             };
         }
-        
-        //以下两个方法为  键盘 敲回车确认登录 事件
+
+        //以下方法为  键盘 敲回车确认登录 事件
         function check() {
 			var phone = $('#phone').val();
             var password = $('#password').val();
@@ -84,12 +62,15 @@
                 'phone':phone,
                 'password':password
             }, function(data){
-                layer.msg(data.tips);
                 if(data.status == 1){
+                	layer.msg(data.tips);
                     window.location.href = "/index.php?m=wap&c=user&v=index";
+                }else{
+                	layer.msg(data.tips);
                 }
             },"JSON");
 		}
+        
 		//回车时，默认是登陆
 		function on_return() {
 			if(window.event.keyCode == 13) {
