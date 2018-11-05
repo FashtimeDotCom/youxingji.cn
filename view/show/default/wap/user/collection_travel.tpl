@@ -13,20 +13,7 @@
     <script src="/resource/m/js/jquery.js"></script>
     <script src="/resource/m/js/lib.js"></script>
     <link rel="stylesheet" href="/resource/m/css/common.css" />
-    <link rel="stylesheet" href="/resource/m/css/commonList.css" />
-    <style type="text/css">
-    	/*.pullDownMenu{z-index: 1003;}
-    	
-    	.maskLayer{z-index: 1000;}
-    	.shareGuidance{position: absolute;right: 1rem;top: 2rem;border-radius: 0.3rem;z-index: 1002;
-    					border-top-right-radius: 0px;}
-    	.shareGuidance .icon_share{display: block;position: absolute;top: -27px;right: 0px;
-    								width: 90px;}
-    	
-    	.shareGuidance .box{width: 100%;height: 100%;background: rgba(0,0,0,0.8);border-radius: 0.3rem;padding: 12px 24px;border-top-right-radius: 0px;}
-    	.shareGuidance .box p{color: #fff;font-size: 0.7rem;line-height: 1.1rem;}
-    	.shareGuidance .box p img{display: inline-block;}*/
-    </style>
+    <link rel="stylesheet" href="/resource/m/css/personalcenter.css" />
 </head>
 <body>
 	<div class="header">
@@ -47,6 +34,7 @@
 	        </div>
 	    </div>
 	    
+	    <!--正文-->
 	    <div class="row-TV minHeight">
 	        <div class="m-nv-yz">
 	            <div class="wp fix">
@@ -72,9 +60,11 @@
 							<div class="date">null</div>
 							<a href="javascript:;" class="dis_block fix"><p class="videoDetails" style="color: red;">:)抱歉，此问答已被作者删除!</p></a>
 							{{else}}
-							<p class="videoTitle">{{$item.title}}</p>
-							<div class="date">{{$item.addtime}}</div>
-							<p class="videoDetails">{{$item.describes}}</p>
+							<a class="dis_block fix" href="/index.php?m=wap&c=index&v=star_detail&id={{$item.id}}">
+								<p class="videoTitle">{{$item.title}}</p>
+								<div class="date">{{$item.addtime}}</div>
+								<p class="videoDetails">{{$item.describes}}</p>
+							</a>
 							<ul class="ul-imgtxt2-yz">
 								<li><dl>{{foreach from=$item.content item=v}}
 		                                <dd><a href="{{$v}}" class="figure fancybox-effects-a" style="background-image: url({{$v}});">
@@ -85,22 +75,28 @@
 		                           	</dl>
 								</li>
 							</ul>
-							<div class="videoBottom">
+							<div class="videoBottom fix">
+								{{if $item.address}}
 								<span class="left"><img src="/resource/m/images/common/icon_location2.png" />{{$item.address}}</span>
+								{{/if}}
 								<p class="right">
-									<span class="check"><img src="/resource/m/images/common/icon_check.png" />{{$item.shownum}}</span>&nbsp;&nbsp;
-									<a class="zan" data-id="{{$item.id}}" href="javascript:;">
-										<span class="like"><img src="/resource/m/images/common/icon_like.png" /><i class="Iclass">{{$item.topnum}}</i></span>
-									</a>&nbsp;&nbsp;
-									<a class="Areview" href="javascript:;"><span class="review"><img src="/resource/m/images/common/icon_review.png" />0</span></a>
+									<span class="check"><img class="icon_check" src="/resource/m/images/common/icon_check.png" /><i class="Iclass">{{$item.shownum}}</i></span>&nbsp;&nbsp;
+									<span class="like zan" onclick="zan(this,{{$item.id}})" data-nature="list">
+										<img class="icon_like" src="/resource/m/images/common/icon_like.png" /><i class="Iclass">{{$item.topnum}}</i>
+									</span>&nbsp;&nbsp;
+									<span class="review">
+										<a class="widthHeight" href="/index.php?m=wap&c=index&v=star_detail&id={{$item.id}}">
+											<img class="icon_review" src="/resource/m/images/common/icon_review.png" /><i class="Iclass">0</i>
+										</a>
+									</span>
 								</p>
 							</div>
 							{{/if}}
-							<div class="pullDownMenu fix">
-								<img class="icon_pullDown" src="/resource/m/images/common/icon_pullDown.png" />
-								<div class="pullDownNav fix dis_none">
-									<!--<a class="collect dis_none" onclick="shareGuidance({{$item.id}})" id="shareGuidance{{$item.id}}"><span>分享</span></a>-->
-									<a class="collect deleteInfo" href="javascript:;" data-id="{{$item.id}}"><span>删除</span></a>
+							<div class="IMGbox fix">
+								<div class="pullDownButton" onclick="pullDownButton(this)"></div>
+								<div class="menuOption fix dis_none">
+									<span class="collect deleteInfo" data-id="{{$item.id}}">删除</span>
+									<span class="cancel">取消</span>
 								</div>
 							</div>
 						</div>
@@ -122,17 +118,7 @@
 	        </div>
 	        {{/if}}
 	    </div>
-	    <div class="maskLayer dis_none" title="遮罩层，作用：下拉菜单失焦时，下拉菜单自动消失">
-	    <!--<div class="maskLayer" title="遮罩层，作用：下拉菜单失焦时，下拉菜单自动消失">-->
-	    	<!--分享引导弹窗-->
-	    	<!--<div class="shareGuidance fix dis_none">
-	    		<div class="box fix">
-	    			<img class="icon_share" src="/resource/m/images/user/icon_share.png"/>
-	    			<p class="">1.点击右上角“...”</p>
-					<p class="">2.选择“<img class="" src="/resource/m/images/user/icon_share2.png" />”分享给朋友</p>
-	    		</div>
-			</div>-->
-	    </div>
+	    <div class="maskLayer dis_none" title="遮罩层，作用：下拉菜单失焦时，下拉菜单自动消失"></div>
 	</div>
 	{{include file='wap/footer.tpl'}}
 
@@ -155,14 +141,7 @@
     </script>
     
 	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
-    <script src="/resource/m/js/common.js"></script>
-	<script type="text/javascript">
-		//分享
-		function shareGuidance(id){
-			$(".pullDownNav").addClass("dis_none");
-			$(".maskLayer").css("opacity","1");
-			$(".shareGuidance").removeClass("dis_none");
-		}
-	</script>
+    <script type="text/javascript" src="/resource/m/js/dianzan.js" title="移动端    所有页面  的  【点赞】"></script>
+	<script src="/resource/m/js/pulldownscroll.js" title="移动端下拉 底部触发增加信息"></script>
 </body>
 </html>

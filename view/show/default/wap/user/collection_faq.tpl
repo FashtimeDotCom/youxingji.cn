@@ -13,13 +13,7 @@
     <script src="/resource/m/js/jquery.js"></script>
     <script src="/resource/m/js/lib.js"></script>
     <link rel="stylesheet" href="/resource/m/css/common.css" />
-    <link rel="stylesheet" href="/resource/m/css/commonList.css" />
-    <style type="text/css">
-    	.m-mytv-yz .item .videoTitle{color: #333;}
-    	.m-mytv-yz .item .videoDetails{color: #666;}
-    	.m-mytv-yz .item .videoTitle .view{display: inline-block;width: 7%;margin-right: 6px;vertical-align: -3px;}
-		.m-mytv-yz .item .videoTitle .view img{width: 100%;}
-    </style>
+    <link rel="stylesheet" href="/resource/m/css/personalcenter.css" />
 </head>
 <body>
 	<div class="header">
@@ -40,6 +34,7 @@
 	        </div>
 	    </div>
 	    
+	    <!--正文-->
 	    <div class="row-TV minHeight">
 	        <div class="m-nv-yz">
 	            <div class="wp fix">
@@ -52,10 +47,10 @@
 	            </div>
 	        </div>
 	        
+	        <input type="hidden" name="type" id="faq_num" title="总数" value="{{$total.faq_num}}"/>
 	        <input type="hidden" id="UniqueValue" data-sign="collect" value="faq_num" data-type="4" title="共用JS区分的唯一必须值"/>
-            <input type="hidden" name="type" id="faq_num" title="总数" value="{{$total.faq_num}}"/>
 	        {{if $list}}
-	        <div class="m-mytv-yz" id="pageCount" data-page="" data-nowPage="1">
+	        <div class="m-mytv-yz issue" id="pageCount" data-page="" data-nowPage="1">
 	        	<div class="content fix">
 	        		{{foreach from=$list item=item key=key}}
 					<div class="item fix item_{{$item.t_id}}">
@@ -70,21 +65,28 @@
 							<a href="/index.php?m=wap&c=faq&v=detail&id={{$item.id}}" class="dis_block fix">
 								<p class="videoDetails">{{$item.desc}}</p>
 								<div class="videoBottom fix">
+									{{if $item.address}}
 									<span class="left"><img src="/resource/m/images/common/icon_location2.png" />{{$item.address}}</span>
+									{{/if}}
 									<p class="right">
-										<span class="check"><img src="/resource/m/images/common/icon_check.png" />{{$item.show_num}}</span>&nbsp;&nbsp;
-										<span class="like">
-											<img src="/resource/m/images/user/icon_faq_detail3.png" /><i class="Iclass" title="收藏数">{{$item.collection_num}}</i>
+										<span class="check">
+											<img class="icon_check" src="/resource/m/images/common/icon_check.png" /><i class="Iclass">{{$item.show_num}}</i>
 										</span>&nbsp;&nbsp;
-										<span class="review" title="评论"><img src="/resource/m/images/common/icon_review.png" />{{$item.response_num}}</span>
+										<span class="like">
+											<img class="icon_like" src="/resource/m/images/user/icon_faq_detail3.png" /><i class="Iclass" title="收藏数">{{$item.collection_num}}</i>
+										</span>&nbsp;&nbsp;
+										<span class="review" title="评论">
+											<img class="icon_review" src="/resource/m/images/common/icon_review.png" /><i class="Iclass">{{$item.response_num}}</i>
+										</span>
 									</p>
 								</div>
 							</a>
 							{{/if}}
-							<div class="pullDownMenu fix">
-								<img class="icon_pullDown" src="/resource/m/images/common/icon_pullDown.png" />
-								<div class="pullDownNav fix dis_none">
-									<a class="collect deleteInfo" href="javascript:;" data-id="{{$item.id}}"><span>删除</span></a>
+							<div class="IMGbox fix">
+								<div class="pullDownButton" onclick="pullDownButton(this)"></div>
+								<div class="menuOption fix dis_none">
+									<span class="collect deleteInfo" data-id="{{$item.id}}">删除</span>
+									<span class="cancel">取消</span>
 								</div>
 							</div>
 						</div>
@@ -110,6 +112,6 @@
 	</div>
 	{{include file='wap/footer.tpl'}}
 	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
-	<script src="/resource/m/js/common.js"></script>
+	<script src="/resource/m/js/pulldownscroll.js" title="移动端下拉 底部触发增加信息"></script>
 </body>
 </html>

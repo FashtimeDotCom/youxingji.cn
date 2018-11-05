@@ -185,6 +185,7 @@
 	    	</div>
 	    </div>
 	</div>
+	<div class="publishButton figure" id="skip" data-id="{{$faq_info.id}}" style="background-image: url(/resource/m/images/icon_faq_list.png);"></div>
 	{{include file='wap/footer.tpl'}}
 	
 	<script type="text/javascript" src="/resource/m/js/swiper.js"></script>
@@ -441,6 +442,23 @@
             	}
 	        }
 	    });
+	    
+	    //发布问题
+        $("#skip").on("click",function(){
+        	var id = $(this).attr("data-id");
+            $.post("index.php?m=api&c=user&v=is_login", {
+            	
+            }, function(data){
+                if(data.status == 1){ //登录了，直接跳转
+                	window.location="/index.php?m=wap&c=faq&v=set_faq";
+                }else{ //没有登录，带参数跳转到登录页
+                	layer.msg(data.tips);
+                	setInterval(function(){
+						window.location="/index.php?m=wap&c=index&v=login&from="+"{{$from_url}}";
+					},1000);
+                }
+            },"JSON");
+        });
 	</script>
 </body>
 </html>

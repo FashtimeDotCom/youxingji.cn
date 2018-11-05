@@ -377,10 +377,10 @@
 						layer.msg('请输入描述');
 						return false;
 					}
-//					if(!me.datas.imgsrc[0]) {
-//						layer.msg('请上传图片');
-//						return false;
-//					}
+					if(!me.datas.imgsrc[0]) {
+						layer.msg('请上传图片');
+						return false;
+					}
 					if(!$("input[type='checkbox']").is(':checked')) {
 						layer.msg('请选择服务协议');
 						return false;

@@ -19,6 +19,7 @@ return array(
 	),
   	Core_Fun::Lang('menu::menu_tv') => array(
 		array('url' => '/admin/youhua/tv', 'name' => 'TV列表', 'auth' => 'youhua_tv', 'icon' => 'icon-file-alt'),
+        array('url' => '/admin/TvKeyword/index', 'name' => '视频搜索', 'auth' => 'tv_keyword', 'icon' => 'icon-file-alt')
 	),
   	Core_Fun::Lang('menu::menu_recruiting') => array(
 		array('url' => '/admin/recruiting/index', 'name' => '招募令', 'auth' => 'recruiting_index', 'icon' => 'icon-file-alt'),
@@ -49,7 +50,8 @@ return array(
       	array('url' => '/admin/article/baojia', 'name' => '日历报价', 'auth' => 'article_baojia', 'icon' => 'icon-file-alt'),
 		array('url' => '/admin/article/features', 'name' => '特色体验', 'auth' => 'article_features', 'icon' => 'icon-file-alt'),
 		array('url' => '/admin/article/trip', 'name' => '详细行程', 'auth' => 'article_trip', 'icon' => 'icon-file-alt'),
-		array('url' => '/admin/leaving/index', 'name' => '预约报名', 'auth' => 'leaving_index', 'icon' => 'icon-file-alt')
+		array('url' => '/admin/leaving/index', 'name' => '预约报名', 'auth' => 'leaving_index', 'icon' => 'icon-file-alt'),
+        array('url' => '/admin/privateCustom/index', 'name' => '私人定制', 'auth' => 'private_custom', 'icon' => 'icon-file-alt')
 	),
 	Core_Fun::Lang('menu::menu_sms') => array(
 		array('url' => '/admin/sms/index', 'name' => '短信列表', 'auth' => 'sms_index', 'icon' => 'icon-file-alt')
@@ -89,5 +91,8 @@ return array(
     ),
     Core_Fun::Lang('menu::menu_faq') => array(
         array('url'=>'/admin/faq/index','name'=>"问答列表",'auth'=>'faq_list'),
+    ),
+    Core_Fun::Lang('menu::menu_about_us') => array(
+        array('url'=>'/admin/aboutUs/index','name'=>"关于我们",'auth'=>'about_us'),
     ),
 );

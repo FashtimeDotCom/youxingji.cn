@@ -1,7 +1,7 @@
-<?php /* vpcvcms compiled created on 2018-10-14 19:50:04
+<?php /* vpcvcms compiled created on 2018-11-02 15:02:25
          compiled from wap/muser/new_tv.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/muser/new_tv.tpl', 47, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/muser/new_tv.tpl', 53, false),)), $this); ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -19,7 +19,7 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'w
     <script src="/resource/m/js/jquery.js"></script>
     <script src="/resource/m/js/lib.js"></script>
     <link rel="stylesheet" href="/resource/m/css/common.css" />
-    <link rel="stylesheet" href="/resource/m/css/commonList.css" />
+    <link rel="stylesheet" href="/resource/m/css/personalcenter.css" />
 </head>
 <body>
 	<div class="header">
@@ -43,38 +43,53 @@ unset($_smarty_tpl_vars);
 	            </form>
 	        </div>
 	    </div>
-	    <div class="ban">
-	        <div class="backdrop fix"><img src="<?php echo $this->_tpl_vars['muser']['cover']; ?>
-" title="背景图" alt=""></div>
-	        <div class="head fix">
-	        	<div class="profilePhoto"><div class="gaine"><a class="box figure" style="background-image: url(<?php echo $this->_tpl_vars['muser']['avatar']; ?>
-);"></a></div></div>
-	        	<p class="wx_name"><?php echo $this->_tpl_vars['muser']['username']; ?>
-&nbsp;<a href="javascript:;" onclick="smg(<?php echo $this->_tpl_vars['muser']['uid']; ?>
-)"><img class="icon_new1" src="/resource/m/images/common/icon_new1.png" /></a></p>
-	        	<p class="signature fix" title="个性签名">
-	        		<span class="icon_location1"></span>
-	        		<img class="icon_location2" src="/resource/m/images/common/icon_location1.png" />
-	        		<span class="autograph"><?php echo $this->_tpl_vars['muser']['city']; ?>
-&nbsp;<?php echo $this->_tpl_vars['muser']['autograph']; ?>
-</span>
-	        	</p>
-	        	<div class="bottom fix">
-	        		<p class="left"><span id="attention"><?php echo ((is_array($_tmp=$this->_tpl_vars['muser']['uid'])) ? $this->_run_mod_handler('helper', true, $_tmp, 'follownum') : smarty_modifier_helper($_tmp, 'follownum')); ?>
-</span>关注</p>&nbsp;&nbsp;&nbsp;<p class="right"><span id="fans"><?php echo ((is_array($_tmp=$this->_tpl_vars['muser']['uid'])) ? $this->_run_mod_handler('helper', true, $_tmp, 'fansnum') : smarty_modifier_helper($_tmp, 'fansnum')); ?>
-</span>粉丝</p>
+	    
+	    <div class="ban figure fix">
+	    	<div class="imgBg figure borderRadius bg_blur" style="background-image: url(<?php echo $this->_tpl_vars['user']['cover']; ?>
+)"></div>
+	        <div class="message fix">
+	        	<div class="gaine figure" style="background-image: url(<?php echo $this->_tpl_vars['muser']['avatar']; ?>
+);"></div>
+	        	<div class="rightBox">
+		        	<p class="wx_name"><?php echo $this->_tpl_vars['muser']['username']; ?>
+</p>
+		        	<p class="location fix" title="定位"><img class="icon_location2" src="/resource/m/images/common/icon_location1.png" /><i><?php echo $this->_tpl_vars['muser']['city']; ?>
+</i></p>
 	        	</div>
-	        </div>
-	        <div class="attentionBtn fix">
-                <button class="guanzhu" onclick="follows(<?php echo $this->_tpl_vars['muser']['uid']; ?>
+	        	<input type="hidden" name="synopsis" id="synopsis" value="<?php echo $this->_tpl_vars['muser']['autograph']; ?>
+" />
+	        	<p class="intro fix" title="简介">
+	        		<span class="autograph"></span>
+	        		<span class="viewMore dis_none" data-open="0">查看全文</span>
+	        	</p>
+	        	<div class="statistics fix">
+	        		<div class="left">
+	        			<div class="boxes">
+	        				<b class="attention"><?php echo ((is_array($_tmp=$this->_tpl_vars['muser']['uid'])) ? $this->_run_mod_handler('helper', true, $_tmp, 'follownum') : smarty_modifier_helper($_tmp, 'follownum')); ?>
+</b>
+	        				<b>关注</b>
+	        			</div>
+	        			<div class="boxes">
+	        				<b class="fans"><?php echo ((is_array($_tmp=$this->_tpl_vars['muser']['uid'])) ? $this->_run_mod_handler('helper', true, $_tmp, 'fansnum') : smarty_modifier_helper($_tmp, 'fansnum')); ?>
+</b>
+	        				<b>粉丝</b>
+	        			</div>
+	        		</div>
+		        	<div class="right">
+		        		<button class="button private" onclick="smg(<?php echo $this->_tpl_vars['muser']['uid']; ?>
+)">私信</button>
+		        		<button class="button attention" onclick="follows(<?php echo $this->_tpl_vars['muser']['uid']; ?>
 ,this)"><?php echo ((is_array($_tmp=$this->_tpl_vars['muser']['uid'])) ? $this->_run_mod_handler('helper', true, $_tmp, 'isfollows') : smarty_modifier_helper($_tmp, 'isfollows')); ?>
 </button>
-            </div>
+		        	</div>
+	        	</div>
+	        </div>
 	    </div>
-	    
-	    <input type="hidden" id="UniqueValue" data-sign="his" value="tv_num" title="共用JS区分的唯一必须值"/>
+
+	    <!--正文-->
 	    <input type="hidden" name="uid" id="uid" data-type="2" value="<?php echo $this->_tpl_vars['muser']['uid']; ?>
 " />
+	    <input type="hidden" id="UniqueValue" data-sign="his" data-length="38" value="tv_num" title="共用JS区分的唯一必须值"/>
 	    <div class="row-TV minHeight">
 	        <div class="m-nv-yz">
 	            <div class="wp fix">
@@ -101,43 +116,52 @@ unset($_smarty_tpl_vars);
 	        		<?php $_from = $this->_tpl_vars['list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
     foreach ($_from as $this->_tpl_vars['key'] => $this->_tpl_vars['item']):
 ?>
-					<div class="item item_<?php echo $this->_tpl_vars['item']['id']; ?>
+					<div class="item fix item_<?php echo $this->_tpl_vars['item']['id']; ?>
 ">
 						<div class="wp fix">
-							<p class="videoTitle"><?php echo $this->_tpl_vars['item']['title']; ?>
-</p>
-							<div class="date"><?php echo $this->_tpl_vars['item']['addtime']; ?>
-</div>
-							<p class="videoDetails"><?php echo $this->_tpl_vars['item']['describes']; ?>
-</p>
-							<div class="preview fix">
-								<a href="#m-pop1-yz" class="pic js-video fix" data-src="<?php echo $this->_tpl_vars['item']['url']; ?>
+							<a class="dis_block fix" href="/index.php?m=wap&c=index&v=tv_detail&id=<?php echo $this->_tpl_vars['item']['id']; ?>
 ">
-									<img src="<?php echo $this->_tpl_vars['item']['pics']; ?>
-" alt="">
+								<p class="videoTitle"><?php echo $this->_tpl_vars['item']['title']; ?>
+</p>
+								<div class="date"><?php echo $this->_tpl_vars['item']['addtime']; ?>
+</div>
+								<p class="videoDetails"><?php echo $this->_tpl_vars['item']['describes']; ?>
+</p>
+							</a>
+							<div class="preview fix">
+								<span class="pic figure vessel borderRadius js-video fix" onclick="js_video(this)" data-src="<?php echo $this->_tpl_vars['item']['url']; ?>
+" style="background-image: url(<?php echo $this->_tpl_vars['item']['pics']; ?>
+);">
 									<span class="bo"></span>
-								</a>
+								</span>
 							</div>
 							<div class="videoBottom">
+								<?php if ($this->_tpl_vars['item']['address']): ?>
 								<span class="left"><img src="/resource/m/images/common/icon_location2.png" /><?php echo $this->_tpl_vars['item']['address']; ?>
 </span>
+								<?php endif; ?>
 								<p class="right">
-									<span class="check"><img src="/resource/m/images/common/icon_check.png" /><?php echo $this->_tpl_vars['item']['shownum']; ?>
-</span>&nbsp;&nbsp;
-									<a class="zan" data-id="<?php echo $this->_tpl_vars['item']['id']; ?>
-" href="javascript:;">
-										<span class="like"><img src="/resource/m/images/common/icon_like.png" /><i class="Iclass"><?php echo $this->_tpl_vars['item']['topnum']; ?>
-</i></span>
-									</a>&nbsp;&nbsp;
-									<a class="Areview" href="javascript:;"><span class="review"><img src="/resource/m/images/common/icon_review.png" />0</span></a>
+									<span class="check"><img class="icon_check" src="/resource/m/images/common/icon_check.png" /><i class="Iclass"><?php echo $this->_tpl_vars['item']['shownum']; ?>
+</i></span>&nbsp;&nbsp;
+									<span class="like zan" onclick="zan(this,<?php echo $this->_tpl_vars['item']['id']; ?>
+)" data-nature="list">
+										<img class="icon_like" src="/resource/m/images/common/icon_like.png" /><i class="Iclass"><?php echo $this->_tpl_vars['item']['topnum']; ?>
+</i>
+									</span>&nbsp;&nbsp;
+									<span class="review">
+										<a class="widthHeight" href="/index.php?m=wap&c=index&v=tv_detail&id=<?php echo $this->_tpl_vars['item']['id']; ?>
+">
+											<img class="icon_review" src="/resource/m/images/common/icon_review.png" /><i class="Iclass">0</i>
+										</a>
+									</span>
 								</p>
 							</div>
-							<div class="pullDownMenu fix">
-								<img class="icon_pullDown" src="/resource/m/images/common/icon_pullDown.png" />
-								<div class="pullDownNav fix dis_none">
-									<a class="collect" href="javascript:;" onclick="collect(<?php echo $this->_tpl_vars['item']['id']; ?>
-)"><span>收藏</span></a>
-									<a class="cancel" href="javascript:;"><span>取消</span></a>
+							<div class="IMGbox fix">
+								<div class="pullDownButton" onclick="pullDownButton(this)"></div>
+								<div class="menuOption fix dis_none">
+									<span class="collect" onclick="collect(<?php echo $this->_tpl_vars['item']['id']; ?>
+)">收藏</span>
+									<span class="cancel">取消</span>
 								</div>
 							</div>
 						</div>
@@ -160,13 +184,11 @@ unset($_smarty_tpl_vars);
 	        <?php endif; ?>
 	    </div>
 	    <div class="maskLayer dis_none" title="遮罩层，作用：下拉菜单失焦时，下拉菜单自动消失"></div>
+	    
 	    <!-- 视频弹窗 -->
-	    <div class="m-pop1-yz" id="m-pop1-yz">
-	        <div class="con conAmend">
-	            <iframe src='' name="myiframe" frameborder=0 'allowfullscreen' id="myiframe"></iframe>
-	            <div class="close js-close"><span></span></div>
-	        </div>
-	    </div>
+	    <div class="m-pop1-yz m_pop1_yz" id="m-pop1-yz">
+        	<div class="con"><div class="close js-close" onclick="js_close()"><span></span></div><div class="VideoArea"></div></div>
+        </div>
 	    <!-- end -->
 	</div>
 	<?php $_smarty_tpl_vars = $this->_tpl_vars;
@@ -175,6 +197,10 @@ $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
 	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
-	<script src="/resource/m/js/common.js"></script>
+    <script type="text/javascript" src="/resource/m/js/jianjie.js" title="移动端    8个页面  的  【简介】"></script>
+    <script type="text/javascript" src="/resource/m/js/dianzan.js" title="移动端    所有页面  的  【点赞】"></script>
+	<script type="text/javascript" src="/resource/m/js/collect.js" title="移动端    所有页面  的 【  收藏、关注、私信】"></script>
+	<script type="text/javascript" src="/resource/m/js/opentv.js" title="移动端    所有页面  的  【打开、关闭视频】"></script>
+	<script src="/resource/m/js/pulldownscroll.js" title="移动端下拉 底部触发增加信息"></script>
 </body>
 </html>

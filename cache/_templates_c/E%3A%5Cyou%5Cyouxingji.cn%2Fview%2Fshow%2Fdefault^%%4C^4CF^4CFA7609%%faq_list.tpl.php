@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-10-12 17:52:14
+<?php /* vpcvcms compiled created on 2018-10-22 10:41:51
          compiled from wap/faq/faq_list.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -231,6 +231,8 @@ unset($_smarty_tpl_vars);
 	    	</div>
 	    </div>
 	</div>
+	<div class="publishButton figure" id="skip" data-id="<?php echo $this->_tpl_vars['faq_info']['id']; ?>
+" style="background-image: url(/resource/m/images/icon_faq_list.png);"></div>
 	<?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => 'wap/footer.tpl', 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
@@ -491,6 +493,24 @@ unset($_smarty_tpl_vars);
             	}
 	        }
 	    });
+	    
+	    //发布问题
+        $("#skip").on("click",function(){
+        	var id = $(this).attr("data-id");
+            $.post("index.php?m=api&c=user&v=is_login", {
+            	
+            }, function(data){
+                if(data.status == 1){ //登录了，直接跳转
+                	window.location="/index.php?m=wap&c=faq&v=set_faq";
+                }else{ //没有登录，带参数跳转到登录页
+                	layer.msg(data.tips);
+                	setInterval(function(){
+						window.location="/index.php?m=wap&c=index&v=login&from="+"<?php echo $this->_tpl_vars['from_url']; ?>
+";
+					},1000);
+                }
+            },"JSON");
+        });
 	</script>
 </body>
 </html>

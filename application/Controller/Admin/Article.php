@@ -61,7 +61,9 @@ class Controller_Admin_Article extends Core_Controller_Action
     public function featuresAction()
     {
         $_orderby = "id DESC";
-		$where = "1 = 1";
+        $article_id=$this->getParam("id");
+        $where = "1 = 1";
+
 		$Num = C::M('journey_features')->where($where)->getCount();
 		$perpage = 20;
 		$curpage = $this->getParam ('page') ? intval ($this->getParam ('page')) : 1;
@@ -82,7 +84,13 @@ class Controller_Admin_Article extends Core_Controller_Action
     public function tripAction()
     {
         $_orderby = "id DESC";
-		$where = "1 = 1";
+        $article_id=$this->getParam("id");
+        if( $article_id ){
+            $where="aid={$article_id}";
+        }else{
+            $where = "1 = 1";
+        }
+
 		$Num = C::M('journey_trip')->where($where)->getCount();
 		$perpage = 20;
 		$curpage = $this->getParam ('page') ? intval ($this->getParam ('page')) : 1;

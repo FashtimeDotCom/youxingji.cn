@@ -1,0 +1,74 @@
+/*
+ 2018-11-04   15:09:31
+ HQS
+ 
+ 独家路线    独家旅行更多列表页
+ * */
+
+
+.navMeun{width: 100%;overflow-x: scroll;padding: 12px 10px;}
+.navMeun .vessel{width: 400%;}
+.navMeun .vessel .navLi{float: left;line-height: 24px;background: #fff;color: #666;
+												border-radius: 16.5px;font-size: 1.25rem;padding: 0 14px;margin-right: 10px;}
+.navMeun .vessel .on{background: #e43436;color: #fff;}
+
+.matter{padding:0 10px;background: #fff;}
+.modules .hunk{margin-bottom: 10px;}
+.modules .hunk a{position: relative;border: 1px #f2f2f5 solid;}
+.modules .hunk a .cover{width: 36%;padding-bottom: 36%;float: left;margin-right: 4%;}
+
+.modules .hunk a .right{float: left;width: 60%;padding-top: 5px;padding-right: 10px;}
+.modules .hunk a .right .title{font-size: 1.2rem;color: #333;font-weight: 600;text-align: justify;}
+.modules .hunk a .right .describe{font-size: 1rem;color: #666;text-align: justify;}
+
+
+.modules .hunk a .right .bottom{position: absolute;right: 10px;bottom: 0;width: 100%;padding-left: 40%;}
+.modules .hunk a .right .bottom span{line-height: 25px;}
+.modules .hunk a .right .bottom span i{line-height: 25px;}
+.modules .hunk a .right .bottom .left{float: left;padding-left: 10px;}
+.modules .hunk a .right .bottom .left img{display: inline-block;width: 10px;vertical-align: middle;margin-right: 5px;}
+.modules .hunk a .right .bottom .spanRight{ float: right;}
+.modules .hunk a .right .bottom .spanRight i{color: #f64b18;font-size: 1.3rem;}
+
+
+/*适配iPhoneX、iPhone XS 样式写法  5.8英寸 2436*1125 */
+@media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3){
+	.matter{min-height: 406px;}
+}
+/*适配iPhoneXR 样式写法  6.1英寸 1792*828 */
+@media only screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2){
+	.matter{min-height: 473px;}
+}
+/*适配iPhone XS Max 样式写法  6.5英寸 2688*1242 */
+@media only screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3){
+	.matter{min-height: 490px;}
+}
+
+/*5.5英寸   414*736尺寸的屏幕  如iPhone6 Plus、iPhone6s Plus、iPhone7 Plus、魅族MX5    1920x1080  /3★*/
+@media only screen and (max-width: 414px) {
+	.matter{min-height: 334px;}
+}
+/*5.96英寸  412*732尺寸的屏幕  如谷歌Nexus 6   2K 2560x1440  /3.5★*/
+@media only screen and (max-width: 412px) {
+	.matter{min-height: 326px;}
+}
+/*5.2英寸   411*731尺寸的屏幕  如 谷歌Nexus 5x   1920x1080  /2.625★*/
+@media only screen and (min-width: 376px) and (max-width: 411px) {
+	.matter{min-height: 325px;}
+}
+/*4.7英寸   375*667尺寸的屏幕  如iPhone6、iPhone7、iPhone 6s   1334x750*/
+@media only screen and (min-width: 361px) and (max-width: 375px) {
+	.matter{min-height: 265px;}
+}
+/*4.95英寸  360*640尺寸的屏幕  如 谷歌Nexus 5    1920x1080 /3★ */
+@media only screen and (min-width: 321px) and (max-width: 360px) {
+	.matter{min-height: 216px;}
+}
+/*4.0英寸   320*568尺寸的屏幕  如iPhone5、iPhone SE   1136x640*/
+@media only screen and (max-width: 320px) {
+	.matter{min-height: 132px;}
+}
+
+
+/*无数据*/
+.dataTips{text-align: center;font-size: 1.4rem;line-height: 38px;}

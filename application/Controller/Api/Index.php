@@ -455,6 +455,7 @@ class Controller_Api_Index extends Core_Controller_Action
     {
         $phone = $this->getParam('phone');
         $password = $this->getParam('password');
+        $from_url=$this->getParam("from_url");
         if(!preg_match("/^1[34578]\d{9}$/", $phone)){
             $json = array('status' => 0, 'tips' => '请输入正确的手机号');
             echo Core_Fun::outputjson($json);
@@ -496,7 +497,11 @@ class Controller_Api_Index extends Core_Controller_Action
             'loginip' => Core_Comm_Util::getClientIp()
         );
         C::M('login_log')->add($data);
-        $json = array('status' => 1, 'tips' => '登陆成功，等待跳转至个人中心...');
+        if( !empty($from_url) ){
+            $json = array('status' => 2, 'tips' => '登陆成功，等待跳转...');
+        }else{
+            $json = array('status' => 1, 'tips' => '登陆成功，等待跳转至个人中心...');
+        }
         echo Core_Fun::outputjson($json);
     }
 
@@ -508,12 +513,14 @@ class Controller_Api_Index extends Core_Controller_Action
         $city = htmlspecialchars($this->getParam('city'));
         $birthday = htmlspecialchars($this->getParam('birthday'));
         $autograph = htmlspecialchars($this->getParam('autograph'));
+        $tag=htmlspecialchars($this->getParam('tag'));
         $data = array(
             'username' => $username,
             'sex' => $sex,
             'city' => $city,
             'birthday' => $birthday,
-            'autograph' => $autograph
+            'autograph' => $autograph,
+            'tag'=>$tag
         );
         if(C::M('user_member')->where("uid = ".$_SESSION['userinfo']['uid'])->update($data)){
             $numerical = 0;
@@ -1190,6 +1197,21 @@ class Controller_Api_Index extends Core_Controller_Action
         echo Core_Fun::outputjson($json);
     }
 
+    //大人问答-回答详情页点赞
+    public function zanfaqAction()
+    {
+        $id = intval($this->getParam('id'));
+        if(!$id){
+            $json = array('status' => 0, 'tips' => '缺少参数');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        C::M('faq_response')->where('id', $id)->setInc('top_num', 1);
+        $json = array('status' => 1, 'tips' => '点赞成功');
+        echo Core_Fun::outputjson($json);
+    }
+
     //评论
     public function commentAction()
     {
@@ -1572,7 +1594,7 @@ class Controller_Api_Index extends Core_Controller_Action
             $where="trainee = 1";
         }
 
-        $list=C::M('user_member')->field('uid,username,realname,headpic,city,autograph')->where("$where")->order("uid desc")->limit($limit)->select();
+        $list=C::M('user_member')->field('uid,username,realname,headpic,city,autograph,tag')->where("$where")->order("uid desc")->limit($limit)->select();
         if($list){
             $json = array('status' => 1, 'tips' =>$list,"page"=>$page+1);
             echo Core_Fun::outputjson($json);
@@ -1584,6 +1606,162 @@ class Controller_Api_Index extends Core_Controller_Action
         }
 
 
+    }
+
+    /*
+     * 加载更多的日志
+     * */
+    public function more_travelAction(){
+        //验证是否是post 提交申请
+        if( !$this->isPost() ){
+            $json = array('status' => 0, 'tips' => '非法操作!');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        $page=$this->getParam("page");
+        if( !$page || $page <=0 ){
+            $json = array('status' => 0, 'tips' => '参数错误');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        $sort_type=$this->getParam("sort_type")??1;//1-按时间，2-按热度
+        if( $sort_type==1 ){
+            $sort="a.addtime desc";
+        }else{
+            $sort="a.shownum desc";
+        }
+
+        $perpage=4;
+        $limit = $perpage * ($page - 1) . "," . $perpage;
+        //返回数据
+        $keyword = htmlspecialchars($this->getParam('keyword'));
+        $where = "a.status = 1";
+        if($keyword){
+            $where .= " and a.describes like '%$keyword%'";
+        }
+        $list = C::M('travel as a')->field('a.*,b.username,b.headpic')->where($where)->join('##__user_member as b','b.uid=a.uid','left')->order($sort)->limit($limit)->select();
+        if( $list ){
+            foreach ($list as $key => $value) {
+                $list[$key]['content'] = json_decode($value['content']);
+                $list[$key]['picnum'] = count(json_decode($value['content']));
+                $list[$key]['addtime'] = date('Y-m-d H:i:s', $value['addtime']);
+            }
+            $json = array('status' => 1, 'tips' =>$list,"page"=>$page+1);
+            echo Core_Fun::outputjson($json);
+            exit;
+        }else{
+            $json = array('status' => 0, 'tips' =>"没有数据啦:)");
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+    }
+
+    /*
+  * 加载更多的视频
+  * */
+    public function more_tvAction(){
+        //验证是否是post 提交申请
+        if( !$this->isPost() ){
+            $json = array('status' => 0, 'tips' => '非法操作!');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        $page=$this->getParam("page");
+        if( !$page || $page <=0 ){
+            $json = array('status' => 0, 'tips' => '参数错误');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        $sort_type=$this->getParam("sort_type")??1;//1-按时间，2-按热度
+        if( $sort_type==1 ){
+            $sort="a.addtime desc";
+        }else{
+            $sort="a.shownum desc";
+        }
+
+        $perpage=4;
+        $limit = $perpage * ($page - 1) . "," . $perpage;
+        //返回数据
+        $keyword = htmlspecialchars($this->getParam('keyword'));
+        $where = "a.status = 1";
+        if($keyword){
+            $where .= " and a.tags like '%$keyword%'";
+        }
+        $list = C::M('tv as a')->field('a.*,b.username,b.headpic')->join('##__user_member as b','b.uid=a.uid','left')->where($where)->order($sort)->limit($limit)->select();
+        if( $list ){
+            foreach ($list as $key => $value) {
+                $list[$key]['headpic']=$value['headpic']??'/resource/images/img-lb2.png';
+            }
+            $json = array('status' => 1, 'tips' =>$list,"page"=>$page+1);
+            echo Core_Fun::outputjson($json);
+            exit;
+        }else{
+            $json = array('status' => 0, 'tips' =>"没有数据啦:)");
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+    }
+
+    /*
+     *私人定制接口
+     */
+    public function private_customAction()
+    {
+        //验证是否是post 提交申请
+        if( !$this->isPost() ){
+            $json = array('status' => 0, 'tips' => '非法操作!');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        //判断用户是否登录
+        $uid = $_SESSION['userinfo']['uid'];
+        if(!$uid){
+            $json = array('status' => 0, 'tips' => '请登录后再试');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        $address=htmlspecialchars($this->getParam('address'));
+        $username=htmlspecialchars($this->getParam('username'));
+        $mobile=htmlspecialchars($this->getParam('mobile'));
+        if( !$address || !$username || !$mobile ){
+            $json = array('status' => 0, 'tips' => '缺少参数');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        $star=date('Y-m-d 00:00:00',time());
+        $end=date('Y-m-d 23:59:59',time());
+        $is_reg=C::M('private_custom')->where("uid={$uid} and add_time Between '$star' and '$end'")->getCount();
+        if( $is_reg>0 ){
+            $json = array('status' => 0, 'tips' => '您今天已提交申请!');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        $data=array(
+            'address'=>$address,
+            'username'=>$username,
+            'mobile'=>$mobile,
+            'add_time'=>date('Y-m-d H:i:s',time()),
+            'uid'=>$uid,
+            'status'=>1
+        );
+        $res=C::M('private_custom')->add($data);
+        if( $res ){
+            $json = array('status' => 1, 'tips' => '提交成功，请您等候通知!');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }else{
+            $json = array('status' => 0, 'tips' => '申请失败!');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
     }
 
     function isPost() {

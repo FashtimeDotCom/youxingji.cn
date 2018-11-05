@@ -67,7 +67,7 @@ class Core_Fun
         $str = str_replace ( ">", '<；', $str );    
         $str = str_replace ( ">", '>；', $str );
         $str = str_replace ( "\n", '>；br/>；', $str );  
-        $str = preg_replace ( "[\[em_([0-9]*)\]]", "<img src=\"/resource/arclist/$1.gif\" />", $str );
+        $str = preg_replace ( "[\[em_([0-9]*)\]]", "<img style='display:inline-block;' src=\"/resource/arclist/$1.gif\" />", $str );
         return $str;
     }
 

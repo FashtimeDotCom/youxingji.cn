@@ -16,6 +16,11 @@
 	<script src="/resource/m/js/jquery.js"></script>
 	<script src="/resource/m/js/lib.js"></script>
 	<link rel="stylesheet" href="/resource/m/css/note.css" />
+	<style type="text/css">
+		.tag{height: 36px!important;}
+		.tagVal{margin-top: 10px;}
+	</style>
+	<link rel="stylesheet" href="/resource/m/css/tag.css" title="和标签相关" />
 </head>
 <body id="row_issue">
 	<div class="mian">
@@ -90,9 +95,20 @@
 							</div>
 						</div>
 	
-						<div class="tit">
-							<input type="text" class="inp" value="{{$res.tag}}" id="tag" placeholder="请输入标签(可选)，每个标签最多四个字，如：旅游知识/美食，用正斜杠分开">
-							<p class="tagTips FontSize dis_none">标签目前最多为四个哦！</p>
+						<div class="tit" style="position: relative;">
+							<input type="text" class="inp tag" value="" maxlength="4" onkeyup="judgeIsNonNull2(event)" id="tag" placeholder="请输入标签(可选),每个标签最多四个字,空格无效">
+							<input type="button" name="" class="btn affirm dis_none" id="affirm" value="确认添加" />
+							<p class="tagTips FontSize dis_none">最多只能四个标签！可以先删掉其中一个旧标签，再增加新标签！</p>
+							<div class="tagVal fix" id="tagVal">
+								{{if $res.tag }}
+								{{foreach from=$res.tag item=item key=key}}
+								<b class="sample">
+									<i class="Iclass">{{$item}}</i>
+									<em class="eliminate" onclick="eliminate(this)"><img src="/resource/m/images/icon_eliminate.png"/></em>
+								</b>
+								{{/foreach}}
+								{{/if}}
+							</div>
 						</div>
 
 						<style>
@@ -149,168 +165,157 @@
 			judgeIsNonNull1(event);
 		});
 		
-		$(document).ready(function(){
-			//标签  字数控制
-			$('#tag').keyup(function() {
-				var tag = $('#tag').val();
-				var result=tag.split("/");
-				if(result.length>4){
-					$(".tagTips").removeClass("dis_none");
-				}else{
-					$(".tagTips").addClass("dis_none");
+		
+		//上传游记 的封面图片
+		layui.upload({
+			url: "/index.php?m=api&c=index&v=uploadpic",
+			type: 'image',
+			ext: 'jpg|png|jpeg|bmp',
+			before: function(obj) {
+				layer.load(); //上传loading
+			},
+			success: function(data){
+				var msg = data.msg;
+				if(msg !== undefined) {
+					layer.msg(msg);
 				}
-			});
-	
-	
-			//上传游记 的封面图片
-			layui.upload({
-				url: "/index.php?m=api&c=index&v=uploadpic",
-				type: 'image',
-				ext: 'jpg|png|jpeg|bmp',
-				before: function(obj) {
-					layer.load(); //上传loading
-				},
-				success: function(data) {
-					var msg = data.msg;
-					if(msg !== undefined) {
-						layer.msg(msg);
-					}
-					$(".note_bg").attr("src",data.url);
-					$(".note_bg").attr("data-default","1");// 判断是否 上传图片
-					//上传完毕回调
-					layer.closeAll('loading'); //关闭loading
-					$(".lump").addClass("dis_none");
-				}
-			});
-	
-			//解密base64编码
-			function Base64(){
-				// private property
-				_keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-	
-				// public method for encoding
-				this.encode = function (input) {
-					var output = "";
-					var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
-					var i = 0;
-					input = _utf8_encode(input);
-					while (i < input.length) {
-						chr1 = input.charCodeAt(i++);
-						chr2 = input.charCodeAt(i++);
-						chr3 = input.charCodeAt(i++);
-						enc1 = chr1 >> 2;
-						enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
-						enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
-						enc4 = chr3 & 63;
-						if (isNaN(chr2)) {
-							enc3 = enc4 = 64;
-						} else if (isNaN(chr3)) {
-							enc4 = 64;
-						}
-						output = output +
-								_keyStr.charAt(enc1) + _keyStr.charAt(enc2) +
-								_keyStr.charAt(enc3) + _keyStr.charAt(enc4);
-					}
-					return output;
-				}
-	
-				// public method for decoding
-				this.decode = function (input) {
-					var output = "";
-					var chr1, chr2, chr3;
-					var enc1, enc2, enc3, enc4;
-					var i = 0;
-					input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
-					while (i < input.length) {
-						enc1 = _keyStr.indexOf(input.charAt(i++));
-						enc2 = _keyStr.indexOf(input.charAt(i++));
-						enc3 = _keyStr.indexOf(input.charAt(i++));
-						enc4 = _keyStr.indexOf(input.charAt(i++));
-						chr1 = (enc1 << 2) | (enc2 >> 4);
-						chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
-						chr3 = ((enc3 & 3) << 6) | enc4;
-						output = output + String.fromCharCode(chr1);
-						if (enc3 != 64) {
-							output = output + String.fromCharCode(chr2);
-						}
-						if (enc4 != 64) {
-							output = output + String.fromCharCode(chr3);
-						}
-					}
-					output = _utf8_decode(output);
-					return output;
-				}
-	
-				// private method for UTF-8 encoding
-				_utf8_encode = function (string) {
-					string = string.replace(/\r\n/g,"\n");
-					var utftext = "";
-					for (var n = 0; n < string.length; n++) {
-						var c = string.charCodeAt(n);
-						if (c < 128) {
-							utftext += String.fromCharCode(c);
-						} else if((c > 127) && (c < 2048)) {
-							utftext += String.fromCharCode((c >> 6) | 192);
-							utftext += String.fromCharCode((c & 63) | 128);
-						} else {
-							utftext += String.fromCharCode((c >> 12) | 224);
-							utftext += String.fromCharCode(((c >> 6) & 63) | 128);
-							utftext += String.fromCharCode((c & 63) | 128);
-						}
-	
-					}
-					return utftext;
-				}
-	
-				// private method for UTF-8 decoding
-				_utf8_decode = function (utftext) {
-					var string = "";
-					var i = 0;
-					var c = c1 = c2 = 0;
-					while ( i < utftext.length ) {
-						c = utftext.charCodeAt(i);
-						if (c < 128) {
-							string += String.fromCharCode(c);
-							i++;
-						} else if((c > 191) && (c < 224)) {
-							c2 = utftext.charCodeAt(i+1);
-							string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
-							i += 2;
-						} else {
-							c2 = utftext.charCodeAt(i+1);
-							c3 = utftext.charCodeAt(i+2);
-							string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
-							i += 3;
-						}
-					}
-					return string;
-				}
+				$(".note_bg").attr("src",data.url);
+				$(".note_bg").attr("data-default","1");// 判断是否 上传图片
+				//上传完毕回调
+				layer.closeAll('loading'); //关闭loading
+				$(".lump").addClass("dis_none");
 			}
-	
-			var code = $("#code").val();
-	
-			var base = new Base64();
-			var result2 = base.decode(code);//调用以上方法解密
-	
-			wx.config({
-				debug: false,
-				appId: "wx9953ad5ae1108b51",
-				timestamp: '{{$timestamp}}',
-				nonceStr: '{{$nonceStr}}',
-				signature: '{{$signature}}',
-				jsApiList: [
-					'chooseImage',
-					'previewImage',
-					'uploadImage',
-	
-					'getNetworkType',//网络状态接口
-					'checkJsApi',//使用微信内置地图查看地理位置接口
-					'openLocation',
-					'getLocation'
-				]
-			});
-			var list = "{{$res.str_content}}".split(',');
-			var index = {
+		});
+
+		//解密base64编码
+		function Base64(){
+			// private property
+			_keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+
+			// public method for encoding
+			this.encode = function (input) {
+				var output = "";
+				var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+				var i = 0;
+				input = _utf8_encode(input);
+				while (i < input.length) {
+					chr1 = input.charCodeAt(i++);
+					chr2 = input.charCodeAt(i++);
+					chr3 = input.charCodeAt(i++);
+					enc1 = chr1 >> 2;
+					enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+					enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+					enc4 = chr3 & 63;
+					if (isNaN(chr2)) {
+						enc3 = enc4 = 64;
+					} else if (isNaN(chr3)) {
+						enc4 = 64;
+					}
+					output = output +
+							_keyStr.charAt(enc1) + _keyStr.charAt(enc2) +
+							_keyStr.charAt(enc3) + _keyStr.charAt(enc4);
+				}
+				return output;
+			}
+
+			// public method for decoding
+			this.decode = function (input) {
+				var output = "";
+				var chr1, chr2, chr3;
+				var enc1, enc2, enc3, enc4;
+				var i = 0;
+				input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+				while (i < input.length) {
+					enc1 = _keyStr.indexOf(input.charAt(i++));
+					enc2 = _keyStr.indexOf(input.charAt(i++));
+					enc3 = _keyStr.indexOf(input.charAt(i++));
+					enc4 = _keyStr.indexOf(input.charAt(i++));
+					chr1 = (enc1 << 2) | (enc2 >> 4);
+					chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+					chr3 = ((enc3 & 3) << 6) | enc4;
+					output = output + String.fromCharCode(chr1);
+					if (enc3 != 64) {
+						output = output + String.fromCharCode(chr2);
+					}
+					if (enc4 != 64) {
+						output = output + String.fromCharCode(chr3);
+					}
+				}
+				output = _utf8_decode(output);
+				return output;
+			}
+
+			// private method for UTF-8 encoding
+			_utf8_encode = function (string) {
+				string = string.replace(/\r\n/g,"\n");
+				var utftext = "";
+				for (var n = 0; n < string.length; n++) {
+					var c = string.charCodeAt(n);
+					if (c < 128) {
+						utftext += String.fromCharCode(c);
+					} else if((c > 127) && (c < 2048)) {
+						utftext += String.fromCharCode((c >> 6) | 192);
+						utftext += String.fromCharCode((c & 63) | 128);
+					} else {
+						utftext += String.fromCharCode((c >> 12) | 224);
+						utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+						utftext += String.fromCharCode((c & 63) | 128);
+					}
+
+				}
+				return utftext;
+			}
+
+			// private method for UTF-8 decoding
+			_utf8_decode = function (utftext) {
+				var string = "";
+				var i = 0;
+				var c = c1 = c2 = 0;
+				while ( i < utftext.length ) {
+					c = utftext.charCodeAt(i);
+					if (c < 128) {
+						string += String.fromCharCode(c);
+						i++;
+					} else if((c > 191) && (c < 224)) {
+						c2 = utftext.charCodeAt(i+1);
+						string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+						i += 2;
+					} else {
+						c2 = utftext.charCodeAt(i+1);
+						c3 = utftext.charCodeAt(i+2);
+						string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+						i += 3;
+					}
+				}
+				return string;
+			}
+		}
+
+		var code = $("#code").val();
+
+		var base = new Base64();
+		var result2 = base.decode(code);//调用以上方法解密
+
+		wx.config({
+			debug: false,
+			appId: "wx9953ad5ae1108b51",
+			timestamp: '{{$timestamp}}',
+			nonceStr: '{{$nonceStr}}',
+			signature: '{{$signature}}',
+			jsApiList: [
+				'chooseImage',
+				'previewImage',
+				'uploadImage',
+
+				'getNetworkType',//网络状态接口
+				'checkJsApi',//使用微信内置地图查看地理位置接口
+				'openLocation',
+				'getLocation'
+			]
+		});
+		
+		var list = "{{$res.str_content}}".split(',');
+		var index = {
 				init: function() {
 					var me = this;
 					me.render();
@@ -394,8 +399,82 @@
 					});
 				}
 			}
-			index.init();
+		index.init();
+	</script>
+	<script type="text/javascript">
+		//监控 标签内容输入框 ，包括粘贴板
+		function judgeIsNonNull2(event){
+			var value=$("#tag").val();
+			var x = event.which || event.keyCode;
+			$("#tag").val(value.replace(/\s*/g,""));//去除字符串空格(空白符)
+			if (x == 4 ) {
+		  		if(value !== "" ){
+			      	$(".affirm").removeClass("dis_none");
+			    }else{
+			    	$(".affirm").addClass("dis_none");
+			    }
+			}
+
+			if(value !== ""){
+				if( /[=，。￥？！：、……“”；（）《》～‘’〈〉——·ˉˇ¨々‖∶＂＇｀｜〃〔〕「」『』．〖〗$【】｛｝［］/,|{}_*:?^%$#@!`·~"'\\<>\[\]\%;)(&+-]/.test(value) ){
+					$("#tag").val(value.replace(/[=，。￥？！：、……“”；（）《》～‘’〈〉——·ˉˇ¨々‖∶＂＇｀｜〃〔〕「」『』．〖〗$【】｛｝［］/,|{}_*:?^%$#@!`·~"'\\<>\[\]\%;)(&+-]/,""));
+					return false;
+				}
+				if( value.length > 4 ){
+		    		return $("#tag").val(value.substr(0, 4));
+		    	}
+		    	$(".affirm").removeClass("dis_none");
+		   	}else{
+		    	$(".affirm").addClass("dis_none");
+		    }
+		}
+		
+		//监控 标签内容输入框 ，包括粘贴板
+		$("#tag").bind('input propertychange', function(){
+			judgeIsNonNull2(event);
 		});
+		
+    	//确认 添加标签
+    	$("#affirm").on("click",function(){
+    		var html,value = $("#tag").val();
+    		var length = $("#tagVal").children().length;
+    		var val0 = $("#tagVal").children().eq(0).find("i").text();
+    		var val1 = $("#tagVal").children().eq(1).find("i").text();
+    		var val2 = $("#tagVal").children().eq(2).find("i").text();
+    		
+			if(value == ""){
+    			layer.msg('标签内容不能为空！');
+				return false;
+    		}else if(value.replace(/(^\s*)|(\s*$)/g, "")==""){ //判断输入的内容是否全为空格
+				layer.msg('标签栏不能只输入空格！');
+				return false;
+			}else{
+				if( length>=4 ){                         //判断是否已存在四个标签
+					$(".tagTips").removeClass("dis_none");
+					return false;
+				} else{
+					if( value == val0 || value == val1 || value == val2 ){
+						layer.msg('不能输入已存在的标签！');
+						return false;
+					} else{
+						html='<b class="sample">'+
+								'<i class="Iclass">'+value+'</i>'+
+								'<em class="eliminate" onclick="eliminate(this)"><img src="/resource/m/images/icon_eliminate.png"/><em>'+
+							 '</b>';
+						$("#tagVal").append(html);
+						$("#tag").val('');
+					}
+				}
+			}
+    	});
+    	
+    	//点击“X”清除标签
+    	function eliminate(which){
+    		var index = $(which).parent().index();
+    		$("#tagVal").children().eq(index).remove();
+    		$(".tagTips").addClass("dis_none");
+    	}
+    	
 	</script>
 	
 	<script src="https://cdn.bootcss.com/js-polyfills/0.1.42/polyfill.min.js"></script>
@@ -519,9 +598,9 @@
 			var did = $('#did').val();
 			var oldImgUrl = parseInt($(".note_bg").attr("data-default")); //判断封面是否有上传，1 为没有上传
 			var imgUrl = $('.note_bg').attr('src');
-			var tag = $('#tag').val();//标签
-			address = $('#address').val();//定位
-	
+			var tag;//标签
+			var address = $('#address').val();//定位
+			
 			if(!title) {
 				layer.msg('请输入游记的标题');
 				return false;
@@ -535,13 +614,27 @@
 				layer.msg('请上传封面图片');
 				return false;
 			}
-	
-			var result=tag.split("/");
-			if(result.length>4){
-				$(".tagTips").removeClass("dis_none");
-				return false;
-			}
-	
+
+			var val0 = $("#tagVal").children().eq(0).find("i").text();
+    		var val1 = $("#tagVal").children().eq(1).find("i").text();
+    		var val2 = $("#tagVal").children().eq(2).find("i").text();
+    		var val3 = $("#tagVal").children().eq(3).find("i").text();
+        	if( val0!="" ){
+        		tag = val0;
+        		if( val1!="" ){
+	        		tag = tag+"/"+val1;
+	        		if( val2!="" ){
+		        		tag = tag+"/"+val2;
+		        		if( val3!="" ){
+			        		tag = tag+"/"+val3;
+			        	}
+		        	}
+	        	}
+        	}
+        	else{
+        		tag="";
+        	}
+			
 			if (!zxEditor.getContent() || zxEditor.getContent() === '<p><br></p>') {
 				zxEditor.dialog.alert('请添加文章内容');
 				return false;
@@ -572,15 +665,13 @@
 					'desc': describe,
 					'address':address
 				}, function(data) {
+					layer.msg(data.tips);
 					if(data.status == 1) {
-						layer.msg('发布成功！');
 						//清除缓存
 						//zxEditor.removeSave(data.content);
 						//localStorage.clear();
 						zxEditor.storage.remove('content', {content: data.content});
 						window.location.href = "/index.php?m=wap&c=user&v=travel_note";
-					}else{
-						layer.msg(data.tips);
 					}
 				}, "JSON");
 			});
@@ -593,12 +684,29 @@
 			var oldImgUrl = parseInt($(".note_bg").attr("data-default")); //判断封面是否有上传，1 为没有上传，
 			var imgUrl = $('.note_bg').attr('src');
 			var list = imgUrl + '||' + con;
-			var tag = $('#tag').val();//标签
-			address = $('#address').val();//定位
-			if(!title && !describe && oldImgUrl == 0 && !con) {
-				layer.msg('不能全为空');
-				return false;
-			}
+			var tag;//标签
+			var address = $('#address').val();//定位
+			
+			var val0 = $("#tagVal").children().eq(0).find("i").text();
+    		var val1 = $("#tagVal").children().eq(1).find("i").text();
+    		var val2 = $("#tagVal").children().eq(2).find("i").text();
+    		var val3 = $("#tagVal").children().eq(3).find("i").text();
+        	if( val0!="" ){
+        		tag = val0;
+        		if( val1!="" ){
+	        		tag = tag+"/"+val1;
+	        		if( val2!="" ){
+		        		tag = tag+"/"+val2;
+		        		if( val3!="" ){
+			        		tag = tag+"/"+val3;
+			        	}
+		        	}
+	        	}
+        	}
+        	else{
+        		tag="";
+        	}
+			
 	
 			// 处理正文中的base64图片
 			// 获取正文中的base64数据数组
@@ -620,6 +728,7 @@
 					'type': 2,
 					'address':address
 				}, function(data) {
+					layer.msg(data.tips);
 					if(data.status == 1) {
 						layer.msg('保存成功！');
 						//清除缓存
@@ -627,8 +736,6 @@
 						//localStorage.clear();
 						zxEditor.storage.remove('content', {content: data.content});
 						window.location.href = "/index.php?m=wap&c=user&v=draft";
-					}else{
-						layer.msg(data.tips);
 					}
 				}, "JSON");
 			});

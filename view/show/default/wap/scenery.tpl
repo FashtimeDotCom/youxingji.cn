@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
@@ -14,8 +13,7 @@
     <script src="/resource/m/js/jquery.js"></script>
     <script src="/resource/m/js/lib.js"></script>
 </head>
-
-<body class="">
+<body>
     <div class="header">
         {{include file='wap/header.tpl'}}
         <h3>游画</h3>
@@ -103,17 +101,17 @@
     {{include file='wap/footer.tpl'}}
     <link rel="stylesheet" type="text/css" href="/resource/m/css/swiper.css" />
     <script type="text/javascript" src="/resource/m/js/swiper.js"></script>
-    <script>
-        var swiper = new Swiper('.m-works .picbox', {
+    <script type="text/javascript">
+        var swiper1 = new Swiper('.m-works .picbox', {
             slidesPerView: 2.5
         });
-        var swiper = new Swiper('.m-imgtxt2', {
+        var swiper2 = new Swiper('.m-imgtxt2', {
             slidesPerView: 1.5
         });
     </script>
     <link rel="stylesheet" type="text/css" href="/resource/m/css/jquery.fancybox.css" media="screen" />
     <script type="text/javascript" src="/resource/m/js/jquery.fancybox.js"></script>
-    <script>
+    <script type="text/javascript">
         $(".fancybox").fancybox({
             wrapCSS: 'fancybox-custom',
             closeClick: false,
@@ -130,5 +128,4 @@
         });
     </script>
 </body>
-
 </html>

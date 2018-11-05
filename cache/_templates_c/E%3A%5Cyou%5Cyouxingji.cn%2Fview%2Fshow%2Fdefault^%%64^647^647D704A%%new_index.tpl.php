@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-10-08 15:37:10
+<?php /* vpcvcms compiled created on 2018-10-22 15:40:52
          compiled from wap/user/new_index.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/user/new_index.tpl', 45, false),)), $this); ?>

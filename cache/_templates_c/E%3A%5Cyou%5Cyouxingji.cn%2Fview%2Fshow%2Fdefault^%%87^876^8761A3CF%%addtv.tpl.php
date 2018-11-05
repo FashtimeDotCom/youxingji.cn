@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-10-14 16:14:16
+<?php /* vpcvcms compiled created on 2018-10-29 09:59:09
          compiled from wap/user/addtv.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -450,7 +450,7 @@ unset($_smarty_tpl_vars);
             }, function(data){
                 layer.msg(data.tips);
                 if (data.status == 1) {
-                    window.location.href = "/index.php?m=wap&c=user&v=tv";
+                    //window.location.href = "/index.php?m=wap&c=user&v=tv";
                 }
             },"JSON");
         })

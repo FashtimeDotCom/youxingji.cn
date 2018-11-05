@@ -17,8 +17,7 @@
         .write a{display:inline-block;background-repeat:no-repeat;-webkit-transition:.3s;-o-transition:.3s;transition:.3s}
     </style>
 </head>
-
-<body class="">
+<body>
     <div class="header">
         {{include file='wap/header.tpl'}}
         <h3>TA的旅拍TV</h3>
@@ -36,16 +35,11 @@
                 </form>
             </div>
         </div>
-        <div class="ban">
-            <a href="">
-                <img src="{{$muser.cover}}" alt="">
-            </a>
-        </div>
+        <div class="ban"><a href=""><img src="{{$muser.cover}}" alt=""></a></div>
         <div class="row-TV">
             <div class="m-nv-yz">
                 <div class="wp">
-                    <ul>
-                        <li><a href="/index.php?m=wap&c=muser&v=index&id={{$muser.uid}}">TA的日志</a></li>
+                    <ul><li><a href="/index.php?m=wap&c=muser&v=index&id={{$muser.uid}}">TA的日志</a></li>
                         <li><a href="/index.php?m=wap&c=muser&v=album&id={{$muser.uid}}">TA的相册</a></li>
                         <li class="on"><a href="/index.php?m=wap&c=muser&v=tv&id={{$muser.uid}}">TA的视频</a></li>
                     </ul>
@@ -78,7 +72,7 @@
                         <ul class="ul-pic1-yz ul-pic1-yz2">
                             {{foreach from=$vo.list item=v}}
                             <li class="tv_t{{$v.id}}" style="position: relative;">
-                                <a href="#m-pop1-yz" class="pic js-video" data-src="{{$v.url}}"  data-id="{{$v.id}}">
+                                <a href="javascript:;" class="pic js-video" data-src="{{$v.url}}"  data-id="{{$v.id}}">
                                     <img src="{{$v.pics}}" alt="">
                                     <span class="bo"></span>
                                     <span class="txt">{{$v.title}}</span>
@@ -93,64 +87,21 @@
             {{/if}}
             {{if $multipage}}
             <div class="pages" style="padding-top: 20px;padding-bottom: 20px;">
-                <ul>
-                    {{foreach from=$multipage item=page}}
+                <ul>{{foreach from=$multipage item=page}}
                     <li {{if $page.2}}class="{{$page.2}}"{{/if}}><a href="{{$page.1}}">{{$page.0}}</a></li>
                     {{/foreach}}
                 </ul>
             </div>
             {{/if}}
         </div>
+        
         <!-- 视频弹窗 -->
-        <div class="m-pop1-yz" id="m-pop1-yz">
-            <div class="con">
-                <iframe src='' frameborder=0 'allowfullscreen'></iframe>
-                <div class="close js-close"><span></span></div>
-            </div>
-        </div>
+        <div class="m-pop1-yz m_pop1_yz" id="m-pop1-yz"><div class="con"><div class="close js-close"><span></span></div></div></div>
         <!-- end -->
     </div>
     {{include file='wap/footer.tpl'}} 
     <script src="/resource/js/layui/lay/dest/layui.all.js"></script>
-    <script type="text/javascript">
-        $('.js-video').click(function(event) {
-            var _id = $(this).attr("href");
-            var _src = $(this).attr("data-src");
-
-            $(_id).find("iframe").attr("src", _src);
-            $(_id).fadeIn();
-        });
-        $('.js-close').click(function(event) {
-            $(this).parents('.m-pop1-yz').fadeOut();
-            $(this).parents('#m-pop1-yz').find("iframe").attr("src", "");
-            event.stopPropagation();
-        });
-        function follows(bid, obj)
-        {
-            $.post("/index.php?m=api&c=index&v=follow", {
-                'bid':bid
-            }, function(data){
-                if(data.status == 0){
-                    layer.msg(data.tips);
-                }else if(data.status == 1){
-                    $(obj).html('已关注');
-                }else if(data.status == 2){
-                    $(obj).html('<b>+</b> 关注');
-                }
-            },"JSON");
-        }
-      	function smg(uid){
-        	layer.prompt({title: '请输入私信内容', formType: 2}, function(text, index){
-              	layer.close(index);
-                $.post("/index.php?m=api&c=index&v=sendmsg", {
-                    'to_id':uid,
-                    'content':text
-                }, function(data){
-                    layer.msg(data.tips);
-                },"JSON");
-            });
-        }
-    </script>
+    <script type="text/javascript" src="/resource/m/js/opentv.js" title="移动端    所有页面  的  【打开、关闭视频】"></script>
+    <script type="text/javascript" src="/resource/m/js/collect.js" title="移动端    所有页面  的 【  收藏、关注、私信】"></script>
 </body>
-
 </html>

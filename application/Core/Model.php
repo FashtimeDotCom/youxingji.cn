@@ -182,7 +182,7 @@ class Core_Model
     public function joins($arr){
         if( $arr && is_array($arr) ){
             foreach( $arr as $key=>$value ){
-                $this->join_str .=" {$value[0]} JOIN {$value[1]} ON {$value[2]} ";
+                $this->join_str .=" {$value[2]} JOIN {$value[0]} ON {$value[1]} ";
             }
         }
         return $this;

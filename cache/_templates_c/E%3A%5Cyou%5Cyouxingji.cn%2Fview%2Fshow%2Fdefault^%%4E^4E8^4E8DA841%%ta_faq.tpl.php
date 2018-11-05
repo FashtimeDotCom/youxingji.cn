@@ -1,7 +1,7 @@
-<?php /* vpcvcms compiled created on 2018-10-14 19:20:40
+<?php /* vpcvcms compiled created on 2018-11-01 21:29:08
          compiled from wap/muser/ta_faq.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/muser/ta_faq.tpl', 53, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/muser/ta_faq.tpl', 55, false),)), $this); ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -19,13 +19,7 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'w
     <script src="/resource/m/js/jquery.js"></script>
     <script src="/resource/m/js/lib.js"></script>
     <link rel="stylesheet" href="/resource/m/css/common.css" />
-    <link rel="stylesheet" href="/resource/m/css/commonList.css" />
-    <style type="text/css">
-    	.m-mytv-yz .item .videoTitle{color: #333;}
-    	.m-mytv-yz .item .videoDetails{color: #666;}
-    	.m-mytv-yz .item .videoTitle .view{display: inline-block;width: 7%;margin-right: 6px;vertical-align: -3px;}
-		.m-mytv-yz .item .videoTitle .view img{width: 100%;}
-    </style>
+    <link rel="stylesheet" href="/resource/m/css/personalcenter.css" />
 </head>
 <body>
 	<div class="header">
@@ -49,38 +43,55 @@ unset($_smarty_tpl_vars);
 	            </form>
 	        </div>
 	    </div>
-	    <div class="ban">
-	        <div class="backdrop fix"><img src="<?php echo $this->_tpl_vars['muser']['cover']; ?>
-" title="背景图" alt=""></div>
-	        <div class="head fix">
-	        	<div class="profilePhoto"><div class="gaine"><a class="box figure" style="background-image: url(<?php echo $this->_tpl_vars['muser']['avatar']; ?>
-);"></a></div></div>
-	        	<p class="wx_name"><?php echo $this->_tpl_vars['muser']['username']; ?>
-&nbsp;<a href="javascript:;" onclick="smg(<?php echo $this->_tpl_vars['muser']['uid']; ?>
-)"><img class="icon_new1" src="/resource/m/images/common/icon_new1.png" /></a></p>
-	        	<p class="signature fix" title="个性签名">
-	        		<span class="icon_location1"></span>
-	        		<img class="icon_location2" src="/resource/m/images/common/icon_location1.png" />
-	        		<span class="autograph"><?php echo $this->_tpl_vars['muser']['city']; ?>
-&nbsp;<?php echo $this->_tpl_vars['muser']['autograph']; ?>
-</span>
-	        	</p>
-	        	<div class="bottom fix">
-	        		<p class="left"><span id="attention"><?php echo ((is_array($_tmp=$this->_tpl_vars['muser']['uid'])) ? $this->_run_mod_handler('helper', true, $_tmp, 'follownum') : smarty_modifier_helper($_tmp, 'follownum')); ?>
-</span>关注</p>&nbsp;&nbsp;&nbsp;<p class="right"><span id="fans"><?php echo ((is_array($_tmp=$this->_tpl_vars['muser']['uid'])) ? $this->_run_mod_handler('helper', true, $_tmp, 'fansnum') : smarty_modifier_helper($_tmp, 'fansnum')); ?>
-</span>粉丝</p>
+	    
+	    <div class="ban figure fix">
+	    	<div class="imgBg figure borderRadius bg_blur" style="background-image: url(<?php echo $this->_tpl_vars['user']['cover']; ?>
+)"></div>
+	        <div class="message fix">
+	        	<div class="gaine figure" style="background-image: url(<?php echo $this->_tpl_vars['muser']['avatar']; ?>
+);"></div>
+	        	<div class="rightBox">
+		        	<p class="wx_name"><?php echo $this->_tpl_vars['muser']['username']; ?>
+</p>
+		        	<p class="location fix" title="定位">
+		        		<img class="icon_location2" src="/resource/m/images/common/icon_location1.png" /><i><?php echo $this->_tpl_vars['muser']['city']; ?>
+</i>
+		        	</p>
 	        	</div>
-	        </div>
-	        <div class="attentionBtn fix">
-                <button class="guanzhu" onclick="follows(<?php echo $this->_tpl_vars['muser']['uid']; ?>
+	        	<input type="hidden" name="synopsis" id="synopsis" value="<?php echo $this->_tpl_vars['muser']['autograph']; ?>
+" />
+	        	<p class="intro fix" title="简介">
+	        		<span class="autograph"></span>
+	        		<span class="viewMore dis_none" data-open="0">查看全文</span>
+	        	</p>
+	        	<div class="statistics fix">
+	        		<div class="left">
+	        			<div class="boxes">
+	        				<b class="attention"><?php echo ((is_array($_tmp=$this->_tpl_vars['muser']['uid'])) ? $this->_run_mod_handler('helper', true, $_tmp, 'follownum') : smarty_modifier_helper($_tmp, 'follownum')); ?>
+</b>
+	        				<b>关注</b>
+	        			</div>
+	        			<div class="boxes">
+	        				<b class="fans"><?php echo ((is_array($_tmp=$this->_tpl_vars['muser']['uid'])) ? $this->_run_mod_handler('helper', true, $_tmp, 'fansnum') : smarty_modifier_helper($_tmp, 'fansnum')); ?>
+</b>
+	        				<b>粉丝</b>
+	        			</div>
+	        		</div>
+		        	<div class="right">
+		        		<button class="button private" onclick="smg(<?php echo $this->_tpl_vars['muser']['uid']; ?>
+)">私信</button>
+		        		<button class="button attention" onclick="follows(<?php echo $this->_tpl_vars['muser']['uid']; ?>
 ,this)"><?php echo ((is_array($_tmp=$this->_tpl_vars['muser']['uid'])) ? $this->_run_mod_handler('helper', true, $_tmp, 'isfollows') : smarty_modifier_helper($_tmp, 'isfollows')); ?>
 </button>
-            </div>
+		        	</div>
+	        	</div>
+	        </div>
 	    </div>
-	    
-	    <input type="hidden" id="UniqueValue" data-sign="his" value="faq_num" title="共用JS区分的唯一必须值"/>
+
+	    <!--正文-->
 	    <input type="hidden" name="uid" id="uid" data-type="4" value="<?php echo $this->_tpl_vars['muser']['uid']; ?>
 " />
+	    <input type="hidden" id="UniqueValue" data-sign="his" data-length="38" value="faq_num" title="共用JS区分的唯一必须值"/>
 	    <div class="row-TV">
 	        <div class="m-nv-yz">
 	            <div class="wp fix">
@@ -102,12 +113,12 @@ unset($_smarty_tpl_vars);
 	        </div>
 
 	        <?php if ($this->_tpl_vars['list']): ?>
-	        <div class="m-mytv-yz" id="pageCount" data-page="" data-nowPage="1">
+	        <div class="m-mytv-yz issue" id="pageCount" data-page="" data-nowPage="1">
 	        	<div class="content fix">
 	        		<?php $_from = $this->_tpl_vars['list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
     foreach ($_from as $this->_tpl_vars['key'] => $this->_tpl_vars['item']):
 ?>
-					<div class="item item_<?php echo $this->_tpl_vars['item']['id']; ?>
+					<div class="item fix item_<?php echo $this->_tpl_vars['item']['id']; ?>
 ">
 						<div class="wp fix">
 							<p class="videoTitle"><span class="view fix"><img src="/resource/m/images/user/icon_faq_detail1.png"></span><?php echo $this->_tpl_vars['item']['title']; ?>
@@ -119,29 +130,34 @@ unset($_smarty_tpl_vars);
 								<p class="videoDetails omit lineNumber4"><?php echo $this->_tpl_vars['item']['desc']; ?>
 </p>
 								<div class="videoBottom fix">
-									<span class="left"><img src="/resource/m/images/common/icon_location2.png" /><?php echo $this->_tpl_vars['item']['address']; ?>
-</span>
+									<?php if ($this->_tpl_vars['item']['address']): ?>
+									<span class="left"><img src="/resource/m/images/common/icon_location1.png" /><h4><?php echo $this->_tpl_vars['item']['address']; ?>
+</h4></span>
+									<?php endif; ?>
 									<?php if ($this->_tpl_vars['item']['label']): ?>
 										<?php $_from = $this->_tpl_vars['item']['label']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
     foreach ($_from as $this->_tpl_vars['k'] => $this->_tpl_vars['vo']):
 ?>
 											<?php if ($this->_tpl_vars['k'] < 1): ?>
-												<span class="left tag"><?php echo $this->_tpl_vars['vo']; ?>
+									<span class="left tag"><?php echo $this->_tpl_vars['vo']; ?>
 </span>
 											<?php endif; ?>
 										<?php endforeach; endif; unset($_from); ?>
 									<?php endif; ?>
-									<p class="right"><span class="check"><?php echo $this->_tpl_vars['user']['username']; ?>
-问于&nbsp;<?php echo $this->_tpl_vars['item']['addtime']; ?>
-</span></p>
+									<div class="divRight">
+										<span class="check"><?php echo $this->_tpl_vars['muser']['username']; ?>
+问于</span>
+										<span class="check"><?php echo $this->_tpl_vars['item']['addtime']; ?>
+</span>
+									</div>
 								</div>
 							</a>
-							<div class="pullDownMenu fix">
-								<img class="icon_pullDown" src="/resource/m/images/common/icon_pullDown.png" />
-								<div class="pullDownNav fix dis_none">
-									<a class="collect" href="javascript:;" onclick="collect(<?php echo $this->_tpl_vars['item']['id']; ?>
-)"><span>收藏</span></a>
-									<a class="cancel" href="javascript:;"><span>取消</span></a>
+							<div class="IMGbox fix">
+								<div class="pullDownButton" onclick="pullDownButton(this)"></div>
+								<div class="menuOption fix dis_none">
+									<span class="collect" onclick="collect(<?php echo $this->_tpl_vars['item']['id']; ?>
+)">收藏</span>
+									<span class="cancel">取消</span>
 								</div>
 							</div>
 						</div>
@@ -171,6 +187,8 @@ $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
 	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
-	<script src="/resource/m/js/common.js"></script>
+    <script type="text/javascript" src="/resource/m/js/jianjie.js" title="移动端    8个页面  的  【简介】"></script>
+	<script type="text/javascript" src="/resource/m/js/collect.js" title="移动端    所有页面  的 【  收藏、关注、私信】"></script>
+	<script src="/resource/m/js/pulldownscroll.js" title="移动端下拉 底部触发增加信息"></script>
 </body>
 </html>

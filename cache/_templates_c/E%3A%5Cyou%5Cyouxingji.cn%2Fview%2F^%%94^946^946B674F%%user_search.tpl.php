@@ -1,7 +1,7 @@
-<?php /* vpcvcms compiled created on 2018-09-21 10:44:36
+<?php /* vpcvcms compiled created on 2018-10-22 16:10:56
          compiled from admin/user_search.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'idate', 'admin/user_search.tpl', 73, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('modifier', 'idate', 'admin/user_search.tpl', 74, false),)), $this); ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "admin/header.tpl", 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
@@ -61,13 +61,14 @@ unset($_smarty_tpl_vars);
             <th class="tdl">帐号</th>
             <th>姓名</th>
             <th>用户组</th>
-            <th>Email</th>
-            <th>注册 IP</th>
+            <th>排序</th>
+            <th>标签</th>
             <th>注册时间</th>
             <th>练习生</th>
           	<th>本周推荐</th>
             <th>达人推荐</th>
             <th>tv推荐</th>
+            <th>问答达人</th>
             <th>操作</th>
         </tr>
         <?php $_from = $this->_tpl_vars['users']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
@@ -89,9 +90,9 @@ unset($_smarty_tpl_vars);
 </td>
                 <td><?php echo $this->_tpl_vars['usergroups'][$this->_tpl_vars['user']['gid']]['title']; ?>
 </td>
-                <td><?php echo $this->_tpl_vars['user']['email']; ?>
+                <td><?php echo $this->_tpl_vars['user']['sort']; ?>
 </td>
-                <td><?php echo $this->_tpl_vars['user']['regip']; ?>
+                <td><?php echo $this->_tpl_vars['user']['tag']; ?>
 </td>
                 <td><?php echo ((is_array($_tmp=$this->_tpl_vars['user']['regtime'])) ? $this->_run_mod_handler('idate', true, $_tmp, "Y-m-d") : smarty_modifier_idate($_tmp, "Y-m-d")); ?>
 </td>
@@ -110,6 +111,10 @@ unset($_smarty_tpl_vars);
                 <td class="tdl">
                     <input type="checkbox" name="tvtop[<?php echo $this->_tpl_vars['user']['uid']; ?>
 ]" value="1"<?php if ($this->_tpl_vars['user']['tvtop']): ?> checked<?php endif; ?> />
+                </td>
+                <td class="tdl">
+                    <input type="checkbox" name="is_faq_star[<?php echo $this->_tpl_vars['user']['uid']; ?>
+]" value="1"<?php if ($this->_tpl_vars['user']['is_faq_star']): ?> checked<?php endif; ?> />
                 </td>
                 <td>
                     <?php if ($this->_tpl_vars['sgid'] == 1): ?>
@@ -146,6 +151,8 @@ unset($_smarty_tpl_vars);
         </tr>
     </table>
 <?php endif; ?>
+
+
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "admin/footer.tpl", 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;

@@ -16,6 +16,7 @@
 	<script src="/resource/m/js/jquery.js"></script>
 	<script src="/resource/m/js/lib.js"></script>
 	<link rel="stylesheet" href="/resource/m/css/note.css" />
+	<link rel="stylesheet" href="/resource/m/css/tag.css" title="和标签相关" />
 </head>
 <body id="row_issue">
 	<div class="mian">
@@ -28,9 +29,7 @@
 			</div>
 		</div>
 		<div class="g-top">
-			<div class="logo">
-				<a href="/"><img src="/resource/m/images/logo.png" alt="" /></a>
-			</div>
+			<div class="logo"><a href="/"><img src="/resource/m/images/logo.png" alt="" /></a></div>
 			<div class="so">
 				<form action="/index.php">
 					<input type="hidden" name="m" value="wap" />
@@ -87,11 +86,27 @@
 							</div>
 						</div>
 						
-						<div class="tit">
+						<!--<div class="tit">
 							<input type="text" class="inp" value="{{$res.tag}}" id="tag" placeholder="请输入标签(可选)，每个标签最多四个字，如：旅游知识/美食，用正斜杠分开">
 							<p class="tagTips FontSize dis_none">标签目前最多为四个哦！</p>
+						</div>-->
+						
+						<div class="tit" style="position: relative;">
+							<input type="text" class="inp tag" value="" maxlength="4" onkeyup="judgeIsNonNull2(event)" id="tag" placeholder="请输入标签(可选),每个标签最多四个字,空格无效">
+							<input type="button" name="" class="btn affirm dis_none" id="affirm" value="确认添加" />
+							<p class="tagTips FontSize dis_none">最多只能四个标签！可以先删掉其中一个旧标签，再增加新标签！</p>
+							<div class="tagVal fix" id="tagVal">
+								{{if $res.tag }}
+								{{foreach from=$res.tag item=item key=key}}
+								<b class="sample">
+									<i class="Iclass">{{$item}}</i>
+									<em class="eliminate" onclick="eliminate(this)"><img src="/resource/m/images/icon_eliminate.png"/></em>
+								</b>
+								{{/foreach}}
+								{{/if}}
+							</div>
 						</div>
-
+						
 						<style>
 							article{min-height: 308px;}
         					#editorContainer{min-height: 298px; border: 1px solid #e5e5e5;margin-bottom: 10px;}
@@ -144,21 +159,6 @@
 					$('#contentwordage').html(result);
 				}
 			);
-			
-			//标签  字数控制
-			$('#tag').keyup(function() {
-				var yourString = $('#tag').val();
-				var result=yourString.split("/");
-				if(result.length>4){
-					$(".tagTips").removeClass("dis_none");
-				}else{
-					for(var i=0;i<result.length;i++){
-						//console.log(result[i]);
-					}
-					$(".tagTips").addClass("dis_none");
-				}	
-			});
-			
 			
 			//上传游记 的封面图片
 			layui.upload({
@@ -405,6 +405,79 @@
 	<!--编辑器-->
 	<script src="/resource/m/demo/js/zx-editor.min.js"></script>
 	<script type="text/javascript">
+		//监控 标签内容输入框 ，包括粘贴板
+		function judgeIsNonNull2(event){
+			var value=$("#tag").val();
+			var x = event.which || event.keyCode;
+			$("#tag").val(value.replace(/\s*/g,""));//去除字符串空格(空白符)
+			if (x == 4 ) {
+		  		if(value !== "" ){
+			      	$(".affirm").removeClass("dis_none");
+			    }else{
+			    	$(".affirm").addClass("dis_none");
+			    }
+			}
+
+			if(value !== ""){
+				if( /[=，。￥？！：、……“”；（）《》～‘’〈〉——·ˉˇ¨々‖∶＂＇｀｜〃〔〕「」『』．〖〗$【】｛｝［］/,|{}_*:?^%$#@!`·~"'\\<>\[\]\%;)(&+-]/.test(value) ){
+					$("#tag").val(value.replace(/[=，。￥？！：、……“”；（）《》～‘’〈〉——·ˉˇ¨々‖∶＂＇｀｜〃〔〕「」『』．〖〗$【】｛｝［］/,|{}_*:?^%$#@!`·~"'\\<>\[\]\%;)(&+-]/,""));
+					return false;
+				}
+				if( value.length > 4 ){
+		    		return $("#tag").val(value.substr(0, 4));
+		    	}
+		    	$(".affirm").removeClass("dis_none");
+		   	}else{
+		    	$(".affirm").addClass("dis_none");
+		    }
+		}
+		
+		//监控 标签内容输入框 ，包括粘贴板
+		$("#tag").bind('input propertychange', function(){
+			judgeIsNonNull2(event);
+		});
+		
+    	//确认 添加标签
+    	$("#affirm").on("click",function(){
+    		var html,value = $("#tag").val();
+    		var length = $("#tagVal").children().length;
+    		var val0 = $("#tagVal").children().eq(0).find("i").text();
+    		var val1 = $("#tagVal").children().eq(1).find("i").text();
+    		var val2 = $("#tagVal").children().eq(2).find("i").text();
+    		
+			if(value == ""){
+    			layer.msg('标签内容不能为空！');
+				return false;
+    		}else if(value.replace(/(^\s*)|(\s*$)/g, "")==""){ //判断输入的内容是否全为空格
+				layer.msg('标签栏不能只输入空格！');
+				return false;
+			}else{
+				if( length>=4 ){                         //判断是否已存在四个标签
+					$(".tagTips").removeClass("dis_none");
+					return false;
+				} else{
+					if( value == val0 || value == val1 || value == val2 ){
+						layer.msg('不能输入已存在的标签！');
+						return false;
+					} else{
+						html='<b class="sample">'+
+								'<i class="Iclass">'+value+'</i>'+
+								'<em class="eliminate" onclick="eliminate(this)"><img src="/resource/m/images/icon_eliminate.png"/><em>'+
+							 '</b>';
+						$("#tagVal").append(html);
+						$("#tag").val('');
+					}
+				}
+			}
+    	});
+    	
+    	//点击“X”清除标签
+    	function eliminate(which){
+    		var index = $(which).parent().index();
+    		$("#tagVal").children().eq(index).remove();
+    		$(".tagTips").addClass("dis_none");
+    	}
+    	
 		// 实例化 ZxEditor
 		var zxEditor = new ZxEditor('#editorContainer', {
 			// 编辑器固定
@@ -518,9 +591,9 @@
 			var did = $('#did').val();
 			var oldImgUrl = parseInt($(".note_bg").attr("data-default")); //判断封面是否有上传，1 为没有上传
 			var imgUrl = $('.note_bg').attr('src');
-			var tag = $('#tag').val();//标签
+			var tag;//标签
 			address = $('#address').val();//定位
-	
+
 			if(!title) {
 				layer.msg('请输入游记的标题');
 				return false;
@@ -534,14 +607,29 @@
 				layer.msg('请上传封面图片');
 				return false;
 			}
-	
-			var yourString = $('#tag').val();
-			var result=yourString.split("/");
-			if(result.length>4){
-				$(".tagTips").removeClass("dis_none");
-				return false;
-			}
-	
+
+			
+			var val0 = $("#tagVal").children().eq(0).find("i").text();
+    		var val1 = $("#tagVal").children().eq(1).find("i").text();
+    		var val2 = $("#tagVal").children().eq(2).find("i").text();
+    		var val3 = $("#tagVal").children().eq(3).find("i").text();
+        	if( val0!="" ){
+        		tag = val0;
+        		if( val1!="" ){
+	        		tag = tag+"/"+val1;
+	        		if( val2!="" ){
+		        		tag = tag+"/"+val2;
+		        		if( val3!="" ){
+			        		tag = tag+"/"+val3;
+			        	}
+		        	}
+	        	}
+        	}
+        	else{
+        		tag="";
+        	}
+			
+
 			if (!zxEditor.getContent() || zxEditor.getContent() === '<p><br></p>') {
 				zxEditor.dialog.alert('请添加文章内容');
 				return false;

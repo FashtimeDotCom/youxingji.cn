@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-10-09 14:53:52
+<?php /* vpcvcms compiled created on 2018-10-17 14:34:06
          compiled from wap/login.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -24,6 +24,8 @@
             <div class="box"> 
                 <div class="con">
                     <div class="logo"><img src="/resource/m/images/logo.png" alt="" /></div>
+                    <input type="hidden" id="from_url" name="from_url" value="<?php echo $this->_tpl_vars['from_url']; ?>
+">
                     <h3 class="tit">登录</h3>
                     <input type="number" placeholder="您的手机号" id="phone" class="inp" onkeydown=""/>
                     <input type="password" placeholder="您的密码" id="password" class="inp" />
@@ -54,6 +56,7 @@
         function check() {
 			var phone = $('#phone').val();
             var password = $('#password').val();
+            var from_url=$("#from_url").val();
             if(!checkMobile(phone)){
                 layer.msg('请输入正确的手机号');
                 return false;
@@ -65,13 +68,17 @@
             $('.y-set').text('').hide();
             $.post("/index.php?m=api&c=index&v=login", {
                 'phone':phone,
-                'password':password
+                'password':password,
+                'from_url':from_url
             }, function(data){
-                if(data.status == 1){
+                if(data.status == 1){ //普通登录
                 	layer.msg(data.tips);
                     window.location.href = "/index.php?m=wap&c=user&v=index";
+                }else if( data.status == 2 ){ //带来源参数登录，跳转到目标路径
+                    layer.msg(data.tips);
+                    window.location.href = from_url;
                 }else{
-                	layer.msg(data.tips);
+                    layer.msg(data.tips);
                 }
             },"JSON");
 		}

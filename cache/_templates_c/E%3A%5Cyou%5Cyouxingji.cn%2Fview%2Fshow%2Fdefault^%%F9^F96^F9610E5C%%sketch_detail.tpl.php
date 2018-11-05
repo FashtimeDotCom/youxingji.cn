@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-05 17:12:49
+<?php /* vpcvcms compiled created on 2018-10-16 11:59:57
          compiled from wap/sketch_detail.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -20,8 +20,17 @@
     <script src="/resource/js/move_rem.js"></script>
     <script src="/resource/m/js/jquery.js"></script>
     <script src="/resource/m/js/lib.js"></script>
+    <style type="text/css">
+    	.padding{padding: 0 0.5rem;text-align: justify;}
+    	
+		.smallIcon{width: 0.8rem;display: inline-block;vertical-align: middle;margin-right: .2rem;}
+		.special{float: left;margin-top: 0.2rem;}
+		pre{white-space: pre-wrap!important;
+			word-wrap: break-word!important;
+			*white-space:normal!important;}
+    </style>
 </head>
-<body class="">
+<body>
 	<div class="header">
 	    <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => 'wap/header.tpl', 'smarty_include_vars' => array()));
@@ -32,9 +41,7 @@ unset($_smarty_tpl_vars);
 	</div>
 	<div class="mian">
 	    <div class="g-top">
-	        <div class="logo">
-	            <a href="/"><img src="/resource/m/images/logo.png" alt="" /></a>
-	        </div>
+	        <div class="logo"><a href="/"><img src="/resource/m/images/logo.png" alt="" /></a></div>
 	        <div class="so">
 	            <form action="/index.php">
 	                <input type="hidden" name="m" value="wap" />
@@ -45,10 +52,8 @@ unset($_smarty_tpl_vars);
 	            </form>
 	        </div>
 	    </div>
-	    <div class="ban">
-	        <a href="javascript:;"><img src="<?php echo $this->_tpl_vars['detail']['pics']; ?>
-" alt="" /></a>
-	    </div>
+	    <div class="ban"><a href="javascript:;"><img src="<?php echo $this->_tpl_vars['detail']['pics']; ?>
+" alt="" /></a></div>
 	    <div class="head">
 	        <div class="head_title"><?php echo $this->_tpl_vars['detail']['title']; ?>
 </div>
@@ -76,22 +81,22 @@ unset($_smarty_tpl_vars);
 天 <?php echo $this->_tpl_vars['item']['title']; ?>
 </h4>
 	                <div class="flight">
-	                    <i></i>
+	                    <img class="smallIcon" src="/resource/m/images/travel_detail/icon_airplane.png"/>
 	                    <?php if ($this->_tpl_vars['item']['airport']): ?><?php echo $this->_tpl_vars['item']['airport']; ?>
 <?php else: ?>自行决定出行方式<?php endif; ?>
 	                </div>
 	                <div class="diet">
-	                    <i></i>
+	                    <img class="smallIcon" src="/resource/m/images/travel_detail/icon_breakfast.png"/>
 	                    <?php if ($this->_tpl_vars['item']['breakfast']): ?><?php echo $this->_tpl_vars['item']['breakfast']; ?>
 <?php else: ?>早餐、午餐、晚餐自行解决<?php endif; ?>
 	                </div>
 	                <div class="sleep">
-	                    <i></i>
+	                    <img class="smallIcon" src="/resource/m/images/travel_detail/icon_bed.png"/>
 	                    <?php if ($this->_tpl_vars['item']['accommodation']): ?><?php echo $this->_tpl_vars['item']['accommodation']; ?>
 <?php else: ?>无<?php endif; ?>
 	                </div>
 	                <div class="Trip">
-	                    <i></i>
+	                    <img class="smallIcon special" src="/resource/m/images/travel_detail/icon_photograph.png"/>
 	                    <?php echo $this->_tpl_vars['item']['desc']; ?>
 
 	                </div>
@@ -103,17 +108,17 @@ unset($_smarty_tpl_vars);
 	    </div>
 	    <div class="items">
 	        <div class="items_title">费用说明</div>
-	        <div><?php echo $this->_tpl_vars['detail']['cost_explain']; ?>
+	        <div class="padding"><?php echo $this->_tpl_vars['detail']['cost_explain']; ?>
 </div>
 	    </div>
 	    <div class="items">
 	        <div class="items_title">签证说明</div>
-	        <div class=""><?php echo $this->_tpl_vars['detail']['visa_explain']; ?>
+	        <div class="padding"><?php echo $this->_tpl_vars['detail']['visa_explain']; ?>
 </div>
 	    </div>
 	    <div class="items">
 	        <div class="items_title">温馨提示</div>
-	        <div class=""><?php echo $this->_tpl_vars['detail']['tips']; ?>
+	        <div class="padding"><?php echo $this->_tpl_vars['detail']['tips']; ?>
 </div>
 	    </div>
 	</div>
@@ -127,9 +132,7 @@ unset($_smarty_tpl_vars);
         </div>
     </div>
     <div class="fl-bot" id="service_book" style="display: none">
-        <div class="wp">
-            <a class="btn-enroll" id="btnNext" href="javascript:;">下一步</a>
-        </div>
+        <div class="wp"><a class="btn-enroll" id="btnNext" href="javascript:;">下一步</a></div>
     </div>
     
     <!-- 弹窗 -->
@@ -173,20 +176,21 @@ unset($_smarty_tpl_vars);
 	<link rel="stylesheet" type="text/css" href="/resource/m/css/swiper.css" />
 	<script type="text/javascript" src="/resource/m/js/swiper.js"></script>
 	<script>
-	    var swiper = new Swiper('.m-works .picbox', {
+	    var swiper1 = new Swiper('.m-works .picbox', {
 	        slidesPerView: 2,
 	        spaceBetween: 30,
 	    });
-	    var swiper = new Swiper('.m-imgtxt2', {
+	    var swiper2 = new Swiper('.m-imgtxt2', {
 	        slidesPerView: 1.5
 	    });
 	</script>
+	
 	<link rel="stylesheet" type="text/css" href="/resource/m/css/jquery.fancybox.css" media="screen" />
 	<script type="text/javascript" src="/resource/m/js/jquery.fancybox.js"></script>
 	<script src="/resource/m/js/zepto.min.js"></script>
 	<script src="/resource/m/js/popup.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
-	<script>
+	<script type="text/javascript">
 	    $(".fancybox").fancybox({
 	        wrapCSS: 'fancybox-custom',
 	        closeClick: false,
@@ -208,7 +212,6 @@ unset($_smarty_tpl_vars);
     		$(".bg_content").removeClass("dis_none");
             $("#nexts").addClass("dis_none");
         });
-        
         
 	    $('#btnBook').click(function() {
             var year = parseInt($('#yearDate').val());
@@ -272,25 +275,19 @@ unset($_smarty_tpl_vars);
         //监控  手机号码 输入框的变化
         function judgeIsNonNull1(event){
 			var value=$("#phone").val();
-			var x = event.which || event.keyCode;
-			if (x == 8 ) {
-		  		if(value !== "" ){
-			      	$(".telClear").removeClass("dis_none");
-			    }else{
-			    	$(".telClear").addClass("dis_none");
-			    }
-			}
 			if(value !== "" ){
 				if( value.length <= 11 ){
 		    		console.log("符合11位数以内");
 		    	} else{
 		    		return $("#phone").val(value.substr(0, 11));
 		    	}
-		    	$(".telClear").removeClass("dis_none");
-		    }else{
-		    	$(".telClear").addClass("dis_none");
 		    }
 		}
+        
+        //监控 正文内容输入框 ，包括粘贴板
+		$("#phone").bind('input propertychange', function(){
+			judgeIsNonNull1(event);
+		});
 	</script>
 </body>
 </html>

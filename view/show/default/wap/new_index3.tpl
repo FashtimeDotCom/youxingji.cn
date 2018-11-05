@@ -14,6 +14,7 @@
 	<script src="/resource/js/move_rem.js"></script>
 	<script src="/resource/lightbox/jquery.min.js"></script>
 	<script src="/resource/m/js/lib.js"></script>
+	<link rel="stylesheet" type="text/css" href="/resource/m/css/swiper.css" />
 	<!--lightbox开始-->
 	<link rel="stylesheet" type="text/css" href="/resource/lightbox/jquery.lightbox.css" />
 	<!--[if IE 6]>
@@ -25,14 +26,20 @@
 			$('.lightbox').lightbox();
 		});
 	</script>
-	
+	<script>
+		var _hmt = _hmt || [];
+		(function() {
+			var hm = document.createElement("script");
+			hm.src = "https://hm.baidu.com/hm.js?0154d439703cde1da00f954c61ca8b64";
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
 	<link rel="stylesheet" href="/resource/m/css/new_index.css" />
 </head>
 <body class="index">
 	<div class="header">
-		<div class="logo">
-			<a href=""><img src="/resource/m/images/logo.png" alt="" /></a>
-		</div>
+		<div class="logo"><a href=""><img src="/resource/m/images/logo.png" alt="" /></a></div>
 		{{if !$user}}
 		<a href="/index.php?m=wap&c=index&v=login" class="sign">登录</a>
 		{{else}}
@@ -54,18 +61,12 @@
 			<div class="swiper-wrapper">
 				{{vplist from='ad' item='adlist' tagname='waphomeslide'}}
 				<div class="swiper-slide">
-					<a href="{{$adlist.linkurl}}">
-						<div class="pic">
-							<img src="{{$adlist.imgurl}}" alt="" />
-						</div>
-					</a>
+					<a href="{{$adlist.linkurl}}"><div class="pic"><img src="{{$adlist.imgurl}}" alt="" /></div></a>
 				</div>
 				{{/vplist}}
 			</div>
 			<div class="swiper-pagination" id="pagination1"></div>
-			<div class="wp">
-				<div class="txt"></div>
-			</div>
+			<div class="wp"><div class="txt"></div></div>
 		</div>
 		
 		<!--菜单-->
@@ -100,7 +101,7 @@
 					<span>达人问答</span>
 				</a>
 			</li>
-			<li><a href="javascript:;">
+			<li><a href="/index.php?m=wap&c=rights&v=index">
 					<i style="background-image: url(/resource/m/images/q-icon53.jpg);"></i>
 					<span>成为达人</span>
 				</a>
@@ -110,36 +111,22 @@
 					<span>独家旅行</span>
 				</a>
 			</li>
-			<!--<li>
-	            <a href="/index.php?m=wap&c=index&v=ryt">
-	                <i style="background-image: url(/resource/m/images/q-icon18.png);"></i>
-	                <span>日阅潭</span>
-	            </a>
-	        </li>
-	        <li>
-	            <a href="/index.php?m=wap&c=index&v=mxp">
-	                <i style="background-image: url(/resource/m/images/q-icon19.png);"></i>
-	                <span>玩转明信片</span>
-	            </a>
-	        </li>-->
 		</ul>
 		
 		<!--达人邦-->
 		<article class="article">
-			<h3 class="title">达人邦 <a href="/index.php?m=wap&c=index&v=master_list"><span>更多<i></i></span></a></h3>
+			<h3 class="title">达人邦 <a class="dis_block fix" style="float: right;" href="/index.php?m=wap&c=index&v=master_list"><span>更多<i></i></span></a></h3>
 			<div class="m_item_a1 swiper-container" id="bannerSwiper2">
 				<div class="swiper-wrapper" id="drb">
 					{{if $tjstar}}
 					{{foreach from=$tjstar key=key item=item}}
 					<div class="swiper-slide">
-						<a href="index.php?m=wap&c=muser&v=index&id={{$item.uid}}">
-							<div class="pic"><img src="http://www.youxingji.cn/{{$item.avatar}}" alt="">
+						<a class="dis_block fix" href="index.php?m=wap&c=muser&v=index&id={{$item.uid}}">
+							<div class="pic figure" style="background-image: url(http://www.youxingji.cn/{{$item.avatar}});border-radius: 0;">
 								<div class="txt">{{$item.username}}</div>
 							</div>
 							<address class="address">{{$item.city}}</address>
-							<div class="text">
-								{{$item.autograph}}
-							</div>
+							<div class="text">{{$item.autograph}}</div>
 						</a>
 					</div>
 					{{/foreach}}
@@ -149,36 +136,39 @@
 		</article>
 		
 		<!--达人日志-->
-		<article class="article">
+		<input type="hidden" name="" id="UniqueValue" value="homePage" />
+		<article class="article log">
 			<h3 class="title">达人日志 </h3>
 			{{if $travel_list}}
 			{{foreach from=$travel_list key=key item=item}}
-			<div class="d_item">
-				<section class="other">
-					<article class="user">
-						<span><img src="http://www.youxingji.cn{{$item.user_info.headpic}}"/></span>
-						<aside>
-							<h4>{{$item.user_info.username}}</h4>
-							<time class="logTime">{{$item.addtime}}</time>
-						</aside>
-					</article>
-				</section>
-				<div class="txt">{{$item.describes}}</div>
+			<div class="d_item fix">
+				<div class="txt">
+					<a class="dis_block" href="/index.php?m=wap&c=index&v=star_detail&id={{$item.id}}">{{$item.describes}}</a>
+				</div>
 				<dl class="list-img list_img">
 					{{foreach from=$item.content item=v}}
-					<dd><a href="{{$v}}" class="lightbox" rel="list{{$item.id}}">
-							<img src="{{$v}}" alt="">
-						</a>
-					</dd>
+					<dd><a href="{{$v}}" class="lightbox figure" rel="list{{$item.id}}" style="background-image: url({{$v}});"></a></dd>
 					{{/foreach}}
 				</dl>
-				<section class="other fix">
-					<div class="interact fix">
-						<span class="Read"><i></i>{{$item.shownum}}</span>
-						<span class="spot zan" data-id="{{$item.id}}" data-num="{{$item.topnum}}" id="zan{{$item.id}}"><i></i>{{$item.topnum}}</span>
-						<span class="theory"><i></i>评论</span>
-					</div>
-				</section>
+				
+				<article class="user">
+					<a class="headPortrait figure" style="background-image: url({{$item.user_info.headpic}});" href="index.php?m=wap&c=muser&v=index&id={{$item.uid}}"></a>
+					<aside style="float: left;">
+						<h4 class="nickname apostrophe">{{$item.user_info.username}}</h4>
+						<time class="logTime">{{$item.addtime}}</time>
+					</aside>
+				</article>
+				<div class="interact gaine fix">
+					<span class="Read"><img class="icon_check" src="/resource/m/images/common/icon_check.png" /><i class="Iclass">{{$item.shownum}}</i></span>
+					<span class="spot zan" onclick="zan(this,{{$item.id}})" data-sign="his" data-nature="list" data-val="travel_num">
+						<img class="icon_like" src="/resource/m/images/common/icon_like.png" /><i class="Iclass">{{$item.topnum}}</i>
+					</span>
+					<span>
+						<a class="widthHeight" href="/index.php?m=wap&c=index&v=star_detail&id={{$item.id}}">
+							<img class="icon_review" src="/resource/m/images/common/icon_review.png" /><i class="Iclass">0</i>
+						</a>
+					</span>
+				</div>
 			</div>
 			{{/foreach}}
 			{{/if}}
@@ -187,12 +177,12 @@
 			</div>
 		</article>
 		
-		<!--中部导航-->
+		<!--中部轮播-->
 		<div class="m-imgtxt1 swiper-container" id="bannerSwiper3">
 			<div class="swiper-wrapper" id="swim">
 				{{vplist from='ad' item='adlist' tagname='waphomeo2'}}
 				<div class='swiper-slide' data-id="">
-					<a href="{{$adlist.linkurl}}">
+					<a class="dis_block fix" href="{{$adlist.linkurl}}">
 						<div class='pic'>
 							<img src="{{$adlist.imgurl}}" alt=''>
 							<div class='txt'></div>
@@ -201,24 +191,18 @@
 				</div>
 				{{/vplist}}
 			</div>
-			<div class="swiper-pagination" id="pagination2"></div>
+			<div class="swiper-pagination" id="pagination3"></div>
 		</div>
 		
 		<!--达人视频-->
-		<article class="article">
-			<h3 class="title">达人视频 <a href="index.php?m=wap&c=index&v=tv"><span>更多<i></i></span></a></h3>
-			<div class="flex-video">
+		<article class="article video_">
+			<h3 class="title">达人视频 <a class="dis_block fix" style="float: right;" href="index.php?m=wap&c=index&v=tv"><span>更多<i></i></span></a></h3>
+			<div class="flex-video" style="width: 100%;">
 				{{if $tv_list}}
 				{{foreach from=$tv_list key=key item=item}}
 				<div class="video">
-					<a href="#m-pop1-yz" class="js-video" data-src="{{$item.url}}" data-id="{{$item.id}}">
-						<div class="pic">
-							<img src="http://www.youxingji.cn{{$item.pics}}" alt="">
-						</div>
-						<div class="txt">
-							{{$item.title}}
-						</div>
-					</a>
+					<div class="pic figure" data-src="{{$item.url}}" onclick="js_video(this)" data-id="{{$item.id}}" style="background-image: url(http://www.youxingji.cn{{$item.pics}});"></div>
+					<div class="txt"><a href="/index.php?m=wap&c=index&v=tv_detail&id={{$item.id}}">{{$item.title}}</a></div>
 				</div>
 				{{/foreach}}
 				{{/if}}
@@ -226,48 +210,50 @@
 		</article>
 		
 		<!--达人游记-->
-		<article class="article fix">
-			<h3 class="title">达人游记 <a href="index.php?m=wap&c=index&v=ryt"><span>更多<i></i></span></a></h3>
-			<section class="y_item">
-				<a href="index.php?m=wap&c=index&v=rytdetai&id={{$info.id}}">
-					<div class="">
-						<img src="{{$info.img_url}}">
-					</div>
-					<h4>{{$info.title}}</h4>
-					<p><span style="font-family: 微软雅黑, &quot;Microsoft YaHei&quot;; font-size: 16px;">{{$info.desc}}</span></p>
+		<article class="article fix note">
+			<h3 class="title">达人游记 <a class="dis_block fix" style="float: right;" href="index.php?m=wap&c=index&v=ryt"><span>更多<i></i></span></a></h3>
+			<section class="y_item fix">
+				<a class="dis_block fix" href="/index.php?m=wap&c=index&v=rytdetai&id={{$info.id}}">
+					<div><img src="{{$info.img_url}}"></div>
+					<article class="user">
+						<span class="headPortrait figure" style="background-image: url({{$info.user_info.headpic}});"></span>
+						<aside>
+							<h4>{{$info.user_info.username}}</h4>
+							<time class="logTime">{{$info.time.hour}}点{{$info.time.min}}分</time>
+						</aside>
+					</article>
+					<h4 class="omit lineNumber2">{{$info.title}}</h4>
+					<p><span>{{$info.desc}}</span></p>
 				</a>
 			</section>
-			<section class="other" style="padding: 0 0.5rem;">
-				<article class="user" style="float: left;">
-					<span><img src="{{$info.user_info.headpic}}"></span>
-					<aside>
-						<h4>{{$info.user_info.username}}</h4>
-						<time>{{$info.time.hour}}点{{$info.time.min}}分</time>
-					</aside>
-				</article>
-				<article class="interact">
-					<span class="Read "><i></i>{{$info.show_num}}</span>
-					<span class="spot zan" data-type="{{$info.type}}" data-id="{{$info.id}}" data-num="{{$info.top_num}}" id="zan{{$info.id}}"><i></i>{{$info.top_num}}</span>
-					<span class="theory "><i></i>评论</span>
+			<section class="fix" style="padding: 0 0.5rem;float: right;">
+				<article class="interact travels">
+					<span class="Read"><img class="icon_check" src="/resource/m/images/common/icon_check.png" /><i class="Iclass">{{$info.show_num}}</i></span>
+					<span class="spot zan" onclick="zan(this,{{$info.id}})" data-sign="his" data-nature="list" data-val="note_num">
+						<img class="icon_like" src="/resource/m/images/common/icon_like.png" /><i class="Iclass">{{$info.top_num}}</i>
+					</span>
+					<span>
+						<a class="widthHeight" href="/index.php?m=wap&c=index&v=rytdetai&id={{$info.id}}">
+							<img class="icon_review" src="/resource/m/images/common/icon_review.png" /><i class="Iclass">0</i>
+						</a>
+					</span>
 				</article>
 			</section>
 		</article>
 		
 		<!--独家旅行-->
 		<article class="article">
-			<h3 class="title">独家旅行
-				<ul class="tab_list">
-					<li class="onn">独家路线</li>
-					<li>私人订制</li>
-				</ul>
-			</h3>
+			<div class="TitleBox">
+				<h3 class="title">独家旅行</h3>
+				<ul class="tab_list"><li class="onn">独家项目</li><li>独家资源</li></ul>
+				<!--<h3 class="title">独家旅行</h3>
+				<ul class="nav_list fix"><li class="onn">独家线路</li><li>私人订制</li></ul>-->
+			</div>
 			<div class="tab_con">
 				<div class="tab_box">
-					<ul class="exclusive box_list fix">
+					<ul class="box_list">
 						<li class="on">达人带你去旅行</li>
 						<li>名师带你去写生</li>
-						<li>佛系旅行</li>
-						<li>其他路线</li>
 					</ul>
 					<div class="con_list">
 						<div class="con_list_box ">
@@ -296,87 +282,95 @@
 							{{/if}}
 						</div>
 	
-						<div class="con_list_box " style="display: none;">
-							{{if $sketch}}
-							{{foreach from=$sketch key=key item=item}}
-							<div class="">
-								<a href="index.php?m=wap&c=index&v=sketch_detail&id={{$item.id}}">
-									<img src="{{$item.thumbfile}}">
-									<p>333{{$item.title}}<span>￥{{$item.price}}</span></p>
-								</a>
-							</div>
-							{{/foreach}}
-							{{/if}}
-						</div>
+					</div>
+				</div>
 	
-						<div class="con_list_box " style="display: none;">
-							{{if $sketch}}
-							{{foreach from=$sketch key=key item=item}}
+				<div class="tab_box " style="display: none;">
+					<ul class="box_list">
+						{{if $label_list}}
+						{{foreach from=$label_list key=key item=item}}
+						<li class="{{if $key==0}}on{{/if}}">{{$item.name}}</li>
+						{{/foreach}}
+						{{/if}}
+					</ul>
+					<div class="con_list">
+						{{if $label_info}}
+						{{foreach from=$label_info key=key item=item}}
+						<div class="con_list_box " {{if $key !=0}}style="display: none;"{{/if}}>
+							{{foreach from=$item key=k item=vo}}
 							<div class="">
-								<a href="index.php?m=wap&c=index&v=sketch_detail&id={{$item.id}}">
-									<img src="{{$item.thumbfile}}">
-									<p>444{{$item.title}}<span>￥{{$item.price}}</span></p>
+								<a href="index.php?m=wap&c=index&v=journeydetail&id={{$vo.id}}">
+									<img src="{{$vo.articlethumb}}">
+									<p>{{$vo.title}} <span>￥{{$vo.price}}</span></p>
 								</a>
 							</div>
 							{{/foreach}}
-							{{/if}}
 						</div>
+						{{/foreach}}
+						{{/if}}
+	
+					</div>
+				</div>
+			
+				<!--<div class="tab_box exclusive">
+					<div class="con_list">
+						<div class="con_list_box">
+							<div class="swiper-container" id="bannerSwiper4">
+								<div class="swiper-wrapper">
+									{{if $travel}}
+									{{foreach from=$travel item=item key=key}}
+									<div class="swiper-slide boxes">
+										<a class="dis_block fix" href="index.php?m=wap&c=index&v=travel_detail&id={{$item.id}}">
+											<img class="fix" src="{{$item.thumbfile}}" />
+											<div class="con">
+												<p class="headline">{{$item.title}}</p>
+												<p class="price"><span>￥{{$item.price}}<i class="Iclass"> 起</i></span></p>
+											</div>
+										</a>
+									</div>
+									{{/foreach}}
+									{{/if}}
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="box_btn widtH">
+						<a type="button" class="btn SeeMoreLines" href="/index.php?m=wap&c=journey&v=index">查看更多线路</a>
 					</div>
 				</div>
 	
 				<div class="tab_box" style="padding-bottom: 10px;display: none;">
 					<div class="con_list">
-						<div class="con_list_box">
+						<div class="con_list_box list_box">
 							<img src="/resource/m/images/homepage_private.png">
 							<input class="matter destination" type="text" name="" id="destination" maxlength="300" value="" placeholder="目的地" />
 							<input class="matter name" type="text" name="" id="name" maxlength="20" value="" placeholder="姓名" />
-							<input class="matter PhoneNum" type="number" name="" id="PhoneNum" value="" placeholder="电话号码" onkeyup="judgeIsNonNull1(event)" />
+							<input class="matter PhoneNum" type="number" name="" id="PhoneNum" value="" placeholder="手机号码" onkeyup="judgeIsNonNull1(event)" />
 							<button class="submitInfo">提交信息</button>
 						</div>
 					</div>
-				</div>
+				</div>-->
 			</div>
 		</article>
-		
-		<!--关于我们-->
-		<article class="article asFor">
-			<h3 class="title">关于我们 <a href="javascript:;"><span>更多<i></i></span></a></h3>
-			<div class="flex-video" style="width: 100%;">
-				<div class="left">
-					<a class="dis_block diamonds figure"  href="javascript:;" style="background-image: url(/resource/m/images/bg-register.jpg);">
-						<div class="txt">啦啦啦啦</div>
-					</a>
-				</div>
-				<div class="right">
-					<a class="dis_block diamonds figure" href="javascript:;" style="background-image: url(/resource/m/images/pic-yz5.jpg);">
-						<div class="txt">啦啦啦啦</div>
-					</a>
-					<a class="dis_block diamonds figure" href="javascript:;" style="background-image: url(/resource/m/images/q-pic13.jpg);">
-						<div class="txt">啦啦啦啦</div>
-					</a>
-				</div>
-			</div>
-		</article>
-		
-		<div class="m-pop1-yz" id="m-pop1-yz">
-			<div class="con">
-				<iframe src='' frameborder=0 'allowfullscreen'></iframe>
-				<div class="close js-close"><span></span></div>
-			</div>
-		</div>
+
+		<!-- 视频弹窗 -->
+        <div class="m-pop1-yz m_pop1_yz" id="m-pop1-yz">
+        	<div class="con"><div class="close js-close" onclick="js_close()"><span></span></div><div class="VideoArea"></div></div>
+        </div>
+        <!-- end -->
+
 		<a href="http://p.qiao.baidu.com/cps/chat?siteId=11959315&userId=25533377" class="g-consultation"><i></i>免费咨询</a>
 	</div>
 	{{include file='wap/footer.tpl'}}
-	<link rel="stylesheet" type="text/css" href="/resource/m/css/swiper.css" />
 	<script type="text/javascript" src="/resource/m/js/swiper.js"></script>
-	<script>
+	<script type="text/javascript">
 		var swiper1 = new Swiper('#bannerSwiper1', {
 				slidesPerView: 1,
 				loop: true,
 				pagination: {
 					el: '#pagination1',
 					clickable: true
-				}
+				},
 			});
 
 		var swiper2 = new Swiper('#bannerSwiper2', {
@@ -392,18 +386,44 @@
 					clickable: true
 				},
 			});
+		
+		//独家旅行
+		var swiper4 = new Swiper('#bannerSwiper4', {
+				speed:300,
+				autoplay : {
+				    delay:3000
+				},
+			});
 	</script>
-	<!-- 弹窗 -->
+	
 	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
-	<link rel="stylesheet" type="text/css" href="/resource/m/css/jquery.fancybox.css" media="screen" />
-	<script type="text/javascript" src="/resource/m/js/jquery.fancybox.js"></script>
+    <script type="text/javascript" src="/resource/m/js/opentv.js" title="移动端    所有页面  的  【打开、关闭视频】"></script>
+    <script type="text/javascript" src="/resource/m/js/dianzan.js" title="移动端    所有页面  的  【点赞】"></script>
+
 	<script type="text/javascript">
+		$(document).ready(function() {
+			var $asd = $(".tab_list li");
+			$asd.click(function() {
+				$(this).addClass("onn").siblings().removeClass("onn");
+				var $index = $(this).index();
+				var $content = $(".tab_con .tab_box");
+				$content.eq($index).show().siblings().hide();
+			});
+			var $asd = $(".box_list li");
+			$asd.click(function(e) {
+				$(this).addClass("on").siblings().removeClass("on");
+				var $index = $(this).index();
+				var $content=$(this).parent().next().find('.con_list_box');
+				$content.eq($index).show().siblings().hide();
+			});
+		});
+		
 		//控制  私人订制 电话号码的长度
 		function judgeIsNonNull1(event){
 			var value=$("#PhoneNum").val();
 			var x = event.which || event.keyCode;
 			if( value.length <= 50 ){
-				//console.log("符合80位数以内");
+				//console.log("符合50位数以内");
 			} else{
 				return $("#PhoneNum").val(value.substr(0, 50));
 			}
@@ -432,194 +452,48 @@
 					layer.msg('请输入姓名！');
 					return false;
 				}else if(name.replace(/(^\s*)|(\s*$)/g, "")==""){
-					layer.msg('目的地不能只输入空格！');
+					layer.msg('姓名框不能只输入空格！');
 					return false;
 				}
+				
+				var reg = /(^1[3|4|5|7|8][0-9]{9}$)/;
 				if( PhoneNum == "" ){
 					layer.msg('请输入电话号码！');
 					return false;
 				}else if(PhoneNum.replace(/(^\s*)|(\s*$)/g, "")==""){
-					layer.msg('目的地不能只输入空格！');
+					layer.msg('手机号码框不能只输入空格！');
 					return false;
-				}
+				}else if (!reg.test(PhoneNum)) {
+                	layer.msg('请输入正确的手机号码！');
+                	return false;
+            	}
 				
-				$.post("", {
-					'destination':destination,
-					'name':name,
-					'PhoneNum':PhoneNum,
+				$.post("/index.php?m=api&c=index&v=private_custom", {
+					'address':destination,
+					'username':name,
+					'mobile':PhoneNum,
 				}, function(data){
 					layer.msg(data.tips);
-					layer.msg("测试提交成功！");
 				},"JSON");
 			});
 			
-			$(".fancybox-effects-a").fancybox({
-				showCloseButton: false,
-				helpers: {
-					title: {
-						type: 'outside'
-					},
-					overlay: {
-						speedOut: 0
-					}
-				}
-			});
-			$(".fancybox").fancybox({
-				wrapCSS: 'fancybox-custom',
-				closeClick: false,
-				openEffect: 'none',
-				helpers: {
-					title: {
-						type: 'inside'
-					}
-				},
-				beforeLoad: function() {
-					this.title = $(this.element).data('title');
-				}
-			});
-	
-			$(".other .theory,.other .hideed,.num .hideed").click(function() {
-				layer.msg('功能正在开发，敬请期待');
-			});
-			
-			//点赞  日志和游记
-			$('.zan').click(function(event) {
-				var id = $(this).attr('data-id');
-				var num = parseInt($(this).attr('data-num'));
-				var obj = $(this);
-				$.post("/index.php?m=api&c=index&v=zan", {
-					'id': id
-				}, function(data) {
-					layer.msg(data.tips);
-					if(data.status == 1) {
-						$('#zan' + id).html((num + 1));
-						$('#zan' + id).addClass("one");
-					} else if(data.status == 2) {
-						$('#zan' + id).addClass("one");
-					}
-				}, "JSON");
-	
-			});
-			
-			//点赞 油画   这个目前PHP 已被注释一部分了
-			$('.dian').click(function(event) {
-				var id = $(this).attr('data-id');
-				var num = parseInt($(this).attr('data-num'));
-				var obj = $(this);
-				$.post("/index.php?m=api&c=index&v=zan_scenery", {
-					'id': id
-				}, function(data) {
-					if(data.status == 1) {
-						$('#zan' + id).html((num + 1));
-						$('#zan' + id).addClass("two");
-						layer.msg(data.tips);
-					} else if(data.status == 2) {
-						$('#zan' + id).addClass("two");
-						layer.msg(data.tips);
-					} else {
-						layer.msg(data.tips);
-					}
-				}, "JSON");
-			});
-			
 			//独家旅行
-			var cut1 = $(".tab_list li");
-			cut1.click(function() {
+			var cut1 = $(".nav_list li");
+			cut1.click(function() { //一级菜单切换
 				$(this).addClass("onn").siblings().removeClass("onn");
 				var $index = $(this).index();
 				var $content = $(".tab_con .tab_box");
 				$content.eq($index).show().siblings().hide();
 			});
+			
 			var cut2 = $(".box_list li");
-			cut2.click(function(e) {
+			cut2.click(function(e) { //二级菜单切换
 				$(this).addClass("on").siblings().removeClass("on");
 				var $index = $(this).index();
 				var $content=$(this).parent().next().find('.con_list_box');
 				$content.eq($index).show().siblings().hide();
 			});
-			
-			$('.js-video').click(function(event) {
-				var _id = $(this).attr("href");
-				var tid = $(this).attr("data-id");
-				var _src = $(this).attr("data-src");
-				$.post("/index.php?m=api&c=index&v=showtv", {
-					'id': tid
-				}, function(data) {
-	
-				}, "JSON");
-				$(_id).find("iframe").attr("src", _src);
-				$(_id).fadeIn();
-			});
-			$('.js-close').click(function(event) {
-				$(this).parents('.m-pop1-yz').fadeOut();
-				$(this).parents('#m-pop1-yz').find("iframe").attr("src", "");
-				event.stopPropagation();
-			});
-	
-			bind_td();
-			var host = window.location.host;
-			//var src = "//" + host + '/' + 'index.php?m=api&c=index&v=getyzz';
-			
 		});
-	</script>
-	<!-- 弹窗 end-->
-	<!-- 日历 -->
-	<script>
-		$(document).ready(function() {
-			//获取当前日期
-			var mydate = new Date();
-			var _y = mydate.getFullYear();
-			var _m = mydate.getMonth() + 1;
-			var _d = mydate.getDate();
-			$("#currentDate").text(_y + "年" + _m + "月" + _d + "日");
-			getryt(_y + '-' + _m + '-' + _d, _y);
-	
-		});
-	
-		function bind_td() {
-			$("#idCalendar td").on('click', function(e) {
-				if($(this).attr('isclick') == 1) {
-					return false;
-				}
-				var china_week = ["日", "一", "二", "三", "四", "五", "六"];
-				day = $(this).text();
-				var time = $(this).data("time");
-				var Year = time.substring(0, 4);
-				var Month = time.substring(5, 7);
-	
-				if(day.length == 1) day = '0' + day;
-				das = Year + "-" + Month + "-" + day; // 带-日期
-				$("#currentDate").text(Year + "年" + Month + "月" + day + "日");
-				getryt(das, Year);
-				w = china_week[$(this).index()];
-				day > 0 && loadinfo(day, w);
-				$(this).parents('.Calendar').find('td').removeClass('onToday');
-				day > 0 && $(this).addClass('onToday');
-			});
-		}
-	
-		function loadinfo(d, w) {
-			$('.today').html("<span>" + d + "</span>周" + w);
-		}
-	
-		function getryt(time, t) {
-			$.ajax({
-				type: "GET",
-				url: "/index.php?m=api&c=index&v=getryt",
-				data: {
-					time: time
-				},
-				dataType: "json",
-				success: function(data) {
-					if(data['id']) {
-						$('#getryt').html('<div onclick=href("' + '/index.php?m=wap&c=index&v=rytdetai&id=' + data['id'] + '")><img src=' + data['img_url'] + '><div class="title">' + data['title'] + '</div>' + data['homecontent'] + '</div>');
-					} else {
-						//                  	<h5 onclick=href("'+'/index.php?m=wap&c=index&v=rytdetai&id='+data['id']+'")>'+data['title']+'</h5>
-						$('#getryt').html("无内容");
-					}
-				}
-			});
-		}
 	</script>
 </body>
 </html>

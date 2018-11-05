@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
@@ -11,7 +10,6 @@
     <meta name="keywords" content="{{TO->cfg key="index_keywords" group="site" default="首页"}}" />
     <meta name="description" content="{{TO->cfg key="index_description" group="site" default="首页"}}" />
     <link rel="stylesheet" href="/resource/m/css/style.css" />
-    
     <style type="text/css">
     	.title {
     		color: #000000;
@@ -38,7 +36,6 @@
     	});
   	</script>
 </head>
-
 <body class="index">
     <div class="header">
         <div class="logo"><a href=""><img src="/resource/m/images/logo.png" alt="" /></a></div>
@@ -223,7 +220,7 @@
                 <div class="swiper-wrapper">
                 	{{foreach from=$tv item=v}}
                     <div class="swiper-slide">
-                        <a href="#m-pop1-yz" class="js-video" data-src="{{$v.url}}" data-id="{{$v.id}}">
+                        <a href="javascript:;" class="js-video" data-src="{{$v.url}}" data-id="{{$v.id}}">
                             <div class="pic">
                                 <img src="{{$v.pics}}" alt="">
                                 <div class="txt">
@@ -291,19 +288,18 @@
                 </div>
             </div>
         </div>
-        <div class="m-pop1-yz" id="m-pop1-yz">
-            <div class="con">
-                <iframe src='' frameborder=0 'allowfullscreen'></iframe>
-                <div class="close js-close"><span></span></div>
-            </div>
-        </div>
+
+        <!-- 视频弹窗 -->
+        <div class="m-pop1-yz" id="m-pop1-yz"><div class="con"><div class="close js-close"><span></span></div></div></div>
+        <!-- end -->
+        
         <a href="http://p.qiao.baidu.com/cps/chat?siteId=11959315&userId=25533377" class="g-consultation"><i></i>免费咨询</a>
     </div>
     {{include file='wap/footer.tpl'}} 
     <link rel="stylesheet" type="text/css" href="/resource/m/css/swiper.css" />
     <script type="text/javascript" src="/resource/m/js/swiper.js"></script>
     <script>
-        var swiper = new Swiper('.banner', {
+        var swiper1 = new Swiper('.banner', {
             slidesPerView: 1,
             loop: true,
             pagination: {
@@ -316,7 +312,7 @@
                 disableOnInteraction: true,
             }
         });
-        var swiper = new Swiper('.m-imgtxt1', {
+        var swiper2 = new Swiper('.m-imgtxt1', {
             slidesPerView: 1,
             loop: true,
             navigation: {
@@ -329,13 +325,14 @@
                 disableOnInteraction: true,
             }
         });
-        var swiper = new Swiper('.m-imgtxt2', {
+        var swiper3 = new Swiper('.m-imgtxt2', {
             slidesPerView: 1.5
         });
-        var swiper = new Swiper('.m-imgtxt3', {
+        var swiper4 = new Swiper('.m-imgtxt3', {
             slidesPerView: 1.5
         });
     </script>
+    
     <!-- 弹窗 -->
     <script src="/resource/js/layui/lay/dest/layui.all.js"></script>
     <link rel="stylesheet" type="text/css" href="/resource/m/css/jquery.fancybox.css" media="screen" />
@@ -366,23 +363,7 @@
                     this.title = $(this.element).data('title');
                 }
             });
-            $('.js-video').click(function(event) {
-                var _id = $(this).attr("href");
-                var tid = $(this).attr("data-id");
-                var _src = $(this).attr("data-src");
-                $.post("/index.php?m=api&c=index&v=showtv", {
-                  'id':tid
-                }, function(data){
-
-                },"JSON");
-                $(_id).find("iframe").attr("src", _src);
-                $(_id).fadeIn();
-            });
-            $('.js-close').click(function(event) {
-                $(this).parents('.m-pop1-yz').fadeOut();
-                $(this).parents('#m-pop1-yz').find("iframe").attr("src", "");
-                event.stopPropagation();
-            });
+            
             $('.zan').click(function(event) {
                 var id = $(this).attr('data-id');
                 var num = parseInt($(this).attr('data-num'));
@@ -402,6 +383,7 @@
         });
     </script>
     <!-- 弹窗 end-->
+    <script type="text/javascript" src="/resource/m/js/opentv.js" title="移动端    所有页面  的  【打开。关闭视频】"></script>
     <!-- 日历 -->
     <script>
         $(document).ready(function() {
@@ -456,5 +438,4 @@
     </script>
     <!--<script type="text/javascript" src="/resource/js/date.js"></script>-->
 </body>
-
 </html>

@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-10-14 18:14:48
+<?php /* vpcvcms compiled created on 2018-10-29 11:00:21
          compiled from wap/faq/set_faq.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -71,6 +71,7 @@
 		
 		.location1{position: absolute;top: 10px;right: 6px;}
 	</style>
+	<link rel="stylesheet" href="/resource/m/css/tag.css" title="和标签相关" />
 </head>
 <body>
 	<div class="header">
@@ -126,10 +127,11 @@ unset($_smarty_tpl_vars);
 " id="nation" placeholder="国家">
 					</div>
 					<p class="headline">标签</p>
-					<div class="tit">
-						<input type="text" class="inp" value="<?php echo $this->_tpl_vars['res']['label']; ?>
-" id="label" placeholder="旅游知识/美食/自由行">
-						<p class="tagTips FontSize dis_none">标签目前最多为四个哦！</p>
+					<div class="tit" style="position: relative;">
+						<input type="text" class="inp" id="tag" value="" maxlength="4" onkeyup="judgeIsNonNull3(event)" placeholder="每个标签最多四个字,最多三个标签,空格无效">
+						<input type="button" name="" class="btn affirm dis_none" id="affirm" value="确认添加" />
+						<p class="tagTips FontSize dis_none">最多只能四个标签！可以先删掉其中一个旧标签，再增加新标签！</p>
+						<div class="tagVal fix" id="tagVal" style="margin-top: 10px;"></div>
 					</div>
 					<button class="publish" id="btnAdd">发布问题</button>
 				</div>
@@ -209,16 +211,81 @@ unset($_smarty_tpl_vars);
 			$(obj).remove();
 		}
 
-		//标签  字数控制
-		$('#label').keyup(function() {
-			var label = $('#label').val();
-			var result=label.split("/");
-			if(result.length>4){
-				$(".tagTips").removeClass("dis_none");
-			}else{
-				$(".tagTips").addClass("dis_none");
+		
+		//监控 标签内容输入框 ，包括粘贴板
+		function judgeIsNonNull3(event){
+			var value=$("#tag").val();
+			var x = event.which || event.keyCode;
+			$("#tag").val(value.replace(/\s*/g,""));//去除字符串空格(空白符)
+			if (x == 4 ) {
+		  		if(value !== "" ){
+			      	$(".affirm").removeClass("dis_none");
+			    }else{
+			    	$(".affirm").addClass("dis_none");
+			    }
 			}
+
+			if(value !== ""){
+				if( /[=，。￥？！：、……“”；（）《》～‘’〈〉——·ˉˇ¨々‖∶＂＇｀｜〃〔〕「」『』．〖〗$【】｛｝［］/,|{}_*:?^%$#@!`·~"'\\<>\[\]\%;)(&+-]/.test(value) ){
+					$("#tag").val(value.replace(/[=，。￥？！：、……“”；（）《》～‘’〈〉——·ˉˇ¨々‖∶＂＇｀｜〃〔〕「」『』．〖〗$【】｛｝［］/,|{}_*:?^%$#@!`·~"'\\<>\[\]\%;)(&+-]/,""));
+					return false;
+				}
+				if( value.length > 4 ){
+		    		return $("#tag").val(value.substr(0, 4));
+		    	}
+		    	$(".affirm").removeClass("dis_none");
+		   	}else{
+		    	$(".affirm").addClass("dis_none");
+		    }
+		}
+		
+		//监控 标签内容输入框 ，包括粘贴板
+		$("#tag").bind('input propertychange', function(){
+			judgeIsNonNull3(event);
 		});
+		
+    	//确认 添加标签
+    	$("#affirm").on("click",function(){
+    		var html,value = $("#tag").val();
+    		var length = $("#tagVal").children().length;
+    		var val0 = $("#tagVal").children().eq(0).find("i").text();
+    		var val1 = $("#tagVal").children().eq(1).find("i").text();
+    		var val2 = $("#tagVal").children().eq(2).find("i").text();
+    		
+			if(value == ""){
+    			layer.msg('标签内容不能为空！');
+				return false;
+    		}else if(value.replace(/(^\s*)|(\s*$)/g, "")==""){ //判断输入的内容是否全为空格
+				layer.msg('标签栏不能只输入空格！');
+				return false;
+			}else{
+				if( length>=4 ){                         //判断是否已存在四个标签
+					$(".tagTips").removeClass("dis_none");
+					return false;
+				} else{
+					if( value == val0 || value == val1 || value == val2 ){
+						layer.msg('不能输入已存在的标签！');
+						return false;
+					} else{
+						html='<b class="sample">'+
+								'<i class="Iclass">'+value+'</i>'+
+								'<em class="eliminate" onclick="eliminate(this)"><img src="/resource/m/images/icon_eliminate.png"/><em>'+
+							 '</b>';
+						$("#tagVal").append(html);
+						$("#tag").val('');
+					}
+				}
+			}
+    	});
+    	
+    	//点击“X”清除标签
+    	function eliminate(which){
+    		var index = $(which).parent().index();
+    		$("#tagVal").children().eq(index).remove();
+    		$(".tagTips").addClass("dis_none");
+    	}
+    	
+		
 		
 		//发布
 		$('#btnAdd').click(function(){
@@ -226,7 +293,7 @@ unset($_smarty_tpl_vars);
 			var describe = $('#describe').val();
 			var address = $('#nation').val();
 			var thumbfile = $('.layui-upload-img').attr('src');
-			var label = $('#label').val();
+			var tag;//标签
 			if(!title){
 				layer.msg('请输入标题');
 				return false;
@@ -242,18 +309,28 @@ unset($_smarty_tpl_vars);
 				return false;
 			}
 	
-			var result=label.split("/");
-			if(result.length>4){
-				$(".tagTips").removeClass("dis_none");
-				return false;
-			}
-			
+			var val0 = $("#tagVal").children().eq(0).find("i").text();
+    		var val1 = $("#tagVal").children().eq(1).find("i").text();
+    		var val2 = $("#tagVal").children().eq(2).find("i").text();
+        	if( val0!="" ){
+        		tag = val0;
+        		if( val1!="" ){
+	        		tag = tag+"/"+val1;
+	        		if( val2!="" ){
+		        		tag = tag+"/"+val2;
+		        	}
+	        	}
+        	}
+        	else{
+        		tag="";
+        	}
+        	
 			$.post("/index.php?m=api&c=faq&v=save_set_faq", {
 				'title':title,
 				'desc':describe,
 				'address':address,
 				'thumbfile':thumbfile,
-				'label':label
+				'label':tag
 			}, function(data){
 				layer.msg(data.tips);
 				if (data.status == 1) {

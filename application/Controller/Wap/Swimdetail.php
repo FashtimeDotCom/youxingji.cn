@@ -31,7 +31,6 @@ class Controller_Wap_Swimdetail extends Core_Controller_WapAction
             $travel_info=$swim_mdl->get_detail($travel_id);
             if( $travel_info ){
                 foreach ($travel_info as $key=>$value){
-                    $travel_info[$key]['describes']= Core_fun::cn_substr(strip_tags($value['describes']),120,'...');
                     $travel_info[$key]['content'] = json_decode($value['content']);
                     $travel_info[$key]['addtime'] = date('Y-m-d', $value['addtime']);
                     $travel_info[$key]['avatar'] = $value['headpic']?$value['headpic']:'/resource/images/img-lb2.png';
@@ -41,7 +40,7 @@ class Controller_Wap_Swimdetail extends Core_Controller_WapAction
 
         //通过用户ID获取达人的头像、简介
         $user_info=C::M("user_member")->where("uid ={$user_id}")->field("autograph,username,headpic")->find();
-        $info['desccibes']=Core_fun::cn_substr(strip_tags($user_info['autograph']),200,'...');
+        $info['desccibes']=$user_info['autograph'];
         $info['username']=$user_info['username'];
         $info['avatar']=$user_info['headpic']?$user_info['headpic']:'/resource/images/img-lb2.png';
         $info['user_id']=$user_id;

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
@@ -13,9 +12,11 @@
     <link rel="stylesheet" href="/resource/m/css/style.css" />
     <script src="/resource/m/js/jquery.js"></script>
     <script src="/resource/m/js/lib.js"></script>
+    <style type="text/css">
+    	.textAlign{text-align: justify;}
+    </style>
 </head>
-
-<body class="">
+<body>
     <div class="header">
         {{include file='wap/header.tpl'}}
         <h3>独家旅行</h3>
@@ -37,9 +38,7 @@
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
                     <a href="javascript:;">
-                        <div class="pic">
-                            <img src="{{$journey.articlepic}}" alt="" />
-                        </div>
+                        <div class="pic"><img src="{{$journey.articlepic}}" alt="" /></div>
                     </a>
                 </div>
             </div>
@@ -52,11 +51,7 @@
                     <div class="swiper-wrapper">
                         {{foreach from=$galleries item=vo key=k}}
                         <div class="swiper-slide">
-                            <a href="">
-                                <div class="pic">
-                                    <img src="{{$vo.imgurl}}" alt="" />
-                                </div>
-                            </a>
+                            <a href="javascript:;"><div class="pic"><img src="{{$vo.imgurl}}" alt="" /></div></a>
                         </div>
                         {{/foreach}}
                     </div>
@@ -72,7 +67,7 @@
             </div>
         </div>
         <div class="m-txt3">
-            <div class="wp">
+            <div class="wp textAlign">
                 <h3>线路亮点</h3>
                 {{$journey.content}}
             </div>
@@ -82,9 +77,8 @@
             <div class="wp">
                 <ul class="ul-imgtxt7">
                     {{foreach from=$features item=vo key=k}}
-                    <li>
-                        <div class="pic"><img src="{{$vo.pics}}" alt="" /></div>
-                        <div class="txt">
+                    <li><div class="pic"><img src="{{$vo.pics}}" alt="" /></div>
+                        <div class="txt textAlign">
                             <h4>{{$vo.title}}： </h4>
                             <p>{{$vo.introduction}}</p>
                         </div>
@@ -98,13 +92,13 @@
             <ul class="ul-imgtxt8">
                 {{foreach from=$trip item=vo key=k}}
                 <li class="{{if $k == 0}}on{{/if}} {{if $count - $k == 1}}last{{/if}}">
-                    <div class="tit">
+                    <div class="tit textAlign">
                         <a href="javascript:;">
                             <span>D{{$vo.days}}</span>
                             <h3>{{$vo.title}}</h3>
                         </a>
                     </div>
-                    <div class="txt" style="display: block;">
+                    <div class="txt" style="display: block;padding-right: 10px;">
                         {{$vo.introduction}}
                         <div class="picbox  swiper-container">
                             <div class="swiper-wrapper">
@@ -134,30 +128,22 @@
             </ul>
             <div class="tablebox">
                 <div class="wp">
-                    <div class="m-txt4">
-                        {{$journey.extend.fybh}}
-                    </div>
+                    <div class="m-txt4 textAlign">{{$journey.extend.fybh}}</div>
                 </div>
             </div>
             <div class="tablebox dn">
                 <div class="wp">
-                    <div class="m-txt4">
-                        {{$journey.extend.fybbh}}
-                    </div>
+                    <div class="m-txt4 textAlign">{{$journey.extend.fybbh}}</div>
                 </div>
             </div>
             <div class="tablebox dn">
                 <div class="wp">
-                    <div class="m-txt4">
-                        {{$journey.extend.htsm}}
-                    </div>
+                    <div class="m-txt4 textAlign">{{$journey.extend.htsm}}</div>
                 </div>
             </div>
             <div class="tablebox dn">
                 <div class="wp">
-                    <div class="m-txt4">
-                        {{$journey.extend.qzsm}}
-                    </div>
+                    <div class="m-txt4 textAlign">{{$journey.extend.qzsm}}</div>
                 </div>
             </div>
         </div>
@@ -218,8 +204,7 @@
                         <div class="swiper-slide">
                             <h3 class="month cal-title"></h3>
                             <table id="pop-cal">
-                                <tbody>
-                                </tbody>
+                                <tbody></tbody>
                             </table>
                         </div>
                     </div>
@@ -230,11 +215,12 @@
         </div>
         <!-- 弹窗 end -->
     </div>
+    
     <script src="/resource/js/layui/lay/dest/layui.all.js"></script>
     <link rel="stylesheet" type="text/css" href="/resource/m/css/swiper.css" />
     <script type="text/javascript" src="/resource/m/js/swiper.js"></script>
-    <script>
-        var swiper = new Swiper('.banner', {
+    <script type="text/javascript">
+        var swiper1 = new Swiper('.banner', {
             slidesPerView: 1,
             loop: true,
             pagination: {
@@ -247,7 +233,7 @@
                 disableOnInteraction: true,
             }
         });
-        var swiper = new Swiper('.m-pick .picbox', {
+        var swiper2 = new Swiper('.m-pick .picbox', {
             slidesPerView: 1,
             loop: true,
             navigation: {
@@ -255,11 +241,10 @@
                 prevEl: '.swiper-button-prev',
             }
         });
-        var swiper = new Swiper('.ul-imgtxt8 .picbox', {
+        var swiper3 = new Swiper('.ul-imgtxt8 .picbox', {
             slidesPerView: 2.5
         });
-    </script>
-    <script>
+
         $(".ul-imgtxt8 .tit").click(function() {
             var li = $(this).parents('li');
             li.toggleClass('on');
@@ -274,7 +259,7 @@
             // $(this).parent().siblings('li').stop().toggleClass('on');
             // $(this).siblings('.txt').stop().slideToggle(200);
             // $(this).parent('li').stop().toggleClass('on');
-            var swiper = new Swiper('.ul-imgtxt8 .picbox', {
+            var swiper4 = new Swiper('.ul-imgtxt8 .picbox', {
                 slidesPerView: 2.5
             });
         })
@@ -494,5 +479,4 @@
         }
     </script>
 </body>
-
 </html>

@@ -84,7 +84,6 @@ class Controller_Wap_User extends Core_Controller_WapAction
         $uid = $this->userInfo['uid'];
         $curpage = $this->getParam ('page') ? intval ($this->getParam ('page')) : 1;
         $list = C::M('faq')->where("uid = $uid")->order('addtime desc')->limit($perpage * ($curpage - 1), $perpage)->select();
-        $this->assign('list', $list);
 		if( $list ){
             foreach ($list as $key=>$value){
                 C::M('faq')->where('id', $value['id'])->setInc('show_num', 1);
@@ -93,8 +92,7 @@ class Controller_Wap_User extends Core_Controller_WapAction
                 }
 
             }
-//          $this->assign('list', $list);
-//          $this->assign('list', $list);
+            $this->assign('list', $list);
        }
         
         //total
@@ -452,6 +450,10 @@ class Controller_Wap_User extends Core_Controller_WapAction
 		if($this->userInfo['autograph'] != ''){
 			$numerical += 20;
 		}
+		if( $this->userInfo['tag'] !="" ){
+		    $tag_list=explode('/',$this->userInfo['tag']);
+            $this->assign("tag_list",$tag_list);
+        }
 		$this->assign('numerical', $numerical);
 		$this->display('wap/user/setting.tpl');
 	}
@@ -633,6 +635,7 @@ class Controller_Wap_User extends Core_Controller_WapAction
                 $info = explode('||', $res['content']);
                 $res['pic']=$info[0]??'';
                 $res['content']=urldecode($info[1])??'';
+                $res['tag']=explode('/',$res['tag']);
             }
 			$this->assign('res', $res);
 			$this->assign('did', $did);
@@ -654,6 +657,9 @@ class Controller_Wap_User extends Core_Controller_WapAction
 		if($id){
 			$res = C::M('travel_note')->where("uid = " . $this->userInfo['uid'] . " and id = $id")->find();
             $res['content']=urldecode($res['content']);
+            if( $res['tag'] ){
+                $res['tag']=explode('/',$res['tag']);
+            }
 			$this->assign('res', $res);
 			$this->assign('id', $id);
 		}

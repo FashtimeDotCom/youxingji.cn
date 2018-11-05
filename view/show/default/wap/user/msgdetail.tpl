@@ -63,7 +63,7 @@
         	var content = $('.chat_input').val();
           	if(content){
               $.post("/index.php?m=api&c=index&v=sendmsg", {
-                'to_id':'214',
+                'to_id':"{{$msg.toid}}",
                 'content':content
               }, function(data){
                 if(data.status == 1){

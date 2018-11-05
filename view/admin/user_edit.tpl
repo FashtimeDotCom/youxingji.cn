@@ -42,6 +42,16 @@
         <td class="vtop rowform"><input type="text" class="txt" id="telephone" name="telephone" value="{{$conditions.telephone}}" /></td>
         <td class="vtop tips2"></td>
     </tr>
+    <tr><td class="td27" colspan="2">首页排序</td></tr>
+    <tr class="noborder">
+        <td class="vtop rowform"><input type="text" class="txt" id="sort" name="sort" value="{{$conditions.sort}}" /></td>
+        <td class="vtop tips2"></td>
+    </tr>
+    <tr><td class="td27" colspan="2">后台标签</td></tr>
+    <tr class="noborder">
+        <td class="vtop rowform"><input type="text" class="txt" id="tag" name="tag" value="{{$conditions.tag}}" /></td>
+        <td class="vtop tips2"></td>
+    </tr>
     <tr><td class="td27" colspan="2">注册IP</td></tr>
     <tr class="noborder">
         <td class="vtop rowform">{{$conditions.regip}}</td>

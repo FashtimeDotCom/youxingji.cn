@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-10-14 18:53:23
+<?php /* vpcvcms compiled created on 2018-11-04 14:55:42
          compiled from wap/faq/faq_detail.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -44,8 +44,7 @@ unset($_smarty_tpl_vars);
 
 	    <div class="container fix">
 	    	<!--问题-->
-			<div class="hunk question marginBotom fix" data-id="<?php echo $this->_tpl_vars['faq_info']['id']; ?>
-">
+			<div class="hunk question marginBotom fix">
 				<div class="title fix">
 					<span class="view fix"><img src="/resource/m/images/user/icon_faq_detail1.png"/></span>
 					<span class="name omit lineNumber2"><?php echo $this->_tpl_vars['faq_info']['title']; ?>
@@ -55,73 +54,77 @@ unset($_smarty_tpl_vars);
 </p></div>
 				
 				<div class="bottom fix">
-					<div class="topButtom transform FontSize">
+					<div class="topButtom transform">
 						<span class="browseNum"><i><?php echo $this->_tpl_vars['faq_info']['show_num']; ?>
-</i>浏览</span>&nbsp;·&nbsp;<span class="answerNum"><i><?php echo $this->_tpl_vars['faq_info']['collection_num']; ?>
-</i>收藏</span>&nbsp;·&nbsp;<span class="assistNum"><i><?php echo $this->_tpl_vars['faq_info']['response_num']; ?>
+</i>浏览</span>&nbsp;·&nbsp;
+						<span class="answerNum"><i><?php echo $this->_tpl_vars['faq_info']['collection_num']; ?>
+</i>收藏</span>&nbsp;·&nbsp;
+						<span class="assistNum"><i><?php echo $this->_tpl_vars['faq_info']['response_num']; ?>
 </i>回答</span>
 					</div>
-					<div class="left transform FontSize fix" style="margin-left: -5px;"><img class="icon" src="/resource/m/images/user/icon_faq_detail2.png"/><span class="seat"><?php echo $this->_tpl_vars['faq_info']['address']; ?>
+					<div class="left transform fix"><img class="icon" src="/resource/m/images/user/icon_faq_detail2.png"/><span class="seat"><?php echo $this->_tpl_vars['faq_info']['address']; ?>
 </span></div>
-					<div class="right transform FontSize fix"><span class="name"><?php echo $this->_tpl_vars['faq_info']['username']; ?>
+					<div class="right transform fix"><span class="name"><?php echo $this->_tpl_vars['faq_info']['username']; ?>
 </span>&nbsp;问于&nbsp;<span class="time"><?php echo $this->_tpl_vars['faq_info']['addtime']; ?>
 </span></div>
 				</div>
 			</div>
 	    	
 	    	<!--答-->
-	    	<input type="hidden" name="" id="answerNum" title="回答的总数" value="<?php echo $this->_tpl_vars['total']; ?>
+	    	<input type="hidden" name="uid" id="uid" data-type="4" value="" />
+	    	<input type="hidden" name="faq_num" id="faq_num" title="回答的总数" value="<?php echo $this->_tpl_vars['total']; ?>
 " />
+	    	<input type="hidden" id="UniqueValue" data-sign="details" value="faq_num" title="共用JS区分的唯一必须值"/>
 	    	<?php if ($this->_tpl_vars['total'] > 0): ?>
 	    	<!--有人回答-->
-	    	<div class="modules answer marginBotom fix" id="answer" data-index="1" data-page="" data-nowPage="1">
+	    	<div class="modules answer marginBotom fix" id="pageCount" data-id="<?php echo $this->_tpl_vars['faq_info']['id']; ?>
+" data-index="1" data-nowPage="1">
 	    		<div class="bigTitle">
 	    			<span class="left">全部问答（<i><?php echo $this->_tpl_vars['total']; ?>
 </i>）</span>
 	    			<p class="right"><span class="key on" id="answerHeat">按热度</span>&nbsp;|&nbsp;<span class="key" id="answerTime">按时间</span></p>
 	    		</div>
 	    		<div class="matter fix">
-					<div class="con fix">
-						<?php $_from = $this->_tpl_vars['list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+					<?php $_from = $this->_tpl_vars['list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
     foreach ($_from as $this->_tpl_vars['key'] => $this->_tpl_vars['item']):
 ?>
-						<div class="hunk fix">
-							<div class="bottom fix">
-								<div class="left answerLeft transform FontSize fix marginLeft">
-									<span class="boxes">答&nbsp;<span class="profilePhoto figure" style="background-image: url(<?php echo $this->_tpl_vars['item']['headpic']; ?>
+					<div class="hunk fix">
+						<div class="bottom fix">
+							<div class="left answerLeft transform fix">
+								<span class="boxes">答&nbsp;<span class="profilePhoto figure" style="background-image: url(<?php echo $this->_tpl_vars['item']['headpic']; ?>
 );"></span></span>&nbsp;
-									<span class="name"><?php echo $this->_tpl_vars['item']['username']; ?>
+								<span class="name"><?php echo $this->_tpl_vars['item']['username']; ?>
 </span>
-								</div>
-								<div class="right transform FontSize fix"><span class="answerTime"><?php echo $this->_tpl_vars['item']['addtime']; ?>
+							</div>
+							<div class="right transform fix"><span><?php echo $this->_tpl_vars['item']['addtime']; ?>
 </span></div>
-							</div>
-							<div class="substance fix">
-								<div class="solution description"><?php echo $this->_tpl_vars['item']['content']; ?>
+						</div>
+						<div class="substance fix">
+							<div class="solution description"><?php echo $this->_tpl_vars['item']['content']; ?>
 </div>
-								<a class="readMore fix" href="javascript:;">
-									<span class="coverage fix"></span>
-									<span class="typeface">查看更多</span>
-								</a>
-							</div>
+							<a class="readMore fix" href="/index.php?m=wap&c=faq&v=response_detail&id=<?php echo $this->_tpl_vars['item']['id']; ?>
+">
+								<span class="coverage fix"></span>
+								<span class="typeface">查看更多</span>
+							</a>
+						</div>
 
-							<div class="bottom fix">
-								<div class="topButtom transform FontSize" style="text-align: center;">
-									<span class="replyNum"><i><?php echo $this->_tpl_vars['item']['show_num']; ?>
+						<div class="bottom fix">
+							<div class="topButtom transform FontSize" style="text-align: center;">
+								<span class="replyNum"><i><?php echo $this->_tpl_vars['item']['show_num']; ?>
 </i>浏览</span>&nbsp;·&nbsp;<span class="replyNum"><i><?php echo $this->_tpl_vars['item']['top_num']; ?>
 </i>点赞</span>
-								</div>
 							</div>
 						</div>
-						<?php endforeach; endif; unset($_from); ?>
-					</div>	
+					</div>
+					<?php endforeach; endif; unset($_from); ?>
 	    		</div>
 	    	</div>
 	    	<p class="tips"></p>
 	    	
 	    	<?php else: ?>
 	    	<!--无人回答-->
-	    	<div class="modules answer marginBotom fix" id="answer" data-index="1">
+	    	<div class="modules answer marginBotom fix">
 	    		<div class="bigTitle">
 	    			<span class="left">全部问答（<i><?php echo $this->_tpl_vars['total']; ?>
 </i>）</span>
@@ -146,94 +149,114 @@ unset($_smarty_tpl_vars);
 	
 	<script type="text/javascript" src="/resource/m/js/swiper.js"></script>
 	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
+	<script type="text/javascript" src="/resource/m/js/collect.js" title="移动端    所有页面  的 【  收藏、关注、私信】"></script>
     <script type="text/javascript">
-		window.onload=function(){
-    		//判断列表的总数量是否大于等于5
-    		var answerNum = parseInt($("#answerNum").val());//回答的总数
-    		var maxPages1 = parseInt(Math.ceil(answerNum/4));//回答的最大页数
-    		
-    		$("#answer").attr("data-page",maxPages1);
-    		
-    		if (answerNum>=5) {
-    			$(".tips").text("往下拖动查看更多！");
-    		} else{
-    			$(".tips").text("没有更多信息咯~");
-    		}
-    	}
+    	//进入页面自动加载
+		var UniqueValue=$("#UniqueValue").val(); //页面 的唯一值
+		var dataSign=$("#UniqueValue").attr("data-sign"); //页面 的唯一标记
+		var dataType=$("#UniqueValue").attr("data-type"); //收藏页面 的分类
+		var url='/index.php?m=api&c=faq&v=response_more';
+		
+		//判断列表的总数量是否大于等于5
+		function autoloading(UniqueValue){
+			if (dataSign=="my" || dataSign=="his") {  //我的 。。。  TA的。。。
+				var totality = parseInt($("#"+UniqueValue).text());
+			} else if (dataSign=="collect" || dataSign=="about_us" || dataSign=="details" ){  //收藏页    关于我们
+				var totality = parseInt($("#"+UniqueValue).val());
+			}else if (dataSign=="TalentState" ) {
+				
+			}
+
+			if (totality>=5) {
+				$(".tips").text("往下拖动查看更多！");
+			} else{
+				$(".tips").text("我也是有底线的哦~");
+			}
+		}
+		autoloading(UniqueValue);
+
+		//提取公共的方法
+		function jointHtml(data,NowPage,maxPages){
+            if(data.status == 1){
+            	var html="";
+            	$.each(data.tips,function(i,item){
+            		html+='<div class="hunk fix">'+
+								'<div class="bottom fix">'+
+									'<div class="left answerLeft transform fix">'+
+										'<span class="boxes">答&nbsp;<span class="profilePhoto figure" style="background-image: url('+data.tips[i].headpic+');"></span></span>&nbsp;'+
+										'<span class="name">'+data.tips[i].username+'</span>'+
+									'</div>'+
+									'<div class="right transform fix"><span>'+data.tips[i].addtime+'</span></div>'+
+								'</div>'+
+								'<div class="substance fix">'+
+									'<div class="solution description">'+data.tips[i].content+'</div>'+
+									'<a class="readMore fix" href="/index.php?m=wap&c=faq&v=response_detail&id='+data.tips[i].id+'">'+
+										'<span class="coverage fix"></span>'+
+										'<span class="typeface">查看更多</span>'+
+									'</a>'+
+								'</div>'+
+								'<div class="bottom fix">'+
+									'<div class="topButtom transform" style="text-align: center;">'+
+										'<span class="replyNum"><i>'+data.tips[i].show_num+'</i>浏览</span>&nbsp;·&nbsp;<span class="replyNum"><i>'+data.tips[i].top_num+'</i>点赞</span>'+
+									'</div>'+
+								'</div>'+
+							'</div>';
+               	});
+           		$(".matter").append(html);
+           		
+           		if (maxPages>NowPage) {
+            		$(".tips").text("往下拖动查看更多！");
+            		flag = true;
+            	}else{
+            		$(".tips").text("我也是有底线的哦~");
+            		flag = false;
+            	}
+            }
+		}
 
         $(".key").on("click",function(){
         	var index = $(this).index();
         	$(this).addClass("on");
         	$(this).siblings().removeClass("on");
-        	$("#answer").attr("data-index",index+1);
-        	$(".con").html("");
-        	buttons(index+1);
-        });
-		
-		function buttons(tab){
-			//判断列表的总数量是否大于等于5
-    		var answerNum = parseInt($("#answerNum").val());//回答的总数
-    		$("#answer").attr("data-nowPage",1);//当前页数
-    		var maxPages = parseInt(Math.ceil(answerNum/4));//回答的最大页数
+        	$("#pageCount").attr("data-index",index+1);  //类别 判断是时间还是热度
+        	var dataIndex = parseInt($("#pageCount").attr("data-index"));
+        	$(".matter").html("");
+
+        	//判断列表的总数量是否大于等于5
+    		var Num = parseInt($("#"+UniqueValue).val()); //回答的总数
+    		var maxPages = parseInt(Math.ceil(Num/4));   //回答的最大页数
     		
-    		$("#answer").attr("data-page",maxPages);
-    		var $faq_info = parseInt( $(".question").attr("data-id") );//对应这个问题的ID
-			$.ajax({
-                url:'/index.php?m=api&c=faq&v=response_more',
-                data:{page:1,type:tab,faq_id:$faq_info},
-                method:'post',
+    		$("#pageCount").attr("data-page",maxPages);
+    		var infoID = parseInt( $("#pageCount").attr("data-id") );//问题的ID
+        	
+        	$.ajax({
+                url:url,
+                data:{page:1,
+                	  type:dataIndex,
+                	  faq_id:infoID },
+                type:'post',
                 dataType:'json',
                 beforeSend:function(){
                 	$(".tips").text("");
 					$(".tips").html('<img class="loading" src="/resource/m/images/common/loading.gif"/>');
-					flag = false;
                 },
                 success:function( data ){
-                	var html="";
-                    if(data.status == 1){
-	                	$.each(data.tips,function(i,item){
-	                		html+='<div class="hunk fix">'+
-										'<div class="bottom fix">'+
-											'<div class="left transform FontSize fix marginLeft">'+
-												'<span class="boxes">答&nbsp;<span class="profilePhoto figure" style="background-image: url('+data.tips[i].headpic+');"></span></span>&nbsp;'+
-												'<span class="name">'+data.tips[i].username+'</span>'+
-											'</div>'+
-											'<div class="right transform FontSize fix"><span class="time" style="margin-right: -10px;">'+data.tips[i].addtime+'</span></div>'+
-										'</div>'+
-										'<div class="substance fix">'+
-											'<div class="solution description">'+data.tips[i].content+'</div>'+
-											'<a class="readMore fix" href="javascript:;">'+
-												'<span class="coverage fix"></span>'+
-												'<span class="typeface">查看更多</span>'+
-											'</a>'+
-										'</div>'+
-										'<div class="bottom fix">'+
-											'<div class="topButtom transform FontSize" style="text-align: center;">'+
-												'<span class="replyNum"><i>'+data.tips[i].show_num+'</i>浏览</span>&nbsp;·&nbsp;<span class="replyNum"><i>'+data.tips[i].top_num+'</i>点赞</span>'+
-											'</div>'+
-										'</div>'+
-									'</div>';
-	                   	});
-                   		$(".con").append(html);
-	                    
-	                    if (maxPages>1) {
-	                		$(".tips").text("往下拖动查看更多！");
-	                		flag = true;
-	                	}else{
-	                		$(".tips").text("没有更多信息咯~");
-	                		flag = false;
-	                	}
-	                }else{
-	                    layer.msg(data.tips);
-	                    html = '<div class="hunk">'+
+			        jointHtml(data,1,maxPages);
+	                if(data.status == 1){
+	                	$("#pageCount").attr("data-NowPage",1);
+	                }
+	                else{
+	                	layer.msg(data.tips);
+	                var htmll = '<div class="hunk">'+
 									'<img class="tips" src="/resource/m/images/user/defaul_travel_bg.png"/>'+
 									'<p class="depict">这个问题还没有人回答哦！<br />赶紧寻找达人回答吧！</p>'+
 								'</div>';
-	                    $(".matter").html(html);
+		                $(".matter").html(htmll);
 	                }
                 }
             });
-		}
+        });
+
 		
 		var scrollTop;     //获取滚动条到顶部的距离
 	    var scrollHeight;  //获取文档区域高度 
@@ -245,23 +268,25 @@ unset($_smarty_tpl_vars);
 	        windowHeight = $(this).height();
 	        var e;
 	        
-			var dataIndex = parseInt($("#answer").attr("data-index"));
+			var dataIndex = parseInt($("#pageCount").attr("data-index"));
 	        
 	        //判断列表的总数量是否大于等于5
-    		var answerNum = parseInt($("#answerNum").val());//总数
+    		var Num = parseInt($("#"+UniqueValue).val());//总数
     		
-    		maxPages = parseInt(Math.ceil(answerNum/4));//旅游达人的最大页数
+    		maxPages = parseInt(Math.ceil(Num/4));//旅游达人的最大页数
     		
-			var NowPage = parseInt( $("#answer").attr("data-nowPage") );//当前页数
-    		var $faq_info = parseInt( $(".question").attr("data-id") );//对应这个问题的ID
+			var NowPage = parseInt( $("#pageCount").attr("data-nowPage") );//当前页数
+    		var infoID = parseInt( $("#pageCount").attr("data-id") );//对应这个问题的ID
 			var page=NowPage+1;
 			
 			if(scrollTop + windowHeight >= scrollHeight-200 && flag == true ){
 	        	if (NowPage+1<=maxPages){
 		            $.ajax({
-		                url:'/index.php?m=api&c=faq&v=response_more',
-		                data:{page:page,type:dataIndex,faq_id:$faq_info},
-		                method:'post',
+		                url:url,
+		                data:{page:page,
+		                	  type:dataIndex,
+		                	  faq_id:infoID },
+		                type:'post',
 		                dataType:'json',
 		                beforeSend:function(){
 		                	$(".tips").text("");
@@ -269,74 +294,21 @@ unset($_smarty_tpl_vars);
 		                    flag = false;
 		                },
 		                success:function( data ){
+		                    jointHtml(data,NowPage,maxPages);
 		                    if(data.status == 1){
-			                	var html="";
-			                	$.each(data.tips,function(i,item){
-			                		html += '<div class="hunk fix">'+
-												'<div class="bottom fix">'+
-													'<div class="left transform FontSize fix marginLeft">'+
-														'<span class="boxes">答&nbsp;<span class="profilePhoto figure" style="background-image: url('+data.tips[i].headpic+');"></span></span>&nbsp;'+
-														'<span class="name">'+data.tips[i].username+'</span>'+
-													'</div>'+
-													'<div class="right transform FontSize fix"><span class="time" style="margin-right: -10px;">'+data.tips[i].addtime+'</span></div>'+
-												'</div>'+
-												'<div class="substance fix">'+
-													'<div class="solution description">'+data.tips[i].content+'</div>'+
-													'<a class="readMore fix" href="javascript:;">'+
-														'<span class="coverage fix"></span>'+
-														'<span class="typeface">查看更多</span>'+
-													'</a>'+
-												'</div>'+
-												'<div class="bottom fix">'+
-													'<div class="topButtom transform FontSize" style="text-align: center;">'+
-														'<span class="replyNum"><i>'+data.tips[i].show_num+'</i>浏览</span>&nbsp;·&nbsp;<span class="replyNum"><i>'+data.tips[i].top_num+'</i>点赞</span>'+
-													'</div>'+
-												'</div>'+
-											'</div>';
-			                   	});
-		                   		$(".con").append(html);
-			                    
-			                    $(".answer").attr("data-NowPage",NowPage+1);
-			                    if(NowPage+1<maxPages){
-			                		$(".tips").text("往下拖动查看更多！");
-			                	}else{
-			                		$(".tips").text("我也是有底线的哦~");
-			                	}
-			                }else{
-			                    layer.msg(data.tips);
-			                }
-		                },
-		                complete:function(){
-		                    if (NowPage+1<maxPages) {
-		                		$(".tips").text("往下拖动查看更多！");
-		                		flag = true;
-		                	}else{
-		                		$(".tips").text("我也是有底线的哦~");
-		                		flag = false;
-		                	}
+		                    	$("#pageCount").attr("data-NowPage",NowPage+1);
+		                    }
+				            else{
+				                layer.msg(data.tips);
+				            }
 		                }
 		            });
-		        }else{
+		        }
+	        	else{
             		$(".tips").text("我也是有底线的哦~");
             	}
 	        }
 	    });
-	    
-	    //收藏
-        function collect(id){
-            $.post("/index.php?m=api&c=favtravel&v=collection", {
-                'action':1,  //action:数值(0取消，1收藏)
-                't_id':id,  //t_id:数值(日志的ID或者tv的ID或者游记的id
-                'type':4  //type:数值(1-日志，2-tv,3-游记,4-问题
-            }, function(data){
-                if(data.status == 1){
-                	layer.msg('收藏成功，请在个人中心查看！');
-                	$(".collectNUM").text(parseInt($(".collectNUM").text())+1);
-                }else{
-                	layer.msg(data.tips);
-                }
-            },"JSON");
-        }
 	    
 	    //添加答案
         $("#skip").on("click",function(){
@@ -344,10 +316,14 @@ unset($_smarty_tpl_vars);
             $.post("index.php?m=api&c=user&v=is_login", {
             	
             }, function(data){
-                if(data.status == 1){
+                if(data.status == 1){ //登录了，直接跳转
                 	window.location="/index.php?m=wap&c=faq&v=response_faq&id="+id;
-                }else{
+                }else{ //没有登录，带参数跳转到登录页
                 	layer.msg(data.tips);
+                	setInterval(function(){
+						window.location="/index.php?m=wap&c=index&v=login&from="+"<?php echo $this->_tpl_vars['from_url']; ?>
+";
+					},1000);
                 }
             },"JSON");
         });

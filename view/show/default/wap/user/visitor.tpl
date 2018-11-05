@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
@@ -14,8 +13,7 @@
     <script src="/resource/m/js/jquery.js"></script>
     <script src="/resource/m/js/lib.js"></script>
 </head> 
-
-<body class="">
+<body>
     <div class="header">
         {{include file='wap/header.tpl'}}
         <h3>我的访客</h3>
@@ -34,13 +32,10 @@
             </div>
         </div>
         <div class="ban">
-            <a href="">
-                <img src="{{$user.cover}}" alt="">
-            </a>
+            <a href=""><img src="{{$user.cover}}" alt=""></a>
             <div class="m-user">
                 <i style="background: url({{$user.avatar}}) no-repeat center center; background-size: cover; border-radius: 50%;"></i>
-                <dl>
-                    <dd><a href="/index.php?m=wap&c=user&v=addtravel">发布游记</a></dd>
+                <dl><dd><a href="/index.php?m=wap&c=user&v=addtravel">发布游记</a></dd>
                     <dd><a href="/index.php?m=wap&c=user&v=addtv">发布TV</a></dd>
                     <dd><a href="/index.php?m=wap&c=user&v=follow">我的关注</a></dd>
                     <dd><a href="/index.php?m=wap&c=user&v=msg">我的私信</a></dd>
@@ -53,25 +48,22 @@
         <div class="row-focus">
             <div class="wp">
                 <ul class="ul-snav-yz1">
-                    <li>
-                        <a href="/index.php?m=wap&c=user&v=follow" class="items item1">
-    					<span style="background-image: url(/resource/m/images/ico-lb6.png)">我的关注</span>
-    				</a>
+                    <li><a href="/index.php?m=wap&c=user&v=follow" class="items item1">
+	    					<span style="background-image: url(/resource/m/images/ico-lb6.png)">我的关注</span>
+	    				</a>
                     </li>
-                    <li>
-                        <a href="/index.php?m=wap&c=user&v=fans" class="items item2">
-    					<span style="background-image: url(/resource/m/images/ico-lb5.png)">我的粉丝</span>
-    				</a>
+                    <li><a href="/index.php?m=wap&c=user&v=fans" class="items item2">
+	    					<span style="background-image: url(/resource/m/images/ico-lb5.png)">我的粉丝</span>
+	    				</a>
                     </li>
                     <li class="on">
                         <a href="/index.php?m=wap&c=user&v=visitor" class="items item1">
-                        <span style="background-image: url(/resource/m/images/ico-lb8.png)">我的访客</span>
-                    </a>
+	                        <span style="background-image: url(/resource/m/images/ico-lb8.png)">我的访客</span>
+	                    </a>
                     </li>
-                    <li>
-                        <a href="/index.php?m=wap&c=user&v=findfriends" class="items item2">
-                        <span style="background-image: url(/resource/m/images/ico-lb11.png)">查找好友</span>
-                    </a>
+                    <li><a href="/index.php?m=wap&c=user&v=findfriends" class="items item2">
+	                        <span style="background-image: url(/resource/m/images/ico-lb11.png)">查找好友</span>
+	                    </a>
                     </li>
                 </ul>
                 <div class="so-friend">
@@ -80,8 +72,7 @@
                 </div>
                 <ul class="ul-list-yz2">
                     {{foreach from=$list item=vo}}
-                    <li>
-                        <div class="items">
+                    <li><div class="items">
                             <div class="img">
                                 <a href="{{$vo.uid|helper:'mhref'}}"><img src="{{$vo.avatar}}" alt=""></a>
                             </div>
@@ -114,8 +105,7 @@
             <!-- 页码 -->
             {{if $multipage}}
             <div class="pages" style="padding-top: 20px;padding-bottom: 20px;">
-                <ul>
-                    {{foreach from=$multipage item=page}}
+                <ul>{{foreach from=$multipage item=page}}
                     <li {{if $page.2}}class="{{$page.2}}"{{/if}}><a href="{{$page.1}}">{{$page.0}}</a></li>
                     {{/foreach}}
                 </ul>
@@ -127,20 +117,6 @@
     {{include file='wap/footer.tpl'}} 
     <script src="/resource/js/layui/lay/dest/layui.all.js"></script>
     <script type="text/javascript">
-        function follows(bid, obj)
-        {
-            $.post("/index.php?m=api&c=index&v=follow", {
-                'bid':bid
-            }, function(data){
-                if(data.status == 0){
-                    layer.msg(data.tips);
-                }else if(data.status == 1){
-                    $(obj).html('已关注');
-                }else if(data.status == 2){
-                    $(obj).html('<span>关注</span>');
-                }
-            },"JSON");
-        }
         $('#btnSo').click(function(){
             var keys = $('#keys').val();
             if(!keys){
@@ -148,19 +124,8 @@
                 return false;
             }
             window.location.href="/index.php?m=wap&c=user&v=visitor&keys=" + keys;
-        })
-      	function smg(uid){
-        	layer.prompt({title: '请输入私信内容', formType: 2}, function(text, index){
-              	layer.close(index);
-                $.post("/index.php?m=api&c=index&v=sendmsg", {
-                    'to_id':uid,
-                    'content':text
-                }, function(data){
-                    layer.msg(data.tips);
-                },"JSON");
-            });
-        }
+        });
     </script>
+	<script type="text/javascript" src="/resource/m/js/collect.js" title="移动端    所有页面  的 【 收藏、关注、私信】"></script>
 </body>
-
 </html>

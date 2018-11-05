@@ -13,7 +13,7 @@
     <script src="/resource/m/js/jquery.js"></script>
     <script src="/resource/m/js/lib.js"></script>
     <link rel="stylesheet" href="/resource/m/css/common.css" />
-    <link rel="stylesheet" href="/resource/m/css/commonList.css" />
+    <link rel="stylesheet" href="/resource/m/css/personalcenter.css" />
 </head>
 <body>
 	<div class="header">
@@ -33,21 +33,37 @@
 	            </form>
 	        </div>
 	    </div>
-	    <div class="ban">
-	        <div class="backdrop fix"><img src="{{$user.cover}}" title="背景图" alt=""></div>
-	        <div class="head fix">
-	        	<div class="profilePhoto"><div class="gaine"><a class="box figure" style="background-image: url({{$user.avatar}});"></a></div></div>
-	        	<p class="wx_name">{{$user.username}}</p>
-	        	<p class="signature fix" title="个性签名">
-	        		<span class="icon_location1"></span>
-	        		<img class="icon_location2" src="/resource/m/images/common/icon_location1.png" />
-	        		<span class="autograph">{{$user.city}}&nbsp;{{$user.autograph}}</span>
+	    
+	    <div class="ban figure fix">
+	    	<div class="imgBg figure borderRadius bg_blur" style="background-image: url({{$user.cover}})"></div>
+	        <div class="message fix">
+	        	<div class="gaine figure" style="background-image: url({{$user.avatar}});"></div>
+	        	<div class="rightBox">
+	        		<p class="wx_name">{{$user.username}}</p>
+		        	<p class="location fix" title="定位"><img class="icon_location2" src="/resource/m/images/common/icon_location1.png" /><i>{{$user.city}}</i></p>
+	        	</div>
+		        	
+	        	<input type="hidden" name="synopsis" id="synopsis" value="{{$user.autograph}}" />
+	        	<p class="intro fix" title="简介">
+	        		<span class="autograph"></span>
+	        		<span class="viewMore dis_none" data-open="0">查看全文</span>
 	        	</p>
-	        	<div class="bottom fix">
-	        		<p class="left"><span id="attention">{{$user.uid|helper:'follownum'}}</span>关注</p>&nbsp;&nbsp;&nbsp;<p class="right"><span id="fans">{{$user.uid|helper:'fansnum'}}</span>粉丝</p>
+	        	<div class="statistics fix">
+	        		<div class="left">
+	        			<div class="boxes">
+	        				<b class="attention">{{$user.uid|helper:'follownum'}}</b>
+	        				<b>关注</b>
+	        			</div>
+	        			<div class="boxes">
+	        				<b class="fans">{{$user.uid|helper:'fansnum'}}</b>
+	        				<b>粉丝</b>
+	        			</div>
+	        		</div>
 	        	</div>
 	        </div>
 	    </div>
+
+	    <!--正文-->
 	    <div class="row-TV minHeight">
 	        <div class="m-nv-yz">
 	            <div class="wp fix">
@@ -60,16 +76,24 @@
 	            </div>
 	        </div>
 	        
-	        <input type="hidden" id="UniqueValue" data-sign="my" value="travel_num" title="共用JS区分的唯一必须值"/>
+	        <input type="hidden" id="UniqueValue" data-sign="my" data-length="38" value="travel_num" title="共用JS区分的唯一必须值"/>
 	        {{if $list}}
 	        <div class="m-mytv-yz" id="pageCount" data-page="" data-nowPage="1">
 	        	<div class="content fix">
 	        		{{foreach from=$list item=item key=key}}
 					<div class="item fix item_{{$item.id}}">
 						<div class="wp fix">
+							{{if $item.status==1}}
+							<a class="dis_block fix" href="/index.php?m=wap&c=index&v=star_detail&id={{$item.id}}">
+								<p class="videoTitle">{{$item.title}}</p>
+								<div class="date">{{$item.addtime}}</div>
+								<p class="videoDetails">{{$item.describes}}</p>
+							</a>
+							{{else}}
 							<p class="videoTitle">{{$item.title}}</p>
 							<div class="date">{{$item.addtime}}</div>
 							<p class="videoDetails">{{$item.describes}}</p>
+							{{/if}}
 							<ul class="ul-imgtxt2-yz">
 								<li><dl>{{foreach from=$item.content item=v}}
 		                                <dd><a href="{{$v}}" class="figure fancybox-effects-a" style="background-image: url({{$v}});">
@@ -81,22 +105,32 @@
 								</li>
 							</ul>
 							
-							<div class="videoBottom">
+							<div class="videoBottom fix">
+								{{if $item.address}}
 								<span class="left"><img src="/resource/m/images/common/icon_location2.png" />{{$item.address}}</span>
+								{{/if}}
 								<p class="right">
-									<span class="check"><img src="/resource/m/images/common/icon_check.png" />{{$item.shownum}}</span>&nbsp;&nbsp;
-									<a class="zan" data-id="{{$item.id}}" href="javascript:;">
-										<span class="like"><img src="/resource/m/images/common/icon_like.png" /><i class="Iclass">{{$item.topnum}}</i></span>
-									</a>&nbsp;&nbsp;
-									<a class="Areview" href="javascript:;"><span class="review"><img src="/resource/m/images/common/icon_review.png" />0</span></a>
+									<span class="check"><img class="icon_check" src="/resource/m/images/common/icon_check.png" /><i class="Iclass">{{$item.shownum}}</i></span>&nbsp;&nbsp;
+									<span class="like zan" onclick="zan(this,{{$item.id}})" data-nature="list">
+										<img class="icon_like" src="/resource/m/images/common/icon_like.png" /><i class="Iclass">{{$item.topnum}}</i>
+									</span>&nbsp;&nbsp;
+									{{if $item.status==1}}
+									<span class="review">
+										<a class="widthHeight" href="/index.php?m=wap&c=index&v=star_detail&id={{$item.id}}">
+											<img class="icon_review" src="/resource/m/images/common/icon_review.png" /><i class="Iclass">0</i>
+										</a>
+									{{else}}
+									<span class="Areview review"><img class="icon_review" src="/resource/m/images/common/icon_review.png" /><i class="Iclass">0</i>
+									{{/if}}
+									</span>
 								</p>
 							</div>
 							
-							<div class="pullDownMenu fix">
-								<img class="icon_pullDown" src="/resource/m/images/common/icon_pullDown.png" />
-								<div class="pullDownNav fix dis_none">
+							<div class="IMGbox fix">
+								<div class="pullDownButton" onclick="pullDownButton(this)"></div>
+								<div class="menuOption fix dis_none">
 									<a class="collect" href="/index.php?m=wap&c=user&v=edittravel&id={{$item.id}}"><span>编辑</span></a>
-									<a class="deleteInfo" href="javascript:;" data-id="{{$item.id}}"><span>删除</span></a>
+									<span class="deleteInfo" data-id="{{$item.id}}">删除</span>
 								</div>
 							</div>
 						</div>
@@ -124,7 +158,7 @@
 	    <div class="maskLayer dis_none" title="遮罩层，作用：下拉菜单失焦时，下拉菜单自动消失"></div>
 	</div>
 	{{include file='wap/footer.tpl'}}
-	
+
 	<!-- 弹窗 -->
     <link rel="stylesheet" type="text/css" href="/resource/m/css/jquery.fancybox.css" media="screen" />
     <script type="text/javascript" src="/resource/m/js/jquery.fancybox.js"></script>
@@ -144,6 +178,8 @@
     </script>
     
 	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
-	<script src="/resource/m/js/common.js"></script>
+    <script type="text/javascript" src="/resource/m/js/jianjie.js" title="移动端    8个页面  的  【简介】"></script>
+    <script type="text/javascript" src="/resource/m/js/dianzan.js" title="移动端    所有页面  的  【点赞】"></script>
+	<script src="/resource/m/js/pulldownscroll.js" title="移动端下拉 底部触发增加信息"></script>
 </body>
 </html>

@@ -1,0 +1,35 @@
+/*2018-10-26   19：28：21
+ HQS
+ 
+ 移动端  所有包含要 添加  标签的页面
+ * */
+
+.btn {display: inline-block;
+	  margin-bottom: 0; // For input.btn
+	  font-weight: @btn-font-weight;
+	  text-align: center;
+	  vertical-align: middle;
+	  touch-action: manipulation;
+	  cursor: pointer;
+	  background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+	  border: 1px solid transparent;
+	  white-space: nowrap;
+	  .button-size(@padding-base-vertical; @padding-base-horizontal; @font-size-base; @line-height-base; @btn-border-radius-base);
+	  .user-select(none);}
+.affirm{position: absolute;top: 0;right: 0;line-height: 34px;padding: 0 6px;
+    	color: #fff;border-radius: 3px;
+	    background-color: #5cb85c;
+    	border: 1px #4cae4c solid;}
+
+.sample:nth-of-type(1){background: #f4ebcc;color: #795636;}
+.sample:nth-of-type(2){background: #dff3ce;color: #4a7d1e;}
+.sample:nth-of-type(3){background: #deeaf6;color: #2a4467;}
+.sample:nth-of-type(4){background: #f4ebcc;color: #795636;}
+.sample{border: 1px #d8d2b8 solid;padding: 0px 2px;font-weight: 500;margin: 0 3px 3px 0;
+		font-size: 12px;text-align: center;display: inline-block;float: left;line-height: 20px;}
+.sample em img{display: inline-block;width: 11px;margin-left: 10px;}
+
+input#tag::-webkit-input-placeholder{font-size:8px;}
+input#tag:-moz-placeholder{font-size:8px;}
+input#tag::-moz-placeholder{font-size:8px;}
+input#tag:-ms-input-placeholder{font-size:8px;}

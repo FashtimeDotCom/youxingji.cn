@@ -13,7 +13,7 @@
     <script src="/resource/m/js/jquery.js"></script>
     <script src="/resource/m/js/lib.js"></script>
     <link rel="stylesheet" href="/resource/m/css/common.css" />
-    <link rel="stylesheet" href="/resource/m/css/commonList.css" />
+    <link rel="stylesheet" href="/resource/m/css/personalcenter.css" />
 </head>
 <body>
 	<div class="header">
@@ -33,27 +33,42 @@
 	            </form>
 	        </div>
 	    </div>
-	    <div class="ban">
-	        <div class="backdrop fix"><img src="{{$muser.cover}}" title="背景图" alt=""></div>
-	        <div class="head fix">
-	        	<div class="profilePhoto"><div class="gaine"><a class="box figure" style="background-image: url({{$muser.avatar}});"></a></div></div>
-	        	<p class="wx_name">{{$muser.username}}&nbsp;<a href="javascript:;" onclick="smg({{$muser.uid}})"><img class="icon_new1" src="/resource/m/images/common/icon_new1.png" /></a></p>
-	        	<p class="signature fix" title="个性签名">
-	        		<span class="icon_location1"></span>
-	        		<img class="icon_location2" src="/resource/m/images/common/icon_location1.png" />
-	        		<span class="autograph">{{$muser.city}}&nbsp;{{$muser.autograph}}</span>
+	    
+	    <div class="ban figure fix">
+	    	<div class="imgBg figure borderRadius bg_blur" style="background-image: url({{$user.cover}})"></div>
+	        <div class="message fix">
+	        	<div class="gaine figure" style="background-image: url({{$muser.avatar}});"></div>
+	        	<div class="rightBox">
+		        	<p class="wx_name">{{$muser.username}}</p>
+		        	<p class="location fix" title="定位"><img class="icon_location2" src="/resource/m/images/common/icon_location1.png" /><i>{{$muser.city}}</i></p>
+	        	</div>
+	        	<input type="hidden" name="synopsis" id="synopsis" value="{{$muser.autograph}}" />
+	        	<p class="intro fix" title="简介">
+	        		<span class="autograph"></span>
+	        		<span class="viewMore dis_none" data-open="0">查看全文</span>
 	        	</p>
-	        	<div class="bottom fix">
-	        		<p class="left"><span id="attention">{{$muser.uid|helper:'follownum'}}</span>关注</p>&nbsp;&nbsp;&nbsp;<p class="right"><span id="fans">{{$muser.uid|helper:'fansnum'}}</span>粉丝</p>
+	        	<div class="statistics fix">
+	        		<div class="left">
+	        			<div class="boxes">
+	        				<b class="attention">{{$muser.uid|helper:'follownum'}}</b>
+	        				<b>关注</b>
+	        			</div>
+	        			<div class="boxes">
+	        				<b class="fans">{{$muser.uid|helper:'fansnum'}}</b>
+	        				<b>粉丝</b>
+	        			</div>
+	        		</div>
+		        	<div class="right">
+		        		<button class="button private" onclick="smg({{$muser.uid}})">私信</button>
+		        		<button class="button attention" onclick="follows({{$muser.uid}},this)">{{$muser.uid|helper:'isfollows'}}</button>
+		        	</div>
 	        	</div>
 	        </div>
-	        <div class="attentionBtn fix">
-                <button class="guanzhu" onclick="follows({{$muser.uid}},this)">{{$muser.uid|helper:'isfollows'}}</button>
-            </div>
 	    </div>
-	    
-	    <input type="hidden" id="UniqueValue" data-sign="his" value="tv_num" title="共用JS区分的唯一必须值"/>
+
+	    <!--正文-->
 	    <input type="hidden" name="uid" id="uid" data-type="2" value="{{$muser.uid}}" />
+	    <input type="hidden" id="UniqueValue" data-sign="his" data-length="38" value="tv_num" title="共用JS区分的唯一必须值"/>
 	    <div class="row-TV minHeight">
 	        <div class="m-nv-yz">
 	            <div class="wp fix">
@@ -72,30 +87,37 @@
 	        		{{foreach from=$list item=item key=key}}
 					<div class="item fix item_{{$item.id}}">
 						<div class="wp fix">
-							<p class="videoTitle">{{$item.title}}</p>
-							<div class="date">{{$item.addtime}}</div>
-							<p class="videoDetails">{{$item.describes}}</p>
+							<a class="dis_block fix" href="/index.php?m=wap&c=index&v=tv_detail&id={{$item.id}}">
+								<p class="videoTitle">{{$item.title}}</p>
+								<div class="date">{{$item.addtime}}</div>
+								<p class="videoDetails">{{$item.describes}}</p>
+							</a>
 							<div class="preview fix">
-								<a href="#m-pop1-yz" class="pic js-video fix" data-src="{{$item.url}}">
-									<img src="{{$item.pics}}" alt="">
+								<span class="pic figure vessel borderRadius js-video fix" onclick="js_video(this)" data-src="{{$item.url}}" style="background-image: url({{$item.pics}});">
 									<span class="bo"></span>
-								</a>
+								</span>
 							</div>
 							<div class="videoBottom">
+								{{if $item.address}}
 								<span class="left"><img src="/resource/m/images/common/icon_location2.png" />{{$item.address}}</span>
+								{{/if}}
 								<p class="right">
-									<span class="check"><img src="/resource/m/images/common/icon_check.png" />{{$item.shownum}}</span>&nbsp;&nbsp;
-									<a class="zan" data-id="{{$item.id}}" href="javascript:;">
-										<span class="like"><img src="/resource/m/images/common/icon_like.png" /><i class="Iclass">{{$item.topnum}}</i></span>
-									</a>&nbsp;&nbsp;
-									<a class="Areview" href="javascript:;"><span class="review"><img src="/resource/m/images/common/icon_review.png" />0</span></a>
+									<span class="check"><img class="icon_check" src="/resource/m/images/common/icon_check.png" /><i class="Iclass">{{$item.shownum}}</i></span>&nbsp;&nbsp;
+									<span class="like zan" onclick="zan(this,{{$item.id}})" data-nature="list">
+										<img class="icon_like" src="/resource/m/images/common/icon_like.png" /><i class="Iclass">{{$item.topnum}}</i>
+									</span>&nbsp;&nbsp;
+									<span class="review">
+										<a class="widthHeight" href="/index.php?m=wap&c=index&v=tv_detail&id={{$item.id}}">
+											<img class="icon_review" src="/resource/m/images/common/icon_review.png" /><i class="Iclass">0</i>
+										</a>
+									</span>
 								</p>
 							</div>
-							<div class="pullDownMenu fix">
-								<img class="icon_pullDown" src="/resource/m/images/common/icon_pullDown.png" />
-								<div class="pullDownNav fix dis_none">
-									<a class="collect" href="javascript:;" onclick="collect({{$item.id}})"><span>收藏</span></a>
-									<a class="cancel" href="javascript:;"><span>取消</span></a>
+							<div class="IMGbox fix">
+								<div class="pullDownButton" onclick="pullDownButton(this)"></div>
+								<div class="menuOption fix dis_none">
+									<span class="collect" onclick="collect({{$item.id}})">收藏</span>
+									<span class="cancel">取消</span>
 								</div>
 							</div>
 						</div>
@@ -118,17 +140,19 @@
 	        {{/if}}
 	    </div>
 	    <div class="maskLayer dis_none" title="遮罩层，作用：下拉菜单失焦时，下拉菜单自动消失"></div>
+	    
 	    <!-- 视频弹窗 -->
-	    <div class="m-pop1-yz" id="m-pop1-yz">
-	        <div class="con conAmend">
-	            <iframe src='' name="myiframe" frameborder=0 'allowfullscreen' id="myiframe"></iframe>
-	            <div class="close js-close"><span></span></div>
-	        </div>
-	    </div>
+	    <div class="m-pop1-yz m_pop1_yz" id="m-pop1-yz">
+        	<div class="con"><div class="close js-close" onclick="js_close()"><span></span></div><div class="VideoArea"></div></div>
+        </div>
 	    <!-- end -->
 	</div>
 	{{include file='wap/footer.tpl'}}
 	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
-	<script src="/resource/m/js/common.js"></script>
+    <script type="text/javascript" src="/resource/m/js/jianjie.js" title="移动端    8个页面  的  【简介】"></script>
+    <script type="text/javascript" src="/resource/m/js/dianzan.js" title="移动端    所有页面  的  【点赞】"></script>
+	<script type="text/javascript" src="/resource/m/js/collect.js" title="移动端    所有页面  的 【  收藏、关注、私信】"></script>
+	<script type="text/javascript" src="/resource/m/js/opentv.js" title="移动端    所有页面  的  【打开、关闭视频】"></script>
+	<script src="/resource/m/js/pulldownscroll.js" title="移动端下拉 底部触发增加信息"></script>
 </body>
 </html>

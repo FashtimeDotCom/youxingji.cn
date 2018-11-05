@@ -143,7 +143,7 @@ class Controller_Wap_Index extends Core_Controller_WapAction
     public function indexAction()
     {
         //推荐达人
-        $tjstar = C::M('user_member')->field('uid,username,realname,headpic,city,autograph')->where("startop = 1")->order("uid desc")->select();
+        $tjstar = C::M('user_member')->field('uid,username,realname,headpic,city,autograph')->where("startop = 1")->order("sort ASC,uid desc")->select();
         foreach ($tjstar as $key => $value) {
             $tjstar[$key]['city'] =empty($value['city'])?'中国':$value['city'];
 //            $tjstar[$key]['autograph'] =Core_fun::cn_substr(strip_tags($value['autograph']),120,'...');
@@ -452,7 +452,7 @@ class Controller_Wap_Index extends Core_Controller_WapAction
     }
 
     //达人帮栏目
-    public function starAction()
+    public function old_starAction()
     { 
         $perpage = 10; 
         $keyword = htmlspecialchars($this->getParam('keyword'),ENT_QUOTES);
@@ -489,8 +489,81 @@ class Controller_Wap_Index extends Core_Controller_WapAction
         $this->display('wap/star.tpl');
     }
 
+    //达人日志栏目
+    public function starAction()
+    {
+        $perpage = 4;
+        $keyword = htmlspecialchars($this->getParam('keyword'),ENT_QUOTES);
+        $where = "status = 1";
+        if($keyword){
+            $where .= " and describes like '%$keyword%'";
+        }
+        $Num = C::M('travel')->where($where)->getCount();
+        $curpage = $this->getParam ('page') ? intval ($this->getParam ('page')) : 1;
+        $mpurl = "index.php?m=wap&c=index&v=star&keyword=$keyword";
+        $list = C::M('travel')->where($where)->order('addtime desc')->limit($perpage * ($curpage - 1), $perpage)->select();
+        foreach ($list as $key => $value) {
+//            C::M('travel')->where('id', $value['id'])->setInc('shownum', 1);
+            $list[$key]['content'] = json_decode($value['content']);
+            $list[$key]['picnum'] = count(json_decode($value['content']));
+            $list[$key]['addtime'] = date('Y-m-d H:i:s', $value['addtime']);
+        }
+        //推荐达人
+        $tjstar = C::M('user_member')->field('uid,username,autograph,headpic,tag')->where("weektop = 1")->order("rand()")->limit('0,1')->select();
+        if($tjstar){
+            $tjstar[0]['avatar'] = $tjstar[0]['headpic']?$tjstar[0]['headpic']:'/resource/images/img-lb2.png';
+            if( $tjstar[0]['tag'] ){
+                $tjstar[0]['tag']=explode("/",$tjstar[0]['tag']);
+            }
+            //以其最新一篇日志图片显示
+            $one_travel=C::M('travel')->field('id,content')->where("uid={$tjstar[0]['uid']} and status=1")->order('addtime desc')->limit(0,1)->find();
+            if( $one_travel ){
+                $img_list=json_decode($one_travel['content']);
+                $this->assign('img_list',$img_list);
+            }
+        }
+        //目的在
+        $tourismlist = C::M('tourism')->select();
+
+        $this->assign('tjstar', $tjstar);
+        $this->assign('list', $list);
+        $this->assign('num', $Num);
+        $this->assign('ns', 'star');
+        $this->assign ('keyword', $keyword);
+        $this->assign ('tourismlist', $tourismlist);
+        $this->display('wap/new_star.tpl');
+    }
+
+    //达人日志详情页
+    public function star_detailAction()
+    {
+        $id=$this->getParam("id");
+        if( !$id ){
+            $this->showmsg('无日志ID!', '/index.php?m=index&c=index&v=tv', 2);
+        }
+        $info=C::M('travel as a')->field('a.*,b.username,b.headpic,b.autograph')->join("##__user_member as b",'a.uid=b.uid','left')->where("id={$id} and status=1")->find();
+        if( !$info ){
+            $this->showmsg('日志不存在!', '/index.php?m=index&c=index&v=tv', 2);
+        }
+        $info['content']=json_decode($info['content']);
+        C::M('travel')->where('id', $id)->setInc('shownum', 1);
+
+        $type=1;//分类
+        $url="/index.php?m=wap&c=index&v=star_detail&id={$id}";
+        $page=$this->getParam("page")??1;
+        $perpage=5;
+        $this->pub_commentAction($id,$type,$url,$page,$perpage);
+
+        //跳转链接加密
+        $from_url=base64_encode($url);
+        $this->assign('from_url',$from_url);
+
+        $this->assign("info",$info);
+        $this->display("wap/star_detail.tpl");
+    }
+
     //tv栏目
-    public function tvAction()
+    public function old_tvAction()
     {
         $perpage = 12;
         //查询所有标签
@@ -536,6 +609,66 @@ class Controller_Wap_Index extends Core_Controller_WapAction
         $this->assign('tagslist', $tagslist);
         $this->assign ('multipage', $multipage);
         $this->display('wap/tv.tpl');
+    }
+
+    //新版达人视频
+    public function tvAction()
+    {
+        $perpage = 4;
+        $where = "status = 1";
+        $keyword = htmlspecialchars($this->getParam('keyword'),ENT_QUOTES);
+        if($keyword){
+            $where .= " and a.tags like '%$keyword%' ";
+        }
+        $Num = C::M('tv')->where($where)->getCount();
+        $curpage = $this->getParam ('page') ? intval ($this->getParam ('page')) : 1;
+        $list = C::M('tv as a')->field('a.*,b.username,b.headpic')->join('##__user_member as b','b.uid=a.uid','left')->where($where)->order('a.addtime desc')->limit($perpage * ($curpage - 1), $perpage)->select();
+        if( $list ){
+            foreach($list as $key=>$value){
+                $list[$key]['headpic']=$value['headpic']??'/resource/images/img-lb2.png';
+            }
+        }
+
+        //搜索条件
+        $key_list=C::M('tv_keyword')->where("status=1")->select();
+        $this->assign('key_list',$key_list);
+
+        $this->assign('list', $list);
+        $this->assign('ns', 'tv');
+        $this->assign('keyword', $keyword);
+        $this->assign('num', $Num);
+        $this->display('wap/new_tv.tpl');
+    }
+
+    //视频详情页
+    public function tv_detailAction()
+    {
+        $id=$this->getParam("id");
+        if( !$id ){
+            $this->showmsg('无视频ID!', '/index.php?m=index&c=index&v=tv', 2);
+        }
+        $info=C::M('tv as a')->field('a.*,b.username,b.headpic,b.autograph')->join("##__user_member as b",'a.uid=b.uid','left')->where("id={$id} and status=1")->find();
+        if( !$info ){
+            $this->showmsg('视频不存在!', '/index.php?m=index&c=index&v=tv', 2);
+        }
+        C::M('tv')->where('id', $id)->setInc('shownum', 1);
+
+        //获取用户相关的视频
+        $tv_list=C::M("tv")->field('id,title,pics,url,addtime')->where("status=1 and id <> {$id} and istop=1")->order("id desc")->limit(0,4)->select();
+
+        $type=2;//分类
+        $url="/index.php?m=wap&c=index&v=tv_detail&id={$id}";
+        $page=$this->getParam("page")??1;
+        $perpage=5;
+        $this->pub_commentAction($id,$type,$url,$page,$perpage);
+
+        //跳转链接加密
+        $from_url=base64_encode($url);
+        $this->assign('from_url',$from_url);
+
+        $this->assign("info",$info);
+        $this->assign("tv_list",$tv_list);
+        $this->display('wap/tv_detail.tpl');
     }
 
     //招募
@@ -657,24 +790,20 @@ class Controller_Wap_Index extends Core_Controller_WapAction
         $tjlist = C::M('ryt')->where("istop = 1")->order("shownum desc")->limit('0,10')->select();
 
         //评论
-        $perpage = 5;
-        $Num = C::M('comment')->where("status = 1 and rid = $id")->getCount();
-        $curpage = $this->getParam ('page') ? intval ($this->getParam ('page')) : 1;
-        $mpurl = "index.php?m=wap&c=index&v=rytdetai&id=$id";
-        $multipage = $this->multipages ($Num, $perpage, $curpage, $mpurl);
-        $comment = C::M('comment')->where("status = 1 and rid = $id")->order('id asc')->limit($perpage * ($curpage - 1), $perpage)->select();
-        foreach ($comment as $key => $value) {
-            $comment[$key]['lou'] = $curpage * $perpage + $key - 4;
-            $comment[$key]['content'] = Core_Fun::ubbreplace($value['content']);
-            $comment[$key]['addtime'] = date('Y-m-d H:i', $value['addtime']);
-        }
+        $type=3;//分类
+        $url="/index.php?m=wap&c=index&v=rytdetai&id={$id}";
+        $page=$this->getParam("page")??1;
+        $perpage=5;
+        $this->pub_commentAction($id,$type,$url,$page,$perpage);
+
+        //跳转链接加密
+        $from_url=base64_encode($url);
+        $this->assign('from_url',$from_url);
 
         $this->assign('ns', 'ryt');
         $this->assign('tjryt', $tjryt);  
         $this->assign('tjlist', $tjlist);  
-        $this->assign('article', $article);  
-        $this->assign('comment', $comment);  
-        $this->assign('multipage', $multipage);  
+        $this->assign('article', $article);
         $this->display('wap/rytdetai.tpl');
     }
 
@@ -855,6 +984,13 @@ class Controller_Wap_Index extends Core_Controller_WapAction
             $this->showmsg('', 'index.php?m=wap&c=user&v=index', 0);
             exit;
         }
+
+        $from_url=$this->getParam('from');
+        if( $from_url && !empty($from_url) ){
+            $from_url=base64_decode($from_url);
+            $this->assign("from_url",$from_url);
+        }
+
         $this->assign('ns', 'login');
         $this->display('wap/login.tpl');
     }
@@ -1232,6 +1368,49 @@ class Controller_Wap_Index extends Core_Controller_WapAction
         $this->assign('info',$info);
         $this->assign("comments",$comments);
         $this->display('wap/user/note_detail.tpl');
+    }
+
+    /*
+     * 评论公共方法
+     * 参数：
+     *  id:对应ID
+     *  type:分类//1-日志 2-视频 3-游记 4-达人问答
+     *  url:跳转链接
+     *  curpage:当前页
+     *  perpage:每页页数
+     * */
+    public function pub_commentAction($id,$type,$url,$curpage=1,$perpage=5)
+    {
+        //评论
+        //获取总数
+        $Num = C::M('comment')->where("rid={$id} and type={$type} and pid=0")->getCount();
+        $limit = $perpage * ($curpage - 1) . "," . $perpage;
+        $mpurl = $url;
+        $multipage = $this->multipages ($Num, $perpage, $curpage, $mpurl);
+        $comment=C::M("comment as a ")->field('a.*,b.headpic,b.username')->join("##__user_member as b","a.uid=b.uid","left")->where("rid={$id} and type={$type} and pid=0")->order("addtime DESC")->limit($limit)->select();
+        $joins=array(
+            array('##__user_member as b','a.uid=b.uid','left'),
+            array('##__user_member as c','a.touid=c.uid','left')
+        );
+        foreach ($comment as $key => $value) {
+            $comment[$key]['headpic']=empty($value['headpic'])?'resource/images/img-lb2.png':$value['headpic'];
+            $comment[$key]['lou'] = $curpage * $perpage + $key - 4;
+            $comment[$key]['content'] = Core_Fun::ubbreplace($value['content']);
+            $comment[$key]['addtime'] = date('Y-m-d H:i', $value['addtime']);
+            //查找对应一级节点的子评论，子子评论。一般只有三级结构,二级三级显示都是同一级显示
+            $son=array();
+            $son=C::M('comment as a')->field("a.*,b.username,c.username as to_username")->joins($joins)->where("rid={$id} and type={$type} and pid={$value['id']}")->order('id ASC')->select();
+            if( $son ){
+                foreach( $son as $k=>$val ){
+                    $son[$k]['content']=Core_Fun::ubbreplace($val['content']);
+                }
+                $comment[$key]['sub']=$son;
+                unset($son);
+            }
+            $comment[$key]['count']=count($comment[$key]['sub']);
+        }
+        $this->assign('comment', $comment);
+        $this->assign('multipage', $multipage);
     }
 
 

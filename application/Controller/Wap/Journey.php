@@ -45,6 +45,11 @@ class Controller_Wap_Journey extends Core_Controller_WapAction
         $this->display("wap/journey/journey_list.tpl");
     }
 
+    public function new_indexAction()
+    {
+        $this->display("wap/journey/new_index.tpl");
+    }
+
 
 
 }

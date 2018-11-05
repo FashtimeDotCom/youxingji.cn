@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-10-14 17:04:42
+<?php /* vpcvcms compiled created on 2018-10-22 17:30:42
          compiled from wap/user/addtravel.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -399,10 +399,10 @@ unset($_smarty_tpl_vars);
 						layer.msg('请输入描述');
 						return false;
 					}
-//					if(!me.datas.imgsrc[0]) {
-//						layer.msg('请上传图片');
-//						return false;
-//					}
+					if(!me.datas.imgsrc[0]) {
+						layer.msg('请上传图片');
+						return false;
+					}
 					if(!$("input[type='checkbox']").is(':checked')) {
 						layer.msg('请选择服务协议');
 						return false;

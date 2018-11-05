@@ -8,19 +8,15 @@
 .myfile .note_bg{display: block;width: 100%;height: 100%; position: relative;z-index: 1;}
 .myfile .buttonTier{position: absolute;top: 0;left: 0;right: 0;bottom: 0;z-index: 2;}
 
-.paddingNum{padding-top: 19%;}
+.paddingNum{padding-top: 15%;}
 
 .myfile .buttonTier .lump{width: 100%;}
 .myfile .buttonTier .lump .note_add{display: block;float: left;width: 40px;margin-right: 3px;}
 .myfile .buttonTier .lump span{color: #fff;text-align: left;display: block;width: 100%;}
 .myfile .buttonTier .lump .title{font-size: 14px;margin-bottom: 4px;}
-.myfile .buttonTier .lump .tips{width: 110%;}
+.myfile .buttonTier .lump .tips{width: 98%;}
 .lump .layui-upload-button{opacity: 0;height: 0;border: none;background: transparent;display: block;}
 
-input#tag::-webkit-input-placeholder{font-size:8px;}
-input#tag:-moz-placeholder{font-size:8px;}
-input#tag::-moz-placeholder{font-size:8px;}
-input#tag:-ms-input-placeholder{font-size:8px;}
 
 /*5.5英寸   414*736尺寸的屏幕  如iPhone6 Plus、iPhone6s Plus、iPhone7 Plus、魅族MX5    1920x1080  /3★*/
 @media only screen and (max-width: 414px) {

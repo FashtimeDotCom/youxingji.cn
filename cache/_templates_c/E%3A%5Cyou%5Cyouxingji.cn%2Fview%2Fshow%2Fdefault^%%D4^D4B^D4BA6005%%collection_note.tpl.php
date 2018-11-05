@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-10-14 19:45:28
+<?php /* vpcvcms compiled created on 2018-11-02 10:32:48
          compiled from wap/user/collection_note.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -17,7 +17,7 @@
     <script src="/resource/m/js/jquery.js"></script>
     <script src="/resource/m/js/lib.js"></script>
     <link rel="stylesheet" href="/resource/m/css/common.css" />
-    <link rel="stylesheet" href="/resource/m/css/commonList.css" />
+    <link rel="stylesheet" href="/resource/m/css/personalcenter.css" />
 </head>
 <body>
 	<div class="header">
@@ -42,6 +42,7 @@ unset($_smarty_tpl_vars);
 	        </div>
 	    </div>
 	    
+	    <!--正文-->
 	    <div class="row-TV minHeight">
 	        <div class="m-nv-yz">
 	            <div class="wp fix">
@@ -58,7 +59,7 @@ unset($_smarty_tpl_vars);
             <input type="hidden" name="type" id="note_num" title="总数" value="<?php echo $this->_tpl_vars['total']['note_num']; ?>
 "/>
 	        <?php if ($this->_tpl_vars['list']): ?>
-	        <div class="m-mytv-yz" id="pageCount" data-page="" data-nowPage="1">
+	        <div class="m-mytv-yz notes" id="pageCount" data-page="" data-nowPage="1">
 	        	<div class="content fix">
 	        		<?php $_from = $this->_tpl_vars['list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
     foreach ($_from as $this->_tpl_vars['key'] => $this->_tpl_vars['item']):
@@ -71,11 +72,12 @@ unset($_smarty_tpl_vars);
 							<div class="date">null</div>
 							<a href="javascript:;" class="dis_block fix"><p class="videoDetails" style="color: red;">:)抱歉，此问答已被作者删除!</p></a>
 							<?php else: ?>
-							<p class="videoTitle"><?php echo $this->_tpl_vars['item']['title']; ?>
+							<a class="dis_block fix" href="/index.php?m=wap&c=index&v=rytdetai&id=<?php echo $this->_tpl_vars['item']['id']; ?>
+">
+								<p class="videoTitle"><?php echo $this->_tpl_vars['item']['title']; ?>
 </p>
-							<div class="date"><?php echo $this->_tpl_vars['item']['addtime']; ?>
+								<div class="date"><?php echo $this->_tpl_vars['item']['addtime']; ?>
 </div>
-							<a href="javascript:;" class="dis_block fix">
 								<p class="videoDetails"><?php echo $this->_tpl_vars['item']['desc']; ?>
 </p>
 								<div class="preview fix"><img src="<?php echo $this->_tpl_vars['item']['thumbfile']; ?>
@@ -83,8 +85,10 @@ unset($_smarty_tpl_vars);
 							</a>
 
 							<div class="videoBottom fix">
+								<?php if ($this->_tpl_vars['item']['address']): ?>
 								<span class="left"><img src="/resource/m/images/common/icon_location2.png" /><?php echo $this->_tpl_vars['item']['address']; ?>
 </span>
+								<?php endif; ?>
 								<?php if ($this->_tpl_vars['item']['tag']): ?>
 									<?php $_from = $this->_tpl_vars['item']['tag']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
     foreach ($_from as $this->_tpl_vars['k'] => $this->_tpl_vars['vo']):
@@ -96,23 +100,28 @@ unset($_smarty_tpl_vars);
 									<?php endforeach; endif; unset($_from); ?>
 								<?php endif; ?>
 								<p class="right">
-									<span class="check"><img src="/resource/m/images/common/icon_check.png" /><?php echo $this->_tpl_vars['item']['show_num']; ?>
-</span>&nbsp;&nbsp;
-									<a class="zan" data-id="<?php echo $this->_tpl_vars['item']['id']; ?>
-" data-num="<?php echo $this->_tpl_vars['item']['top_num']; ?>
-" href="javascript:;">
-										<span class="like"><img src="/resource/m/images/common/icon_like.png" /><i class="Iclass"><?php echo $this->_tpl_vars['item']['top_num']; ?>
-</i></span>
-									</a>&nbsp;&nbsp;
-									<a class="Areview" href="javascript:;"><span class="review"><img src="/resource/m/images/common/icon_review.png" />0</span></a>
+									<span class="check"><img class="icon_check" src="/resource/m/images/common/icon_check.png" /><i class="Iclass"><?php echo $this->_tpl_vars['item']['show_num']; ?>
+</i></span>&nbsp;&nbsp;
+									<span class="like zan" onclick="zan(this,<?php echo $this->_tpl_vars['item']['id']; ?>
+)" data-nature="list">
+										<img class="icon_like" src="/resource/m/images/common/icon_like.png" /><i class="Iclass"><?php echo $this->_tpl_vars['item']['top_num']; ?>
+</i>
+									</span>&nbsp;&nbsp;
+									<span class="review">
+										<a href="/index.php?m=wap&c=index&v=rytdetai&id=<?php echo $this->_tpl_vars['item']['id']; ?>
+">
+											<img class="icon_review" src="/resource/m/images/common/icon_review.png" /><i class="Iclass">0</i>
+										</a>
+									</span>
 								</p>
 							</div>
 							<?php endif; ?>
-							<div class="pullDownMenu fix">
-								<img class="icon_pullDown" src="/resource/m/images/common/icon_pullDown.png" />
-								<div class="pullDownNav fix dis_none">
-									<a class="collect deleteInfo" href="javascript:;" data-id="<?php echo $this->_tpl_vars['item']['id']; ?>
-"><span>删除</span></a>
+							<div class="IMGbox fix">
+								<div class="pullDownButton" onclick="pullDownButton(this)"></div>
+								<div class="menuOption fix dis_none">
+									<span class="collect deleteInfo" data-id="<?php echo $this->_tpl_vars['item']['id']; ?>
+">删除</span>
+									<span class="cancel">取消</span>
 								</div>
 							</div>
 						</div>
@@ -141,12 +150,8 @@ $this->_smarty_include(array('smarty_include_tpl_file' => 'wap/footer.tpl', 'sma
 $this->_tpl_vars = $_smarty_tpl_vars;
 unset($_smarty_tpl_vars);
  ?>
-	
-	<!-- 弹窗 -->
-    <link rel="stylesheet" type="text/css" href="/resource/m/css/jquery.fancybox.css" media="screen" />
-    <script type="text/javascript" src="/resource/m/js/jquery.fancybox.js"></script>
-    
 	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
-	<script src="/resource/m/js/common.js"></script>
+    <script type="text/javascript" src="/resource/m/js/dianzan.js" title="移动端    所有页面  的  【点赞】"></script>
+	<script src="/resource/m/js/pulldownscroll.js" title="移动端下拉到底部触发更新增加信息JS函数集合"></script>
 </body>
 </html>

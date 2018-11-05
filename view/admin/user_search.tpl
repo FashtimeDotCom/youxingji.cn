@@ -48,8 +48,8 @@
             <th class="tdl">帐号</th>
             <th>姓名</th>
             <th>用户组</th>
-            <th>Email</th>
-            <th>注册 IP</th>
+            <th>排序</th>
+            <th>标签</th>
             <th>注册时间</th>
             <th>练习生</th>
           	<th>本周推荐</th>
@@ -69,8 +69,8 @@
                 <td class="tdl"><a href="javascript:void(0);" onclick="Controller.controller('修改用户', 'admin/user/edit/uid/{{$user.uid}}')">{{$user.username}}</a></td>
                 <td>{{$user.realname}}</td>
                 <td>{{$usergroups[$user.gid].title}}</td>
-                <td>{{$user.email}}</td>
-                <td>{{$user.regip}}</td>
+                <td>{{$user.sort}}</td>
+                <td>{{$user.tag}}</td>
                 <td>{{$user.regtime|idate:"Y-m-d"}}</td>
                 <td class="tdl">
                     <input type="checkbox" name="trainee[{{$user.uid}}]" value="1"{{if $user.trainee}} checked{{/if}} />
@@ -115,4 +115,6 @@
         </tr>
     </table>
 {{/if}}
+
+
 {{include file="admin/footer.tpl"}}

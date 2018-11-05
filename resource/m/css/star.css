@@ -1,0 +1,92 @@
+/*
+ 2018-10-25  11:25:08
+ HQS
+ 
+ 达人日志、达人视频   、日志详情、视频详情、达人视频-热门视频
+ * */
+
+.title{padding-left: 12px;background-position: left center;background-repeat: no-repeat;font-size: 16px;
+				font-weight: normal;color: #333;line-height: 1.1em;-webkit-background-size: 4px auto;border-left: 4px #D71617 solid;
+				background-size: 4px auto;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+.portrait{border-radius: 50%;}
+.intro{text-align: justify;line-height: 18px;}
+.tagList{text-align: center;}
+.tagList span{color: #d71618;border: 1px #d71618 solid;padding: 0px 4px;border-radius: 2px;font-weight: 600;margin-left: 4px;}
+
+.sketch{border-bottom: 1px #f2f2f5 solid;border-top: 1px #f2f2f5 solid;padding: 8px 0;}
+.sketch .left{float: left;margin-right: -36px;}
+.sketch .middle{padding-left: 44px;padding-right: 20px;float: left;width: 100%;}
+.sketch .middle .preview{display: block;float: left;width: 17%;padding-bottom: 17%;border-radius: 0;margin-right: 3%;}
+.sketch .middle .preview:last-child{margin-right: 0;}
+.sketch .right{display: block;float: right;width: 15px;margin-left: -15px;}
+.sketch .right img{width: 15px;height: 15px;border-radius:0;vertical-align: middle;display: inline-block;}
+
+
+
+.quiz{background: #ce0b0d;color: #fff;font-size: 1.3rem;text-align: center;display: block;
+			border-radius: 3px;line-height: 30px;width: 100%;margin: 10px auto;}
+
+.notice{border-bottom: 1px #f2f2f5 solid;}
+
+.row-list{padding-bottom: 29px;}
+.nanCut{background: #fff;padding: 0 10px;}
+.nanCut span{line-height: 32px;font-size: 1.2rem;display: block;color: #333333;float: left;margin-right: 20px;}
+.nanCut .onn{color: #d71618;border-bottom: 2px #d71618 solid;}
+		/*点击日志，图片弹窗  发现并没有完全显示*/
+.jquery-lightbox-mode-image{height: auto!important;}
+
+.row_list{margin: 0 auto;background: #fff;}
+.ul-list-talent .item{border: none;padding-left: 0;padding-right: 0;position: relative;}
+.ul-list-talent .tx .pic{width: 40px;height: 40px;}
+.ul-list-talent h5 span{font-size: 17px;color: #333;display: block;font-weight: normal;line-height: 22px;}
+.ul-list-talent .time{line-height: 22px;color: #9d9d9d;font-size: 12px;}
+
+.ul-list-talent .txt{margin-top: 5px;}
+.ul-list-talent .txt p{line-height: 20px;text-align: justify;}
+
+.botton{float: right;border: 1px #f33b3b solid;color:#fff;background: #f33b3b; padding: 0px 4px;font-style: initial;line-height: 20px; margin-top: -10px;font-size: 0.75rem;}
+.botton b{display: inline-block;line-height: 20px;}
+
+
+.videoBottom img{display: inline-block;margin-right: 0.2rem;}
+.videoBottom span{font-size: 0.75rem;color: #666;line-height: 24px;}
+
+.videoBottom .left{display: block;height: 20.8px;line-height: 20.8px;}
+.videoBottom .left img{width: 10px;vertical-align: middle;}
+
+.videoBottom .right{line-height: 24px;float: left;}
+.videoBottom .right img{vertical-align: sub;width: 12px;}
+.videoBottom .right i{display: inline-block; line-height: 24px;font-style: normal;}
+
+.IMGbox{float: right;width: 3.5rem;position: relative;z-index: 2;}
+.IMGbox .pullDownButton{display: block;width: 3.5rem;;height: 3.5rem;; float: right;
+						background: url(/resource/m/images/icon_nav.png) no-repeat center center / 60%;}
+.IMGbox .menuOption{background: #fff;border: 1px #ccc solid;border-radius: 2px;z-index: 2;
+					width: 36px;margin-top: -7rem;margin-left: -4px;position: relative;float: left;}
+.IMGbox .menuOption span{display: block;text-align: center;padding: 2px 0;font-size: 0.8rem;}
+.IMGbox .menuOption .collect{color: #d71618;background: #f2f2f5;}
+
+
+@media only screen and (max-width: 414px) {
+	.vessel{min-height: 714px;}
+}
+/*5.96英寸  412*732尺寸的屏幕  如谷歌Nexus 6   2K 2560x1440  /3.5★*/
+@media only screen and (max-width: 412px) {
+	.vessel{min-height: 714px;}
+}
+/*5.2英寸   411*731尺寸的屏幕  如 谷歌Nexus 5x   1920x1080  /2.625★*/
+@media only screen and (min-width: 376px) and (max-width: 411px) {
+	.vessel{min-height: 714px;}
+}
+/*4.7英寸   375*667尺寸的屏幕  如iPhone6、iPhone7、iPhone 6s   1334x750*/
+@media only screen and (min-width: 361px) and (max-width: 375px) {
+	.vessel{min-height: 500px;}
+}
+/*4.95英寸  360*640尺寸的屏幕  如 谷歌Nexus 5    1920x1080 /3★ */
+@media only screen and (min-width: 321px) and (max-width: 360px) {
+	.vessel{min-height: 450px;}
+}
+/*4.0英寸   320*568尺寸的屏幕  如iPhone5、iPhone SE   1136x640*/
+@media only screen and (max-width: 320px) {
+	.vessel{min-height: 400px;}
+}

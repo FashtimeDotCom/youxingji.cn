@@ -17,8 +17,7 @@
         .write a{display:inline-block;background-repeat:no-repeat;-webkit-transition:.3s;-o-transition:.3s;transition:.3s}
     </style>
 </head>
-
-<body class="">
+<body>
     <div class="header">
         {{include file='wap/header.tpl'}}
         <h3>我的旅拍TV</h3>
@@ -37,13 +36,10 @@
             </div>
         </div>
         <div class="ban">
-            <a href="">
-                <img src="{{$user.cover}}" alt="">
-            </a>
+            <a href=""><img src="{{$user.cover}}" alt=""></a>
             <div class="m-user">
                 <i style="background: url({{$user.avatar}}) no-repeat center center; background-size: cover; border-radius: 50%;"></i>
-                <dl>
-                    <dd><a href="/index.php?m=wap&c=user&v=addtravel">发布日志</a></dd>
+                <dl><dd><a href="/index.php?m=wap&c=user&v=addtravel">发布日志</a></dd>
                     <dd><a href="/index.php?m=wap&c=user&v=addtv">发布视频</a></dd>
                     <dd><a href="/index.php?m=wap&c=user&v=follow">我的关注</a></dd>
                     <dd><a href="/index.php?m=wap&c=user&v=msg">我的私信</a></dd>
@@ -56,8 +52,7 @@
         <div class="row-TV">
             <div class="m-nv-yz">
                 <div class="wp">
-                    <ul>
-                        <li><a href="/index.php?m=wap&c=user&v=travel">我的日志</a></li>
+                    <ul><li><a href="/index.php?m=wap&c=user&v=travel">我的日志</a></li>
                         <li><a href="/index.php?m=wap&c=user&v=album">我的相册</a></li>
                         <li class="on"><a href="/index.php?m=wap&c=user&v=tv">我的视频</a></li>
                         <li><a href="/index.php?m=wap&c=user&v=draft">草稿箱</a></li>
@@ -65,26 +60,22 @@
                 </div>
             </div>
             <ul class="ul-txtlist-yz">
-                <li>
-                    <a href="/index.php?m=wap&c=user&v=addtravel">
+                <li><a href="/index.php?m=wap&c=user&v=addtravel">
                         <i style="background-image: url(/resource/m/images/s-i1.png);"></i>
                         <div class="txt">发布日志</div>
                     </a>
                 </li>
-                <li>
-                    <a href="/index.php?m=wap&c=user&v=addtv">
+                <li><a href="/index.php?m=wap&c=user&v=addtv">
                         <i style="background-image: url(/resource/m/images/s-i2.png);"></i>
                         <div class="txt">发布视频</div>
                     </a>
                 </li>
-                <li>
-                    <a href="/index.php?m=wap&c=user&v=follow">
+                <li><a href="/index.php?m=wap&c=user&v=follow">
                         <i style="background-image: url(/resource/m/images/s-i3.png);"></i>
                         <div class="txt">我的关注</div>
                     </a>
                 </li>
-                <li>
-                    <a href="/index.php?m=wap&c=user&v=fans">
+                <li><a href="/index.php?m=wap&c=user&v=fans">
                         <i style="background-image: url(/resource/m/images/s-i4.png);"></i>
                         <div class="txt">我的粉丝</div>
                     </a>
@@ -99,7 +90,7 @@
                         <ul class="ul-pic1-yz ul-pic1-yz2">
                             {{foreach from=$vo.list item=v}}
                             <li class="tv_t{{$v.id}}" style="position: relative;">
-                                <a href="#m-pop1-yz" class="pic js-video" data-src="{{$v.url}}"  data-id="{{$v.id}}">
+                                <a href="javascript:;" class="pic js-video" data-src="{{$v.url}}"  data-id="{{$v.id}}">
                                     <img src="{{$v.pics}}" alt="">
                                     <span class="bo"></span>
                                     <span class="txt">{{$v.title}}</span>
@@ -126,32 +117,15 @@
             </div>
             {{/if}}
         </div>
+        
         <!-- 视频弹窗 -->
-        <div class="m-pop1-yz" id="m-pop1-yz">
-            <div class="con">
-                <iframe src='' frameborder=0 'allowfullscreen'></iframe>
-                <div class="close js-close"><span></span></div>
-            </div>
-        </div>
+        <div class="m-pop1-yz" id="m-pop1-yz"><div class="con"><div class="close js-close"><span></span></div></div></div>
         <!-- end -->
     </div>
     {{include file='wap/footer.tpl'}} 
     <script src="/resource/js/layui/lay/dest/layui.all.js"></script>
     <script type="text/javascript">
-        $('.js-video').click(function(event) {
-            var _id = $(this).attr("href");
-            var _src = $(this).attr("data-src");
-
-            $(_id).find("iframe").attr("src", _src);
-            $(_id).fadeIn();
-        });
-        $('.js-close').click(function(event) {
-            $(this).parents('.m-pop1-yz').fadeOut();
-            $(this).parents('#m-pop1-yz').find("iframe").attr("src", "");
-            event.stopPropagation();
-        });
-        function deleteTv(id)
-        {
+        function deleteTv(id){
             layer.msg('您确定要删除吗？', {
                 btn: ['确认', '取消'],
                 yes: function (index) {
@@ -167,6 +141,6 @@
             });
         }
     </script>
+    <script type="text/javascript" src="/resource/m/js/opentv.js" title="移动端    所有页面  的  【打开、关闭视频】"></script>
 </body>
-
 </html>

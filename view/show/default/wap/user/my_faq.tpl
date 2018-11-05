@@ -13,13 +13,7 @@
     <script src="/resource/m/js/jquery.js"></script>
     <script src="/resource/m/js/lib.js"></script>
     <link rel="stylesheet" href="/resource/m/css/common.css" />
-    <link rel="stylesheet" href="/resource/m/css/commonList.css" />
-    <style type="text/css">
-    	.m-mytv-yz .item .videoTitle{color: #333;}
-    	.m-mytv-yz .item .videoDetails{color: #666;}
-    	.m-mytv-yz .item .videoTitle .view{display: inline-block;width: 7%;margin-right: 6px;vertical-align: -3px;}
-		.m-mytv-yz .item .videoTitle .view img{width: 100%;}
-    </style>
+    <link rel="stylesheet" href="/resource/m/css/personalcenter.css" />
 </head>
 <body>
 	<div class="header">
@@ -39,21 +33,38 @@
 	            </form>
 	        </div>
 	    </div>
-	    <div class="ban">
-	        <a class="backdrop fix" href=""><img src="{{$user.cover}}" title="背景图" alt=""></a>
-	        <div class="head fix">
-	        	<div class="profilePhoto"><div class="gaine"><a class="box figure" style="background-image: url({{$user.avatar}});"></a></div></div>
-	        	<p class="wx_name">{{$user.username}}</p>
-	        	<p class="signature fix" title="个性签名">
-	        		<span class="icon_location1"></span>
-	        		<img class="icon_location2" src="/resource/m/images/common/icon_location1.png" />
-	        		<span class="autograph">{{$user.city}}&nbsp;{{$user.autograph}}</span>
+	    
+	    <div class="ban figure fix">
+	    	<div class="imgBg figure borderRadius bg_blur" style="background-image: url({{$user.cover}})"></div>
+	        <div class="message fix">
+	        	<div class="gaine figure" style="background-image: url({{$user.avatar}});"></div>
+	        	<div class="rightBox">
+		        	<p class="wx_name">{{$user.username}}</p>
+		        	<p class="location fix" title="定位"><img class="icon_location2" src="/resource/m/images/common/icon_location1.png" /><i>{{$user.city}}</i></p>
+	        	</div>
+	        	
+	        	<input type="hidden" name="synopsis" id="synopsis" value="{{$user.autograph}}" />
+	        	<p class="intro fix" title="简介">
+	        		<span class="autograph"></span>
+	        		<span class="viewMore dis_none" data-open="0">查看全文</span>
 	        	</p>
-	        	<div class="bottom fix">
-	        		<p class="left"><span id="attention">{{$user.uid|helper:'follownum'}}</span>关注</p>&nbsp;&nbsp;&nbsp;<p class="right"><span id="fans">{{$user.uid|helper:'fansnum'}}</span>粉丝</p>
+	        	<div class="statistics fix">
+	        		<div class="left">
+	        			<div class="boxes">
+	        				<b class="attention">{{$user.uid|helper:'follownum'}}</b>
+	        				<b>关注</b>
+	        			</div>
+	        			<div class="boxes">
+	        				<b class="fans">{{$user.uid|helper:'fansnum'}}</b>
+	        				<b>粉丝</b>
+	        			</div>
+	        		</div>
 	        	</div>
 	        </div>
 	    </div>
+	    
+	    <!--正文-->
+	    <input type="hidden" id="UniqueValue" data-sign="my" data-length="38" value="faq_num" title="共用JS区分的唯一必须值"/>
 	    <div class="row-TV minHeight">
 	        <div class="m-nv-yz">
 	            <div class="wp fix">
@@ -66,9 +77,8 @@
 	            </div>
 	        </div>
 	        
-	        <input type="hidden" id="UniqueValue" data-sign="my" value="faq_num" title="共用JS区分的唯一必须值"/>
 	        {{if $list}}
-	        <div class="m-mytv-yz" id="pageCount" data-page="" data-nowPage="1">
+	        <div class="m-mytv-yz issue" id="pageCount" data-page="" data-nowPage="1">
 	        	<div class="content fix">
 	        		{{foreach from=$list item=item key=key}}
 					<div class="item fix item_{{$item.id}}">
@@ -77,22 +87,27 @@
 							<a class="dis_block fix" href="/index.php?m=wap&c=faq&v=detail&id={{$item.id}}">
 								<p class="videoDetails omit lineNumber4">{{$item.desc}}</p>
 								<div class="videoBottom fix">
-									<span class="left"><img src="/resource/m/images/common/icon_location2.png" />{{$item.address}}</span>
+									{{if $item.address}}
+									<span class="left"><img src="/resource/m/images/common/icon_location1.png" /><h4>{{$item.address}}</h4></span>
+									{{/if}}
 									{{if $item.label}}
 										{{foreach from=$item.label key=k item=vo }}
 											{{if $k <1}}
-												<span class="left tag">{{$vo}}</span>
+									<span class="left tag">{{$vo}}</span>
 											{{/if}}
 										{{/foreach}}
 									{{/if}}
-									<p class="right"><span class="check">{{$user.username}}问于&nbsp;{{$item.addtime}}</span></p>
+									<div class="divRight">
+										<span class="check">{{$muser.username}}问于</span>
+										<span class="check">{{$item.addtime}}</span>
+									</div>
 								</div>
 							</a>
-							<div class="pullDownMenu fix">
-								<img class="icon_pullDown" src="/resource/m/images/common/icon_pullDown.png" />
-								<div class="pullDownNav fix dis_none">
-									<a class="collect deleteInfo" href="javascript:;" data-id="{{$item.id}}"><span>删除</span></a>
-									<a class="cancel" href="javascript:;"><span>取消</span></a>
+							<div class="IMGbox fix">
+								<div class="pullDownButton" onclick="pullDownButton(this)"></div>
+								<div class="menuOption fix dis_none">
+									<span class="collect deleteInfo" data-id="{{$item.id}}">删除</span>
+									<span class="cancel">取消</span>
 								</div>
 							</div>
 						</div>
@@ -121,6 +136,7 @@
 	</div>
 	{{include file='wap/footer.tpl'}}
 	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
-	<script src="/resource/m/js/common.js"></script>
+    <script type="text/javascript" src="/resource/m/js/jianjie.js" title="移动端    8个页面  的  【简介】"></script>
+	<script src="/resource/m/js/pulldownscroll.js" title="移动端下拉 底部触发增加信息"></script>
 </body>
 </html>

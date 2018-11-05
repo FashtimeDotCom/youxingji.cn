@@ -305,7 +305,7 @@
 				<div class="swiper-wrapper">
 					{{foreach from=$tv item=v}}
 					<div class="swiper-slide">
-						<a href="#m-pop1-yz" class="js-video" data-src="{{$v.url}}" data-id="{{$v.id}}">
+						<a href="javascript:;" class="js-video" data-src="{{$v.url}}" data-id="{{$v.id}}">
 							<div class="pic">
 								<img src="{{$v.pics}}" alt="">
 								<div class="txt">
@@ -386,19 +386,18 @@
 				</div>
 			</div>
 		</div>
-		<div class="m-pop1-yz" id="m-pop1-yz">
-			<div class="con">
-				<iframe src='' frameborder=0 'allowfullscreen'></iframe>
-				<div class="close js-close"><span></span></div>
-			</div>
-		</div>
+        
+        <!-- 视频弹窗 -->
+        <div class="m-pop1-yz m_pop1_yz" id="m-pop1-yz"><div class="con"><div class="close js-close"><span></span></div></div></div>
+        <!-- end -->
+        
 		<a href="http://p.qiao.baidu.com/cps/chat?siteId=11959315&userId=25533377" class="g-consultation"><i></i>免费咨询</a>
 	</div>
 	{{include file='wap/footer.tpl'}}
 	<link rel="stylesheet" type="text/css" href="/resource/m/css/swiper.css" />
 	<script type="text/javascript" src="/resource/m/js/swiper.js"></script>
 	<script>
-		var swiper = new Swiper('.banner', {
+		var swiper1 = new Swiper('.banner', {
 			slidesPerView: 1,
 			loop: true,
 			pagination: {
@@ -411,7 +410,7 @@
 				disableOnInteraction: true,
 			}
 		});
-		var swiper = new Swiper('.m-imgtxt1', {
+		var swiper2 = new Swiper('.m-imgtxt1', {
 			slidesPerView: 'auto',
 			centeredSlides: true,
 			initialSlide: 1,
@@ -420,10 +419,10 @@
 
 		});
 
-		var swiper = new Swiper('.m-imgtxt2', {
+		var swiper3 = new Swiper('.m-imgtxt2', {
 			slidesPerView: 1.5
 		});
-		var swiper = new Swiper('.m-imgtxt3', {
+		var swiper4 = new Swiper('.m-imgtxt3', {
 			slidesPerView: 1.5
 		});
 	</script>
@@ -509,23 +508,6 @@
 				var $content = $(".tab_con .tab_box");
 				$content.eq($index).show().siblings().hide();
 			});
-			$('.js-video').click(function(event) {
-				var _id = $(this).attr("href");
-				var tid = $(this).attr("data-id");
-				var _src = $(this).attr("data-src");
-				$.post("/index.php?m=api&c=index&v=showtv", {
-					'id': tid
-				}, function(data) {
-
-				}, "JSON");
-				$(_id).find("iframe").attr("src", _src);
-				$(_id).fadeIn();
-			});
-			$('.js-close').click(function(event) {
-				$(this).parents('.m-pop1-yz').fadeOut();
-				$(this).parents('#m-pop1-yz').find("iframe").attr("src", "");
-				event.stopPropagation();
-			});
 
 			bind_td();
 			var host = window.location.host;
@@ -547,7 +529,7 @@
 						html += "<div class='swiper-slide' data-id=" + sdata[i].id + "><a href=" + linkurl + "><div class='pic'><img src=" + sdata[i].url + " alt=''><div class='txt'></div></div></a></div>"
 					}
 					$("#swim").append(html);
-					var swiper = new Swiper('.m-imgtxt1', {
+					var swiper5 = new Swiper('.m-imgtxt1', {
 						slidesPerView: 'auto',
 						centeredSlides: true,
 						initialSlide: 1,
@@ -560,6 +542,7 @@
 		});
 	</script>
 	<!-- 弹窗 end-->
+    <script type="text/javascript" src="/resource/m/js/opentv.js" title="移动端    所有页面  的  【打开。关闭视频】"></script>
 	<!-- 日历 -->
 	<script>
 		$(document).ready(function() {

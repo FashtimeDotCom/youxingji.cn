@@ -99,6 +99,7 @@
             </td>
             <td class="td25">
                 <a href="javascript:void(0);" onclick="Controller.controller('修改内容','admin/article/edit/id/{{$article.id}}')">编辑</a>
+                <a href="javascript:;" onclick="Controller.main('{{$_pathroot}}admin/article/trip/id/{{$article.id}}')">详细行程</a>
             </td>
         </tr>
         {{/foreach}}

@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-10-14 18:43:27
+<?php /* vpcvcms compiled created on 2018-10-29 13:59:39
          compiled from wap/user/add_note.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -20,6 +20,11 @@
 	<script src="/resource/m/js/jquery.js"></script>
 	<script src="/resource/m/js/lib.js"></script>
 	<link rel="stylesheet" href="/resource/m/css/note.css" />
+	<style type="text/css">
+		.tag{height: 36px!important;}
+		.tagVal{margin-top: 10px;}
+	</style>
+	<link rel="stylesheet" href="/resource/m/css/tag.css" title="和标签相关" />
 </head>
 <body id="row_issue">
 	<div class="mian">
@@ -98,10 +103,23 @@
 							</div>
 						</div>
 	
-						<div class="tit">
-							<input type="text" class="inp" value="<?php echo $this->_tpl_vars['res']['tag']; ?>
-" id="tag" placeholder="请输入标签(可选)，每个标签最多四个字，如：旅游知识/美食，用正斜杠分开">
-							<p class="tagTips FontSize dis_none">标签目前最多为四个哦！</p>
+						<div class="tit" style="position: relative;">
+							<input type="text" class="inp tag" value="" maxlength="4" onkeyup="judgeIsNonNull2(event)" id="tag" placeholder="请输入标签(可选),每个标签最多四个字,空格无效">
+							<input type="button" name="" class="btn affirm dis_none" id="affirm" value="确认添加" />
+							<p class="tagTips FontSize dis_none">最多只能四个标签！可以先删掉其中一个旧标签，再增加新标签！</p>
+							<div class="tagVal fix" id="tagVal">
+								<?php if ($this->_tpl_vars['res']['tag']): ?>
+								<?php $_from = $this->_tpl_vars['res']['tag']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+    foreach ($_from as $this->_tpl_vars['key'] => $this->_tpl_vars['item']):
+?>
+								<b class="sample">
+									<i class="Iclass"><?php echo $this->_tpl_vars['item']; ?>
+</i>
+									<em class="eliminate" onclick="eliminate(this)"><img src="/resource/m/images/icon_eliminate.png"/></em>
+								</b>
+								<?php endforeach; endif; unset($_from); ?>
+								<?php endif; ?>
+							</div>
 						</div>
 
 						<style>
@@ -166,19 +184,8 @@ unset($_smarty_tpl_vars);
 			judgeIsNonNull1(event);
 		});
 		
+		
 		$(document).ready(function(){
-			//标签  字数控制
-			$('#tag').keyup(function() {
-				var tag = $('#tag').val();
-				var result=tag.split("/");
-				if(result.length>4){
-					$(".tagTips").removeClass("dis_none");
-				}else{
-					$(".tagTips").addClass("dis_none");
-				}
-			});
-	
-	
 			//上传游记 的封面图片
 			layui.upload({
 				url: "/index.php?m=api&c=index&v=uploadpic",
@@ -187,7 +194,7 @@ unset($_smarty_tpl_vars);
 				before: function(obj) {
 					layer.load(); //上传loading
 				},
-				success: function(data) {
+				success: function(data){
 					var msg = data.msg;
 					if(msg !== undefined) {
 						layer.msg(msg);
@@ -427,6 +434,79 @@ unset($_smarty_tpl_vars);
 	<!--编辑器-->
 	<script src="/resource/m/demo/js/zx-editor.min.js"></script>
 	<script type="text/javascript">
+		//监控 标签内容输入框 ，包括粘贴板
+		function judgeIsNonNull2(event){
+			var value=$("#tag").val();
+			var x = event.which || event.keyCode;
+			$("#tag").val(value.replace(/\s*/g,""));//去除字符串空格(空白符)
+			if (x == 4 ) {
+		  		if(value !== "" ){
+			      	$(".affirm").removeClass("dis_none");
+			    }else{
+			    	$(".affirm").addClass("dis_none");
+			    }
+			}
+
+			if(value !== ""){
+				if( /[=，。￥？！：、……“”；（）《》～‘’〈〉——·ˉˇ¨々‖∶＂＇｀｜〃〔〕「」『』．〖〗$【】｛｝［］/,|{}_*:?^%$#@!`·~"'\\<>\[\]\%;)(&+-]/.test(value) ){
+					$("#tag").val(value.replace(/[=，。￥？！：、……“”；（）《》～‘’〈〉——·ˉˇ¨々‖∶＂＇｀｜〃〔〕「」『』．〖〗$【】｛｝［］/,|{}_*:?^%$#@!`·~"'\\<>\[\]\%;)(&+-]/,""));
+					return false;
+				}
+				if( value.length > 4 ){
+		    		return $("#tag").val(value.substr(0, 4));
+		    	}
+		    	$(".affirm").removeClass("dis_none");
+		   	}else{
+		    	$(".affirm").addClass("dis_none");
+		    }
+		}
+		
+		//监控 标签内容输入框 ，包括粘贴板
+		$("#tag").bind('input propertychange', function(){
+			judgeIsNonNull2(event);
+		});
+		
+    	//确认 添加标签
+    	$("#affirm").on("click",function(){
+    		var html,value = $("#tag").val();
+    		var length = $("#tagVal").children().length;
+    		var val0 = $("#tagVal").children().eq(0).find("i").text();
+    		var val1 = $("#tagVal").children().eq(1).find("i").text();
+    		var val2 = $("#tagVal").children().eq(2).find("i").text();
+    		
+			if(value == ""){
+    			layer.msg('标签内容不能为空！');
+				return false;
+    		}else if(value.replace(/(^\s*)|(\s*$)/g, "")==""){ //判断输入的内容是否全为空格
+				layer.msg('标签栏不能只输入空格！');
+				return false;
+			}else{
+				if( length>=4 ){                         //判断是否已存在四个标签
+					$(".tagTips").removeClass("dis_none");
+					return false;
+				} else{
+					if( value == val0 || value == val1 || value == val2 ){
+						layer.msg('不能输入已存在的标签！');
+						return false;
+					} else{
+						html='<b class="sample">'+
+								'<i class="Iclass">'+value+'</i>'+
+								'<em class="eliminate" onclick="eliminate(this)"><img src="/resource/m/images/icon_eliminate.png"/><em>'+
+							 '</b>';
+						$("#tagVal").append(html);
+						$("#tag").val('');
+					}
+				}
+			}
+    	});
+    	
+    	//点击“X”清除标签
+    	function eliminate(which){
+    		var index = $(which).parent().index();
+    		$("#tagVal").children().eq(index).remove();
+    		$(".tagTips").addClass("dis_none");
+    	}
+    	
 		// 实例化 ZxEditor
 		var zxEditor = new ZxEditor('#editorContainer', {
 			// 编辑器固定
@@ -541,9 +621,9 @@ unset($_smarty_tpl_vars);
 			var did = $('#did').val();
 			var oldImgUrl = parseInt($(".note_bg").attr("data-default")); //判断封面是否有上传，1 为没有上传
 			var imgUrl = $('.note_bg').attr('src');
-			var tag = $('#tag').val();//标签
-			address = $('#address').val();//定位
-	
+			var tag;//标签
+			var address = $('#address').val();//定位
+			
 			if(!title) {
 				layer.msg('请输入游记的标题');
 				return false;
@@ -557,13 +637,27 @@ unset($_smarty_tpl_vars);
 				layer.msg('请上传封面图片');
 				return false;
 			}
-	
-			var result=tag.split("/");
-			if(result.length>4){
-				$(".tagTips").removeClass("dis_none");
-				return false;
-			}
-	
+
+			var val0 = $("#tagVal").children().eq(0).find("i").text();
+    		var val1 = $("#tagVal").children().eq(1).find("i").text();
+    		var val2 = $("#tagVal").children().eq(2).find("i").text();
+    		var val3 = $("#tagVal").children().eq(3).find("i").text();
+        	if( val0!="" ){
+        		tag = val0;
+        		if( val1!="" ){
+	        		tag = tag+"/"+val1;
+	        		if( val2!="" ){
+		        		tag = tag+"/"+val2;
+		        		if( val3!="" ){
+			        		tag = tag+"/"+val3;
+			        	}
+		        	}
+	        	}
+        	}
+        	else{
+        		tag="";
+        	}
+			
 			if (!zxEditor.getContent() || zxEditor.getContent() === '<p><br></p>') {
 				zxEditor.dialog.alert('请添加文章内容');
 				return false;
@@ -594,15 +688,13 @@ unset($_smarty_tpl_vars);
 					'desc': describe,
 					'address':address
 				}, function(data) {
+					layer.msg(data.tips);
 					if(data.status == 1) {
-						layer.msg('发布成功！');
 						//清除缓存
 						//zxEditor.removeSave(data.content);
 						//localStorage.clear();
 						zxEditor.storage.remove('content', {content: data.content});
 						window.location.href = "/index.php?m=wap&c=user&v=travel_note";
-					}else{
-						layer.msg(data.tips);
 					}
 				}, "JSON");
 			});
@@ -615,12 +707,29 @@ unset($_smarty_tpl_vars);
 			var oldImgUrl = parseInt($(".note_bg").attr("data-default")); //判断封面是否有上传，1 为没有上传，
 			var imgUrl = $('.note_bg').attr('src');
 			var list = imgUrl + '||' + con;
-			var tag = $('#tag').val();//标签
-			address = $('#address').val();//定位
-			if(!title && !describe && oldImgUrl == 0 && !con) {
-				layer.msg('不能全为空');
-				return false;
-			}
+			var tag;//标签
+			var address = $('#address').val();//定位
+			
+			var val0 = $("#tagVal").children().eq(0).find("i").text();
+    		var val1 = $("#tagVal").children().eq(1).find("i").text();
+    		var val2 = $("#tagVal").children().eq(2).find("i").text();
+    		var val3 = $("#tagVal").children().eq(3).find("i").text();
+        	if( val0!="" ){
+        		tag = val0;
+        		if( val1!="" ){
+	        		tag = tag+"/"+val1;
+	        		if( val2!="" ){
+		        		tag = tag+"/"+val2;
+		        		if( val3!="" ){
+			        		tag = tag+"/"+val3;
+			        	}
+		        	}
+	        	}
+        	}
+        	else{
+        		tag="";
+        	}
+			
 	
 			// 处理正文中的base64图片
 			// 获取正文中的base64数据数组
@@ -642,6 +751,7 @@ unset($_smarty_tpl_vars);
 					'type': 2,
 					'address':address
 				}, function(data) {
+					layer.msg(data.tips);
 					if(data.status == 1) {
 						layer.msg('保存成功！');
 						//清除缓存
@@ -649,8 +759,6 @@ unset($_smarty_tpl_vars);
 						//localStorage.clear();
 						zxEditor.storage.remove('content', {content: data.content});
 						window.location.href = "/index.php?m=wap&c=user&v=draft";
-					}else{
-						layer.msg(data.tips);
 					}
 				}, "JSON");
 			});

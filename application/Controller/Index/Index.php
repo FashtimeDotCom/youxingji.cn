@@ -1142,6 +1142,9 @@ class Controller_Index_Index extends Core_Controller_TAction
         $id = intval($this->getParam('id'));
         $type_model=new Model_TravelNote();
         $article=$type_model->get_one($id);
+        if( $article ){
+            $article['content']=urldecode($article['content']);
+        }
 
         if(!$article){
             $this->showmsg('', '/', 0);

@@ -128,18 +128,7 @@
                 }
             });
         });
-        // 视频
-        $('.js-video').click(function(event) {
-            var _id = $(this).attr("href");
-            var _src = $(this).attr("data-src");
-
-            $(_id).find("iframe").attr("src", _src);
-            $(_id).fadeIn();
-        });
-        $('.js-close').click(function(event) {
-            $(this).parents('.m-pop1-yz').fadeOut();
-            $(this).parents('#m-pop1-yz').find("iframe").attr("src", "");
-        });
+        
         $('.js-pop1').click(function(event) {
             /* Act on the event */
             $('.pop-pic').fadeIn();
@@ -193,5 +182,4 @@
         }
     </script>
 </body>
-
 </html>

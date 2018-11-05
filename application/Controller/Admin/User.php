@@ -22,6 +22,7 @@ class Controller_Admin_User extends Core_Controller_Action
 			$conditions['realname'] = trim($this->getParam('realname'));
 			$password = trim($this->getParam('password'));
 			$conditions['email'] = trim($this->getParam('email'));
+            $conditions['tag']=$this->getParam("tag");
 			//将从表单取得的数据拼接到queryString
 			$conditionstr = implode('||', $conditions);
 			$md5str = md5($conditionstr.$securecode);
@@ -142,6 +143,8 @@ class Controller_Admin_User extends Core_Controller_Action
 			$conditions['email'] = trim($this->getParam('email'));
 			$conditions['telephone'] = trim($this->getParam('telephone'));
 			$conditions['bgpic'] = trim($this->getParam('bgpic'));
+            $conditions['sort']=(int)$this->getParam("sort")??100;
+            $conditions['tag']=$this->getParam("tag");
 			$summary = trim($this->getParam('summary'));
 			$bgpic = $this->getParam('bgpic');
 			$userInfo = $conditions;
@@ -153,6 +156,9 @@ class Controller_Admin_User extends Core_Controller_Action
 
 	        //if($this->checkEmail($memberModel, $userInfo['email'], $userInfo['uid']))
 		        //$this->showmsg('邮箱已被注册！', '');
+            if( $conditions['sort'] != 100 ){
+                C::M('user_member')->where("sort={$conditions['sort']}")->update(array('sort'=>100));
+            }
 		    
 			if($memberModel->editUserInfo($userInfo))
 			{

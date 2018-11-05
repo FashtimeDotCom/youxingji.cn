@@ -117,8 +117,9 @@ class Controller_Api_Comment extends Core_Controller_Action
             exit;
         }
         $data['uid']=$user_id;//用户ID
-        $data['rid']=(int)$this->getParam('id');//文章ID
+        $data['rid']=(int)$this->getParam('rid');//文章ID
         $data['type']=(int)$this->getParam("type");//分类，1-日志 2-视频 3-游记 4-问答
+        $data['touid']=(int)$this->getParam("touid");
 
         //内容
         $content=addslashes(str_replace("\n", "<br />", $this->getParam("content")));//content
@@ -135,7 +136,7 @@ class Controller_Api_Comment extends Core_Controller_Action
         $data['content'] = $content;
         $data['status']=1;
 
-        $res = M("comment")->add($data);
+        $res = C::M("comment")->add($data);
 
         if ($res > 0) {
             $cur_date = strtotime(date('Y-m-d'));
@@ -144,13 +145,131 @@ class Controller_Api_Comment extends Core_Controller_Action
                 //赠送10经验
                 C::M('user_member')->where("uid = $user_id")->setInc('exp', 10);
             }
-            $json=array('status'=>1,'tips'=>'评论成功!');
+            $username=C::M('user_member')->field('username,headpic')->where("uid={$user_id}")->find();
+            $to_username=C::M('user_member')->field('username,headpic')->where("uid={$data['touid']}")->find();
+            $response=array(
+                'id'=>$res,//ID，作为吓一条的pid_sub
+                'uid'=>$user_id,//评论人的ID,作为下一条回复对象touid
+                'username'=>$username['username'],
+                'to_username'=>$to_username['username'],
+                'headpic'=>empty($username['headpic'])?'/resource/images/img-lb2.png':$username['headpic'],
+                'to_headpic'=>$to_username['headpic']??'/resource/images/img-lb2.png',
+                'addtime'=>date("Y-m-d H:i:s",time())
+            );
+
+            $json=array('status'=>1,'tips'=>'评论成功!','datas'=>$response);
         }else{
             $json = array('status' => 0, 'tips' => '评论失败，请重试');
         }
 
         echo Core_Fun::outputjson($json);
         exit;
+    }
+
+
+    /*
+     * 评论点赞
+     * */
+    public function zanAction()
+    {
+        //验证是否是post 提交申请
+        if( !$this->isPost() ){
+            $json = array('status' => 0, 'tips' => '非法操作!');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        $comment_id=$this->getParam("id");
+        if( !$comment_id || $comment_id<=0 ){
+            $json = array('status' => 0, 'tips' => '参数错误!');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        $info=C::M('comment')->field('id,top_num')->where("id={$comment_id} and status=1")->find();
+        if( $info ){
+            $data['top_num']=intval($info['top_num'])+1;
+            $res=C::M('comment')->where("id={$comment_id}")->update($data);
+            if( $res ){
+                $json = array('status' => 1, 'tips' => '点赞成功!','data'=>$data);
+                echo Core_Fun::outputjson($json);
+                exit;
+            }else{
+                $json = array('status' => 0, 'tips' => '点赞失败!');
+                echo Core_Fun::outputjson($json);
+                exit;
+            }
+        }else{
+            $json = array('status' => 0, 'tips' => '记录不存在!');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+    }
+
+    /*
+     * 按分类排序
+     * */
+    public function comment_listAction()
+    {
+        //验证是否是post 提交申请
+        if( !$this->isPost() ){
+            $json = array('status' => 0, 'tips' => '非法操作!');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        $rid=$this->getParam('rid');//文章ID
+        $type=$this->getParam("type");//分类ID，1-日志 2-视频 3-游记 4-问答
+        $curpage=$this->getParam("page")??1;//页数
+        $sort_type=$this->getParam("sort_type")??1;//排序分类，1-按发布时间，2-按照热度
+        if( !$rid || !$type ){
+            $json = array('status' => 0, 'tips' => '参数错误!');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        $Num = C::M('comment')->where("rid={$rid} and type={$type} and pid=0")->getCount();
+        $perpage = 5;
+        $limit = $perpage * ($curpage - 1) . "," . $perpage;
+
+        if( $sort_type==1 ){//时间
+            $order="a.addtime desc";
+        }else{//热度，即点赞数
+            $order="a.top_num desc";
+        }
+
+        $uid=$_SESSION['userinfo']['uid'];
+        if( $uid ){
+            $is_login=1;
+        }else{
+            $is_login=0;
+        }
+        //一级评论
+        $comment=C::M("comment as a ")->field('a.*,b.headpic,b.username')->join("##__user_member as b","a.uid=b.uid","left")->where("rid={$rid} and type={$type} and pid=0")->order($order)->limit($limit)->select();
+        if( $comment ){
+            $joins=array(
+                array('##__user_member as b','a.uid=b.uid','left'),
+                array('##__user_member as c','a.touid=c.uid','left')
+            );
+            foreach ($comment as $key => $value) {
+                $comment[$key]['headpic']=empty($value['headpic'])?'resource/images/img-lb2.png':$value['headpic'];
+                $comment[$key]['lou'] = $curpage * $perpage + $key - 4;
+                $comment[$key]['content'] = Core_Fun::ubbreplace($value['content']);
+                $comment[$key]['addtime'] = date('Y-m-d H:i', $value['addtime']);
+                //查找对应一级节点的子评论，子子评论。一般只有三级结构,二级三级显示都是同一级显示
+                $comment[$key]['sub']=C::M('comment as a')->field("a.*,b.username,c.username as to_username")->joins($joins)->where("rid={$rid} and type={$type} and pid={$value['id']}")->order('id ASC')->select();
+                $comment[$key]['count']=count($comment[$key]['sub']);
+                $comment[$key]['is_login']=$is_login;
+            }
+
+            $json = array('status' => 1, 'tips' =>$comment );
+            echo Core_Fun::outputjson($json);
+            exit;
+        }else{
+            $json = array('status' => 0, 'tips' => '我也是有底线的啊!');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
     }
 
 

@@ -1,10 +1,9 @@
-<?php /* vpcvcms compiled created on 2018-10-10 14:32:46
+<?php /* vpcvcms compiled created on 2018-10-24 21:38:35
          compiled from wap/user/visitor.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/user/visitor.tpl', 86, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/user/visitor.tpl', 77, false),)), $this); ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
@@ -20,8 +19,7 @@ smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'w
     <script src="/resource/m/js/jquery.js"></script>
     <script src="/resource/m/js/lib.js"></script>
 </head> 
-
-<body class="">
+<body>
     <div class="header">
         <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => 'wap/header.tpl', 'smarty_include_vars' => array()));
@@ -44,15 +42,12 @@ unset($_smarty_tpl_vars);
             </div>
         </div>
         <div class="ban">
-            <a href="">
-                <img src="<?php echo $this->_tpl_vars['user']['cover']; ?>
-" alt="">
-            </a>
+            <a href=""><img src="<?php echo $this->_tpl_vars['user']['cover']; ?>
+" alt=""></a>
             <div class="m-user">
                 <i style="background: url(<?php echo $this->_tpl_vars['user']['avatar']; ?>
 ) no-repeat center center; background-size: cover; border-radius: 50%;"></i>
-                <dl>
-                    <dd><a href="/index.php?m=wap&c=user&v=addtravel">发布游记</a></dd>
+                <dl><dd><a href="/index.php?m=wap&c=user&v=addtravel">发布游记</a></dd>
                     <dd><a href="/index.php?m=wap&c=user&v=addtv">发布TV</a></dd>
                     <dd><a href="/index.php?m=wap&c=user&v=follow">我的关注</a></dd>
                     <dd><a href="/index.php?m=wap&c=user&v=msg">我的私信</a></dd>
@@ -65,25 +60,22 @@ unset($_smarty_tpl_vars);
         <div class="row-focus">
             <div class="wp">
                 <ul class="ul-snav-yz1">
-                    <li>
-                        <a href="/index.php?m=wap&c=user&v=follow" class="items item1">
-    					<span style="background-image: url(/resource/m/images/ico-lb6.png)">我的关注</span>
-    				</a>
+                    <li><a href="/index.php?m=wap&c=user&v=follow" class="items item1">
+	    					<span style="background-image: url(/resource/m/images/ico-lb6.png)">我的关注</span>
+	    				</a>
                     </li>
-                    <li>
-                        <a href="/index.php?m=wap&c=user&v=fans" class="items item2">
-    					<span style="background-image: url(/resource/m/images/ico-lb5.png)">我的粉丝</span>
-    				</a>
+                    <li><a href="/index.php?m=wap&c=user&v=fans" class="items item2">
+	    					<span style="background-image: url(/resource/m/images/ico-lb5.png)">我的粉丝</span>
+	    				</a>
                     </li>
                     <li class="on">
                         <a href="/index.php?m=wap&c=user&v=visitor" class="items item1">
-                        <span style="background-image: url(/resource/m/images/ico-lb8.png)">我的访客</span>
-                    </a>
+	                        <span style="background-image: url(/resource/m/images/ico-lb8.png)">我的访客</span>
+	                    </a>
                     </li>
-                    <li>
-                        <a href="/index.php?m=wap&c=user&v=findfriends" class="items item2">
-                        <span style="background-image: url(/resource/m/images/ico-lb11.png)">查找好友</span>
-                    </a>
+                    <li><a href="/index.php?m=wap&c=user&v=findfriends" class="items item2">
+	                        <span style="background-image: url(/resource/m/images/ico-lb11.png)">查找好友</span>
+	                    </a>
                     </li>
                 </ul>
                 <div class="so-friend">
@@ -95,8 +87,7 @@ unset($_smarty_tpl_vars);
                     <?php $_from = $this->_tpl_vars['list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
     foreach ($_from as $this->_tpl_vars['vo']):
 ?>
-                    <li>
-                        <div class="items">
+                    <li><div class="items">
                             <div class="img">
                                 <a href="<?php echo ((is_array($_tmp=$this->_tpl_vars['vo']['uid'])) ? $this->_run_mod_handler('helper', true, $_tmp, 'mhref') : smarty_modifier_helper($_tmp, 'mhref')); ?>
 "><img src="<?php echo $this->_tpl_vars['vo']['avatar']; ?>
@@ -142,8 +133,7 @@ unset($_smarty_tpl_vars);
             <!-- 页码 -->
             <?php if ($this->_tpl_vars['multipage']): ?>
             <div class="pages" style="padding-top: 20px;padding-bottom: 20px;">
-                <ul>
-                    <?php $_from = $this->_tpl_vars['multipage']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+                <ul><?php $_from = $this->_tpl_vars['multipage']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
     foreach ($_from as $this->_tpl_vars['page']):
 ?>
                     <li <?php if ($this->_tpl_vars['page']['2']): ?>class="<?php echo $this->_tpl_vars['page']['2']; ?>
@@ -164,20 +154,6 @@ unset($_smarty_tpl_vars);
  ?> 
     <script src="/resource/js/layui/lay/dest/layui.all.js"></script>
     <script type="text/javascript">
-        function follows(bid, obj)
-        {
-            $.post("/index.php?m=api&c=index&v=follow", {
-                'bid':bid
-            }, function(data){
-                if(data.status == 0){
-                    layer.msg(data.tips);
-                }else if(data.status == 1){
-                    $(obj).html('已关注');
-                }else if(data.status == 2){
-                    $(obj).html('<span>关注</span>');
-                }
-            },"JSON");
-        }
         $('#btnSo').click(function(){
             var keys = $('#keys').val();
             if(!keys){
@@ -185,19 +161,8 @@ unset($_smarty_tpl_vars);
                 return false;
             }
             window.location.href="/index.php?m=wap&c=user&v=visitor&keys=" + keys;
-        })
-      	function smg(uid){
-        	layer.prompt({title: '请输入私信内容', formType: 2}, function(text, index){
-              	layer.close(index);
-                $.post("/index.php?m=api&c=index&v=sendmsg", {
-                    'to_id':uid,
-                    'content':text
-                }, function(data){
-                    layer.msg(data.tips);
-                },"JSON");
-            });
-        }
+        });
     </script>
+	<script type="text/javascript" src="/resource/m/js/collect.js" title="移动端    所有页面  的 【 收藏、关注、私信】"></script>
 </body>
-
 </html>
