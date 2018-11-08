@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-11-02 14:20:38
+<?php /* vpcvcms compiled created on 2018-11-06 15:11:20
          compiled from wap/new_index3.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -160,6 +160,17 @@
     foreach ($_from as $this->_tpl_vars['key'] => $this->_tpl_vars['item']):
 ?>
 			<div class="d_item fix">
+				<article class="user">
+					<a class="headPortrait figure" style="background-image: url(<?php echo $this->_tpl_vars['item']['user_info']['headpic']; ?>
+);" href="index.php?m=wap&c=muser&v=index&id=<?php echo $this->_tpl_vars['item']['uid']; ?>
+"></a>
+					<aside>
+						<h4 class="nickname apostrophe"><?php echo $this->_tpl_vars['item']['user_info']['username']; ?>
+</h4>
+						<time class="logTime"><?php echo $this->_tpl_vars['item']['addtime']; ?>
+</time>
+					</aside>
+				</article>
 				<div class="txt">
 					<a class="dis_block" href="/index.php?m=wap&c=index&v=star_detail&id=<?php echo $this->_tpl_vars['item']['id']; ?>
 "><?php echo $this->_tpl_vars['item']['describes']; ?>
@@ -170,23 +181,13 @@
     foreach ($_from as $this->_tpl_vars['v']):
 ?>
 					<dd><a href="<?php echo $this->_tpl_vars['v']; ?>
-" class="lightbox figure" rel="list<?php echo $this->_tpl_vars['item']['id']; ?>
+" class="lightbox figure piece" rel="list<?php echo $this->_tpl_vars['item']['id']; ?>
 " style="background-image: url(<?php echo $this->_tpl_vars['v']; ?>
 );"></a></dd>
 					<?php endforeach; endif; unset($_from); ?>
 				</dl>
+				</a>
 				
-				<article class="user">
-					<a class="headPortrait figure" style="background-image: url(<?php echo $this->_tpl_vars['item']['user_info']['headpic']; ?>
-);" href="index.php?m=wap&c=muser&v=index&id=<?php echo $this->_tpl_vars['item']['uid']; ?>
-"></a>
-					<aside style="float: left;">
-						<h4 class="nickname apostrophe"><?php echo $this->_tpl_vars['item']['user_info']['username']; ?>
-</h4>
-						<time class="logTime"><?php echo $this->_tpl_vars['item']['addtime']; ?>
-</time>
-					</aside>
-				</article>
 				<div class="interact gaine fix">
 					<span class="Read"><img class="icon_check" src="/resource/m/images/common/icon_check.png" /><i class="Iclass"><?php echo $this->_tpl_vars['item']['shownum']; ?>
 </i></span>
@@ -240,15 +241,15 @@
 				<?php $_from = $this->_tpl_vars['tv_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
     foreach ($_from as $this->_tpl_vars['key'] => $this->_tpl_vars['item']):
 ?>
-				<div class="video">
-					<div class="pic figure" data-src="<?php echo $this->_tpl_vars['item']['url']; ?>
-" onclick="js_video(this)" data-id="<?php echo $this->_tpl_vars['item']['id']; ?>
-" style="background-image: url(http://www.youxingji.cn<?php echo $this->_tpl_vars['item']['pics']; ?>
+				<a class="dis_block lump" href="/index.php?m=wap&c=index&v=tv_detail&id=<?php echo $this->_tpl_vars['item']['id']; ?>
+">
+					<div class="video">
+						<div class="pic figure" style="background-image: url(http://www.youxingji.cn<?php echo $this->_tpl_vars['item']['pics']; ?>
 );"></div>
-					<div class="txt"><a href="/index.php?m=wap&c=index&v=tv_detail&id=<?php echo $this->_tpl_vars['item']['id']; ?>
-"><?php echo $this->_tpl_vars['item']['title']; ?>
-</a></div>
-				</div>
+						<div class="txt"><?php echo $this->_tpl_vars['item']['title']; ?>
+</div>
+					</div>
+				</a>
 				<?php endforeach; endif; unset($_from); ?>
 				<?php endif; ?>
 			</div>
@@ -299,15 +300,15 @@
 		</article>
 		
 		<!--独家旅行-->
-		<article class="article">
-			<div class="TitleBox">
-				<h3 class="title">独家旅行</h3>
-				<ul class="tab_list"><li class="onn">独家项目</li><li>独家资源</li></ul>
+		<article class="article tour">
+			<div class="TitleBox fix">
 				<!--<h3 class="title">独家旅行</h3>
-				<ul class="nav_list fix"><li class="onn">独家线路</li><li>私人订制</li></ul>-->
+				<ul class="tab_list"><li class="onn">独家项目</li><li>独家资源</li></ul>-->
+				<h3 class="title">独家旅行</h3>
+				<ul class="nav_list fix"><li class="onn">独家线路</li><li>私人订制</li></ul>
 			</div>
-			<div class="tab_con">
-				<div class="tab_box">
+			<div class="tab_con fix">
+				<!--<div class="tab_box">
 					<ul class="box_list">
 						<li class="on">达人带你去旅行</li>
 						<li>名师带你去写生</li>
@@ -388,29 +389,28 @@
 						</div>
 						<?php endforeach; endif; unset($_from); ?>
 						<?php endif; ?>
-	
 					</div>
-				</div>
+				</div>-->
 			
-				<!--<div class="tab_box exclusive">
+				<div class="tab_box exclusive">
 					<div class="con_list">
 						<div class="con_list_box">
 							<div class="swiper-container" id="bannerSwiper4">
 								<div class="swiper-wrapper">
-									<?php if ($this->_tpl_vars['travel']): ?>
-									<?php $_from = $this->_tpl_vars['travel']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+									<?php if ($this->_tpl_vars['journey_list']): ?>
+									<?php $_from = $this->_tpl_vars['journey_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
     foreach ($_from as $this->_tpl_vars['key'] => $this->_tpl_vars['item']):
 ?>
 									<div class="swiper-slide boxes">
-										<a class="dis_block fix" href="index.php?m=wap&c=index&v=travel_detail&id=<?php echo $this->_tpl_vars['item']['id']; ?>
+										<a class="dis_block fix" href="index.php?m=wap&c=index&v=journeydetail&id=<?php echo $this->_tpl_vars['item']['id']; ?>
 ">
-											<img class="fix" src="<?php echo $this->_tpl_vars['item']['thumbfile']; ?>
+											<img class="fix" src="<?php echo $this->_tpl_vars['item']['articlethumb']; ?>
 " />
 											<div class="con">
-												<p class="headline"><?php echo $this->_tpl_vars['item']['title']; ?>
-</p>
-												<p class="price"><span>￥<?php echo $this->_tpl_vars['item']['price']; ?>
-<i class="Iclass"> 起</i></span></p>
+												<div class="headline"><?php echo $this->_tpl_vars['item']['title']; ?>
+</div>
+												<div class="price">￥<?php echo $this->_tpl_vars['item']['price']; ?>
+<i class="Iclass"> 起</i></div>
 											</div>
 										</a>
 									</div>
@@ -432,10 +432,11 @@
 							<input class="matter destination" type="text" name="" id="destination" maxlength="300" value="" placeholder="目的地" />
 							<input class="matter name" type="text" name="" id="name" maxlength="20" value="" placeholder="姓名" />
 							<input class="matter PhoneNum" type="number" name="" id="PhoneNum" value="" placeholder="手机号码" onkeyup="judgeIsNonNull1(event)" />
+							<input class="matter destination" type="text" name="remark" id="remark" maxlength="300" value="" placeholder="备注(可选填)" />
 							<button class="submitInfo">提交信息</button>
 						</div>
 					</div>
-				</div>-->
+				</div>
 			</div>
 		</article>
 
@@ -487,7 +488,6 @@ unset($_smarty_tpl_vars);
 	</script>
 	
 	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
-    <script type="text/javascript" src="/resource/m/js/opentv.js" title="移动端    所有页面  的  【打开、关闭视频】"></script>
     <script type="text/javascript" src="/resource/m/js/dianzan.js" title="移动端    所有页面  的  【点赞】"></script>
 
 	<script type="text/javascript">
@@ -530,11 +530,12 @@ unset($_smarty_tpl_vars);
 				var destination = $("#destination").val();
 				var name = $("#name").val();
 				var PhoneNum = $("#PhoneNum").val();
+				var remark = $("#remark").val();
 				if( destination == "" ){
 					layer.msg('请输入目的地！');
 					return false;
 				}else if(destination.replace(/(^\s*)|(\s*$)/g, "")==""){
-					layer.msg('目的地不能只输入空格！');
+					layer.msg('目的地栏不能只输入空格！');
 					return false;
 				}
 				
@@ -542,7 +543,7 @@ unset($_smarty_tpl_vars);
 					layer.msg('请输入姓名！');
 					return false;
 				}else if(name.replace(/(^\s*)|(\s*$)/g, "")==""){
-					layer.msg('姓名框不能只输入空格！');
+					layer.msg('姓名栏不能只输入空格！');
 					return false;
 				}
 				
@@ -558,10 +559,17 @@ unset($_smarty_tpl_vars);
                 	return false;
             	}
 				
+				if( remark != "" ){
+					if(remark.replace(/(^\s*)|(\s*$)/g, "")==""){
+						remark="";
+					}
+				}
+				
 				$.post("/index.php?m=api&c=index&v=private_custom", {
 					'address':destination,
 					'username':name,
 					'mobile':PhoneNum,
+					'remark':remark,
 				}, function(data){
 					layer.msg(data.tips);
 				},"JSON");

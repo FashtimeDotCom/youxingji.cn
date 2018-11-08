@@ -20,14 +20,6 @@ class Controller_Index_Index extends Core_Controller_TAction
             $starlist[$key]['addtime'] = date('Y-m-d', $value['addtime']);
         }
 
-        //油画
-        $scenery = C::M('scenery')->where("istop = 1")->limit("0,3")->order("id desc")->select();
-        foreach ($scenery as $key => $value) {
-            C::M('scenery')->where('id', $value['id'])->setInc('show_num', 1);
-            $user = C::M('writer')->where("id = $value[wid]")->find();
-            $scenery[$key]['name'] = $user['name'];
-        }
-
         //旅拍tv
         $tv = C::M('tv')->where("istop = 1 and status = 1")->limit("0,4")->order("id desc")->select();
 
@@ -50,39 +42,6 @@ class Controller_Index_Index extends Core_Controller_TAction
             if( $journey_info ){
                 $this->assign("journey_info",$journey_info);
             }
-        }
-
-        //达人带你去旅行
-        $travel_mdl=new Model_StarTravel();
-        $travel_info=$travel_mdl->get_living_sketch(2);
-        if( $travel_info ){
-            foreach( $travel_info as $key=>$value ){
-
-                if( $value['autograph'] ){
-                    $travel_info[$key]['autograph']=Core_fun::cn_substr(strip_tags($value['autograph']),320,'...');
-                }
-
-            }
-            $this->assign("travel_info",$travel_info);
-        }
-
-        //名师带你去写生
-        $sketch_mdl=new Model_Sketch();
-        $sketch_list=$sketch_mdl->get_living_sketch(2);
-        if( $sketch_list ){
-            foreach( $sketch_list as $key=>$value ){
-                if( $value['label'] ){
-                    $label_arr=array();
-                    $label_arr=explode(",",$value['label']);
-                    $sketch_list[$key]['label']=$label_arr;
-                }
-
-                if( $value['introduction'] ){
-                    $sketch_list[$key]['introduction']=Core_fun::cn_substr(strip_tags($value['introduction']),320,'...');
-                }
-
-            }
-            $this->assign("sketch_list",$sketch_list);
         }
 
         //日月潭
@@ -124,7 +83,6 @@ class Controller_Index_Index extends Core_Controller_TAction
         $this->assign('month', date('n'));
 
         $this->assign('starlist', $starlist);
-        $this->assign('scenery', $scenery);
         $this->assign('tv', $tv);
         $this->display('index/new_index.tpl');
     }

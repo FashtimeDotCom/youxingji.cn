@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-11-02 14:54:36
+<?php /* vpcvcms compiled created on 2018-11-08 14:12:12
          compiled from wap/muser/new_travel.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/muser/new_travel.tpl', 53, false),)), $this); ?>
@@ -45,7 +45,7 @@ unset($_smarty_tpl_vars);
 	    </div>
 	    
 	    <div class="ban figure fix">
-	    	<div class="imgBg figure borderRadius bg_blur" style="background-image: url(<?php echo $this->_tpl_vars['user']['cover']; ?>
+	    	<div class="imgBg figure borderRadius bg_blur" style="background-image: url(<?php echo $this->_tpl_vars['muser']['cover']; ?>
 )"></div>
 	        <div class="message fix">
 	        	<div class="gaine figure" style="background-image: url(<?php echo $this->_tpl_vars['muser']['avatar']; ?>

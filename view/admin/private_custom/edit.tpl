@@ -94,6 +94,13 @@
                         </div>
 
                         <div class="form-group">
+                            <label class="control-label input_label">备注</label>
+                            <div class="">
+                                <textarea name="" id="" cols="30" rows="10" disabled>{{$detail.remark}}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label class="control-label input_label">状态</label>
                             <div class="">
                                 <select name="status" id="status">

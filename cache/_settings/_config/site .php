@@ -1,6 +1,6 @@
 <?php
  /**
- Cachefile auto created by vpcvcms , created on GMT+8 2018-11-04 14:06:35 , do not modify it!
+ Cachefile auto created by vpcvcms , created on GMT+8 2018-11-08 09:33:53 , do not modify it!
 */ 
 return array (
   'site_name' => '游行迹',

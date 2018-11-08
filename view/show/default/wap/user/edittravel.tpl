@@ -1,236 +1,246 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
-	<head>
-		<meta charset="utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-		<meta name="renderer" content="webkit" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-		<meta name="format-detection" content="telephone=no" />
-		<title>个人中心-编辑</title>
-		<meta name="keywords" content="{{TO->cfg key=" index_keywords " group="site " default="首页 "}}" />
-		<meta name="description" content="{{TO->cfg key=" index_description " group="site " default="首页 "}}" />
-		<link rel="stylesheet" href="/resource/m/css/style.css" />
-		<link rel="stylesheet" href="/resource/js/layui/css/layui.css" />
-		<link rel="stylesheet" type="text/css" href="/resource/m/css/globle.css" />
-		<script src="/resource/m/js/jquery.js"></script>
-		<script src="/resource/m/js/lib.js"></script>
-	</head>
-
-	<body class="">
-		<div class="mian">
-			<div class="save-issue">
-				<div class="wp">
-					<a href="/index.php?m=wap&c=user&v=index" class="i-close col-l" style="background-image: url(/resource/m/images/i-close.png)"></a>
-					<div class="col-r">
-						<a href="javascript:;" id="addtravel" class="i-issue" style="background-image: url(/resource/m/images/i-dh.png)">编辑</a>
-					</div>
-				</div>
-			</div>
-			<div class="g-top">
-				<div class="logo">
-					<a href="/"><img src="/resource/m/images/logo.png" alt="" /></a>
-				</div>
-				<div class="so">
-					<form action="/index.php">
-						<input type="hidden" name="m" value="wap" />
-						<input type="hidden" name="c" value="index" />
-						<input type="hidden" name="v" value="search" />
-						<input type="text" name="keyword" placeholder="请输入关键字" class="inp" />
-						<input type="submit" value="" class="sub sub1" />
-					</form>
-				</div>
-			</div>
-			<div class="row-issue">
-				<ul class="ul-tab-yz1">
-					<li class="on">
-						<a href="javascript:;">
-							<h4>编辑日志</h4>
-							<p>记录您的每一个动人深刻</p>
-						</a>
-					</li>
-				</ul>
-				<div class="m-edit-yz">
-					<div class="wp">
-						<form>
-							<div class="tit">
-								<input type="text" class="inp" value="{{$res.title}}" id="title" placeholder="请在这里输入标题">
-							</div>
-							<div class="content-txt" style="overflow: auto;margin-bottom: 0px;">
-								<textarea placeholder="请在此处编辑正文内容" class="txta1" id="describe">{{$res.describes}}</textarea>
-								<p class="r num_text">可输入
-									<a class="num_f" id="contentwordage">255</a>个字</p>
-							</div>
-							<div class="pic-video">
-								<div class="file f-pic" id="chooseImage" style="margin-bottom: 7px;">
-									<label style="background-image: url(/resource/m/images/i-plus.png)">
-	        							<em>添加图片</em>
-	        						</label>
-								</div>
-							
-								<input type="hidden" name="code" value="{{$code}}" id="code">
-								<div class="file f-pic" id="openLocation" style="margin-bottom: 7px;">
-									<label style="background-image: url(/resource/m/images/i_location.png)">
-		    							<em>添加定位</em>
-		    						</label>
-								</div>
-								<input type="hidden" name="Add" value="{{$res.address}}" id="address" title="后台返回来的定位地址">
-								<p id="Paddress" class="address">{{$res.address}}</p>
-							</div>
-							<input type="button" class="btn" id="uploadImage" value="上传图片" />
-							<ul id="previewImage">
-								{{if $res.content}}
-								{{foreach from=$res.content item=vo}}
-									<li><div class="viewThumb "><img src='{{$vo}}' /><i class="delete iz layui-icon">&#xe640;</i></div></li>
-								{{/foreach}}
-								{{/if}}
-							</ul>
-						</form>
-					</div>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+	<meta name="format-detection" content="telephone=no" />
+	<title>个人中心-编辑</title>
+	<meta name="keywords" content="{{TO->cfg key=" index_keywords " group="site " default="首页 "}}" />
+	<meta name="description" content="{{TO->cfg key=" index_description " group="site " default="首页 "}}" />
+	<link rel="stylesheet" href="/resource/m/css/style.css" />
+	<link rel="stylesheet" href="/resource/js/layui/css/layui.css" />
+	<link rel="stylesheet" type="text/css" href="/resource/m/css/globle.css" />
+	<script src="/resource/m/js/jquery.js"></script>
+	<script src="/resource/m/js/lib.js"></script>
+	<style type="text/css">
+		#previewImage li:first-child .left{display: none;}
+		#previewImage li:last-child  .right{display: none;}
+		
+		.viewThumb i{width: 30px;border-radius: 5px;}
+		
+		.viewThumb i:nth-of-type(1){left: 17%;}
+		.viewThumb i:nth-of-type(2){}
+		.viewThumb i:nth-of-type(3){left: 84%;}
+	</style>
+</head>
+<body>
+	<div class="mian">
+		<div class="save-issue">
+			<div class="wp">
+				<a href="/index.php?m=wap&c=user&v=travel" class="i-close col-l" style="background-image: url(/resource/m/images/i-close.png)"></a>
+				<div class="col-r">
+					<a href="javascript:;" id="addtravel" class="i-issue" style="background-image: url(/resource/m/images/i-dh.png)">更新编辑</a>
 				</div>
 			</div>
 		</div>
-		{{include file='wap/footer.tpl'}}
-		<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
-		<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				//解密base64编码
-				function Base64() {
-				    // private property  
-				    _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";  
-				   
-				    // public method for encoding  
-				    this.encode = function (input) {  
-				        var output = "";  
-				        var chr1, chr2, chr3, enc1, enc2, enc3, enc4;  
-				        var i = 0;  
-				        input = _utf8_encode(input);  
-				        while (i < input.length) {  
-				            chr1 = input.charCodeAt(i++);  
-				            chr2 = input.charCodeAt(i++);  
-				            chr3 = input.charCodeAt(i++);  
-				            enc1 = chr1 >> 2;  
-				            enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);  
-				            enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);  
-				            enc4 = chr3 & 63;  
-				            if (isNaN(chr2)) {  
-				                enc3 = enc4 = 64;  
-				            } else if (isNaN(chr3)) {  
-				                enc4 = 64;  
-				            }  
-				            output = output +  
-				            _keyStr.charAt(enc1) + _keyStr.charAt(enc2) +  
-				            _keyStr.charAt(enc3) + _keyStr.charAt(enc4);  
-				        }  
-				        return output;  
-				    }  
-				   
-				    // public method for decoding  
-				    this.decode = function (input) {  
-				        var output = "";  
-				        var chr1, chr2, chr3;  
-				        var enc1, enc2, enc3, enc4;  
-				        var i = 0;  
-				        input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");  
-				        while (i < input.length) {  
-				            enc1 = _keyStr.indexOf(input.charAt(i++));  
-				            enc2 = _keyStr.indexOf(input.charAt(i++));  
-				            enc3 = _keyStr.indexOf(input.charAt(i++));  
-				            enc4 = _keyStr.indexOf(input.charAt(i++));  
-				            chr1 = (enc1 << 2) | (enc2 >> 4);  
-				            chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);  
-				            chr3 = ((enc3 & 3) << 6) | enc4;  
-				            output = output + String.fromCharCode(chr1);  
-				            if (enc3 != 64) {  
-				                output = output + String.fromCharCode(chr2);  
-				            }  
-				            if (enc4 != 64) {  
-				                output = output + String.fromCharCode(chr3);  
-				            }  
-				        }  
-				        output = _utf8_decode(output);  
-				        return output;  
-				    }  
-				   
-				    // private method for UTF-8 encoding  
-				    _utf8_encode = function (string) {  
-				        string = string.replace(/\r\n/g,"\n");  
-				        var utftext = "";  
-				        for (var n = 0; n < string.length; n++) {  
-				            var c = string.charCodeAt(n);  
-				            if (c < 128) {  
-				                utftext += String.fromCharCode(c);  
-				            } else if((c > 127) && (c < 2048)) {  
-				                utftext += String.fromCharCode((c >> 6) | 192);  
-				                utftext += String.fromCharCode((c & 63) | 128);  
-				            } else {  
-				                utftext += String.fromCharCode((c >> 12) | 224);  
-				                utftext += String.fromCharCode(((c >> 6) & 63) | 128);  
-				                utftext += String.fromCharCode((c & 63) | 128);  
-				            }  
-				   
-				        }  
-				        return utftext;  
-				    }  
-				   
-				    // private method for UTF-8 decoding  
-				    _utf8_decode = function (utftext) {  
-				        var string = "";  
-				        var i = 0;  
-				        var c = c1 = c2 = 0;  
-				        while ( i < utftext.length ) {  
-				            c = utftext.charCodeAt(i);  
-				            if (c < 128) {  
-				                string += String.fromCharCode(c);  
-				                i++;  
-				            } else if((c > 191) && (c < 224)) {  
-				                c2 = utftext.charCodeAt(i+1);  
-				                string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));  
-				                i += 2;  
-				            } else {  
-				                c2 = utftext.charCodeAt(i+1);  
-				                c3 = utftext.charCodeAt(i+2);  
-				                string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));  
-				                i += 3;  
-				            }  
-				        }  
-				        return string;  
-				    }  
-				}
-				
-				var code = $("#code").val();
-				
-				var base = new Base64();              
-				var result2 = base.decode(code);//调用以上方法解密
-				
-				
-				wx.config({
-					debug: false,
-					appId: "wx9953ad5ae1108b51",
-					timestamp: '{{$timestamp}}',
-					nonceStr: '{{$nonceStr}}',
-					signature: '{{$signature}}',
-					jsApiList: [
-						'chooseImage',
-						'previewImage',
-						'uploadImage',
+		<div class="g-top">
+			<div class="logo">
+				<a href="/"><img src="/resource/m/images/logo.png" alt="" /></a>
+			</div>
+			<div class="so">
+				<form action="/index.php">
+					<input type="hidden" name="m" value="wap" />
+					<input type="hidden" name="c" value="index" />
+					<input type="hidden" name="v" value="search" />
+					<input type="text" name="keyword" placeholder="请输入关键字" class="inp" />
+					<input type="submit" value="" class="sub sub1" />
+				</form>
+			</div>
+		</div>
+		<div class="row-issue">
+			<ul class="ul-tab-yz1">
+				<li class="on" style="width: 100%;">
+					<a href="javascript:;">
+						<h4>编辑日志</h4>
+						<p>记录您的每一个动人深刻</p>
+					</a>
+				</li>
+			</ul>
+			<div class="m-edit-yz">
+				<div class="wp">
+					<form>
+						<div class="tit"><input type="text" class="inp" value="{{$res.title}}" id="title" placeholder="请在这里输入标题"></div>
+						<div class="content-txt" style="overflow: auto;margin-bottom: 0px;">
+							<textarea placeholder="请在此处编辑正文内容" class="txta1" id="describe">{{$res.describes}}</textarea>
+							<p class="r num_text">可输入<a class="num_f" id="contentwordage">255</a>个字</p>
+						</div>
+						<div class="pic-video">
+							<div class="file f-pic" id="chooseImage" style="margin-bottom: 7px;">
+								<label style="background-image: url(/resource/m/images/i-plus.png)"><em>添加图片</em></label>
+							</div>
 						
-						'getNetworkType',//网络状态接口
-						'checkJsApi',//使用微信内置地图查看地理位置接口
-	        			'openLocation',
-	        			'getLocation'
-					]
-				});
-				var list = "{{$res.str_content}}".split(',');
-				var index = {
+							<input type="hidden" name="code" value="{{$code}}" id="code">
+							<div class="file f-pic" id="openLocation" style="margin-bottom: 7px;">
+								<label style="background-image: url(/resource/m/images/i_location.png)">
+	    							<em>添加定位</em>
+	    						</label>
+							</div>
+							<input type="hidden" name="Add" value="{{$res.address}}" id="address" title="后台返回来的定位地址">
+							<p id="Paddress" class="address">{{$res.address}}</p>
+						</div>
+						<input type="button" class="btn" id="uploadImage" value="上传图片" />
+						<ul id="previewImage">
+							{{if $res.content}}
+							{{foreach from=$res.content item=vo}}
+								<li><div class="viewThumb ">
+									<img src='{{$vo}}' />
+									<i class="iz layui-icon left">&#xe603;</i>
+									<i class="iz layui-icon delete">&#xe640;</i>
+                                    <i class="iz layui-icon right">&#xe602;</i>
+									</div>
+								</li>
+							{{/foreach}}
+							{{/if}}
+						</ul>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{include file='wap/footer.tpl'}}
+	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			//解密base64编码
+			function Base64(){
+			    // private property
+			    _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+
+			    // public method for encoding
+			    this.encode = function (input){
+			        var output = "";
+			        var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+			        var i = 0;
+			        input = _utf8_encode(input);
+			        while (i < input.length){
+			            chr1 = input.charCodeAt(i++);
+			            chr2 = input.charCodeAt(i++);
+			            chr3 = input.charCodeAt(i++);
+			            enc1 = chr1 >> 2;
+			            enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+			            enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+			            enc4 = chr3 & 63;
+			            if (isNaN(chr2)){
+			                enc3 = enc4 = 64;
+			            }
+			            else if (isNaN(chr3)){
+			                enc4 = 64;
+			            }
+			            output = output +_keyStr.charAt(enc1) + _keyStr.charAt(enc2) + _keyStr.charAt(enc3) + _keyStr.charAt(enc4);
+			        }
+			        return output;
+			    }  
+			   
+			    // public method for decoding
+			    this.decode = function (input){
+			        var output = "";
+			        var chr1, chr2, chr3;
+			        var enc1, enc2, enc3, enc4;
+			        var i = 0;
+			        input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+			        while (i < input.length) {
+			            enc1 = _keyStr.indexOf(input.charAt(i++));
+			            enc2 = _keyStr.indexOf(input.charAt(i++));
+			            enc3 = _keyStr.indexOf(input.charAt(i++));
+			            enc4 = _keyStr.indexOf(input.charAt(i++));
+			            chr1 = (enc1 << 2) | (enc2 >> 4);
+			            chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+			            chr3 = ((enc3 & 3) << 6) | enc4;
+			            output = output + String.fromCharCode(chr1);
+			            if (enc3 != 64) {
+			                output = output + String.fromCharCode(chr2);
+			            }
+			            if (enc4 != 64) {
+			                output = output + String.fromCharCode(chr3);
+			            }
+			        }
+			        output = _utf8_decode(output);
+			        return output;
+			    }
+
+			    // private method for UTF-8 encoding  
+			    _utf8_encode = function (string){
+			        string = string.replace(/\r\n/g,"\n");  
+			        var utftext = "";
+			        for (var n = 0; n < string.length; n++){  
+			            var c = string.charCodeAt(n);
+			            if (c < 128) {
+			                utftext += String.fromCharCode(c);  
+			            }
+			            else if((c > 127) && (c < 2048)) {
+			                utftext += String.fromCharCode((c >> 6) | 192);
+			                utftext += String.fromCharCode((c & 63) | 128);
+			            }
+			            else{
+			                utftext += String.fromCharCode((c >> 12) | 224);  
+			                utftext += String.fromCharCode(((c >> 6) & 63) | 128);  
+			                utftext += String.fromCharCode((c & 63) | 128);
+			            }
+			        }
+			        return utftext;  
+			    }
+
+			    // private method for UTF-8 decoding  
+			    _utf8_decode = function (utftext){
+			        var string = "";
+			        var i = 0;
+			        var c = c1 = c2 = 0;  
+			        while ( i < utftext.length ){  
+			            c = utftext.charCodeAt(i);  
+			            if (c < 128){
+			                string += String.fromCharCode(c);  
+			                i++;
+			            }
+			            else if((c > 191) && (c < 224)) {
+			                c2 = utftext.charCodeAt(i+1);
+			                string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));  
+			                i += 2;
+			            }
+			            else {
+			                c2 = utftext.charCodeAt(i+1);
+			                c3 = utftext.charCodeAt(i+2);
+			                string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+			                i += 3;
+			            }
+			        }
+			        return string;
+			    }
+			}
+			
+			var code = $("#code").val();
+			
+			var base = new Base64();              
+			var result2 = base.decode(code);//调用以上方法解密
+			
+			
+			wx.config({
+				debug: false,
+				appId: "wx9953ad5ae1108b51",
+				timestamp: '{{$timestamp}}',
+				nonceStr: '{{$nonceStr}}',
+				signature: '{{$signature}}',
+				jsApiList: [
+					'chooseImage',
+					'previewImage',
+					'uploadImage',
+					
+					'getNetworkType',//网络状态接口
+					'checkJsApi',//使用微信内置地图查看地理位置接口
+        			'openLocation',
+        			'getLocation'
+				]
+			});
+			var list = "{{$res.str_content}}".split(',');
+			var index = {
 					init: function() {
 						var me = this;
 						me.render();
 						me.bind();
 					},
 					datas: {
-						
 						localId: [],
 						serverId: [],
 						imgsrc: {{if $res.str_content}}list {{else}}[]{{/if}},
@@ -241,7 +251,10 @@
 						me.chooseImage = $('#chooseImage');
 						me.uploadImage = $('#uploadImage');
 						me.addtravel = $('#addtravel');
-						me.deleter = $('#previewImage li');
+						
+						me.left = $('#previewImage li .left');     //往左移动
+						me.deleter = $('#previewImage li .delete');//删除图片
+						me.right = $('#previewImage li .right');   //往右移动
 					
 						me.openLocation = $('#openLocation');
 					},
@@ -250,7 +263,10 @@
 						me.chooseImage.on('click', $.proxy(me['_chooseImage'], this));
 						me.uploadImage.on('click', $.proxy(me['_uploadImage'], this));
 						me.addtravel.on('click', $.proxy(me['_addtravel'], this));
-						$("#previewImage").on('click', me.deleter, $.proxy(me['_delete'], this));
+						
+						$("#previewImage li .left").on('click', me.left,    $.proxy(me['_left'], this));
+						$("#previewImage li .delete").on('click', me.deleter, $.proxy(me['_delete'], this));
+						$("#previewImage li .right").on('click', me.right,   $.proxy(me['_right'], this));
 						
 						me.openLocation.on('click', $.proxy(me['_openLocation'], this));
 					},
@@ -268,7 +284,7 @@
 								};
 								var i = 0,
 									length = localIds.length;
-
+	
 								function upload() {
 									wx.uploadImage({
 										localId: localIds[i],
@@ -288,7 +304,13 @@
 								(function($) {
 									var imglist = "";
 									$.each(res.localIds, function(i, n) { //这里是显示已选择的图片  
-										imglist += '<li><div class="viewThumb "><img src=' + n + '  /><i class="delete iz layui-icon">&#xe640;</i></div></li>';
+										imglist += '<li><div class="viewThumb">'+
+															'<img src=' + n + '  />'+
+															'<i class="iz layui-icon left">&#xe603;</i>'+
+															'<i class="iz layui-icon delete">&#xe640;</i>'+
+						                                    '<i class="iz layui-icon right">&#xe602;</i>'+
+														'</div>'+
+													'</li>';
 									});
 									$("#previewImage").append(imglist);
 									var lengli = $("#previewImage li").length;
@@ -362,7 +384,22 @@
 							}
 						}, "JSON");
 					},
-					_delete: function(e) {
+					
+					_left: function(e){
+						e.stopPropagation();
+						var me = this;
+						var li = $(e.target).parents('li').index();
+						
+						var src1 = me.datas.imgsrc[li-1];//先把图片路径的值拿出来并储存，才能在下面赋值，不能直接赋值，否则会产生覆盖问题！
+						var src2 = me.datas.imgsrc[li];
+						
+						me.datas.imgsrc.splice((li-1), 1, src2);
+						me.datas.imgsrc.splice(li, 1, src1);
+	
+						$(e.target).siblings("img").attr("src",src1);
+	            		$(e.target).parents('li').prev().find("img").attr("src",src2);
+					},
+					_delete: function(e){
 						e.stopPropagation();
 						var me = this;
 						var li = $(e.target).parents('li').index();
@@ -373,9 +410,24 @@
 						var lengli = $("#previewImage li").length;
 						if(lengli >= 9) {
 							$('#chooseImage').hide();
-						} else {
+						}
+						else {
 							$('#chooseImage').show();
 						}
+					},
+					_right: function(e){
+						e.stopPropagation();
+						var me = this;
+						var li = $(e.target).parents('li').index();
+						
+						var src1 = me.datas.imgsrc[li+1];//先把图片路径的值拿出来并储存，才能在下面赋值，不能直接赋值，否则会产生覆盖问题！
+						var src2 = me.datas.imgsrc[li];
+	
+						me.datas.imgsrc.splice(li, 1, src1);
+						me.datas.imgsrc.splice((li+1), 1, src2);
+	
+						$(e.target).siblings("img").attr("src",src1);
+	            		$(e.target).parents('li').next().find("img").attr("src",src2);
 					},
 					
 					_openLocation: function(e) {
@@ -437,48 +489,47 @@
 						});
 					}
 				}
-				index.init();
-				
-				
-				var limitNum = 255;
-				var num = $('.txta1').val().length;
-				var s = limitNum - num;
-				if(s < 0) {
-					$('.txta1').val(setString($('.txta1').val(), 255));
-					$('#contentwordage').html(0);
-					return false;
-				}
-				$('#contentwordage').html(s);
-				$('.txta1').keyup(
-					function() {
-						var remain = $(this).val().length;
-						if(remain > 255) {
-							$('.txta1').val(setString($('.txta1').val(), 255));
-							var result = 0;
-						} else {
-							var result = limitNum - remain;
-						}
-						$('#contentwordage').html(result);
-					}
-				);
-			});
-
-			function setString(str, len) {
-				var strlen = 0;
-				var s = "";
-				for(var i = 0; i < str.length; i++) {
-					strlen++;
-					s += str.charAt(i);
-					if(strlen >= len) {
-						return s;
-					}
-				}
-				return s;
+			index.init();
+			
+			
+			var limitNum = 255;
+			var num = $('.txta1').val().length;
+			var s = limitNum - num;
+			if(s < 0) {
+				$('.txta1').val(setString($('.txta1').val(), 255));
+				$('#contentwordage').html(0);
+				return false;
 			}
-			function ChangeTime() {
-				window.location.href = '/index.php?m=wap&c=user&v=index';
-			}
-		</script>
-	</body>
+			$('#contentwordage').html(s);
+			$('.txta1').keyup(
+				function() {
+					var remain = $(this).val().length;
+					if(remain > 255) {
+						$('.txta1').val(setString($('.txta1').val(), 255));
+						var result = 0;
+					} else {
+						var result = limitNum - remain;
+					}
+					$('#contentwordage').html(result);
+				}
+			);
+		});
 
+		function setString(str, len) {
+			var strlen = 0;
+			var s = "";
+			for(var i = 0; i < str.length; i++) {
+				strlen++;
+				s += str.charAt(i);
+				if(strlen >= len) {
+					return s;
+				}
+			}
+			return s;
+		}
+		function ChangeTime() {
+			window.location.href = '/index.php?m=wap&c=user&v=travel';
+		}
+	</script>
+</body>
 </html>

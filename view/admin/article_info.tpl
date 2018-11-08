@@ -67,7 +67,8 @@
 
         <tr>
         	<td colspan="2" class="td27">
-            	<a href="javascript:void(0);" class="btn active">缩略图</a>
+            	<a href="javascript:void(0);" class="btn active">详情页，顶部大图</a>
+                <span style="color: red;">尺寸 1920 * 800</span>
             </td>
         </tr>
         <tr class="noborder">
@@ -75,8 +76,8 @@
                 <div id="uploader-single">
                     <!--用来存放item-->
                     <div id="fileList" class="uploader-list">
-                        {{if $article.articlethumb}}
-                        <img width="120" height="90" src="{{$article.articlethumb}}" />
+                        {{if $article.articlepic}}
+                        <img width="120" height="90" src="{{$article.articlepic}}" />
                         {{/if}}
                     </div>
                     <div id="filePicker">选择图片</div>
@@ -253,6 +254,8 @@
             </td>
         </tr>
     </table>
+
+    <!--详细信息-->
     <table class="mtb mtb-hide" id="detail-table">
         <tr><td colspan="2" class="td27">详细内容</td></tr>
         <tr class="noborder">
@@ -261,6 +264,8 @@
             </td>
         </tr>
     </table>
+
+    <!--优化信息-->
     <table class="mtb mtb-hide" id="seo-table">
         <tr><td colspan="2" class="td27">tagword</td></tr>
         <tr class="noborder">
@@ -291,6 +296,8 @@
             <td class="vtop tips2">请填写Description</td>
         </tr>
     </table>
+
+    <!--信息-->
     <table class="mtb mtb-hide" id="other-table">
         <tr><td colspan="2" class="td27">浏览数</td></tr>
         <tr class="noborder">

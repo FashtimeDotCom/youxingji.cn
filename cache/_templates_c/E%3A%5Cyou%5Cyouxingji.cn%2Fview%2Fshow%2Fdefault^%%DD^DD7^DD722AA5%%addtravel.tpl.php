@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-09-13 19:50:56
+<?php /* vpcvcms compiled created on 2018-11-07 10:08:16
          compiled from user/addtravel.tpl */ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -31,10 +31,8 @@
 			    margin-right: 9px;
 				background:rgba(248,89,89,1);
 				color:rgba(254,254,254,1);}
-		.sub{
-			background:rgba(249,249,249,1)  !important ;
-			color:rgba(102,102,102,1) !important;
-		}
+		.sub{background:rgba(249,249,249,1)  !important ;
+			 color:rgba(102,102,102,1) !important;}
 	</style>
 </head>
 <body>
@@ -65,81 +63,57 @@ unset($_smarty_tpl_vars);
 				</li>
 			</ul>
 			<style type="text/css">
-                .upic {
-                    display: inline-block;
-                }
-                .upic,.layui-upload-img {
-                    width: 150px;
-                    height: 150px;
-                    cursor:pointer;
-                    margin: 0 15px 15px 0;
-                    position: relative;
-                }
-                .upic i {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    width: 100px;
-                    height: 100px;
-                    -webkit-border-radius: 50%;
-                    -moz-border-radius: 50%;
-                    border-radius: 50%;
-                    background: rgba(0,0,0,.2);
-                    color: #fff;
-                    text-align: center;
-                    font-size: 24px;
-                    line-height: 100px;
-                    opacity: 0;
-                    -webkit-transition: all .3s;
-                    -moz-transition: all .3s;
-                    -o-transition: all .3s;
-                    transition: all .3s;
-                    -o-border-radius: 50%;
-                    -ms-border-radius: 50%;
-                    -ms-transition: all .3s;
-                }
-                .upic:hover i {
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    width: 48px;
-                    height: 48px;
-                    line-height: 48px;
-                    opacity: 1;
-                }
-              	.num_text {
-                    font-size: 12px;
-                    color: #868686;
-                    line-height: 20px;
-                }
-              	.num_f {
-                    color: #d71618;
-                }
+				#piclist .upic:first-child .left{display: none;}
+				#piclist .upic:last-child  .right{display: none;}
+				
+                .upic{display: inline-block;}
+                .upic,.layui-upload-img{width: 150px;height: 150px;cursor:pointer;margin: 0 15px 15px 0;position: relative;}
+                
+                .upic i{position: absolute;transform: translate(-50%, -50%);width: 100px;height: 100px;
+	                    -webkit-border-radius: 50%;-moz-border-radius: 50%;border-radius: 50%;background: rgba(0,0,0,.2);
+	                    color: #fff;text-align: center;font-size: 24px;line-height: 100px;opacity: 0;
+	                    -webkit-transition: all .3s;-moz-transition: all .3s;-o-transition: all .3s;
+	                    transition: all .3s;-o-border-radius: 50%;-ms-border-radius: 50%;-ms-transition: all .3s;}
+	            .upic i:nth-of-type(1){bottom: 0%;right: 78px;}
+                .upic i:nth-of-type(2){bottom: 0%;right: 28px;}
+                .upic i:nth-of-type(3){bottom: 0%;right: -24px;}
+                
+                .upic:hover i{bottom: 0%;transform: translate(-50%, -50%);width: 48px;height: 48px;line-height: 48px;opacity: 1;}
+                
+                .upic:hover i:nth-of-type(1){right: 78px;}
+                .upic:hover i:nth-of-type(2){right: 28px;}
+                .upic:hover i:nth-of-type(3){right: -24px;}
+              	
+              	.num_text {font-size: 12px;color: #868686;line-height: 20px; }
+              	.num_f {color: #d71618;}
             </style>
             <div class="m-con-lb1">
                 <div class="col-l">
                     <div class="m-edit-lb">
-                        <div class="tit">
-                            <input type="text" class="inp" value="<?php echo $this->_tpl_vars['res']['title']; ?>
-" id="title" placeholder="请在这里输入标题">
-                        </div>
+                        <div class="tit"><input type="text" class="inp" value="<?php echo $this->_tpl_vars['res']['title']; ?>
+" id="title" placeholder="请在这里输入标题"></div>
                         <div class="tit">
                             <textarea type="text" class="inp txta1" id="describe" placeholder="请在这里输入描述" style="height: 100px;line-height: 25px;padding: 10px 15px;"><?php echo $this->_tpl_vars['res']['describe']; ?>
 </textarea>
                           	<p class="r num_text">可输入<a class="num_f" id="contentwordage">255</a>个字</p>
                         </div>
                         <div class="layui-upload">
-                        	<button type="button" class="layui-btn" id="layui_upload_icon">
-							  	<i class="layui-icon">&#xe67c;</i>上传图片
-							</button>
+                        	<button type="button" class="layui-btn" id="layui_upload_icon"><i class="layui-icon">&#xe67c;</i>上传图片</button>
+
                             <blockquote class="layui-elem-quote layui-quote-nm" id="picslist" style="margin-top: 10px;<?php if ($this->_tpl_vars['res']['content']['0'] == ''): ?>display:none;<?php endif; ?>padding-bottom: 0px;width: 524px;padding-right: 0px;">
                                 <div class="layui-upload-list" id="piclist">
+                                	
+                                	<!--下面这个 FOR循坏 是给草稿箱用的-->
                                     <?php $_from = $this->_tpl_vars['res']['content']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
     foreach ($_from as $this->_tpl_vars['vo']):
 ?>
-                                        <div class="upic" onclick="deletepic(this)"><img src="<?php echo $this->_tpl_vars['vo']; ?>
-" class="layui-upload-img"><i class="iz layui-icon">&#xe640;</i></div>
+                                    <div class="upic">
+                                    	<img src="<?php echo $this->_tpl_vars['vo']; ?>
+" class="layui-upload-img">
+                                    	<i class="iz layui-icon left" onclick="leftpic(this)">&#xe603;</i>
+                                    	<i class="iz layui-icon" onclick="deletepic(this)">&#xe640;</i>
+                                    	<i class="iz layui-icon right" onclick="rightpic(this)">&#xe602;</i>
+                                    </div>
                                     <?php endforeach; endif; unset($_from); ?>
                                 </div>
                             </blockquote>
@@ -147,14 +121,12 @@ unset($_smarty_tpl_vars);
                         <br>
                         <div class="fabu">
 							<input type="hidden" name="did" value="<?php echo $this->_tpl_vars['did']; ?>
-" id="did">
+" id="did" title="草稿箱的ID">
 							<input type="submit"  class="subbtn" id="btnAdd" value="发布">
 							<input type="button"  class="sub" onclick="javascript:window.history.back(-1);"  value="取消" />
 							<input type="button" class="sub"  id="btnDraft" value="保存草稿" />
 							<div class="xieyi">
-								<label>
-		                            <input type="checkbox" checked>我已阅读并同意<a href="/article/hyzn">《游行迹协议》</a>
-		                        </label>
+								<label><input type="checkbox" checked>我已阅读并同意<a href="/article/hyzn">《游行迹协议》</a></label>
 							</div>
 						</div>
                     </div>
@@ -186,6 +158,7 @@ unset($_smarty_tpl_vars);
             </div>
         </div>
     </div>
+    
     <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => 'public/footer.tpl', 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
@@ -194,7 +167,7 @@ unset($_smarty_tpl_vars);
   	<link rel="stylesheet" href="/resource/css/slick.css">
     <script src="/resource/js/slick.min.js"></script>
     <script src="/resource/layui/layui.all.js"></script>
-  	<script>
+  	<script type="text/javascript">
         $(document).ready(function() {
             $('.m-pic2-qm .slider').slick({
                 dots: false,
@@ -205,10 +178,7 @@ unset($_smarty_tpl_vars);
                 pauseOnHover: false,
                 lazyLoad: 'ondemand'
             });
-        });
-    </script>
-    <script type="text/javascript">
-      	$(document).ready(function(){
+
 		    var limitNum = 255;
 		    var num = $('.txta1').val().length;
 		    var s = limitNum - num;
@@ -268,7 +238,13 @@ unset($_smarty_tpl_vars);
 	                    return false;
 	                }
 	                $("#picslist").show();
-	                $('#piclist').append('<div class="upic" onclick="deletepic(this)"><img src="'+ res.url +'" class="layui-upload-img"><i class="iz layui-icon">&#xe640;</i></div>');
+	                var html  = '<div class="upic">'+
+	                				'<img src="'+ res.url +'" class="layui-upload-img">'+
+	                				'<i class="iz layui-icon left" onclick="leftpic(this)">&#xe603;</i>'+
+                                   	'<i class="iz layui-icon" onclick="deletepic(this)">&#xe640;</i>'+
+                                    '<i class="iz layui-icon right" onclick="rightpic(this)">&#xe602;</i>'+
+	                			'</div>';
+	                $('#piclist').append(html);
 	                jcnum();
 			    	//上传完毕回调
 			    	layer.closeAll('loading'); //关闭loading
@@ -279,11 +255,29 @@ unset($_smarty_tpl_vars);
 			    }
 			});
 		});
-
+		
+        
+        //往左移动
+        function leftpic(obj){
+            var src1 = $(obj).siblings("img").attr("src");
+            var src2 = $(obj).parent().prev().children("img").attr("src");
+            $(obj).siblings("img").attr("src",src2);
+            $(obj).parent().prev().children("img").attr("src",src1);
+        }
+        //往右移动
+    	function rightpic(obj){
+            var src1 = $(obj).siblings("img").attr("src");
+            var src2 = $(obj).parent().next().children("img").attr("src");
+            $(obj).siblings("img").attr("src",src2);
+            $(obj).parent().next().children("img").attr("src",src1);
+        }
+    	
+		//删除图片
         function deletepic(obj){
-            $(obj).remove();
+            $(obj).parent().remove();
             jcnum();
         }
+        
         function jcnum(){
             var num = $('#piclist').children('.upic').length;
             if(num >= 9){

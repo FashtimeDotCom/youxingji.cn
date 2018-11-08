@@ -35,7 +35,7 @@
 	    </div>
 	    
 	    <div class="ban figure fix">
-	    	<div class="imgBg figure borderRadius bg_blur" style="background-image: url({{$user.cover}})"></div>
+	    	<div class="imgBg figure borderRadius bg_blur" style="background-image: url({{$muser.cover}})"></div>
 	        <div class="message fix">
 	        	<div class="gaine figure" style="background-image: url({{$muser.avatar}});"></div>
 	        	<div class="rightBox">

@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-08-10 09:31:32
+<?php /* vpcvcms compiled created on 2018-11-07 16:05:57
          compiled from public/footer.tpl */ ?>
 <style>
 	.footer {

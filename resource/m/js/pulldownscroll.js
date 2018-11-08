@@ -164,7 +164,7 @@ var scrollTop;     //获取滚动条到顶部的距离
 var scrollHeight;  //获取文档区域高度 
 var windowHeight;  //获取滚动条的高度
 var flag = true;   //加载数据标志
-var html="";
+
 $(window).scroll(function(){
     scrollTop = $(this).scrollTop();     
     scrollHeight = $(document).height(); 
@@ -236,6 +236,7 @@ $(window).scroll(function(){
                 },
                 success:function( data ){
                     if(data.status == 1){
+	                	var html="";
 	                	$.each(data.tips,function(i,item){
 							html += '<div class="item fix item_'+ data.tips[i].id+'">'+
 										'<div class="wp fix">';

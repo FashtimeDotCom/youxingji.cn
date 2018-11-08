@@ -1,0 +1,101 @@
+/*2018-11-08  10:00:10
+ * HQS 
+ * 
+ * 游行迹   首页
+ * */
+
+
+.dis_block{display: block!important;}
+.dis_none {display: none!important;}
+
+.Iclass{font-style: normal;}
+
+.omit{display: -webkit-box!important;-webkit-box-orient: vertical;overflow: hidden;}
+.lineNumber2{-webkit-line-clamp: 2;}
+.lineNumber3{-webkit-line-clamp: 3;}
+.lineNumber4{-webkit-line-clamp: 4;}
+.lineNumber5{-webkit-line-clamp: 5;}
+
+
+.fix{*zoom:1;}
+.fix:after{display:block; content:"clear"; height:0; clear:both; overflow:hidden; visibility:hidden;}
+.divClear{clear: both;}
+
+
+/*模仿朋友圈   九宫格显示    防止图片变形*/
+.figure{padding-bottom: ; /* 关键就在这里 */
+		  	background-position: center;
+		  	background-repeat: no-repeat;
+		  	background-size: cover;border-radius: 5px;}
+
+.borderRadius{border-radius:0px!important;}
+.borderRadius50{border-radius:50%!important;}
+
+
+
+
+
+
+
+
+
+
+
+
+/*轮播图 下的 平台注册用户*/
+.index_warp{width: 100%!important;padding-bottom: 10px;border-bottom: 1px #f2f2f5 solid;}
+.index_warp .text-center span{font-style: italic;}
+
+
+/*达人邦*/
+.divtitle{line-height: 53px;margin: .2rem auto .6rem;}
+.divtitle .index_title{float: left;width: auto;font-size: 1.2rem;font-weight: 500;}
+.divtitle .more {width:auto;float: right;font-size: .9rem;position: relative;
+				font-family: '博洋行书';color: rgba(245, 110, 110, 1);}
+.divtitle .more span{font-size: 0.35rem;font-family: 'MicrosoftYaHei';color: rgba(102, 102, 102, 1);float: left;}
+.divtitle .more .icon{display: inline-block;width: 14px;margin-top: 20px; margin-left: 9px;}
+
+
+.header .wp{height: 85px;}
+.wp{width: 1200px;max-width:none!important;}
+
+
+/*达人邦*/
+.s2 .s2_content {position: relative;margin: 0px auto;width: 1200px;height: 482px;text-align: center;overflow: hidden;}
+.s2 .s2_content .dis_block{position:absolute;top:-5px;width:205px;height:492px;overflow: hidden;
+							transform:rotate(3deg);-webkit-transform:rotate(3deg);}
+
+.s2 .s2_content .dis_block .picture{max-width: none;width:234px;height:492px;position:relative;
+									transition:all 1s ease;-webkit-transition:all 1s ease;-moz-transition:all 1s ease;
+									transform:rotate(-3deg);-webkit-transform:rotate(-3deg);
+									left:-15px;top:-1px;}
+.s2 .s2_content .dis_block .message{position:absolute;bottom:0px;left:0px;
+									transform:rotate(-3deg);-webkit-transform:rotate(-3deg);
+									transition:all 1s ease;-webkit-transition:all 1s ease;-moz-transition:all 1s ease;}
+.s2 .s2_content .dis_block .message .name{width:140px;line-height:34px;color:#fff;margin-bottom: 5px;
+										    border-bottom-right-radius: 17px;border-top-right-radius: 17px;font-size:18px;
+										    background: -webkit-linear-gradient(left, #e25252 , #fb5151); /* Safari 5.1 - 6.0 */
+											background: -o-linear-gradient(right, #e25252, #fb5151); /* Opera 11.1 - 12.0 */
+											background: -moz-linear-gradient(right, #e25252, #fb5151); /* Firefox 3.6 - 15 */
+											background: linear-gradient(to right, #e25252 , #fb5151); /* 标准的语法 */}
+.s2 .s2_content .dis_block .message .name span{display:block;width:100%;text-align:center;}
+.s2 .s2_content .dis_block .message .text{opacity: 0;background: rgba(0,0,0,0.5);color: #fff;font-size: 12px;margin-left: 10px;
+										  line-height: 16px;padding: 10px 10px;border-radius: 5px;text-align: justify;width: 162px;}
+
+.item1{left:-12px;z-index: 1;}
+.item1 .picture{left:-3px!important;}
+.item1 .message{left: 20px!important;}
+
+.item2{left:193px;z-index: 2;}
+
+.item3{left:398px;z-index: 3;}
+
+.item4{left:600px;z-index: 4;}
+
+.item5{left:802px;z-index: 5;}
+
+.item6{right:-12px;z-index: 6;width: 209px!important;}
+
+.s2 .s2_content .dis_block:hover .picture{transform: rotate(-3deg) scale(1.1);-webkit-transform: rotate(-3deg) scale(1.1);}
+.s2 .s2_content .dis_block:hover .message{transform:rotate(-3deg) translateY(-45px);-webkit-transform: rotate(-3deg) translateY(-45px);}
+.s2 .s2_content .dis_block:hover .message .text{opacity: 1;}

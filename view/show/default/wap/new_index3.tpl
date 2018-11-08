@@ -142,22 +142,23 @@
 			{{if $travel_list}}
 			{{foreach from=$travel_list key=key item=item}}
 			<div class="d_item fix">
+				<article class="user">
+					<a class="headPortrait figure" style="background-image: url({{$item.user_info.headpic}});" href="index.php?m=wap&c=muser&v=index&id={{$item.uid}}"></a>
+					<aside>
+						<h4 class="nickname apostrophe">{{$item.user_info.username}}</h4>
+						<time class="logTime">{{$item.addtime}}</time>
+					</aside>
+				</article>
 				<div class="txt">
 					<a class="dis_block" href="/index.php?m=wap&c=index&v=star_detail&id={{$item.id}}">{{$item.describes}}</a>
 				</div>
 				<dl class="list-img list_img">
 					{{foreach from=$item.content item=v}}
-					<dd><a href="{{$v}}" class="lightbox figure" rel="list{{$item.id}}" style="background-image: url({{$v}});"></a></dd>
+					<dd><a href="{{$v}}" class="lightbox figure piece" rel="list{{$item.id}}" style="background-image: url({{$v}});"></a></dd>
 					{{/foreach}}
 				</dl>
+				</a>
 				
-				<article class="user">
-					<a class="headPortrait figure" style="background-image: url({{$item.user_info.headpic}});" href="index.php?m=wap&c=muser&v=index&id={{$item.uid}}"></a>
-					<aside style="float: left;">
-						<h4 class="nickname apostrophe">{{$item.user_info.username}}</h4>
-						<time class="logTime">{{$item.addtime}}</time>
-					</aside>
-				</article>
 				<div class="interact gaine fix">
 					<span class="Read"><img class="icon_check" src="/resource/m/images/common/icon_check.png" /><i class="Iclass">{{$item.shownum}}</i></span>
 					<span class="spot zan" onclick="zan(this,{{$item.id}})" data-sign="his" data-nature="list" data-val="travel_num">
@@ -200,10 +201,12 @@
 			<div class="flex-video" style="width: 100%;">
 				{{if $tv_list}}
 				{{foreach from=$tv_list key=key item=item}}
-				<div class="video">
-					<div class="pic figure" data-src="{{$item.url}}" onclick="js_video(this)" data-id="{{$item.id}}" style="background-image: url(http://www.youxingji.cn{{$item.pics}});"></div>
-					<div class="txt"><a href="/index.php?m=wap&c=index&v=tv_detail&id={{$item.id}}">{{$item.title}}</a></div>
-				</div>
+				<a class="dis_block lump" href="/index.php?m=wap&c=index&v=tv_detail&id={{$item.id}}">
+					<div class="video">
+						<div class="pic figure" style="background-image: url(http://www.youxingji.cn{{$item.pics}});"></div>
+						<div class="txt">{{$item.title}}</div>
+					</div>
+				</a>
 				{{/foreach}}
 				{{/if}}
 			</div>
@@ -242,15 +245,15 @@
 		</article>
 		
 		<!--独家旅行-->
-		<article class="article">
-			<div class="TitleBox">
-				<h3 class="title">独家旅行</h3>
-				<ul class="tab_list"><li class="onn">独家项目</li><li>独家资源</li></ul>
+		<article class="article tour">
+			<div class="TitleBox fix">
 				<!--<h3 class="title">独家旅行</h3>
-				<ul class="nav_list fix"><li class="onn">独家线路</li><li>私人订制</li></ul>-->
+				<ul class="tab_list"><li class="onn">独家项目</li><li>独家资源</li></ul>-->
+				<h3 class="title">独家旅行</h3>
+				<ul class="nav_list fix"><li class="onn">独家线路</li><li>私人订制</li></ul>
 			</div>
-			<div class="tab_con">
-				<div class="tab_box">
+			<div class="tab_con fix">
+				<!--<div class="tab_box">
 					<ul class="box_list">
 						<li class="on">达人带你去旅行</li>
 						<li>名师带你去写生</li>
@@ -308,23 +311,22 @@
 						</div>
 						{{/foreach}}
 						{{/if}}
-	
 					</div>
-				</div>
+				</div>-->
 			
-				<!--<div class="tab_box exclusive">
+				<div class="tab_box exclusive">
 					<div class="con_list">
 						<div class="con_list_box">
 							<div class="swiper-container" id="bannerSwiper4">
 								<div class="swiper-wrapper">
-									{{if $travel}}
-									{{foreach from=$travel item=item key=key}}
+									{{if $journey_list}}
+									{{foreach from=$journey_list item=item key=key}}
 									<div class="swiper-slide boxes">
-										<a class="dis_block fix" href="index.php?m=wap&c=index&v=travel_detail&id={{$item.id}}">
-											<img class="fix" src="{{$item.thumbfile}}" />
+										<a class="dis_block fix" href="index.php?m=wap&c=index&v=journeydetail&id={{$item.id}}">
+											<img class="fix" src="{{$item.articlethumb}}" />
 											<div class="con">
-												<p class="headline">{{$item.title}}</p>
-												<p class="price"><span>￥{{$item.price}}<i class="Iclass"> 起</i></span></p>
+												<div class="headline">{{$item.title}}</div>
+												<div class="price">￥{{$item.price}}<i class="Iclass"> 起</i></div>
 											</div>
 										</a>
 									</div>
@@ -346,10 +348,11 @@
 							<input class="matter destination" type="text" name="" id="destination" maxlength="300" value="" placeholder="目的地" />
 							<input class="matter name" type="text" name="" id="name" maxlength="20" value="" placeholder="姓名" />
 							<input class="matter PhoneNum" type="number" name="" id="PhoneNum" value="" placeholder="手机号码" onkeyup="judgeIsNonNull1(event)" />
+							<input class="matter destination" type="text" name="remark" id="remark" maxlength="300" value="" placeholder="备注(可选填)" />
 							<button class="submitInfo">提交信息</button>
 						</div>
 					</div>
-				</div>-->
+				</div>
 			</div>
 		</article>
 
@@ -397,7 +400,6 @@
 	</script>
 	
 	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
-    <script type="text/javascript" src="/resource/m/js/opentv.js" title="移动端    所有页面  的  【打开、关闭视频】"></script>
     <script type="text/javascript" src="/resource/m/js/dianzan.js" title="移动端    所有页面  的  【点赞】"></script>
 
 	<script type="text/javascript">
@@ -440,11 +442,12 @@
 				var destination = $("#destination").val();
 				var name = $("#name").val();
 				var PhoneNum = $("#PhoneNum").val();
+				var remark = $("#remark").val();
 				if( destination == "" ){
 					layer.msg('请输入目的地！');
 					return false;
 				}else if(destination.replace(/(^\s*)|(\s*$)/g, "")==""){
-					layer.msg('目的地不能只输入空格！');
+					layer.msg('目的地栏不能只输入空格！');
 					return false;
 				}
 				
@@ -452,7 +455,7 @@
 					layer.msg('请输入姓名！');
 					return false;
 				}else if(name.replace(/(^\s*)|(\s*$)/g, "")==""){
-					layer.msg('姓名框不能只输入空格！');
+					layer.msg('姓名栏不能只输入空格！');
 					return false;
 				}
 				
@@ -468,10 +471,17 @@
                 	return false;
             	}
 				
+				if( remark != "" ){
+					if(remark.replace(/(^\s*)|(\s*$)/g, "")==""){
+						remark="";
+					}
+				}
+				
 				$.post("/index.php?m=api&c=index&v=private_custom", {
 					'address':destination,
 					'username':name,
 					'mobile':PhoneNum,
+					'remark':remark,
 				}, function(data){
 					layer.msg(data.tips);
 				},"JSON");

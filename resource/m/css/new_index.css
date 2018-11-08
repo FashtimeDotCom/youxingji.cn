@@ -22,7 +22,7 @@
 .widthHeight{display: inline-block;width: 100%;height: 100%;}
 
 .article{margin: .7rem 0;}
-.article .TitleBox{height: 2.5rem;}
+.article .TitleBox{}
 .article .TitleBox .title{font-weight: 500;float: left;}
 
 /*达人邦*/
@@ -34,13 +34,13 @@
 
 .log .d_item .list_img{margin: 13px 0 0 0px;}
 .log .d_item .list_img dd{width: 32.33%;margin-right: 1%;margin-bottom: 2%;}
-.log .d_item .list_img dd a{border-radius: 0px;}
-.log .d_item .user{padding: 0rem 0 0.25rem;float: left;}
+.log .d_item .list_img dd .piece{border-radius: 0px;display: block;margin-left:3px;overflow: hidden;height: 69px; }
+.log .d_item .user{padding: 0rem 0 0.25rem;}
 .log .d_item .user .headPortrait{display: inline-block;width: 1.65rem;height: 1.65rem;border-radius: 0.825rem;margin-right: 0.325rem;float: left;}
 .logTime{color: #999;font-size: 12px;}
 .log .d_item .user .txt{text-align: justify;}
 
-.log .d_item .gaine{float: right;display: block;width: auto;line-height: 62px;height: 46.58px;}
+.log .d_item .gaine{float: right;display: block;width: auto;line-height: 30px;}
 .log .d_item .gaine span{display: inline-block;font-size: 12px;padding-left:0;}
 .log .d_item .gaine span img{display: inline-block;margin-right: 0.2rem;vertical-align: middle;}
 .log .d_item .gaine span .icon_check{width: 1rem;}
@@ -53,7 +53,8 @@
 
 
 /*达人视频*/
-.video_ .flex-video .video{padding: 0rem 0.5rem 0.5rem;}
+.video_ .flex-video .lump{width: 50%;}
+.video_ .flex-video .lump .video{padding: 0rem 0.5rem 0.5rem;width: 100%!important;}
 .video_ .video .txt{margin-top: 0.3rem;text-align: justify;}
 
 
@@ -75,6 +76,7 @@
 
 
 /*独家旅行*/
+.tour h3{float: initial!important;}
 .tour .nav_list{display: block;width: 94%;margin:0rem auto 0.6rem;background: #f6f6f6;}
 .tour .nav_list li{line-height: 1.4rem;text-align: center;
 					display: block;width: 50%;float: left;color: #666;}
@@ -82,20 +84,18 @@
 		/*独家旅行 独家路线*/
 .exclusive{display: block;}
 .exclusive .boxes{margin-bottom: 0.5rem;border-radius: 2px;}
+.exclusive .boxes a{width: 100%;margin: 0 auto;}
 .exclusive .boxes a img{display: block;}
-.exclusive .con{position: relative;border: 1px #858585 solid;padding: 0.5rem;border-radius: 2px;}
-.exclusive .con .headline{display: -webkit-box;
-						    -webkit-box-orient: vertical;
-						    -webkit-line-clamp: 1;
-						    overflow: hidden;font-size: .6rem;line-height: 1rem;}
-.exclusive .price{display: block;position: absolute;right: 0.5rem;bottom: 0.5rem;}
-.exclusive .price i{color: #666;font-size: 0.75px;}
-.exclusive .price span{font-weight: 600;font-size: 1.2rem;}
+.exclusive .con{position: relative;border: 1px #adadad solid;border-top: none; padding: 0.5rem;
+				border-bottom-right-radius: 4px;border-bottom-left-radius: 4px;}
+.exclusive .con .headline{font-size: 15px;line-height: 1rem;margin-bottom: 10px;text-align: justify;color: #333;}
+.exclusive .price{text-align: right;font-size: 17px;color: rgba(215, 22, 24, 1);font-weight: 600;}
+.exclusive .price i{color: #666;font-size: 12px;}
 
 .widtH .SeeMoreLines{display: block;width: 5rem!important;border-radius: 0.6625rem!important;text-align: center;line-height: 1.325rem;}
 		/*独家旅行 私人订制*/
 .list_box{background: #f8f7f2;padding-bottom: 20px;margin-bottom: 10px;}
-.list_box .matter{padding-left: 5px;border-radius: 3px;border: 1px #bcbcbc solid;display: block;line-height: 24px;font-weight: 600;}
+.list_box .matter{padding-left: 5px;border-radius: 3px;border: 1px #bcbcbc solid;display: block;line-height: 28px;font-weight: 600;font-size: 16px;}
 .list_box .destination{width: 90%;margin: 0.5rem auto 0.5rem;}
 .list_box .name{width: 30%;float: left;margin: 0.2rem 3% 1rem 5%;}
 .list_box .PhoneNum{width: 57%;float: left;margin: 0.2rem 0 1rem;}

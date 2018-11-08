@@ -1718,17 +1718,10 @@ class Controller_Api_Index extends Core_Controller_Action
             exit;
         }
 
-        //判断用户是否登录
-        $uid = $_SESSION['userinfo']['uid'];
-        if(!$uid){
-            $json = array('status' => 0, 'tips' => '请登录后再试');
-            echo Core_Fun::outputjson($json);
-            exit;
-        }
-
         $address=htmlspecialchars($this->getParam('address'));
         $username=htmlspecialchars($this->getParam('username'));
         $mobile=htmlspecialchars($this->getParam('mobile'));
+        $remark=htmlspecialchars(trim($this->getParam('remark')));
         if( !$address || !$username || !$mobile ){
             $json = array('status' => 0, 'tips' => '缺少参数');
             echo Core_Fun::outputjson($json);
@@ -1737,7 +1730,7 @@ class Controller_Api_Index extends Core_Controller_Action
 
         $star=date('Y-m-d 00:00:00',time());
         $end=date('Y-m-d 23:59:59',time());
-        $is_reg=C::M('private_custom')->where("uid={$uid} and add_time Between '$star' and '$end'")->getCount();
+        $is_reg=C::M('private_custom')->where("mobile={$mobile} and add_time Between '$star' and '$end'")->getCount();
         if( $is_reg>0 ){
             $json = array('status' => 0, 'tips' => '您今天已提交申请!');
             echo Core_Fun::outputjson($json);
@@ -1750,7 +1743,8 @@ class Controller_Api_Index extends Core_Controller_Action
             'mobile'=>$mobile,
             'add_time'=>date('Y-m-d H:i:s',time()),
             'uid'=>$uid,
-            'status'=>1
+            'status'=>1,
+            'remark'=>$remark
         );
         $res=C::M('private_custom')->add($data);
         if( $res ){

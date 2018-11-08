@@ -1,4 +1,4 @@
-<?php /* vpcvcms compiled created on 2018-10-23 11:50:25
+<?php /* vpcvcms compiled created on 2018-11-06 11:16:48
          compiled from wap/master_list.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'helper', 'wap/master_list.tpl', 83, false),)), $this); ?>
@@ -91,7 +91,8 @@ unset($_smarty_tpl_vars);
                 <?php $_from = $this->_tpl_vars['star']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
     foreach ($_from as $this->_tpl_vars['key'] => $this->_tpl_vars['item']):
 ?>
-                <div class="hunk marginBotom fix">
+                <div class="hunk marginBotom fix _<?php echo $this->_tpl_vars['item']['uid']; ?>
+">
                     <p class="title fix">
                     	<span class="name"><?php if ($this->_tpl_vars['item']['tag']): ?><i title="标签"><?php echo $this->_tpl_vars['item']['tag']; ?>
 </i> | <?php endif; ?><?php echo $this->_tpl_vars['item']['username']; ?>
@@ -171,19 +172,20 @@ unset($_smarty_tpl_vars);
 
         if (intelligent_num>=5) {
             $(".tips1").text("往下拖动查看更多！");
-        } else{
+        }
+        else{
             $(".tips1").text("我也是有底线的哦~");
         }
         if (trainee_num>=5) {
             $(".tips2").text("往下拖动查看更多！");
-        } else{
+        }
+        else{
             $(".tips2").text("我也是有底线的哦~");
         }
     }
 
     //切换菜单
     function choice(tab){
-    	
         $(".navLi").eq(tab).addClass("on");
         $(".navLi").eq(tab).siblings().removeClass("on");
 
@@ -249,7 +251,7 @@ unset($_smarty_tpl_vars);
                             if(data.status == 1){
                                 var html="";
                                 $.each(data.tips,function(i,item){
-                                    html += '<div class="hunk marginBotom fix">'+
+                                    html += '<div class="hunk marginBotom fix _'+data.tips[i].uid+'">'+
 	                                            '<p class="title fix">';
 		                                if (data.tips[i].tag=="") {
 		                                    html += '<span class="name">'+data.tips[i].username+'</span>';

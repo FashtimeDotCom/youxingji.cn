@@ -150,7 +150,7 @@ class Controller_Wap_Index extends Core_Controller_WapAction
             $tjstar[$key]['avatar'] = $value['headpic']?$value['headpic']:'/resource/images/img-lb2.png';
         }
 
-        //达人邦
+        //达人日志
         $starlist = C::M('travel')->where("status = 1 and istop = 1")->order('id desc')->limit('0,2')->select();
         foreach ($starlist as $key => $value) {
             C::M('travel')->where('id', $value['id'])->setInc('shownum', 1);
@@ -161,7 +161,7 @@ class Controller_Wap_Index extends Core_Controller_WapAction
             $starlist[$key]['user_info']['headpic']=empty($starlist[$key]['user_info']['headpic'])?'/resource/images/img-lb2.png':$starlist[$key]['user_info']['headpic'];
         }
 
-        //tv
+        //达人视频
         $tv = C::M('tv')->where("istop = 1 and status = 1")->limit("0,4")->order("id desc")->select();
 
         //达人带你去旅行
@@ -231,29 +231,30 @@ class Controller_Wap_Index extends Core_Controller_WapAction
             $info['user_info']['username']=$info['username'];
         }
 
-        //大师带你去写生
-        $sketch=C::M("sketch")->field('id,thumbfile,title,price')->where(' status=1 ')->order('id desc')->limit(0,2)->select();
-
-        //达人带你去旅行
-        $travel=C::M("star_travel")->field('id,title,thumbfile,price')->where('status=1')->order('id desc')->limit(0,2)->select();
-
-        //独家旅行
-        $label_list=C::M("journey_label")->field('id,name')->where('status=1')->select();
-        if( $label_list ){
-            foreach($label_list as $key=>$value){
-                $sql1="select a.id,a.title,a.tjpic as articlethumb,b.price from ##__article_article as a left join ##__base_module_journey as b on a.id=b.aid where a.useable=1 and a.label_id={$value['id']} order by a.id desc LIMIT 2";
-                $label_info[]=Core_Db::fetchAll($sql1);
+        //独家线路
+        $list_type=C::M('journey_type')->field('id,type_name')->select();
+        $travel_list=array();
+        if( $list_type ){
+            foreach($list_type as $key=>$value){
+                $arr=array();
+                $sql1="select a.id,a.title,a.tjpic as articlethumb,b.price from ##__article_article as a left join ##__base_module_journey as b on a.id=b.aid where a.useable=1 and a.type_id={$value['id']} order by a.id desc LIMIT 1";
+                $arr=Core_Db::fetchAll($sql1);
+                if( $arr ){
+                    $arr=$arr[0];
+                    $arr['type_name']=$value['type_name'];
+                    if( $arr ){
+                        $travel_list[]=$arr;
+                    }
+                    unset($arr);
+                }
             }
         }
-        
-        $this->assign('label_list',$label_list);
-        $this->assign("label_info",$label_info);
-        $this->assign("travel",$travel);
-        $this->assign('sketch',$sketch);
+
+        $this->assign("journey_list",$travel_list);
         $this->assign("info",$info);
+        $this->assign('tv_list',$tv);
         $this->assign("tjstar",$tjstar);
         $this->assign("travel_list",$starlist);
-        $this->assign("tv_list",$tv);
         $this->display("wap/new_index3.tpl");
     }
 
