@@ -240,6 +240,18 @@ class Core_Model
 
         return $rt;
     }
+
+    /*
+     * 批量添加
+     *
+     * */
+    public function adds($add=array())
+    {
+        $rt=Core_Db::batch_insert($this->_tableName,$add);
+        return $rt;
+    }
+
+
     
     /**
      * 修改

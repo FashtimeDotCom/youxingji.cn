@@ -21,7 +21,7 @@ class Core_Language_Admin_Menu
 		  'menu_category_task' => '任务类型',
 		  'menu_category_attr' => '增值服务',
 		  'menu_article' => '内容管理',
-          'menu_ryt' => '日阅潭',
+          'menu_ryt' => '达人游记',
 		  'menu_article_index' => '文章列表',
 		  'menu_active_index' => '活动列表',
 		  'menu_order_index' => '订单列表',
@@ -81,12 +81,14 @@ class Core_Language_Admin_Menu
 		  'menu_sms' => '短信记录',
           'menu_recruiting' => '招募令',
           'menu_youhua' => '油画',
-          'menu_star' => '达人邦',
-          'menu_tv' => '旅拍TV',
+          'menu_star' => '达人日志',
+          'menu_tv' => '达人视频',
 
-           "menu_activity"=>"游主张",
+           "menu_activity"=>"免费游",
            "menu_faq"=>"达人问答",
-           'menu_about_us'=>'公司信息'
+           'menu_about_us'=>'公司信息',
+           'menu_we_chat'=>'微信管理',
+           'menu_auth'=>'权限管理',
 		);
 	}
 }

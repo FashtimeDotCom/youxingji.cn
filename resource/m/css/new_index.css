@@ -4,6 +4,33 @@
  * 首页  部分样式
  * */
 
+/* 取消a标签在移动端点击时的蓝色 */
+a{ text-decoration:none; color:#666;
+/* -webkit-tap-highlight-color:transparent; */
+-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+-webkit-user-select: none;
+-moz-user-focus: none;
+-moz-user-select: none; }
+		
+a:active{ text-decoration: none; list-style-type: none; }
+a:hover { text-decoration: none!important; list-style-type: none!important; }
+a:focus{ text-decoration: none; list-style-type: none; }
+a:focus {outline-style:none;
+	-moz-outline-style: none;} 
+a:visited{ text-decoration: none; list-style-type: none; }
+		
+a:active{star:expression(this.onFocus=this.blur());}
+a:focus{star:expression(this.onFocus=this.blur());}
+a{blr:expression(this.onFocus=this.close());} /* 只支持IE，过多使用效率低 */ 　 
+a{blr:expression(this.onFocus=this.blur());
+	outline-style:none;/*FF使用*/
+} /* 只支持IE，过多使用效率低 */
+/* 使用图片作为a标签的点击按钮时，当触发touchstart的时候，往往会有一个灰色的背景 */
+a,a:hover,a:active,a:visited,a:link,a:focus{
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+	-webkit-tap-highlight-color: transparent;
+	outline:none;text-decoration: none;}
+
 .fix{*zoom:1;}
 .fix:after{display:block; content:"clear"; height:0; clear:both; overflow:hidden; visibility:hidden;}
 
@@ -22,13 +49,14 @@
 .widthHeight{display: inline-block;width: 100%;height: 100%;}
 
 .article{margin: .7rem 0;}
-.article .TitleBox{}
 .article .TitleBox .title{font-weight: 500;float: left;}
 
 /*达人邦*/
 .m_item_a1{width: 100%;}
 .m_item_a1 .pic{overflow: hidden;}
-
+.TalentState .username{display: inline-block;margin: .5rem 0;font-size: 0.55rem;color: rgba(51, 51, 51, 1);
+						line-height: 0.75rem;font-weight: 700;float: left;}
+.TalentState .text{clear: both;white-space: pre-wrap!important;word-wrap: break-word!important;*white-space:normal!important;}
 /*达人日志*/
 .log .d_item{width: 93.7%!important;margin: 0 auto!important;}
 
@@ -37,8 +65,8 @@
 .log .d_item .list_img dd .piece{border-radius: 0px;display: block;margin-left:3px;overflow: hidden;height: 69px; }
 .log .d_item .user{padding: 0rem 0 0.25rem;}
 .log .d_item .user .headPortrait{display: inline-block;width: 1.65rem;height: 1.65rem;border-radius: 0.825rem;margin-right: 0.325rem;float: left;}
-.logTime{color: #999;font-size: 12px;}
-.log .d_item .user .txt{text-align: justify;}
+.log .d_item .user aside .logTime{color: #999;font-size: 12px;}
+.log .d_item .txt a{white-space: pre-wrap!important;word-wrap: break-word!important;*white-space:normal!important;}
 
 .log .d_item .gaine{float: right;display: block;width: auto;line-height: 30px;}
 .log .d_item .gaine span{display: inline-block;font-size: 12px;padding-left:0;}
@@ -55,15 +83,17 @@
 /*达人视频*/
 .video_ .flex-video .lump{width: 50%;}
 .video_ .flex-video .lump .video{padding: 0rem 0.5rem 0.5rem;width: 100%!important;}
-.video_ .video .txt{margin-top: 0.3rem;text-align: justify;}
+.video_ .video .txt{margin-top: 0.3rem;text-align: justify;
+					white-space: pre-wrap!important;word-wrap: break-word!important;*white-space:normal!important;}
 
 
 /*达人游记*/
 .note .y_item{padding-bottom: 0;}
-.note .y_item h4{margin: 0;}
+.note .y_item h4{margin: 0;white-space: pre-wrap!important;word-wrap: break-word!important;*white-space:normal!important;}
 .note .y_item a .user .headPortrait{display: inline-block;width: 1.65rem;height: 1.65rem;
 									border-radius: 0.825rem;margin-right: 0.325rem;float: left;}
-.note .y_item a p span{display: block;font-size: 12px!important;text-align: justify;line-height: 18px;}
+.note .y_item a p span{display: block;font-size: 12px!important;text-align: justify;line-height: 18px;
+						white-space: pre-wrap!important;word-wrap: break-word!important;*white-space:normal!important;}
 
 .note .travels{width: auto;display: block;line-height: 36px;}
 .note .travels span{display: inline-block;font-size: 12px;padding-left:0;margin-right: 4px;}
@@ -80,7 +110,7 @@
 .tour .nav_list{display: block;width: 94%;margin:0rem auto 0.6rem;background: #f6f6f6;}
 .tour .nav_list li{line-height: 1.4rem;text-align: center;
 					display: block;width: 50%;float: left;color: #666;}
-.tour .onn{color: #fff!important; background: #ee2f33;}
+.tour .onn,.tour .onn a{color: #fff!important; background: #ee2f33;}
 		/*独家旅行 独家路线*/
 .exclusive{display: block;}
 .exclusive .boxes{margin-bottom: 0.5rem;border-radius: 2px;}
@@ -88,7 +118,8 @@
 .exclusive .boxes a img{display: block;}
 .exclusive .con{position: relative;border: 1px #adadad solid;border-top: none; padding: 0.5rem;
 				border-bottom-right-radius: 4px;border-bottom-left-radius: 4px;}
-.exclusive .con .headline{font-size: 15px;line-height: 1rem;margin-bottom: 10px;text-align: justify;color: #333;}
+.exclusive .con .headline{font-size: 15px;line-height: 1rem;margin-bottom: 10px;text-align: justify;color: #333;
+							white-space: pre-wrap!important;word-wrap: break-word!important;*white-space:normal!important;}
 .exclusive .price{text-align: right;font-size: 17px;color: rgba(215, 22, 24, 1);font-weight: 600;}
 .exclusive .price i{color: #666;font-size: 12px;}
 

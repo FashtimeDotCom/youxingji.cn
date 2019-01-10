@@ -113,6 +113,7 @@ class Controller_Admin_TravelNote extends Core_Controller_Action
         $show_num=$this->getParam("show_num");
         $top_num=$this->getParam("top_num");
         $is_top=$this->getParam("is_top");
+        $small_pic=$this->getParam('small_pic');
 
         if( $id ){
             $data=array(
@@ -120,7 +121,9 @@ class Controller_Admin_TravelNote extends Core_Controller_Action
                 'remark'=>$remark,
                 "show_num"=>(int)$show_num,
                 'top_num'=>(int)$top_num,
-                'is_top'=>(int)$is_top
+                'is_top'=>(int)$is_top,
+                'small_pic'=>$small_pic,
+                'update_time'=>time()
             );
 
             $res=C::M("travel_note")->where(" id = {$id}")->update($data);
@@ -142,6 +145,7 @@ class Controller_Admin_TravelNote extends Core_Controller_Action
         if( !$detail ){
             die("ID错误");
         }
+        $detail['content']=urldecode($detail['content']);
 
         $tjryt = C::M('ryt')->where("istop = 1")->order("rand()")->limit('0,5')->select();
         //日月潭

@@ -6,7 +6,7 @@
     <meta name="renderer" content="webkit" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
     <meta name="format-detection" content="telephone=no" />
-    <title>{{$journey.seotitle}}_独家旅行_{{TO->cfg key="site_name" group="site" default="致茂网络"}}</title>
+    <title>{{$journey.seotitle}}_独家旅行_{{TO->cfg key="site_name" group="site" default="广州游行迹新媒体科技有限公司"}}</title>
     <meta name="description" content="{{$journey.keywords}}" />
     <meta name="keywords" content="{{$journey.description}}" />
     <link rel="stylesheet" href="/resource/m/css/style.css" />
@@ -150,7 +150,7 @@
         <div class="h50"></div>
         <div class="fl-bot" id="nexts">
             <div class="wp">
-                <span>￥{{$journey.extend.price}}</span>
+                <span>￥{{$journey.extend.price}}元/位</span>
                 <a class="btn-enroll" id="btnBook" href="javascript:;">立刻报名</a>
             </div>
         </div>

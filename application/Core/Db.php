@@ -188,9 +188,20 @@ class Core_Db
 
 	}
 
+    /*
+    * Insert，批量插入操作
+    *
+    * */
+    public static function batch_insert($table,$array)
+    {
+
+        return self::DB()->insert_batch($table,$array);
+
+    }
 
 
-	/**
+
+        /**
 
 	 * 同Insert，区别是使用Replace
 
@@ -215,7 +226,6 @@ class Core_Db
 		return self::Db()->replace($table, $array, $safe);
 
 	}
-
 
 
 	/**

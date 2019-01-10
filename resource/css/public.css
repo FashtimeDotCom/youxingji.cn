@@ -1,0 +1,175 @@
+/*
+ 2018-11-02    00：57：03
+ HQS
+ * */
+
+@charset "utf-8";
+/* CSS Document */
+*{ padding:0px; margin:0px; font-size:12px; font-family:"微软雅黑"; 
+	box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box; }
+/* 取消a标签在移动端点击时的蓝色 */
+a{ text-decoration:none; color:#666;
+/* -webkit-tap-highlight-color:transparent; */
+-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+-webkit-user-select: none;
+-moz-user-focus: none;
+-moz-user-select: none; }
+		
+a:active{ text-decoration: none; list-style-type: none; }
+a:hover { text-decoration: none!important; list-style-type: none!important;color: #5a5a5a; }
+a:focus{ text-decoration: none; list-style-type: none; }
+a:focus {outline-style:none;
+	-moz-outline-style: none;} 
+a:visited{ text-decoration: none; list-style-type: none; }
+		
+a:active{star:expression(this.onFocus=this.blur());}
+a:focus{star:expression(this.onFocus=this.blur());}
+a{blr:expression(this.onFocus=this.close());} /* 只支持IE，过多使用效率低 */ 　 
+a{blr:expression(this.onFocus=this.blur());
+	outline-style:none;/*FF使用*/
+} /* 只支持IE，过多使用效率低 */
+/* 使用图片作为a标签的点击按钮时，当触发touchstart的时候，往往会有一个灰色的背景 */
+a,a:hover,a:active,a:visited,a:link,a:focus{
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+	-webkit-tap-highlight-color: transparent;
+	outline:none;text-decoration: none;}
+
+
+
+/* 去除ios input框点击时的灰色背景 */
+input{-webkit-tap-highlight-color:rgba(0,0,0,0);}
+
+ul li{ list-style:none; }
+em{font-style: normal;}
+button{outline:none;}
+
+html, body{ width: 100%; height: 100%;
+            font-family: '微软雅黑'; margin: auto;
+            -webkit-text-size-adjust:none;
+				    /*让页面上的内容不能被选中*/
+				    /*-webkit-user-select:none;
+				    -moz-user-select:none;
+				    -ms-user-select:none;
+				    user-select:none;*/
+				    }
+
+.Iclass{font-style: normal;}
+
+.fix{*zoom:1;}
+.fix:after{display:block; content:"clear"; height:0; clear:both; overflow:hidden; visibility:hidden;}
+
+
+.dis_block{display: block!important;}
+.dis_none{display: none!important;}
+
+.widthHeight{display: inline-block;width: 100%;height: 100%;}
+
+.whiteSpace{white-space: pre-wrap!important;word-wrap: break-word!important;*white-space:normal!important;}
+
+
+/*模仿朋友圈   九宫格显示    防止图片变形*/
+.figure{padding-bottom: ; /* 关键就在这里 */
+	  	background-position: center;
+	  	background-repeat: no-repeat;
+	  	background-size: cover;border-radius: 5px;}
+
+.borderRadius{border-radius:0px!important;}
+.borderRadius50{border-radius:50%!important;}
+
+/* 去掉input 的上下箭头 开始*/
+.pageJump_text::-webkit-outer-spin-button,
+.pageJump_text::-webkit-inner-spin-button { -webkit-appearance: none!important; ; }
+.pageJump_text{ -moz-appearance: textfield; }
+
+/*毛玻璃效果其中之一的样式*/
+.imgBg{max-width:none;position: absolute;top: 0;z-index: 0;width: 100%!important;height: 100%!important;}
+
+
+/*超出文本  自动省略号*/
+.apostrophe{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+
+/*字体超出多少行 以省略号代替  
+ * 此处 在特定的位置  加一句行数
+ * -webkit-line-clamp: 3;三列
+ * */
+.omit{display: -webkit-box!important;-webkit-box-orient: vertical;overflow: hidden;}
+.lineNumber2{-webkit-line-clamp: 2;}
+.lineNumber3{-webkit-line-clamp: 3;}
+.lineNumber4{-webkit-line-clamp: 4;}
+.lineNumber5{-webkit-line-clamp: 5;}
+
+
+/*弹窗  弹出层*/
+.scrollable{overflow: auto;-webkit-overflow-scrolling: touch;}
+
+.active{-webkit-transition: none;transition: none;visibility: visible;}
+.active > .bg_overlay{opacity: .6;}
+.active > .bg_content{-webkit-transform: translate(0%, 0%);transform: translate(0%, 0%);}
+.active .waitBg .wait{-webkit-transform: translate(0%, 0%);transform: translate(0%, 0%);}
+
+
+/*遮罩层*/
+.maskLayer{position: fixed;top: 0;right: 0;left: 0;bottom: 0;background: transparent;opacity: 0;z-index: 1;}
+
+
+/*弹窗  弹出层*/
+.union{width: 80%;margin-top: 40%;border-radius: 0.3rem;background: #fff; position: absolute;left: 10%;overflow: hidden;}
+.style{color: #3d3d3d;font-size: 1.5rem;text-align: center;font-weight: 800;}
+.marginHeight{margin-bottom: 5rem!important;}
+
+.leaveTeam{height: auto; margin-top: 40%;}
+.leaveTeam .title{line-height: 7rem;margin-bottom: 2rem;}
+
+.buttonDiv{width: 100%;height: 3rem;line-height: 3rem;position: absolute;left: 0;bottom: 0;}
+.buttonDiv button{width: 50%;height: inherit;text-align: center;color: #fff;font-size: 1rem;float: left;border: none;}
+.leftButton{background: #e60111;}
+.rightButton{background: #558efc;}
+
+.moduleBGcolor1{background: #fff;}
+
+.FontSize{font-size: 14px;
+	      transform: scale(0.9);
+		  -webkit-transform: scale(0.9);
+	      -o-transform: scale(0.9);    /*针对能识别-webkit的opera browser设置*/}
+
+.tagTips{color: red;}
+
+
+/*播放视频按钮*/
+.bo{position: absolute;top: 50%;left: 50%;width: 36px;height: 36px;
+	background: url(../images/s-bo2.png) center center no-repeat;
+	-webkit-background-size: cover;
+	background-size: cover;
+	-webkit-transform: translate(-50%,-50%);
+    -moz-transform:  translate(-50%,-50%);
+    -ms-transform:  translate(-50%,-50%);
+    -o-transform:  translate(-50%,-50%);
+    transform:  translate(-50%,-50%);}
+
+/*点击播放视频  弹窗  关闭视频按钮*/
+.m_pop1_yz .con{overflow: initial;}
+.m_pop1_yz .con .close{top: -44px;}
+.m_pop1_yz .con .close span{background: #221414 url(/resource/m/images/icon-close2.png) no-repeat center center / 68%;}
+
+/*简介*/
+.viewMore{display: inline-block;color: #0000FF!important;font-size: 1.2rem;line-height: 18px;}
+
+.tips{text-align: center;color: #ccc;margin: 0px auto 10px;}
+.loading{margin: 0 auto;display: block;width: 5%;}
+
+.marginBotom{margin-bottom: 0.8rem;}
+
+
+		/*页码*/
+.pagination{width: 1200px;margin: 16px  auto 0;}
+.pages .amount{display: inline-block;color: #999;margin-right: 10px;}
+.pages li a{width: auto!important;padding: 0 9px;}
+.pages li a:hover,.pages li.on a{background-color:#d71618!important;}
+
+.pages .pages-form .btn{background: -webkit-linear-gradient(#fefffe, #f0f1f0); /* Safari 5.1 - 6.0 */
+						background: -o-linear-gradient(#fefffe, #f0f1f0); /* Opera 11.1 - 12.0 */
+						background: -moz-linear-gradient(#fefffe, #f0f1f0); /* Firefox 3.6 - 15 */
+						background: linear-gradient(#fefffe, #f0f1f0); /* æ ‡å‡†çš„è¯­æ³• */}
+.pages .pages-form .btn:hover{background:#d71618;}

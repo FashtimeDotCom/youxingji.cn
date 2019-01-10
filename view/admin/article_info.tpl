@@ -65,6 +65,13 @@
             <td class="vtop tips2">请选择分类<span info="catid"></span></td>
         </tr>
 
+        <tr class="noborder">
+            <td class="vtop rowform">
+                <input name="address" value="{{$article.address}}" type="text" class="txt" datatype="Require" msg="请填写地址" />
+            </td>
+            <td class="vtop tips2">请填写地址<span info="title"></span></td>
+        </tr>
+
         <tr>
         	<td colspan="2" class="td27">
             	<a href="javascript:void(0);" class="btn active">详情页，顶部大图</a>

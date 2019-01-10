@@ -26,7 +26,7 @@ class Controller_Api_Traffic extends Core_Controller_Action
             $platform=0;
         }
 
-        $temp=rand(1,5);
+        $temp=1;
         $visit=$visit+$temp;
         $customer=$customer+$temp;
         $platform=$platform+$temp;

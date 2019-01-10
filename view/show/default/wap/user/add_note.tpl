@@ -17,7 +17,6 @@
 	<script src="/resource/m/js/lib.js"></script>
 	<link rel="stylesheet" href="/resource/m/css/note.css" />
 	<style type="text/css">
-		.tag{height: 36px!important;}
 		.tagVal{margin-top: 10px;}
 	</style>
 	<link rel="stylesheet" href="/resource/m/css/tag.css" title="和标签相关" />
@@ -96,7 +95,7 @@
 						</div>
 	
 						<div class="tit" style="position: relative;">
-							<input type="text" class="inp tag" value="" maxlength="4" onkeyup="judgeIsNonNull2(event)" id="tag" placeholder="请输入标签(可选),每个标签最多四个字,空格无效">
+							<input type="text" class="inp tag" value="" onkeyup="judgeIsNonNull2(event)" id="tag" placeholder="请输入标签(可选),每个标签最多四个字,空格无效">
 							<input type="button" name="" class="btn affirm dis_none" id="affirm" value="确认添加" />
 							<p class="tagTips FontSize dis_none">最多只能四个标签！可以先删掉其中一个旧标签，再增加新标签！</p>
 							<div class="tagVal fix" id="tagVal">
@@ -410,21 +409,21 @@
 			if (x == 4 ) {
 		  		if(value !== "" ){
 			      	$(".affirm").removeClass("dis_none");
-			    }else{
+			    }
+		  		else{
 			    	$(".affirm").addClass("dis_none");
 			    }
 			}
 
 			if(value !== ""){
-				if( /[=，。￥？！：、……“”；（）《》～‘’〈〉——·ˉˇ¨々‖∶＂＇｀｜〃〔〕「」『』．〖〗$【】｛｝［］/,|{}_*:?^%$#@!`·~"'\\<>\[\]\%;)(&+-]/.test(value) ){
-					$("#tag").val(value.replace(/[=，。￥？！：、……“”；（）《》～‘’〈〉——·ˉˇ¨々‖∶＂＇｀｜〃〔〕「」『』．〖〗$【】｛｝［］/,|{}_*:?^%$#@!`·~"'\\<>\[\]\%;)(&+-]/,""));
+				var res = /[\、\…\.\．\·\•\'\,\，\。\×\_\＿\-\−\－\—\ˉ\ˇ\々\＇\｀\‘\’\“\”\〃\¨\"\＂\｜\|\‖\(\)\（\）\〔\〕\<\>\〈\〉\《\》\「\」\『\』\〖\〗\【\】\［\］\[\]\{\}\｛\｝\/\*\＊\?\？\^\＾\+\＋\=\＝\÷\¥\￥\#\＃\@\＠\!\！\`\~\～\%\％\∶\:\：\;\；\&\＆\$\＄\£\￡\€\°\°C\°F\←\↑\→\↓\／\＼\\]/g;
+				if( res.test(value) ){
+					$("#tag").val(value.replace(res,""));
 					return false;
 				}
-				if( value.length > 4 ){
-		    		return $("#tag").val(value.substr(0, 4));
-		    	}
 		    	$(".affirm").removeClass("dis_none");
-		   	}else{
+		   	}
+			else{
 		    	$(".affirm").addClass("dis_none");
 		    }
 		}
@@ -457,6 +456,8 @@
 						layer.msg('不能输入已存在的标签！');
 						return false;
 					} else{
+						value = value.replace(/\s*/g,"");//去除字符串空格(空白符)
+						value = value.substr(0, 4);
 						html='<b class="sample">'+
 								'<i class="Iclass">'+value+'</i>'+
 								'<em class="eliminate" onclick="eliminate(this)"><img src="/resource/m/images/icon_eliminate.png"/><em>'+
@@ -502,12 +503,9 @@
 		
 		// 初始化本地存储的数据
 		function initLoaclData () {
-			var data = zxEditor.storage.get('article')
+			var data = zxEditor.storage.get('content');
 			if (data) {
-				if (data.cover) {
-					zxEditor.addClass('has-pic', $('.cover'));
-				}
-				zxEditor.setContent(data.content);
+				zxEditor.setContent(data);
 			}else{
 				zxEditor.setContent('{{$res.content}}');
 			}

@@ -123,7 +123,7 @@
         var start = {
             elem: '#test1',
             format: 'YYYY-MM-DD hh:mm:ss',
-            min: '2018-01-01', //设定最小日期为当前日期
+            min: '2017-01-01', //设定最小日期为当前日期
             max: laydate.now(+730), //最大日期
             istime: true,
             istoday: true,

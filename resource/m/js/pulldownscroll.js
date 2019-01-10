@@ -164,7 +164,8 @@ var scrollTop;     //获取滚动条到顶部的距离
 var scrollHeight;  //获取文档区域高度 
 var windowHeight;  //获取滚动条的高度
 var flag = true;   //加载数据标志
-
+var htmlDelete ='<p class="nullTitle">null</p>'+
+				'<p class="nullDetails">:)抱歉，此内容已被原作者删除!</p>';
 $(window).scroll(function(){
     scrollTop = $(this).scrollTop();     
     scrollHeight = $(document).height(); 
@@ -197,7 +198,6 @@ $(window).scroll(function(){
 				}
 				//传输给后台的参数
 				data={page:page};
-				
 			}
 			else if(dataSign=="his"){ //TA的页面
 				if( UniqueValue=="travel_num" ){//TA的日志
@@ -211,7 +211,6 @@ $(window).scroll(function(){
 				}
 				//传输给后台的参数
 				data={"page":page,"user_id":user_id};
-				
 			}
 			else if(dataSign=="collect"){//收藏页
 				url="/index.php?m=api&c=Favtravel&v=collection_more";  //我收藏的日志、视频、游记、问答
@@ -249,13 +248,13 @@ $(window).scroll(function(){
 									html += '<a class="dis_block fix" href="/index.php?m=wap&c=index&v=star_detail&id='+data.tips[i].id+'">'+
 												'<p class="videoTitle">'+data.tips[i].title+'</p>'+
 												'<div class="date">'+data.tips[i].addtime+'</div>'+
-												'<p class="videoDetails">'+data.tips[i].describes+'</p>'+
+												'<p class="videoDetails omit lineNumber3">'+data.tips[i].describes+'</p>'+
 											'</a>';
 									}
 									else{
                 					html += '<p class="videoTitle">'+data.tips[i].title+'</p>'+
 											'<div class="date">'+data.tips[i].addtime+'</div>'+
-											'<p class="videoDetails">'+data.tips[i].describes+'</p>';
+											'<p class="videoDetails Areview omit lineNumber3">'+data.tips[i].describes+'</p>';
 									}
 									html += '<ul class="ul-imgtxt2-yz">'+
 												'<li><dl>';
@@ -319,13 +318,13 @@ $(window).scroll(function(){
 									html += '<a class="dis_block fix" href="/index.php?m=wap&c=index&v=tv_detail&id='+data.tips[i].id+'">'+
 												'<p class="videoTitle">'+data.tips[i].title+'</p>'+
 												'<div class="date">'+data.tips[i].addtime+'</div>'+
-												'<p class="videoDetails">'+data.tips[i].describes+'</p>'+
+												'<p class="videoDetails omit lineNumber3">'+data.tips[i].describes+'</p>'+
 											'</a>';
 									}
 									else{
 									html += '<p class="videoTitle">'+data.tips[i].title+'</p>'+
 											'<div class="date">'+data.tips[i].addtime+'</div>'+
-											'<p class="videoDetails">'+data.tips[i].describes+'</p>';
+											'<p class="videoDetails Areview omit lineNumber3">'+data.tips[i].describes+'</p>';
 									}
 									html += '<div class="preview fix">'+
 												'<span class="pic figure vessel borderRadius js-video fix" onclick="js_video(this)" data-src="'+data.tips[i].url+'" style="background-image: url('+data.tips[i].pics+');">'+
@@ -387,14 +386,14 @@ $(window).scroll(function(){
 									html += '<a class="dis_block fix" href="javascript:;">'+
 												'<p class="videoTitle">'+data.tips[i].title+'</p>'+
 												'<div class="date">'+data.tips[i].addtime+'</div>'+
-												'<p class="videoDetails">'+data.tips[i].desc+'</p>'+
+												'<p class="videoDetails omit lineNumber3">'+data.tips[i].desc+'</p>'+
 												'<div class="preview fix"><img src="'+data.tips[i].thumbfile+'" alt=""></div>'+
 											'</a>';
 									}
 									else{
 									html += '<p class="videoTitle">'+data.tips[i].title+'</p>'+
 											'<div class="date">'+data.tips[i].addtime+'</div>'+
-											'<p class="videoDetails">'+data.tips[i].desc+'</p>'+
+											'<p class="videoDetails Areview omit lineNumber3">'+data.tips[i].desc+'</p>'+
 											'<div class="preview fix"><img src="'+data.tips[i].thumbfile+'" alt=""></div>';
 									}
 									html += '<div class="videoBottom fix">';
@@ -451,12 +450,12 @@ $(window).scroll(function(){
 								else{
 									var str1 = data.tips[i].label;
 									var str2=str1.substring(0,str1.indexOf("/") );
-									html += '<p class="videoTitle"><span class="view fix"><img src="/resource/m/images/user/icon_faq_detail1.png"></span>'+data.tips[i].title+'</p>'+
+									html += '<p class="headline"><img class="view" src="/resource/m/images/user/icon_faq_detail1.png"><span class="substance">'+data.tips[i].title+'</span></p>'+
 											'<a class="dis_block fix" href="/index.php?m=wap&c=faq&v=detail&id='+data.tips[i].id+'">'+
 												'<p class="videoDetails omit lineNumber4">'+data.tips[i].desc+'</p>'+
 												'<div class="videoBottom fix">';
 										if( data.tips[i].address !='' && data.tips[i].address !=null ){ //判断用户 有没有加 定位地址
-											html += '<span class="left"><img src="/resource/m/images/common/icon_location2.png" />'+data.tips[i].address+'</span>';
+											html += '<span class="left"><img src="/resource/m/images/common/icon_location1.png" /><h4>'+data.tips[i].address+'</h4></span>';
 										}
 									if( dataSign=="my" || dataSign=="his" ){
 										if( str1!="" && str2=="" ){
@@ -466,7 +465,10 @@ $(window).scroll(function(){
 										if( data.tips[i].label !='' && str2 !='' ){ //判断用户 有没有加 标签
 											html += '<span class="left tag">'+str2+'</span>';
 										}
-											html += '<p class="right"><span class="check">问于&nbsp;'+data.tips[i].addtime+'</span></p>';
+											html += '<p class="divRight">'+
+														'<span class="check">'+data.tips[i].username+'问于</span>'+
+														'<span class="check">'+data.tips[i].addtime+'</span>'+
+													'</p>';
 									}
 									else if( dataSign=="collect" ){
 											html += '<p class="right">'+

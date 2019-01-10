@@ -1,0 +1,31 @@
+/*2018-12-09   16:53:58
+* HQS
+* 
+* PC端我的收藏  部分共用样式
+*/
+
+
+/*二级导航*/
+.m_mine_sz{margin-bottom:18px;padding:2px 0px 25px 0px;background-color:#fff;border:1px solid #e2e2e2}
+.m_mine_sz .title{font-size: 16px;color: #333;line-height: 39px;font-weight: 600;margin-left: 21px;
+					border-bottom: 3px #d71618 solid;display: inline-block;margin-bottom: -1px;}
+.m_mine_sz .title span{font-weight: 500;font-size: 14px;color: #666;}
+.m_mine_sz .title span i{font-size: 14px;}
+
+.m_mine_sz .secondaryMenu{border-top: 1px #e2e2e2 solid;padding: 16px 30px 0px 21px;}
+.m_mine_sz .secondaryMenu .option{display: block;float: left;font-size: 14px;color: #666;line-height: 30px;padding: 0 9px;margin-right: 25px;}
+.m_mine_sz .secondaryMenu a.on{color: #fff;background: #cf191b;border-radius: 2px;}
+
+.m_mine_sz .secondaryMenu .hunt{float: right;width: 182px;height: 30px;
+								border: 1px #d3d3d3 solid;position: relative;}
+.m_mine_sz .secondaryMenu .hunt input{display: block;width: 156px;line-height: 30px;color: #666;text-indent: 8px;}
+.m_mine_sz .secondaryMenu .hunt input::-webkit-input-placeholder { /* WebKit browsers */
+									　　color:#666;}
+.m_mine_sz .secondaryMenu .hunt input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+									　　color:#666;opacity:1;}
+.m_mine_sz .secondaryMenu .hunt input::-moz-placeholder { /* Mozilla Firefox 19+ */
+									　　color:#666;opacity:1;}
+.m_mine_sz .secondaryMenu .hunt input:-ms-input-placeholder { /* Internet Explorer 10+ */
+									　　color:#666;}
+.m_mine_sz .secondaryMenu .hunt .verify{width: 26px;height: 28px;position: absolute;right: 0;top: 0;
+				  					background: url(/resource/images/common/seek.png) no-repeat center center / 64%;}

@@ -211,13 +211,14 @@ class Controller_Admin_Article extends Core_Controller_Action
           	$time = $this->getParam('addtime');
           	$start_time = strtotime("$time 00:00:00");
 	        $end_time=strtotime("$time 23:59:59");
-	        $res = C::M('journey_price')->where("addtime between $start_time and $end_time")->find();
+            $aid=$this->getParam('aid');
+	        $res = C::M('journey_price')->where("addtime between $start_time and $end_time and jid={$aid}")->find();
 	        if($res){
 	        	echo $this->returnJson(0, $time . '已经添加过');
 	        	exit;
 	        }
 			$data = array(
-				'jid' => $this->getParam('aid'),
+				'jid' => $aid,
 				'minperson' => $this->getParam('minperson'),
 				'price' => $this->getParam('price'),
               	'text' => $this->getParam('text'),
@@ -235,6 +236,10 @@ class Controller_Admin_Article extends Core_Controller_Action
 		}
 		else
 		{
+            //获取列表
+            $article_list=C::M('article_article')->field("id,title")->select();
+            $this->assign('article_list',$article_list);
+
 			$this->assign('picdom', 'imgurl');
 			$this->display('admin/journey/addbaojia.tpl');
 		}
@@ -243,9 +248,10 @@ class Controller_Admin_Article extends Core_Controller_Action
   	public function gettimeAction()
 	{
 		$time = $this->getParam('time');
+        $aid=$this->getParam('aid');
 		$start_time = strtotime("$time 00:00:00");
         $end_time=strtotime("$time 23:59:59");
-        $res = C::M('journey_price')->where("addtime between $start_time and $end_time")->find();
+        $res = C::M('journey_price')->where("addtime between $start_time and $end_time and jid={$aid}")->find();
         echo json_encode($res,JSON_UNESCAPED_UNICODE);
 	}
   
@@ -386,6 +392,10 @@ class Controller_Admin_Article extends Core_Controller_Action
 		}
 		else
 		{
+		    //获取列表
+            $article_list=C::M('article_article')->field("id,title")->select();
+            $this->assign('article_list',$article_list);
+
 			$this->assign('picdom', 'imgurl');
 			$this->assign('article', $article);
 			$this->display('admin/journey/editbaojia.tpl');
@@ -518,7 +528,8 @@ class Controller_Admin_Article extends Core_Controller_Action
 				'addtime' => Core_Fun::time(),
                 "label_id"=>intval($this->getParam("label_id")),
                 "tjpic"=>$this->getParam("tjpic"),
-                'type'=>$this->getParam("type")
+                'type_id'=>$this->getParam("type"),
+                'address'=>$this->getParam('address')
 			);
 			if('' != $this->getParam('articlepic'))
 			{
@@ -663,7 +674,9 @@ class Controller_Admin_Article extends Core_Controller_Action
 				'updatetime' => Core_Fun::time(),
                 "label_id"=>$this->getParam("label_id"),
                 "tjpic"=>$this->getParam("tjpic"),
-                'type_id'=>$this->getParam("type_id")
+                'type_id'=>$this->getParam("type_id"),
+                'address'=>$this->getParam('address'),
+                "wap_tjpic"=>$this->getParam("wap_tjpic")
 			);
 
 			if('' != $this->getParam('articlepic') && $this->getParam('articlepic') != $article['articlepic'])

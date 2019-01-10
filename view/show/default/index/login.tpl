@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
@@ -15,23 +14,32 @@
     <link rel="stylesheet" href="/resource/css/style.css" />
     <script src="/resource/js/jquery.min.js"></script>
     <script src="/resource/js/lib.js"></script>
+    <style type="text/css">
+    	.bottom{vertical-align:top;margin-top:24px}
+		.bottom a{display:inline-block;vertical-align:middle;width:30px;height:30px;background-repeat:no-repeat;background-position:center center}
+		.bottom a:hover{opacity:.8;filter:alpha(Opacity=80);-ms-filter:'progid:DXImageTransform.Microsoft.Alpha(Opacity=80)'}
+		.bottom .register{display: inline-block;width: auto;float: right;font-size: 14px;color: #d71618;}
+    </style>
 </head>
-
-<body>
+<body onkeydown="on_return();">
     {{include file='public/header.tpl'}}
     <div class="main">
         <div class="m-login-lb" style="background-image: url(/resource/images/bg-lb1.jpg);">
             <div class="m-login-con">
-                <h4 class="tit"><a href="/index.php?m=index&c=index&v=reg">没有账号？现在注册</a>登录</h4>
-                <div class="item">
-                    <input type="text" class="inp" id="phone" placeholder="您的手机号">
-                </div>
-                <div class="item">
-                    <input type="password" class="inp" id="password" placeholder="您的密码">
-                </div>
+                <input type="hidden" id="from_url" name="from_url" value="{{$from_url}}">
+                <h4 class="tit">用户名密码登录</h4>
+                <div class="item"><input type="text" class="inp" id="phone" placeholder="您的手机号"></div>
+                <div class="item"><input type="password" class="inp" id="password" placeholder="您的密码"></div>
                 <p class="y-set"></p>
                 <p class="notice">忘记密码？<a href="/index.php?m=index&c=index&v=forget">点击找回</a></p>
-                <input type="submit" class="sub" id="btnLogin" value="登 录">
+                <input type="submit" class="sub" id="btnLogin" onClick="check()" value="登 录">
+
+	            <div class="bottom">
+	                <a href="/index.php?m=index&c=index&v=weibologin" style="background-image: url(/resource/images/icon2-qm.png);"></a>
+	                <a href="/index.php?m=index&c=index&v=qqlogin" style="background-image: url(/resource/images/icon3-qm.png);"></a>
+	                <a href="/index.php?m=index&c=index&v=weixinlogin" style="background-image: url(/resource/images/icon4-qm.png);"></a>
+	                <a class="register" href="/index.php?m=index&c=index&v=reg">没有账号？现在注册</a>
+	            </div>
             </div>
         </div>
     </div>
@@ -50,24 +58,30 @@
     <!-- 返回顶部 -->
     <div class="m-float-qm">
         <a href="javascript:;" class="tel">
-        <img src="/resource/images/icon24-qm.png" alt="">
-        <div class="boximg">
-            <img src="/resource/images/tel.png" alt="">
-        </div>
-    </a>
+	        <img src="/resource/images/icon24-qm.png" alt="">
+	        <div class="boximg"><img src="/resource/images/tel.png" alt=""></div>
+	    </a>
         <a href="javascript:;" class="ma">
-        <img src="/resource/images/icon25-qm.png" alt="">
-        <div class="boximg">
-            <img src="/resource/images/pic1-qm.jpg" alt="">
-        </div>
-    </a>
+	        <img src="/resource/images/icon25-qm.png" alt="">
+	        <div class="boximg"><img src="/resource/images/pic1-qm.jpg" alt=""></div>
+	    </a>
         <a href="javascript:;" class="return g-top"><img src="/resource/images/icon26-qm.png" alt=""></a>
     </div>
     <!-- 返回顶部 end-->
     <script type="text/javascript">
-        $('#btnLogin').click(function(){
+        function checkMobile(tel) {
+            var reg = /(^1[3|4|5|7|8][0-9]{9}$)/;
+            if (reg.test(tel)) {
+                return true;
+            }else{
+                return false;
+            };
+        }
+        
+        function check() {
             var phone = $('#phone').val();
             var password = $('#password').val();
+            var from_url=$("#from_url").val();
             if(!checkMobile(phone)){
                 $('.y-set').text('请输入正确的手机号').show();
                 return false;
@@ -79,23 +93,26 @@
             $('.y-set').text('').hide();
             $.post("/index.php?m=api&c=index&v=login", {
                 'phone':phone,
-                'password':password
+                'password':password,
+                'from_url':from_url
             }, function(data){
                 $('.y-set').text(data.tips).show();
                 if(data.status == 1){
-                    window.location.href = "/index.php?m=index&c=user&v=index";
+                    window.location.href = "/index.php?m=index&c=user&v=home";
+                }else if( data.status == 2 ){ //带来源参数登录，跳转到目标路径
+                    window.location.href = from_url;
                 }
             },"JSON");
-        });
-        function checkMobile(tel) {
-            var reg = /(^1[3|4|5|7|8][0-9]{9}$)/;
-            if (reg.test(tel)) {
-                return true;
-            }else{
-                return false;
-            };
         }
+        
+        //敲回车 跳转页面
+		function on_return(){
+			if(window.event.keyCode == 13){
+				if(document.all('btnLogin') != null) {
+					document.all('btnLogin').click();
+				}
+			}
+		}
     </script>
 </body>
-
 </html>

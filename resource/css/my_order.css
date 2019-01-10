@@ -1,0 +1,91 @@
+/*2019-01-09  15:46:28
+* HQS
+* 
+* PC端 我的订单
+* */
+
+
+
+/*导航菜单*/
+.m-nv-sz li{margin-right: 16px;width: auto!important;padding: 0 14px;}
+.m-nv-sz .on:before { width: 100%;}
+
+.row-sz .col-r{border:1px solid #e2e2e2;background: #fff;}
+
+/*二级导航*/
+.m_mine_sz .secondaryMenu{padding: 10px 30px 0px 21px;}
+.m_mine_sz .secondaryMenu .option{display: block;float: left;font-size: 16px;color: #333;line-height: 39px;padding: 0 50px 0 22px;}
+.m_mine_sz .secondaryMenu a.on{color: #d71618;}
+
+.m_mine_sz .secondaryMenu .hunt{float: right;width: 182px;height: 30px;margin-top: 6px;
+								border: 1px #d3d3d3 solid;position: relative;}
+.m_mine_sz .secondaryMenu .hunt input{display: block;width: 156px;line-height: 30px;color: #666;text-indent: 8px;}
+.m_mine_sz .secondaryMenu .hunt input::-webkit-input-placeholder { /* WebKit browsers */
+									　　color:#666;}
+.m_mine_sz .secondaryMenu .hunt input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+									　　color:#666;opacity:1;}
+.m_mine_sz .secondaryMenu .hunt input::-moz-placeholder { /* Mozilla Firefox 19+ */
+									　　color:#666;opacity:1;}
+.m_mine_sz .secondaryMenu .hunt input:-ms-input-placeholder { /* Internet Explorer 10+ */
+									　　color:#666;}
+.m_mine_sz .secondaryMenu .hunt .verify{width: 26px;height: 28px;position: absolute;right: 0;top: 0;
+				  						background: url(/resource/images/common/seek.png) no-repeat center center / 64%;}
+.m_mine_sz .title{font-size: 16px;color: #333;line-height: 44px;padding-left: 43px;margin-top: 11px;position: relative;
+					background: #f8f8f8;}
+.m_mine_sz .title .direction{display: block;position: absolute;top: -12px;width: 20px;}
+.m_mine_sz .title .direction.left1{left: 65px;}
+.m_mine_sz .title .direction.left2{left: 193px;}
+.m_mine_sz .title .direction.left3{left: 312px;}
+.m_mine_sz .title .direction.left4{left: 444px;}
+
+
+.content{padding: 28px 23px;}
+/*列表  有内容*/
+.commonality{margin-bottom: 20px;}
+.commonality .ul_box{width: 840px; margin-bottom: 24px;}
+.commonality .ul_box li{height: 151px;border: 1px solid #f2f2f5;margin-bottom: 20px;}
+.commonality .ul_box li .boxTop{border-bottom: 1px solid #f2f2f5;color: #666;line-height: 40px;background: #f8f8f8;}
+.commonality .ul_box li .boxTop div{float: left;padding: 0 19px;text-align: center;font-size: 15px;}
+.commonality .ul_box li .boxTop .orderNumber{width: 354px;text-align: left;}
+.commonality .ul_box li .boxTop .orderNumber span{color: #d71618;font-size: 16px;}
+.commonality .ul_box li .boxTop .DepartureDate{width: 140px;}
+.commonality .ul_box li .boxTop .paymentAmount{width: 140px;}
+.commonality .ul_box li .boxTop .orderStatus{width: 110px;}
+.commonality .ul_box li .boxTop .operation{width: 94px;}
+
+.commonality .ul_box li .boxBottom{padding: 19px 0 0;}
+.commonality .ul_box li .boxBottom div{float: left;text-align: center;}
+.commonality .ul_box li .boxBottom .orderiofn{width: 354px;padding-left: 19px;}
+.commonality .ul_box li .boxBottom .orderiofn .preview{display: block;float: left;width: 70px;height: 70px;border-radius: 0;margin-right: 10px;}
+.commonality .ul_box li .boxBottom .orderiofn .rightSection{float: left;width: 216px;}
+.commonality .ul_box li .boxBottom .orderiofn .rightSection .title{color: #333;text-align: justify;line-height: 22px;font-size: 14px;margin-bottom: 12px;}
+.commonality .ul_box li .boxBottom .orderiofn .rightSection .orderTime{color: #666;text-align: left;font-size: 14px;}
+.commonality .ul_box li .boxBottom .orderiofn .rightSection .orderTime span{font-size: 14px;}
+.commonality .ul_box li .boxBottom .DepartureDate{width: 140px;line-height: 75px;font-size: 16px;}
+.commonality .ul_box li .boxBottom .paymentAmount{width: 140px;line-height: 75px;font-size: 20px;color: #d71618;font-weight: 600;}
+.commonality .ul_box li .boxBottom .paymentAmount span{color: #d71618;font-size: 20px;}
+.commonality .ul_box li .boxBottom .orderStatus{width: 110px;line-height: 75px;font-size: 16px;}
+.commonality .ul_box li .boxBottom .operation{width: 94px;text-align: center;}
+.commonality .ul_box li .boxBottom .operation .carte{display: block;font-size: 16px;line-height: 25px;}
+.commonality .ul_box li .boxBottom .operation .delete:hover{color: red;}
+
+
+.bottom div .smallIcon{display:inline-block;vertical-align:middle;margin-top:-3px;margin-right:5px}
+
+
+/*原内容已被删除  显示的收藏状态*/
+.nullTitle{color: #ef1517;font-size: 16px;font-weight: 600;width:90%;display: -webkit-box;}
+.nullDetails{font-size: 16px;color: #333;text-align: justify;margin-bottom: 46px;}
+.paddingLeft{padding-left:110px;}
+
+/*页码*/
+.pages{padding:34px 40px 30px 0;background: #fff;}
+
+
+
+
+/*列表  无内容*/
+.mainTips{background: #fff;position: relative;padding: 30px 10px;}
+.mainTips .preview{width: 344px;height: 241px; margin: 0px 42px;;float: left;}
+.mainTips .tip{float: left;position: relative;padding-top: 78px;}
+.mainTips .tip .title{font-size: 23px;color: #666;line-height: 30px;}

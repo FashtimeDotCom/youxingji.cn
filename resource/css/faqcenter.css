@@ -1,0 +1,36 @@
+/*2018-12-17   19:39:37
+HQS
+个人中心  我的问答/TA的问答
+*/
+
+.m_mine_sz{background-color:#fff;border:1px solid #e2e2e2;height: 59px;padding: 0 20px;}
+.m_mine_sz .secondaryMenu .option{display: block;float: left;font-size: 14px;color: #666;line-height: 55px;padding: 0 12px;margin-right: 25px;color: #666;}
+.m_mine_sz .secondaryMenu a.on{color: #d71618;border-bottom: 2px solid #d71618;}
+
+.m_mine_sz .secondaryMenu .hunt{float: right;width: 182px;height: 30px;margin-top: 14px;
+								border: 1px #d3d3d3 solid;position: relative;}
+.m_mine_sz .secondaryMenu .hunt input{display: block;width: 156px;line-height: 30px;color: #666;text-indent: 8px;}
+.m_mine_sz .secondaryMenu .hunt input::-webkit-input-placeholder { /* WebKit browsers */
+									　　color:#666;}
+.m_mine_sz .secondaryMenu .hunt input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+									　　color:#666;opacity:1;}
+.m_mine_sz .secondaryMenu .hunt input::-moz-placeholder { /* Mozilla Firefox 19+ */
+									　　color:#666;opacity:1;}
+.m_mine_sz .secondaryMenu .hunt input:-ms-input-placeholder { /* Internet Explorer 10+ */
+									　　color:#666;}
+.m_mine_sz .secondaryMenu .hunt .verify{width: 26px;height: 28px;position: absolute;right: 0;top: 0;
+				  					background: url(/resource/images/common/seek.png) no-repeat center center / 64%;}
+
+.content{min-height: 301px;}
+.issue{padding-top: 30px;background: #fff;min-height: 301px;
+		border-left: 1px solid #e2e2e2;border-right: 1px solid #e2e2e2;border-bottom: 1px solid #e2e2e2;}
+.issue .box{padding-left: 0!important;}
+.issue .ul_box{margin-bottom:0;}
+.issue .ul_box li{padding-top: 0;border-top:none!important;border-left:none!important;border-right:none!important;}
+
+.issue .bottomToolbars{padding-left: 0;}
+.issue .bottomToolbars .exhibition,.issue .bottomToolbars .exhibition span{font-size: 14px;}
+
+.myIssue .ul_box li .con{position: relative;}
+.myIssue .ul_box li .con .IMGbox{right: 30px;}
+.myIssue .ul_box li .con .videoTitle .title.WidtHh{width: 794px;}

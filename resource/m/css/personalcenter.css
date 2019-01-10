@@ -6,35 +6,87 @@
 		  -我收藏的日志、我收藏的视频、我收藏的游记、我收藏的问答
 公共 样式
  * */
-
-
-
 .write {position: absolute;bottom: 0px;right: 10px;z-index: 9999;}
 .write a{display:inline-block;background-repeat:no-repeat;-webkit-transition:.3s;-o-transition:.3s;transition:.3s}
 
 .ban{border-radius: 0;position: relative;background: transparent;}
 
-.bg_blur{-webkit-filter: blur(3px) contrast(.8) brightness(.8);
-        -moz-filter: blur(3px);
-        -o-filter: blur(3px);
-        -ms-filter: blur(3px);
-        filter: blur(3px) contrast(.8) brightness(.8);}
+.bg_blur{-webkit-filter: blur(1px) contrast(.8) brightness(.8);
+        -moz-filter: blur(1px);
+        -o-filter: blur(1px);
+        -ms-filter: blur(1px);
+        filter: blur(1px) contrast(.8) brightness(.8);}
 
 .ban .message{margin: 24px auto 10px;width: 94%;position: relative;}
-.ban .message .gaine{border-radius: 50%;float: left;margin-right: 13px;}
-
-
-.ban .message .rightBox{float: left;}
+.ban .message .gaine{border-radius: 50%;position: absolute;top: 1px;left: 0px;}
+.ban .message .rightBox{float: left;width: 100%;}
 .ban .message p{color: #fff;}
-.ban .message .wx_name{font-size: 1.2rem;font-weight: 600;}
+.ban .message .wx_name{width: 100%;}
+.ban .message .wx_name .username{line-height: 2rem;font-size: 1.2rem;font-weight: 600;
+								float: left;color: #fff;margin-right: 0.5rem;display: inline-block;}
 		/*定位*/
-.ban .message .location{line-height: 14px;vertical-align: middle;margin-bottom: 14px;float: left;}
-.ban .message .location img{display: inline-block;width: 1.2rem;margin-right:0.2rem;vertical-align: middle;}
-.ban .message .location i{font-size: 1.2rem;line-height: 14px;font-style: normal;}
+.ban .message .location{display: inline-block;width: auto;float: left;}
+.ban .message .location img{display: inline-block;width: 1.2rem;margin-right:0.4rem;float: left;margin-top: 0.35rem;}
+.ban .message .location i{font-size: 1.2rem;line-height: 2rem;font-style: normal;display: inline-block;float: left;}
+		/*标签*/
+.ban .message .labelList{padding: 5px 0px;margin: 4px 0px 8px;display: block;clear: both;}
+.ban .message .labelList .tag{padding: 4px 8px;border: 1px #ee4d4d solid;border-radius: 3px;font-size: 0.9rem;}
+.ban .message .labelList .tag:first-child{margin-right: 10px;}
+
+/*5.5英寸   414*736尺寸的屏幕  如iPhone6 Plus、iPhone6s Plus、iPhone7 Plus、魅族MX5    1920x1080  /3★*/
+@media only screen and (max-width: 414px) {
+	.ban .message .gaine{width: 49.63px;padding-bottom: 49.63px;}
+	.ban .message .rightBox{padding-left: 62.34px;}
+	.ban .message .rightBox.MarginBottom{margin-bottom: 30px;}
+	.minHeight{min-height: 400px;}
+}
+/*5.96英寸  412*732尺寸的屏幕  如谷歌Nexus 6   2K 2560x1440  /3.5★*/
+@media only screen and (max-width: 412px) {
+	.ban .message .gaine{width: 49.34px;padding-bottom: 49.34px;}
+	.ban .message .rightBox{padding-left: 62.34px;}
+	.ban .message .rightBox.MarginBottom{margin-bottom: 30px;}
+	.minHeight{min-height: 394px;}
+}
+/*5.2英寸   411*731尺寸的屏幕  如 谷歌Nexus 5x   1920x1080  /2.625★*/
+@media only screen and (min-width: 376px) and (max-width: 411px) {
+	.ban .message .gaine{width: 49.24px;padding-bottom: 49.24px;top: -7px;}
+	.ban .message .rightBox.MarginBottom{margin-bottom: 26px;}
+	.minHeight{min-height: 392px;}
+}
+/*4.7英寸   375*667尺寸的屏幕  如iPhone6、iPhone7、iPhone 6s   1334x750*/
+@media only screen and (min-width: 361px) and (max-width: 375px) {
+	.ban .message .gaine{width: 45px;padding-bottom: 45px;}
+	.ban .message .rightBox{padding-left: 58px;}
+	.ban .message .rightBox.MarginBottom{margin-bottom: 30px;}
+	.minHeight{min-height: 332px;}
+}
+
+/*适配iPhoneX 样式写法  5.8英寸 2436*1125 */
+@media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3){
+	.minHeight{min-height: 472px;}
+}
+
+/*5.0英寸   384*640尺寸的屏幕  如 魅蓝M1    1280x768*/
+@media only screen and (min-width: 321px) and (max-width: 360px) {
+	.ban .message .gaine{width: 43px;padding-bottom: 43px;}
+	.ban .message .rightBox{padding-left: 56px;}
+	.ban .message .rightBox.MarginBottom{margin-bottom: 26px;}
+	.minHeight{min-height: 284px;}
+}
+/*3.5英寸   320*480尺寸的屏幕  如iPhone4   960x640*/
+@media only screen and (max-width: 320px) {
+	.ban .message .gaine{width: 38px;padding-bottom: 38px;}
+	.ban .message .rightBox{padding-left: 51px;}
+	.ban .message .rightBox.MarginBottom{margin-bottom: 20px;}
+	.minHeight{min-height: 200px;}
+}
 
 		/*简介*/
 .ban .message .intro{margin-bottom: 10px;}
-.ban .message .intro .autograph{font-size: 1.2rem;text-align: justify;line-height: 18px!important;}
+.ban .message .intro .autograph{font-size: 1.2rem;text-align: justify;line-height: 18px!important;
+								white-space: pre-wrap!important;
+								word-wrap: break-word!important;
+								*white-space:normal!important;}
 
 .ban .message .statistics .left{float: left;}
 .ban .message .statistics .left .boxes:nth-of-type(1){border-right: 1px rgba(242, 242, 245, 0.6) solid;}
@@ -54,10 +106,8 @@
 .m-nv-yz li a,.m-nv-yz li a i{font-size: 16px;}
 
 .ul-imgtxt2-yz dd:nth-last-of-type(1){padding-bottom: 2px;}
-
 .ul-imgtxt2-yz li{padding: 0px;}
 .ul-imgtxt2-yz dl{margin-top: 0;margin-bottom: -5px;}
-
 .ul-imgtxt2-yz .pic{padding-top: 0px;overflow: hidden;}
 
 
@@ -68,20 +118,23 @@
 .m-mytv-yz .item .videoTitle{color: #ef1517;font-size: 16px;font-weight: 600;width:90%;display: -webkit-box;
 								-webkit-line-clamp: 2;/*两列*/
 								-webkit-box-orient: vertical;
-								 overflow: hidden;}
+								overflow: hidden;margin-bottom: 6px;
+								white-space: pre-wrap!important;
+								word-wrap: break-word!important;
+								*white-space:normal!important;}
 .m-mytv-yz .item .date{font-size: 0.6rem;margin-bottom:0;}
-.m-mytv-yz .item .videoDetails{font-size: 1.2rem;color: #333;text-align: justify;margin-bottom: 0.7rem;}
+.m-mytv-yz .item .videoDetails{font-size: 1.2rem;color: #333;text-align: justify;margin-bottom: 0.7rem;
+								white-space: pre-wrap!important;
+								word-wrap: break-word!important;
+								*white-space:normal!important;}
 .ul-imgtxt2-yz dd a{padding-bottom: 67%;}
 .m-mytv-yz .item .preview{min-height: 10rem;position: relative;}
 .m-mytv-yz .item .preview .vessel{display: block;width: 100%;padding-bottom: 60%;}
-
 .m-mytv-yz .item .videoBottom{margin: 0.5rem auto;}
 .m-mytv-yz .item .videoBottom img{display: inline-block;margin-right: 0.2rem;vertical-align: middle;}
-
 .m-mytv-yz .item .videoBottom .icon_check{width: 1rem;}
 .m-mytv-yz .item .videoBottom .icon_like {width: 0.85rem;}
 .m-mytv-yz .item .videoBottom .icon_review{width: 0.85rem;}
-
 .m-mytv-yz .item .videoBottom span{color: #666;}
 .m-mytv-yz .item .videoBottom .left{display: block;float: left;height: 20.8px;line-height: 20.8px;}
 .m-mytv-yz .item .videoBottom .left img{width: 10px;}
@@ -96,9 +149,16 @@
 .notes .tag{margin-top: 2px;}
 
 /*我的问答、TA的问答、我收藏的问答*/
-.issue .videoTitle{color: #333!important;}
-.issue .videoTitle .view{display: inline-block;width: 16px;margin-right: 6px;}
-.issue .videoTitle .view img{width: 100%;}
+.m-mytv-yz .item .headline{width:88%;margin-bottom: 6px;}
+.issue .headline{color: #333!important;}
+.issue .headline .view{display: inline;width: 16px;margin-right: 6px;margin-top: 3px;float: left;}
+.issue .headline .substance{font-size: 1.25rem;color: #333;text-align: justify;
+						-webkit-line-clamp: 2;/*两列*/display: -webkit-box;
+						-webkit-box-orient: vertical;
+						overflow: hidden;
+						white-space: pre-wrap!important;
+						word-wrap: break-word!important;
+						*white-space:normal!important;}
 .issue .videoDetails{color: #666!important;}
 /*我的问答、TA的问答*/
 .issue .left{margin-top: 7px;}
@@ -107,17 +167,18 @@
 .issue .divRight{float: right;}
 .issue .divRight span{display: block;text-align: right;}
 
-
+/*右边下拉菜单*/
 .IMGbox{position: absolute;top: 0.9rem;right: 0.8rem;z-index: 2;}
 .IMGbox .pullDownButton{display: block;width: 3.5rem;;height: 3.5rem;; float: right;
 						background: url(/resource/m/images/common/icon_pullDown.png) no-repeat center center / 50%;}
 .IMGbox .menuOption{background: #fff;border: 1px #ccc solid;border-radius: 2px;margin-top: 3.1rem;z-index: 2;position: relative;}
 .IMGbox .menuOption a{display: block;}
-.IMGbox .menuOption span{display: block;text-align: center;padding: 2px 0;font-size: 0.8rem;}
+.IMGbox .menuOption span{display: block;text-align: center;padding: 2px 16px;font-size: 1.4rem;}
 .IMGbox .menuOption .collect{color: #d71618;background: #f2f2f5;}
 
-
-
+/*我收藏 已删*/
+.nullTitle{color: #ef1517;font-size: 16px;font-weight: 600;width:90%;}
+.nullDetails{font-size: 1.2rem;color: red;margin-bottom: 0.7rem;}
 
 
 .bg3{margin-top: 20px;padding:0px 0px 20px;text-align: center;}
@@ -139,41 +200,3 @@
 						-moz-box-shadow: 0px 0px 1px 1px #b2b0b0;display: block;margin: 10px auto 0px;
 						box-shadow: 0px 0px 1px 1px #b2b0b0;border-radius: 15px;}
 .attentionBtn .guanzhu  b{font-size: 1rem;display: inline-block;}
-
-
-/*5.5英寸   414*736尺寸的屏幕  如iPhone6 Plus、iPhone6s Plus、iPhone7 Plus、魅族MX5    1920x1080  /3★*/
-@media only screen and (max-width: 414px) {
-	.ban .message .gaine{width: 49.63px;padding-bottom: 49.63px;margin-top: 0px;margin-bottom: 10px;}
-	.minHeight{min-height: 400px;}
-}
-/*5.96英寸  412*732尺寸的屏幕  如谷歌Nexus 6   2K 2560x1440  /3.5★*/
-@media only screen and (max-width: 412px) {
-	.ban .message .gaine{width: 49.34px;padding-bottom: 49.34px;margin-top: -6px;}
-	.minHeight{min-height: 394px;}
-}
-/*5.2英寸   411*731尺寸的屏幕  如 谷歌Nexus 5x   1920x1080  /2.625★*/
-@media only screen and (min-width: 376px) and (max-width: 411px) {
-	.ban .message .gaine{width: 49.24px;padding-bottom: 49.24px;margin-top: -7px;}
-	.minHeight{min-height: 392px;}
-}
-/*4.7英寸   375*667尺寸的屏幕  如iPhone6、iPhone7、iPhone 6s   1334x750*/
-@media only screen and (min-width: 361px) and (max-width: 375px) {
-	.ban .message .gaine{width: 45px;padding-bottom: 45px;margin-top: -4px;}
-	.minHeight{min-height: 332px;}
-}
-
-/*适配iPhoneX 样式写法  5.8英寸 2436*1125 */
-@media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3){
-	.minHeight{min-height: 472px;}
-}
-
-/*5.0英寸   384*640尺寸的屏幕  如 魅蓝M1    1280x768*/
-@media only screen and (min-width: 321px) and (max-width: 360px) {
-	.ban .message .gaine{width: 43px;padding-bottom: 43px;margin-top: -2px;}
-	.minHeight{min-height: 284px;}
-}
-/*3.5英寸   320*480尺寸的屏幕  如iPhone4   960x640*/
-@media only screen and (max-width: 320px) {
-	.ban .message .gaine{width: 38px;padding-bottom: 38px;margin-top: 1px;}
-	.minHeight{min-height: 200px;}
-}

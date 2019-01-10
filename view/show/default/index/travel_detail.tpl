@@ -108,7 +108,7 @@
 						{{/if}}
 					</ul>
 				</div>
-				
+
 				<div class="r_box">
 					<a href=""><img src="http://www.youxingji.cn/uploadfile/image/20180413/152358134768728.jpg" alt=""></a>
 				</div>
@@ -141,7 +141,7 @@
 				window.location.href = "/index.php?m=index&c=index&v=star&keyword={{$keyword}}&page=" + page;
 			}
 		});
-		
+
 		$('.zan').on("click",function(){
 			var id = $(this).attr('data-id');
 			var num = parseInt($(this).attr('data-num'));

@@ -5,97 +5,158 @@
  * */
 
 
-.dis_block{display: block!important;}
-.dis_none {display: none!important;}
+.banner img{max-width: none;width: 100%;}
 
-.Iclass{font-style: normal;}
-
-.omit{display: -webkit-box!important;-webkit-box-orient: vertical;overflow: hidden;}
-.lineNumber2{-webkit-line-clamp: 2;}
-.lineNumber3{-webkit-line-clamp: 3;}
-.lineNumber4{-webkit-line-clamp: 4;}
-.lineNumber5{-webkit-line-clamp: 5;}
-
-
-.fix{*zoom:1;}
-.fix:after{display:block; content:"clear"; height:0; clear:both; overflow:hidden; visibility:hidden;}
-.divClear{clear: both;}
-
-
-/*模仿朋友圈   九宫格显示    防止图片变形*/
-.figure{padding-bottom: ; /* 关键就在这里 */
-		  	background-position: center;
-		  	background-repeat: no-repeat;
-		  	background-size: cover;border-radius: 5px;}
-
-.borderRadius{border-radius:0px!important;}
-.borderRadius50{border-radius:50%!important;}
-
-
-
-
-
-
-
-
-
-
-
-
-/*轮播图 下的 平台注册用户*/
+/*顶部轮播图 下的 平台注册用户*/
 .index_warp{width: 100%!important;padding-bottom: 10px;border-bottom: 1px #f2f2f5 solid;}
-.index_warp .text-center span{font-style: italic;}
+.index_warp .index_box{width: 30rem;display: block;text-align: center;}
+.index_warp .index_box .user_img{height: 0.75rem;display: inline-block;padding-top: 0.2rem;}
+.index_warp .index_box .text-center{display: inline-block;}
+.index_warp .index_box .text-center span{font-style: italic;margin-right: 5px;}
 
+/*各块公用标题*/
+.divtitle{line-height: 53px;margin: .2rem auto .8rem;position: relative;}
 
 /*达人邦*/
-.divtitle{line-height: 53px;margin: .2rem auto .6rem;}
-.divtitle .index_title{float: left;width: auto;font-size: 1.2rem;font-weight: 500;}
-.divtitle .more {width:auto;float: right;font-size: .9rem;position: relative;
+.divtitle .index_title{float: left;width: auto;font-weight: 500;line-height: 53px;}
+.divtitle .andMore {width:auto;float: right;font-size: .9rem;position: relative;
 				font-family: '博洋行书';color: rgba(245, 110, 110, 1);}
-.divtitle .more span{font-size: 0.35rem;font-family: 'MicrosoftYaHei';color: rgba(102, 102, 102, 1);float: left;}
-.divtitle .more .icon{display: inline-block;width: 14px;margin-top: 20px; margin-left: 9px;}
+.divtitle .andMore span{font-size: 0.35rem;font-family: 'MicrosoftYaHei';color: rgba(102, 102, 102, 1);float: left;}
+.divtitle .andMore .icon{display: inline-block;width: 14px;margin-top: 20px; margin-left: 9px;float: right;}
 
-
-.header .wp{height: 85px;}
-.wp{width: 1200px;max-width:none!important;}
+.header .wp{width: 1200px;height: 85px;}
 
 
 /*达人邦*/
-.s2 .s2_content {position: relative;margin: 0px auto;width: 1200px;height: 482px;text-align: center;overflow: hidden;}
-.s2 .s2_content .dis_block{position:absolute;top:-5px;width:205px;height:492px;overflow: hidden;
+.s2 .s2_content {position: relative;margin: 0px auto;height: 482px;text-align: center;overflow: hidden;}
+.s2 .s2_content .dis_block{position:absolute;top:-5px;width:17%;height:492px;overflow: hidden;
 							transform:rotate(3deg);-webkit-transform:rotate(3deg);}
 
-.s2 .s2_content .dis_block .picture{max-width: none;width:234px;height:492px;position:relative;
+.s2 .s2_content .dis_block .picture{max-width: none;width:117%;height:492px;position:relative;
 									transition:all 1s ease;-webkit-transition:all 1s ease;-moz-transition:all 1s ease;
 									transform:rotate(-3deg);-webkit-transform:rotate(-3deg);
-									left:-15px;top:-1px;}
-.s2 .s2_content .dis_block .message{position:absolute;bottom:0px;left:0px;
+									left:-6.75%;top:-1px;}
+.s2 .s2_content .dis_block .message{position:absolute;bottom:30px;left:0px; width: 90%;
 									transform:rotate(-3deg);-webkit-transform:rotate(-3deg);
 									transition:all 1s ease;-webkit-transition:all 1s ease;-moz-transition:all 1s ease;}
-.s2 .s2_content .dis_block .message .name{width:140px;line-height:34px;color:#fff;margin-bottom: 5px;
+.s2 .s2_content .dis_block .message .name{padding: 0 8px;line-height:34px;color:#fff;margin-bottom: 5px;
 										    border-bottom-right-radius: 17px;border-top-right-radius: 17px;font-size:18px;
 										    background: -webkit-linear-gradient(left, #e25252 , #fb5151); /* Safari 5.1 - 6.0 */
 											background: -o-linear-gradient(right, #e25252, #fb5151); /* Opera 11.1 - 12.0 */
 											background: -moz-linear-gradient(right, #e25252, #fb5151); /* Firefox 3.6 - 15 */
 											background: linear-gradient(to right, #e25252 , #fb5151); /* 标准的语法 */}
-.s2 .s2_content .dis_block .message .name span{display:block;width:100%;text-align:center;}
-.s2 .s2_content .dis_block .message .text{opacity: 0;background: rgba(0,0,0,0.5);color: #fff;font-size: 12px;margin-left: 10px;
-										  line-height: 16px;padding: 10px 10px;border-radius: 5px;text-align: justify;width: 162px;}
+.s2 .s2_content .dis_block .message .name span{display:block;width:100%;text-align:left;}
+.s2 .s2_content .dis_block .message .text{opacity: 0;background: rgba(0,0,0,0.5);color: #fff;font-size: 12px;margin-left: 10px;height: 0;
+										  line-height: 16px;padding: 10px 10px;border-radius: 5px;text-align: justify;width: 96%;}
+.s2 .s2_content .dis_block:first-child .message .text{width: 80%;}
 
 .item1{left:-12px;z-index: 1;}
 .item1 .picture{left:-3px!important;}
 .item1 .message{left: 20px!important;}
-
-.item2{left:193px;z-index: 2;}
-
-.item3{left:398px;z-index: 3;}
-
-.item4{left:600px;z-index: 4;}
-
-.item5{left:802px;z-index: 5;}
-
-.item6{right:-12px;z-index: 6;width: 209px!important;}
+.item2{left:16.083333%;z-index: 2;}
+.item3{left:33.166666%;z-index: 3;}
+.item4{left:50%;z-index: 4;}
+.item5{left:66.833333%;z-index: 5;}
+.item6{right:-1.334%;z-index: 6;width: 17.4166666%!important;}
 
 .s2 .s2_content .dis_block:hover .picture{transform: rotate(-3deg) scale(1.1);-webkit-transform: rotate(-3deg) scale(1.1);}
 .s2 .s2_content .dis_block:hover .message{transform:rotate(-3deg) translateY(-45px);-webkit-transform: rotate(-3deg) translateY(-45px);}
-.s2 .s2_content .dis_block:hover .message .text{opacity: 1;}
+.s2 .s2_content .dis_block:hover .message .text{opacity: 1;height: auto;}
+
+
+/*达人日志*/
+.ul-txt1 .det{height: auto;}
+.ul-txt1 .det p{text-align: justify;height: 78px;}
+.ul-txt1 .user-info .txt-r{padding: 4px 13px 0;}
+.ul-txt1 .user-info .txt-r p{line-height: 16px;}
+.ul-txt1 .bottom{display: flex;border-top: 1px solid #E5E5E5;color:#333;line-height:16px;
+				 text-align:right;margin-left: -29px;margin-right: -29px;padding: .3rem 0 0.2rem;}
+.ul-txt1 .bottom div{flex-grow: 1;text-align: center;padding-left: .8rem;border-right: 1px #eaeaea solid;}
+.ul-txt1 .bottom div:last-child{border-right: none;}
+.ul-txt1 .bottom div      .smallIcon{display:inline-block;vertical-align:middle;margin-top:-3px;width:20px;height:20px;margin-right:5px}
+.ul-txt1 .bottom .collect .smallIcon{background:url(../images/common/icon_like1.png) no-repeat center center / 78%;}
+.ul-txt1 .bottom .review  .smallIcon{background:url(../images/common/icon_review1.png) no-repeat center center / 80%;}
+.ul-txt1 .bottom .zan     .smallIcon{background:url(../images/common/icon_dianzan1.png) no-repeat center center / 84%;}
+.ul-txt1 .bottom .check   .smallIcon{background:url(../images/common/preview1.png) no-repeat center center / 100%;}
+.ul-txt1 .bottom .one .smallIcon{background:url(../images/common/icon_dianzan2.png) no-repeat center center / 84%;}
+.ul-txt1 .bottom .one i{color: #d71618;}
+.bottom .collect:hover,.bottom .review:hover a{color:#d71618;}
+.bottom .collect:hover .smallIcon{background-image:url(../images/common/icon_like2.png);}
+.bottom .review:hover  .smallIcon{background-image:url(../images/common/icon_review2.png);}
+
+/*达人视频*/
+.TalentVideo{background:#F9F9F9;padding-bottom: 1px;}
+.TalentVideo .wp .divtitle{padding-top: 0.7rem;}
+.TalentVideo .wp .ul-pic1 .txt{top: 33%;}
+
+
+/*达人游记*/
+.TalentTravels{padding-top: 10px!important;}
+.TalentTravels .wp .divtitle .y{left: 50%;font-size: 1.1rem;}
+.TalentTravels .wp .m-read-qm{background:url(/resource/images/index2.0/ri_bg.png) no-repeat center center / 100% 100%;}
+.TalentTravels .wp .m-read-qm .ul-txt1-qm .ls{display: inline-block;float: left;width: 8.333333333%;text-align: center;margin: 0;}
+.TalentTravels .wp .m-read-qm .ul-txt1-qm .ls a{margin: 0 auto;}
+
+/*独家旅行*/
+.ExclusiveTravel{padding: 30px 0px;background:none;margin-bottom: 60px;}
+.ExclusiveTravel .divtitle .button{padding: 0px 10px;margin-top: 22px;line-height: 24px;display: inline-block;}
+.ExclusiveTravel .divtitle .path{margin-left: 26px;}
+.ExclusiveTravel .num div:nth-child(2) a{display: inline-block;width: 100%;}
+.ExclusiveTravel .onn{background: #d10c3b;border-radius: 2px;font-size: 12px;}
+
+
+/*独家旅行*/
+			/*独家路线*/
+.index_pic .tab_box{width: 100%;}
+.index_pic .tab_box>div{float: left;}
+.index_pic .tab_box .box1{display: inline-block;width: 49.166666%;height: 267px;float: left;position: relative;margin-right: 1.6%;margin-bottom: 20px;}
+.index_pic .tab_box .box1 .details{width: 100%;height: 97px;position: absolute;left: 0;bottom: 0;background: rgba(0,0,0,0.5);padding: 14px 20px;}
+.index_pic .tab_box .box1 .details p{color: #fff;text-align: justify;}
+.index_pic .tab_box .box1 .details .matter{font-size: 18px;}
+.index_pic .tab_box .box1 .details .time{font-size: 14px;margin-top: 22px;}
+.index_pic .tab_box .box1 .details .price{font-size: 14px;position: absolute;right: 20px;bottom: 8px;}
+.index_pic .tab_box .box1 .details .price i{color: #ff7467;font-size: 28px;font-weight: 500;}
+
+.index_pic .tab_box .box2{display: inline-block;width: 23.75%;height: 267px;float: left;margin-right: 1.6666%;border: 1px #fafafb solid;border-top: none;position: relative;margin-bottom: 20px;}
+.index_pic .tab_box .box2 .cove{width: 99%;height: 170px;}
+.index_pic .tab_box .box2 .details{width: 99%;height: 96px;padding: 10px 12px;border: 1px #fafafb solid;border-top: none;position: relative;}
+.index_pic .tab_box .box2 .details .matter{color: #666;font-size: 16px;text-align: justify;line-height: 18px;}
+
+.index_pic .tab_box .box2 .details .price{font-size: 14px;position: absolute;right: 12px;bottom: 0px;color:#666;}
+.index_pic .tab_box .box2 .details .price i{color: #ff7467;font-size: 28px;font-weight: 500;}
+
+.index_pic .tab_box .box2:nth-of-type(3){margin-right: 0;}
+.index_pic .tab_box .box2:last-child{margin-right: 0;}
+
+			/*私人订制*/
+.index_pic .tab_box .left{float: left;width: 66.66666%;height: 450px;border-radius: 8px;overflow: hidden;margin-right: 3.3333%;}
+.index_pic .tab_box .left .banner{width: 100%;height: 100%;}
+.index_pic .tab_box .left .banner .playbill{height: 100%;}
+
+.index_pic .tab_box .right{width: 30%;height: 450px;overflow: hidden;border-radius: 8px;}
+.index_pic .tab_box .right h3.caption{  line-height: 75px;
+										background: -webkit-linear-gradient(#e25252, #d03333); /* Safari 5.1 - 6.0 */
+										background: -moz-linear-gradient(#e25252, #d03333); /* Firefox 3.6 - 15 */
+										background: -o-linear-gradient(#e25252, #d03333); /* Opera 11.1 - 12.0 */
+										background: linear-gradient(#e25252, #d03333); /* 标准的语法 */}
+.index_pic .tab_box .right h3.caption span {display: block;     /*设置为块级元素会独占一行形成上下居中的效果*/
+								            font-size: 23px;color: #fff;position: relative;   /*定位横线（当横线的父元素）*/
+								           text-align: center;font-weight: 500;}
+.index_pic .tab_box .right h3.caption span:before, 
+.index_pic .tab_box .right h3.caption span:after{content: '';                 /*CSS伪类用法*/
+									            position: absolute;         /*定位背景横线的位置*/
+									            top: 52%;
+									            background: #fff;       /*宽和高做出来的背景横线*/
+									            width: 12%;height: 1px;}
+.index_pic .tab_box .right h3.caption span:before{ left: 7%;        /*调整背景横线的左右距离*/ }
+.index_pic .tab_box .right h3.caption span:after {right: 7%;}
+
+.index_pic .tab_box .right .box{height: 375px;background: #fafafa;padding-top: 28px;}
+.index_pic .tab_box .right .box .matter{display: block; border: 1px #bcbcbc solid;border-radius: 3px;color: #666;font-size: 22px;
+										width: 90.83333%;height: 50px;margin: 0px auto 20px;text-indent: 21px;line-height: 50px;}
+.index_pic .tab_box .right .box .submitInfo{display: block;width: 141px;height: 39px;line-height: 39px;color: #fff;margin: 0 auto;
+											border-radius: 19.5px;text-align: center; background: #545454;border: none;}
+.index_pic .tab_box .right .box input.PhoneNum::-webkit-outer-spin-button,
+.index_pic .tab_box .right .box input.PhoneNum::-webkit-inner-spin-button{
+   									-webkit-appearance: none !important;}
+.index_pic .tab_box .right .box input.PhoneNum[type="number"]{-moz-appearance:textfield;}

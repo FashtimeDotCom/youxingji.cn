@@ -79,6 +79,13 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label class="control-label input_label">排序(越前,值越小)</label>
+                            <div class="">
+                                <input type="number" class="form-control input_box"  name="sort" value="{{$detail.sort}}" placeholder="标签名称" parsley-trigger="change">
+                            </div>
+                        </div>
+
                     </div>
 
                 </form>

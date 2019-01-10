@@ -56,7 +56,7 @@ function jointly3(rid,dataType,page,length,htmll){
 				                '</a>'+
 		                    '</div>'+
 		                    '<div class="substance" data-replyNum="'+data.tips[i].count+'">'+
-		                    	'<div class="txtt"><p>'+data.tips[i].content+'</p></div>'+
+		                    	'<div class="txtt">'+data.tips[i].content+'</div>'+
 			                    '<div class="BarSubmenu">'+
 			                    	'<span class="reply replyReview" data-id="'+data.tips[i].id+'" data-open="0" data-class="1">回复</span>'+
 			                    	'<div class="leftSubmenu">'+
@@ -188,22 +188,12 @@ function replace_em(str){
 }
 
 
-
-
-
-
-
-
 //提交  评论
 $(".btnComment").on("click",function(){
     var val = $("#comment").val();//文章的内容
 	var that=this;
 
-    if( String(val).length <= 10 ){
-    	layer.msg("评论内容不能少于10个字的长度！");
-    	return false;
-    }
-    else if(val.replace(/(^\s*)|(\s*$)/g, "")==""){
+    if(val.replace(/(^\s*)|(\s*$)/g, "")==""){
 		layer.msg('评论内容不能只输入空格！');
 		return false;
 	}
@@ -226,7 +216,7 @@ $(".btnComment").on("click",function(){
 			                '</a>'+
 	                    '</div>'+
 	                    '<div class="substance">'+
-	                    	'<div class="txtt"><p>'+new_str+'</p></div>'+
+	                    	'<div class="txtt">'+new_str+'</div>'+
 	                    	'<div class="BarSubmenu">'+
 		                    	'<div class="leftSubmenu">'+
 			                    	'<span class="zan" onclick="zan(this,'+res.datas.id+')" data-nature="review">'+
@@ -312,10 +302,6 @@ function btnComment_Review(){
 	    if ( val=="" ) {
 	    	layer.msg("回复内容不能为空哦！");
 	    }
-	    else if(String(val).length <= 10){
-			layer.msg('评论内容不能少于10个字的长度！');
-			return false;
-		}
 	    else if(val.replace(/(^\s*)|(\s*$)/g, "")==""){
 			layer.msg('评论内容不能只输入空格！');
 			return false;
@@ -434,10 +420,6 @@ function btnComment_(){
 		if ( val=="" ) {
 			layer.msg("回复内容不能为空哦！");
 		}
-		else if(String(val).length <= 10){
-			layer.msg('评论内容不能少于10个字的长度！');
-			return false;
-		}
 		else if(val.replace(/(^\s*)|(\s*$)/g, "")==""){
 			layer.msg('评论内容不能只输入空格！');
 			return false;
@@ -506,8 +488,6 @@ function btnComment_(){
 	});
 }
 btnComment_();
-
-
 
 
 //翻页

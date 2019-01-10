@@ -16,6 +16,9 @@
 	<script src="/resource/m/js/jquery.js"></script>
 	<script src="/resource/m/js/lib.js"></script>
 	<link rel="stylesheet" href="/resource/m/css/note.css" />
+	<style type="text/css">
+		.tagVal{margin-top: 10px;}
+	</style>
 	<link rel="stylesheet" href="/resource/m/css/tag.css" title="和标签相关" />
 </head>
 <body id="row_issue">
@@ -24,7 +27,7 @@
 			<div class="wp">
 				<a href="/index.php?m=wap&c=user&v=index" class="i-close col-l" style="background-image: url(/resource/m/images/i-close.png)"></a>
 				<div class="col-r">
-					<a href="javascript:;" id="addnote" class="i-issue site-demo-layedit" data-type="content" style="background-image: url(/resource/m/images/i-dh.png)">编辑</a>
+					<a href="javascript:;" id="addnote" class="i-issue site-demo-layedit" data-type="content" style="background-image: url(/resource/m/images/i-dh.png)">发布编辑</a>
 				</div>
 			</div>
 		</div>
@@ -86,14 +89,9 @@
 							</div>
 						</div>
 						
-						<!--<div class="tit">
-							<input type="text" class="inp" value="{{$res.tag}}" id="tag" placeholder="请输入标签(可选)，每个标签最多四个字，如：旅游知识/美食，用正斜杠分开">
-							<p class="tagTips FontSize dis_none">标签目前最多为四个哦！</p>
-						</div>-->
-						
 						<div class="tit" style="position: relative;">
-							<input type="text" class="inp tag" value="" maxlength="4" onkeyup="judgeIsNonNull2(event)" id="tag" placeholder="请输入标签(可选),每个标签最多四个字,空格无效">
-							<input type="button" name="" class="btn affirm dis_none" id="affirm" value="确认添加" />
+							<input type="text" class="inp tag" onkeyup="judgeIsNonNull2(event)" id="tag" placeholder="请输入标签(可选),每个标签最多四个字,空格无效">
+							<input type="button" class="btn affirm dis_none" id="affirm" value="确认添加" />
 							<p class="tagTips FontSize dis_none">最多只能四个标签！可以先删掉其中一个旧标签，再增加新标签！</p>
 							<div class="tagVal fix" id="tagVal">
 								{{if $res.tag }}
@@ -413,21 +411,21 @@
 			if (x == 4 ) {
 		  		if(value !== "" ){
 			      	$(".affirm").removeClass("dis_none");
-			    }else{
+			    }
+		  		else{
 			    	$(".affirm").addClass("dis_none");
 			    }
 			}
 
 			if(value !== ""){
-				if( /[=，。￥？！：、……“”；（）《》～‘’〈〉——·ˉˇ¨々‖∶＂＇｀｜〃〔〕「」『』．〖〗$【】｛｝［］/,|{}_*:?^%$#@!`·~"'\\<>\[\]\%;)(&+-]/.test(value) ){
-					$("#tag").val(value.replace(/[=，。￥？！：、……“”；（）《》～‘’〈〉——·ˉˇ¨々‖∶＂＇｀｜〃〔〕「」『』．〖〗$【】｛｝［］/,|{}_*:?^%$#@!`·~"'\\<>\[\]\%;)(&+-]/,""));
+				var res = /[\、\…\.\．\·\•\'\,\，\。\×\_\＿\-\−\－\—\ˉ\ˇ\々\＇\｀\‘\’\“\”\〃\¨\"\＂\｜\|\‖\(\)\（\）\〔\〕\<\>\〈\〉\《\》\「\」\『\』\〖\〗\【\】\［\］\[\]\{\}\｛\｝\/\*\＊\?\？\^\＾\+\＋\=\＝\÷\¥\￥\#\＃\@\＠\!\！\`\~\～\%\％\∶\:\：\;\；\&\＆\$\＄\£\￡\€\°\°C\°F\←\↑\→\↓\／\＼\\]/g;
+				if( res.test(value) ){
+					$("#tag").val(value.replace(res,""));
 					return false;
 				}
-				if( value.length > 4 ){
-		    		return $("#tag").val(value.substr(0, 4));
-		    	}
 		    	$(".affirm").removeClass("dis_none");
-		   	}else{
+		   	}
+			else{
 		    	$(".affirm").addClass("dis_none");
 		    }
 		}
@@ -448,18 +446,24 @@
 			if(value == ""){
     			layer.msg('标签内容不能为空！');
 				return false;
-    		}else if(value.replace(/(^\s*)|(\s*$)/g, "")==""){ //判断输入的内容是否全为空格
+    		}
+			else if(value.replace(/(^\s*)|(\s*$)/g, "")==""){ //判断输入的内容是否全为空格
 				layer.msg('标签栏不能只输入空格！');
 				return false;
-			}else{
+			}
+    		else{
 				if( length>=4 ){                         //判断是否已存在四个标签
 					$(".tagTips").removeClass("dis_none");
 					return false;
-				} else{
+				}
+				else{
 					if( value == val0 || value == val1 || value == val2 ){
 						layer.msg('不能输入已存在的标签！');
 						return false;
-					} else{
+					}
+					else{
+						value = value.replace(/\s*/g,"");//去除字符串空格(空白符)
+						value = value.substr(0, 4);
 						html='<b class="sample">'+
 								'<i class="Iclass">'+value+'</i>'+
 								'<em class="eliminate" onclick="eliminate(this)"><img src="/resource/m/images/icon_eliminate.png"/><em>'+
@@ -501,7 +505,8 @@
 					zxEditor.addClass('has-pic', $('.cover'));
 				}
 				zxEditor.setContent(data.content);
-			}else{
+			}
+			else{
 				zxEditor.setContent('{{$res.content}}');
 			}
 		}
@@ -583,8 +588,7 @@
 			var type = $(this).data('type');
 			active[type] ? active[type].call(this) : '';
 		});
-	
-	
+
 		function add (con) {
 			var title = $('#title').val();
 			var describe = $('#describe').val();
@@ -608,7 +612,6 @@
 				return false;
 			}
 
-			
 			var val0 = $("#tagVal").children().eq(0).find("i").text();
     		var val1 = $("#tagVal").children().eq(1).find("i").text();
     		var val2 = $("#tagVal").children().eq(2).find("i").text();
@@ -674,7 +677,6 @@
 				}, "JSON");
 			});
 		}
-
 	</script>
 </body>
 </html>

@@ -26,6 +26,9 @@ class Controller_Wap_Collection extends Core_Controller_WapAction
             foreach ($info as $key=>$value){
                 $info[$key]['addtime']=date("Y-m-d H:i:s",$value['addtime']);
                 $info[$key]['content']=json_decode($value['content']);
+                if( $value['title']==NULL && $value['describes']==NULL ){
+                    $info[$key]['is_delete']=1;
+                }
             }
             $this->assign("list",$info);
         }
@@ -46,6 +49,9 @@ class Controller_Wap_Collection extends Core_Controller_WapAction
         if( $info ){
             foreach ($info as $key=>$value){
                 $info[$key]['addtime']=date("Y-m-d H:i:s",$value['addtime']);
+                if( $value['title']==NULL && $value['describes']==NULL ){
+                    $info[$key]['is_delete']=1;
+                }
             }
             $this->assign("list",$info);
         }
@@ -65,6 +71,9 @@ class Controller_Wap_Collection extends Core_Controller_WapAction
             foreach ($info as $key=>$value){
                 if( trim($value['tag']) ){
                     $info[$key]['tag']=explode("/",$value['tag']);
+                    if( $value['title']==NULL && $value['desc']==NULL ){
+                        $info[$key]['is_delete']=1;
+                    }
                 }
             }
             $this->assign("list",$info);

@@ -9,15 +9,24 @@ class Controller_Index_Index extends Core_Controller_TAction
     {
         parent::preDispatch();
     }
-    public function indexAction()
+
+    public function old_indexAction()
     {
         //达人邦
         $starlist = C::M('travel')->where("status = 1 and istop = 1")->order('toptime desc,id desc')->limit('0,2')->select();
         foreach ($starlist as $key => $value) {
             C::M('travel')->where('id', $value['id'])->setInc('shownum', 1);
-          	$starlist[$key]['describes'] = Core_fun::cn_substr(strip_tags($value['describes']),320,'...');
+            $starlist[$key]['describes'] = Core_fun::cn_substr(strip_tags($value['describes']),320,'...');
             $starlist[$key]['content'] = json_decode($value['content']);
             $starlist[$key]['addtime'] = date('Y-m-d', $value['addtime']);
+        }
+
+        //油画
+        $scenery = C::M('scenery')->where("istop = 1")->limit("0,3")->order("id desc")->select();
+        foreach ($scenery as $key => $value) {
+            C::M('scenery')->where('id', $value['id'])->setInc('show_num', 1);
+            $user = C::M('writer')->where("id = $value[wid]")->find();
+            $scenery[$key]['name'] = $user['name'];
         }
 
         //旅拍tv
@@ -42,6 +51,39 @@ class Controller_Index_Index extends Core_Controller_TAction
             if( $journey_info ){
                 $this->assign("journey_info",$journey_info);
             }
+        }
+
+        //达人带你去旅行
+        $travel_mdl=new Model_StarTravel();
+        $travel_info=$travel_mdl->get_living_sketch(2);
+        if( $travel_info ){
+            foreach( $travel_info as $key=>$value ){
+
+                if( $value['autograph'] ){
+                    $travel_info[$key]['autograph']=Core_fun::cn_substr(strip_tags($value['autograph']),320,'...');
+                }
+
+            }
+            $this->assign("travel_info",$travel_info);
+        }
+
+        //名师带你去写生
+        $sketch_mdl=new Model_Sketch();
+        $sketch_list=$sketch_mdl->get_living_sketch(2);
+        if( $sketch_list ){
+            foreach( $sketch_list as $key=>$value ){
+                if( $value['label'] ){
+                    $label_arr=array();
+                    $label_arr=explode(",",$value['label']);
+                    $sketch_list[$key]['label']=$label_arr;
+                }
+
+                if( $value['introduction'] ){
+                    $sketch_list[$key]['introduction']=Core_fun::cn_substr(strip_tags($value['introduction']),320,'...');
+                }
+
+            }
+            $this->assign("sketch_list",$sketch_list);
         }
 
         //日月潭
@@ -83,30 +125,75 @@ class Controller_Index_Index extends Core_Controller_TAction
         $this->assign('month', date('n'));
 
         $this->assign('starlist', $starlist);
-        $this->assign('tv', $tv);
-        $this->display('index/new_index.tpl');
-    }
-
-
-    public function new_indexAction()
-    {
-        $starlist = C::M('travel')->where("status = 1 and istop = 1")->order('id desc')->limit('0,2')->select();
-        foreach ($starlist as $key => $value) {
-            C::M('travel')->where('id', $value['id'])->setInc('shownum', 1);
-            $starlist[$key]['describes'] = Core_fun::cn_substr(strip_tags($value['describes']),320,'...');
-            $starlist[$key]['content'] = json_decode($value['content']);
-            $starlist[$key]['addtime'] = date('Y-m-d', $value['addtime']);
-        }
-        $scenery = C::M('scenery')->where("istop = 1")->limit("0,3")->order("id desc")->select();
-        foreach ($scenery as $key => $value) {
-            $user = C::M('writer')->where("id = $value[wid]")->find();
-            $scenery[$key]['name'] = $user['name'];
-        }
-        $tv = C::M('tv')->where("istop = 1 and status = 1")->limit("0,4")->order("id desc")->select();
-        $this->assign('starlist', $starlist);
         $this->assign('scenery', $scenery);
         $this->assign('tv', $tv);
         $this->display('index/index.tpl');
+    }
+
+    public function indexAction()
+    {
+        //达人邦,获取首先是达人，weektop=1 and 推荐图tjpic IS NOT NULL
+        $tj_star=C::M('user_member')->field('uid,username,autograph,tjpic')->where("startop = 1 and weektop=1")->order('sort ASC,uid desc')->limit(0,6)->select();
+        if( $tj_star ){
+            $this->assign("tj_star",$tj_star);
+        }
+
+        //达人日志
+        $starlist = C::M('travel')->where("status = 1 and istop = 1")->order('toptime desc,id desc')->limit('0,2')->select();
+        foreach ($starlist as $key => $value) {
+            $starlist[$key]['content'] = json_decode($value['content']);
+            $starlist[$key]['addtime'] = date('Y-m-d', $value['addtime']);
+            $starlist[$key]['describes']=Core_Fun_Encode::mynl2br($value['describes']);
+        }
+
+        //旅拍tv
+        $tv = C::M('tv')->where("istop = 1 and status = 1")->limit("0,4")->order("id desc")->select();
+
+        //独家旅行
+        $journey_info=array();
+        $journey_info=C::M("article_article as a")->field("a.id,a.title,a.tjpic as articlethumb,b.price ")->join('##__base_module_journey as b','a.id=b.aid','left')->where("a.useable =1")->limit("0,7")->select();
+        $this->assign('journey_info',$journey_info);
+
+        //日月潭
+        $y = intval($this->getParam('y')) ? intval($this->getParam('y')) : date('Y');
+        $dy = date('Y');
+        $dm = date('n');
+        if($y > $dy){
+            $y = $dy;
+        }elseif($y < 2010){
+            $y = 2010;
+        }
+        $list = array();
+        if($dy == $y){
+            $list = $this->rl_one($y, $dy, $dm);
+        }else{
+            $list = $this->rl_one($y);
+        }
+
+        for($i=1;$i<=$dm;$i++){
+            $month_arr[$i]=$i;
+        }
+        $this->assign("month_arr",$month_arr);
+
+        //流量统计
+        $traffic=C::M("traffic_number")->where("id=1")->field('visit_num,customer_num,platform_num')->find();
+        if( $traffic ){
+            //获取四个随机用户头像
+            $customer=C::M("user_member")->field("uid,headpic")->where("uid >= ((SELECT MAX(uid) FROM g_user_member)-(SELECT MIN(uid) FROM g_user_member)) * RAND() + (SELECT MIN(uid) FROM g_user_member)")->limit("0,4")->select();
+            $star=C::M("user_member")->field("uid,headpic")->where("startop =1 and uid >= ((SELECT MAX(uid) FROM g_user_member)-(SELECT MIN(uid) FROM g_user_member)) * RAND() + (SELECT MIN(uid) FROM g_user_member)")->limit("0,4")->select();
+            $traffic['customer_head']=$customer;
+            $traffic['star_head']=$star;
+            $this->assign("traffic",$traffic);
+        }
+
+        $this->assign('y', $y);
+        $this->assign('list', $list);
+        $this->assign('year', date('Y'));
+        $this->assign('month', date('n'));
+
+        $this->assign('starlist', $starlist);
+        $this->assign('tv', $tv);
+        $this->display('index/new_index.tpl');
     }
 
     public function noneAction()
@@ -306,7 +393,7 @@ class Controller_Index_Index extends Core_Controller_TAction
     //达人帮栏目
     public function starAction()
     { 
-        $perpage = 10; 
+        $perpage = 6;
       	$keyword = htmlspecialchars($this->getParam('keyword'),ENT_QUOTES);
         $where="";
       	if($keyword){
@@ -345,7 +432,7 @@ class Controller_Index_Index extends Core_Controller_TAction
     }
 
     //tv栏目
-    public function tvAction()
+    public function old_tvAction()
     {
         $perpage = 12;
         //查询所有标签
@@ -390,6 +477,48 @@ class Controller_Index_Index extends Core_Controller_TAction
       	$this->assign('tagslist', $tagslist);
         $this->assign ('multipage', $multipage);
         $this->display('index/tv.tpl');
+    }
+
+    public function tvAction()
+    {
+        $perpage = 12;
+        $where = "status = 1";
+        $keyword = htmlspecialchars($this->getParam('keyword'),ENT_QUOTES);
+        if($keyword){
+            $where .= " and a.tags like '%$keyword%' ";
+        }
+
+        $type=htmlspecialchars($this->getParam('type'));
+        $type=empty($type)?1:$type;
+        if( $type==1 ){//最新，
+            $order="a.addtime desc";
+        }else{ //热门
+            $order="a.shownum desc";
+        }
+
+        $Num = C::M('tv as a')->where($where)->getCount();
+        $curpage = $this->getParam ('page') ? intval ($this->getParam ('page')) : 1;
+        $list = C::M('tv as a')->field('a.*,b.username,b.headpic')->join('##__user_member as b','b.uid=a.uid','left')->where($where)->order($order)->limit($perpage * ($curpage - 1), $perpage)->select();
+        if( $list ){
+            foreach($list as $key=>$value){
+                $list[$key]['headpic']=$value['headpic']??'/resource/images/img-lb2.png';
+            }
+        }
+
+        $mpurl = "index.php?m=index&c=index&v=tv&keyword=$keyword&type=$type";
+        $multipage = $this->multipages ($Num, $perpage, $curpage, $mpurl);
+
+        //搜索条件
+        $key_list=C::M('tv_keyword')->where("status=1")->select();
+        $this->assign('key_list',$key_list);
+
+        $this->assign('list', $list);
+        $this->assign('ns', 'tv');
+        $this->assign('keyword', $keyword);
+        $this->assign("type",$type);
+        $this->assign ('multipage', $multipage);
+        $this->assign('page_info',array('num'=>$Num,'total_page'=>ceil($Num/$perpage)));
+        $this->display('index/new_tv.tpl');
     }
 
     //招募
@@ -586,6 +715,9 @@ class Controller_Index_Index extends Core_Controller_TAction
             $this->showmsg('', '/', 0);
             exit;
         }
+        if( !$article['top_pic'] ){
+            $article['top_pic']='/uploadfile/image/20180629/153026548528241.jpg';
+        }
         $article['addtime'] = date('Y-m-d', $article['show_time']);
         C::M('ryt')->where('id', $id)->setInc('shownum', 1);
 
@@ -594,9 +726,15 @@ class Controller_Index_Index extends Core_Controller_TAction
         //日月潭
         $tjlist = C::M('ryt')->where("istop = 1")->order("shownum desc")->limit('0,10')->select();
 
-        //生成畅言的source_id
-        $source_id=Core_Fun_Encode::createSourceId("pc",'ryt',$id);
-        $this->assign("source_id",$source_id);
+        $type=3;//分类
+        $url="/index.php?m=index&c=index&v=rytdetai&id={$id}";
+        $page=$this->getParam("page")??1;
+        $perpage=5;
+        $this->pub_commentAction($id,$type,$url,$page,$perpage);
+
+        //跳转链接加密
+        $from_url=base64_encode($url);
+        $this->assign('from_url',$from_url);
 
         $this->assign('ns', 'ryt');
         $this->assign('tjryt', $tjryt);
@@ -820,6 +958,13 @@ class Controller_Index_Index extends Core_Controller_TAction
             $this->showmsg('', 'index.php?m=index&c=user&v=index', 0);
             exit;
         }
+
+        $from_url=$this->getParam('from');
+        if( $from_url && !empty($from_url) ){
+            $from_url=base64_decode($from_url);
+            $this->assign("from_url",$from_url);
+        }
+
         $this->assign('ns', 'login');
         $this->display('index/login.tpl');
     }
@@ -1115,9 +1260,15 @@ class Controller_Index_Index extends Core_Controller_TAction
         //日月潭
         $tjlist = C::M('ryt')->where("istop = 1")->order("shownum desc")->limit('0,10')->select();
 
-        //生成畅言的source_id
-        $source_id=Core_Fun_Encode::createSourceId("pc",'travel_note',$id);
-        $this->assign("source_id",$source_id);
+        $type=3;//分类
+        $url="/index.php?m=index&c=index&v=traveldetai&id={$id}";
+        $page=$this->getParam("page")??1;
+        $perpage=5;
+        $this->pub_commentAction($id,$type,$url,$page,$perpage);
+
+        //跳转链接加密
+        $from_url=base64_encode($url);
+        $this->assign('from_url',$from_url);
 
         $this->assign('ns', 'ryt');
         $this->assign('tjryt', $tjryt);
@@ -1126,6 +1277,124 @@ class Controller_Index_Index extends Core_Controller_TAction
 
         $this->display('index/travel_note_detail.tpl');
     }
+
+    //新版-达人列表（达人帮）
+    public function new_starAction()
+    {
+        //达人聚集地
+        $looking_list=C::M('looking_star')->order('sort ASC,id desc')->select();
+        if( $looking_list ){
+            $this->assign("looking_list",$looking_list);
+        }
+
+        //达人列表
+        $perpage = 8;
+        $Num = C::M('user_member')->where("startop=1 or trainee=1 ")->getCount();
+        $curpage = $this->getParam ('page') ? intval ($this->getParam ('page')) : 1;
+        $list = C::M('user_member')->field('uid,username,headpic,autograph')->where('startop=1 or trainee=1')->order('sort asc,uid desc')->limit($perpage * ($curpage - 1), $perpage)->select();
+        foreach($list as $key=>$value){
+            $list[$key]['headpic']=empty($value['headpic'])?'resource/images/img-lb2.png':$value['headpic'];
+        }
+
+        $mpurl = "/index.php?m=index&c=index&v=new_star";
+        $multipage = $this->multipages ($Num, $perpage, $curpage, $mpurl);
+        if( $multipage ){
+//            unset($multipage[0]);//first
+            unset($multipage[count($multipage)-1]);
+        }
+//        var_dump($multipage);die();
+
+        $this->assign ('multipage', $multipage);
+        $this->assign("list",$list);
+        $this->assign('ns', 'new_star');
+        $this->assign('page_info',array('num'=>$Num,'total_page'=>ceil($Num/$perpage),'cur_page'=>$curpage));
+        $this->display('index/new_star.tpl');
+    }
+
+    //新版-达人视频详情页
+    public function tv_detailAction()
+    {
+        $id=$this->getParam("id");
+        if( !$id ){
+            $this->showmsg('无视频ID!', '/index.php?m=index&c=index&v=tv', 2);
+        }
+        $info=C::M('tv as a')->field('a.*,b.username,b.headpic,b.autograph')->join("##__user_member as b",'a.uid=b.uid','left')->where("id={$id} and status=1")->find();
+        if( !$info ){
+            $this->showmsg('视频不存在!', '/index.php?m=index&c=index&v=tv', 2);
+        }
+        C::M('tv')->where('id', $id)->setInc('shownum', 1);
+        $tag=$info['tags'];
+        //获取用户相关的视频
+        if( $tag ){//查找相关视频
+            $tv_list=C::M("tv")->field('id,title,pics,url,addtime')->where("status=1 and id <> {$id} and tags like '%{$tag}%'")->order("id desc")->limit(0,6)->select();
+        }else{//没有则按照推荐来查找
+            $tv_list=C::M("tv")->field('id,title,pics,url,addtime')->where("status=1 and id <> {$id} and istop=1")->order("id desc")->limit(0,6)->select();
+        }
+        $type=2;//分类
+        $url="/index.php?m=index&c=index&v=tv_detail&id={$id}";
+        $page=$this->getParam("page")??1;
+        $perpage=5;
+        $this->pub_commentAction($id,$type,$url,$page,$perpage);
+
+        //跳转链接加密
+        $from_url=base64_encode($url);
+        $this->assign('from_url',$from_url);
+
+        $this->assign("info",$info);
+        $this->assign('ns', 'tv');
+        $this->assign("tv_list",$tv_list);
+        $this->display('index/tv_detail.tpl');
+    }
+
+    /*
+ * 评论公共方法
+ * 参数：
+ *  id:对应ID
+ *  type:分类//1-日志 2-视频 3-游记 4-达人问答
+ *  url:跳转链接
+ *  curpage:当前页
+ *  perpage:每页页数
+ * */
+    public function pub_commentAction($id,$type,$url,$curpage=1,$perpage=5)
+    {
+        //评论
+        //获取总数
+        $Num = C::M('comment')->where("rid={$id} and type={$type} and pid=0")->getCount();
+        $limit = $perpage * ($curpage - 1) . "," . $perpage;
+        $mpurl = $url;
+        $multipage = $this->multipages ($Num, $perpage, $curpage, $mpurl);
+        if( $multipage ){
+//            unset($multipage[0]);//first
+            unset($multipage[count($multipage)-1]);
+        }
+        $comment=C::M("comment as a ")->field('a.*,b.headpic,b.username')->join("##__user_member as b","a.uid=b.uid","left")->where("rid={$id} and type={$type} and pid=0")->order("addtime DESC")->limit($limit)->select();
+        $joins=array(
+            array('##__user_member as b','a.uid=b.uid','left'),
+            array('##__user_member as c','a.touid=c.uid','left')
+        );
+        foreach ($comment as $key => $value) {
+            $comment[$key]['headpic']=empty($value['headpic'])?'resource/images/img-lb2.png':$value['headpic'];
+            $comment[$key]['lou'] = $curpage * $perpage + $key - 4;
+            $comment[$key]['content'] = Core_Fun::ubbreplace($value['content']);
+            $comment[$key]['addtime'] = date('Y-m-d H:i', $value['addtime']);
+            //查找对应一级节点的子评论，子子评论。一般只有三级结构,二级三级显示都是同一级显示
+            $son=array();
+            $son=C::M('comment as a')->field("a.*,b.username,c.username as to_username")->joins($joins)->where("rid={$id} and type={$type} and pid={$value['id']}")->order('id ASC')->select();
+            if( $son ){
+                foreach( $son as $k=>$val ){
+                    $son[$k]['content']=Core_Fun::ubbreplace($val['content']);
+                }
+                $comment[$key]['sub']=$son;
+                unset($son);
+            }
+            $comment[$key]['count']=count($comment[$key]['sub']);
+        }
+        $this->assign('comment', $comment);
+        $this->assign('page_info',array('num'=>$Num,'total_page'=>ceil($Num/$perpage),'cur_page'=>$curpage));
+        $this->assign('multipage', $multipage);
+    }
+
+
 
 
 }

@@ -88,6 +88,9 @@ html, body{ width: 100%; height: 100%;
 
 .widthHeight{display: inline-block;width: 100%;height: 100%;}
 
+.whiteSpace{white-space: pre-wrap!important;
+						word-wrap: break-word!important;
+						*white-space:normal!important;}
 
 /*模仿朋友圈   九宫格显示    防止图片变形*/
 .figure{padding-bottom: ; /* 关键就在这里 */

@@ -12,6 +12,18 @@
     <link rel="stylesheet" href="/resource/m/css/style.css" />
     <script src="/resource/m/js/jquery.js"></script>
     <script src="/resource/m/js/lib.js"></script>
+	<script src="/resource/lightbox/jquery.min.js"></script>
+	<!--lightbox开始-->
+	<link rel="stylesheet" type="text/css" href="/resource/lightbox/jquery.lightbox.css" />
+	<!--[if IE 6]>
+	<link rel="stylesheet" type="text/css" href="/resource/lightbox/jquery.lightbox.ie6.css" />
+	<![endif]-->
+	<script type="text/javascript" src="/resource/lightbox/jquery.lightbox.min.js"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			$('.lightbox').lightbox();
+		});
+	</script>
     <link rel="stylesheet" href="/resource/m/css/common.css" />
     <link rel="stylesheet" href="/resource/m/css/faq_detail.css" />
 </head>
@@ -36,12 +48,17 @@
 
 	    <div class="container fix">
 	    	<!--问题-->
-			<div class="hunk question marginBotom fix">
+			<div class="hunk question fix">
 				<div class="title fix">
 					<span class="view fix"><img src="/resource/m/images/user/icon_faq_detail1.png"/></span>
-					<span class="name omit lineNumber2">{{$faq_info.title}}</span>
+					<span class="name whiteSpace">{{$faq_info.title}}</span>
 				</div>
-				<div class="headPortrait fix"><p class="description">{{$faq_info.desc}}</p></div>
+				<div class="headPortrait fix">
+					{{if $faq_info.thumbfile}}
+					<a href="{{$faq_info.thumbfile}}" class="thumbnail lightbox figure" style="background-image: url({{$faq_info.thumbfile}});"></a>
+					{{/if}}
+					<p class="description whiteSpace">{{$faq_info.desc}}</p>
+				</div>
 				
 				<div class="bottom fix">
 					<div class="topButtom transform">
@@ -58,9 +75,10 @@
 	    	<input type="hidden" name="uid" id="uid" data-type="4" value="" />
 	    	<input type="hidden" name="faq_num" id="faq_num" title="回答的总数" value="{{$total}}" />
 	    	<input type="hidden" id="UniqueValue" data-sign="details" value="faq_num" title="共用JS区分的唯一必须值"/>
+	    	<input type="hidden" name="" id="pageCount" data-id="{{$faq_info.id}}" data-index="1" data-nowPage="1" />
 	    	{{if $total >0 }}
 	    	<!--有人回答-->
-	    	<div class="modules answer marginBotom fix" id="pageCount" data-id="{{$faq_info.id}}" data-index="1" data-nowPage="1">
+	    	<div class="modules answer marginBotom fix question1">
 	    		<div class="bigTitle">
 	    			<span class="left">全部问答（<i>{{$total}}</i>）</span>
 	    			<p class="right"><span class="key on" id="answerHeat">按热度</span>&nbsp;|&nbsp;<span class="key" id="answerTime">按时间</span></p>
@@ -76,7 +94,7 @@
 							<div class="right transform fix"><span>{{$item.addtime}}</span></div>
 						</div>
 						<div class="substance fix">
-							<div class="solution description">{{$item.content}}</div>
+							<div class="solution description whiteSpace">{{$item.content}}</div>
 							<a class="readMore fix" href="/index.php?m=wap&c=faq&v=response_detail&id={{$item.id}}">
 								<span class="coverage fix"></span>
 								<span class="typeface">查看更多</span>
@@ -96,7 +114,7 @@
 	    	
 	    	{{else}}
 	    	<!--无人回答-->
-	    	<div class="modules answer marginBotom fix">
+	    	<div class="modules answer marginBotom fix question1">
 	    		<div class="bigTitle">
 	    			<span class="left">全部问答（<i>{{$total}}</i>）</span>
 	    			<p class="right"><span class="key on" id="answerHeat">按热度</span>&nbsp;|&nbsp;<span class="key" id="answerTime">按时间</span></p>
@@ -130,15 +148,18 @@
 		function autoloading(UniqueValue){
 			if (dataSign=="my" || dataSign=="his") {  //我的 。。。  TA的。。。
 				var totality = parseInt($("#"+UniqueValue).text());
-			} else if (dataSign=="collect" || dataSign=="about_us" || dataSign=="details" ){  //收藏页    关于我们
+			}
+			else if (dataSign=="collect" || dataSign=="about_us" || dataSign=="details" ){  //收藏页    关于我们
 				var totality = parseInt($("#"+UniqueValue).val());
-			}else if (dataSign=="TalentState" ) {
+			}
+			else if (dataSign=="TalentState" ) {
 				
 			}
 
 			if (totality>=5) {
 				$(".tips").text("往下拖动查看更多！");
-			} else{
+			}
+			else{
 				$(".tips").text("我也是有底线的哦~");
 			}
 		}
@@ -158,7 +179,7 @@
 									'<div class="right transform fix"><span>'+data.tips[i].addtime+'</span></div>'+
 								'</div>'+
 								'<div class="substance fix">'+
-									'<div class="solution description">'+data.tips[i].content+'</div>'+
+									'<div class="solution description whiteSpace">'+data.tips[i].content+'</div>'+
 									'<a class="readMore fix" href="/index.php?m=wap&c=faq&v=response_detail&id='+data.tips[i].id+'">'+
 										'<span class="coverage fix"></span>'+
 										'<span class="typeface">查看更多</span>'+
@@ -183,6 +204,7 @@
             }
 		}
 
+		//按时间、热度切换
         $(".key").on("click",function(){
         	var index = $(this).index();
         	$(this).addClass("on");
@@ -197,7 +219,7 @@
     		
     		$("#pageCount").attr("data-page",maxPages);
     		var infoID = parseInt( $("#pageCount").attr("data-id") );//问题的ID
-        	
+
         	$.ajax({
                 url:url,
                 data:{page:1,

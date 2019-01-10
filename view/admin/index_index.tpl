@@ -65,6 +65,8 @@
                     <li index="{{$smarty.foreach.nav.index}}">
                         <a href="javascript:;" data-href="{{$item.url}}" class="item">
                             {{$item.name}}
+                            {{if $item.url == '/admin/leaving/index'}} <e style="background-color:
+                            red;padding: 0 8px 0 8px;border-radius: 50%">{{$order_count}}</e>{{/if}}
                         </a>
                     </li>
                     {{/foreach}}

@@ -1,0 +1,92 @@
+/*2018-11-13    14:50:42
+* HQS
+* 
+* 视频详情页
+* */
+
+body{background: #f6f6f6;}
+
+.header{-webkit-box-shadow: 0 0 6px 1px #b9b9b9;
+		-moz-box-shadow: 0 0 6px 1px #b9b9b9;
+		box-shadow: 0 0 6px 1px #b9b9b9;}
+.m-master-qm{margin-top: 30px;}
+
+/*左侧内容*/
+.col_l{width: 828px; float: left;}
+.col_l .iframe{width: 100%;height: 466px;margin-bottom: 24px;}
+
+
+/*视频信息*/
+.col_l .messageBox{background: #fff;width: 100%;padding: 15px 25px;margin-bottom: 30px;}
+.col_l .messageBox .title{width: 100%;float: left;}
+.col_l .messageBox .title .titleDetails{font-size: 22px;color: #333;width: 100%;display: inline-block;padding-right: 160px;text-align: justify;}
+.col_l .messageBox .right{font-size: 16px;color: #666;float: right;display: inline-block;margin-left: -160px;line-height: 42px;position: relative;}
+.col_l .messageBox .right i{font-size: 16px;}
+.col_l .messageBox .right span{font-size: 16px;}
+
+
+/*分享   开始*/
+.col_l .messageBox .right .rightBox{display: inline-block;width: 32px;height: 42px;}
+.col_l .messageBox .right .rightBox  .share{font-size: 16px;    display: inline-block;}
+
+.bs_pop{display: none;width: auto;padding: 8px 10px;background-color: #fff;border-radius: 6px;
+	    box-shadow: 0 1px 4px rgba(0,0,0,.3);position: absolute;right: 0;top: 70%;z-index: 10;}
+.bs_pop a{ width: 36px;height: 36px;
+		    display: inline-block;margin: 0 12px 0 0;
+		    line-height: 200px;overflow: hidden;float: left;border-radius: 5px;}
+.bs_pop a.weixin{background-image: url(/resource/m/images/q-icon41.png);
+			    background-position-x: center;
+			    background-position-y: center;
+			    background-size: 100%;
+			    background-repeat-x: no-repeat;
+			    background-repeat-y: no-repeat;
+			    background-attachment: initial;
+			    background-origin: initial;
+			    background-clip: initial;
+				background-color: -webkit-linear-gradient(#38AD4D, #39ad4d); /* Safari 5.1 - 6.0 */
+				background-color: -o-linear-gradient(#38AD4D, #39ad4d); /* Opera 11.1 - 12.0 */
+				background-color: -moz-linear-gradient(#38AD4D, #39ad4d); /* Firefox 3.6 - 15 */
+				background-color: linear-gradient(#38AD4D, #39ad4d); /* 标准的语法 */}
+.bs_pop a:last-child{margin-right: 0;}
+		/*微信二维码弹窗*/
+._j_layer{position: fixed;width: 100%;height: 100%;top: 0px;left: 0px;z-index: 551;display: none;}
+._j_layer ._j_mask{position: fixed; width: 100%; height: 100%; top: 0px; left: 0px; background: rgb(0, 0, 0); opacity: 0.7; z-index: -1;}
+._j_layer ._j_content{width: 100%; height: 100%; top: 0px; left: 0px; z-index: 0; overflow: hidden;}
+._j_layer ._j_content .popup_box{_position: absolute;position: absolute;top: 40%;left: 35%;
+							    width: 420px;height: 330px;z-index: 1;opacity: 1;
+							    border-radius: 3px;background: rgb(255, 255, 255);
+							    box-shadow: 0 0 3px rgba(0,0,0,0.3);
+							    border: 1px solid #ccc\9;
+							    border: none\9\0;overflow: hidden;}
+._j_layer .wx-mfw-pop { width: 420px;height: 285px;padding-top: 45px;text-align: center;
+					    font-size: 16px;color: #666;line-height: 1.8em;
+					    background: #fff url(/resource/m/images/q-icon41.png) 48px 20px no-repeat / 16%;}
+._j_layer .wx-mfw-pop img {margin: 10px auto 0;border: 0;vertical-align: middle;}
+._j_layer .popup_box a.close_btn{display: block;width: 36px;height: 26px;outline: 0;
+								border-top-left-radius: 13px;border-bottom-left-radius: 13px;
+							    position: absolute;top: 4px;right: 0px;
+							    _background: #EFEFEF url(/resource/images/common/icon_close.png) no-repeat center center / 46%;
+								background: #EFEFEF url(/resource/images/common/icon_close.png) no-repeat center center / 46%;}
+
+/*分享   结束*/
+
+
+.col_l .messageBox .details{clear: both;margin-bottom: 18px;}
+.col_l .messageBox .headPortrait{display: inline-block;width: 54px;height: 54px;margin-right: -54px;float: left;}
+.col_l .messageBox .box{float:left;width: 100%;overflow: hidden;height: 61px;}
+.col_l .messageBox .box .name{color: #333;font-size: 17px;margin-left: 68px;margin-right: 90px;}
+.col_l .messageBox .box .botton{font-size: 16px;border-radius: 3px;margin-top: 8px;margin-left: 68px;
+								text-align:center;font-style: initial;line-height: 20px;width: 76px;
+								background: #fa5252;color: #fff;border: 1px #fa5252 solid;display: inline-block;}
+.col_l .messageBox .box .botton b{display: inline-block;font-size: 18px;}
+.col_l .messageBox .box .playNum{color: #666;font-size: 17px;float: right;margin-left: -90px;line-height}
+.col_l .messageBox .box .playNum i{color: #666;font-size: 17px;}
+
+
+/*右侧内容*/
+.col_r{width: 355px;float: right;}
+.col_r .title{font-size: 24px;line-height: 30px;color: #333;margin-bottom: 10px;}
+.col_r .box{border-bottom: 1px #e2e2e2 solid;color: #333;margin-bottom: 20px;}
+.col_r .box .preview{width: 94px;height: 68px;float: left;margin-right: 18px;margin-bottom: 13px;}
+.col_r .box .describe{text-align: justify;line-height: 22px;font-size: 14px;}
+.col_r .box .time{text-align: justify;line-height: 34px;font-size: 14px;}

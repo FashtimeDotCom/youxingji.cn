@@ -143,10 +143,13 @@ class Controller_Wap_Index extends Core_Controller_WapAction
     public function indexAction()
     {
         //推荐达人
-        $tjstar = C::M('user_member')->field('uid,username,realname,headpic,city,autograph')->where("startop = 1")->order("sort ASC,uid desc")->select();
+        $tjstar = C::M('user_member')->field('uid,username,realname,headpic,city,autograph,tag')->where("startop = 1 and weektop=1")->order("sort ASC,uid desc")->limit(0,6)->select();
         foreach ($tjstar as $key => $value) {
+            if( !empty($value['tag']) ){
+                $tags=explode("/",$value['tag']);
+                $tjstar[$key]['tag']=$tags[0];
+            }
             $tjstar[$key]['city'] =empty($value['city'])?'中国':$value['city'];
-//            $tjstar[$key]['autograph'] =Core_fun::cn_substr(strip_tags($value['autograph']),120,'...');
             $tjstar[$key]['avatar'] = $value['headpic']?$value['headpic']:'/resource/images/img-lb2.png';
         }
 
@@ -197,11 +200,6 @@ class Controller_Wap_Index extends Core_Controller_WapAction
                 $res['show_num']=$res['shownum'];
                 $res['top_num']=$res['zannum'];
                 $res['desc'] = $res['homecontent']?$res['homecontent']:' ';
-                $res['time']['year']=date('Y',$res['show_time']);
-                $res['time']['month']=date('M',$res['show_time']);
-                $res['time']['day']=date('d',$res['show_time']);
-                $res['time']['hour']=date('H',$res['show_time']);
-                $res['time']['min']=date('i',$res['show_time']);
                 $res['type']=1;
                 $info=$res;
             }else{//显示达人长篇游记
@@ -209,11 +207,6 @@ class Controller_Wap_Index extends Core_Controller_WapAction
                 $info=C::M("travel_note")->field('id,title,`desc`,thumbfile,uid,UNIX_TIMESTAMP(`addtime`) as addtime,show_num,top_num')->where("status=1 and id={$note_id}")->find();
                 if( $info ){
                     C::M('travel_note')->where('id', $note_id)->setInc('show_num', 1);
-                    $info['time']['year']=date('Y',$info['addtime']);
-                    $info['time']['month']=date('M',$info['addtime']);
-                    $info['time']['day']=date('d',$info['addtime']);
-                    $info['time']['hour']=date('H',$info['addtime']);
-                    $info['time']['min']=date('i',$info['addtime']);
                     $info['desc']=$info['desc']??' ';
                     $info['img_url']=$info['thumbfile'];
                     $info['type']=2;
@@ -653,10 +646,13 @@ class Controller_Wap_Index extends Core_Controller_WapAction
             $this->showmsg('视频不存在!', '/index.php?m=index&c=index&v=tv', 2);
         }
         C::M('tv')->where('id', $id)->setInc('shownum', 1);
-
+        $tag=$info['tags'];
         //获取用户相关的视频
-        $tv_list=C::M("tv")->field('id,title,pics,url,addtime')->where("status=1 and id <> {$id} and istop=1")->order("id desc")->limit(0,4)->select();
-
+        if( $tag ){//查找相关视频
+            $tv_list=C::M("tv")->field('id,title,pics,url,addtime')->where("status=1 and id <> {$id} and tags like '%{$tag}%'")->order("id desc")->limit(0,6)->select();
+        }else{//没有则按照推荐来查找
+            $tv_list=C::M("tv")->field('id,title,pics,url,addtime')->where("status=1 and id <> {$id} and istop=1")->order("id desc")->limit(0,6)->select();
+        }
         $type=2;//分类
         $url="/index.php?m=wap&c=index&v=tv_detail&id={$id}";
         $page=$this->getParam("page")??1;
@@ -1023,7 +1019,7 @@ class Controller_Wap_Index extends Core_Controller_WapAction
     {
         define( "WB_AKEY" , '2155157593' );
         define( "WB_SKEY" , '9e1b2d860d853951b0345fd72683b02d' );
-        define( "WB_CALLBACK_URL" , 'http://wwww.youxingji.cn/index.php?m=index&c=index&v=weibocallback' );
+        define( "WB_CALLBACK_URL" , 'http://www.youxingji.cn/index.php?m=index&c=index&v=weibocallback' );
         include_once( ROOT . "vendor/weibo"."/saetv2.ex.class.php");
         $o = new SaeTOAuthV2( WB_AKEY , WB_SKEY );
         $code_url = $o->getAuthorizeURL( WB_CALLBACK_URL );
@@ -1306,15 +1302,17 @@ class Controller_Wap_Index extends Core_Controller_WapAction
         $this->assign('ad',$ad);
 
         //tab-旅行达人
-        $star = C::M('user_member')->field('uid,username,realname,headpic,city,autograph')->where("startop = 1")->order("uid desc")->limit('0,4')->select();
+        $star = C::M('user_member')->field('uid,username,realname,headpic,city,autograph,tag')->where("startop = 1")->order("uid desc")->limit('0,4')->select();
         foreach ($star as $key => $value) {
             $star[$key]['avatar'] = $value['headpic']?$value['headpic']:'/resource/images/img-lb2.png';
+            $star[$key]['tag']=(explode('/',$value['tag']))[0];
         }
 
         //tab-种子达人
-        $seed=C::M('user_member')->field('uid,username,realname,headpic,city,autograph')->where("trainee=1")->order("uid desc")->limit('0,4')->select();
+        $seed=C::M('user_member')->field('uid,username,realname,headpic,city,autograph,tag')->where("trainee=1")->order("uid desc")->limit('0,4')->select();
         foreach ($seed as $key => $value) {
             $seed[$key]['avatar'] = $value['headpic']?$value['headpic']:'/resource/images/img-lb2.png';
+            $seed[$key]['tag']=(explode('/',$value['tag']))[0];
         }
 
         //总数
@@ -1388,6 +1386,10 @@ class Controller_Wap_Index extends Core_Controller_WapAction
         $limit = $perpage * ($curpage - 1) . "," . $perpage;
         $mpurl = $url;
         $multipage = $this->multipages ($Num, $perpage, $curpage, $mpurl);
+        if( $multipage ){
+//            unset($multipage[0]);//first
+            unset($multipage[count($multipage)-1]);
+        }
         $comment=C::M("comment as a ")->field('a.*,b.headpic,b.username')->join("##__user_member as b","a.uid=b.uid","left")->where("rid={$id} and type={$type} and pid=0")->order("addtime DESC")->limit($limit)->select();
         $joins=array(
             array('##__user_member as b','a.uid=b.uid','left'),
@@ -1411,6 +1413,7 @@ class Controller_Wap_Index extends Core_Controller_WapAction
             $comment[$key]['count']=count($comment[$key]['sub']);
         }
         $this->assign('comment', $comment);
+        $this->assign('page_info',array('num'=>$Num,'total_page'=>ceil($Num/$perpage),'cur_page'=>$curpage));
         $this->assign('multipage', $multipage);
     }
 

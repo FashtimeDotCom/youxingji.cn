@@ -40,7 +40,7 @@
 	    <div class="row-issue">
 	        <div class="m-edit-yz">
 	            <div class="issueTile">
-	                <p class="title">{{$info.title}}</p>
+	                <p class="title whiteSpace">{{$info.title}}</p>
 	            </div>
 	            <div class="wp">
 	                <!-- 内容编辑区域 -->
@@ -155,7 +155,12 @@
 	        if( $(".zxeditor-content-wrapper p").text() == "" ){
 	            layer.msg('回答内容不能为空！');
 	            return false;
-	        } else{
+	        }
+	        else if($(".zxeditor-content-wrapper p").text().replace(/(^\s*)|(\s*$)/g, "")==""){
+				layer.msg('回答内容不能只输入空格！');
+				return false;
+			}
+	        else{
 	            //上传base64图片数据
 	            uploadBase64Images(base64Images, function () {
 	                // 正文中有base64数据，上传替换成功后再重新获取正文内容

@@ -6,7 +6,7 @@
     <meta name="renderer" content="webkit" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
     <meta name="format-detection" content="telephone=no" />
-    <title>达人邦</title>
+    <title>独家路线</title>
     <meta name="keywords" content="{{TO->cfg key="index_keywords" group="site" default="首页"}}" />
     <meta name="description" content="{{TO->cfg key="index_description" group="site" default="首页"}}" />
     <link rel="stylesheet" href="/resource/m/css/style.css" />
@@ -18,7 +18,7 @@
 <body>
 	<div class="header">
 	    {{include file='wap/header.tpl'}}
-	    <h3>达人邦</h3>
+	    <h3>独家路线</h3>
 	</div>
 	<div class="mian">
 	    <div class="g-top">
@@ -36,79 +36,41 @@
 	
 	    <div class="navMeun marginBotom fix">
 	    	<div class="vessel">
-	    		<div class="navLi on" id="value1" onclick="choice(this,0)" data-amount="">达人带你去旅行</div>
-		        <div class="navLi" id="value2" onclick="choice(this,1)" data-amount="">名师带你去写生</div>
-		        <div class="navLi" id="value3" onclick="choice(this,2)" data-amount="">佛系旅游</div>
-		        <div class="navLi" id="value4" onclick="choice(this,3)" data-amount="">2佛系旅游</div>
-		        <div class="navLi" id="value5" onclick="choice(this,4)" data-amount="">3佛系旅游</div>
+				{{foreach from=$type_list key=key item=item}}
+				<div class="navLi {{if $item.id==1}}on{{/if}}" onclick="choice(this,{{$item.id}})" data-amount="">{{$item.type_name}}</div>
+				{{/foreach}}
 	    	</div>
 	    </div>
 	
 	    <!--正文 列表-->
-	    <input type="hidden" id="UniqueValue" data-sign="TalentState" value="value" data-type="7" title="共用JS区分的唯一必须值"/>
-	    
-	    <div class="modules fix" id="pageCount" data-index="1" data-page="" data-nowPage="1">
-	    	
-	        <div class="matter">
-	        	<!--无数据-->
-	        	<div class="hunk marginBotom fix dis_none">
-	        		<img src="/resource/m/images/user/defaul_tv_bg.png"/>
-	        		<p class="dataTips">暂无数据！</p>
-	        	</div>
-	        	
-	        	<!--有数据-->
-	            <div class="hunk marginBotom fix">
-	                <a class="dis_block fix" href="/index.php?m=wap&c=muser&v=index&id={{$item.uid}}">
-	                	<div class="cover figure borderRadius" style="background-image: url(/resource/m/images/pic-yz1.jpg);"></div>
-	                	<div class="right fix">
-	                		<p class="title omit lineNumber2">贝加尔湖绿叶追踪10天</p>
-	                		<p class="describe omit lineNumber2">巴黎-柏林-慕尼黑-新天鹅堡-慕尼黑-威尼斯-佛罗伦萨-罗马</p>
-	                		<div class="bottom fix">
-								<span class="left"><img src="/resource/m/images/common/icon_location2.png" /><i class="Iclass">俄罗斯</i></span>
-	                			<span class="spanRight"><i class="Iclass">28888</i>人/起</span>
-	                		</div>
-	                	</div>
-	                </a>
-	            </div>
-	            <div class="hunk marginBotom fix">
-	                <a class="dis_block fix" href="/index.php?m=wap&c=muser&v=index&id={{$item.uid}}">
-	                	<div class="cover figure borderRadius" style="background-image: url(/resource/m/images/pic-yz1.jpg);"></div>
-	                	<div class="right fix">
-	                		<p class="title omit lineNumber2">贝加尔湖绿叶追踪10天</p>
-	                		<p class="describe omit lineNumber2">巴黎-柏林-慕尼黑-新天鹅堡-慕尼黑-威尼斯-佛罗伦萨-罗马</p>
-	                		<div class="bottom fix">
-								<span class="left"><img src="/resource/m/images/common/icon_location2.png" /><i class="Iclass">俄罗斯</i></span>
-	                			<span class="spanRight"><i class="Iclass">28888</i>人/起</span>
-	                		</div>
-	                	</div>
-	                </a>
-	            </div>
-	            <div class="hunk marginBotom fix">
-	                <a class="dis_block fix" href="/index.php?m=wap&c=muser&v=index&id={{$item.uid}}">
-	                	<div class="cover figure borderRadius" style="background-image: url(/resource/m/images/pic-yz1.jpg);"></div>
-	                	<div class="right fix">
-	                		<p class="title omit lineNumber2">贝加尔湖绿叶追踪10天</p>
-	                		<p class="describe omit lineNumber2">巴黎-柏林-慕尼黑-新天鹅堡-慕尼黑-威尼斯-佛罗伦萨-罗马</p>
-	                		<div class="bottom fix">
-								<span class="left"><img src="/resource/m/images/common/icon_location2.png" /><i class="Iclass">俄罗斯</i></span>
-	                			<span class="spanRight"><i class="Iclass">28888</i>人/起</span>
-	                		</div>
-	                	</div>
-	                </a>
-	            </div>
-	            <div class="hunk marginBotom fix">
-	                <a class="dis_block fix" href="/index.php?m=wap&c=muser&v=index&id={{$item.uid}}">
-	                	<div class="cover figure borderRadius" style="background-image: url(/resource/m/images/pic-yz1.jpg);"></div>
-	                	<div class="right fix">
-	                		<p class="title omit lineNumber2">贝加尔湖绿叶追踪10天</p>
-	                		<p class="describe omit lineNumber2">巴黎-柏林-慕尼黑-新天鹅堡-慕尼黑-威尼斯-佛罗伦萨-罗马</p>
-	                		<div class="bottom fix">
-								<span class="left"><img src="/resource/m/images/common/icon_location2.png" /><i class="Iclass">俄罗斯</i></span>
-	                			<span class="spanRight"><i class="Iclass">28888</i>人/起</span>
-	                		</div>
-	                	</div>
-	                </a>
-	            </div>
+	    <input type="hidden" id="UniqueValue" data-sign="TalentState" value="value" title="共用JS区分的唯一必须值"/>
+	    <input type="hidden" name="第一个分类的总数" id="totality" title="总数" value="{{$num}}" />
+	    <div class="modules fix" id="pageCount" data-index="1" data-nowPage="1">
+	        <div class="matter" style="padding-top: 0.9rem;">
+				{{if $jourbey_list}}
+					{{foreach from=$jourbey_list key=key item=item}}
+				<a class="dis_block hunk marginBotom fix" href="index.php?m=wap&c=index&v=journeydetail&id={{$item.id}}">
+					<div class="cover figure borderRadius" style="background-image: url({{$item.articlethumb}});"></div>
+					<div class="right fix">
+						<p class="title omit lineNumber2">{{$item.title}}</p>
+						<p class="describe">{{$item.description}}</p>
+						<div class="bottom fix">
+							<span class="left">
+								<img src="/resource/m/images/common/icon_location2.png" />
+								<i class="Iclass">{{$item.address}}</i>
+							</span>
+							<span class="spanRight"><i class="Iclass">{{$item.price}}</i>元/位</span>
+						</div>
+					</div>
+				</a>
+					{{/foreach}}
+				{{else}}
+				<!--无数据-->
+				<div class="hunk marginBotom fix">
+					<img src="/resource/m/images/user/defaul_tv_bg.png"/>
+					<p class="dataTips">暂无数据！</p>
+				</div>
+				{{/if}}
 	        </div>
 	        <p class="tips"></p>
 	   	</div>
@@ -121,10 +83,9 @@
 	        //判断列表的总数量是否大于等于5
 	        var index = $("#pageCount").attr("data-index");
 	        var value = parseInt($("#UniqueValue").val());
-	        var num = parseInt($("#value"+index).attr("data-amount"));//总数
-	
-	        var maxPages = parseInt(Math.ceil(num/4));    //最大页数
-
+	        var num = parseInt($("#totality").val());     //总数
+	        var maxPages = parseInt(Math.ceil(num/5));    //最大页数
+			$(".navLi").eq(0).attr("data-amount",num);
 	        if (num>=5) {
 	            $(".tips").text("往下拖动查看更多！");
 	        }
@@ -133,27 +94,19 @@
 	        }
 	    }
 		
-		function jointHtml(data,NowPage,maxPages){
-			var jointHtml="";
-			if(data.status == 1){
-				
-			}
-		}
-		
+        var flag = true;   //加载数据标志
 	    //切换菜单
 	    function choice(obj,id){
 	    	var index = $(obj).index();
-	    	var html="";
 	        $(".navLi").eq(index).addClass("on");
 	        $(".navLi").eq(index).siblings().removeClass("on");
-	
+	        $("#pageCount").attr("data-index",id);   //返回类型，方便下拉更新
 	        $(".matter").html("");
 	        
 	        $.ajax({
-                url:'',
+                url:'/index.php?m=api&c=index&v=journey_list',
                 data:{page:1,
-                	  type:dataIndex,
-                	  id:id},
+                	  type:id},
                 type:'post',
                 dataType:'json',
                 beforeSend:function(){
@@ -165,35 +118,44 @@
                     if(data.status == 1){
                         var html="";
                         $.each(data.tips,function(i,item){
-                            html += '<div class="hunk marginBotom fix">'+
-						                '<a class="dis_block fix" href="/index.php?m=wap&c=muser&v=index&id='+data.tips[i].username+'">'+
-						                	'<div class="cover figure borderRadius" style="background-image: url(/resource/m/images/pic-yz1.jpg);"></div>'+
-						                	'<div class="right fix">'+
-						                		'<p class="title omit lineNumber2">贝加尔湖绿叶追踪10天</p>'+
-						                		'<p class="describe omit lineNumber2">巴黎-柏林-慕尼黑-新天鹅堡-慕尼黑-威尼斯-佛罗伦萨-罗马</p>'+
-						                		'<div class="bottom fix">'+
-													'<span class="left"><img src="/resource/m/images/common/icon_location2.png" /><i class="Iclass">俄罗斯</i></span>'+
-						                			'<span class="spanRight"><i class="Iclass">28888</i>人/起</span>'+
-						                		'</div>'+
-						                	'</div>'+
-						                '</a>'+
-						            '</div>';
+                            html += '<a class="dis_block hunk marginBotom fix" href="index.php?m=wap&c=index&v=journeydetail&id='+data.tips[i].id+'">'+
+					                	'<div class="cover figure borderRadius" style="background-image: url('+data.tips[i].articlethumb+');"></div>'+
+					                	'<div class="right fix">'+
+					                		'<p class="title omit lineNumber2">'+data.tips[i].title+'</p>'+
+					                		'<p class="describe omit lineNumber2">'+data.tips[i].description+'</p>'+
+					                		'<div class="bottom fix">'+
+												'<span class="left"><img src="/resource/m/images/common/icon_location2.png" /><i class="Iclass">'+data.tips[i].address+'</i></span>'+
+					                			'<span class="spanRight"><i class="Iclass">'+data.tips[i].price+'</i>元/位</span>'+
+					                		'</div>'+
+					                	'</div>'+
+					                '</a>';
                         });
                         $(".matter").append(html);
-
-                        $("#matter").attr("data-NowPage",1);
-                        if (maxPages>1) {
-                            $(".tips").text("往下拖动查看更多！");
-                            flag = true;
-                        }
-                        else{
-                            $(".tips").text("我也是有底线的哦~");
-                            flag = false;
-                        }
+						
+						$(".navLi").eq(index).attr("data-amount",data.total);
+                        $("#pageCount").attr("data-NowPage",1);
+                        $("#pageCount").attr("data-index",id);
+                        
+                        maxPages = parseInt(Math.ceil(data.total/5));//旅游达人的最大页数
                     }
                     else{
                         layer.msg(data.tips);
+                        var html1 = '<div class="hunk marginBotom fix">'+
+										'<img src="/resource/m/images/user/defaul_tv_bg.png"/>'+
+										'<p class="dataTips">暂无数据！</p>'+
+									'</div>';
+						$(".matter").html(html1);
                     }
+                },
+                complete:function(){
+                    if (1<maxPages) {
+                		$(".tips").text("往下拖动查看更多！");
+                		flag = true;
+                	}
+                    else{
+                		$(".tips").text("我也是有底线的哦~");
+                		flag = false;
+                	}
                 }
             });
 	    }
@@ -201,31 +163,23 @@
         var scrollTop;     //获取滚动条到顶部的距离
         var scrollHeight;  //获取文档区域高度
         var windowHeight;  //获取滚动条的高度
-        var flag = true;   //加载数据标志
         $(window).scroll(function(){
             scrollTop = $(this).scrollTop();
             scrollHeight = $(document).height();
             windowHeight = $(this).height();
             var e;
 
-            var dataIndex = parseInt($(".container").attr("data-index"));
-
-            //判断列表的总数量是否大于等于5
-            var num = parseInt($("#modulesNum"+dataIndex).val());//总数
-
-            maxPages = parseInt(Math.ceil(num/4));//旅游达人的最大页数
-
-            var NowPage = parseInt( $("#modules"+dataIndex).attr("data-nowPage") );//当前页数
-
+            var Index = parseInt($("#pageCount").attr("data-index"));           //分类
+            var num = parseInt($(".navLi").eq(Index-1).attr("data-amount"));//当前第几个分类的总数
+            var NowPage = parseInt( $("#pageCount").attr("data-nowPage") );     //当前页数
+            maxPages = parseInt(Math.ceil(num/5));                              //旅游达人的最大页数
             var page=NowPage+1;
-
             if(scrollTop + windowHeight >= scrollHeight-200 && flag == true ){
                 if (NowPage+1<=maxPages){
                     $.ajax({
-                        url:'',
+                        url:'/index.php?m=api&c=index&v=journey_list',
                         data:{page:page,
-                        	  type:dataIndex,
-                        	  id:id},
+                        	  type:Index},
                         method:'post',
                         dataType:'json',
                         beforeSend:function(){
@@ -237,62 +191,42 @@
                             if(data.status == 1){
                                 var html="";
                                 $.each(data.tips,function(i,item){
-                                    html += '<div class="hunk marginBotom fix">'+
-								                '<a class="dis_block fix" href="/index.php?m=wap&c=muser&v=index&id='+data.tips[i].username+'">'+
-								                	'<div class="cover figure borderRadius" style="background-image: url(/resource/m/images/pic-yz1.jpg);"></div>'+
-								                	'<div class="right fix">'+
-								                		'<p class="title omit lineNumber2">贝加尔湖绿叶追踪10天</p>'+
-								                		'<p class="describe omit lineNumber2">巴黎-柏林-慕尼黑-新天鹅堡-慕尼黑-威尼斯-佛罗伦萨-罗马</p>'+
-								                		'<div class="bottom fix">'+
-															'<span class="left"><img src="/resource/m/images/common/icon_location2.png" /><i class="Iclass">俄罗斯</i></span>'+
-								                			'<span class="spanRight"><i class="Iclass">28888</i>人/起</span>'+
-								                		'</div>'+
-								                	'</div>'+
-								                '</a>'+
-								            '</div>';
+		                            html += '<a class="dis_block hunk marginBotom fix" href="/index.php?m=wap&c=index&v=journeydetail&id='+data.tips[i].id+'">'+
+							                	'<div class="cover figure borderRadius" style="background-image: url('+data.tips[i].id+');"></div>'+
+							                	'<div class="right fix">'+
+							                		'<p class="title omit lineNumber2">'+data.tips[i].title+'</p>'+
+							                		'<p class="describe omit lineNumber2">'+data.tips[i].description+'</p>'+
+							                		'<div class="bottom fix">'+
+														'<span class="left"><img src="/resource/m/images/common/icon_location2.png" /><i class="Iclass">'+data.tips[i].address+'</i></span>'+
+							                			'<span class="spanRight"><i class="Iclass">'+data.tips[i].price+'</i>元/位</span>'+
+							                		'</div>'+
+							                	'</div>'+
+							                '</a>';
                                 });
-                                $("#matter").append(html);
-
-                                $("#matter").attr("data-NowPage",NowPage+1);
-                                if (NowPage+1<maxPages) {
-                                	flag = true;
-                                    $(".tips").text("往下拖动查看更多！");
-                                }
-                                else{
-                                	flag = false;
-                                    $(".tips").text("我也是有底线的哦~");
-                                }
+                                $(".matter").append(html);
+                                $("#pageCount").attr("data-NowPage",NowPage+1);
                             }
                             else{
                                 layer.msg(data.tips);
                             }
-                        }
+                        },
+		                complete:function(){
+		                    if (NowPage+1<maxPages) {
+		                		$(".tips").text("往下拖动查看更多！");
+		                		flag = true;
+		                	}
+		                    else{
+		                		$(".tips").text("我也是有底线的哦~");
+		                		flag = false;
+		                	}
+		                }
                     });
                 }
                 else{
-                    $(".tips"+dataIndex).text("我也是有底线的哦~");
+                    $(".tips").text("我也是有底线的哦~");
                 }
             }
         });
-	    
-	    	
-	    //关注
-	    function follows(bid, obj){
-	        $.post("/index.php?m=api&c=index&v=follow", {
-	            'bid':bid
-	        }, function(data){
-	            if(data.status == 0){
-	                layer.msg(data.tips);
-	            }else if(data.status == 1){
-	                layer.msg('关注成功！');
-	                $(obj).html('已关注');
-	            }else if(data.status == 2){
-	                layer.msg('已取消关注！');
-	                $(obj).html('<b>+</b> 关注');
-	            }
-	        },"JSON");
-	    }
-	
 	</script>
 </body>
 </html>

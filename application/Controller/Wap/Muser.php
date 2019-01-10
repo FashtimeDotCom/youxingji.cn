@@ -10,6 +10,9 @@ class Controller_Wap_Muser extends Core_Controller_WapAction
         if($user){
             $user['avatar'] = $user['headpic']?$user['headpic']:'/resource/images/img-lb2.png';
           	$user['cover'] = $user['cover']?$user['cover']:'/resource/images/s-ban1.jpg';
+            if( !empty($user['tag']) ){
+                $user['tag']=explode("/",$user['tag']);
+            }
         }else{
         	$this->showmsg('', 'index.php', 0);
         	exit;

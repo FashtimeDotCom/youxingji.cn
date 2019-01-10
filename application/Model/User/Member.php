@@ -18,7 +18,7 @@ class Model_User_Member extends Core_Model
      *
      * @var array
      */
-    protected $_fields = array ('uid', 'gid', 'roleid', 'username', 'realname', 'password', 'salt', 'score', 'regtime', 'regip', 'lastvisit', 'lastip', 'headpic', 'honor', 'medals', 'headpic30', 'headpic50', 'headpic150', 'islocked', 'email', 'isemail', 'telephone', 'qq', 'connectid', 'exp', 'istelephone', 'wbname','sex','city','birthday','autograph','qq_openid','wx_openid','wb_openid','weektop','startop','tvtop','bgpic','cover','isgetsettingexp','trainee','is_faq_star','sort','tag');
+    protected $_fields = array ('uid', 'gid', 'roleid', 'username', 'realname', 'password', 'salt', 'score', 'regtime', 'regip', 'lastvisit', 'lastip', 'headpic', 'honor', 'medals', 'headpic30', 'headpic50', 'headpic150', 'islocked', 'email', 'isemail', 'telephone', 'qq', 'connectid', 'exp', 'istelephone', 'wbname','sex','city','birthday','autograph','qq_openid','wx_openid','wb_openid','weektop','startop','tvtop','bgpic','cover','isgetsettingexp','trainee','is_faq_star','sort','tag','tjpic','is_fake');
 
     /**
      * 主键字段名

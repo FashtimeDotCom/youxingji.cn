@@ -165,4 +165,51 @@ class Controller_Index_Article extends Core_Controller_TAction
 
         return array('prev' => $prev, 'next' => $next);
     }
+
+    /*
+     * 新版-独家旅行列表页
+     *
+     * */
+    public function new_listAction()
+    {
+        //获取分类信息
+        $perpage = 10;
+        $where = "useable = 1";
+        $type_id = htmlspecialchars($this->getParam('type'),ENT_QUOTES);
+        if($type_id){
+            $where .= " and a.type_id ={$type_id} ";
+        }
+
+        $lxts=htmlspecialchars($this->getParam('days'));
+        if( $lxts ){
+            $where .= " and b.lxts ={$lxts} ";
+        }
+
+        $Num = C::M('article_article as a')->where($where)->getCount();
+        $curpage = $this->getParam ('page') ? intval ($this->getParam ('page')) : 1;
+        $list = C::M('article_article as a')->field('a.id,a.address,a.title,a.tjpic as articlethumb,a.cutstr,b.price,b.lxts')->join('##__base_module_journey as b','a.id=b.aid','left')->where($where)->order('a.id desc')->limit($perpage * ($curpage - 1), $perpage)->select();
+
+        $mpurl = "/index.php?m=index&c=article&v=new_list";
+        $multipage = $this->multipages ($Num, $perpage, $curpage, $mpurl);
+
+        //查找分类列表
+        $type_list=C::M('journey_type')->select();
+
+        //旅行天数
+        $travel_days=C::M('base_module_journey')->field('lxts')->select();
+        $travel_days=array_column($travel_days,'lxts');
+        $travel_days=array_unique($travel_days);
+        sort($travel_days);
+
+        $this->assign("type",$type_id);
+        $this->assign("day",$lxts);
+        $this->assign ('multipage', $multipage);
+        $this->assign('ns', 'new_list');
+        $this->assign("list",$list);
+        $this->assign("type_list",$type_list);
+        $this->assign('page_info',array('num'=>$Num,'total_page'=>ceil($Num/$perpage)));
+        $this->assign("travel_days",$travel_days);
+        $this->display('index/article/list.tpl');
+    }
+
 }

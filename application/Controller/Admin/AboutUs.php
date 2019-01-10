@@ -87,7 +87,7 @@ class Controller_Admin_AboutUs extends Core_Controller_Action
 
         $data=array(
             "title"=>$title,
-            "desc"=>$desc,
+            "describes"=>$desc,
             "content"=>$content,
             "thumbfile"=>$thumbfile,
             "top_picture"=>$top_picture,

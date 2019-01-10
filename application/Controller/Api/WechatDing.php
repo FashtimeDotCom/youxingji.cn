@@ -45,7 +45,7 @@ class Controller_Api_WechatDing extends Core_Controller_Action
     }
 
     public function parseDataAction(){
-        $postStr = isset($GLOBALS["HTTP_RAW_POST_DATA"]) ? $GLOBALS["HTTP_RAW_POST_DATA"] : "";//php7+不再使用改方法
+        $postStr = isset($GLOBALS["HTTP_RAW_POST_DATA"]) ? $GLOBALS["HTTP_RAW_POST_DATA"] : "";//php7+不再使用该方法
         if( empty($postStr) ){
             $postStr = file_get_contents('php://input');
         }
@@ -486,7 +486,12 @@ class Controller_Api_WechatDing extends Core_Controller_Action
                     array(
                         'type'=>'view',
                         'name'=>'报名链接',
-                        'url'=>'http://cn.mikecrm.com/jcokYeI'
+                        'url'=>'http://youxingji.mikecrm.com/y0pk8FQ'
+                    ),
+                    array(
+                        'type'=>'view',
+                        'name'=>'游行迹商城',
+                        'url'=>'https://weidian.com/s/1380945023'
                     ),
                     array(
                         'type'=>'click',

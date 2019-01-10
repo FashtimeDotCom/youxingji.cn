@@ -25,8 +25,7 @@
 		});
 	</script>
 	<style type="text/css">
-		.user-head{display: block;height: auto;margin-bottom: 30px;}
-		.user-head .Head_portrait{float: left;margin-right: 4px;}
+		.whiteSpace{white-space: pre-wrap!important;word-wrap: break-word!important;*white-space:normal!important;}
 		.fix{*zoom:1;}
 		.fix:after{display:block; content:"clear"; height:0; clear:both; overflow:hidden; visibility:hidden;}
 		.dis_block{display: block!important;}
@@ -39,6 +38,8 @@
 		.omit{display: -webkit-box!important;-webkit-box-orient: vertical;overflow: hidden;}
 		.lineNumber4{-webkit-line-clamp: 4;}
 		
+		.user-head{display: block;height: auto;margin-bottom: 30px;}
+		.user-head .Head_portrait{float: left;margin-right: 4px;}
 		.profilePhoto{ padding-bottom: 100%;border-radius: 50%;}
 		
 		.user-text{text-align: justify;}
@@ -51,6 +52,7 @@
 		
 		.viewMore{display: inline-block;color: #0000FF;}
 		.widthHeight{display: inline-block;width: 100%;height: 100%;}
+		.TalentVideo .headline h4{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
 	</style>
 </head>
 <body>
@@ -77,7 +79,7 @@
 			<div class="banna"><img src="{{$detail_info.ad_img_url}}" /></div>
 			<div class="Country-info">
 				<div class="title" style="margin-left: 0;">目的地介绍</div>
-				<div class="info-text">{{$detail_info.desc}}</div>
+				<div class="info-text whiteSpace">{{$detail_info.desc}}</div>
 				<div class="user-info">
 					<div class="info-img-box">
 						<a class="dis_block profilePhoto figure fix" style="background-image: url(http://m.youxingji.cn{{$detail_info.avatar}});" href="index.php?m=wap&c=muser&v=index&id={{$detail_info.user_id}}"></a>
@@ -85,7 +87,7 @@
 					<div class="info-text">
 						<p>{{$detail_info.university}} {{$detail_info.username}}</p>
 						<input type="hidden" name="synopsis" id="synopsis" value="{{$detail_info.desccibes}}" />
-						<p><span class="autograph"></span><span class="viewMore dis_none" data-open="0">查看全文</span></p>
+						<p><span class="autograph whiteSpace"></span><span class="viewMore dis_none" data-open="0">查看全文</span></p>
 					</div>
 				</div>
 			</div>
@@ -111,7 +113,7 @@
 								<div>{{$item.username}}</div>
 								<div class="time">{{$item.addtime}}</div>
 							</div>
-							<div class="user-text">{{$item.describes}}</div>
+							<div class="user-text whiteSpace">{{$item.describes}}</div>
 						</div>
 					</a>
 					<ul class="row">
@@ -145,7 +147,7 @@
 					<div class="list-right"><img src="image/images/yhzbg1.jpg" /></div>
 					<div class="list-left">
 						<div>金边 </div>
-						<p>金边，柬埔寨王国的首都，柬埔寨最大城市</p>
+						<p class="whiteSpace">金边，柬埔寨王国的首都，柬埔寨最大城市</p>
 						<input type="button" id="" value="查看详情" />
 					</div>
 				</div>
@@ -153,7 +155,7 @@
 					<div class="list-right"><img src="image/images/yhzbg1.jpg" /></div>
 					<div class="list-left">
 						<div>金边 </div>
-						<p>金边，柬埔寨王国的首都，柬埔寨最大城市</p>
+						<p class="whiteSpace">金边，柬埔寨王国的首都，柬埔寨最大城市</p>
 						<input type="button" id="" value="查看详情" />
 					</div>
 				</div>
@@ -161,7 +163,7 @@
 					<div class="list-right"><img src="image/images/yhzbg1.jpg" /></div>
 					<div class="list-left">
 						<div>金边 </div>
-						<p>金边，柬埔寨王国的首都，柬埔寨最大城市</p>
+						<p class="whiteSpace">金边，柬埔寨王国的首都，柬埔寨最大城市</p>
 						<input type="button" id="" value="查看详情" />
 					</div>
 				</div>
@@ -170,7 +172,7 @@
 		{{/if}}
 		
 		{{if $tv_info}}
-		<div class="item p30">
+		<div class="item p30 TalentVideo">
 			<div class="title">达人视频 <span id="">更多</span></div>
 			<div class="m-imgtxt3 swiper-container swiper-container-horizontal">
 				<div class="swiper-wrapper">
@@ -305,7 +307,7 @@
 															"<div>" +sdata[i].username + "</div>"+
 															"<div class='time'>" +sdata[i].addtime + "</div>"+
 														"</div>"+
-														"<div class='user-text'>" +sdata[i].describes + "</div>"+
+														"<div class='user-text whiteSpace'>" +sdata[i].describes + "</div>"+
 													"</div>"+
 												"</div>"+
 												"<ul class='row'id='rowid" +sdata[i].id + "'></ul>"+

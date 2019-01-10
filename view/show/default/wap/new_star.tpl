@@ -103,7 +103,7 @@
 	                	</div>
 	                	<a class="right" href="index.php?m=wap&c=muser&v=index&id={{$tjstar.0.uid}}"><img src="/resource/m/images/icon_right.png"/></a>
 	                </div>
-	                <div class="txt" style="margin-top: 8px;"><p class="intro">{{$tjstar.0.autograph}}</p></div>
+	                <div class="txt" style="margin-top: 8px;"><p class="intro whiteSpace">{{$tjstar.0.autograph}}</p></div>
 	                <a class="quiz" onclick="smg({{$tjstar.0.uid}})">提问达人</a>
 	            </div>
 	        </div>
@@ -137,7 +137,7 @@
 		                                <span class="botton" onclick="follows({{$vo.uid}},this)">{{$vo.uid|helper:'isfollows'}}</span>
 		                           	</div>
 		                            <div class="txt">
-		                            	<p><a class="dis_block" href="/index.php?m=wap&c=index&v=star_detail&id={{$vo.id}}">{{$vo.describes}}</a></p>
+		                            	<p><a class="dis_block omit lineNumber3 whiteSpace" href="/index.php?m=wap&c=index&v=star_detail&id={{$vo.id}}">{{$vo.describes}}</a></p>
 		                            </div>
 		                        </div>
 		                        <dl class="list-img list_img">
@@ -246,7 +246,7 @@
 					                                '<span class="botton" onclick="follows('+data.tips[i].id+',this)"><b>+</b>关注</span>'+
 					                           	'</div>'+
 					                            '<div class="txt">'+
-					                            	'<p><a class="dis_block" href="/index.php?m=wap&c=index&v=star_detail&id='+data.tips[i].id+'">'+data.tips[i].describes+'</a></p>'+
+					                            	'<p><a class="dis_block omit lineNumber3 whiteSpace" href="/index.php?m=wap&c=index&v=star_detail&id='+data.tips[i].id+'">'+data.tips[i].describes+'</a></p>'+
 					                            '</div>'+
 					                        '</div>'+
 					                        '<dl class="list-img list_img">';

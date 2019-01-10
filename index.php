@@ -20,6 +20,11 @@ if($_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'] == 'm.youxingji.cn/wap'){
     header('Location: http://m.youxingji.cn');
     exit;
 }
+define('APP_STATUS','develop'); // 项目开发状态 默认测试 on-line正式 上线前记得改
+
+// 指定需要自动加载的配置文件    /config/目录下
+$load_file_arr = ['config','status_config'];
+
 $d = dirname(__FILE__);
 define('ROOT', $d == '' ? '/' : $d . '/');
 define('INCLUDE_PATH', ROOT . 'application/');

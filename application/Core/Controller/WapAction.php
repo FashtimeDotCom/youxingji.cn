@@ -68,6 +68,9 @@ class Core_Controller_WapAction extends Core_Controller_Action
 		if($cUser){ 
             $cUser['avatar'] = $cUser['headpic']?$cUser['headpic']:'/resource/images/img-lb2.png';
           	$cUser['cover'] = $cUser['cover']?$cUser['cover']:'/resource/m/images/ban3.jpg';
+            if( !empty($cUser['tag']) ){
+                $cUser['tag']=explode("/",$cUser['tag']);
+            }
             $weidu = C::M('msg_detail')->where("to_id = $uid and status = 0")->getCount();
             $this->assign('weidu', $weidu);
  

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Core_Controller_Action 基类
  * 所有Controller继承自此类
@@ -9,7 +10,7 @@
  */
 class Core_Controller_Action
 {
-
+    public $user;
     protected $_classMethods;
     protected $_params;
 
@@ -18,44 +19,65 @@ class Core_Controller_Action
      * @param array $params Pathinfo中附带的请求参数
      * @author Snake.L
      */
-    public function __construct ($params)
+    public function __construct($params)
     {
+        $user = $this->is_login();
+        if ($user) {
+            $this->user = $user;
+        }
+        // 获取独家路线预约数量
+        $order_count = C::M('article_leaving')->where("status = 1")->getCount();
+        $this->assign('order_count',$order_count);
+
         $this->_params = $params;
+    }
+
+    public function is_login(){
+        $uid = $_SESSION['userinfo']['uid'];
+        $info = C::M("user_member")->field('uid,username,headpic')->where("uid ={$uid}")->find();
+        if (empty($info['headpic'])) {
+            $info['headpic'] = "http://www.youxingji.cn/resource/images/img-lb2.png";
+        }
+        if ($info) {
+            return array(
+                "user_id" => (int)$info['uid'],
+                "nickname" => $info['username'],
+                "img_url" => $info['headpic'],
+                "sign" => "**" //注意这里的sign签名验证已弃用，任意赋值即可
+            );
+        } else {
+            return false;
+        }
     }
 
     /**
      * 获取请求参数
      * 优先级 Pathinfo => $_GET => $_POST
      *
-     * @param string $key    不解释
-     * @param string $default    默认值
+     * @param string $key 不解释
+     * @param string $default 默认值
      * @return mix
      * @author Snake.L
      */
-    public function getParam ($key, $default = null)
+    public function getParam($key, $default = null)
     {
-		if (isset($this->_params[$key]))
-		{
-			//return $this->_params[$key];
-			return $this->hackXss($this->_params[$key]);
-		}
-		elseif (isset($_GET[$key]))
-		{
-			//return $_GET[$key];
-			return $this->hackXss($_GET[$key]);
-		}
-		elseif (isset($_POST[$key]))
-		{
-			//return $_POST[$key];
-			return $this->hackXss($_POST[$key]);
-		}
+        if (isset($this->_params[$key])) {
+            //return $this->_params[$key];
+            return $this->hackXss($this->_params[$key]);
+        } elseif (isset($_GET[$key])) {
+            //return $_GET[$key];
+            return $this->hackXss($_GET[$key]);
+        } elseif (isset($_POST[$key])) {
+            //return $_POST[$key];
+            return $this->hackXss($_POST[$key]);
+        }
 
         return $default;
     }
 
-    public function getSafeParam ($key, $default = null)
+    public function getSafeParam($key, $default = null)
     {
-        return strip_tags(trim($this->getParam ($key,$default)));
+        return strip_tags(trim($this->getParam($key, $default)));
     }
 
     /**
@@ -64,13 +86,13 @@ class Core_Controller_Action
      * @return array
      * @author Snake.L
      */
-    public function getParams ()
+    public function getParams()
     {
         $return = $this->_params;
-        if (isset ($_GET) && is_array ($_GET)) {
+        if (isset ($_GET) && is_array($_GET)) {
             $return += $_GET;
         }
-        if (isset ($_POST) && is_array ($_POST)) {
+        if (isset ($_POST) && is_array($_POST)) {
             $return += $_POST;
         }
         return $return;
@@ -79,12 +101,12 @@ class Core_Controller_Action
     /**
      * 设置一个请求参数
      *
-     * @param string $key	参数key
-     * @param mix $value	参数值
+     * @param string $key 参数key
+     * @param mix $value 参数值
      * @return Core_Controller_Action
      * @author Snake.L
      */
-    public function setParam ($key, $value)
+    public function setParam($key, $value)
     {
         $key = (string)$key;
 
@@ -104,11 +126,10 @@ class Core_Controller_Action
      * @return Core_Controller_Action
      * @author Snake.L
      */
-    public function setParams ($params=array ())
+    public function setParams($params = array())
     {
-        foreach ($params as $key => $value)
-        {
-            $this->setParam ($key, $value);
+        foreach ($params as $key => $value) {
+            $this->setParam($key, $value);
         }
         return $this;
     }
@@ -116,17 +137,17 @@ class Core_Controller_Action
     /**
      * 转发请求到其它控制器
      *
-     * @param string $action	转发的Action
-     * @param string $controller	转发的Controller
-     * @param string $model	转发的Model
+     * @param string $action 转发的Action
+     * @param string $controller 转发的Controller
+     * @param string $model 转发的Model
      * @param array $params 附带的参数
      * @author Snake.L
      */
-    public function forward ($action, $controller=null, $model=null, $params=null)
+    public function forward($action, $controller = null, $model = null, $params = null)
     {
-        $front = Core_Controller_Front::getInstance ();
-        $front->setdparams ($action, $controller, $model, $params);
-        $front->dispatch ();
+        $front = Core_Controller_Front::getInstance();
+        $front->setdparams($action, $controller, $model, $params);
+        $front->dispatch();
     }
 
     protected $_front = null;
@@ -136,12 +157,12 @@ class Core_Controller_Action
      * @return Core_Controller_Front
      * @author Snake.L
      */
-    public function getFront ()
+    public function getFront()
     {
         if (null === $this->_front) {
-            $this->_front = Core_Controller_Front::getInstance ();
+            $this->_front = Core_Controller_Front::getInstance();
         }
-        return Core_Controller_Front::getInstance ();
+        return Core_Controller_Front::getInstance();
     }
 
     /**
@@ -149,9 +170,9 @@ class Core_Controller_Action
      * @return string
      * @author Snake.L
      */
-    protected function getModelName ()
+    protected function getModelName()
     {
-        return Core_Controller_Front::getInstance ()->getModelName ();
+        return Core_Controller_Front::getInstance()->getModelName();
     }
 
     /**
@@ -159,9 +180,9 @@ class Core_Controller_Action
      * @return string
      * @author Snake.L
      */
-    protected function getControllerName ()
+    protected function getControllerName()
     {
-        return Core_Controller_Front::getInstance ()->getControllerName ();
+        return Core_Controller_Front::getInstance()->getControllerName();
     }
 
     /**
@@ -169,9 +190,9 @@ class Core_Controller_Action
      * @return string
      * @author Snake.L
      */
-    protected function getActionName ()
+    protected function getActionName()
     {
-        return Core_Controller_Front::getInstance ()->getActionName ();
+        return Core_Controller_Front::getInstance()->getActionName();
     }
 
     /**
@@ -180,9 +201,9 @@ class Core_Controller_Action
      * @return mix
      * @author Snake.L
      */
-    protected function getCookie ($name)
+    protected function getCookie($name)
     {
-        return Core_Fun::getcookie ($name);
+        return Core_Fun::getcookie($name);
     }
 
     /**
@@ -193,18 +214,18 @@ class Core_Controller_Action
      * @param bool $httponly 是否仅http
      * @author Snake.L
      */
-    protected function setCookie ($name, $value, $kptime=0, $httponly=false)
+    protected function setCookie($name, $value, $kptime = 0, $httponly = false)
     {
-        Core_Fun::setcookie ($name, $value, $kptime, $httponly);
+        Core_Fun::setcookie($name, $value, $kptime, $httponly);
     }
-	
+
     /**
      * 获取SERVER变量
      * @param string $name
      * @return string
      * @author Snake.L
      */
-    protected function getServer ($name)
+    protected function getServer($name)
     {
         return $_SERVER[$name];
     }
@@ -214,131 +235,111 @@ class Core_Controller_Action
      * 如有需要请重载
      * @author Snake.L
      */
-    public function preDispatch ()
+    public function preDispatch()
     {
-    	$bannedModel = new Model_User_Banned();
-		if($bannedModel->checkBanned(Core_Comm_Util::getClientIp()))
-		{
-			$this->display('index/banned.tpl');
-			exit;
-		}
+        $bannedModel = new Model_User_Banned();
+        if ($bannedModel->checkBanned(Core_Comm_Util::getClientIp())) {
+            $this->display('index/banned.tpl');
+            exit;
+        }
 
-		$userModel = new Model_User_Member();
-		$cUser = $userModel->onGetCurrentUser();
+        $userModel = new Model_User_Member();
+        $cUser = $userModel->onGetCurrentUser();
         $cUser && $userInfo = $userModel->getUserInfoByUid($cUser['uid']);
-		
+
         //站点关闭 只有管理员才可以登录和访问
-        if(Core_Config::get('site_closed','site',false))
-        {
-        	if(!$userInfo || $userInfo['gid'] != 1)
-        	{
-	        	if($this->getModelName() == 'index' && (($this->getControllerName() != 'gd' && ($this->getControllerName() != 'login') || ($this->getControllerName() == 'login' && ($this->getActionName() != 'index' && $this->getActionName() != 'l')))))
-	        	{
-	        		$userModel->onLogout();
-	        		$this->showmsg('', 'login/index/msg/'.Core_Comm_Modret::RET_SITE_CLOSED, 0);
-	        	}
-	        	if($this->getModelName() == 'wap' && ($this->getControllerName() != 'login' || ($this->getControllerName() == 'login' && ($this->getActionName() != 'index' && $this->getActionName() != 'l'))))
-	        	{
-	        		$userModel->onLogout();
-	        		$this->showmsg('', 'wap/login/index', 0);
-	        	}
-        	}
+        if (Core_Config::get('site_closed', 'site', false)) {
+            if (!$userInfo || $userInfo['gid'] != 1) {
+                if ($this->getModelName() == 'index' && (($this->getControllerName() != 'gd' && ($this->getControllerName() != 'login') || ($this->getControllerName() == 'login' && ($this->getActionName() != 'index' && $this->getActionName() != 'l'))))) {
+                    $userModel->onLogout();
+                    $this->showmsg('', 'login/index/msg/' . Core_Comm_Modret::RET_SITE_CLOSED, 0);
+                }
+                if ($this->getModelName() == 'wap' && ($this->getControllerName() != 'login' || ($this->getControllerName() == 'login' && ($this->getActionName() != 'index' && $this->getActionName() != 'l')))) {
+                    $userModel->onLogout();
+                    $this->showmsg('', 'wap/login/index', 0);
+                }
+            }
         }
         //关闭新用户注册 注册请求跳转回登录页
-        if(!Core_Config::get('login_allow_new_user','basic',false))
-        	if($this->getModelName() == 'index' && $this->getControllerName() == 'reg' && ($this->getActionName() == 'index' || $this->getActionName() == 'r'))
-        		$this->showmsg('', 'login', 0);
+        if (!Core_Config::get('login_allow_new_user', 'basic', false))
+            if ($this->getModelName() == 'index' && $this->getControllerName() == 'reg' && ($this->getActionName() == 'index' || $this->getActionName() == 'r'))
+                $this->showmsg('', 'login', 0);
         //Model是index 且Controller是login或reg
-		if($this->getModelName() == 'index' && ($this->getControllerName() == 'login' || $this->getControllerName() == 'reg'))
-		{
-			if($this->getActionName() != 'logout')
-			{
-		        if(!empty($cUser['uid']))
-		        	$this->showmsg('', 'u/'.$cUser['uid'], 0);
-		        if(($this->getControllerName() == 'login' && $this->getActionName() != 'l') &&
-			        		($this->getControllerName() == 'reg' && $this->getActionName() != 'b') &&
-			        		($this->getControllerName() == 'reg' && $this->getActionName() != 'index') &&
-			        		($this->getControllerName() == 'reg' && $this->getActionName() != 'r'))
-		        	$this->showmsg('', 'reg/b', 0);
-			}
-		}
-		//Model是wap 且Controller是login
-		if($this->getModelName() == 'wap' && $this->getControllerName() == 'login')
-		{
-			if($this->getActionName() != 'logout')
-			{
-		        if(!empty($cUser['uid']))
-		        	$this->showmsg('', 'wap/u/'.$cUser['uid'], 0);
-		        if(($this->getControllerName() == 'login' && $this->getActionName() != 'l') &&
-			        		($this->getControllerName() == 'login' && $this->getActionName() != 'b'))
-		        	$this->showmsg('', 'wap/login/b', 0);
-			}
-		}
-		//Model是admin
-		if($this->getModelName() == 'admin')
-		{
-			if(isset($_SESSION['isadmin']) && isset($_SESSION['admingid']))
-			{
-				if($_SESSION['isadmin'] != 1)
-				{
-					$_controller = $this->getControllerName();
-					$_action = $this->getActionName();
-					//检查权限
-					if(!C::M('User_Access')->checkAccessByUidAndModel($_SESSION['isadmin'], $_controller . '_' . $_action))
-					{
-						
-						if($_controller == 'login' && $_action == 'login')
-						{
-							$userModel->onLogout();
-							$this->showmsg('你没有权限操作', 'admin/login/index');
-						}
-						else
-						{
-							echo 'no priv';exit;
-						}
-					}
-				}
-			}
-			
-			//数据恢复
-			if(!(isset($_SESSION['restore']) && $_SESSION['restore']))
-			{
-				if(isset($_SESSION['isadmin']) && $_SESSION['isadmin']){
-					//为活跃管理员延续超时时间
-					if($_SESSION['isadmin'] && Core_Fun::time() - $_SESSION['lastupdate'] > 300)
-		            	$_SESSION['lastupdate'] = Core_Fun::time();
-				}
-				//Model是admin 且Controller不是login
-				if($this->getControllerName() != 'login' && empty($_SESSION['isadmin'])){
-                    if($this->getControllerName() == 'index' && $this->getActionName() == 'index')
-                    {
-                        $this->showmsg('', 'admin/login/index', 0);
+        if ($this->getModelName() == 'index' && ($this->getControllerName() == 'login' || $this->getControllerName() == 'reg')) {
+            if ($this->getActionName() != 'logout') {
+                if (!empty($cUser['uid']))
+                    $this->showmsg('', 'u/' . $cUser['uid'], 0);
+                if (($this->getControllerName() == 'login' && $this->getActionName() != 'l') &&
+                    ($this->getControllerName() == 'reg' && $this->getActionName() != 'b') &&
+                    ($this->getControllerName() == 'reg' && $this->getActionName() != 'index') &&
+                    ($this->getControllerName() == 'reg' && $this->getActionName() != 'r'))
+                    $this->showmsg('', 'reg/b', 0);
+            }
+        }
+        //Model是wap 且Controller是login
+        if ($this->getModelName() == 'wap' && $this->getControllerName() == 'login') {
+            if ($this->getActionName() != 'logout') {
+                if (!empty($cUser['uid']))
+                    $this->showmsg('', 'wap/u/' . $cUser['uid'], 0);
+                if (($this->getControllerName() == 'login' && $this->getActionName() != 'l') &&
+                    ($this->getControllerName() == 'login' && $this->getActionName() != 'b'))
+                    $this->showmsg('', 'wap/login/b', 0);
+            }
+        }
+        //Model是admin
+        if ($this->getModelName() == 'admin') {
+            if (isset($_SESSION['isadmin']) && isset($_SESSION['admingid'])) {
+                if ($_SESSION['isadmin'] != 1) {
+                    $_controller = $this->getControllerName();
+                    $_action = $this->getActionName();
+                    //检查权限
+                    if (!C::M('User_Access')->checkAccessByUidAndModel($_SESSION['isadmin'], $_controller . '_' . $_action)) {
+
+                        if ($_controller == 'login' && $_action == 'login') {
+                            $userModel->onLogout();
+                            $this->showmsg('你没有权限操作', 'admin/login/index');
+                        } else {
+                            echo 'no priv';
+                            exit;
+                        }
                     }
-                    else
-                    {
+                }
+            }
+
+            //数据恢复
+            if (!(isset($_SESSION['restore']) && $_SESSION['restore'])) {
+                if (isset($_SESSION['isadmin']) && $_SESSION['isadmin']) {
+                    //为活跃管理员延续超时时间
+                    if ($_SESSION['isadmin'] && Core_Fun::time() - $_SESSION['lastupdate'] > 300)
+                        $_SESSION['lastupdate'] = Core_Fun::time();
+                }
+                //Model是admin 且Controller不是login
+                if ($this->getControllerName() != 'login' && empty($_SESSION['isadmin'])) {
+                    if ($this->getControllerName() == 'index' && $this->getActionName() == 'index') {
+                        $this->showmsg('', 'admin/login/index', 0);
+                    } else {
                         $arr['msg'] = -1;
                         echo Core_Fun::array2json($arr);
                         exit;
-                    } 
+                    }
                 }
-				
-				//Model是admin 且Controller是login 且Action不是logout
-				if($this->getControllerName() == 'login' && $this->getActionName() != 'logout' && isset($_SESSION['isadmin']))
-					$this->showmsg('', 'admin/index/index', 0);
-			}
-		}
-		
-		if($this->getModelName() == 'business')
-		{
-			if(isset($_SESSION['isbusiness']) && $_SESSION['isbusiness']){
-				if($_SESSION['isbusiness'] && Core_Fun::time() - $_SESSION['lastupdate'] > 300)
-					$_SESSION['lastupdate'] = Core_Fun::time();
-			}
-			if($this->getControllerName() != 'login' && empty($_SESSION['isbusiness']))
-				$this->showmsg('', 'business/login/index', 0);
-			if($this->getControllerName() == 'login' && $this->getActionName() != 'logout' && isset($_SESSION['isbusiness']))
-				$this->showmsg('', 'business/index/index', 0);
-		}
+
+                //Model是admin 且Controller是login 且Action不是logout
+                if ($this->getControllerName() == 'login' && $this->getActionName() != 'logout' && isset($_SESSION['isadmin']))
+                    $this->showmsg('', 'admin/index/index', 0);
+            }
+        }
+
+        if ($this->getModelName() == 'business') {
+            if (isset($_SESSION['isbusiness']) && $_SESSION['isbusiness']) {
+                if ($_SESSION['isbusiness'] && Core_Fun::time() - $_SESSION['lastupdate'] > 300)
+                    $_SESSION['lastupdate'] = Core_Fun::time();
+            }
+            if ($this->getControllerName() != 'login' && empty($_SESSION['isbusiness']))
+                $this->showmsg('', 'business/login/index', 0);
+            if ($this->getControllerName() == 'login' && $this->getActionName() != 'logout' && isset($_SESSION['isbusiness']))
+                $this->showmsg('', 'business/index/index', 0);
+        }
     }
 
     /**
@@ -346,7 +347,7 @@ class Core_Controller_Action
      * 如有需要请重载
      * @author Snake.L
      */
-    public function postDispatch ()
+    public function postDispatch()
     {
 
     }
@@ -356,20 +357,20 @@ class Core_Controller_Action
      * @param string $action
      * @author Snake.L
      */
-    public function dispatch ($action)
+    public function dispatch($action)
     {
-        $this->preDispatch ();
+        $this->preDispatch();
         if (null === $this->_classMethods) {
-            $this->_classMethods = get_class_methods ($this);
+            $this->_classMethods = get_class_methods($this);
         }
 
         //__call 方法兼容
-        if (in_array ($action, $this->_classMethods)) {
+        if (in_array($action, $this->_classMethods)) {
             $this->$action ();
         } else {
-            $this->__call ($action, array ());
+            $this->__call($action, array());
         }
-        $this->postDispatch ();
+        $this->postDispatch();
     }
 
     /**
@@ -379,14 +380,14 @@ class Core_Controller_Action
      * @param array $args 调用函数时传入的参数
      * @author Snake.L
      */
-    public function __call ($methodName, $args)
+    public function __call($methodName, $args)
     {
-        if ('Action' == substr ($methodName, -6)) {
-            $action = substr ($methodName, 0, strlen ($methodName) - 6);
-            throw new Core_Exception (sprintf ('Action "%s" does not exist and was not trapped in __call()', $action), 404);
+        if ('Action' == substr($methodName, -6)) {
+            $action = substr($methodName, 0, strlen($methodName) - 6);
+            throw new Core_Exception (sprintf('Action "%s" does not exist and was not trapped in __call()', $action), 404);
         }
 
-        throw new Core_Exception (sprintf ('Method "%s" does not exist and was not trapped in __call()', $methodName), 500);
+        throw new Core_Exception (sprintf('Method "%s" does not exist and was not trapped in __call()', $methodName), 500);
     }
 
     /**
@@ -396,32 +397,32 @@ class Core_Controller_Action
      * @param mix $val
      * @author Snake.L
      */
-    public function assign ($key, $val)
+    public function assign($key, $val)
     {
-        Core_Template::assignvar ($key, $val);
+        Core_Template::assignvar($key, $val);
     }
 
     /**
      * 设置默认模版参数
      * @param type $tpl
      */
-    protected function _setDefaultTplParams ()
+    protected function _setDefaultTplParams()
     {
-        $_front = Core_Controller_Front::getInstance ();		
-		Core_Template::assignvar(array(
-			'_modelName' => $_front->getModelName(),
-			'_controllerName' => $_front->getControllerName(),
-			'_actionName' => $_front->getActionName (),
-			'_gdurl' => 'gd/index',
-			'_resource' => SITEURL,
-			'_pathroot' => Core_Fun::getPathroot(),	
-			'_host' => Core_Comm_Util::getHostname(),
-			'_footCountMes' => 
-				array(
-					'ip' =>  Core_Fun::ip(),
-					'name' =>  empty($_SESSION['name'])?NULL:$_SESSION['access_token'] ,
-			)		
-		));
+        $_front = Core_Controller_Front::getInstance();
+        Core_Template::assignvar(array(
+            '_modelName' => $_front->getModelName(),
+            '_controllerName' => $_front->getControllerName(),
+            '_actionName' => $_front->getActionName(),
+            '_gdurl' => 'gd/index',
+            '_resource' => SITEURL,
+            '_pathroot' => Core_Fun::getPathroot(),
+            '_host' => Core_Comm_Util::getHostname(),
+            '_footCountMes' =>
+                array(
+                    'ip' => Core_Fun::ip(),
+                    'name' => empty($_SESSION['name']) ? NULL : $_SESSION['access_token'],
+                )
+        ));
     }
 
     /**
@@ -431,13 +432,13 @@ class Core_Controller_Action
      * @param string $tpl
      * @author Snake.L
      */
-    public function display ($tpl, $type = false)
+    public function display($tpl, $type = false)
     {
-        $this->_setDefaultTplParams ();
-		header('Content-Type: text/html; charset=utf-8');
-        Core_Template::render ($tpl, $type);
+        $this->_setDefaultTplParams();
+        header('Content-Type: text/html; charset=utf-8');
+        Core_Template::render($tpl, $type);
     }
-	
+
     /**
      *
      * 获取一个模板内容
@@ -445,26 +446,26 @@ class Core_Controller_Action
      * @param string $tpl
      * @author gionouyang
      */
-    public function fetch ($tpl)
+    public function fetch($tpl)
     {
-        $this->_setDefaultTplParams ();
-        return Core_Template::render ($tpl, true);
+        $this->_setDefaultTplParams();
+        return Core_Template::render($tpl, true);
     }
-	
-	public function makeHtml($tpl)
-	{
-		$body = $this->fetch($tpl);
-		$fp = @fopen('index.html',"w");
-        fwrite($fp,$body);
+
+    public function makeHtml($tpl)
+    {
+        $body = $this->fetch($tpl);
+        $fp = @fopen('index.html', "w");
+        fwrite($fp, $body);
         fclose($fp);
-	}
-	
-	public function getCacheId()
-	{
-		$params = $this->getParams();
-		return sprintf('%X', crc32(implode('-', $params)));
-	}
-	
+    }
+
+    public function getCacheId()
+    {
+        $params = $this->getParams();
+        return sprintf('%X', crc32(implode('-', $params)));
+    }
+
     /**
      * 统一抛出错误方法
      *
@@ -478,9 +479,9 @@ class Core_Controller_Action
      * @param array $params 扩展参数
      * @author Snake.L
      */
-    public function error ($code, $msg, $params=array ())
+    public function error($code, $msg, $params = array())
     {
-        Core_Fun::error ($msg, $code, $params);
+        Core_Fun::error($msg, $code, $params);
     }
 
     /**
@@ -491,9 +492,9 @@ class Core_Controller_Action
      * @param array $params 扩展参数
      * @author echoyang
      */
-    public function exitJson ($code, $msg='', $params=array (), $callback=NULL)
+    public function exitJson($code, $msg = '', $params = array(), $callback = NULL)
     {
-        Core_Fun::exitJson ($code, $msg, $params, $callback);
+        Core_Fun::exitJson($code, $msg, $params, $callback);
     }
 
     /**
@@ -504,41 +505,40 @@ class Core_Controller_Action
      * @param array $params 扩展参数
      * @author echoyang
      */
-    public function returnJson ($code, $msg='', $params=array (), $callback=NULL)
+    public function returnJson($code, $msg = '', $params = array(), $callback = NULL)
     {
-        return Core_Fun::returnJson ($code, $msg, $params, $callback);
+        return Core_Fun::returnJson($code, $msg, $params, $callback);
     }
 
     /**
      * 通用的cfg保存方法
      */
-    public function configsave ($config = null)
+    public function configsave($config = null)
     {
         if (!isset ($config)) {
-            $config = $this->getParam ('config', array ());
+            $config = $this->getParam('config', array());
         }
-		
-        foreach ((array)$config as $_group => $__config)
-        {
-            Core_Config::get (null, $_group);
-            Core_Config::add ($__config, $_group);
-            Core_Config::update ($_group);
+
+        foreach ((array)$config as $_group => $__config) {
+            Core_Config::get(null, $_group);
+            Core_Config::add($__config, $_group);
+            Core_Config::update($_group);
         }
     }
 
     /**
      * showmsg 方法
      *
-     * @param string $msg	提示信息内容
+     * @param string $msg 提示信息内容
      * @param string $gourl 跳转地址
-     * @param number $time	跳转等待时间
-     * @param bool $button	是否停留并显示一个botton，点击后再跳转
+     * @param number $time 跳转等待时间
+     * @param bool $button 是否停留并显示一个botton，点击后再跳转
      * @author Snake.L
      * @todo 暂时只有后台跳转模板，前台todo
      */
-    public function showmsg ($msg, $gourl=-1, $time = null, $button=false)
+    public function showmsg($msg, $gourl = -1, $time = null, $button = false)
     {
-        Core_Fun::showmsg ($msg, $gourl, $time, $button);
+        Core_Fun::showmsg($msg, $gourl, $time, $button);
     }
 
     /**
@@ -552,19 +552,19 @@ class Core_Controller_Action
      * @return array
      * @author Snake.L
      */
-    public static function multipage ($num, $perpage, $curpage, $mpurl, $page=5)
+    public static function multipage($num, $perpage, $curpage, $mpurl, $page = 5)
     {
-		$mpurlArr = explode('/', $mpurl);
-		foreach ($mpurlArr as $k=>$v)
-			$mpurlArr[$k] = Core_Fun::iurlencode($v);
-		$mpurl = Core_Fun::getPathroot() . implode('/', $mpurlArr);
+        $mpurlArr = explode('/', $mpurl);
+        foreach ($mpurlArr as $k => $v)
+            $mpurlArr[$k] = Core_Fun::iurlencode($v);
+        $mpurl = Core_Fun::getPathroot() . implode('/', $mpurlArr);
 
-        $returnArr = array ();
-        $returnArr[] = array ('总记录数:' . $num);
+        $returnArr = array();
+        $returnArr[] = array('总记录数:' . $num);
         $realpages = 1;
         if ($num > $perpage) {
             $offset = 2;
-            $pages = $realpages = @ceil ($num / $perpage);
+            $pages = $realpages = @ceil($num / $perpage);
             if ($page > $pages) {
                 $from = 1;
                 $to = $pages;
@@ -580,31 +580,30 @@ class Core_Controller_Action
                     $to = $pages;
                 }
             }
-            $returnArr[] = array ('共' . $pages . '页');
-            ($curpage > 1) && $returnArr[] = array ('上一页', $mpurl . 'page/' . ($curpage - 1), 'prev');
-            ($curpage - $offset > 1 && $pages > $page) && $returnArr[] = array ('1 ...', $mpurl . 'page/1', 'first');
-            for ($i = $from; $i <= $to; $i++)
-            {
-                $returnArr[] = ($i == $curpage) ? array ($i, '', '') : array ($i, $mpurl . 'page/' . $i, '');
+            $returnArr[] = array('共' . $pages . '页');
+            ($curpage > 1) && $returnArr[] = array('上一页', $mpurl . 'page/' . ($curpage - 1), 'prev');
+            ($curpage - $offset > 1 && $pages > $page) && $returnArr[] = array('1 ...', $mpurl . 'page/1', 'first');
+            for ($i = $from; $i <= $to; $i++) {
+                $returnArr[] = ($i == $curpage) ? array($i, '', '') : array($i, $mpurl . 'page/' . $i, '');
             }
-            ($to < $pages) && $returnArr[] = array ('... ' . $realpages, $mpurl . 'page/' . $pages, 'last');
-            ($curpage < $pages) && $returnArr[] = array ('下一页', $mpurl . 'page/' . ($curpage + 1), 'next');
+            ($to < $pages) && $returnArr[] = array('... ' . $realpages, $mpurl . 'page/' . $pages, 'last');
+            ($curpage < $pages) && $returnArr[] = array('下一页', $mpurl . 'page/' . ($curpage + 1), 'next');
         }
         return $returnArr;
     }
 
-    public static function multipages ($num, $perpage, $curpage, $mpurl, $page=5)
+    public static function multipages($num, $perpage, $curpage, $mpurl, $page = 5)
     {
         // $mpurlArr = explode('/', $mpurl);
         // foreach ($mpurlArr as $k=>$v)
         //     $mpurlArr[$k] = Core_Fun::iurlencode($v);
         $mpurl = Core_Fun::getPathroot() . $mpurl;
-        $returnArr = array ();
+        $returnArr = array();
         //$returnArr[] = array ('总记录数:' . $num);
         $realpages = 1;
         if ($num > $perpage) {
             $offset = 2;
-            $pages = $realpages = @ceil ($num / $perpage);
+            $pages = $realpages = @ceil($num / $perpage);
             if ($page > $pages) {
                 $from = 1;
                 $to = $pages;
@@ -622,19 +621,18 @@ class Core_Controller_Action
             }
             //$returnArr[] = array ('共' . $pages . '页');
 
-            ($curpage > 1) && $returnArr[] = array ('', $mpurl . '&page=' . ($curpage - 1), 'pages-prev');
-            ($curpage - $offset > 1 && $pages > $page) && $returnArr[] = array ('1 ...', $mpurl . '&page=1', 'first');
-            for ($i = $from; $i <= $to; $i++)
-            {
-                $returnArr[] = ($i == $curpage) ? array ($i, 'javascript:;', 'on') : array ($i, $mpurl . '&page=' . $i, '');
+            ($curpage > 1) && $returnArr[] = array('', $mpurl . '&page=' . ($curpage - 1), 'pages-prev');
+            ($curpage - $offset > 1 && $pages > $page) && $returnArr[] = array('1 ...', $mpurl . '&page=1', 'first');
+            for ($i = $from; $i <= $to; $i++) {
+                $returnArr[] = ($i == $curpage) ? array($i, 'javascript:;', 'on') : array($i, $mpurl . '&page=' . $i, '');
             }
-            ($to < $pages) && $returnArr[] = array ('... ' . $realpages, $mpurl . '&page=' . $pages, 'last');
-            ($curpage < $pages) && $returnArr[] = array ('下一页<i></i>', $mpurl . '&page=' . ($curpage + 1), 'pages-next');
+            ($to < $pages) && $returnArr[] = array('... ' . $realpages, $mpurl . '&page=' . $pages, 'last');
+            ($curpage < $pages) && $returnArr[] = array('下一页<i></i>', $mpurl . '&page=' . ($curpage + 1), 'pages-next');
         }
         return $returnArr;
     }
 
-		/**
+    /**
      * 特殊加密url,防止地址被解析不完全
      *
      * @param string $class
@@ -645,178 +643,169 @@ class Core_Controller_Action
     {
         return Core_Fun::iurlencode($key);
     }
-	
-	/**
-	 *
-	 * 修复浏览器XSS HACK 函数
-	 * @param string $input 
-	 * @return string
-	 */
-	private function hackXss($input)
-	{
-		if(is_array($input))
-		{
-			return $input;
-		}
-		else
-		{
-			return $this->removeXss($input);
-		}
-	}
-	
-	/**
-	 *
-	 * 修复浏览器XSS HACK 函数
-	 * @param string $val 
-	 * @return string
-	 */
-	private function removeXss($val)
-	{
-		$this->checkInjection($val);//注入检测
-		//$val = $this->safeReplace($val);
-		$val = preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/S', '', $val);
 
-		$parm1 = array('javascript', 'vbscript', 'expression', 'applet', 'meta', 'blink', 'link', 'script', 'iframe', 'frame', 'frameset', 'ilayer', 'bgsound', 'base');
-	
-		$parm2 = array('onabort', 'onactivate', 'onafterprint', 'onafterupdate', 'onbeforeactivate', 'onbeforecopy', 'onbeforecut', 'onbeforedeactivate', 'onbeforeeditfocus', 'onbeforepaste', 'onbeforeprint', 'onbeforeunload', 'onbeforeupdate', 'onblur', 'onbounce', 'oncellchange', 'onchange', 'onclick', 'oncontextmenu', 'oncontrolselect', 'oncopy', 'oncut', 'ondataavailable', 'ondatasetchanged', 'ondatasetcomplete', 'ondblclick', 'ondeactivate', 'ondrag', 'ondragend', 'ondragenter', 'ondragleave', 'ondragover', 'ondragstart', 'ondrop', 'onerror', 'onerrorupdate', 'onfilterchange', 'onfinish', 'onfocus', 'onfocusin', 'onfocusout', 'onhelp', 'onkeydown', 'onkeypress', 'onkeyup', 'onlayoutcomplete', 'onload', 'onlosecapture', 'onmousedown', 'onmouseenter', 'onmouseleave', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'onmousewheel', 'onmove', 'onmoveend', 'onmovestart', 'onpaste', 'onpropertychange', 'onreadystatechange', 'onreset', 'onresize', 'onresizeend', 'onresizestart', 'onrowenter', 'onrowexit', 'onrowsdelete', 'onrowsinserted', 'onscroll', 'onselect', 'onselectionchange', 'onselectstart', 'onstart', 'onstop', 'onsubmit', 'onunload');
-	
-		$parm = array_merge($parm1, $parm2); 
-	
-		for ($i = 0; $i < sizeof($parm); $i++) { 
-			$pattern = '/'; 
-			for ($j = 0; $j < strlen($parm[$i]); $j++) { 
-				if ($j > 0) { 
-					$pattern .= '('; 
-					$pattern .= '(&#[x|X]0([9][a][b]);?)?'; 
-					$pattern .= '|(&#0([9][10][13]);?)?'; 
-					$pattern .= ')?'; 
-				}
-				$pattern .= $parm[$i][$j]; 
-			}
-			$pattern .= '/i';
-			$val = preg_replace($pattern, '', $val); 
-		}
-       	return $val;
-	}
-	
-	/**
- 	 *  检查注入函数
- 	 *
- 	 * @param     string   $val  需要处理的内容
- 	 * @return    string
+    /**
+     *
+     * 修复浏览器XSS HACK 函数
+     * @param string $input
+     * @return string
      */
-	private function checkInjection($val)
-	{
-		$notallow = "select|insert|and|or|update|delete|\'|\/\*|\*|\.\.\/|\.\/|union|into";
-		$notarr = array('select', 'insert', 'update', 'and', 'or', 'delete', 'union', 'into', '\'', '\*', '\.');
-		if(preg_match($val, $notallow))
-		{
-			//Core_Util_Log::setFile('Request','Request vars are not allow : ' . $val);
-			//exit('Request vars are not allow');
-		}
-		return str_replace($notarr, '', $val);
-	}
-	
-	private function safeReplace($string) 
-	{
-		$string = str_replace('%20','',$string);
-		$string = str_replace('%27','',$string);
-		$string = str_replace('%2527','',$string);
-		$string = str_replace('*','',$string);
-		$string = str_replace('"','&quot;',$string);
-		$string = str_replace("'",'',$string);
-		$string = str_replace('"','',$string);
-		$string = str_replace(';','',$string);
-		$string = str_replace('<','&lt;',$string);
-		$string = str_replace('>','&gt;',$string);
-		$string = str_replace("{",'',$string);
-		$string = str_replace('}','',$string);
-		$string = str_replace("<!--{",'',$string);
-		$string = str_replace('}-->','',$string);
-		$string = str_replace('\\','',$string);
-		return $string;
-	}
-	
-	/*
-	 * 简便条件
-	 * @return array()
-	 */
-	protected function setWhereCondition(array $Arr = array())
-	{
-		$whereArr = array();
-		$conditions = array();
-		$_map = '';
-		$_return = array();
-		
-		foreach($Arr AS $_arr)
-		{
-			$param = $this->getParam ($_arr[0]);
-			if (!empty($param)) 
-			{
-				$_where = '' != $_arr[1] ? array ($_arr[0], $this->getParam ($_arr[0]), $_arr[1]) : 
-										   array ($_arr[0], $this->getParam ($_arr[0]));
-				$whereArr[] = $_where;
-            	$conditions[$_arr[0]] = $this->getParam ($_arr[0]);
-            	$this->assign ($_arr[0], $this->getParam ($_arr[0]));
-			}
-			else
-			{
-				$this->assign ($_arr[0], 0);
-			}
-			if(isset($_arr[2]))
-			{
-				$whereArr[] = '' != $_arr[1] ? array($_arr[0], $_arr[2], $_arr[1]) : array($_arr[0], $_arr[2]);
-				$conditions[$_arr[0]] = $_arr[2];
-				$this->assign ($_arr[0], $_arr[2]);
-			}
-		}
-		$_return['where'] = $whereArr;
-		$_return['conditions'] = $conditions;
-		
-		return $_return;
-	}
-	
-	/*
-	 * 获取swfupload上传控件
-	 * @return assign
-	 */
-	protected function setSwfupload(array $swfArr = array())
-	{
-		foreach($swfArr AS $swf)
-		{
-			$_Params = array(
-				'item_id' => $swf['item_id'], 
-				'belong' => $swf['belong'],
-				'button_id' => 'spanButton' . ucfirst($swf['id']),
-				'progress_id' => 'divFileProgress' . ucfirst($swf['id']),
-				'obj' => 'img' . $swf['obj'],
-				'kindid' => $swf['kindid'],
-				'isIndex' => $swf['isIndex']
-			);
-			$this->assign($swf['id'], Core_Fun_Swfupload::_build_upload($_Params)); //构建swfupload
-		}
-	}
-	
-	/*
-	 * 获取swfupload上传控件
-	 * @return string
-	 */
-	protected function setStringSwfupload(array $swfArr = array())
-	{
-		$_Params = array(
-			'item_id' => $swfArr['item_id'], 
-			'belong' => $swfArr['belong'],
-			'button_id' => 'spanButton' . ucfirst($swfArr['id']),
-			'progress_id' => 'divFileProgress' . ucfirst($swfArr['id']),
-			'obj' => 'img' . $swfArr['obj'],
-			'kindid' => $swfArr['kindid'],
-			'isIndex' => $swfArr['isIndex']
-		);
-		return Core_Fun_Swfupload::_build_upload($_Params); //构建swfupload
-	}
-	
-	protected function setSeo($action)
-	{
-		$this->assign('seo', Model_Nav::getNavSeo($action));
-	}
+    private function hackXss($input)
+    {
+        if (is_array($input)) {
+            return $input;
+        } else {
+            return $this->removeXss($input);
+        }
+    }
+
+    /**
+     *
+     * 修复浏览器XSS HACK 函数
+     * @param string $val
+     * @return string
+     */
+    private function removeXss($val)
+    {
+        $val = $this->checkInjection($val);//注入检测
+
+//		$val = $this->safeReplace($val);
+        $val = preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/S', '', $val);
+
+        $parm1 = array('javascript', 'vbscript', 'expression', 'applet', 'meta', 'blink', 'link', 'script', 'iframe', 'frame', 'frameset', 'ilayer', 'bgsound', 'base');
+
+        $parm2 = array('onabort', 'onactivate', 'onafterprint', 'onafterupdate', 'onbeforeactivate', 'onbeforecopy', 'onbeforecut', 'onbeforedeactivate', 'onbeforeeditfocus', 'onbeforepaste', 'onbeforeprint', 'onbeforeunload', 'onbeforeupdate', 'onblur', 'onbounce', 'oncellchange', 'onchange', 'onclick', 'oncontextmenu', 'oncontrolselect', 'oncopy', 'oncut', 'ondataavailable', 'ondatasetchanged', 'ondatasetcomplete', 'ondblclick', 'ondeactivate', 'ondrag', 'ondragend', 'ondragenter', 'ondragleave', 'ondragover', 'ondragstart', 'ondrop', 'onerror', 'onerrorupdate', 'onfilterchange', 'onfinish', 'onfocus', 'onfocusin', 'onfocusout', 'onhelp', 'onkeydown', 'onkeypress', 'onkeyup', 'onlayoutcomplete', 'onload', 'onlosecapture', 'onmousedown', 'onmouseenter', 'onmouseleave', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'onmousewheel', 'onmove', 'onmoveend', 'onmovestart', 'onpaste', 'onpropertychange', 'onreadystatechange', 'onreset', 'onresize', 'onresizeend', 'onresizestart', 'onrowenter', 'onrowexit', 'onrowsdelete', 'onrowsinserted', 'onscroll', 'onselect', 'onselectionchange', 'onselectstart', 'onstart', 'onstop', 'onsubmit', 'onunload');
+
+        $parm = array_merge($parm1, $parm2);
+
+        for ($i = 0; $i < sizeof($parm); $i++) {
+            $pattern = '/';
+            for ($j = 0; $j < strlen($parm[$i]); $j++) {
+                if ($j > 0) {
+                    $pattern .= '(';
+                    $pattern .= '(&#[x|X]0([9][a][b]);?)?';
+                    $pattern .= '|(&#0([9][10][13]);?)?';
+                    $pattern .= ')?';
+                }
+                $pattern .= $parm[$i][$j];
+            }
+            $pattern .= '/i';
+            $val = preg_replace($pattern, '', $val);
+        }
+        return $val;
+    }
+
+    /**
+     *  检查注入函数
+     *
+     * @param     string $val 需要处理的内容
+     * @return    string
+     */
+    private function checkInjection($val)
+    {
+        $notallow = "select|insert|and|or|update|delete|\'|\/\*|\*|\.\.\/|\.\/|union|into";
+        $notarr = array('select', 'insert', 'update', 'and', 'or', 'delete', 'union', 'into', '\'', '\*', '\.');
+        if (preg_match($val, $notallow)) {
+            //Core_Util_Log::setFile('Request','Request vars are not allow : ' . $val);
+            //exit('Request vars are not allow');
+        }
+        return str_replace($notarr, '', $val);
+    }
+
+    private function safeReplace($string)
+    {
+        $string = str_replace('%20', '', $string);
+        $string = str_replace('%27', '', $string);
+        $string = str_replace('%2527', '', $string);
+        $string = str_replace('*', '', $string);
+        $string = str_replace('"', '&quot;', $string);
+        $string = str_replace("'", '', $string);
+        $string = str_replace('"', '', $string);
+        $string = str_replace(';', '', $string);
+        $string = str_replace('<', '&lt;', $string);
+        $string = str_replace('>', '&gt;', $string);
+        $string = str_replace("{", '', $string);
+        $string = str_replace('}', '', $string);
+        $string = str_replace("<!--{", '', $string);
+        $string = str_replace('}-->', '', $string);
+        $string = str_replace('\\', '', $string);
+        return $string;
+    }
+
+    /*
+     * 简便条件
+     * @return array()
+     */
+    protected function setWhereCondition(array $Arr = array())
+    {
+        $whereArr = array();
+        $conditions = array();
+        $_map = '';
+        $_return = array();
+
+        foreach ($Arr AS $_arr) {
+            $param = $this->getParam($_arr[0]);
+            if (!empty($param)) {
+                $_where = '' != $_arr[1] ? array($_arr[0], $this->getParam($_arr[0]), $_arr[1]) :
+                    array($_arr[0], $this->getParam($_arr[0]));
+                $whereArr[] = $_where;
+                $conditions[$_arr[0]] = $this->getParam($_arr[0]);
+                $this->assign($_arr[0], $this->getParam($_arr[0]));
+            } else {
+                $this->assign($_arr[0], 0);
+            }
+            if (isset($_arr[2])) {
+                $whereArr[] = '' != $_arr[1] ? array($_arr[0], $_arr[2], $_arr[1]) : array($_arr[0], $_arr[2]);
+                $conditions[$_arr[0]] = $_arr[2];
+                $this->assign($_arr[0], $_arr[2]);
+            }
+        }
+        $_return['where'] = $whereArr;
+        $_return['conditions'] = $conditions;
+
+        return $_return;
+    }
+
+    /*
+     * 获取swfupload上传控件
+     * @return assign
+     */
+    protected function setSwfupload(array $swfArr = array())
+    {
+        foreach ($swfArr AS $swf) {
+            $_Params = array(
+                'item_id' => $swf['item_id'],
+                'belong' => $swf['belong'],
+                'button_id' => 'spanButton' . ucfirst($swf['id']),
+                'progress_id' => 'divFileProgress' . ucfirst($swf['id']),
+                'obj' => 'img' . $swf['obj'],
+                'kindid' => $swf['kindid'],
+                'isIndex' => $swf['isIndex']
+            );
+            $this->assign($swf['id'], Core_Fun_Swfupload::_build_upload($_Params)); //构建swfupload
+        }
+    }
+
+    /*
+     * 获取swfupload上传控件
+     * @return string
+     */
+    protected function setStringSwfupload(array $swfArr = array())
+    {
+        $_Params = array(
+            'item_id' => $swfArr['item_id'],
+            'belong' => $swfArr['belong'],
+            'button_id' => 'spanButton' . ucfirst($swfArr['id']),
+            'progress_id' => 'divFileProgress' . ucfirst($swfArr['id']),
+            'obj' => 'img' . $swfArr['obj'],
+            'kindid' => $swfArr['kindid'],
+            'isIndex' => $swfArr['isIndex']
+        );
+        return Core_Fun_Swfupload::_build_upload($_Params); //构建swfupload
+    }
+
+    protected function setSeo($action)
+    {
+        $this->assign('seo', Model_Nav::getNavSeo($action));
+    }
 }

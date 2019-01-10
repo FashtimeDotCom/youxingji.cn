@@ -297,17 +297,11 @@ class Core_Config
 			return self::get(null, $_args[0]);
 
 		}
-
 		else if (count($_args) >= 2)
-
 		{
 
 			return self::get(implode('_', array_splice($_args, 1)), $_args[0]);
 
 		}
-
 	}
-
-
-
 }

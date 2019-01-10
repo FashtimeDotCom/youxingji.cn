@@ -23,9 +23,7 @@
 		.sift .uiBox a span{display: block;width: 100%; padding-bottom: 60%;border-radius: 2px;}
 		.sift .uiBox a .name{ color: #fff;text-align: center;position: absolute;top:24%;width: 100%;}
 		.sift .uiBox a .con{color: #666;text-align: left;line-height: 30px;}
-		
 		.ul-imgtxt2 li{margin-bottom:0;}
-		
 				/*正文*/
 		.TV .ul-list-talent{position: relative;}
 		.TV .ul-list-talent .item{padding-top: 0;margin-bottom:0;}
@@ -89,7 +87,7 @@
 	        <!--热门精选-->
 	        <div class=" sift">
 	            <div class="wp">
-	                <h4 class="title">热门精选</h4>
+	                <h4 class="title">精选主题</h4>
                 	<div class="uiBox swiper-container" id="bannerSwiper1">
 						<div class="swiper-wrapper">
 							{{foreach from=$key_list item=item key=key}}
@@ -125,9 +123,9 @@
 		            <div class="wp row_list">
 		                <ul class="ul-list-talent ul-imgtxt2">
 		                    <li><div class="item fix">
-			                        <div class="con cover figure" data-src="{{$vo.url}}" onclick="js_video(this)" style="background-image: url({{$vo.pics}});">
+			                        <a class="dis_block con cover figure" href="/index.php?m=wap&c=index&v=tv_detail&id={{$vo.id}}" style="background-image: url({{$vo.pics}});">
 			                            <i class="bo"></i>
-			                        </div>
+			                        </a>
 			                        <div class="info float">
 			                        	<div class="tx">
 			                                <a class="dis_block portrait figure borderRadius50" href="{{$vo.uid|helper:'mhref'}}" style="background-image: url({{$vo.uid|helper:'avatar'}});"></a>
@@ -135,7 +133,7 @@
 			                                <h5><span>{{$vo.uid|helper:'username'}}</span></h5>
 			                           </div>
 			                        </div>
-			                        <div class="info character"><div class="txt"><p><a class="dis_block" href="/index.php?m=wap&c=index&v=tv_detail&id={{$vo.id}}">{{$vo.describes}}</a></p></div></div>
+			                        <div class="info character"><div class="txt"><p><a class="dis_block omit lineNumber3 whiteSpace" href="/index.php?m=wap&c=index&v=tv_detail&id={{$vo.id}}">{{$vo.describes}}</a></p></div></div>
 			                        <div class="videoBottom fix">
 										<div class="right">
 											<span><img class="icon_check" src="/resource/m/images/common/icon_check.png" /><i>{{$vo.shownum}}</i></span>&nbsp;&nbsp;
@@ -165,17 +163,10 @@
 	    		</div>
 				<p class="tips"></p>
 	    	</div>
-	    </div>
-	    
-	    <!-- 视频弹窗 -->
-        <div class="m-pop1-yz m_pop1_yz" id="m-pop1-yz">
-        	<div class="con"><div class="close js-close" onclick="js_close()"><span></span></div><div class="VideoArea"></div></div>
-        </div>
-        <!-- end -->
+	   </div>
 	</div>
 	<div class="maskLayer dis_none" title="遮罩层，作用：下拉菜单失焦时，下拉菜单自动消失"></div>
 	{{include file='wap/footer.tpl'}}
-	
 	<script type="text/javascript" src="/resource/m/js/swiper.js"></script>
 	<script type="text/javascript">
 		//热门精选
@@ -190,7 +181,6 @@
 	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
 	<script type="text/javascript" src="/resource/m/js/dianzan.js" title="移动端    所有页面  的  【点赞】"></script>
 	<script type="text/javascript" src="/resource/m/js/collect.js" title="移动端    所有页面  的 【 收藏、关注、私信】"></script>
-	<script type="text/javascript" src="/resource/m/js/opentv.js" title="移动端    所有页面  的  【打开、关闭视频】"></script>
 	<script type="text/javascript">
 		//进入页面自动加载
 		var UniqueValue=$("#UniqueValue").val(); //页面 的唯一值
@@ -213,7 +203,8 @@
 
 			if (totality>=5) {
 				$(".tips").text("往下拖动查看更多！");
-			} else{
+			}
+			else{
 				$(".tips").text("我也是有底线的哦~");
 			}
 		}
@@ -225,7 +216,8 @@
 				$(".menuOption").addClass("dis_none");
 				$(obj).next(".menuOption").removeClass("dis_none");
 				$(".maskLayer").removeClass("dis_none");
-			}else{
+			}
+			else{
 				$(".maskLayer,.menuOption").addClass("dis_none");
 			}
 		}
@@ -247,9 +239,9 @@
 	        		jointHtml +='<div class="wp row_list">'+
 					                '<ul class="ul-list-talent ul-imgtxt2">'+
 					                    '<li><div class="item fix">'+
-				                            	'<div class="con cover figure" data-src="'+data.tips[i].url+'" onclick="js_video(this)" style="background-image: url('+data.tips[i].pics+');">'+
+				                            	'<a class="dis_block con cover figure" href="/index.php?m=wap&c=index&v=tv_detail&id='+data.tips[i].id+'" style="background-image: url('+data.tips[i].pics+');">'+
 						                            '<i class="bo"></i>'+
-						                        '</div>'+
+						                        '</a>'+
 						                        '<div class="info float">'+
 						                        	'<div class="tx">'+
 						                                '<a class="dis_block portrait figure borderRadius50" href="/index.php?m=wap&c=muser&v=index&id='+data.tips[i].uid+'" style="background-image: url('+data.tips[i].headpic+');"></a>'+
@@ -257,7 +249,7 @@
 						                                '<h5><span>'+data.tips[i].username+'</span></h5>'+
 						                           '</div>'+
 						                        '</div>'+
-						                        '<div class="info character"><div class="txt"><p><a href="/index.php?m=wap&c=index&v=tv_detail&id='+data.tips[i].id+'">'+data.tips[i].describes+'</a></p></div></div>'+
+						                        '<div class="info character"><div class="txt"><p><a class="dis_block omit lineNumber3 whiteSpace" href="/index.php?m=wap&c=index&v=tv_detail&id='+data.tips[i].id+'">'+data.tips[i].describes+'</a></p></div></div>'+
 						                        '<div class="videoBottom fix">'+
 													'<div class="right">'+
 														'<span><img class="icon_check" src="/resource/m/images/common/icon_check.png" /><i>'+data.tips[i].shownum+'</i></span>&nbsp;&nbsp;'+
@@ -289,10 +281,12 @@
                 }
                 if (NowPage+1<maxPages) {
                     $(".tips").text("往下拖动查看更多！");
-                }else{
+                }
+                else{
                     $(".tips").text("我也是有底线的哦~");
                 }
-	        }else{
+	        }
+			else{
 	        	layer.msg(data.tips);
 	        }
 		}
@@ -377,13 +371,15 @@
 		                    if (NowPage+1<maxPages) {
 		                		$(".tips").text("往下拖动查看更多！");
 		                		flag = true;
-		                	}else{
+		                	}
+		                    else{
 		                		$(".tips").text("我也是有底线的哦~");
 		                		flag = false;
 		                	}
 		                }
 		            });
-		        }else{
+		        }
+		    	else{
 		    		$(".tips").text("我也是有底线的哦~");
 		    	}
 		    }

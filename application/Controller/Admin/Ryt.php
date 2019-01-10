@@ -15,6 +15,16 @@ class Controller_Admin_Ryt extends Core_Controller_Action
 	{
 		$_orderby = "show_time DESC";
 		$where = "1 = 1";
+
+
+        $username = $this->getParam('username');
+        $conditions = array();
+        if($username)
+        {
+            $where .= " and username like '%$username%'";
+            $conditions['username'] = $username;
+        }
+
 		$Num = C::M('ryt')->where($where)->getCount();
 		$perpage = 20;
 		$curpage = $this->getParam ('page') ? intval ($this->getParam ('page')) : 1;
@@ -46,7 +56,8 @@ class Controller_Admin_Ryt extends Core_Controller_Action
         }
 		$this->assign('list', $list);
 		$this->assign ('multipage', $multipage);
-		$this->display('admin/ryt_index.tpl');
+        $this->assign('conditions', $conditions);
+        $this->display('admin/ryt_index.tpl');
 	}
   
   	public function commentAction()
@@ -174,7 +185,10 @@ class Controller_Admin_Ryt extends Core_Controller_Action
 
                 //阅读数、点赞数
                 "shownum"=>$this->getParam("shownum"),
-                "zannum"=>$this->getParam("zannum")
+                "zannum"=>$this->getParam("zannum"),
+                'top_pic'=>$this->getParam('top_pic'),
+                'address'=>$this->getParam('address'),
+                'update_time'=>time()
 
 			);
 			$adid = C::M('ryt')->add($data);
@@ -238,7 +252,10 @@ class Controller_Admin_Ryt extends Core_Controller_Action
 
                 //阅读数、点赞数
                 "shownum"=>$this->getParam("shownum"),
-                "zannum"=>$this->getParam("zannum")
+                "zannum"=>$this->getParam("zannum"),
+                'top_pic'=>$this->getParam('top_pic'),
+                'address'=>$this->getParam('address'),
+                'update_time'=>time()
 			);
 
             if( $status_old !=1 ){

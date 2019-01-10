@@ -352,6 +352,54 @@ class Core_Db_Driver_Mysql
 		return false;
 	}
 
+	/*
+	 *insert 批量操作，数据组合
+	 *
+	 * */
+	public function insert_batch($table,$array)
+    {
+        $sql="";
+        if( is_array($array) ){
+           //拿出第一个
+            $one=$array[0];
+            if( is_array($one) ){
+                //组装key
+                $keys=array_keys($one);
+                $str="(";
+                foreach($keys as $key=>$val){
+                    $str .= "`{$val}`,";
+                }
+                $str=rtrim($str,',');
+                $str .=")";
+
+                //组装value
+                $value_str="";
+                foreach( $array as $key=>$value ){
+                    $one_str="(";
+                    foreach($value as $k=>$v){
+                        $v=$this->escape($v);
+                        $one_str .="'{$v}',";
+                    }
+                    $one_str=trim($one_str,',');
+                    $one_str .= ")";
+                    $value_str .=" $one_str,";
+                    unset($one_str);
+                }
+                $value_str=trim($value_str,',');
+
+                //组装sql
+                if( $str && $value_str ){
+                    $sql=" INSERT INTO {$table} {$str} VALUES $value_str ";
+                    if ($resource = $this->execute($sql))
+                    {
+                       return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
 	/**
 	 * 创建安全的set子句
 	 * @param array $array 需要创建set子句的关联数组

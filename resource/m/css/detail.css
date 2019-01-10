@@ -6,8 +6,7 @@
  * */
 
 /*评论的点赞小图标*/
-.icon_like{display: inline-block;vertical-align: middle;width: 12px;
-			height: 12px;margin-right: 5px;margin-top: -2px;}
+.icon_like{display: inline-block;vertical-align: middle;width: 1.2rem;margin-right: 5px;margin-top: -2px;}
 .Iclass{display: inline!important;margin-right:0!important;}
 
 /*弹出的 表情框*/
@@ -18,12 +17,11 @@
 
 
 /*评论  上方的标题*/
-.m-comment{padding-right: 10px;padding-left: 10px;padding-top: 5px;}
-.m-comment .navigation{border-bottom: 1px #e4e4e4 solid;margin-bottom: 10px;font-size: 12px;height: 30px;}
-.m-comment .navigation .title{display: block;float: left;line-height: 30px;color: #333;font-weight: 600;}
-.m-comment .navigation .Button{float: right;}
-.m-comment .navigation .Button span{color: #666;padding: 0 4px;float: left;line-height: 12px;margin-top: 8px;}
-.m-comment .navigation .Button span:nth-of-type(1){border-right: 1px #e4e4e4 solid;}
+.m-comment{padding-right: 10px;padding-left: 10px;padding-top: 0px;}
+.m-comment .navigation{border-bottom: 1px #e4e4e4 solid;margin-bottom: 10px;height: 3.1rem;}
+.m-comment .navigation .titleTWO{display: block;float: left;line-height: 3.1rem;font-size: 1.2rem;color: #333;font-weight: 600;}
+.m-comment .navigation .Button{float: right;color: #efefef;}
+.m-comment .navigation .Button span{color: #666;padding: 0 4px;line-height: 3.1rem;font-size: 1.2rem;}
 .m-comment .navigation .Button span.onn{color: #d71618!important;}
 
 
@@ -44,25 +42,29 @@
 .ul-imgtxt4 li{border-bottom: 1px #e4e4e4 solid;}
 .ul-imgtxt4 .tit{padding-right: 0;margin-left: 17px;}
 .ul-imgtxt4 .tit h3{color: #75949f;}
+.ul-imgtxt4 .tit h3 b{font-size: 1.2rem;}
 .ul-imgtxt4 .tit .addtime{color: #75949f;}
 
 .substance{margin-left: 40px;margin-top: 4px;}
-.substance .txtt{font-size: 12px;color: #666;line-height: 1.75em;text-align: justify;}
+.substance .txtt{font-size: 1.2rem;color: #666;line-height: 1.75em;text-align: justify;
+				white-space: pre-wrap!important;
+				word-wrap: break-word!important;
+				*white-space:normal!important;}
 .substance .txtt span{display: block;color: #a8a8a8;font-size: 12px;}
 
 
 .substance .BarSubmenu{font-size: 12px;height: 1.75em;margin: 8px auto 10px;}
-.substance .BarSubmenu .reply{float: left;line-height: 1.75em;color: #767676;
-								-webkit-box-shadow: 0px 1px 0.5px 1px #e1e1e1;
-								-moz-box-shadow: 0px 1px 0.5px 1px #e1e1e1;
-								box-shadow: 0px 1px 0.5px 1px #e1e1e1;
-								border: 1px #eeeeee solid;padding: 0 10px;border-radius: 10px;background: #f0f0f0;}
+.substance .BarSubmenu .reply{float: left;line-height: 1.5em;color: #767676;font-size: 1.2rem;
+								-webkit-box-shadow: 0px 0.5px 0.5px 0.5px #e1e1e1;
+								-moz-box-shadow: 0px 0.5px 0.5px 0.5px #e1e1e1;
+								box-shadow: 0px 0.5px 0.5px 0.5px #e1e1e1;
+								border: 1px #eeeeee solid;padding: 0 10px;border-radius: 0.75rem;background: #f0f0f0;}
 
 .substance .BarSubmenu .leftSubmenu{float: right;line-height: 1.75em;color: #a8a8a8;}
 .substance .BarSubmenu .leftSubmenu .floor{margin-right: 6px;}
 .substance .BarSubmenu .leftSubmenu span{display: inline-block; line-height: 1.75em;}
 .substance .addtime{margin-right: 10px;}
-.substance .BarSubmenu .leftSubmenu .zan i{display: inline-block;line-height: 1.75em;font-style: normal;}
+.substance .BarSubmenu .leftSubmenu .zan i{display: inline-block;line-height: 1.75em;font-style: normal;font-size: 1.2rem;}
 
 
 /*【对评论】弹出的回复框*/
@@ -70,7 +72,7 @@
 .details_stair{margin-top: 0px;}
 .details_stair .wp{padding-left: 0px;padding-right: 0px;}
 .details_stair .wp .content{margin-bottom: 5px;}
-.details_stair .wp .content textarea{height: 78px;}
+.details_stair .wp .content textarea{height: 78px;font-size: 1.2rem;line-height: 1.5rem;}
 .details_stair .wp #facebox{height: 78px;overflow-y: scroll;}
 .details_stair .wp .btn{background-color: #79ceff;}
 .details_stair .wp .nologinbtn{margin-top: 50px;}
@@ -81,7 +83,7 @@
 .details_{margin-top: 10px;}
 .details_ .wp{padding-left: 0px;padding-right: 0px;background: #fff;}
 .details_ .wp .content{margin-bottom: 5px;}
-.details_ .wp .content textarea{height: 78px;}
+.details_ .wp .content textarea{height: 78px;font-size: 1.2rem;line-height: 1.5rem;}
 .details_ .wp #facebox{height: 78px;overflow-y: scroll;}
 .details_ .wp .btn{background-color: #79ceff;}
 .details_ .wp .nologinbtn{margin-top: 50px;}
@@ -92,18 +94,18 @@
 .blockquote_wrap .module:first-child{margin-top:8px;}
 .blockquote_wrap .module:last-child{margin-bottom:20px;}
 
-.blockquote_wrap .comment_floor{color:#999; float:right; margin:-14px 0px 0 0;}
+.blockquote_wrap .comment_floor{color:#999; float:right; margin:-14px 0px 0 0;font-size: 1.2rem;}
 .blockquote_wrap .comment_conWrap{clear: both;}
 .blockquote_wrap .comment_con{overflow:hidden;width:100%;}
 .blockquote_wrap .comment_con .name{color: #2d64b3;}
 .blockquote_wrap .comment_con .name i{color: #3d4c63;font-style: normal;}
 .blockquote_wrap .detail .content a,.blockquote_wrap .comment_listBox a{color:#369; font-size:13px;}
-.blockquote_wrap .comment_con .matter{display:inline; word-break:break-all; word-wrap:break-word;}
+.blockquote_wrap .comment_con .matter{display:inline; word-break:break-all; word-wrap:break-word;font-size: 1.2rem;}
 
 .blockquote_wrap .comment_action_sub{visibility:hidden; float:right; text-align:right;}
 .blockquote_wrap .comment_action a,.blockquote_wrap .comment_action_sub a{color:#999; font-size:12px; padding-left:12px; text-decoration:none;}
 
-.btnComment_Review,.btnComment_{float: right;}
+.addReview,.btnComment_Review,.btnComment_{float: right;}
 
 .openReply{ animation: openReply 1s 1;}
 @keyframes openReply{ 0%{ opacity: 0;height: 0px;} 100%{ opacity: 1;height: 168px;} }
@@ -114,7 +116,7 @@
 
 
 
-.original .content textarea{height: 100px;}
+.original .content textarea{height: 100px;font-size: 1.2rem;line-height: 1.5rem;}
 .original .wp{padding-right: 0px;padding-left: 0px;}
 
 .nologinbtn{margin-top: 70px;}

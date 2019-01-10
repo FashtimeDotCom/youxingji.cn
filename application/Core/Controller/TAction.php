@@ -41,6 +41,9 @@ class Core_Controller_TAction extends Core_Controller_Action
           	$cUser['cover'] = $cUser['cover']?$cUser['cover']:'/resource/images/s-ban1.jpg';
             $weidu = C::M('msg_detail')->where("to_id = $uid and status = 0")->getCount();
             $this->assign('weidu', $weidu);
+            if( !empty($cUser['tag']) ){
+                $cUser['tag']=explode("/",$cUser['tag']);
+            }
 
             //获取等级
             $lv = C::M('lv')->where("exp <= ".$cUser['exp'])->order('id desc')->limit(0,1)->select();

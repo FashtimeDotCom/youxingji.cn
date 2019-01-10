@@ -107,10 +107,13 @@ class Controller_Wap_User extends Core_Controller_WapAction
         $uid = $this->userInfo['uid'];
 
         //获取用户信息
-        $user = C::M('user_member')->field('uid,headpic,cover,exp,city,username,autograph')->where("uid = '$uid' and uid <> 1")->find();
+        $user = C::M('user_member')->field('uid,headpic,cover,exp,city,username,autograph,tag')->where("uid = '$uid' and uid <> 1")->find();
         if($user){
             $user['avatar'] = $user['headpic']?$user['headpic']:'/resource/images/img-lb2.png';
             $user['cover'] = $user['cover']?$user['cover']:'/resource/images/s-ban1.jpg';
+            if( !empty($user['tag']) ){
+                $user['tag']=explode("/",$user['tag']);
+            }
         }else{
             $this->showmsg('', 'index.php', 0);
             exit;
@@ -207,9 +210,12 @@ class Controller_Wap_User extends Core_Controller_WapAction
         $this->assign("total",$total);
 
         //user info
-        $user_info=C::M('user_member')->field('uid,headpic as avatar,username,autograph,city,cover')->where("uid={$uid}")->find();
+        $user_info=C::M('user_member')->field('uid,headpic as avatar,username,autograph,city,cover,tag')->where("uid={$uid}")->find();
         if(empty($user_info['avatar'])) $user_info['avatar']="/resource/images/img-lb2.png";
         if (empty($user_info['cover'])) $user_info['cover']="/resource/m/images/ban3.jpg";
+        if( !empty($user_info['tag']) ){
+            $user_info['tag']=explode("/",$user_info['tag']);
+        }
         $this->assign("user",$user_info);
 
         $this->display('wap/user/new_tv.tpl');
@@ -614,9 +620,12 @@ class Controller_Wap_User extends Core_Controller_WapAction
         $this->assign("total",$total);
 
         //user info
-        $user_info=C::M('user_member')->field('uid,headpic as avatar,username,autograph,city,cover')->where("uid={$uid}")->find();
+        $user_info=C::M('user_member')->field('uid,headpic as avatar,username,autograph,city,cover,tag')->where("uid={$uid}")->find();
         if(empty($user_info['avatar'])) $user_info['avatar']="/resource/images/img-lb2.png";
         if (empty($user_info['cover'])) $user_info['cover']="/resource/m/images/ban3.jpg";
+        if( !empty($user_info['tag']) ){
+            $user_info['tag']=explode("/",$user_info['tag']);
+        }
         $this->assign("user",$user_info);
 
         $this->display("wap/user/new_note.tpl");

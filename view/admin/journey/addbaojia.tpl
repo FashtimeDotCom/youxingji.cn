@@ -5,7 +5,12 @@
         <tr><td colspan="2" class="td27">录属ID</td></tr>
         <tr class="noborder">
             <td class="vtop rowform">
-            <input name="aid" value="" type="number" class="txt" datatype="Require" msg="请填写录属ID" />
+                <select name="aid" id="aid">
+                    <option value=""></option>
+                    {{foreach from=$article_list item=item key=key}}
+                        <option value="{{$item.id}}">{{$item.title}}</option>
+                    {{/foreach}}
+                </select>
             </td>
             <td class="vtop tips2">请填写录属ID</td>
         </tr>
@@ -55,10 +60,16 @@ var start = {
   istime: false,
   istoday: false,
   choose: function(datas){
+      var aid=$('#aid').val();
+      if( aid=='' || aid==0 || aid==null ){
+          alert('请您先选择报价隶属线路!');
+          return false;
+      }
+      aid=parseInt(aid);
      $.ajax({
          type: "GET",
          url: "/admin/article/gettime",
-         data: {time:datas},
+         data: {time:datas,aid:aid},
          dataType: "json",
          success: function(data){
             if(data){

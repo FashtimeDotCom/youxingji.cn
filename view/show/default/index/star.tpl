@@ -7,7 +7,7 @@
 		<meta name="renderer" content="webkit" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
 		<meta name="format-detection" content="telephone=no" />
-		<title>达人邦_{{TO->cfg key="site_name" group="site" default="致茂网络"}}</title>
+		<title>达人日志_{{TO->cfg key="site_name" group="site" default="致茂网络"}}</title>
 		<meta name="description" content="{{TO->cfg key=" index_keywords " group="site " default="首页 "}}" />
 		<meta name="keywords" content="{{TO->cfg key=" index_description " group="site " default="首页 "}}" />
 		<link rel="stylesheet" href="/resource/css/module.css" />
@@ -31,12 +31,12 @@
 	<body>
 		{{include file='public/header.tpl'}}
 		<div class="main">
-			{{vplist from='ad' item='adlist' tagname='starlide'}}
+			{{vplist from='ad' item='adlist' tagname='pc_new_star'}}
 			<div class="ban s2" style="background-image: url({{$adlist.imgurl}});"></div>
 			{{/vplist}}
 			<div class="cur">
 				<div class="wp">
-					<a href="/">首页</a> &gt; <span>达人邦{{if $keyword}}【{{$keyword}}】{{/if}}</span>
+					<a href="/">首页</a> &gt; <span>达人日志{{if $keyword}}【{{$keyword}}】{{/if}}</span>
 				</div>
 			</div>
 			<div class="wp">

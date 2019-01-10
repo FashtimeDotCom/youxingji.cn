@@ -17,15 +17,14 @@
     <link rel="stylesheet" href="/resource/m/css/detail.css" />
     <style type="text/css">
     	.BigBox{overflow: hidden;background-color: #fff;}
-		.BigBox .Video{display: block;width: 100%;}
-		
+		.BigBox .Video{display: block;width: 100%;height: 20rem;}
 		.BigBox .main{position: relative;}
 		.BigBox .main .boxTop{position: relative;z-index: 2;padding: 10px 10px;border-bottom: 1.5px rgba(99, 92, 78, 0.6) solid;}
 		.BigBox .main .boxTop p{color: #fff;text-align: justify;}
 		.BigBox .main .boxTop .title{font-size: 1.3rem;margin-top: 10px}
 		.BigBox .main .boxTop .describe{font-size: 1.2rem;margin-top: 10px}
 		.BigBox .main .boxTop .boxs{margin-top: 10px;}
-		.BigBox .main .boxTop .boxs .profile{width: 16%;padding-bottom: 16%;float: left;border: 1.5px #fff solid;margin-right: -16%;}
+		.BigBox .main .boxTop .boxs .profile{width: 16%;padding-bottom: 15.24%;float: left;border: 1.5px #fff solid;margin-right: -16%;}
 		.BigBox .main .boxTop .boxs .module{padding-left: 20%;width: 100%;float: left;}
 		.BigBox .main .boxTop .boxs .module span{margin-right: 10px;color: #fff;}
 		.BigBox .main .boxTop .boxs .module .name{font-size: 1.3rem;line-height: 30px;}
@@ -36,9 +35,9 @@
 		.BigBox .main .botton .title .back{display: block; font-size: 1.3rem;float: right;}
 		.BigBox .main .botton .slideshow .pic{padding-bottom: 55%;position: relative;border-radius: 3px;}
 		.BigBox .main .botton .slideshow .pic .addtime{position: absolute;right: 0;bottom: 1rem;background: #111111;color: #bababa;}
-		.BigBox .main .botton .slideshow .little_title{font-size: 0.9rem;text-align: justify;}
-		.BigBox .main .botton .slideshow .little_title a{display: block;width: 100%;height: 100%;color: #fff;}
-		
+		.BigBox .main .botton .slideshow .little_title{font-size: 0.9rem;text-align: justify;color: #fff;}
+		.BigBox .main .botton .slideshow .little_title a{width: 100%;height: 100%;}
+
 		.bg_blur{-webkit-filter: blur(5px) contrast(.8) brightness(.8);
 	            -moz-filter: blur(5px);
 	            -o-filter: blur(5px);
@@ -73,16 +72,15 @@
         	<div class="main fix">
             	<div class="imgBg bg_blur" style="background: url({{$info.pics}}) no-repeat top center / 200%;"></div>
             	<div class="boxTop fix">
-            		<p class="title">{{$info.title}}</p>
-	            	<p class="describe">{{$info.describes}}</p>
+            		<p class="title whiteSpace">{{$info.title}}</p>
+	            	<p class="describe whiteSpace">{{$info.describes}}</p>
 	            	<div class="boxs fix">
 	            		<div class="profile figure borderRadius50" style="background-image: url({{$info.headpic}});"></div>
 	            		<div class="module fix">
 	            			<p class="name">{{$info.username}}</p>
-	            			
 	            			<input type="hidden" name="synopsis" id="synopsis" value="{{$info.autograph}}" />
 	            			<p class="tag">
-								<span class="autograph"></span>
+								<span class="autograph whiteSpace"></span>
 								<span class="viewMore dis_none" data-open="0">查看全文</span>
 							</p>
 	            		</div>
@@ -93,15 +91,17 @@
             		<div class="slideshow swiper-container" id="bannerSwiper">
 						<div class="swiper-wrapper">
 						{{if $tv_list}}
-						{{foreach from=$tv_list item=item key=key}}
-							<div class='swiper-slide'>
-								<div class='pic figure' onclick="js_video(this)" data-src="{{$item.url}}" style="background-image: url({{$item.pics}});">
-									<span class="bo"></span>
-									<span class="addtime">{{$item.addtime|date_format:'%Y-%m-%d'}}</span>
-								</div>
-								<p class="little_title"><a class="dis_block omit lineNumber2" href="/index.php?m=wap&c=index&v=tv_detail&id={{$item.id}}">{{$item.title}}</a></p>
+							{{foreach from=$tv_list item=item key=key}}
+							<div class="swiper-slide">
+								<a class="dis_block" href="/index.php?m=wap&c=index&v=tv_detail&id={{$item.id}}">
+									<div class="pic figure" style="background-image: url({{$item.pics}});">
+										<span class="bo"></span>
+										<span class="addtime">{{$item.addtime|date_format:'%Y-%m-%d'}}</span>
+									</div>
+									<p class="little_title whiteSpace">{{$item.title}}</p>
+								</a>
 							</div>
-						{{/foreach}}
+							{{/foreach}}
 						{{/if}}
 						</div>
 	            	</div>
@@ -112,9 +112,9 @@
         <!--评论区-->
         <div class="m-comment">
         	<div class="navigation" id="navigation" data-type="1">
-        		<span class="title">评论</span>
+        		<span class="titleTWO">评论</span>
         		<p class="Button fix">
-        			<span class="press pressTime onn">按时间</span>
+        			<span class="press pressTime onn">按时间</span>&nbsp;|&nbsp;
         			<span class="press pressHeat">按热度</span>
         		</p>
         	</div>
@@ -133,7 +133,7 @@
 			                </a>
 	                    </div>
 	                    <div class="substance" data-replyNum="{{$vo.count}}">
-	                    	<div class="txtt"><p>{{$vo.content}}</p></div>
+	                    	<div class="txtt">{{$vo.content}}</div>
 		                    <div class="BarSubmenu">
 		                    	<span class="reply replyReview" data-id="{{$vo.id}}" data-open="0" data-class="1">回复</span>
 		                    	<div class="leftSubmenu">
@@ -249,15 +249,7 @@
         </div>
     </div>
     {{include file='wap/footer.tpl'}}
-    
-    <!-- 视频弹窗 -->
-    <div class="m-pop1-yz m_pop1_yz" id="m-pop1-yz">
-    	<div class="con"><div class="close js-close" onclick="js_close()"><span></span></div><div class="VideoArea"></div></div>
-    </div>
-    <!-- end -->
     <script src="/resource/js/layui/lay/dest/layui.all.js"></script>
-	<script type="text/javascript" src="/resource/m/js/opentv.js" title="移动端    所有页面  的  【打开、关闭视频】"></script>
-	
 	<script type="text/javascript" src="/resource/m/js/swiper.js"></script>
 	<script type="text/javascript">
 		var swiper = new Swiper('#bannerSwiper', {
@@ -269,7 +261,6 @@
 	</script>
     <script type="text/javascript" src="/resource/m/js/jianjie.js" title="移动端    8个页面  的  【简介】"></script>
     <script type="text/javascript" src="/resource/m/js/dianzan.js" title="移动端    所有页面  的  【点赞】"></script>
-    
     <script type="text/javascript" src="/resource/js/jquery.qqFace.js"></script>
     <script type="text/javascript" src="/resource/m/js/comment.js" title="评论  + 回复   公共 JS代码"></script>
 </body>

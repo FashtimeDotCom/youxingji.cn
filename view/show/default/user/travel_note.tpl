@@ -16,41 +16,25 @@
 	<script src="/resource/js/jquery.min.js"></script>
 	<script src="/resource/js/lib.js"></script>
 	<style type="text/css">
-		.subbtn {
-			display: inline-block;
-			width: 112px;
-			height: 38px;
-			line-height: 38px;
-			text-align: center;
-			font-size: 16px;
-			border: none;
-			border-radius: 5px;
-			margin-right: 9px;
-			background: rgba(248, 89, 89, 1);
-			color: rgba(254, 254, 254, 1);
-		}
-		
-		.sub {
-			background: rgba(249, 249, 249, 1) !important;
-			color: rgba(102, 102, 102, 1) !important;
-		}
+		.subbtn{display: inline-block;width: 112px;height: 38px;line-height: 38px;
+				text-align: center;font-size: 16px;border: none;border-radius: 5px;margin-right: 9px;
+				background: rgba(248, 89, 89, 1);color: rgba(254, 254, 254, 1);}
+		.sub{background: rgba(249, 249, 249, 1) !important;color: rgba(102, 102, 102, 1) !important;}
+		.ul-tab-lb1 li{margin-right: 52px!important;}
 	</style>
 </head>
 <body>
 	{{include file='public/header.tpl'}}
 	<div class="main">
-		<div class="ban l2" style="background-image: url(/resource/images/ban-lb1.jpg);">
-		</div>
+		<div class="ban l2" style="background-image: url(/resource/images/ban-lb1.jpg);"></div>
 		<div class="wp">
 			<ul class="ul-tab-lb1">
-				<li>
-					<a href="/index.php?m=index&c=user&v=addtravel">
+				<li><a href="/index.php?m=index&c=user&v=addtravel">
 						<h4>发表旅行日志</h4>
 						<p>用九宫格定格您的每一个动人时刻</p>
 					</a>
 				</li>
-				<li>
-					<a href="/index.php?m=index&c=user&v=addtv">
+				<li><a href="/index.php?m=index&c=user&v=addtv">
 						<h4>发表视频</h4>
 						<p>最原创的旅拍，最独特的旅行视角</p>
 					</a>
@@ -61,22 +45,15 @@
 						<p>用”长篇大论“记录您的美好旅程</p>
 					</a>
 				</li>
+				<li><a href="/index.php?m=index&c=user&v=set_question">
+						<h4>发表问题</h4><p>用文字 记录您旅程的疑问与好奇</p>
+					</a>
+				</li>
 			</ul>
 			<style type="text/css">
-				.upic {
-					max-width: 300px;
-					margin-top: 20px;
-				}
-				
-				.num_text {
-					font-size: 12px;
-					color: #868686;
-					line-height: 20px;
-				}
-				
-				.num_f {
-					color: #d71618;
-				}
+				.upic{max-width: 300px;margin-top: 20px;}
+				.num_text{font-size: 12px;color: #868686;line-height: 20px;}
+				.num_f {color: #d71618;}
 			</style>
 			<div class="m-con-lb1">
 				<div class="col-l">
@@ -141,7 +118,7 @@
 	<link rel="stylesheet" href="/resource/css/slick.css">
 	<script src="/resource/js/slick.min.js"></script>
 	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
-	<script>
+	<script type="text/javascript">
 		$(document).ready(function() {
 			$('.m-pic2-qm .slider').slick({
 				dots: false,
@@ -171,7 +148,6 @@
 				if(msg !== undefined) {
 					layer.msg(msg);
 				}
-				console.log(msg);
 				$('#piclist').html('<div class="upic"><img src="' + data.url + '" class="layui-upload-img"></div>');
 
 			}
@@ -234,7 +210,7 @@
 				layer.msg('请选择服务协议');
 				return false;
 			}
-			$.post("index.php?m=api&c=TravelNote&v=save_travel_note", {
+			$.post("index.php?m=api&c=Travelnote&v=save_travel_note", {
 				'title': title,
 				'content': con,
 				'did':did,

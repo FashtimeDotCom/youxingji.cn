@@ -101,7 +101,7 @@
     <div class="h50"></div>
     <div class="fl-bot" id="nexts">
         <div class="wp">
-            <span>￥{{$detail.price}}</span>
+            <span>￥{{$detail.price}}元/位</span>
             <a class="btn-enroll" id="btnBook" href="javascript:;">立刻报名</a>
         </div>
     </div>

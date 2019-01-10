@@ -53,6 +53,7 @@ class Controller_Index_User extends Core_Controller_TAction
 		$this->assign('list', $list);
 		$this->assign('num', $Num);
 		$this->assign ('multipage', $multipage);
+        $this->assign('page_info',array('num'=>$Num,'total_page'=>ceil($Num/$perpage),'cur_page'=>$curpage));
         $this->display('user/index.tpl');
 	}
 
@@ -94,24 +95,15 @@ class Controller_Index_User extends Core_Controller_TAction
 	{
 		$perpage = 10;
 		$uid = $this->userInfo['uid'];
-		$sql = "Select FROM_UNIXTIME(addtime,'%Y%m%d') days from ##__tv where uid = $uid GROUP BY days desc";
-		$num = Core_Db::fetchAll($sql, false);
+        $num = C::M("tv")->where("uid={$uid}")->getCount();
 		$curpage = $this->getParam ('page') ? intval ($this->getParam ('page')) : 1;
 		$mpurl = "index.php?m=index&c=user&v=tv";
-		$multipage = $this->multipages (count($num), $perpage, $curpage, $mpurl);
+		$multipage = $this->multipages ($num, $perpage, $curpage, $mpurl);
 		$limit = $perpage * ($curpage - 1) . "," . $perpage;
-		$sql = "Select FROM_UNIXTIME(addtime,'%Y-%m-%d') days from ##__tv where uid = $uid GROUP BY days desc limit $limit";
-		$list = Core_Db::fetchAll($sql, false);
-		foreach ($list as $key => $value) {
-			$start_time = strtotime($value['days'] . " 00:00:00");
-        	$end_time=strtotime($value['days'] . " 23:59:59");
-        	$sql = "Select * from ##__tv where uid = $uid and addtime between $start_time and $end_time";
-			$reslist = Core_Db::fetchAll($sql, false);
-			$list[$key]['days'] = $value['days'];
-			$list[$key]['list'] = $reslist;
-		}
+		$list=C::M('tv')->where("uid={$uid}")->order('id desc')->limit($limit)->select();
 		$this->assign('list', $list);
 		$this->assign ('multipage', $multipage);
+        $this->assign('page_info',array('num'=>$num,'total_page'=>ceil($num/$perpage),'cur_page'=>$curpage));
 		$this->display('user/tv.tpl');
 	}
 
@@ -129,11 +121,15 @@ class Controller_Index_User extends Core_Controller_TAction
         if( $list ){
             foreach($list as $key=>$value){
                 $list[$key]['headpic']=$list[$key]['headpic']??'/resource/images/img-lb2.png';
+                if( trim($value['tag']) ){
+                    $list[$key]['tag']=explode("/",$value['tag']);
+                }
             }
         }
 
         $this->assign('list', $list);
         $this->assign ('multipage', $multipage);
+        $this->assign('page_info',array('num'=>$num,'total_page'=>ceil($num/$perpage),'cur_page'=>$curpage));
         $this->display("user/travel_list.tpl");
     }
 
@@ -451,6 +447,7 @@ class Controller_Index_User extends Core_Controller_TAction
             if( !$info ){
                 $this->showmsg('数据不存在，跳转中...', '/index.php?m=index&c=user&v=index', 2);
             }
+            $info['content']=urldecode($info['content']);
             $this->assign("info",$info);
         }else{
             $this->showmsg('非法操作，跳转中...', '/index.php?m=index&c=user&v=index', 2);
@@ -463,7 +460,161 @@ class Controller_Index_User extends Core_Controller_TAction
         $this->display("user/travel_note_edit.tpl");
     }
 
+    /*
+     * 达人问答
+     * 发布问题
+     *
+     * */
+    public function set_questionAction()
+    {
 
+        $this->display('user/faq/set_question.tpl');
+    }
+
+    public function set_responseAction()
+    {
+
+        $this->display('user/faq/set_response.tpl');
+    }
+
+
+    /*
+     * 新版-PC个人中心
+     *
+     * */
+    public function homeAction()
+    {
+        $perpage = 5;
+        $uid = $this->userInfo['uid'];
+        $curpage=1;
+        $limit = $perpage * ($curpage - 1) . "," . $perpage;
+
+        //日志列表
+        $travel_list = C::M('travel')->field('*')->where("uid = $uid")->order('addtime desc')->limit($limit)->select();
+        if( $travel_list ){
+            foreach ($travel_list as $key => $value) {
+                $travel_list[$key]['content'] = json_decode($value['content']);
+                $travel_list[$key]['picnum'] = count(json_decode($value['content']));
+                $travel_list[$key]['addtime'] = date('Y-m-d H:i:s', $value['addtime']);
+            }
+            $this->assign('travel_list',$travel_list);
+        }
+
+        //达人视频
+        $tv_list=C::M('tv')->field('*')->where("uid={$uid}")->order('addtime desc')->limit($limit)->select();
+        if( $tv_list ){
+            foreach ($tv_list as $key => $value) {
+                $tv_list[$key]['addtime'] = date('Y-m-d H:i:s', $value['addtime']);
+            }
+            $this->assign('tv_list',$tv_list);
+        }
+
+        //达人游记
+        $note_list=C::M('travel_note')->field('*')->where("uid={$uid}")->order('addtime desc')->limit($limit)->select();
+        if( $note_list ){
+            foreach($note_list as $key=>$value){
+                $note_list[$key]['headpic']=$note_list[$key]['headpic']??'/resource/images/img-lb2.png';
+                if( trim($value['tag']) ){
+                    $note_list[$key]['tag']=explode("/",$value['tag']);
+                }
+            }
+            $this->assign('note_list',$note_list);
+        }
+
+        //达人问答
+        $faq_list=C::M('faq')->field('*')->where("uid={$uid}")->order('addtime desc')->limit($limit)->select();
+        if( $faq_list ){
+            foreach($faq_list as $key=>$value){
+                if( trim($value['label']) ){
+                    $faq_list[$key]['label']=explode("/",$value['label']);
+                }
+            }
+            $this->assign('faq_list',$faq_list);
+        }
+        $total_info=$this->totalAction($uid);
+
+        $this->assign('total',$total_info);
+        $this->display('user/new_index.tpl');
+    }
+
+    //新版-我的问答
+    public function my_faqAction()
+    {
+        $perpage = 10;
+        $uid = $this->userInfo['uid'];
+        $curpage = $this->getParam ('page') ? intval ($this->getParam ('page')) : 1;
+        $type=$this->getParam('type')??1;
+        $limit = $perpage * ($curpage - 1) . "," . $perpage;
+        if( $type==1 ){
+            $list = C::M('faq')->where("uid = $uid")->order('addtime desc')->limit($limit)->select();
+            $mpurl = "index.php?m=index&c=user&v=my_faq&type=1";
+            $Num=C::M('faq')->where("uid = {$uid}")->getCount();
+        }else{
+            $list=C::M('faq as a')->field('a.*,b.addtime as response_time')->join('##__faq_response as b','a.id=b.faq_id','left')->where("b.uid={$uid}")->order("b.addtime desc")->limit($limit)->select();
+            $mpurl = "index.php?m=index&c=user&v=my_faq&type=2";
+            $Num=C::M('faq_response')->where("uid = {$uid}")->getCount();
+        }
+        if( $list ){
+            foreach ($list as $key=>$value){
+                C::M('faq')->where('id', $value['id'])->setInc('show_num', 1);
+                if( trim($value['label']) ){
+                    $list[$key]['label']=explode("/",$value['label']);
+                }
+
+            }
+            $this->assign('list', $list);
+        }
+
+        //total
+        $total=$this->totalAction($uid);
+        $this->assign("total",$total);
+
+        $multipage = $this->multipages ($Num, $perpage, $curpage, $mpurl);
+        $this->assign('type',$type);
+        $this->assign ('multipage', $multipage);
+        $this->assign('page_info',array('num'=>$Num,'total_page'=>ceil($Num/$perpage)));
+        $this->display('user/my_faq.tpl');
+    }
+
+    /*
+     * 我的订单
+     *
+     * */
+    public function my_orderAction()
+    {
+
+        $this->display("user/my_order.tpl");
+    }
+
+    /*
+   * 统计日志，视频，游记，问题总数
+   * */
+    protected function totalAction($uid)
+    {
+        $data=array();
+        //日志
+        $travel_num=0;
+        $travel_num=C::M('travel')->where("uid={$uid}")->getCount();
+        $data['travel_num']=$travel_num;
+
+        //视频
+        $tv_num=0;
+        $tv_num=C::M('tv')->where("uid={$uid}")->getCount();
+        $data['tv_num']=$tv_num;
+
+        //游记
+        $note_num=0;
+        $note_num=C::M('travel_note')->where("uid={$uid}")->getCount();
+        $data['note_num']=$note_num;
+
+        //问答，暂时没有，0
+        $answer=0;
+        $answer=C::M('faq')->where("uid={$uid}")->getCount();
+        $data['faq_num']=$answer;
+
+        return $data;
+
+    }
 
 
 }

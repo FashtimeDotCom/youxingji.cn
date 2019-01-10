@@ -1,0 +1,84 @@
+/*2018-11-22
+ * HQS 
+ * 
+ * 达人问题
+ * */
+body{background: #fbfbfb;}
+
+.main .ban{height: 300px;}
+
+.main .wp{padding-top: 34px;}
+/*左侧列表*/
+.main .wp .col_l{width: 850px;float: left;}
+.col_l .issueSearch{margin-bottom: 47px;}
+.col_l .issueSearch .searchVal{display: block;width: 780px;height: 46px;line-height: 46px;border: 1px #ed5858 solid;
+						 border-radius: 3px;background: #fff;color: #999;text-indent: 11px;float: left;}
+.col_l .issueSearch .searchAffirm{display: block;border: none;width: 60px;height: 46px;border-radius: 3px;float: right;
+							 background: #e64b4b url(/resource/images/faq/searchAffirm.png) no-repeat center center;}
+
+.navMeun .navLi{float: left;margin-right: 70px;margin-left: 3px;color: #333;margin-bottom: 5px;font-size: 15px;}
+.navMeun .navLi.on{color: #d71618;}
+.navMeun .navLi i{color: red;font-size: 15px;}
+
+.content,.content .boxx{min-height: 100px;}
+			/*有内容*/
+.content .module{background: #fff;border: 1px #ececec solid;padding: 0px 30px 20px 31px;margin-bottom: 20px;}
+.content .module .issue{line-height: 58px;}
+.content .module .issue span{font-size: 17px;color: #000;}
+.content .module .issue em  {font-size: 14px;color: #d71618;padding: 0px 6px;border: 1px #d71618 solid;border-radius: 3px;}
+
+.content .module .box{height: 100px;margin-bottom: 23px;}
+.content .module .box .illustration{float: left;display: inline-block;width: 150px;height: 100px;margin-right: 19px;}
+.content .module .box .describe{line-height: 26px;margin-bottom: 43px;text-align: justify;font-size: 14px;}
+
+.content .module .bottom{height: 30px;line-height: 30px;margin-bottom: 10px;}
+.content .module .bottom .answerer{display: block; line-height: 30px;color: #999;float: left;font-size:15px;}
+.content .module .bottom .answerer .headPortrait{display: block;width: 30px;height: 30px;border-radius: 15px;float: left;}
+.content .module .bottom .answerer .name{color: #333;font-size:15px;}
+.content .module .bottom .answerer i{font-size: 15px;}
+						/*热门回答*/
+.content .module .bottom .RightHandSide{text-align: right;}
+.content .module .bottom .RightHandSide span{color: #666;font-size: 15px;}
+.content .module .bottom .RightHandSide span i{color: #666;font-size: 15px;}
+.content .module .bottom .RightHandSide span .smallIcon{display:inline-block;vertical-align:middle;margin-top:-3px;width:20px;height:20px;margin-right:5px}
+
+.bottom .preview .smallIcon{background:url(../images/common/preview1.png) no-repeat center center / 100%;}
+.bottom .dianzan .smallIcon{background:url(../images/common/icon_dianzan1.png) no-repeat center center / 100%;}
+						/*最新回答*/
+			/*无内容*/
+.modules .default_bg{margin: 35px auto 0;}
+.modules .tipsButtom{text-align: center;font-size: 18px;line-height: 70px;}
+
+
+/*右侧*/
+.main .wp .col_r{width: 300px;float: right;}
+.col_r .quizButton{height: 46px;border-radius: 4px;color: #fff;line-height: 46px;text-align: center;
+					background: #e64b4b;margin-bottom: 50px;font-size: 18px;}
+.col_r .quizButton i{font-size: 26px;font-weight: 600;line-height: 30px;}
+		/*广告位*/
+.col_r .playbill{width: 300px;height: 224px;margin-bottom: 50px;}
+		/*热门标签*/
+.col_r .HotTags{padding-top: 3px;border-top: 1px #f2f2f5 solid;}
+.col_r .HotTags .title{font-size: 17px;line-height: 75px;color: #333;}
+.col_r .HotTags .labelList .label{float: left;padding: 0 13px;background: #f0f0f0;color: #333;
+								  border-radius: 15px;margin-right: 14px;font-size: 15px;margin-bottom: 15px;}
+.col_r .HotTags .labelList .label.on{color: #fff;background: #fd4c4e;}
+.col_r .HotTags .labelList .label:hover{color: #fff;background: #fd4c4e;}
+.col_r .HotTags .labelList .evenMore{float: left;color: #333;font-size: 15px;}
+.col_r .HotTags .labelList .evenMore img{display: inline-block;float: right;
+										transform:rotate(90deg);
+										-o-transform:rotate(90deg); 	/* Opera */
+										-ms-transform:rotate(90deg); 	/* IE 9 */
+										-moz-transform:rotate(90deg); 	/* Firefox */
+										-webkit-transform:rotate(90deg); /* Safari 和 Chrome */}
+
+.pagination{margin: 36px auto 0;}
+.pagination .pages .amount{display: inline-block;color: #999;margin-right: 10px;}
+.pagination .pages li a:hover,.pages li.on a{background-color:#d71618;}
+
+.pagination .pages .pages-form .btn{background: -webkit-linear-gradient(#fefffe, #f0f1f0); /* Safari 5.1 - 6.0 */
+									background: -o-linear-gradient(#fefffe, #f0f1f0); /* Opera 11.1 - 12.0 */
+									background: -moz-linear-gradient(#fefffe, #f0f1f0); /* Firefox 3.6 - 15 */
+									background: linear-gradient(#fefffe, #f0f1f0); /* æ ‡å‡†çš„è¯­æ³• */}
+
+.pagination .pages .pages-form .btn:hover{background:#d71618;}

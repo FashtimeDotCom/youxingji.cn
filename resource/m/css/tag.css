@@ -4,6 +4,8 @@
  移动端  所有包含要 添加  标签的页面
  * */
 
+.tag{padding-right: 65px!important;}
+
 .btn {display: inline-block;
 	  margin-bottom: 0; // For input.btn
 	  font-weight: @btn-font-weight;
@@ -16,7 +18,7 @@
 	  white-space: nowrap;
 	  .button-size(@padding-base-vertical; @padding-base-horizontal; @font-size-base; @line-height-base; @btn-border-radius-base);
 	  .user-select(none);}
-.affirm{position: absolute;top: 0;right: 0;line-height: 34px;padding: 0 6px;
+.affirm{position: absolute;top: 0;right: 0;line-height: 36px;padding: 0 6px;
     	color: #fff;border-radius: 3px;
 	    background-color: #5cb85c;
     	border: 1px #4cae4c solid;}
@@ -25,11 +27,15 @@
 .sample:nth-of-type(2){background: #dff3ce;color: #4a7d1e;}
 .sample:nth-of-type(3){background: #deeaf6;color: #2a4467;}
 .sample:nth-of-type(4){background: #f4ebcc;color: #795636;}
-.sample{border: 1px #d8d2b8 solid;padding: 0px 2px;font-weight: 500;margin: 0 3px 3px 0;
-		font-size: 12px;text-align: center;display: inline-block;float: left;line-height: 20px;}
-.sample em img{display: inline-block;width: 11px;margin-left: 10px;}
+.sample{border: 1px #d8d2b8 solid;padding: 0px 2px 0px 8px;font-weight: 500;margin: 0 14px 3px 0;
+		text-align: center;display: inline-block;float: left;line-height: 26px;}
+.sample .Iclass{font-size: 15px;display: inline-block;line-height: 30px;}
+
+.sample .eliminate{display: inline-block;float: right;width: 17px;height: inherit;margin-left: 10px;}
+.sample .eliminate img{float: left;margin-top: 8px;}
 
 input#tag::-webkit-input-placeholder{font-size:8px;}
 input#tag:-moz-placeholder{font-size:8px;}
 input#tag::-moz-placeholder{font-size:8px;}
 input#tag:-ms-input-placeholder{font-size:8px;}
+

@@ -14,6 +14,9 @@
     <script src="/resource/m/js/lib.js"></script>
     <link rel="stylesheet" href="/resource/m/css/common.css" />
     <link rel="stylesheet" href="/resource/m/css/personalcenter.css" />
+    <style type="text/css">
+    	.m-mytv-yz .item .videoBottom .left{margin-top:0!important;}
+    </style>
 </head>
 <body>
 	<div class="header">
@@ -56,17 +59,16 @@
 					<div class="item fix item_{{$item.t_id}}">
 						<div class="wp">
 							{{if $item.is_delete && $item.is_delete==1}}
-							<p class="videoTitle"><span class="view fix"><img src="/resource/m/images/user/icon_faq_detail1.png"></span>null</p>
-							<div class="date">null</div>
-							<a href="javascript:;" class="dis_block fix"><p class="videoDetails" style="color: red;">:)抱歉，此问答已被作者删除!</p></a>
+							<p class="nullTitle">null</p>
+							<p class="nullDetails" style="color: red;">:)抱歉，此内容已被原作者删除!</p>
 							{{else}}
-							<p class="videoTitle"><span class="view fix"><img src="/resource/m/images/user/icon_faq_detail1.png"></span>{{$item.title}}</p>
+							<p class="headline"><img class="view" src="/resource/m/images/user/icon_faq_detail1.png"><span class="substance">{{$item.title}}</span></p>
 							<div class="date">{{$item.addtime}}</div>
 							<a href="/index.php?m=wap&c=faq&v=detail&id={{$item.id}}" class="dis_block fix">
-								<p class="videoDetails">{{$item.desc}}</p>
+								<p class="videoDetails omit lineNumber4">{{$item.desc}}</p>
 								<div class="videoBottom fix">
 									{{if $item.address}}
-									<span class="left"><img src="/resource/m/images/common/icon_location2.png" />{{$item.address}}</span>
+									<span class="left"><img src="/resource/m/images/common/icon_location1.png" /><h4>{{$item.address}}</h4></span>
 									{{/if}}
 									<p class="right">
 										<span class="check">

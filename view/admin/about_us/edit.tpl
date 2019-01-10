@@ -130,7 +130,7 @@
                         <div class="form-group">
                             <label class="control-label input_label">描述</label>
                             <div class="">
-                                <textarea name="desc" id="desc" cols="60" rows="10">{{$detail.desc}}</textarea>
+                                <textarea name="desc" id="desc" cols="60" rows="10">{{$detail.describes}}</textarea>
                             </div>
                         </div>
 

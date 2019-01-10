@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
     <meta name="renderer" content="webkit" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" /> 
     <meta name="format-detection" content="telephone=no" />
-    <title>个人中心-编辑</title>
+    <title>个人中心-编辑视频</title>
     <meta name="keywords" content="{{TO->cfg key="index_keywords" group="site" default="首页"}}" />
     <meta name="description" content="{{TO->cfg key="index_description" group="site" default="首页"}}" />
     <link rel="stylesheet" href="/resource/m/css/style.css" />
@@ -15,58 +14,31 @@
     <script src="/resource/m/js/jquery.js"></script>
     <script src="/resource/m/js/lib.js"></script>
     <style type="text/css">
-        .upic {
-            max-width: 300px;
-            margin-top: 5px;
-            cursor:pointer;
-            margin: 0 15px 15px 0;
-            position: relative;
-        }
-        .layui-upload-button {
-            display: none;
-        }
-      	.upic i {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 48px;
-            height: 48px;
-            -webkit-border-radius: 50%;
-            -moz-border-radius: 50%;
-            border-radius: 50%;
-            background: rgba(0,0,0,.2);
-            color: #fff;
-            text-align: center;
-            font-size: 24px;
-            line-height: 48px;
-            opacity: 1;
-            -webkit-transition: all .3s;
-            -moz-transition: all .3s;
-            -o-transition: all .3s;
-            transition: all .3s;
-            -o-border-radius: 50%;
-            -ms-border-radius: 50%;
-            -ms-transition: all .3s;
-        }
-        .num_text {
-            font-size: 12px;
-            color: #868686;
-            line-height: 20px;
-        }
-        .num_f {
-            color: #d71618;
-        }
+        .upic{max-width: 300px;margin-top: 5px;cursor:pointer;margin: 0 15px 15px 0;position: relative;}
+        .layui-upload-button {display: none;}
+      	.upic i{position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);width: 48px;height: 48px;
+	            -webkit-border-radius: 50%;
+	            -moz-border-radius: 50%;
+	            border-radius: 50%;background: rgba(0,0,0,.2);color: #fff;
+	            text-align: center;font-size: 24px;line-height: 48px;opacity: 1;
+	            -webkit-transition: all .3s;
+	            -moz-transition: all .3s;
+	            -o-transition: all .3s;
+	            transition: all .3s;
+	            -o-border-radius: 50%;
+	            -ms-border-radius: 50%;
+	            -ms-transition: all .3s;}
+        .num_text {font-size: 12px;color: #868686;line-height: 20px;}
+        .num_f {color: #d71618;}
     </style>
 </head>
-
-<body class="">
+<body>
     <div class="mian">
         <div class="save-issue">
             <div class="wp">
                 <a href="/index.php?m=wap&c=user&v=index" class="i-close col-l" style="background-image: url(/resource/m/images/i-close.png)"></a>
                 <div class="col-r">
-                    <a href="javascript:;" id="btnAdd" class="i-issue" style="background-image: url(/resource/m/images/i-dh.png)">编辑</a>
+                    <a href="javascript:;" id="btnAdd" class="i-issue" style="background-image: url(/resource/m/images/i-dh.png)">发布编辑</a>
                 </div>
             </div>
         </div>
@@ -84,7 +56,7 @@
         </div>
         <div class="row-issue">
             <ul class="ul-tab-yz1">
-                <li class="on">
+                <li class="on" style="width: 100%;">
                     <a href="javascript:;">
                         <h4>编辑视频</h4>
                         <p>最温馨旅行小提示</p>
@@ -438,5 +410,4 @@
         })
     </script>
 </body>
-
 </html>

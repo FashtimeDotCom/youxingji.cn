@@ -114,7 +114,7 @@
 		</ul>
 		
 		<!--达人邦-->
-		<article class="article">
+		<article class="article TalentState">
 			<h3 class="title">达人邦 <a class="dis_block fix" style="float: right;" href="/index.php?m=wap&c=index&v=master_list"><span>更多<i></i></span></a></h3>
 			<div class="m_item_a1 swiper-container" id="bannerSwiper2">
 				<div class="swiper-wrapper" id="drb">
@@ -123,8 +123,9 @@
 					<div class="swiper-slide">
 						<a class="dis_block fix" href="index.php?m=wap&c=muser&v=index&id={{$item.uid}}">
 							<div class="pic figure" style="background-image: url(http://www.youxingji.cn/{{$item.avatar}});border-radius: 0;">
-								<div class="txt">{{$item.username}}</div>
+								<div class="txt">{{$item.tag}}</div>
 							</div>
+							<span class="username">{{$item.username}}</span>&nbsp;|&nbsp;
 							<address class="address">{{$item.city}}</address>
 							<div class="text">{{$item.autograph}}</div>
 						</a>
@@ -222,7 +223,7 @@
 						<span class="headPortrait figure" style="background-image: url({{$info.user_info.headpic}});"></span>
 						<aside>
 							<h4>{{$info.user_info.username}}</h4>
-							<time class="logTime">{{$info.time.hour}}点{{$info.time.min}}分</time>
+							<time class="logTime"></time>
 						</aside>
 					</article>
 					<h4 class="omit lineNumber2">{{$info.title}}</h4>
@@ -246,74 +247,11 @@
 		
 		<!--独家旅行-->
 		<article class="article tour">
-			<div class="TitleBox fix">
-				<!--<h3 class="title">独家旅行</h3>
-				<ul class="tab_list"><li class="onn">独家项目</li><li>独家资源</li></ul>-->
+			<div class="TitleBox fix" id="nav_list">
 				<h3 class="title">独家旅行</h3>
-				<ul class="nav_list fix"><li class="onn">独家线路</li><li>私人订制</li></ul>
+				<ul class="nav_list fix"><li class="onn">独家线路</li><li><a href="#nav_list">私人订制</a></li></ul>
 			</div>
 			<div class="tab_con fix">
-				<!--<div class="tab_box">
-					<ul class="box_list">
-						<li class="on">达人带你去旅行</li>
-						<li>名师带你去写生</li>
-					</ul>
-					<div class="con_list">
-						<div class="con_list_box ">
-							{{if $travel}}
-							{{foreach from=$travel item=item key=key}}
-							<div class="">
-								<a href="index.php?m=wap&c=index&v=travel_detail&id={{$item.id}}">
-									<img src="{{$item.thumbfile}}">
-									<p>{{$item.title}}<span>￥{{$item.price}}</span></p>
-								</a>
-							</div>
-							{{/foreach}}
-							{{/if}}
-						</div>
-	
-						<div class="con_list_box " style="display: none;">
-							{{if $sketch}}
-							{{foreach from=$sketch key=key item=item}}
-							<div class="">
-								<a href="index.php?m=wap&c=index&v=sketch_detail&id={{$item.id}}">
-									<img src="{{$item.thumbfile}}">
-									<p>{{$item.title}}<span>￥{{$item.price}}</span></p>
-								</a>
-							</div>
-							{{/foreach}}
-							{{/if}}
-						</div>
-	
-					</div>
-				</div>
-	
-				<div class="tab_box " style="display: none;">
-					<ul class="box_list">
-						{{if $label_list}}
-						{{foreach from=$label_list key=key item=item}}
-						<li class="{{if $key==0}}on{{/if}}">{{$item.name}}</li>
-						{{/foreach}}
-						{{/if}}
-					</ul>
-					<div class="con_list">
-						{{if $label_info}}
-						{{foreach from=$label_info key=key item=item}}
-						<div class="con_list_box " {{if $key !=0}}style="display: none;"{{/if}}>
-							{{foreach from=$item key=k item=vo}}
-							<div class="">
-								<a href="index.php?m=wap&c=index&v=journeydetail&id={{$vo.id}}">
-									<img src="{{$vo.articlethumb}}">
-									<p>{{$vo.title}} <span>￥{{$vo.price}}</span></p>
-								</a>
-							</div>
-							{{/foreach}}
-						</div>
-						{{/foreach}}
-						{{/if}}
-					</div>
-				</div>-->
-			
 				<div class="tab_box exclusive">
 					<div class="con_list">
 						<div class="con_list_box">
@@ -326,7 +264,7 @@
 											<img class="fix" src="{{$item.articlethumb}}" />
 											<div class="con">
 												<div class="headline">{{$item.title}}</div>
-												<div class="price">￥{{$item.price}}<i class="Iclass"> 起</i></div>
+												<div class="price">￥{{$item.price}}<i class="Iclass"> 元/位</i></div>
 											</div>
 										</a>
 									</div>

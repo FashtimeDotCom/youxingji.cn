@@ -1,7 +1,20 @@
+#
+#Linux压缩，暂时没有用到
+#本地是跑不了的，mac不支持这个时间格式,Linux服务器才可以
+#
 #!/usr/bin/env bash
 
+if [ ! -n "$1" ] ;then
+    #如果是定时任务就会跑这一步，执行压缩前一天的图片
+    before_date=`date  +"%Y%m%d" -d  "-1 days"`
+else
+    #如果是特殊情况，认为执行某一天就 ./thumbfile 20181204这样格式
+    before_date=$1
+fi
+
 #folderPath1=/www/wwwroot/youxingji.cn/uploadfile/image/ #图片目录路径
-folderPath=/www/wwwroot/youxingji.cn/uploadfile/image/20180727/
+
+folderPath=/www/wwwroot/youxingji.cn/uploadfile/image/${before_date}/
 #config
 maxSize='600k'  #触发压缩的图片大小
 maxWidth=1280  # 图片最大宽度

@@ -36,10 +36,21 @@
 	    <div class="ban figure fix">
 	    	<div class="imgBg figure borderRadius bg_blur" style="background-image: url({{$user.cover}})"></div>
 	        <div class="message fix">
-	        	<div class="gaine figure" style="background-image: url({{$user.avatar}});"></div>
-	        	<div class="rightBox">
-		        	<p class="wx_name">{{$user.username}}</p>
-		        	<p class="location fix" title="定位"><img class="icon_location2" src="/resource/m/images/common/icon_location1.png" /><i>{{$user.city}}</i></p>
+	        	<a class="dis_block gaine figure" href="/index.php?m=wap&c=user&v=index" style="background-image: url({{$user.avatar}});"></a>
+	        	<div class="rightBox{{if $user.tag}}{{else}} MarginBottom{{/if}}">
+	        		<div class="wx_name fix">
+	        			<span class="username">{{$user.username}}</span>
+	        			<p class="location fix" title="定位"><img class="icon_location2" src="/resource/m/images/common/icon_location1.png" /><i>{{$user.city}}</i></p>
+	        		</div>
+        			{{if $user.tag}}
+        			<p class="labelList">
+						{{foreach from=$user.tag key=k item=vo }}
+							{{if $k <2}}
+						<span class="tag">{{$vo}}</span>
+							{{/if}}
+						{{/foreach}}
+						</p>
+					{{/if}}
 	        	</div>
 	        	<input type="hidden" name="synopsis" id="synopsis" value="{{$user.autograph}}" />
 	        	<p class="intro fix" title="简介">
@@ -72,7 +83,30 @@
 	                </ul>
 	            </div>
 	        </div>
-	        
+	        <div class="row-yz" style="margin-bottom: 11px;">
+	            <ul class="ul-txtlist-yz borderNone" style="border: none;">
+	                <li><a href="/index.php?m=wap&c=user&v=addtravel">
+	    					<i style="background-image: url(/resource/m/images/s-i5.png);"></i>
+	    					<div class="txt">发布日志</div>
+	    				</a>
+	                </li>
+	                <li><a href="/index.php?m=wap&c=user&v=addtv">
+	    					<i style="background-image: url(/resource/m/images/s-i2.png);"></i>
+	    					<div class="txt">发布视频</div>
+	    				</a>
+	                </li>
+	                <li><a href="/index.php?m=wap&c=user&v=add_note">
+	    					<i style="background-image: url(/resource/m/images/s-i1.png);"></i>
+	    					<div class="txt">发布游记</div>
+	    				</a>
+	                </li>
+	                <li><a href="/index.php?m=wap&c=faq&v=set_faq">
+	    					<i style="background-image: url(/resource/m/images/s-i4.png);"></i>
+	    					<div class="txt">发布提问</div>
+	    				</a>
+	                </li>
+	            </ul>
+	       	</div>
 	        <input type="hidden" id="UniqueValue" data-sign="my" data-length="38" value="tv_num" title="共用JS区分的唯一必须值"/>
 	        {{if $list}}
 	        <div class="m-mytv-yz" id="pageCount" data-page="" data-nowPage="1">
@@ -84,12 +118,12 @@
 							<a class="dis_block fix" href="/index.php?m=wap&c=index&v=tv_detail&id={{$item.id}}">
 								<p class="videoTitle">{{$item.title}}</p>
 								<div class="date">{{$item.addtime}}</div>
-								<p class="videoDetails">{{$item.describes}}</p>
+								<p class="videoDetails omit lineNumber3">{{$item.describes}}</p>
 							</a>
 							{{else}}
 							<p class="videoTitle">{{$item.title}}</p>
 							<div class="date">{{$item.addtime}}</div>
-							<p class="videoDetails">{{$item.describes}}</p>
+							<p class="videoDetails Areview omit lineNumber3">{{$item.describes}}</p>
 							{{/if}}
 							<div class="preview fix">
 								<span class="pic figure vessel borderRadius js-video fix" onclick="js_video(this)" data-src="{{$item.url}}" style="background-image: url({{$item.pics}});">

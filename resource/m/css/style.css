@@ -2818,18 +2818,6 @@ body{
     border-radius: 50%;
 }
 
-.ban .content p{text-align: center;font-size: 0.7rem;}
-.ban .content p i{font-style: normal;}
-
-.ban .content .wx_name{font-size: 0.7rem;font-weight: 600;}
-.ban .content .wx_name img{display: inline-block;width: 3%;}
-.ban .content .middle{margin: 0.5rem auto;}
-.ban .content .middle .grade{padding-right: 1rem;}
-.ban .content .middle .grade i{color: #D60F11;}
-.ban .content .middle .dwell{padding-left: 0.5rem;border-left: 1px #d6d6d6 solid;}
-.ban .content .signature{margin: 0 auto 2rem;width: 92%;text-indent: 1.4rem;}
-
-
 
 .m-user{
     position: absolute;

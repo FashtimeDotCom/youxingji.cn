@@ -13,9 +13,10 @@ return array(
 		array('url' => '/admin/category/index/item/1', 'name' => '品牌类别', 'auth' => 'category_index', 'icon' => 'icon-reorder')
 	),*/
 	Core_Fun::Lang('menu::menu_ryt') => array(
-		array('url' => '/admin/ryt/index', 'name' => '日阅潭', 'auth' => 'ryt_index', 'icon' => 'icon-file-alt'),
+		array('url' => '/admin/ryt/index', 'name' => '达人游记', 'auth' => 'ryt_index', 'icon' => 'icon-file-alt'),
 		array('url' => '/admin/ryt/comment', 'name' => '评论列表', 'auth' => 'ryt_comment', 'icon' => 'icon-file-alt'),
         array('url' => '/admin/TravelNote/index', 'name' => '游记', 'auth' => 'travel_note', 'icon' => 'icon-file-alt'),
+        array('url' => '/admin/RytNote/index', 'name' => '整合游记', 'auth' => 'ryt_note', 'icon' => 'icon-file-alt'),
 	),
   	Core_Fun::Lang('menu::menu_tv') => array(
 		array('url' => '/admin/youhua/tv', 'name' => 'TV列表', 'auth' => 'youhua_tv', 'icon' => 'icon-file-alt'),
@@ -36,7 +37,7 @@ return array(
         array('url'=>"/admin/sketchApply/index","name"=>"写生报名","auth"=>"sketch_apply","icon"=>"icon-file-alt"),
 	),
   	Core_Fun::Lang('menu::menu_star') => array(
-		array('url' => '/admin/youhua/star', 'name' => '达人邦', 'auth' => 'youhua_star', 'icon' => 'icon-file-alt'),
+		array('url' => '/admin/youhua/star', 'name' => '达人日志', 'auth' => 'youhua_star', 'icon' => 'icon-file-alt'),
       	array('url' => '/admin/youhua/tourism', 'name' => '旅游地', 'auth' => 'youhua_tourism', 'icon' => 'icon-file-alt'),
 
         array('url'=>"/admin/starTravel/index","name"=>"带你旅行","auth"=>"star_travel","icon"=>"icon-file-alt"),
@@ -94,5 +95,9 @@ return array(
     ),
     Core_Fun::Lang('menu::menu_about_us') => array(
         array('url'=>'/admin/aboutUs/index','name'=>"关于我们",'auth'=>'about_us'),
+        array('url'=>'/admin/lookingStar/index','name'=>"寻找达人",'auth'=>'looking_star'),
+    ),
+    Core_Fun::Lang('menu::menu_we_chat') => array(
+        array('url'=>'/admin/WeChatMenu/index','name'=>"菜单管理",'auth'=>'auth_rule'),
     ),
 );

@@ -1,0 +1,135 @@
+/*2018-10-11
+ * HQS
+ * 
+ * 【PC端】评论
+ * 
+ * 日志详情页、视频详情页 
+ * */
+
+.m-comment{overflow: hidden;background-color: #fff;margin-bottom: 15px;padding: 18px 10px 15px 10px;}
+
+
+/*评论  上方的标题*/
+.m-comment .navigation{margin-bottom: 10px;font-size: 12px;height: 30px;line-height: 30px;}
+.m-comment .navigation .title{display: block;float: left;color: #333;font-size: 18px;}
+.m-comment .navigation .Button{float: right;}
+.m-comment .navigation .Button .press{color: #666;float: left;font-size: 16px;}
+.m-comment .navigation .Button .press:nth-of-type(1){margin-right: 46px;}
+.m-comment .navigation .Button .press.onn{color: #d71618!important;}
+
+.m-publish{overflow: hidden;}
+.m-publish .wp .content{position: relative;}
+.m-publish .wp .content{margin-bottom: 6px;overflow: hidden;border-radius: 4px;}
+.m-publish .wp .content textarea{width: 100%;border: none;float: left;font-size: 17px;color: #666;resize: none;text-align: justify;}
+				/*发表...*/
+.m-publish .wp .btn{display: inline-block;width: 100px;line-height: 32px;font-size: 12px;float: left;
+    				background-color: #d71618;border-radius: 3px;text-align: center;color: #fff;}
+.m-publish .wp .btn.addComment,.commentNumWords{height: 0px;}
+				/*字数*/
+.m-publish .wp .numberWords{display: inline-block;line-height: 32px;font-size: 14px;
+							text-align: center;color: #ccc;float: left;margin-left: 10px;}
+.m-publish .wp .numberWords i{color: red;display: inline-block;line-height: 32px;font-size: 14px;}
+/*评论框*/
+.original{margin-bottom: 10px;}
+.original .wp{padding-right: 0px;padding-left: 0px;margin-bottom: 14px;}
+.original .wp .content{background: #f8f8f8;}
+.original .wp .content textarea{height: 40px;line-height: 40px;text-indent: 20px;}
+.original .wp .content .nologinbtn{margin: 12px auto 0;}
+
+
+/*评论列表*/
+.ul_imgtxt4{overflow: hidden;border-bottom: 1px #e4e4e4 solid;}
+.ul_imgtxt4 li{margin-bottom: 20px;padding-top: 10px;border-top: 1px #e4e4e4 solid;}
+.ul_imgtxt4 .details{line-height: 30px;margin-left: 38px;
+    				 padding-right: 0px;padding-left: 38px;position: relative;margin: 2px 0px 2px 25px;}
+.ul_imgtxt4 .details .headPortrait{display: block;width: 40px;height: 40px;
+							    position: absolute;top: -2px;left: -17px;border-radius: 50%;overflow: hidden;
+							    background-repeat: no-repeat;background-position: center center;
+							    -webkit-background-size: cover;
+							    -moz-background-size: cover;
+							    -ms-background-size: cover;
+							    -o-background-size: cover;
+							    background-size: cover;}
+.ul_imgtxt4 .details h3{font-size: 12px;color: #333;font-weight: normal;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
+.ul_imgtxt4 .details h3 .username_{color: #333;font-size: 16px;}
+.ul_imgtxt4 .details h3 .addtime{color: #666;margin-left: 10px;}
+
+.ul_imgtxt4 .details .zan{position: absolute;right: 10px;top: 0px;font-size: 12px;color: #999;display: inline-block; line-height: 30px;}
+.ul_imgtxt4 .details .zan i{display: inline-block;line-height: 30px;font-style: normal;font-size: 16px;}
+
+/*评论的点赞小图标*/
+.icon_like1{display: inline-block;float: left;width: 14px;margin-right: 5px;margin-top: 8px;}
+.icon_like2{display: inline-block;float: left;width: 15px;margin-right: 5px;margin-top: 6px;}
+.Iclass{display: inline!important;margin-right:0!important;}
+
+		/*评论的内容*/
+.ul_imgtxt4 .substance{margin-left: 63px;margin-top: 4px;margin-bottom: 10px;}
+.ul_imgtxt4 .substance .description{font-size: 14px;color: #666;line-height: 1.75em;text-align: justify;}
+.ul_imgtxt4 .substance .description span{display: block;color: #a8a8a8;font-size: 12px;}
+
+.ul_imgtxt4 .substance .BarSubmenu{font-size: 12px;height: 1.75em;margin: 8px auto 10px;}
+.ul_imgtxt4 .substance .BarSubmenu .reply{float: left;line-height: 16px;color: #666;
+										 -webkit-box-shadow: 0px 1px 0.5px 1px #e1e1e1;
+										 -moz-box-shadow: 0px 1px 0.5px 1px #e1e1e1;
+										 box-shadow: 0px 1px 0.5px 1px #e1e1e1;
+										 border: 1px #e9e9e9 solid;padding: 0 10px;border-radius: 10px;background: #e9e9e9;}
+
+.ul_imgtxt4 .substance .BarSubmenu .leftSubmenu{float: right;line-height: 16px;color: #a8a8a8;}
+.ul_imgtxt4 .substance .BarSubmenu .leftSubmenu .floor{margin-right: 6px;}
+.ul_imgtxt4 .substance .BarSubmenu .leftSubmenu span{display: inline-block; line-height: 1.75em;}
+.ul_imgtxt4 .substance .BarSubmenu .leftSubmenu a{display: inline-block; line-height: 1.75em;}
+.ul_imgtxt4 .substance .BarSubmenu .leftSubmenu a i{color: #999;}
+.ul_imgtxt4 .substance .BarSubmenu .leftSubmenu a:hover i{color: #999;}
+.ul_imgtxt4 .substance .addtime{margin-right: 10px;}
+.ul_imgtxt4 .substance .BarSubmenu .leftSubmenu .zan i{display: inline-block;line-height: 1.75em;font-style: normal;font-size: 16px;}
+
+
+/*【对评论】弹出的回复框*/
+.substance .details_stair{height: 0;}
+.details_stair{margin-bottom: 8px;}
+.details_stair .wp{padding-left: 0px;padding-right: 0px;}
+.details_stair .wp .content{margin-bottom: 5px;padding: 10px;border: 1px #e0dede solid;background: #f8f8f8;}
+.details_stair .wp .content textarea{height: 78px;line-height: 19px;}
+.details_stair .wp #facebox{height: 78px;overflow-y: scroll;}
+.details_stair .wp .btn{background-color: #79ceff;}
+.details_stair .wp .nologinbtn{margin: 32px auto 0;}
+
+
+/*【对回复】弹出的回复框*/
+.substance .details_{height: 0;}
+.details_{margin-top: 10px;}
+.details_ .wp{padding-left: 0px;padding-right: 0px;background: #fff;}
+.details_ .wp .content{margin-bottom: 5px;padding: 10px;border: 1px #e0dede solid;}
+.details_ .wp .content textarea{height: 78px;line-height: 19px;}
+.details_ .wp #facebox{height: 78px;overflow-y: scroll;}
+.details_ .wp .btn{background-color: #79ceff;}
+.details_ .wp .nologinbtn{margin: 35px auto 0;}
+
+/*对评论  回复的内容*/
+.blockquote_wrap{position: relative;background-color:#f8f8f8;}
+.paddingBottom{padding-bottom: 26px;}
+.blockquote_wrap .comment_blockquote{width: 100%;border:1px solid #dcdcdc;padding:15px 10px 2px 2%;border-top: none;}
+.blockquote_wrap .module:first-child{border-top: 1px #dcdcdc solid;}
+.blockquote_wrap .module:last-child{margin-bottom:20px;}
+
+.blockquote_wrap .comment_floor{color:#999; float:right; margin:-10px 0px 0 0;}
+.blockquote_wrap .comment_conWrap{clear: both;}
+.blockquote_wrap .comment_con{overflow:hidden;width:100%;}
+.blockquote_wrap .comment_con .name{color: #2d64b3;font-size: 14px;}
+.blockquote_wrap .comment_con .name i{color: #3d4c63;font-style: normal;font-size: 14px;}
+.blockquote_wrap .detail .content a,.blockquote_wrap .comment_listBox a{color:#369; font-size:13px;}
+.blockquote_wrap .comment_con .matter{display:inline; word-break:break-all; word-wrap:break-word;font-size: 14px;}
+
+.blockquote_wrap .comment_action_sub{visibility:hidden; float:right; text-align:right;}
+.blockquote_wrap .comment_action a,.blockquote_wrap .comment_action_sub a{color:#999; font-size:12px; padding-left:12px; text-decoration:none;}
+
+.hint{position: absolute;bottom: 2px;left: 6px;color: #666;}
+.hint .seeMore{color: #2d64b3;}
+
+.addReview{float: right;}
+
+.openReply{ animation: openReply 1s 1;}
+@keyframes openReply{ 0%{ opacity: 0;height: 0px;} 100%{ opacity: 1;height: 168px;} }
+
+.closeReply{ animation: closeReply 1s 1;}
+@keyframes closeReply{ 0%{ opacity: 1;height: 168px;} 100%{ opacity: 0;height: 0px;} }

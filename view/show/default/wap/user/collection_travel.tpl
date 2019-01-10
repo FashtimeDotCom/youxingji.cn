@@ -56,14 +56,13 @@
 					<div class="item fix item_{{$item.id}}">
 						<div class="wp">
 							{{if $item.is_delete && $item.is_delete==1}}
-							<p class="videoTitle"><span class="view fix"><img src="/resource/m/images/user/icon_faq_detail1.png"></span>null</p>
-							<div class="date">null</div>
-							<a href="javascript:;" class="dis_block fix"><p class="videoDetails" style="color: red;">:)抱歉，此问答已被作者删除!</p></a>
+							<p class="nullTitle">null</p>
+							<p class="nullDetails" style="color: red;">:)抱歉，此内容已被原作者删除!</p>
 							{{else}}
 							<a class="dis_block fix" href="/index.php?m=wap&c=index&v=star_detail&id={{$item.id}}">
 								<p class="videoTitle">{{$item.title}}</p>
 								<div class="date">{{$item.addtime}}</div>
-								<p class="videoDetails">{{$item.describes}}</p>
+								<p class="videoDetails omit lineNumber3">{{$item.describes}}</p>
 							</a>
 							<ul class="ul-imgtxt2-yz">
 								<li><dl>{{foreach from=$item.content item=v}}
@@ -121,7 +120,6 @@
 	    <div class="maskLayer dis_none" title="遮罩层，作用：下拉菜单失焦时，下拉菜单自动消失"></div>
 	</div>
 	{{include file='wap/footer.tpl'}}
-
 	<!-- 弹窗 -->
     <link rel="stylesheet" type="text/css" href="/resource/m/css/jquery.fancybox.css" media="screen" />
     <script type="text/javascript" src="/resource/m/js/jquery.fancybox.js"></script>
@@ -139,7 +137,6 @@
             });
         });
     </script>
-    
 	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
     <script type="text/javascript" src="/resource/m/js/dianzan.js" title="移动端    所有页面  的  【点赞】"></script>
 	<script src="/resource/m/js/pulldownscroll.js" title="移动端下拉 底部触发增加信息"></script>

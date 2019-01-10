@@ -1,0 +1,236 @@
+/*2018-11-22
+ * HQS 
+ * 
+ * 问题详情页
+ * */
+
+body{background: #fbfbfb;}
+.main .ban{height: 300px;}
+
+
+/*左侧列表*/
+.main .wp .col_l{width: 850px;float: left;}
+.col_l .issueSearch{margin-bottom: 47px;}
+.col_l .issueSearch .searchVal{display: block;width: 780px;height: 46px;line-height: 46px;border: 1px #ed5858 solid;
+						 border-radius: 3px;background: #fff;color: #999;text-indent: 11px;float: left;}
+.col_l .issueSearch .searchAffirm{display: block;border: none;width: 60px;height: 46px;border-radius: 3px;float: right;
+							 background: #e64b4b url(/resource/images/faq/searchAffirm.png) no-repeat center center;}
+
+
+.trouble{background: #fff;border: 1px #ececec solid;padding: 0px 33px 20px 30px;}
+			/*问题标签*/
+.trouble .labelList{margin-top: 8px;height: 72px;padding-top: 22px;}
+.trouble .labelList .label{float: left;height: 28px;line-height: 28px;border-radius: 14px;border: 1px #f2f2f5 solid;background: #f6f6f6;
+							text-align: center;color: #666;padding: 0 26px;margin-right: 20px;font-size: 16px;}
+.trouble .labelList .right{float: right;}
+.trouble .labelList .right span{color: #999;font-size: 14px;}
+.trouble .labelList .right span i{color: #999;font-size: 15px;font-weight: 600;}
+			/*问题*/
+.trouble .issue{line-height: 33px;font-size: 17px;color: #333;font-weight: 600;}
+
+.trouble .box{margin-bottom: 23px;}
+.trouble .box .illustration{display: inline-block;width: 100%;}
+.trouble .box .describe{line-height: 22px;margin-bottom: 18px;text-align: justify;font-size: 14px;color: #5f5f5f;}
+
+.trouble .bottom{height: 30px;line-height: 30px;margin-bottom: 10px;}
+.trouble .bottom .left{float: left;}
+.trouble .bottom .left .button{display: block;width: 84px;height: 34px;line-height: 34px;color: #fff;
+								font-size: 14px;text-align: center;float: left;border-radius: 2px;}
+.trouble .bottom .left .respond{background: #03a9f4;margin-right: 6px;}
+.trouble .bottom .left .collect{background: #d81938;}
+
+.trouble .bottom .right{float: right;font-size:15px;color: #999;}
+.trouble .bottom .right .headPortrait{display: block;width: 30px;height: 30px;border-radius: 15px;float: left;}
+.trouble .bottom .right .name{color: #333;font-size:15px;}
+
+			/*回答列表*/
+.bigBox{min-height: 100px;border-left: 1px #ececec solid;border-right: 1px #ececec solid;
+		border-bottom: 1px #ececec solid;padding: 0px 33px 00px 30px;background: #fff;}
+.NoAnswer{background: #fff;padding-top: 20px;}
+.NoAnswer .default_bg{margin: 0px auto;display: block;}
+.NoAnswer .tipsButtom{text-align: center;font-size: 16px;line-height: 60px;font-weight: 600;text-indent: ;}
+
+.box .modules{padding: 30px 0 0;border-bottom: 2px #ccc solid;margin-bottom: 40px;}
+.box .modules .writer{height: 40px;margin-bottom: 21px;}
+.box .modules .writer .left{float: left;font-size:15px;color: #999;width: 60%;}
+.box .modules .writer .left .headPortrait{display: block;width: 40px;height: 40px;border-radius: 20px;float: left;
+											margin-right: -40px;}
+.box .modules .writer .left span{display: block; line-height: 20px;width: 100%;float: left;padding-left: 57px;}
+.box .modules .writer .left .name{color: #333;font-size:15px;}
+.box .modules .writer .left .time{color: #666;}
+
+.box .modules .writer .dianzan{display: block;min-width: 58px;height: 25px;line-height: 25px;border-radius: 2px;float: right;
+								color: #fff;text-align: center;background: #f35353;margin-top: 8px;}
+.box .modules .writer .dianzan em{display: inline-block;width: 14px;height: 14px;vertical-align: text-top;
+								  background: url(/resource/images/faq/love1.png) no-repeat center center / 100%;}
+.box .modules .writer .dianzan i{font-size: 14px;}
+
+.box .modules .detailss{clear: both;overflow: hidden;text-align: justify;margin-bottom: 16px;}
+.box .modules .detailss p{text-align: justify;line-height: 22px;margin-bottom: 23px;font-size: 14px;color: #757575;}
+.box .modules .detailss p:last-child{margin-bottom: 0px;}
+.box .modules .detailss img{margin: 3px auto 26px;max-width: 100%;}
+
+
+/*展开全文阅读*/
+.readSwitch{text-align: center;line-height: 18px;margin-bottom: 14px;font-weight: 600;}
+.readSwitch a{color: #175199; font-size: 15px;}
+.readSwitch .icon{display: inline-block;vertical-align: middle;margin-left: 10px;width: 7px;}
+.icon1{transform:rotate(90deg);
+		-o-transform:rotate(90deg); 	/* Opera */
+		-ms-transform:rotate(90deg); 	/* IE 9 */
+		-moz-transform:rotate(90deg); 	/* Firefox */
+		-webkit-transform:rotate(90deg); /* Safari 和 Chrome */}
+.icon2{transform:rotate(-90deg);
+		-o-transform:rotate(-90deg); 	/* Opera */
+		-ms-transform:rotate(-90deg); 	/* IE 9 */
+		-moz-transform:rotate(-90deg); 	/* Firefox */
+		-webkit-transform:rotate(-90deg); /* Safari 和 Chrome */}
+
+
+
+
+/*添加评论*/
+.OpenCommentList{margin-bottom: 16px;}
+.OpenCommentList a{float: left;color: #999;font-size: 15px;}
+.OpenCommentList a img{display: inline-block;width: 16px;vertical-align: middle;}
+.OpenCommentList a .icon_1{margin-right: 5px;}
+.OpenCommentList a .icon_2{transform:rotate(90deg);
+					  -o-transform:rotate(90deg); 	/* Opera */
+					  -ms-transform:rotate(90deg); 	/* IE 9 */
+					  -moz-transform:rotate(90deg); 	/* Firefox */
+					  -webkit-transform:rotate(90deg); /* Safari 和 Chrome */}
+					  
+
+/*我要回答*/
+.IWillAnswer{position: relative;}
+.IWillAnswer .roof{}
+.IWillAnswer .roof .headPortrait{display: block;width: 40px;height: 40px;border-radius: 20px;float: left;margin-right: -40px;}
+.IWillAnswer .roof .name{display: block; line-height: 40px;width: 100%;float: left;padding-left: 57px;color: #d71618;font-size:15px;}
+.IWillAnswer .buttonVessel{margin-bottom: 30px;}
+.IWillAnswer .buttonVessel .response{display: block;width: 100px;line-height: 32px;height: 32px;font-size: 12px;float: right;
+    								background: #e94963;border-radius: 2px;text-align: center;color: #fff;}
+
+
+
+/*右侧          广告和问题推荐*/
+.col_r{width: 300px;float: right;}
+.col_r .quizButton{height: 46px;border-radius: 4px;color: #fff;line-height: 46px;text-align: center;
+					background: #e64b4b;margin-bottom: 50px;font-size: 18px;}
+.col_r .quizButton i{font-size: 26px;font-weight: 600;line-height: 30px;}
+		/*广告位*/
+.col_r .playbill{width: 300px;height: 224px;margin-bottom: 50px;}
+		/*相关问题*/
+.col_r .HotTags{padding-top: 15px;border-top: 1px #f2f2f5 solid;}
+.col_r .HotTags .title{font-size: 17px;line-height: 51px;color: #333;}
+.col_r .HotTags .labelList .issue{font-size: 15px;color: #d71618;line-height: 23px;text-align: justify;margin-bottom: 11px;}
+.col_r .HotTags .labelList .issue i{font-size: 15px;color: #666;}
+
+.pagination{margin: 36px auto 0;}
+.pages .amount{display: inline-block;color: #999;margin-right: 10px;}
+.pages li a:hover,.pages li.on a{background-color:#d71618;}
+
+.pages .pages-form .btn{background: -webkit-linear-gradient(#fefffe, #f0f1f0); /* Safari 5.1 - 6.0 */
+						background: -o-linear-gradient(#fefffe, #f0f1f0); /* Opera 11.1 - 12.0 */
+						background: -moz-linear-gradient(#fefffe, #f0f1f0); /* Firefox 3.6 - 15 */
+						background: linear-gradient(#fefffe, #f0f1f0); /* æ ‡å‡†çš„è¯­æ³• */}
+.pages .pages-form .btn:hover{background:#d71618;}
+
+
+/*2018-11-29
+ * HQS
+ * 
+ * 【PC端】评论     开始
+ * 
+ * 问题详情页 
+ * */
+.m_comment{margin-bottom: 15px;background: #fafafa;height: 0;border: 0;overflow: hidden;position: relative;
+			width: 98%;float: right;}
+.heightCommen{height: auto;}
+.m_comment .location{display: inline-block;width: 14px;height: 0;background: #fafafa;
+				    position: absolute;left: 36px;top: -8px;
+				    border-top: 1px #f1f1f1 solid;border-left: 1px #f1f1f1 solid;
+				    transform:rotate(45deg);
+					-o-transform:rotate(45deg); 	/* Opera */
+					-ms-transform:rotate(45deg); 	/* IE 9 */
+					-moz-transform:rotate(45deg); 	/* Firefox */
+					-webkit-transform:rotate(45deg); /* Safari 和 Chrome */}
+/*评论框*/
+.m_comment .m_publish{overflow: hidden;width: 96%;margin: 0 auto;}
+.m_comment .original  .wp{padding-right: 0px;padding-left: 0px;margin-bottom: 14px;}
+.m_comment .m_publish .wp .content{background: #fff;position: relative;
+									margin-bottom: 6px;overflow: hidden;border-radius: 4px;}
+.m_comment .m_publish .wp .content textarea{width: 100%;border: none;float: left;font-size: 17px;color: #666;
+											height: 22px;line-height: 40px;text-indent: 20px;resize: none;text-align: justify;}
+.m_comment .m_publish .wp .content .nologinbtn{margin: 28px auto 0;}
+.m_comment .m_publish .wp .bottomArea .btn{display: block;width: 100px;line-height: 32px;font-size: 12px;
+    										background: #79ceff;border-radius: 2px;text-align: center;color: #fff;}
+.m_comment .m_publish .wp .bottomArea .btn.addComment{height: 0px;float: left;}
+.m_comment .m_publish .wp .btn.addReview{height: 32px;}
+.m_comment .m_publish .wp .bottomArea .wordLimit{color: #999;float: left;line-height: 32px;margin-left: 20px;}
+.m_comment .m_publish .wp .bottomArea .wordLimit i{color: red;}
+/*回复评论框*/
+.m-publish{overflow: hidden;}
+.m-publish .wp .content{position: relative;}
+.m-publish .wp .content{margin-bottom: 6px;overflow: hidden;border-radius: 4px;}
+.m-publish .wp .content textarea{width: 100%;border: none;float: left;font-size: 17px;color: #666;resize: none;text-align: justify;}
+				/*发表...*/
+.m-publish .wp .btn{display: inline-block;width: 100px;line-height: 32px;font-size: 12px;float: left;
+    				background-color: #d71618;border-radius: 3px;text-align: center;color: #fff;}
+.m-publish .wp .btn.addComment,.commentNumWords{height: 0px;}
+				/*字数*/
+.m-publish .wp .wordLimit{display: inline-block;line-height: 32px;font-size: 14px;
+							text-align: center;color: #ccc;float: left;margin-left: 10px;}
+.m-publish .wp .wordLimit i{color: red;display: inline-block;line-height: 32px;font-size: 14px;}
+
+/*评论列表*/
+.ul_imgtxt4{overflow: hidden;margin: 0 auto;width: 96%;}
+.ul_imgtxt4 li{margin-bottom: 20px;border-bottom: 1px #e4e4e4 solid;}
+.ul_imgtxt4 .details{line-height: 30px;margin-left: 38px;margin: 2px 0px 2px 25px;
+    				 padding-right: 0px;padding-left: 38px;position: relative;}
+.ul_imgtxt4 .details .headPortrait{display: block;width: 40px;height: 40px;
+							    position: absolute;top: -2px;left: -17px;border-radius: 50%;overflow: hidden;
+							    background-repeat: no-repeat;background-position: center center;
+							    -webkit-background-size: cover;
+							    -moz-background-size: cover;
+							    -ms-background-size: cover;
+							    -o-background-size: cover;
+							    background-size: cover;}
+.ul_imgtxt4 .details h3{color: #333;font-weight: normal;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
+.ul_imgtxt4 .details h3 .username_{color: #d71618;font-size: 16px;line-height: 30px;}
+.ul_imgtxt4 .details h3 .addtime{color: #666;margin-left: 10px;float: right;font-size: 12px;}
+.ul_imgtxt4 .details h3 .zan{display: inline-block;float: right;font-size: 12px;color: #999;margin-left: 12px;}
+.ul_imgtxt4 .details h3 .zan i{display: inline-block;line-height: 28px;font-style: normal;font-size: 16px;}
+
+/*评论的点赞小图标*/
+.icon_like1{display: inline-block;float: left;width: 14px;margin-right: 5px;margin-top: 8px;}
+.icon_like2{display: inline-block;float: left;width: 15px;margin-right: 5px;margin-top: 6px;}
+.Iclass{display: inline!important;margin-right:0!important;}
+
+		/*评论的内容*/
+.ul_imgtxt4 .substance{margin-left: 63px;margin-top: 4px;margin-bottom: 10px;}
+.ul_imgtxt4 .substance .description{font-size: 14px;color: #666;line-height: 1.75em;text-align: justify;}
+.ul_imgtxt4 .substance .description span{display: block;color: #a8a8a8;font-size: 12px;}
+
+.ul_imgtxt4 .substance .BarSubmenu{font-size: 12px;height: 1.75em;margin: 8px auto 10px;}
+.ul_imgtxt4 .substance .BarSubmenu .reply{float: left;line-height: 16px;color: #666;
+										 -webkit-box-shadow: 0px 1px 0.5px 1px #e1e1e1;
+										 -moz-box-shadow: 0px 1px 0.5px 1px #e1e1e1;
+										 box-shadow: 0px 1px 0.5px 1px #e1e1e1;
+										 border: 1px #e9e9e9 solid;padding: 0 10px;border-radius: 10px;background: #e9e9e9;}
+.ul_imgtxt4 .substance .addtime{margin-right: 10px;}
+
+
+/*【对评论】弹出的回复框*/
+.substance .details_stair{height: 0;position: relative;}
+.details_stair{margin-bottom: 8px;}
+.details_stair .wp{padding-left: 0px;padding-right: 0px;}
+.details_stair .wp .content{margin-bottom: 5px;padding: 10px;border: 1px #e0dede solid;background: #fff!important;}
+.details_stair .wp .content textarea{height: 78px;line-height: 19px;}
+.details_stair .wp #facebox{height: 78px;overflow-y: scroll;}
+.details_stair .wp .btn{background-color: #79ceff!important;}
+.details_stair .wp .nologinbtn{margin: 32px auto 0;}
+
+
+/*查看更多回复*/
+.hint{display: block; bottom: 2px;left: 6px;color: #666;margin: 2px auto;background: #eaeaec;padding: 4px 10px;}
+.hint .colorTips{color: #eb7350;}

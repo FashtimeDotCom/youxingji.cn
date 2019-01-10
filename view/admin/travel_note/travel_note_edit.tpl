@@ -93,7 +93,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label input_label">广告图</label>
+                            <label class="control-label input_label">大图</label>
                             <div class="" style="margin-left: 200px;">
                                 <div id="uploader-single">
                                     <!--用来存放item-->
@@ -103,6 +103,69 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label class="control-label input_label">标题</label>
+                            <div class="">
+                                <input type="text" class="form-control input_box"  name="title" value="{{$detail.title}}" placeholder="标题" parsley-trigger="change">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label input_label">封面图</label>
+                            <div class="" style="margin-left: 200px;">
+                                {{if $detail.small_pic }}
+                                <div id="uploader-single">
+                                    <!--用来存放item-->
+                                    <div id="" class="uploader-list" style="display: inline-block">
+                                        {{if $detail.small_pic}}
+                                        <img width="120" id="imagess" src="{{$detail.small_pic}}" />
+                                        {{/if}}
+                                    </div>
+                                    <div id="dwed" style="display: inline-block;">选择图片</div>
+                                </div>
+                                <input type="hidden" id="images" name="small_pic" value="{{$detail.small_pic}}">
+                                {{else}}
+                                <div id="uploader-single">
+                                    <!--用来存放item-->
+                                    <img width="" height="" src="" id="imagess" style="max-width: 120px" />
+                                </div>
+                                <input type="hidden" id="images" name="small_pic" value="">
+                                <a id="dwed">选择图片</a>
+                                {{/if}}
+                                <span style="color: red;">(420 * 280)</span>
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            var singleuploaders = WebUploader.create({
+
+                                // 选完文件后，是否自动上传。
+                                auto: true,
+
+                                // swf文件路径
+                                swf: SITE_URL + 'resource/webuploader/Uploader.swf',
+
+                                // 文件接收服务端。
+                                server: SITE_URL + 'admin/ajax/pic',
+
+                                // 选择文件的按钮。可选。
+                                // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                                pick: '#dwed',
+
+                                // 只允许选择图片文件。
+                                accept: {
+                                    title: 'Images',
+                                    extensions: 'gif,jpg,jpeg,bmp,png',
+                                    mimeTypes: 'image/*'
+                                },
+                                fileNumLimit: 1,
+                                compress: false
+                            });
+                            singleuploaders.on( 'uploadSuccess', function( file, ret ) {
+                                $('#images').val(ret.url);
+                                $('#imagess').attr('src',ret.url);
+                            });
+                        </script>
 
                         <div class="form-group">
                             <label class="control-label input_label">查看全文</label>

@@ -37,10 +37,21 @@
 	    <div class="ban figure fix">
 	    	<div class="imgBg figure borderRadius bg_blur" style="background-image: url({{$muser.cover}})"></div>
 	        <div class="message fix">
-	        	<div class="gaine figure" style="background-image: url({{$muser.avatar}});"></div>
-	        	<div class="rightBox">
-		        	<p class="wx_name">{{$muser.username}}</p>
-		        	<p class="location fix" title="定位"><img class="icon_location2" src="/resource/m/images/common/icon_location1.png" /><i>{{$muser.city}}</i></p>
+	        	<a class="dis_block gaine figure" href="/index.php?m=wap&c=user&v=index" style="background-image: url({{$muser.avatar}});"></a>
+	        	<div class="rightBox{{if $muser.tag}}{{else}} MarginBottom{{/if}}">
+	        		<div class="wx_name fix">
+	        			<span class="username">{{$muser.username}}</span>
+	        			<p class="location fix" title="定位"><img class="icon_location2" src="/resource/m/images/common/icon_location1.png" /><i>{{$muser.city}}</i></p>
+	        		</div>
+        			{{if $muser.tag}}
+        			<p class="labelList">
+						{{foreach from=$muser.tag key=k item=vo}}
+							{{if $k <2}}
+						<span class="tag">{{$vo}}</span>
+							{{/if}}
+						{{/foreach}}
+						</p>
+					{{/if}}
 	        	</div>
 	        	<input type="hidden" name="synopsis" id="synopsis" value="{{$muser.autograph}}" />
 	        	<p class="intro fix" title="简介">
@@ -90,7 +101,7 @@
 							<a class="dis_block fix" href="/index.php?m=wap&c=index&v=tv_detail&id={{$item.id}}">
 								<p class="videoTitle">{{$item.title}}</p>
 								<div class="date">{{$item.addtime}}</div>
-								<p class="videoDetails">{{$item.describes}}</p>
+								<p class="videoDetails omit lineNumber3">{{$item.describes}}</p>
 							</a>
 							<div class="preview fix">
 								<span class="pic figure vessel borderRadius js-video fix" onclick="js_video(this)" data-src="{{$item.url}}" style="background-image: url({{$item.pics}});">

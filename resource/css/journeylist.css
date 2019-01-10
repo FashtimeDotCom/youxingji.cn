@@ -1,0 +1,51 @@
+/*2018-11-16  11:36:38
+ * HQS 
+ * 
+ * 游行迹   独家旅行 列表页
+ * */
+
+*{font-size: 14px;}
+body{background-color: #f8f8f8;}
+
+
+.content{margin: 29px auto;width: 1200px;}
+
+
+/*左侧菜单*/
+.content .left{width: 282px;float: left;border: 1px #efefef solid;background: #fbfbfb;padding: 4px 0 26px 20px;
+				-webkit-box-shadow: 0 0 14px -4px #c3c3c3;
+				-moz-box-shadow: 0 0 14px -4px #c3c3c3;
+				box-shadow: 0 0 14px -4px #c3c3c3;}
+.content .left .title{line-height: 47px;color: #333;border-bottom: 1px #ebebeb solid;margin-bottom: 26px;font-size:16px;}
+.content .left .secondTitle{color: #333;font-size:16px;}
+.content .left .list .sample{display: inline-block;color: #666;border: 1px #c9c9c9 solid;line-height: 30px;padding: 0 8px;
+							margin-right: 10px;margin-top:12px; border-radius: 2px;}
+
+.content .left .numberDays{margin-top: 26px;}
+.content .left .numberDays .list .sample{padding: 0 20px;}
+
+.one{color: #d71618!important;border-color: #d71618!important;}
+
+/*无信息*/
+.mainTips{background: #fff;position: relative;padding: 30px 10px;}
+.mainTips .preview{width: 344px;height: 241px; margin-right: 42px;float: left;}
+.mainTips .tip{width: 472px;float: left;position: relative;}
+.mainTips .tip .title{font-size: 23px;color: #666;line-height: 241px;width: 72%;}
+
+
+/*右侧内容列表*/
+.content .right{width: 892px;float: right;}
+.right .box .module{margin-bottom: 19px;background: #fff;position: relative;}
+.right .box .poster{width: 285px;height: 170px; margin-right: 42px;float: left;}
+
+.right .box .right{width: 541px;padding-top: 10px;float: left;position: relative;}
+.right .box .right .title{font-size: 23px;color: #333;line-height: 45.5px;width: 72%;}
+.right .box .right .location{display: inline-block;position: absolute;top: 26px;right: 0;color: #666;}
+.right .box .right .location img{display: inline-block;width: 13px;float: left;margin-top: 5px;margin-right:6px;}
+.right .box .right .location i{font-size: 16px;display: inline-block;max-width: 126px;}
+.right .box .right .describe{color: #666;line-height: 25px;text-align: justify;width: 100%;font-size: 16px;height:48px;}
+.right .box .right .diamonds{margin-top: 28px;float: left;line-height: 34px;}
+.right .box .right .diamonds span{display: inline-block;font-size: 24px;color: #ff7362;}
+.right .box .right .diamonds span i{font-size: 30px;line-height: 28px;color: #ff7362;}
+.right .box .seeMore{display: inline-block;width: 130px;height: 40px;color: #fff;text-align: center;font-size: 16px;
+					 background: #ff7362;float: right;line-height: 40px;position: absolute; bottom: 0;right: 0;}

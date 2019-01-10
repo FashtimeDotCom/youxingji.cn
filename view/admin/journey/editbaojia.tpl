@@ -5,7 +5,12 @@
         <tr><td colspan="2" class="td27">录属ID</td></tr>
         <tr class="noborder">
             <td class="vtop rowform">
-            <input name="aid" value="{{$article.jid}}" type="number" class="txt" datatype="Require" msg="请填写录属ID" />
+                <select name="aid" id="aid">
+                    <option value=""></option>
+                    {{foreach from=$article_list item=item key=key}}
+                        <option value="{{$item.id}}" {{if $article.jid==$item.id}}selected{{/if}}>{{$item.title}}</option>
+                    {{/foreach}}
+                </select>    
             </td>
             <td class="vtop tips2">请填写录属ID</td>
         </tr>

@@ -14,6 +14,7 @@
             <th width="60">选择</th>
             <th class="tdl" width="60">编号</th>
             <th class="tdl">名称</th>
+            <th class="tdl">排序</th>
             <th class="tdl" width="60">操作</th>
         </tr>
         {{foreach from=$list item=vo}}
@@ -26,6 +27,9 @@
             </td>
             <td class="tdl">
                 {{$vo.type_name}}
+            </td>
+            <td class="tdl">
+                {{$vo.sort}}
             </td>
             <td class="tdl">
                 <a href="javascript:;" onclick="Controller.main('{{$_pathroot}}admin/JourneyType/edit/id/{{$vo.id}}')" >编辑</a>

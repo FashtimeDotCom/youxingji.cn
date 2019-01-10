@@ -1,201 +1,130 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-	<head>
-		<meta charset="utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-		<meta name="renderer" content="webkit" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-		<meta name="format-detection" content="telephone=no" />
-		<title>TA的游记_{{TO->cfg key="site_name" group="site" default="致茂网络"}}</title>
-		<meta name="keywords" content="{{TO->cfg key=" index_keywords " group="site " default="首页 "}}" />
-		<meta name="description" content="{{TO->cfg key=" index_description " group="site " default="首页 "}}" />
-		<link rel="stylesheet" href="/resource/css/module.css" />
-		<link rel="stylesheet" href="/resource/css/module-less.css" />
-		<link rel="stylesheet" href="/resource/css/style.css" />
-		<script src="/resource/lightbox/jquery.min.js"></script>
-		<script src="/resource/js/lib.js"></script>
-		
-		<link rel="stylesheet" type="text/css" href="/resource/css/travel_list.css" />
-		<!--lightbox开始-->
-		<link rel="stylesheet" type="text/css" href="/resource/lightbox/jquery.lightbox.css" />
-		<!--[if IE 6]>
- 	<link rel="stylesheet" type="text/css" href="/resource/lightbox/jquery.lightbox.ie6.css" />
-	<![endif]-->
-		<script type="text/javascript" src="/resource/lightbox/jquery.lightbox.min.js"></script>
-		<script src="/resource/js/pc_rem.js"></script>
-		<script type="text/javascript">
-			jQuery(document).ready(function($) {
-				$('.lightbox').lightbox();
-			});
-		</script>
-		<style type="text/css">
-			.m-nv-sz ul {
-				display: flex;
-			}
-			
-			.m-nv-sz ul li {
-				flex-grow: 1;
-				text-align: center;
-			}
-			
-			.m-nv-sz .on:before {
-				width: 100%;
-			}
-		</style>
-	</head>
-
-	<body>
-		{{include file='public/header.tpl'}}
-		<div class="main">
-			<div class="ban s1" style="background-image: url({{$muser.cover}});"></div>
-			<div class="row-sz pb30">
-				<div class="m-nv-sz">
-					<div class="wp">
-						<ul>
-							<li>
-								<a href="/index.php?m=index&c=muser&v=index&id={{$muser.uid}}">TA的旅行日志</a>
-							</li>
-							<li>
-								<a href="/index.php?m=index&c=muser&v=album&id={{$muser.uid}}">TA的相册</a>
-							</li>
-							<li>
-								<a href="/index.php?m=index&c=muser&v=tv&id={{$muser.uid}}">TA的旅拍TV</a>
-							</li>
-							<li class="on">
-								<a href="/index.php?m=index&c=muser&v=travel_note&id={{$muser.uid}}">TA的游记</a>
-							</li>
-						</ul>
-					</div>
-				</div>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+	<meta name="format-detection" content="telephone=no" />
+	<title>TA的游记_{{TO->cfg key="site_name" group="site" default="广州游行迹新媒体科技有限公司"}}</title>
+	<meta name="keywords" content="{{TO->cfg key=" index_keywords " group="site " default="首页 "}}" />
+	<meta name="description" content="{{TO->cfg key=" index_description " group="site " default="首页 "}}" />
+	<link rel="stylesheet" href="/resource/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="/resource/css/user/user_index.css"/>
+	<script src="/resource/js/jquery.min.js"></script>
+	<script src="/resource/js/lib.js"></script>
+	<link rel="stylesheet" type="text/css" href="/resource/css/public.css" />
+	<link rel="stylesheet" type="text/css" href="/resource/css/centershare.css" />
+</head>
+<body onkeydown="on_return();">
+	{{include file='public/header.tpl'}}
+	<div class="main">
+		<div class="ban s1" style="background-image: url({{$muser.cover}});"></div>
+		<div class="row-sz pb30">
+			<div class="m-nv-sz meneTA">
 				<div class="wp">
-					{{include file='user/left.tpl'}}
-					<div class="col-r">
-						<div class="m-mytv-sz">
-							{{if $list}} {{foreach from=$list item=item key=key}}
-
-							<div class="item">
-								<div class="user-in">
-									<div class="user-head">
-										<div class="Head_portrait ">
-											<a href=""><img src="{{$item.headpic}}"></a>
-											<div>{{$item.username}}</div>
-
+					<ul><li><a href="/index.php?m=index&c=muser&v=index&id={{$muser.uid}}">TA的日志</a></li>
+						<li><a href="/index.php?m=index&c=muser&v=tv&id={{$muser.uid}}">TA的视频</a></li>
+						<li class="on"><a href="/index.php?m=index&c=muser&v=travel_note&id={{$muser.uid}}">TA的游记</a></li>
+						<li><a href="/index.php?m=index&c=muser&v=ta_faq&id={{$muser.uid}}">TA的问答</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="wp">
+                {{include file='muser/left.tpl'}}
+                <div class="col-r">
+					<!--正文列表-->
+					<input type="hidden" name="uid" id="uid" data-type="3" value="{{$muser.uid}}" />
+					<input type="hidden" id="UniqueValue" data-sign="his" value="note_num" data-type="3" title="共用JS区分的唯一必须值" />
+					<input type="hidden" name="type" id="note_num" title="总数" value="{{$total.note_num}}"/>
+					<div class="content">
+						{{if $list}}
+						<div class="commonality note">
+							<ul class="ul_box">
+								{{foreach from=$list item=vo key=key}}
+								<li class="item_{{$vo.id}}">
+									<div class="con fix">
+										<div class="left">
+											<div class="figure borderRadius50 headPortrait" style="background-image: url({{$muser.avatar}});"></div>
+											<p class="title">{{$muser.username}}</p>
 										</div>
-										<div class="user-info-box">
-											<div class="user_title lib">
-												<div class="title">
-													<a href="index.php?m=index&c=index&v=traveldetai&id={{$item.id}}">{{$item.title}}</a>
-												</div>
-												<div class="time">{{$item.addtime}}</div>
-												<!--<i></i>
-												<ul class="i_ul">
-													<li>
-														<a href="index.php?m=index&c=user&v=edit_travel_note&id={{$item.id}}">编辑</a>
-													</li>
-													<li class="delete" data-id="{{$item.id}}">删除</li>
-												</ul>-->
+										<div class="right txt">
+											<div class="title">
+												<p class="tit">{{$vo.title}}</p>
+												<span class="date">{{$vo.addtime}}</span>
 											</div>
-											<div class="user-text">{{$item.desc}}</div>
+											<a class="dis_block" href="/index.php?m=index&c=index&v=traveldetai&id={{$vo.id}}">
+												<p class="describe omit lineNumber2">{{$vo.desc}}</p>
+												<div class="figure borderRadius cover" style="background-image: url({{$vo.thumbfile}});"></div>
+											</a>
+											<div class="bottomToolbars fix">
+												{{if $vo.address}}
+												<div class="location">
+													<img class="smallIcon" src="/resource/m/images/common/icon_location2.png"/>
+													<i class="Iclass">{{$vo.address}}</i>
+												</div>
+												{{/if}}
+												{{if $vo.tag}}
+													{{foreach from=$vo.tag key=k item=tag }}
+														{{if $k <1}}
+												<span class="tag">{{$tag}}</span>
+														{{/if}}
+													{{/foreach}}
+												{{/if}}
+											</div>
 										</div>
 									</div>
-									<div class="img_item">
-										<a href="index.php?m=index&c=index&v=traveldetai&id={{$item.id}}">
-											<img src="{{$item.thumbfile}}">
-										</a>
+									<div class="bottom">
+										<div class="hideed" onclick="collect({{$vo.id}})">
+											<a href="javascript:;"><em class="smallIcon"></em><i class="Iclass">收藏</i></a>
+										</div>
+										<div class="theory">
+											<a href="/index.php?m=index&c=index&v=traveldetai&id={{$vo.id}}">
+												<em class="smallIcon"></em><i class="Iclass">评论</i>
+											</a>
+										</div>
+										<div class="zan" onclick="zan(this,{{$vo.id}})" data-sign="my" data-nature="list" data-val="note_num">
+											<a href="javascript:;"><em class="smallIcon"></em><i class="Iclass">{{$vo.top_num}}</i></a>
+										</div>
+										<div class="look"><em class="smallIcon"></em><i class="Iclass">{{$vo.show_num}}</i></div>
 									</div>
-									<div class="clear">
-									</div>
-
-								</div>
-								<div class="num">
-									<div class="hideed "><i></i>收藏</div>
-									<div class="theory "><i></i>评论</div>
-									<div class="spot zan" data-id="{{$item.id}}" data-num="{{$item.top_num}}" id="zan{{$item.id}}"><i></i><span class="top_num">{{$item.top_num}}</span></div>
-									<div class="Read one"><i></i>{{$item.show_num}}</div>
-								</div>
-							</div>
-
-							{{/foreach}} {{/if}}
-
-						</div>
-						<!-- 页码 -->
-						{{if $multipage}}
-						<div class="pages" style="margin-top: 10px;">
-							<ul>
-								{{foreach from=$multipage item=page}}
-								<li {{if $page.2}}class="{{$page.2}}" {{/if}}>
-									<a href="{{$page.1}}">{{$page.0}}</a>
 								</li>
 								{{/foreach}}
-								<li class="pages-form">
-									到<input class="inp" type="text" id="pages">页
-									<input class="btn" type="button" id="pageqr" value="确定">
-								</li>
 							</ul>
+							
+		                    <!-- 页码 -->
+							{{if $multipage}}
+							<div class="pages">
+								<div class="amount">共<i class="Iclass" id="total_page">{{$page_info.total_page}}</i>页 / <i class="Iclass">{{$page_info.num}}</i>条</div>
+								<ul>{{foreach from=$multipage item=page}}
+									<li {{if $page.2}}class="{{$page.2}}" {{/if}}>
+										<a href="{{$page.1}}">{{$page.0}}</a>
+									</li>
+									{{/foreach}}
+									<li class="pages-form">
+										到<input class="inp" type="text" id="pages" onkeyup="judgeIsNonNull2(event)" />页
+										<input class="btn" type="button" id="pageqr" value="确定" onClick="check()" />
+									</li>
+								</ul>
+							</div>
+							{{/if}}
+		                    <!-- 页码 end-->
+						</div>
+						{{else}}
+						<!--无信息-->
+						<div class="mainTips fix">
+							<div class="preview" style="background: url(/resource/m/images/user/defaul_travel_note_bg.png) no-repeat center;" title="海报/封面"></div>
+							<div class="tip"><p class="title">你还没有发布过任何游记哦！<br />快增加发布一个吧！</p></div>
 						</div>
 						{{/if}}
-						<!-- 页码 end-->
-					</div>
-					<div class="clear">
-
 					</div>
 				</div>
 			</div>
 		</div>
-		{{include file='public/footer.tpl'}}
-		<link rel="stylesheet" href="/resource/css/slick.css">
-		<script src="/resource/js/slick.min.js"></script>
-		<script>
-			$('.pic-sz').slick({ //自定导航条
-				slidesToShow: 4, //个数
-				slidesToScroll: 1,
-				arrows: true,
-				prevArrow: '<a href="javascript:void(0);" class="prev"> </a>',
-				nextArrow: '<a href="javascript:void(0);" class="next"> </a>',
-				dots: false
-
-			});
-		</script>
-		<!-- 弹窗 -->
-		<link rel="stylesheet" type="text/css" href="/resource/css/jquery.fancybox.css" media="screen" />
-		<script type="text/javascript" src="/resource/js/jquery.fancybox.js"></script>
-		<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$(".fancybox-effects-a").fancybox({
-					helpers: {
-						title: {
-							type: 'outside'
-						},
-						overlay: {
-							speedOut: 0
-						}
-					}
-				});
-			});
-			$('.zan').click(function(event) {
-				var id = $(this).attr('data-id');
-				var num = parseInt($(this).attr('data-num'));
-				var obj = $(this);
-				$.post("/index.php?m=api&c=index&v=zantravel", {
-					'id': id
-				}, function(data) {
-					if(data.status == 1) {
-						$('#zan' + id).find('.top_num').html((num + 1));
-						$('#zan' + id).addClass("one");
-						layer.msg(data.tips);
-					} else if(data.status == 2) {
-						$('#zan' + id).addClass("one");
-						layer.msg(data.tips);
-					} else {
-						layer.msg(data.tips);
-					}
-				}, "JSON");
-
-			});
-		</script>
-		<!-- 弹窗 end-->
-	</body>
-
+	</div>
+	{{include file='public/footer.tpl'}}
+    <script type="text/javascript" src="/resource/js/collect.js" title="收藏"></script>
+    <script type="text/javascript" src="/resource/js/dianzan.js" title="点赞"></script>
+	<script src="/resource/js/skip.js" title="页码跳转"></script>
+</body>
 </html>

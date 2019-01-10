@@ -59,7 +59,7 @@
                             <span class="time">{{$info.addtime|date_format:'%Y-%m-%d %H:%M:%S'}}</span>
                             <span class="botton" onclick="follows({{$info.uid}},this)">{{$info.uid|helper:'isfollows'}}</span>
                        	</div>
-                        <div class="txt"><p>{{$info.describes}}</p></div>
+                        <div class="txt"><p class="whiteSpace">{{$info.describes}}</p></div>
                     </div>
                     <dl class="list-img list_img">
 						{{foreach from=$info.content item=item key=key}}
@@ -93,9 +93,9 @@
 		<!--评论区-->
         <div class="m-comment">
         	<div class="navigation" id="navigation" data-type="1">
-        		<span class="title">评论</span>
+        		<span class="titleTWO">评论</span>
         		<p class="Button fix">
-        			<span class="press pressTime onn">按时间</span>
+        			<span class="press pressTime onn">按时间</span>&nbsp;|&nbsp;
         			<span class="press pressHeat">按热度</span>
         		</p>
         	</div>
@@ -114,7 +114,7 @@
 			                </a>
 	                    </div>
 	                    <div class="substance" data-replyNum="{{$vo.count}}">
-	                    	<div class="txtt"><p>{{$vo.content}}</p></div>
+	                    	<div class="txtt">{{$vo.content}}</div>
 		                    <div class="BarSubmenu">
 		                    	<span class="reply replyReview" data-id="{{$vo.id}}" data-open="0" data-class="1">回复</span>
 		                    	<div class="leftSubmenu">
@@ -231,12 +231,10 @@
 	</div>
 	<div class="maskLayer dis_none" title="遮罩层，作用：下拉菜单失焦时，下拉菜单自动消失"></div>
 	{{include file='wap/footer.tpl'}}
-	
 	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
 	<script type="text/javascript" src="/resource/m/js/dianzan.js" title="移动端    所有页面  的  【点赞】"></script>
-	<script type="text/javascript" src="/resource/m/js/collect.js" title="移动端    所有页面  的 【 收藏、关注、私信】">
-
-	</script><script type="text/javascript" src="/resource/js/jquery.qqFace.js"></script>
+	<script type="text/javascript" src="/resource/m/js/collect.js" title="移动端    所有页面  的 【 收藏、关注、私信】"></script>
+	<script type="text/javascript" src="/resource/js/jquery.qqFace.js"></script>
     <script type="text/javascript" src="/resource/m/js/comment.js" title="评论  + 回复   公共 JS代码"></script>
 	<script type="text/javascript">
 		//点击下拉

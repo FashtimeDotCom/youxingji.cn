@@ -22,6 +22,15 @@ class Core_Fun_Encode
         return $code;
     }
 
+    /*
+     * 将html实体转换
+     *
+     * */
+    public static function mynl2br($text)
+    {
+        return strtr($text, array("\r\n" => '<br />', "\r" => '<br />', "\n" => '<br />'));
+    }
+
 
 
 

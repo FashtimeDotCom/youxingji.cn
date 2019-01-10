@@ -1,0 +1,54 @@
+/*2018-11-09   15:24:47
+ * HQS
+ * 
+ * 游行迹 PC端   第二个 公共CSS
+ * 
+ * */
+
+
+
+html, body{ width: 100%; height: 100%;
+            font-family: '微软雅黑'; margin: auto;
+            -webkit-text-size-adjust:none;
+				    /*让页面上的内容不能被选中*/
+				    -webkit-user-select:none;
+				    -moz-user-select:none;
+				    -ms-user-select:none;
+				    user-select:none;}
+
+.dis_block{display: block!important;}
+.dis_none {display: none!important;}
+
+.Iclass{font-style: normal;}
+
+
+/*超出文本  自动省略号*/
+.apostrophe{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+
+/*字体超出多少行 以省略号代替  
+ * 此处 在特定的位置  加一句行数
+ * -webkit-line-clamp: 3;三列
+ * */
+.omit{display: -webkit-box!important;-webkit-box-orient: vertical;overflow: hidden;}
+.lineNumber2{-webkit-line-clamp: 2;}
+.lineNumber3{-webkit-line-clamp: 3;}
+.lineNumber4{-webkit-line-clamp: 4;}
+.lineNumber5{-webkit-line-clamp: 5;}
+
+
+.fix{*zoom:1;}
+.fix:after{display:block; content:"clear"; height:0; clear:both; overflow:hidden; visibility:hidden;}
+.divClear{clear: both;}
+
+
+/*模仿朋友圈   九宫格显示    防止图片变形*/
+.figure{padding-bottom: ; /* 关键就在这里 */
+		  	background-position: center;
+		  	background-repeat: no-repeat;
+		  	background-size: cover;border-radius: 5px;}
+
+.borderRadius{border-radius:0px!important;}
+.borderRadius50{border-radius:50%!important;}
+
+
+

@@ -22,7 +22,7 @@
 	</div>
 	<div class="mian">
 	    <div class="g-top">
-	        <div class="logo"><a href="/"><img src="/resource/m/images/logo.png" alt="" /></a></div>
+	        <div class="logo"><a href="/"><img src="/resource/m/images/logo.png" alt="logo" /></a></div>
 	        <div class="so">
 	            <form action="/index.php">
 	                <input type="hidden" name="m" value="wap"/>
@@ -37,10 +37,21 @@
 	    <div class="ban figure fix">
 	    	<div class="imgBg figure borderRadius bg_blur" style="background-image: url({{$muser.cover}})"></div>
 	        <div class="message fix">
-	        	<div class="gaine figure" style="background-image: url({{$muser.avatar}});"></div>
-	        	<div class="rightBox">
-	        		<p class="wx_name">{{$muser.username}}</p>
-		        	<p class="location fix" title="定位"><img class="icon_location2" src="/resource/m/images/common/icon_location1.png" /><i>{{$muser.city}}</i></p>
+	        	<a class="dis_block gaine figure" href="/index.php?m=wap&c=user&v=index" style="background-image: url({{$muser.avatar}});"></a>
+	        	<div class="rightBox{{if $muser.tag}}{{else}} MarginBottom{{/if}}">
+	        		<div class="wx_name fix">
+	        			<span class="username">{{$muser.username}}</span>
+	        			<p class="location fix" title="定位"><img class="icon_location2" src="/resource/m/images/common/icon_location1.png" /><i>{{$muser.city}}</i></p>
+	        		</div>
+        			{{if $muser.tag}}
+        			<p class="labelList">
+						{{foreach from=$muser.tag key=k item=vo}}
+							{{if $k <2}}
+						<span class="tag">{{$vo}}</span>
+							{{/if}}
+						{{/foreach}}
+						</p>
+					{{/if}}
 	        	</div>
 	        	<input type="hidden" name="synopsis" id="synopsis" value="{{$muser.autograph}}" />
 	        	<p class="intro fix" title="简介">
@@ -90,7 +101,7 @@
 							<a class="dis_block fix" href="/index.php?m=wap&c=index&v=star_detail&id={{$item.id}}">
 								<p class="videoTitle">{{$item.title}}</p>
 								<div class="date">{{$item.addtime}}</div>
-								<p class="videoDetails">{{$item.describes}}</p>
+								<p class="videoDetails omit lineNumber3">{{$item.describes}}</p>
 							</a>
 							<ul class="ul-imgtxt2-yz">
 								<li><dl>{{foreach from=$item.content item=v}}
@@ -148,7 +159,6 @@
 	    <div class="maskLayer dis_none" title="遮罩层，作用：下拉菜单失焦时，下拉菜单自动消失"></div>
 	</div>
 	{{include file='wap/footer.tpl'}}
-	
 	<!-- 弹窗 -->
     <link rel="stylesheet" type="text/css" href="/resource/m/css/jquery.fancybox.css" media="screen" />
     <script type="text/javascript" src="/resource/m/js/jquery.fancybox.js"></script>
@@ -166,7 +176,6 @@
             });
         });
     </script>
-    
 	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
     <script type="text/javascript" src="/resource/m/js/jianjie.js" title="移动端    8个页面  的  【简介】"></script>
     <script type="text/javascript" src="/resource/m/js/dianzan.js" title="移动端    所有页面  的  【点赞】"></script>

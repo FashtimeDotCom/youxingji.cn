@@ -25,7 +25,7 @@
 </head>
 
 <body>
-    {{include file='public/header.tpl'}} 
+    {{include file='public/header.tpl'}}
     <div class="main">
         {{vplist from='ad' item='adlist' tagname='rytdetailslide'}}
         <div class="ban s2" style="background-image: url({{$adlist.imgurl}});"></div>
@@ -157,13 +157,13 @@
             $.post("/index.php?m=api&c=index&v=zanryt", {
                 'id':id
             }, function(data){
-                if(data.status == 1){ 
+                if(data.status == 1){
                     $(obj).html('<i></i>'+(num+1));
                 }else{
                     layer.msg(data.tips);
                 }
             },"JSON");
-            
+
         });
     </script>
     <script type="text/javascript" src="/resource/js/jquery.qqFace.js"></script>
@@ -176,8 +176,8 @@
             }
         })
         $('.emotion').qqFace({
-            id : 'facebox', 
-            assign:'saytext', 
+            id : 'facebox',
+            assign:'saytext',
             path:'/resource/arclist/' //表情存放的路径
         });
         $(".btnComment").click(function(){

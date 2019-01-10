@@ -47,6 +47,7 @@ class Controller_Api_Index extends Core_Controller_Action
             exit;
         }
 
+        $month=trim($month);
         $year=date("Y");
         $list=$this->rl_one($year,'',$month);
 
@@ -1367,9 +1368,9 @@ class Controller_Api_Index extends Core_Controller_Action
         foreach ($list as $key => $value) {
             $start_time = strtotime($value['DateString'] . " 00:00:00");
             $end_time = strtotime($value['DateString'] . " 23:59:59");
-            $calendar = C::M('journey_price')->where("addtime between $start_time and $end_time")->find();
+            $calendar = C::M('journey_price')->where("jid={$jid} and addtime between $start_time and $end_time")->find();
             $d = date("d", time());
-            if($calendar && $value['DateString'] && $d < date("d", $start_time)){
+            if($calendar && $value['DateString'] ){
                 $list[$key]['DateType'] = 1;
                 $list[$key]['Day'] = intval(date("d", $start_time));
                 $list[$key]['MinPerson'] = intval($calendar['minperson']);
@@ -1596,6 +1597,9 @@ class Controller_Api_Index extends Core_Controller_Action
 
         $list=C::M('user_member')->field('uid,username,realname,headpic,city,autograph,tag')->where("$where")->order("uid desc")->limit($limit)->select();
         if($list){
+            foreach ($list as $key=>$value){
+                $list[$key]['tag']=explode('/',$value['tag'])[0];
+            }
             $json = array('status' => 1, 'tips' =>$list,"page"=>$page+1);
             echo Core_Fun::outputjson($json);
             exit;
@@ -1731,8 +1735,8 @@ class Controller_Api_Index extends Core_Controller_Action
         $star=date('Y-m-d 00:00:00',time());
         $end=date('Y-m-d 23:59:59',time());
         $is_reg=C::M('private_custom')->where("mobile={$mobile} and add_time Between '$star' and '$end'")->getCount();
-        if( $is_reg>0 ){
-            $json = array('status' => 0, 'tips' => '您今天已提交申请!');
+        if( $is_reg>5 ){
+            $json = array('status' => 0, 'tips' => '一天只能提交5次申请!');
             echo Core_Fun::outputjson($json);
             exit;
         }
@@ -1753,6 +1757,80 @@ class Controller_Api_Index extends Core_Controller_Action
             exit;
         }else{
             $json = array('status' => 0, 'tips' => '申请失败!');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+    }
+
+    /*
+     * 达人列表，分页
+     * */
+    public function star_listAction()
+    {
+        //验证是否是post 提交申请
+        if( !$this->isPost() ){
+            $json = array('status' => 0, 'tips' => '非法操作!');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        $page=$this->getParam("page");
+        if( !$page || $page <=0 ){
+            $json = array('status' => 0, 'tips' => '参数错误');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        $perpage = 8;
+        $list = C::M('user_member')->field('uid,username,headpic,autograph')->where('startop=1 or trainee=1')->order('sort asc,uid desc')->limit($perpage * ($page - 1), $perpage)->select();
+        foreach($list as $key=>$value){
+            $list[$key]['headpic']=empty($value['headpic'])?'resource/images/img-lb2.png':$value['headpic'];
+        }
+
+        if( $list ){
+            $json = array('status' => 1, 'tips' =>$list,"page"=>$page+1);
+            echo Core_Fun::outputjson($json);
+            exit;
+        }else{
+            $json = array('status' => 0, 'tips' =>"没有数据啦:)");
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+    }
+
+    /*
+     * 独家旅行列表
+     * page:分页
+     * type
+     * */
+    public function journey_listAction()
+    {
+        //验证是否是post 提交申请
+        if( !$this->isPost() ){
+            $json = array('status' => 0, 'tips' => '非法操作!');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        $page=$this->getParam("page");
+        $type_id=$this->getParam('type');
+        if( !$page || $page <=0 || !$type_id ){
+            $json = array('status' => 0, 'tips' => '参数错误');
+            echo Core_Fun::outputjson($json);
+            exit;
+        }
+
+        $perpage = 5;
+        $where="a.useable=1 and a.type_id={$type_id}";;
+        $Num = C::M('article_article as a')->where($where)->getCount();
+        $limit = $perpage * ($page - 1) . "," . $perpage;
+        $list=C::M('article_article as a')->field('a.id,a.title,a.tjpic as articlethumb,a.description,a.address,b.price,b.lxts')->join('##__base_module_journey as b','a.id=b.aid','left')->where($where)->order('a.istop desc,a.id desc')->limit($limit)->select();
+        if( $list ){
+            $json = array('status' => 1, 'tips' =>$list,"page"=>$page+1,'total'=>$Num);
+            echo Core_Fun::outputjson($json);
+            exit;
+        }else{
+            $json = array('status' => 0, 'tips' =>"没有数据啦:)");
             echo Core_Fun::outputjson($json);
             exit;
         }

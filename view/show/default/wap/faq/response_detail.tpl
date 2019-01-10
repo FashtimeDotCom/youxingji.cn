@@ -12,19 +12,34 @@
     <link rel="stylesheet" href="/resource/m/css/style.css" />
     <script src="/resource/m/js/jquery.js"></script>
     <script src="/resource/m/js/lib.js"></script>
+    
+    <script src="/resource/lightbox/jquery.min.js"></script>
+	<!--lightbox开始-->
+	<link rel="stylesheet" type="text/css" href="/resource/lightbox/jquery.lightbox.css" />
+	<!--[if IE 6]>
+	<link rel="stylesheet" type="text/css" href="/resource/lightbox/jquery.lightbox.ie6.css" />
+	<![endif]-->
+	<script type="text/javascript" src="/resource/lightbox/jquery.lightbox.min.js"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function($){
+			//这个for循环的作用：回答问题者的图片可以点击放大查看
+			for(var i=0;i<$("#answerContent p img").length;i++){
+				$("#answerContent p img").eq(i).before("<a class='lightbox' rel='list' href='"+"//"+window.location.host+$("#answerContent p img").eq(i).attr("src")+"'></a>");
+			}
+			$('.lightbox').lightbox();
+		});
+	</script>
+    
     <link rel="stylesheet" href="/resource/m/css/common.css" />
     <link rel="stylesheet" href="/resource/m/css/faq_detail.css" />
     <link rel="stylesheet" href="/resource/m/css/detail.css" />
     <style type="text/css">
     	.question{position: relative;padding: 3% 3% 0.5rem 3%;background: #fff;margin-bottom: 1.2rem;}
-
-    	.question h3{width: 90%;line-height: 20px;color: #333;font-size: 1.4rem;font-weight: ;}
+    	.question h3{width: 90%;line-height: 20px;color: #333;font-size: 1.4rem;}
+    	.question .browseNum{width: 90%;font-size: 1.25rem;color: #898989;line-height: 24px;}
+		.question .browseNum i{font-style: normal;font-weight: 600;color: #666;font-size: 1.25rem;padding: 0 2px;}
     	
-    	.question .browseNum{width: 90%;font-size: 14px;color: #898989;line-height: 24px;}
-		.question .browseNum i{font-style: normal;font-weight: 600;color: #666;}
-    	
-    	.question .skip{position: absolute;top: 1.2rem;right: 0.5rem;
-    							display: block; width: 1.5rem;height: 3.5rem;}
+    	.question .skip{position: absolute;top: 1.2rem;right: 0.5rem;display: block; width: 1.5rem;height: 3.5rem;}
     	.question .skip img{display: block;width: 110%;margin: 36% auto;
 							transform:rotate(-90deg);
 							-o-transform:rotate(-90deg); 	/* Opera */
@@ -32,21 +47,25 @@
 							-moz-transform:rotate(-90deg); 	/* Firefox */
 							-webkit-transform:rotate(-90deg); /* Safari 和 Chrome */}
 		.answer{ margin-bottom: 1.8rem;}
-		.answer .hunk .left{line-height: 30px;margin-top: 5px;}
-		.answer .hunk .right{margin-bottom: 5px;}
-
 		.answer .hunk .bottom{border-bottom: 1px #f2eeee solid;}
-		.answer .hunk .bottom .boxes{margin-top: 6px;}
-		.answer .hunk .bottom .grade{color: #d71618;font-weight: 600;}
+		.answer .hunk .bottom .left{line-height: 30px;margin-top: 5px;}
+		.answer .hunk .bottom .left .boxes{margin-top: 6px;}
+		.answer .hunk .bottom .left .grade{color: #d71618;font-weight: 600;}
+		.answer .hunk .bottom .right{margin-bottom: 5px;}
+
+		.answer .hunk .substanc{padding: 10px 0;}
+		.answer .hunk .substanc p{line-height: 24px;font-size: 14px;text-align: justify;position: relative;}
+		.answer .hunk .substanc p a{position: absolute;z-index: 1;display: block;width: 100%;height: 100%;}
+		.answer .hunk .substanc img{padding: 10px 0;}
 		
 		.botton{border: 1px #f33b3b solid;padding: 0px 4px;font-style: initial;line-height: 20px; margin-top: 12px;font-size: 0.75rem;color: #fff;background: #f33b3b;}
 		.botton b{display: inline-block;line-height: 20px;}
 
-		.videoBottom div span{display: inline-block;font-size: 0.75rem;color: #666;line-height: 34px;}
+		.videoBottom div span{display: inline-block;font-size: 1.3rem;color: #666;line-height: 34px;}
 		
 		.videoBottom .left{float: left;}
-		.videoBottom .left img{display: inline-block;margin-right: 0.2rem;vertical-align: middle;}
-		.videoBottom .left i{width: 10px;line-height: 34px;}
+		.videoBottom .left img{display: inline-block;margin-right: 0.2rem;vertical-align: middle;width: 1.5rem;}
+		.videoBottom .left i{width: 10px;line-height: 34px;font-size: 1.3rem;}
 		
 		.videoBottom .right{float: right;}
 		
@@ -106,12 +125,12 @@
 						</div>
 						<div class="right transform fix"><span>{{$info.addtime}}</span></div>
 					</div>
-					<div class="substanc fix"><div class="solution description">{{$info.content}}</div></div>
+					<div class="substanc fix" id="answerContent">{{$info.content}}</div>
 					
 					<div class="videoBottom fix">
 						<div class="left">
 							<span class="zan" onclick="zan(this,{{$info.id}})" data-nature="subject">
-								<img class="icon_like" src="http://localhost.youxingji.cn/resource/m/images/common/icon_like.png"><i class="Iclass">{{$info.top_num}}</i>
+								<img src="/resource/m/images/common/icon_like.png"><i class="Iclass">{{$info.top_num}}</i>
 							</span>&nbsp;&nbsp;
 						</div>
 						
@@ -125,9 +144,9 @@
 	        <!--评论区-->
 	        <div class="m-comment">
 	        	<div class="navigation" id="navigation" data-type="1">
-	        		<span class="title">评论</span>
+	        		<span class="titleTWO">评论</span>
 	        		<p class="Button fix">
-	        			<span class="press pressTime onn">按时间</span>
+	        			<span class="press pressTime onn">按时间</span>&nbsp;|&nbsp;
 	        			<span class="press pressHeat">按热度</span>
 	        		</p>
 	        	</div>
@@ -146,7 +165,7 @@
 				                </a>
 		                    </div>
 		                    <div class="substance" data-replyNum="{{$vo.count}}">
-		                    	<div class="txtt"><p>{{$vo.content}}</p></div>
+		                    	<div class="txtt">{{$vo.content}}</div>
 			                    <div class="BarSubmenu">
 			                    	<span class="reply replyReview" data-id="{{$vo.id}}" data-open="0" data-class="1">回复</span>
 			                    	<div class="leftSubmenu">
@@ -273,9 +292,11 @@
     		<div class="shade" onclick="shade()"></div>
 		</div>
 	</div>
-	{{include file='wap/footer.tpl'}}
 	
+	{{include file='wap/footer.tpl'}}
 	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
+
+	
 	<script type="text/javascript" src="/resource/m/js/collect.js" title="移动端    所有页面  的 【  收藏、关注、私信】"></script>
     <script type="text/javascript" src="/resource/m/js/dianzan.js" title="移动端    所有页面  的  【点赞】"></script>
     

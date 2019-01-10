@@ -15,7 +15,7 @@
     <style type="text/css">
     	.Iclass{font-style: normal;}
     	.dis_none{display: none!important;}
-    	.tally{margin-bottom: 5px!important;}
+    	.tag{margin-bottom: 5px!important;}
     	
     	.FontSize{font-size: 12px;transform: scale(0.9);
 								-webkit-transform: scale(0.9);
@@ -100,13 +100,13 @@
                         </tr>
                         <tr><td class="td1"><span>我的标签：</span></td>
                             <td class="td2" style="position: relative;">
-                            	<input type="text" class="inp tally" id="tag" value="" maxlength="8" onkeyup="judgeIsNonNull1(event)" placeholder="每个标签最多六个字,最多两个,空格无效">
-                            	<input type="button" name="" class="btn affirm dis_none" id="affirm" value="确认添加" />
+                            	<input type="text" class="inp tag" id="tag" onkeyup="judgeIsNonNull2(event)" placeholder="每个标签最多六个字,最多两个,空格无效">
+                            	<input type="button" class="btn affirm dis_none" id="affirm" value="确认添加" />
                             	<p class="tagTips FontSize dis_none">最多两个标签！可以先删掉其中一个旧标签，再增加新标签！</p>
                             </td>
                         </tr>
                         <tr><td class="td1"><span></span></td>
-                            <td class="td2" id="tagVal">
+                            <td class="td2" id="tagVal" style="padding-bottom: 14px;">
                                 {{foreach from=$tag_list item=item key=key}}
                                 <b class="sample">
                                     <i class="Iclass">{{$item}}</i>
@@ -136,35 +136,34 @@
     <script src="/resource/js/layui/lay/dest/layui.all.js"></script>
     <script type="text/javascript">
     	//监控 标签内容输入框 ，包括粘贴板
-		function judgeIsNonNull1(event){
-			var value=$("#tag").val();
+		function judgeIsNonNull2(event){
+			var value = $("#tag").val();
 			var x = event.which || event.keyCode;
-			$("#tag").val(value.replace(/\s*/g,""));//去除字符串空格(空白符)
 			if (x == 8 ) {
 		  		if(value !== "" ){
 			      	$(".affirm").removeClass("dis_none");
-			    }else{
+			    }
+		  		else{
 			    	$(".affirm").addClass("dis_none");
 			    }
 			}
 
 			if(value !== ""){
-				if( /[=，。￥？！：、……“”；（）《》～‘’〈〉——·ˉˇ¨々‖∶＂＇｀｜〃〔〕「」『』．〖〗$【】｛｝［］/,|{}_*:?^%$#@!`·~"'\\<>\[\]\%;)(&+-]/.test(value) ){
-					$("#tag").val(value.replace(/[=，。￥？！：、……“”；（）《》～‘’〈〉——·ˉˇ¨々‖∶＂＇｀｜〃〔〕「」『』．〖〗$【】｛｝［］/,|{}_*:?^%$#@!`·~"'\\<>\[\]\%;)(&+-]/,""));
+				var res = /[\、\…\.\．\·\•\'\,\，\。\×\_\＿\-\−\－\—\ˉ\ˇ\々\＇\｀\‘\’\“\”\〃\¨\"\＂\｜\|\‖\(\)\（\）\〔\〕\<\>\〈\〉\《\》\「\」\『\』\〖\〗\【\】\［\］\[\]\{\}\｛\｝\/\*\＊\?\？\^\＾\+\＋\=\＝\÷\¥\￥\#\＃\@\＠\!\！\`\~\～\%\％\∶\:\：\;\；\&\＆\$\＄\£\￡\€\°\°C\°F\←\↑\→\↓\／\＼\\]/g;
+				if( res.test(value) ){
+					$("#tag").val(value.replace(res,""));
 					return false;
 				}
-				if( value.length > 6 ){
-		    		return $("#tag").val(value.substr(0, 6));
-		    	}
 		    	$(".affirm").removeClass("dis_none");
-		   }else{
+			}
+			else{
 		    	$(".affirm").addClass("dis_none");
 		    }
 		}
 		
 		//监控 标签内容输入框 ，包括粘贴板
 		$("#tag").bind('input propertychange', function(){
-			judgeIsNonNull1(event);
+			judgeIsNonNull2(event);
 		});
     	
     	//确认 添加标签
@@ -176,18 +175,24 @@
     		if(value == ""){
     			layer.msg('标签栏不能为空！');
 				return false;
-    		}else if(value.replace(/(^\s*)|(\s*$)/g, "")==""){ //判断输入的内容是否全为空格
+    		}
+    		else if(value.replace(/(^\s*)|(\s*$)/g, "")==""){ //判断输入的内容是否全为空格
 				layer.msg('标签栏不能只输入空格！');
 				return false;
-			}else{
+			}
+    		else{
 				if( length>=2 ){                         //判断是否已存在三个标签
 					$(".tagTips").removeClass("dis_none");
 					return false;
-				} else{
+				}
+				else{
 					if( value == val0 ){
 						layer.msg('不能输入已存在的标签！');
 						return false;
-					} else{
+					}
+					else{
+						value = value.replace(/\s*/g,"");//去除字符串空格(空白符)
+						value = value.substr(0, 6);
 						html='<b class="sample">'+
 								'<i class="Iclass">'+value+'</i>'+
 								'<em class="eliminate" onclick="eliminate(this)"><img src="/resource/m/images/icon_eliminate.png"/><em>'+
@@ -232,7 +237,15 @@
                 'birthday':birthday,
                 'autograph':autograph,
             }, function(data){
-                window.location.href = window.location.href;
+            	if(data == 1){
+            		layer.msg("保存成功！");
+            		setInterval(function(){
+		            	window.location.href = window.location.href;
+		            },1000);
+            	}
+            	else{
+            		layer.msg("保存失败！");
+            	}
             },"JSON");
         })
     </script>

@@ -168,6 +168,7 @@ class Controller_Wap_Faq extends Core_Controller_WapAction
         $info['content']=urldecode($info['content']);
         $info['res_account']=C::M('faq_response')->where("faq_id={$info['faq_id']}")->getCount();
         $info['res_account']=$info['res_account']-1;
+        $info['headpic']=empty($info['headpic'])?'/resource/images/img-lb2.png':$info['headpic'];
         C::M('faq_response')->where('id', $id)->setInc('show_num', 1);
 
         $type=4;//分类
@@ -202,6 +203,10 @@ class Controller_Wap_Faq extends Core_Controller_WapAction
         $mpurl = $url;
         $multipage = $this->multipages ($Num, $perpage, $curpage, $mpurl);
         $comment=C::M("comment as a ")->field('a.*,b.headpic,b.username')->join("##__user_member as b","a.uid=b.uid","left")->where("rid={$id} and type={$type} and pid=0")->order("addtime DESC")->limit($limit)->select();
+        if( $multipage ){
+//            unset($multipage[0]);//first
+            unset($multipage[count($multipage)-1]);
+        }
         $joins=array(
             array('##__user_member as b','a.uid=b.uid','left'),
             array('##__user_member as c','a.touid=c.uid','left')
@@ -224,6 +229,7 @@ class Controller_Wap_Faq extends Core_Controller_WapAction
             $comment[$key]['count']=count($comment[$key]['sub']);
         }
         $this->assign('comment', $comment);
+        $this->assign('page_info',array('num'=>$Num,'total_page'=>ceil($Num/$perpage),'cur_page'=>$curpage));
         $this->assign('multipage', $multipage);
     }
 

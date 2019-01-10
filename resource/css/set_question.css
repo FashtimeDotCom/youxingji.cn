@@ -1,0 +1,108 @@
+/*
+ 2018-11-30   09：33：41
+ HQS
+ 
+ PC端 发布问题
+ * */
+
+
+body{background: #fbfbfb;}
+
+.header{-webkit-box-shadow: 0 0 6px 1px #b9b9b9;
+		-moz-box-shadow: 0 0 6px 1px #b9b9b9;
+		box-shadow: 0 0 6px 1px #b9b9b9;}
+
+.mainBody{line-height: 29px;color: #666;margin-top: 23px;margin-bottom: 7px;}
+.mainBody .title{width: 100%;max-width: 1200px;margin: 0 auto;}
+.mainBody .title a{font-size: 16px;}
+.mainBody .title a:first-child{color: #d71618;}
+
+.m-master-qm{margin-top: 0;}
+
+/*左侧正文*/
+.col_l{width: 767px;float: left;}
+.col_l .headline{font-size: 14px;color: #333;line-height: 46px;}
+.col_l .inp{display: block; line-height: 33px;height: 33px;border: 1px #f2f2f5 solid;color:#999;
+			background: #fff;font-size: 14px;text-indent: 11px;width: 100%;}
+.col_l .tips{line-height: 29px;font-size: 12px;color: #999;text-align: left;}
+.col_l .tips span{color: red;font-size: 12px;}
+
+.col_l .title2{margin-top: 24px;}
+
+.col_l .txta1{display: block; max-width: 100%;min-width: 100%; max-height: 200px;min-height: 200px;padding: 7px 10px;
+				border: 1px #f2f2f5 solid;background: #fff;font-size: 14px;color:#999;line-height: 22px;resize:none;}
+.tips1{margin-bottom: 24px;}
+.tips2{margin-bottom: 14px;}
+
+.title4{margin-top: 24px;}
+
+.addImg{ display: inline-block;width:60px;height: 60px;float: left;
+		background: url(/resource/m/images/user/icon_addimg.png) no-repeat center center / 100%;}
+.f-pic .tip{line-height: 60px;float: left;padding-left: 20px;font-size: 14px;color: #ccc;}
+.upic{cursor:pointer;position: relative;float: left;}
+.layui-upload-button{display: none;}
+.upic i{position: absolute;top: 50%;left: 50%;color: #fff;
+		transform: translate(-50%, -50%);
+		width: 64px;height: 64px;line-height: 64px;font-size: 36px;
+		-webkit-border-radius: 50%;
+		-moz-border-radius: 50%;
+		border-radius: 50%;
+		background: rgba(0,0,0,.5);
+		text-align: center;
+		opacity: 1;
+		-webkit-transition: all .3s;
+		-moz-transition: all .3s;
+		-o-transition: all .3s;
+		transition: all .3s;
+		-o-border-radius: 50%;
+		-ms-border-radius: 50%;
+		-ms-transition: all .3s;}
+
+/* 标签 */
+.tit{position: relative;margin: 10px auto 0;}
+.affirm{display: inline-block;
+	  	margin-bottom: 0; // For input.btn
+	  	font-weight: @btn-font-weight;
+	  	text-align: center;
+	  	vertical-align: middle;
+	  	touch-action: manipulation;
+	  	cursor: pointer;
+	  	background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+	  	border: 1px solid transparent;
+	  	white-space: nowrap;
+	  	.button-size(@padding-base-vertical; @padding-base-horizontal; @font-size-base; @line-height-base; @btn-border-radius-base);
+	  	.user-select(none);
+	  	position: absolute;top: 0;right: 0;line-height: 30px;padding: 0 6px;
+    	color: #fff;border-radius: 3px;
+	    background-color: #5cb85c;
+    	border: 1px #4cae4c solid;}
+
+.sample:nth-of-type(1){background: #f4ebcc;color: #795636;}
+.sample:nth-of-type(2){background: #dff3ce;color: #4a7d1e;}
+.sample:nth-of-type(3){background: #deeaf6;color: #2a4467;}
+.sample:nth-of-type(4){background: #f4ebcc;color: #795636;}
+.sample{border: 1px #d8d2b8 solid;padding: 0px 2px;font-weight: 500;margin: 0 16px 0px 0;
+		text-align: center;display: inline-block;float: left;line-height: 26px;}
+.sample i{display: inline-block;font-size: 14px;padding: 0 0 0 8px;line-height: 26px;}
+.sample .eliminate{display: inline-block;float: right;height: 28px;width: 26px;}
+.sample .eliminate img{display: inline-block;width: 18px;margin-left: 10px;}
+
+
+.col_l .publish{display: block;width: 152px;margin: 52px auto 0px;color: #fff;border: none;
+		 font-size: 16px;text-align: center;line-height: 40px;background: #f75b5d;
+		 border-radius: 2px;float: left;}
+
+
+
+
+
+
+
+
+
+
+/*右侧推荐*/
+.col_r{width: 406px;float: right;}
+.col_r .title{font-size: 17px;color: #333;font-weight: 600;text-align: justify;line-height: 63px;}
+.col_r .case{}
+.col_r .case p{text-align: justify;line-height: 20px;margin-bottom: 20px;font-size: 14px;}

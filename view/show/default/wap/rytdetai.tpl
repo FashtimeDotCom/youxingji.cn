@@ -42,7 +42,7 @@
         <input type="hidden" id="UniqueValue" data-sign="detail" data-rid="{{$article.id}}" value="note_num" data-uid="{{$vo.uid}}" data-type="3" title="共用JS区分的唯一必须值"/>
         <div class="m-text2">
             <div class="wp">
-                <h1>{{$article.title}}</h1>
+                <h1 class="whiteSpace">{{$article.title}}</h1>
                 <div class="info">
                     <span>By<em>{{$article.username}}</em></span>
                     <span>{{$article.addtime}}</span>
@@ -61,16 +61,16 @@
                         <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
                     </div>
                 </div>
-                <div class="txt">{{$article.content}}</div>
+                <div class="txt whiteSpace">{{$article.content}}</div>
             </div>
         </div>
         
         <!--评论区-->
         <div class="m-comment">
         	<div class="navigation" id="navigation" data-type="1">
-        		<span class="title">评论</span>
+        		<span class="titleTWO">评论</span>
         		<p class="Button fix">
-        			<span class="press pressTime onn">按时间</span>
+        			<span class="press pressTime onn">按时间</span>&nbsp;|&nbsp;
         			<span class="press pressHeat">按热度</span>
         		</p>
         	</div>
@@ -89,7 +89,7 @@
 			                </a>
 	                    </div>
 	                    <div class="substance" data-replyNum="{{$vo.count}}">
-	                    	<div class="txtt"><p>{{$vo.content}}</p></div>
+	                    	<div class="txtt">{{$vo.content}}</div>
 		                    <div class="BarSubmenu">
 		                    	<span class="reply replyReview" data-id="{{$vo.id}}" data-open="0" data-class="1">回复</span>
 		                    	<div class="leftSubmenu">
@@ -221,7 +221,6 @@
 		};
     </script>
     <script type="text/javascript" src="/resource/m/js/dianzan.js" title="移动端    所有页面  的  【点赞】"></script>
-    
     <script type="text/javascript" src="/resource/js/jquery.qqFace.js"></script>
     <script type="text/javascript" src="/resource/m/js/comment.js" title="评论  + 回复   公共 JS代码"></script>
 </body>

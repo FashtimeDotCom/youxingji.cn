@@ -70,7 +70,8 @@ class Controller_Admin_JourneyType extends Core_Controller_Action
         $id=$this->getParam("id");
         $data=array(
             'type_name' => $this->getParam('name'),
-            'addtime'=>date("Y-m-d H:i:s",time())
+            'addtime'=>date("Y-m-d H:i:s",time()),
+            'sort'=>intval($this->getParam('sort'))
         );
 
         if( $id ){

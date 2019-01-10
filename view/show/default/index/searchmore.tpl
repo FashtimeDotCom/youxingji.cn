@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
@@ -15,85 +14,82 @@
     <link rel="stylesheet" href="/resource/css/style.css" />
     <script src="/resource/js/jquery.min.js"></script>
     <script src="/resource/js/lib.js"></script>
+    <style type="text/css">
+    	.whiteSpace{white-space: pre-wrap!important;word-wrap: break-word!important;*white-space:normal!important;}
+    	.left-s{padding-bottom: 50px;width: 820px;}
+    </style>
 </head>
-
 <body>
     {{include file='public/header.tpl'}}
     <div class="main">
-      	<div class="sj">
-          	<p>搜索结果</p>
-      	</div>
+      	<div class="sj"><p>搜索结果</p></div>
       	<div class="wp lis">
           	<span>以下是为您找到“{{$keyword}}”相关结果{{$num}}条</span>
           	<div class="left-s">
-              	<!--日阅潭-->
+              	<!--达人游记-->
               	{{if $type == 'ryt'}}
               	<style>
-              		.lis li:nth-child(1) {
-                        padding-top: 0px;
-                    }
+              		.lis li:nth-child(1){padding-top: 0px;}
               	</style>
-                {{foreach from=$list item=vo}}
+                	{{foreach from=$list item=vo}}
                 <li>
                   	<div class="flt1">
-                      	<a href="/index.php?m=index&c=index&v=rytdetai&id={{$vo.id}}" target="_blank" style="margin-bottom: 0px;"><img src="{{$vo.pics}}" style="width:135px;height:85px;"></a>
+                      	<a href="/index.php?m=index&c=index&v=rytdetai&id={{$vo.id}}" target="_blank" style="margin-bottom: 0px;">
+                      		<img src="{{$vo.pics}}" style="width:135px;height:85px;">
+                      	</a>
                   	</div>
                   	<div class="ct-text">
-                        <a href="/index.php?m=index&c=index&v=rytdetai&id={{$vo.id}}" target="_blank">{{$vo.title}}</a>
-                        <p>{{$vo.content}}</p>
+                        <a href="/index.php?m=index&c=index&v=rytdetai&id={{$vo.id}}" class="whiteSpace" style="display: block;" target="_blank">{{$vo.title}}</a>
+                        <p class="whiteSpace">{{$vo.content}}</p>
                         <ul class="seg-info-list clearfix">
                             <span>浏览({{$vo.shownum}})</span><span> {{$vo.addtime}}</span>
                         </ul>
                     </div>
                 </li>
-                {{/foreach}}
+                	{{/foreach}}
               	{{/if}}
-              	<!--达人邦-->
+              	
+              	<!--达人日志-->
               	{{if $type == 'star'}}
               	<div class="travel-notes _j_search_section" data-category="info">
-                  <ul>
-                      {{foreach from=$list item=vo}}
-                      <li>
-                          <p class="clearfix">
-                              <a href="{{$vo.uid|helper:'href'}}" target="_blank" class="_j_search_link">{{$vo.title}}</a>
-                              <span class="seg-info">{{$vo.addtime}}</span>
-                              <span class="seg-info">{{$vo.uid|helper:'username'}}</span>
-                              <span class="seg-info">浏览({{$vo.shownum}})</span>
-                              <span class="seg-info">点赞({{$vo.topnum}})</span>
-                          </p>
-                      </li>
-                      {{/foreach}}
-                  </ul>
+                  	<ul>{{foreach from=$list item=vo}}
+                      	<li><p class="clearfix">
+                              	<a href="{{$vo.uid|helper:'href'}}" target="_blank" class="_j_search_link">{{$vo.title}}</a>
+                              	<span class="seg-info">{{$vo.addtime}}</span>
+                              	<span class="seg-info">{{$vo.uid|helper:'username'}}</span>
+                              	<span class="seg-info">浏览({{$vo.shownum}})</span>
+                              	<span class="seg-info">点赞({{$vo.topnum}})</span>
+                          	</p>
+                      	</li>
+                      	{{/foreach}}
+                  	</ul>
               	</div>
               	{{/if}}
+              	
               	<!--旅拍TV-->
               	{{if $type == 'tv'}}
               	<div class="travel-notes _j_search_section" data-category="info">
-                  <ul>
-                      {{foreach from=$list item=vo}}
-                      <li>
-                          <p class="clearfix">
-                              <a href="/index.php?m=index&c=muser&v=tv&id={{$vo.uid}}" target="_blank" class="_j_search_link">{{$vo.title}}</a>
-                              <span class="seg-info">{{$vo.addtime}}</span>
-                              <span class="seg-info">{{$vo.uid|helper:'username'}}</span>
-                              <span class="seg-info">浏览({{$vo.shownum}})</span>
-                              <span class="seg-info">点赞({{$vo.topnum}})</span>
-                          </p>
-                      </li>
-                      {{/foreach}}
-                  </ul>
+                  	<ul>{{foreach from=$list item=vo}}
+                      	<li><p class="clearfix">
+                              	<a href="/index.php?m=index&c=muser&v=tv&id={{$vo.uid}}" target="_blank" class="_j_search_link">{{$vo.title}}</a>
+                              	<span class="seg-info">{{$vo.addtime}}</span>
+                              	<span class="seg-info">{{$vo.uid|helper:'username'}}</span>
+                              	<span class="seg-info">浏览({{$vo.shownum}})</span>
+                              	<span class="seg-info">点赞({{$vo.topnum}})</span>
+                          	</p>
+                      	</li>
+                      	{{/foreach}}
+                  	</ul>
               	</div>
               	{{/if}}
+              	
               	<!--作家-->
               	{{if $type == 'writer'}}
               	<style>
-              		.lis li:nth-child(1) {
-                        padding-top: 0px;
-                    }
+              		.lis li:nth-child(1){padding-top: 0px;}
               	</style>
-                {{foreach from=$list item=vo}}
-                <li>
-                  	<div class="flt1">
+                	{{foreach from=$list item=vo}}
+                <li><div class="flt1">
                       	<a href="/index.php?m=index&c=index&v=writer&id={{$vo.id}}" target="_blank" style="margin-bottom: 0px;"><img src="{{$vo.pics}}" style="width:135px;"></a>
                   	</div>
                   	<div class="ct-text">
@@ -101,8 +97,9 @@
                         <p>{{$vo.introduction}}</p>
                     </div>
                 </li>
-                {{/foreach}}
+                	{{/foreach}}
               	{{/if}}
+              	
               	{{if $type == 'user'}}
               	<div class="ser-rt" style="margin-bottom: 10px;float: left;width: 600px;">
               		<div class="_j_search_section" data-category="user">
@@ -135,11 +132,10 @@
             <!-- 页码 -->
             {{if $multipage}}
             <div class="pages" style="text-align: left;padding-top: 20px;padding-bottom: 20px;">
-              <ul>
-                {{foreach from=$multipage item=page}}
-                <li {{if $page.2}}class="{{$page.2}}"{{/if}}><a href="{{$page.1}}">{{$page.0}}</a></li>
-                {{/foreach}}
-              </ul>
+            	<ul>{{foreach from=$multipage item=page}}
+                	<li {{if $page.2}}class="{{$page.2}}"{{/if}}><a href="{{$page.1}}">{{$page.0}}</a></li>
+                	{{/foreach}}
+              	</ul>
             </div>
             {{/if}}
             <!-- 页码 end-->
@@ -148,8 +144,7 @@
     {{include file='public/footer.tpl'}}
   	<script src="/resource/js/layui/lay/dest/layui.all.js"></script>
     <script type="text/javascript">
-        function follows(bid, obj)
-        {
+        function follows(bid, obj){
             $.post("/index.php?m=api&c=index&v=follow", {
                 'bid':bid
             }, function(data){
@@ -162,15 +157,13 @@
                 }
             },"JSON");
         }
-    </script>
-  	<script>
+
   		$('#pageqr').click(function(){
             var page = $('#pages').val();
             if(page){
                 window.location.href = "/index.php?m=index&c=index&v=search&keyword={{$keyword}}&page=" + page;
             }
-        })
+       	});
   	</script>
 </body>
-
 </html>

@@ -56,15 +56,14 @@
 					<div class="item fix item_{{$item.id}}">
 						<div class="wp">
 							{{if $item.is_delete && $item.is_delete==1}}
-							<p class="videoTitle"><span class="view fix"><img src="/resource/m/images/user/icon_faq_detail1.png"></span>null</p>
-							<div class="date">null</div>
-							<a href="javascript:;" class="dis_block fix"><p class="videoDetails" style="color: red;">:)抱歉，此问答已被作者删除!</p></a>
+							<p class="nullTitle">null</p>
+							<p class="nullDetails" style="color: red;">:)抱歉，此内容已被原作者删除!</p>
 							{{else}}
 							<!--<a class="dis_block fix" href="/index.php?m=wap&c=index&v=rytdetai&id={{$item.id}}">-->
 							<a class="dis_block fix" href="javascript:;">
 								<p class="videoTitle">{{$item.title}}</p>
 								<div class="date">{{$item.addtime}}</div>
-								<p class="videoDetails">{{$item.desc}}</p>
+								<p class="videoDetails omit lineNumber3">{{$item.desc}}</p>
 								<div class="preview fix"><img src="{{$item.thumbfile}}" alt=""></div>
 							</a>
 

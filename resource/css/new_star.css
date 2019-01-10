@@ -1,0 +1,94 @@
+/*2018-11-16  11:36:38
+ * HQS 
+ * 
+ * 游行迹   达人邦 列表页
+ * */
+
+*{font-size: 14px;}
+
+.main .ban{height: 577px;}
+
+.main .totalTitle{font-size: 32px;font-weight: 600;line-height: 130px;text-align: center;margin-bottom: 7px;color: #000033;}
+.main .totalTitle span{color: #c92d42;font-size: 32px;font-weight: 600;font-family: georgia;}
+
+
+/*达人列表*/
+.main .list{width: 1200px;margin: 0 auto;padding-bottom: 22px;}
+.main .list .box{max-height: 740px;min-height: 740px;}
+.main .list .modules{width: 240px;height: 340px;
+					margin-right: 80px;float: left;margin-bottom: 34px;
+					background-color:#f5f5f5;border-radius:10px;padding:30px 12px 26px;
+					font-size:12px;color:#666;line-height:20px;margin-bottom:30px;}
+.main .list .modules:nth-of-type(4){margin-right: 0;}
+.main .list .modules:nth-of-type(8){margin-right: 0;}
+
+
+.modules .headPortrait{display:block;width:118px;height:118px;margin:0 auto 18px}
+.modules .name{font-size:14px;color:#333;text-align:center;line-height:16px;margin-bottom:44px}
+.modules .synopsis{text-align: justify;}
+
+
+/*达人聚集地*/
+.gatheringPlace{height: 735px;background: #ea5e55;padding-top: 17px;}
+.gatheringPlace .box{width: 1200px;margin: 0 auto;}
+.gatheringPlace .box .title{line-height: 134px;color: #fff;font-size: 38px;text-align: center;}
+.gatheringPlace .box .title i{color: #f7df3c;font-size: 38px;}
+
+.gatheringPlace .box .title .sidelights{display: inline-block;width: 124px;height: 82px;position: relative;}
+.gatheringPlace .box .title .sidelights em{height: 5px;border-radius: 2.5px;position: absolute;}
+.gatheringPlace .box .title .sidelights .titbit1{background: #fff;width: 38.85px;top: 88px;left: 0;}
+.gatheringPlace .box .title .sidelights .titbit2{background: #fff;width: 5px;top: 112px;left: 40px;}
+.gatheringPlace .box .title .sidelights .titbit3{background: #fde404;width: 39.56px;top: 50px;left: 65px;}
+.gatheringPlace .box .title .sidelights .titbit4{background: #5596fe;width: 26.25px;top: 97px;left: 80px;}
+.gatheringPlace .box .title .sidelights .titbit5{background: #56e905;width: 5px;top: 80px;right: 8px;}
+
+.rotate{transform:rotate(-45deg);
+		-o-transform:rotate(-45deg); 	/* Opera */
+		-ms-transform:rotate(-45deg); 	/* IE 9 */
+		-moz-transform:rotate(-45deg); 	/* Firefox */
+		-webkit-transform:rotate(-45deg); /* Safari 和 Chrome */}
+
+.gatheringPlace .box .secondTitle{line-height: 18px;text-align: center;position: relative;}
+.gatheringPlace .box .secondTitle span {
+            display: block;     /*设置为块级元素会独占一行形成上下居中的效果*/
+            font-size: 18px;color: #fff;
+            position: relative;   /*定位横线（当横线的父元素）*/}
+.gatheringPlace .box .secondTitle span:before, .secondTitle span:after {
+            content: '';                 /*CSS伪类用法*/
+            position: absolute;         /*定位背景横线的位置*/
+            top: 50%;
+            background: #fff;       /*宽和高做出来的背景横线*/
+            width: 320px;height: 2px;}
+.gatheringPlace .box .secondTitle span:before{left: 10%;        /*调整背景横线的左右距离*/}
+.gatheringPlace .box .secondTitle span:after {right: 10%;}
+
+.gatheringPlace .box .card{width: 1200px;margin: 64px auto;}
+.gatheringPlace .box .card .modules{height: 450px;padding: 28px 19px;background: #fff;border-radius: 6px;}
+.gatheringPlace .box .card .modules .cardTitle{line-height: 63px;color: #333;font-size: 32px;border-bottom: 1px #454545 solid;}
+.gatheringPlace .box .card .modules .describe{line-height: 20px;color: #333;font-size: 12px;text-align: justify;margin-top: 15px;
+												margin-bottom: 16px;-webkit-line-clamp: 8;height: 158px;}
+.gatheringPlace .box .card .modules .ico{width: 150px;height: 150px;margin: 0 auto;}
+
+
+/*达人权益*/
+.equities{height: 746px;background: #f9f9f9;}
+.equities .box{width: 1200px;margin: 0 auto;}
+.equities .box .title{line-height: 134px;color: #333;font-size: 38px;text-align: center;width: 991px;
+						border-bottom: 2px #ea5e55 solid;margin: 0 auto;}
+.equities .box .title i{color: #fe4a6a;font-size: 38px;}
+
+.equities .box .title .sidelights{display: inline-block;width: 124px;height: 82px;position: relative;}
+.equities .box .title .sidelights em{height: 5px;border-radius: 2.5px;position: absolute;}
+.equities .box .title .sidelights .titbit1{background: #de4c4c;width: 38.85px;top: 88px;left: 0;}
+.equities .box .title .sidelights .titbit2{background: #fff;width: 5px;top: 112px;left: 40px;}
+.equities .box .title .sidelights .titbit3{background: #ffe103;width: 39.56px;top: 50px;left: 65px;}
+.equities .box .title .sidelights .titbit4{background: #5198ff;width: 26.25px;top: 97px;left: 80px;}
+.equities .box .title .sidelights .titbit5{background: #50ea10;width: 5px;top: 80px;right: 8px;}
+
+.equities .box .card{margin: 40px auto;}
+.equities .box .card .modules{width: 294px;height: 237px;float: left;margin-right: 158px;margin-bottom: 33px;}
+.equities .box .card .modules:nth-of-type(3){margin-right: 0;}
+.equities .box .card .modules:nth-of-type(6){margin-right: 0;}
+
+.equities .box .card .modules .ico{width: 138px;height: 138px;margin: 0 auto 10px;}
+.equities .box .card .modules .cardTitle{text-align: center;font-size: 24px;line-height: 45px;color: #000;}

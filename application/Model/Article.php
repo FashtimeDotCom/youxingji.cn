@@ -14,7 +14,7 @@ class Model_Article extends Core_Model
      * Database table columns.
      * @var (array), table fields.
      */
-    protected $_fields = array('id', 'catid', 'catarr', 'moduleid', 'brandid', 'classid', 'title', 'titlecolor', 'content', 'cutstr', 'articlepic', 'articlethumb', 'attachlist', 'tagword', 'seotitle', 'keywords', 'description', 'sort', 'istop', 'isspecial', 'isindex', 'useable', 'uid', 'realname', 'comefrom', 'addtime', 'updatetime', 'shownum', 'feednum', 'bestnum', 'stownum', 'fileurl', 'isview',"label_id",'type_id');
+    protected $_fields = array('id', 'catid', 'catarr', 'moduleid', 'brandid', 'classid', 'title', 'titlecolor', 'content', 'cutstr', 'articlepic', 'articlethumb', 'attachlist', 'tagword', 'seotitle', 'keywords', 'description', 'sort', 'istop', 'isspecial', 'isindex', 'useable', 'uid', 'realname', 'comefrom', 'addtime', 'updatetime', 'shownum', 'feednum', 'bestnum', 'stownum', 'fileurl', 'isview',"label_id",'type_id','address');
 	
 	//用户表可操作表达式字段
     protected $UnsetColumu = array ('shownum', 'feednum', 'bestnum', 'stownum');

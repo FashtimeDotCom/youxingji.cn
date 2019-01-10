@@ -37,12 +37,21 @@
 	    <div class="ban figure fix">
 	    	<div class="imgBg figure borderRadius bg_blur" style="background-image: url({{$muser.cover}})"></div>
 	        <div class="message fix">
-	        	<div class="gaine figure" style="background-image: url({{$muser.avatar}});"></div>
-	        	<div class="rightBox">
-		        	<p class="wx_name">{{$muser.username}}</p>
-		        	<p class="location fix" title="定位">
-		        		<img class="icon_location2" src="/resource/m/images/common/icon_location1.png" /><i>{{$muser.city}}</i>
-		        	</p>
+	        	<a class="dis_block gaine figure" href="/index.php?m=wap&c=user&v=index" style="background-image: url({{$muser.avatar}});"></a>
+	        	<div class="rightBox{{if $muser.tag}}{{else}} MarginBottom{{/if}}">
+	        		<div class="wx_name fix">
+	        			<span class="username">{{$muser.username}}</span>
+	        			<p class="location fix" title="定位"><img class="icon_location2" src="/resource/m/images/common/icon_location1.png" /><i>{{$muser.city}}</i></p>
+	        		</div>
+        			{{if $muser.tag}}
+        			<p class="labelList">
+						{{foreach from=$muser.tag key=k item=vo}}
+							{{if $k <2}}
+						<span class="tag">{{$vo}}</span>
+							{{/if}}
+						{{/foreach}}
+						</p>
+					{{/if}}
 	        	</div>
 	        	<input type="hidden" name="synopsis" id="synopsis" value="{{$muser.autograph}}" />
 	        	<p class="intro fix" title="简介">
@@ -89,8 +98,7 @@
 	        		{{foreach from=$list item=item key=key}}
 					<div class="item fix item_{{$item.id}}">
 						<div class="wp fix">
-							<p class="videoTitle"><span class="view fix"><img src="/resource/m/images/user/icon_faq_detail1.png"></span>{{$item.title}}</p>
-							<div class="date">{{$item.addtime}}</div>
+							<p class="headline"><img class="view" src="/resource/m/images/user/icon_faq_detail1.png"><span class="substance">{{$item.title}}</span></p>
 							<a class="dis_block fix" href="/index.php?m=wap&c=faq&v=detail&id={{$item.id}}">
 								<p class="videoDetails omit lineNumber4">{{$item.desc}}</p>
 								<div class="videoBottom fix">

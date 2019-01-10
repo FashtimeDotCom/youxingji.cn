@@ -12,15 +12,38 @@
     <link rel="stylesheet" href="/resource/m/css/style.css" />
     <script src="/resource/m/js/jquery.js"></script> 
     <script src="/resource/m/js/lib.js"></script>
+    <style type="text/css">
+    	.ban .content p{text-align: center;font-size: 0.9rem;}
+		.ban .content p i{font-style: normal;}
+		.ban .content .wx_name{font-size: 0.7rem;font-weight: 600;}
+		.ban .content .wx_name img{display: inline-block;width: 3%;}
+		.ban .content .middle{margin: 0.5rem auto;}
+		.ban .content .middle .grade{padding-right: 1rem;}
+		.ban .content .middle .grade i{color: #D60F11;}
+		.ban .content .middle .dwell{padding-left: 0.5rem;border-left: 1px #d6d6d6 solid;}
+		.ban .content .signature{margin: 0 auto 2rem;width: 92%;text-indent: 1.4rem;}
+
+    	.labelList{margin: 0 20px 0.3rem;text-align: center;}
+		.labelList .tag{display: inline-block;font-size: 0.7rem;color: #333;padding: 2px 8px;
+						  border: 1px #ee4d4d solid;border-radius: 5px;}
+		.labelList .tag:first-child{margin-right: 10px;}
+		
+		.ul-txtlist-yz .txt{font-size: 0.9rem;}
+		
+		.level p{font-size: 1rem;}
+		.whiteSpace{white-space: pre-wrap!important;
+						word-wrap: break-word!important;
+						*white-space:normal!important;}
+    </style>
 </head> 
-<body class="">
+<body>
     <div class="header">
         {{include file='wap/header.tpl'}}
         <h3>个人中心</h3>
     </div>
     <div class="mian">
         <div class="g-top">
-            <div class="logo"><a href="/"><img src="/resource/m/images/logo.png" alt="" /></a></div>
+            <div class="logo"><a href="/"><img src="/resource/m/images/logo.png" alt="logo" /></a></div>
             <div class="so">
                 <form action="/index.php">
                     <input type="hidden" name="m" value="wap"/>
@@ -32,13 +55,25 @@
             </div>
         </div>
         <div class="ban ban1">
-            <a class="dis_block fix" href="">
+            <div class="dis_block fix">
 		        <img class="headPortrait" src="{{$user.avatar}}" alt="">
-		    </a>
+		    </div>
 		    <div class="content fix">
 		    	<p class="wx_name">{{$user.username}}</p>
-		    	<p class="middle"><span class="grade">等级：<i>{{$user.lvname}}</i></span> <span class="dwell">现居：<i>{{$user.city}}</i></span></p>
-		    	<p class="signature" title="个性签名">{{$user.autograph}}</p>
+		    	<p class="middle">
+		    		<span class="grade">等级：<i>{{$user.lvname}}</i></span> 
+		    		<span class="dwell">现居：<i>{{$user.city}}</i></span>
+		    	</p>
+		    	{{if $user.tag}}
+		    	<p class="labelList">
+					{{foreach from=$user.tag key=k item=vo }}
+						{{if $k <2}}
+					<span class="tag">{{$vo}}</span>
+						{{/if}}
+					{{/foreach}}
+				</p>
+				{{/if}}
+		    	<p class="signature whiteSpace" title="个性签名">{{$user.autograph}}</p>
 		    </div>
 		    <ul class="ul-txtlist-yz ClassUL">
                 <li><a href="/index.php?m=wap&c=user&v=follow">

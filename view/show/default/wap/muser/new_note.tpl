@@ -33,14 +33,24 @@
 	            </form>
 	        </div>
 	    </div>
-	    
 	    <div class="ban figure fix">
 	    	<div class="imgBg figure borderRadius bg_blur" style="background-image: url({{$muser.cover}})"></div>
 	        <div class="message fix">
-	        	<div class="gaine figure" style="background-image: url({{$muser.avatar}});"></div>
-	        	<div class="rightBox">
-		        	<p class="wx_name">{{$muser.username}}</p>
-		        	<p class="location fix" title="定位"><img class="icon_location2" src="/resource/m/images/common/icon_location1.png" /><i>{{$muser.city}}</i></p>
+	        	<a class="dis_block gaine figure" href="/index.php?m=wap&c=user&v=index" style="background-image: url({{$muser.avatar}});"></a>
+	        	<div class="rightBox{{if $muser.tag}}{{else}} MarginBottom{{/if}}">
+	        		<div class="wx_name fix">
+	        			<span class="username">{{$muser.username}}</span>
+	        			<p class="location fix" title="定位"><img class="icon_location2" src="/resource/m/images/common/icon_location1.png" /><i>{{$muser.city}}</i></p>
+	        		</div>
+        			{{if $muser.tag}}
+        			<p class="labelList">
+						{{foreach from=$muser.tag key=k item=vo}}
+							{{if $k <2}}
+						<span class="tag">{{$vo}}</span>
+							{{/if}}
+						{{/foreach}}
+						</p>
+					{{/if}}
 	        	</div>
 	        	<input type="hidden" name="synopsis" id="synopsis" value="{{$muser.autograph}}" />
 	        	<p class="intro fix" title="简介">
@@ -80,7 +90,6 @@
 	                </ul>
 	            </div>
 	        </div>
-	        
 	        {{if $list}}
 	        <div class="m-mytv-yz notes" id="pageCount" data-page="" data-nowPage="1">
 	        	<div class="content fix">
@@ -91,7 +100,7 @@
 							<a class="dis_block fix" href="javascript:;">
 								<p class="videoTitle">{{$item.title}}</p>
 								<div class="date">{{$item.addtime}}</div>
-								<p class="videoDetails">{{$item.desc}}</p>
+								<p class="videoDetails omit lineNumber3">{{$item.desc}}</p>
 								<div class="preview fix"><img src="{{$item.thumbfile}}" alt=""></div>
 							</a>
 

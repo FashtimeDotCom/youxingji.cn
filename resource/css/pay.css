@@ -1,0 +1,141 @@
+/*
+ 2019-01-02   19:13:40
+ HQS
+ 
+ PC端  支付页面
+ * */
+
+
+.main{width: 1200px;margin: 0 auto;}
+
+/*状态条*/
+.status{height: 40px;margin: 39px 0 38px 4px;width: 998px;overflow: hidden;}
+.status .clauses{color: #666;width: 216px;margin-right: 15px; float: left;height: inherit;
+				 background: #dcdbdb;line-height: 40px;text-indent: 20px;font-weight:600;font-size: 18px;}
+.status .clauses:nth-of-type(2),
+.status .clauses:nth-of-type(3),
+.status .clauses:nth-of-type(4){margin-left: -30px;}
+.status .clauses i{display: inline-block;width: 24px;height: 24px;margin: 9px 0 0 37px;line-height: 24px;
+					background: #fff;border-radius: 50%;text-align: center;float: left;
+					font-weight:600;text-indent:0;color: #666666;}
+.status .clauses .arrows{display: inline-block;float: right;width: 28px;height: 28px;background: #dcdbdb;
+						 transform:rotate(45deg);margin-top: 6.5px;margin-right: -14px;
+						-o-transform:rotate(45deg); 	/* Opera */
+						-ms-transform:rotate(45deg); 	/* IE 9 */
+						-moz-transform:rotate(45deg); 	/* Firefox */
+						-webkit-transform:rotate(45deg); /* Safari 和 Chrome */}
+.status .clauses.achieve{background: #d20c0e;color: #fff;}
+.status .clauses.achieve i{color: #d71618;}
+.status .clauses.achieve .arrows{background: #d20c0e;}
+.status .icon_right{float: left;width: 76px;margin: -18px 0 0 -50px;position: relative;}
+/*填写信息_内容*/
+.content{padding-bottom: 32px;}
+.content .left{width: 300px;float: left;margin-right: 20px;border: 1px #f2f2f5 solid;background: #fff;padding-left: 19px;padding-right: 19px;}
+.content .left .Title1{font-size: 22px;text-align: center;width: 291px;height: 51px;line-height: 51px;margin: 1px 0 19px -16px;
+						background: url(http://localhost.branches.com/resource/images/pay/icon_bg.jpg) repeat;color: #696969;}
+.content .left .productInfo{width: 260px;border: 1px #d71618 solid;padding: 9px 16px;font-size: 15px;color: #d71618;
+							text-align: justify;line-height: 22px;font-weight: 600;margin: 0 0 20px;}
+.content .left .useInCommon{font-size: 14px;color: #cecece;margin-bottom: 17px;font-weight: 600;line-height: 14px;}
+.content .left .date{font-size: 16px;color: #333;margin-bottom: 17px;font-weight: 600;line-height: 16px;}
+.content .left .date span{float: right;}
+.content .left .date span i{font-size: 16px;}
+.content .left .totalValue{border-top: 1px #dbd9d9 solid;padding: 24px 0px 15px;margin-top: 32px;}
+.content .left .totalValue span{float: right;color: #d71618;}
+.content .left .totalValue span i{font-size: 20px;}
+		/*右边*/
+.content .right{width: 880px;float: left;border: 1px #f2f2f5 solid;background: #fff;padding: 9px 37px;}
+.content .right div{clear: both;}
+.content .right div .tilte{font-size: 20px;line-height: 64px;font-weight: 600;}
+				/*出行信息*/
+.travelInformation .secondLevel{font-size: 18px;line-height: 18px;margin-bottom: 20px;}
+.travelInformation .secondLevel span{font-size: 16px;padding-left: 10px;}
+.travelInformation .tableInfo{margin-bottom: 17px;}
+.travelInformation .tableInfo p{font-size: 16px;line-height: 40px;color: #666;padding-left: 16px;height: 40px;
+								border: 1px #f2f2f5 solid;border-left-color: #d25151;float: left;margin-right: 18px;}
+.travelInformation .tableInfo p:nth-of-type(1),
+.travelInformation .tableInfo p:nth-of-type(2),
+.travelInformation .tableInfo p:nth-of-type(3){margin-bottom: 20px;}
+.travelInformation .tableInfo p span{font-size: 16px;}
+.travelInformation .tableInfo p input{font-size: 16px;}
+.travelInformation .tableInfo p select{ width: 100%;
+										/* 清除默认边框 */
+									    border: 0;
+									    /* 清除默认的箭头样式 */
+									    appearance: none;
+									    -moz-appearance: none;
+									    -webkit-appearance: none;
+									    /* 右侧添加小箭头的背景图 */
+									    background: url('http://localhost.branches.com/resource/images/pay/icon_arrows.png') 90% center no-repeat;
+									    background-size: 24px;}
+input.IDcardNo::-webkit-outer-spin-button,
+input.IDcardNo::-webkit-inner-spin-button,
+input.phoneNum::-webkit-outer-spin-button,
+input.phoneNum::-webkit-inner-spin-button{-webkit-appearance: none !important;}
+input.IDcardNo[type="number"],input.phoneNum[type="number"]{-moz-appearance:textfield;}
+				/*保险*/
+.Insurance .declareBox{padding: 15px 21px;border: 1px #f2f2f5 solid;}
+.Insurance .declareBox .declareLeft{font-size: 16px;float: left;padding-left: 20px;}
+.Insurance .declareBox .declareLeft input{margin-left: -18px;}
+.Insurance .declareBox .check{display: inline-block; font-size: 16px;color: #d71818;float: right;}
+				/*预订人信息*/
+.SubscriberInformation .secondLevel{font-size: 18px;line-height: 18px;margin-bottom: 20px;}
+.SubscriberInformation .secondLevel span{font-size: 16px;padding-left: 10px;}
+
+.SubscriberInformation .tableInfo{margin-bottom: 17px;}
+.SubscriberInformation .tableInfo p{font-size: 16px;line-height: 40px;color: #666;width: 250px;padding-left: 16px;
+									border: 1px #f2f2f5 solid;border-left-color: #d25151;float: left;margin-right: 18px;}
+.SubscriberInformation .tableInfo p:nth-of-type(1),
+.SubscriberInformation .tableInfo p:nth-of-type(2),
+.SubscriberInformation .tableInfo p:nth-of-type(3){margin-bottom: 20px;}
+.SubscriberInformation .tableInfo p span{font-size: 16px;}
+.SubscriberInformation .tableInfo p input{font-size: 16px;}
+				/*统一条款，确认下一步*/
+.ConfirmNextStep{padding-top: 10px;}
+.ConfirmNextStep .priceColumn{height: 54px;line-height: 54px;margin-bottom: 18px;}
+.ConfirmNextStep .priceColumn span,.ConfirmNextStep .priceColumn a{display: block; height: inherit;float: left;color: #fff;}
+.ConfirmNextStep .priceColumn .price{background: #525151;width: 504px;
+									 border-top: 1px #ccc solid;font-size: 12px;padding-left: 32px;
+									 border-bottom: 1px #ccc solid;font-weight: 600;
+									 border-left: 1px #ccc solid;}
+.ConfirmNextStep .priceColumn .price i{font-size: 30px;}
+.ConfirmNextStep .priceColumn .affirmBottom{width: 300px;background: #dd5959;
+											font-weight: 600;text-align: center;font-size: 20px;}
+.ConfirmNextStep .notice{margin-bottom: 32px;font-weight: 600;}
+.ConfirmNextStep .notice a{color: #2980d1;}
+
+/*在线支付_内容*/
+.content .OrderContent{width: 1200px;}
+				/*订单内容*/
+.Order{padding: 25px 0px 0px 29px;position: relative;background: #fff;border: 1px #f2f2f5 solid;border-bottom: none;}
+.Order .message{width: 888px;float: left;}
+.Order .message .tilte{font-size: 22px;font-weight: 600;line-height: 32px;margin-bottom: 8px;}
+.Order .message .secondLevel{font-size: 17px;width: 860px;float: left;font-weight: 600;color: #666;margin-bottom: 10px;}
+.Order .priceNum{width: 280px;height: 96px;border-left: 2px #d0d0d0 solid;text-align: center;position: absolute;bottom: 0;right: 0;}
+.Order .priceNum p{font-size: 25px;line-height: 96px;font-weight: 600;}
+.Order .priceNum p i{font-size: 25px;color: #e25456;}
+.countDown{padding-left: 37px;line-height: 66px;background: #dad9d9;font-size: 16px;color: #003333;font-weight: 600;margin-bottom: 74px;}
+.countDown i{color: #d71618;font-size: 16px;}
+				/*支付方式*/
+.payment .tilte{font-weight: 600;}
+.payment .tilte a{display: block; font-size: 18px;width: 200px;height: 50px;line-height: 50px;color: #333;text-align: center;background: #fff;
+						border-top: 1px #f2f2f5 solid;border-left: 1px #f2f2f5 solid;border-bottom: 1px #f2f2f5 solid;float: left;}
+.payment .tilte a.pitchOn{border-top: 3px #d71618 solid; border-bottom: none;}
+
+.box{border: 1px #f2f2f5 solid;background: #fff;margin-top: -1px;}
+.box .bankCard{}
+.box .bankCard .bankCardList{padding: 44px 74px;}
+.box .bankCard .bankCardList .Card{width: 150px;float: left;margin-right: 22px;margin-bottom: 24px;}
+.box .bankCard .bankCardList .Card input{float: left;margin-right: 10px;margin-top: 16px;}
+.box .bankCard .bankCardList .Card img{display: block; float: left;width: 122px;height: 48px;border: 2px #ccc solid;}
+.box .bankCard .bankCardList .Card.optFor img{border-color: #d71618;}
+				/*待支付*/
+.unpaid{padding-top: 10px;}
+.unpaid .priceColumn{height: 54px;line-height: 54px;margin-bottom: 18px;}
+.unpaid .priceColumn span,.ConfirmNextStep .priceColumn a{display: block; height: inherit;float: left;color: #fff;}
+.unpaid .priceColumn .price{background: #525151;width: 898px;
+									 border-top: 1px #ccc solid;font-size: 20px;padding-left: 32px;
+									 border-bottom: 1px #ccc solid;font-weight: 600;}
+.unpaid .priceColumn .price i{font-size: 30px;}
+.unpaid .priceColumn .affirmBottom{width: 300px;background: #dd5959;font-weight: 600;text-align: center;font-size: 20px;}
+
+/*支付结果_内容*/

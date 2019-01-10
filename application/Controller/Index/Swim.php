@@ -49,8 +49,6 @@ class Controller_Index_Swim extends Core_Controller_TAction
 
         }
 
-//        var_dump($type_list);die();
-
         $this->assign("ns","swim");
         $this->assign("info",$type_list);
         $this->display("swim/index.tpl");
